@@ -1,0 +1,1533 @@
+MNRAS 481, 4009–4029 (2018)                                                                                                doi:10.1093/mnras/sty2463
+Advance Access publication 2018 September 7
+
+
+On the formation history of Galactic double neutron stars
+
+Alejandro Vigna-Gómez,1,2‹ Coenraad J. Neijssel,1 Simon Stevenson,1,3
+Jim W. Barrett,1 Krzysztof Belczynski,4 Stephen Justham,5,6,7,2 Selma E. de Mink,7
+Bernhard Müller,8 Philipp Podsiadlowski,9,2 Mathieu Renzo,7 Dorottya Szécsi1 and
+Ilya Mandel1,2,8
+1 Birmingham Institute for Gravitational Wave Astronomy and School of Physics and Astronomy, University of Birmingham, Birmingham, B15 2TT, UK
+2 DARK, Niels Bohr Institute, University of Copenhagen, Blegdamsvej 17, DK-2100 Copenhagen, Denmark
+3 OzGrav, Swinburne University of Technology, Hawthorn VIC 3122, Australia
+4 Nicolaus Copernicus Astronomical Center, Polish Academy of Sciences, ul. Bartycka 18, PL-00-716 Warsaw, Poland
+
+
+
+
+                                                                                                                                                       Downloaded from academic.oup.com/mnras/article/481/3/4009/5092622 by guest on 28 September 2026
+5 School of Astronomy, Space Science, University of the Chinese Academy of Sciences, Beijing 100012, China
+6 National Astronomical Observatories, Chinese Academy of Sciences, Beijing 100012, China
+7 Anton Pannekoek Institute for Astronomy, University of Amsterdam, NL-1090 GE Amsterdam, the Netherlands
+8 Monash Centre for Astrophysics, School of Physics and Astronomy, Monash University, Clayton, Victoria 3800, Australia
+9 Department of Astronomy, Oxford University, Oxford OX1 3RH, UK
+
+
+
+
+Accepted 2018 September 6. Received 2018 September 5; in original form 2018 May 21
+
+
+
+                                        ABSTRACT
+                                        Double neutron stars (DNSs) have been observed as Galactic radio pulsars, and the recent
+                                        discovery of gravitational waves from the DNS merger GW170817 adds to the known DNS
+                                        population. We perform rapid population synthesis of massive binary stars and discuss model
+                                        predictions, including DNS formation rates, mass distributions, and delay time distributions.
+                                        We vary assumptions and parameters of physical processes such as mass transfer stability
+                                        criteria, supernova natal kick distributions, remnant mass prescriptions, and common-envelope
+                                        energetics. We compute the likelihood of observing the orbital period–eccentricity distribution
+                                        of the Galactic DNS population under each of our population synthesis models, allowing us
+                                        to quantitatively compare the models. We find that mass transfer from a stripped post-helium-
+                                        burning secondary (case BB) on to a neutron star is most likely dynamically stable. We also
+                                        find that a natal kick distribution composed of both low (Maxwellian σ = 30 km s−1 ) and high
+                                        (σ = 265 km s−1 ) components is preferred over a single high-kick component. We conclude
+                                        that the observed DNS mass distribution can place strong constraints on model assumptions.
+                                        Key words: binaries: general – stars: neutron – pulsars: general.
+
+
+
+
+                                                                                   Tutukov & Yungel’son (1993) carried out an early rapid pop-
+1 I N T RO D U C T I O N
+                                                                                ulation synthesis study of Galactic NSs. The formation and fate
+Since the first detection of a Galactic double neutron star (DNS)               of DNSs has been studied with a similar approach by Portegies
+system (Hulse & Taylor 1975), the growing observed population                   Zwart & Yungelson (1998) who made an analysis of the observed
+of DNSs continues to provide constraints on their orbital param-                systems and predictions of gamma-ray burst (GRB) rates, and
+eters. Precise measurements of Keplerian and post-Keplerian pa-                 Belczyński & Bulik (1999) who focused on gravitational-wave
+rameters (Kramer et al. 2006) contain valuable information about                merger rates. Voss & Tauris (2003) studied both GRB and
+the progenitors and formation history of neutron star (NSs) and                 gravitational-wave merger rates for Galactic DNSs and binary black
+DNSs. Additionally, GW170817 (Abbott et al. 2017c) became the                   holes (BHs). O’Shaughnessy et al. (2005) used six DNSs observed
+first gravitational-wave signal detected from a DNS merger. These               in the Galactic disc to constrain population synthesis models. Sev-
+precise measurements allow us to test our understanding on the                  eral binary population synthesis studies have focussed on natal kick
+massive binary progenitor populations and their formation history               distributions (e.g. Brandt & Podsiadlowski 1995; Podsiadlowski
+(e.g. Bhattacharya & van den Heuvel 1991).                                      et al. 2004; Bray & Eldridge 2016), short GRBs locations (e.g.
+                                                                                Church et al. 2011), evolutionary channels (e.g. Andrews et al.
+                                                                                2015), and merger rates (e.g. Chruslinska et al. 2018). More re-
+ E-mail: avigna@star.sr.bham.ac.uk                                             cently, Kruckow et al. (2018) used their population synthesis model,
+
+
+C 2018 The Author(s)
+
+Published by Oxford University Press on behalf of the Royal Astronomical Society
+4010         A. Vigna-Gómez et al.
+Table 1. Measured parameters of the Galactic DNSs used as a diagnosis in       specified. Section 3 presents the results of the Fiducial popula-
+this study.                                                                    tion, with particular emphasis on the formation history of Galactic
+                                                                               DNSs. The effect of variations such as mass transfer during the
+Pulsar                    P          e          Mplsr        Mcmpn     Ref.    post-helium-burning phase and the comparison between different
+                         (d)                    (M )        (M )             natal kick distributions is mentioned. We conclude with a summary
+J0453+1559              4.072      0.113        1.559        1.174      a      and discussion in Section 4.
+J0737–3039†, ‡          0.102      0.088        1.338        1.249      b
+B1534+12†               0.421      0.274        1.333        1.346      c      2 METHODS
+J1756–2251†             0.320      0.181        1.341        1.230      d
+B1913+16†               0.323      0.617        1.440        1.389      e
+                                                                               2.1 Population synthesis
+J1913+1102†             0.206      0.090        1.580        1.300      f
+J1757–1854†             0.184      0.606        1.338        1.395      g      The COMPAS suite includes a rapid population synthesis module
+J1518+4904             8.634      0.249          –            –        h      designed to simulate isolated binary evolution. Rapid population
+J1811–1736            18.779      0.828          –            –        i      synthesis aims to simulate the evolution of a binary system in a
+J1829+2456             1.176      0.139          –            –        j
+
+
+
+
+                                                                                                                                                       Downloaded from academic.oup.com/mnras/article/481/3/4009/5092622 by guest on 28 September 2026
+                                                                               fraction of a second, which makes it possible to simulate millions
+J1930–1852            45.060      0.399          –            –        k
+J1753–2240            13.638      0.304          –            –        l
+                                                                               of binaries in a few days using a single processor. The population
+J1411+2551             2.616      0.169          –            –        m      synthesis module of COMPAS explores binary evolution with a
+J1946+2052             0.078      0.064          –            –        n      Monte Carlo simulation. We stochastically sample the initial distri-
+                                                                               bution of binary masses, separations, and eccentricities in order to
+Notes. † Systems which will merge in via gravitational-wave emission in less   generate a population.
+than 3000 Myr. ‡ Double pulsar.  Measurements used only for diagnosis in
+                                                                                   Given a certain mass and certain metallicity value at ZAMS, we
+the P–e plane. The masses of the DNSs are presented as Mplsr and Mcmpn ,
+the mass of the pulsar and the companion, respectively.
+                                                                               define the initial conditions and evolution of a star following the
+References: a Martinez et al. (2015); b Kramer et al. (2006); c Fonseca,       fitting formulae of single-star evolution (SSE) as given in Hurley,
+Stairs & Thorsett (2014); d Faulkner et al. (2005); e Hulse & Taylor (1975);   Pols & Tout (2000) to the detailed models calculated in Pols et al.
+f Lazarus et al. (2016); g Cameron et al. (2018); h Janssen et al. (2008);     (1998). We use the same nomenclature as Hurley et al. (2000) to
+i Corongiu et al. (2007); j Champion et al. (2004); k Swiggum et al. (2015);   define stellar phases, such as the Hertzsprung gap (HG), where the
+l Keith et al. (2009); m Martinez et al. (2017); n Stovall et al. (2018).
+                                                                               HG is defined as the phase after the depletion of hydrogen during
+                                                                               the main sequence (MS) and before the start of core helium burning
+calibrated to match the observed Galactic DNS population, to pre-              (CHeB). For every binary, we follow the centre of mass evolution
+dict merger rates in the local Universe.                                       of the system, computing the masses, separation and eccentricity at
+   Using the rapid population synthesis element of the Compact                 every time-step. We use parametrizations to quantify the effect on
+Object Mergers: Population Astrophysics and Statistics (COMPAS)                the orbit of the physics involving mass-loss through stellar winds,
+suite (Stevenson et al. 2017), we use the Galactic DNS population as           mass transfer, SNe, and common-envelope (CE) events. For SNe,
+an observational constraint on massive binary evolution, from two              we also use remnant mass distributions that will determine the ul-
+zero age main-sequence stars (ZAMS) to a pair of NSs. The COM-                 timate fate of our stars. Each binary is evolved until the system
+PAS tool simulates isolated binaries: double star systems that evolve          either merges, becomes unbound, or forms a double compact object
+without significant interaction with the environment or with other             (DCO). The population generates a set of DCOs, where DNSs are
+stars. The majority of the confirmed Galactic DNSs [14 confirmed               sub-selected into our final distribution of interest. COMPAS pop-
+systems (for details, see Table 1) as well as Tauris et al. (2017)             ulation synthesis is similar to the general approach of the codes
+and references therein] come from isolated binaries that lie in the            SEBA (Portegies Zwart & Verbunt 1996; Portegies Zwart & Yun-
+Galactic disc. We do not address the two Galactic globular cluster             gelson 1998; Toonen, Nelemans & Portegies Zwart 2012), BSE
+binaries in this work, B2127+11C (Anderson et al. 1990) and J1807–             (Hurley, Tout & Pols 2002), STARTRACK (Belczynski, Kalogera &
+2500B (Lynch et al. 2012, not a confirmed DNS), since dynami-                  Bulik 2002; Belczynski et al. 2008), and BINARY C (Izzard et al.
+cal interactions likely played a key role in their formation (Phin-            2004, 2006, 2009), all of which use the SSE fits from Hurley et al.
+ney & Sigurdsson 1991; Grindlay, Portegies Zwart & McMillan                    (2000).
+2006; Ivanova et al. 2008).                                                        Our current approach to the study of populations by proposing
+   Our paper explores the impact of physical interactions during var-          an initial model and studying the variations is similar to the one
+ious stages of binary evolution on predictions of observables such             described in Dominik et al. (2012). That study uses STARTRACK
+as orbital parameters of Galactic DNSs and inferred mass distribu-             to simulate populations from ZAMS to DCO formation and pre-
+tions of gravitational-wave events. To do this, we compare models              dict merger rates for all compact objects. Their ‘Standard’ model
+with different underlying assumptions and quantify the difference              overlaps with some of our Fiducial model assumptions.
+between their predictions. For each model, we provide DNS forma-
+tion rates and orbital parameters as predictions to be tested against          2.2 Fiducial model
+present time observations. We compare the predicted DNS masses
+(m1, 2 ) and orbital parameters (period P, eccentricity e) to those of         2.2.1 Changes since Stevenson et al. (2017)
+the observed Galactic DNSs. We find that the natal kicks received              The main changes to binary evolution modelling in COMPAS rela-
+by NSs during formation in a supernova (SN) and mass transfer                  tive to the default assumptions in Stevenson et al. (2017), hereafter
+stability criteria play a fundamental role in recreating the Galactic          referred to as COMPAS α, are as follows:
+DNS population.
+   The paper is structured as follows. Section 2 describes popula-               (i) Incorporation of the fitting formulae of the binding energy
+tion synthesis and presents our Fiducial model. Changes made                   parameter λNanjing instead of a fixed λ = 0.1, as described in
+to binary evolution in COMPAS since Stevenson et al. (2017) are                Section 2.2.5.
+
+
+MNRAS 481, 4009–4029 (2018)
+                                                                                                               Double neutron stars              4011
+   (ii) A bimodal natal kick distribution, where core-collapse su-                 10, while more recent studies propose a lower mass range from
+pernova (CCSN) explosions contribute to the high mode (σhigh =                     7  mZAMS /M  9 (Woosley & Heger 2015). Note that binary
+265 km s−1 ), while ultra-stripped supernova (USSN) explosions and                 interactions extend this initial mass range, which means that if
+electron-capture supernova (ECSN) explosions constitute the low                    we take a COMPAS simulation with binaries, the mass range
+mode (σlow = 30 km s−1 ), as described in Section 2.2.3.                           for ECSNe will be broader because binarity changes the pro-
+   (iii) Mass transfer stability criteria, allowing for always stable              genitor ZAMS masses (i.e. initially less massive stars that ac-
+case BB mass transfer, as described in Section 2.2.5.                              creted mass or initially more massive that lost mass). We assume
+   (iv) The ‘optimistic’ CE assumption, which allows donors clas-                  the baryonic mass of the degenerate ONeMg core leading to an
+sified as HG stars in the Hurley et al. (2000) models to engage and                ECSN is 1.38 M (Nomoto 1987). We approximate the ECSN rem-
+survive a CE phase, as described in Section 2.2.5.                                 nant mass as mECSN = 1.26 M using the quadratic approximation
+                                                                                   mbar − mgrav = 0.075m2grav (Timmes, Woosley & Weaver 1996).
+                                                                                      All natal kicks from SNe are assumed to be isotropic in the
+2.2.2 Initial distributions                                                        frame of reference of the exploding star and randomly drawn from
+To initialize a binary, we sample from initial distributions of mass,              a unit sphere. For the magnitude of the natal kicks of the SNe,
+
+
+
+
+                                                                                                                                                            Downloaded from academic.oup.com/mnras/article/481/3/4009/5092622 by guest on 28 September 2026
+separation, and eccentricity of the binary at ZAMS. For the mass                   we assume a bimodal distribution (e.g. Katz 1975; Arzoumanian,
+distribution, we draw the primary mass from a Kroupa initial mass                  Chernoff & Cordes 2002). For CCSN, we draw natal kick mag-
+function (IMF; Kroupa 2001) in the form dN /dm1 ∝ m−2.3     1    with              nitudes from a Maxwellian velocity distribution with a one-
+masses between 5 ≤ m1 /M ≤ 100. The secondary is drawn from                       dimensional (1D) standard deviation of σhigh = 265 km s−1 follow-
+a flat distribution in mass ratio between 0.1 < qZAMS ≡ m2 /m1 ≤                   ing the three-dimensional (3D) pulsar velocity distribution derived
+1 (Sana et al. 2012). The initial separation follows the flat-in-the-              by Hobbs et al. (2005) from a subset of their two-dimensional
+log distribution (Öpik 1924; Sana et al. 2012) in the range 0.1 <                 (2D) observations. USSN and ECSN natal kick magnitudes are
+aZAMS /au < 1000. We assume that all of our binaries are circular                  drawn from a Maxwellian velocity distribution with a 1D stan-
+at ZAMS, with eZAMS = 0.                                                           dard deviation of σlow = 30 km s−1 , following Pfahl, Rappaport &
+                                                                                   Podsiadlowski (2002a) and Podsiadlowski et al. (2004). This second
+                                                                                   component is introduced to match the observed low natal kicks in
+2.2.3 Supernovae                                                                   some Galactic DNSs (Schwab, Podsiadlowski & Rappaport 2010;
+                                                                                   Beniamini & Piran 2016) as well as in isolated pulsars (Brisken
+We differentiate between three SN scenarios: CCSN, ECSN, and                       et al. 2002), as the single-mode isolated pulsar velocity distribution
+USSN. For the CCSN treatment, we apply the ‘rapid’ explosion                       proposed by Hobbs et al. (2005) fails to predict the low-velocity
+mechanism,1 as presented in Fryer et al. (2012), to determine the                  pulsar population as discussed by Verbunt, Igoshev & Cator (2017)
+compact object remnant mass according to the total and carbon–                     and Verbunt & Cator (2017).
+oxygen (CO) core mass of the progenitor, with a maximum allowed
+NS mass of mNS,max = 2.0 M . In this explosion mechanism, the
+collapse does not allow for accretion on to the proto-NS, and is able              2.2.4 Mass transfer
+to reproduce the apparent mass gap between NSs and BHs (Özel                      A crucial part of binary evolution is mass transfer, which begins
+et al. 2010; Farr et al. 2011). There is no consensus yet whether the              when one or both stars fill their Roche lobe (Eggleton 1983), in-
+mass gap is due to observational selection effects or if it is intrinsic           stigating a Roche-lobe overflow (RLOF) event. In our population
+to the explosion mechanism (Kreidberg et al. 2012; Wyrzykowski                     synthesis approach, mass transfer is treated by determining sta-
+et al. 2016).                                                                      bility, time-scales, and conservativeness. Rapid population synthe-
+    Another explosion scenario that some of our binary systems ex-                 sis oversimplifies the complex hydrodynamics involved in a mass
+perience is called USSNe (Tauris et al. 2013; Tauris, Langer &                     transfer episode. There have been some efforts to provide gener-
+Podsiadlowski 2015). In this case, a star becomes stripped when                    alized models (e.g. de Mink, Pols & Hilditch 2007; Claeys et al.
+it loses its hydrogen envelope during its evolution; if, during later              2014; Tauris et al. 2015). In particular, determining whether mass
+stages, it manages to lose its helium envelope, it becomes ultra-                  transfer is dynamically stable is challenging (e.g. Pavlovskii et al.
+stripped. In COMPAS, any star that engages in a stable case BB                     2017).
+mass transfer episode with an NS as an accretor is considered to                      To determine dynamical stability during mass transfer episodes,
+be ultra-stripped. We define case BB as a mass transfer episode                    we compare the response of the donor star’s radius to adiabatic mass-
+that involves a post-helium main-sequence (HeMS) donor star that                   loss, ζad = (d logR/d logM)ad , to the response of the Roche-lobe
+has stopped burning helium in the core (helium Hertzsprung gap,                    radius of the donor, ζ RL , under the same mass exchange conditions.
+HeHG). Ultra-stripped stars are left with an ONeMg core with a thin                Mass transfer is defined as dynamically stable if ζ ad ≥ ζ RL . We
+carbon and helium layer (Tauris et al. 2013). The compact object                   use fixed values of ζ ad, MS = 2.0 for MS and ζ ad, HG = 6.5 for
+remnant mass of an USSN is determined in the same way as for                       HG stars that are typical for these phases, following models by
+CCSN.                                                                              Ge et al. (2015). For later phases in which the stars still possess
+    A single star with mass within 7  mZAMS /M  10 may col-                     hydrogen envelopes (such as the phases CHeB and early asymptotic
+lapse in an ECSN. Early studies by Nomoto (1984, 1987) had a                       giant branch, EAGB), we use a fit to ζ ad = ζ SPH for condensed
+higher mass range for single stars between 8  mZAMS /M                          polytrope models of a red giant as provided in Soberman, Phinney &
+                                                                                   van den Heuvel (1997). Case BB mass transfer is always stable in
+1 In this text, the term SN explosion scenario refers to the type of explosion,    the Fiducial model, broadly in agreement with Tauris et al.
+such as ECSN, USSN, or CCSN, while the term explosion mechanism refers             (2015).
+to the numerical treatment of this process in the code. The latter is henceforth      COMPAS uses fits to equilibrium mass–radius relations
+also referred to as SN prescription, or fallback prescription, or remnant mass     (Hurley et al. 2000) to describe stellar evolution. We use these
+model.                                                                             analytic formulae to determine when stable mass transfer is driven
+
+
+                                                                                                                      MNRAS 481, 4009–4029 (2018)
+4012        A. Vigna-Gómez et al.
+by thermal readjustment. If the calculated donor-star radius cannot
+                                                                                                                                (00) COMPAS_
+stay within its Roche lobe during thermally stable mass transfer,                                                               (01) COMPAS Fiducial
+then we remove the mass on a thermal time-scale, although our                                                                   (02) Unstable Case BB
+                                                                                                                                (03) Fryer Delayed
+stellar evolution recipes do not accurately represent the donor stars
+                                                                                                                                (04) Muller
+during thermal-time-scale mass transfer (for more detailed studies,                                                             (05) Single mode
+see e.g. Kippenhahn & Weigert 1967; Pols 1994). Once the donor’s                                                                (06)       = high
+                                                                                                                                      ECSN
+                                                                                                                                (07)       =
+calculated equilibrium radius can again fit within its Roche lobe,                                                                    USSN     high
+                                                                                                                                (08) =0.1
+we assume that the mass transfer occurs on a nuclear time-scale                                                                 (09) Kruckow
+(Claeys et al. 2014).                                                                                                           (10) =0.1
+                                                                                                                                (11) =10.0
+   Dynamically stable mass transfer from evolved stars is assumed                                                               (12) ap =a(1-e)
+to always proceed on the thermal time-scale until the entire envelope                                                           (13) a =a(1-e2 )
+                                                                                                                                      SR
+is removed (but see e.g. Götberg, de Mink & Groh 2017). We                                                                     (14) Jeans
+                                                                                                                                (15) Circumbinary
+approximate the thermal time-scale as the Kelvin–Helmholtz time-                                                                (16) Thermal
+scale of the donor’s envelope, τ KH = GMMenv /RL, where G is                                                                    (17) Z=0.002
+
+
+
+
+                                                                                                                                                            Downloaded from academic.oup.com/mnras/article/481/3/4009/5092622 by guest on 28 September 2026
+the gravitational constant, M is the total mass, Menv is the mass                                                               (18) Z=0.001
+                                                                                                                                (19) Pessimistic
+of the envelope, R is the radius, and L is the luminosity of the
+star.                                                                     10-7                                 0.1   1   10   100
+   Conservativeness is defined as the amount of transferred mass                            Bayes Factor "K"
+
+from the donor that the accretor will accept and retain. When mass
+is lost from the system during non-conservative mass transfer, the      Figure 1. The ratio of the likelihood of each model to the likelihood of
+fraction of mass lost and the specific angular momentum it car-         the Fiducial model (01). Green (red) bars denote models significantly
+ries away determine the orbital parameters and subsequent evo-          favoured (disfavoured) by an odds ratio of greater than 20 : 1 relative to the
+                                                                        Fiducial model.
+lution of the system. In the Fiducial model, if mass transfer
+is non-conservative, the non-accreted mass is lost from the vicin-
+                                                                        while the alternative, ‘pessimistic’ CE, always leads to a merger for
+ity of the accreting star via isotropic re-emission, carrying away
+                                                                        HG donors.
+the specific orbital angular momentum of the accretor. The con-
+servativeness of our mass transfer episode is limited by the ac-
+cretor. For non-degenerate accretors, we assume a star can accrete      2.3 Model comparison
+at a maximum rate Ṁacc = CMacc /τKH . We use C = 10 follow-            In order to quantify how well our models match the observed Galac-
+ing Hurley et al. (2002). For degenerate accretors, we assume the       tic DNS period–eccentricity (P–e) distribution, we calculate the
+compact object accretion is limited by the Eddington accretion          likelihood Li that observations could have come from the synthe-
+limit.                                                                  sized DNS population for each model i. We use the P–e distribution
+                                                                        because all 14 observed Galactic DNSs (cf. Table 1) have precise
+2.2.5 Common envelope                                                   measurements of the period and the eccentricity, but only half of
+                                                                        them have precise measurements of their individual masses. We do
+If either of the binary stars begin dynamically unstable mass trans-    not use any of the mass measurements in the likelihood calcula-
+fer, the binary may become engulfed in a CE phase. The loss of          tion. We also do not attempt to account for selection biases in the
+corotation between the binary system and the envelope generates         observed P–e distribution.
+drag forces, which causes the binary to inspiral. The gravitational        The details of how the likelihoods Li are computed are given in
+energy lost from the orbit is deposited in the envelope and may be      Appendix A. We quote our results as the ratio of the likelihood for
+enough to eject it from the binary. The whole process allows the        a given model to the likelihood of the Fiducial model i, that is,
+system to decrease its separation several orders of magnitude.          we define the Bayes factor Ki as
+   The classical isolated binary evolutionary scenario for the forma-
+tion of DCOs often involves a CE phase (Paczynski 1976; Ivanova         log Ki = log Li − log L01 ,                                                   (1)
+et al. 2013; Belczynski et al. 2016). We use the αλ formalism, as       where all logarithms in this study are base e unless stated otherwise.
+proposed by Webbink (1984) and de Kool (1990), to estimate the          A positive log Bayes factor log K > 0 means that the given model is
+effect of the CE phase on the orbit of the binary.                      preferred over the Fiducial model. On the other hand, a negative
+   The value of λ, which parametrizes the envelope’s binding energy,    log Bayes factor means that the Fiducial model is preferred over
+is calculated from detailed models of the stellar structure. For our    the given model. If all models have equal priori probabilities, the
+Fiducial model, we adopt λNanjing (originally referred to as λb ,       odds ratio is equal to the Bayes factor. The odds ratio determines
+which includes internal energy) as calculated by Xu & Li (2010).        how significantly favoured or unfavoured the model is with respect
+This λNanjing is also implemented in the STARTRACK code (Dominik        to the Fiducial model; for an introduction to Bayesian analysis,
+et al. 2012).                                                           see Jaynes et al. (2003) and Sivia (1996). For readers unfamiliar
+   The value of α, which parametrizes the efficiency of converting      with Bayes factors, we also indicate when odd ratios for these
+orbital energy into unbinding the envelope, depends on the orbital      model comparisons exceed 20 : 1 (or 1 : 20 for disfavoured models),
+parameters, energy sources, and energy exchange during the CE           loosely corresponding to the common significance threshold with a
+phase, and is difficult to constrain even with detailed hydrodynami-    p-value of p < 0.05. Limited sampling of the synthetic distributions
+cal models (Ivanova et al. 2013). We use α = 1. We assume that the      leads to uncertainties of order unity on log Ki , corresponding to
+orbit is always circularized during a CE phase. We allow donor stars    a factor of 2 or 3 uncertainty in the Bayes factor; this statistical
+that engage into a CE phase during the HG to survive the event and      uncertainty can be improved with longer simulations. The Bayes
+expel the CE if allowed by the energy condition. This assumption        factors calculated for our models are plotted in Fig. 1 and presented
+is labelled ‘optimistic’ CE in the literature (Dominik et al. 2012),    in Table 2.
+
+MNRAS 481, 4009–4029 (2018)
+                                                                                                                 Double neutron stars                  4013
+                   Table 2. We list all simulations computed for this study; for simulations (02) through (19), we state the physical
+                   interaction or assumption varied relative to the Fiducial model and the actual parameter varied. For each simulation,
+                   we give the formation rate R of DNS that will merge in a Hubble time in the Galaxy, its log Bayes factor relative to the
+                   Fiducial model (see Appendix A) given the observed Galactic DNS P–e distribution and the fraction f of formed
+                   DNSs that merge within a Hubble time. See Fig. A1 for the predicted P–e distributions for all models.
+
+                   Number                    Physics                   Variation             R (Myr−1 )          log(K)            f
+
+                   00                    COMPAS α                                              11.34             − 16.78          0.61
+                   01                 COMPAS Fiducial                                          24.04                0             0.73
+                   02                      Stability              Case BB: unstable            24.54              − 3.12          0.94
+                   03                        SNe                    Fryer delayed              28.05                3.03          0.76
+                   04                        SNe                         Müller               30.95              − 2.50          0.87
+                   05                        SNe                     Single mode                9.16              − 3.08          0.83
+                   06                        SNe                    σ ECSN = σ high            15.11              − 1.05          0.77
+                   07                        SNe                    σ USSN = σ high            13.53              − 3.19          0.81
+
+
+
+
+                                                                                                                                                                  Downloaded from academic.oup.com/mnras/article/481/3/4009/5092622 by guest on 28 September 2026
+                   08                         CE                        λ = 0.1                16.30              − 0.07          0.85
+                   09                         CE                  λKruckow ∝ R−5/6              9.08                0.02          0.84
+                   10                         CE                        α = 0.1                 5.26                1.76          0.59
+                   11                         CE                        α = 10.0                9.54              − 1.97          0.36
+                   12                   Circularization             ap = a(1 − e)              14.14                2.54          0.77
+                   13                   Circularization            aSR = a(1 − e2 )            15.31                0.27          0.72
+                   14                   Mass-loss mode                    Jeans                 6.69              − 3.34          0.21
+                   15                   Mass-loss mode              Circumbinary               28.05              − 2.67          0.94
+                   16                    Distribution              fe (e) = thermal            10.22              − 0.07          0.69
+                   17                    Metallicity                   Z = 0.002               20.09              − 3.23          0.71
+                   18                    Metallicity                   Z = 0.001               24.06              − 2.22          0.72
+                   19                         CE                      Pessimistic              14.29              − 0.16          0.70
+
+
+3 R E S U LT S                                                                     it takes that DCO to inspiral until coalescence due to gravitational
+                                                                                   radiation, following the post-Newtonian approximation as given by
+We evolve 10 binaries with initial metallicity Z = 0.0142. Al-
+               6          2
+                                                                                   Peters (1964). The delay time is the sum of the formation time and
+though Galactic NSs were born at a range of metallicities, we use
+                                                                                   the coalescence time.
+solar metallicity values (Asplund et al. 2009) for bulk composition
+                                                                                       Given the orbital properties of the population and the estimated
+as a proxy for ongoing star formation metallicity in the Galaxy.
+                                                                                   time distributions we are able to predict the formation rate R of
+   We present the detailed results of our Fiducial model (01)3
+                                                                                   DNSs that will merge in a Hubble time (assuming H0−1 = 14.03 Gyr
+and some variations to it, all with identical initial parameters (unless
+                                                                                   in a flat CDM cosmology; Planck Collaboration XIII 2016). If a
+stated otherwise). The diagnostic tools we use to analyse all of our
+                                                                                   system has a delay time of less than a Hubble time we include it in
+variations is the P–e distribution (see Fig. 2 and Section 2.3, as
+                                                                                   the formation rate R.
+well as Appendix A for details), remnant NS mass distribution
+                                                                                       Formation rates are calculated for a galaxy with a continuous
+(see Fig. 7) and formation rate estimates (see Table 2). We report
+                                                                                   star formation rate of fSFR = 2.0 M yr−1 , with all systems in our
+the number of significant figures based on statistical simulation
+                                                                                   simulated universe born in binaries.4 The star formation rate is
+uncertainty, i.e. the Monte Carlo uncertainty.
+                                                                                   chosen to mimic the Milky Way value of fSFR = 1.9 ± 0.4 M yr−1
+   We illustrate the plausible distribution of simulated Galactic
+                                                                                   (Chomiuk & Povich 2011); any shifts in the chosen value would
+DNSs (see Fig. 2 for Fiducial model and Fig. A1 for all mod-
+                                                                                   proportionately shift the quoted DNS formation rate.
+els), which shows, in the P–e plane, how systems may evolve from
+                                                                                       A summary of all the formation rates and Bayes factors for the
+DNS formation to a typical observable distribution. To illustrate
+                                                                                   different variations is given in Table 2.
+this, we assign each binary a random probability of being born
+at any given point in the last 10 Gyr (a proxy for the age of the
+Galactic thin disc, see del Peloso et al. 2005), and then follow their             3.1 On the Fiducial model
+gravitational-wave-driven orbital evolution until present time.
+   Our models predict the mass ratio distribution (Fig. 3) and time                3.1.1 Formation channels
+distributions (Fig. 4). The mass ratio distribution depends on the                 There are two main ways that DNSs can form in our Fidu-
+explosion mechanism of the SNe. The time distributions describe                    cial model. We call these two dominant channels – Channel I
+the formation time (tform ), coalescence time (tc ), and delay time                and Channel II; some variations on these channels with additional
+(tdelay ). The formation time is the time it takes a binary to evolve              mass transfer episodes or a different sequential order are possible.
+from ZAMS to DCO formation. The coalescence time is the time                       Below we will explain the crucial steps in these formation channels,
+                                                                                   mentioning the fraction of systems that went through different stages
+                                                                                   of binary evolution. We find that 0.13 per cent of all simulated bi-
+2 The total mass of evolved binaries is 20 250 000 M for each simulation;
+                                                                                  naries become DNSs.
+this represents 78 587 000 M of total star-forming mass under the assumed
+initial mass distribution. The results of all simulations can be found in:
+http://www.sr.bham.ac.uk/compas/data/GalacticDNSs/                                 4 While our models only include binaries, our orbital period distribution
+3 We will label the variations by their number (see Table 2) in parentheses;       allows wide systems to evolve effectively as single stars. In fact, we find
+e.g. Fiducial model (01) or COMPASα (00).                                          that more than half of our simulated binaries never engage in mass transfer.
+
+
+                                                                                                                          MNRAS 481, 4009–4029 (2018)
+4014                      A. Vigna-Gómez et al.
+                                                                                                Channel I, illustrated in Fig. 5, is responsible for the formation
+                      1                                                                      of roughly 70 per cent of all DNSs. This formation channel is con-
+                                                                                             sistent with the canonical channel described by Bhattacharya & van
+                                                                                             den Heuvel (1991) and Tauris & van den Heuvel (2006). Channel
+                                                                                             I involves a single-core CE phase in which the primary has already
+                 0.8                                                                         collapsed into an NS. A single-core CE phase occurs when only
+                                                                                             one of the stars has a clear core-envelope separation; all compact
+ Eccentricity
+
+
+
+
+                                                                                             objects are assumed not to have a clear core-envelope separation,
+                 0.6                                                                         as well as MS and HeMS stars. This channel proceeds as follows:
+                                                                                                Channel I:
+                                                                                                (i) The two stars begin their evolution with the more massive one
+                 0.4
+                                                                                             (the primary) evolving faster than its companion.
+                                                                                                (ii) ≈22 per cent of the all the initial systems experience stable
+                                                                                             mass transfer from the primary during the HG phase on to an MS
+
+
+
+
+                                                                                                                                                                       Downloaded from academic.oup.com/mnras/article/481/3/4009/5092622 by guest on 28 September 2026
+                 0.2                                               DNS at birth              secondary. This is because 52 per cent of the primaries never expand
+                                                                   DNS evolved               enough to start the mass transfer, and of the ones that do 47 per cent
+                                                                   DNS observed              are stable during this phase (0.48 × 0.47 ≈ 0.22).
+                      0                                                                         (iii) ≈4 per cent of those ≈22 per cent systems contain a primary
+                             -2          0           2              4           6            that experiences an SN explosion producing an NS and remaining
+                                  log 10 Orbital Period [days]                               in a bound orbit. In the mass transfer episode, the primary becomes
+                                                                                             an HeMS star. The majority of the HeMS stars are either too light to
+                                                                                             become NSs or heavy enough to become BHs. Only 30 per cent of
+Figure 2. Predicted P–e distribution of Galactic DNSs under the Fidu-
+                                                                                             them have the mass of an NS progenitor. In this first SN explosion,
+cial model. Grey dots are all DNSs at DCO formation. DCO period
+and eccentricity are evolved forwards from birth until present age given                     there are 10 times more CCSNe than there are ECSNe, but given
+gravitational-wave radiation, removing a fraction of the short-lived short-                  the higher natal kick magnitude, their survival rate is only 9 per cent
+period binaries from the observable population. Coloured dots represent the                  compared to 47 per cent of the ECSNe.
+DNS distribution at present age. Colour denotes the type of CE phase: red                       (iv) ≈25 per cent of those ≈4 per cent systems experience and
+for a single core, in which only the donor has a clear core-envelope sep-                    survive a CE phase initiated by the post-MS secondary. Only
+aration, and yellow for a double-core CE phase, in which both the donor                      33 per cent of the secondaries expand enough to engage into an
+and the accretor have a clear core-envelope separation. The single-core and                  RLOF mass transfer. This second mass transfer episode, with a
+double-core CE phases can be, in most cases, associated with Channel I                       primary NS accretor, is usually dynamically unstable and leads to
+and Channel II, respectively (see Section 3.1.1; Figs 5 and 6 for more de-
+                                                                                             a CE phase. 85 per cent of these systems are able to successfully
+tails). Channel I and Channel II are the first and second most common
+                                                                                             eject their envelope, hardening the binary by two or three orders of
+formation channels, respectively. Purple diamonds represent the observed
+Galactic DNSs; all observed systems have precise P–e measurements with                       magnitude.
+error bars within the thickness of the symbol. The black curve illustrates                      (v) ≈40 per cent of those ≈25 per cent systems begin a third
+a gravitational-wave-driven P–e evolution from DCO formation to merger;                      mass transfer episode (case BB) of a HeHG secondary on to an
+this system, with initial P = 1.5 h, e = 0.69, and characteristic NS masses                  NS primary. There the HeHG star recycles its NS companion while
+m1 = m2 = 1.2 M , would merge in ≈3 Myr through gravitational-wave                          being stripped for a second time until a CO core (we call this ultra-
+emission.                                                                                    stripped, see Section 2.2.3). Half of those cores are in the right mass
+                                                                                             range to become an NS (lighter cores may form an NS–white dwarf
+                                                                                             binary while heavier cores yield an NS–BH binary).
+
+                            (01) Fryer Rapid                                    (03) Fryer Delayed                                  (04) Müller
+          1000                                               1      1000                                       1     1000                                      1
+
+                800                                          0.8        800                                    0.8    800                                      0.8
+
+                600                                          0.6        600                                    0.6    600                                      0.6
+
+                400                                          0.4        400                                    0.4    400                                      0.4
+
+                200                                          0.2        200                                    0.2    200                                      0.2
+
+                  0                                          0            0                                    0        0                                      0
+                  0.5       0.6    0.7   0.8   0.9       1                0.5   0.6   0.7   0.8      0.9   1            0.5   0.6     0.7   0.8    0.9     1
+
+
+Figure 3. Mass ratio distribution of merging DNSs (blue histogram) and its cumulative distribution function (orange curve) for three SN fallback and natal
+kick models: (01) Fryer Rapid (left), (03) Fryer Delayed (middle), and (04) Müller (right). See Sections 3.1.2 and 3.3 for a discussion of the evolutionary
+channels leading to sharp features in the histograms.
+
+
+
+
+MNRAS 481, 4009–4029 (2018)
+                                                                                                          Double neutron stars                 4015
+
+    2.5                                               10 6
+                                                                                                                                        COMPAS
+                                                                                                             2
+                                                                                                        10                              t -1
+      2                                                    4
+                                                      10
+
+    1.5
+                                                                                                        10 1
+                                                      10 2
+      1
+                                                           0                                                 0
+                                                      10                                                10
+    0.5
+
+
+      0                                              10 -2
+          0    10     20      30      40     50                -6 -5 -4 -3 -2 -1 0          1   2                0   2   4   6   8   10 12 14
+
+
+
+
+                                                                                                                                                        Downloaded from academic.oup.com/mnras/article/481/3/4009/5092622 by guest on 28 September 2026
+Figure 4. Time distributions or merging DNSs (blue histogram) for our Fiducial model (01): time tform from ZAMS to DNS formation (left), coalescence
+                                                                                                                           −1
+time tc from DNS formation to merger (middle), and total delay time tdelay from ZAMS to merger (right). We show a dR/dt ∝ tdelay curve for comparison
+with the delay time distribution in the right panel. The apparent gap in the middle panel is a sampling artefact.
+
+
+
+   (vi) ≈96 per cent of those ≈40 per cent systems will remain                cretor. This mass transfer episode on to the NS is defined to always
+bound after the second SN explosion and form a DNS. The tight                 be stable and the secondary now becomes an ultra-stripped CO core.
+post-CE orbit and the reduced natal kicks for USSNe make it rela-                (vii) ≈55 per cent of those ≈80 per cent systems have secon-
+tively easy for binaries to survive the natal kick and form a DNS sys-        daries that experience and survive an SN explosion and become
+tem. The systems that are disrupted either lost enough mass and/or            NSs. 71 per cent of the CO cores are massive enough to explode
+had orbital velocities low enough that even the reduced USSN natal            as an SN, and given the previous episode of mass transfer they are
+kick disrupts the system.                                                     all USSNe. The lower natal kicks and tighter orbits help to get a
+                                                                              survival rate of 77 per cent, leaving a DNS system behind.
+   The secondary formation Channel II, illustrated in Fig. 6, is re-
+sponsible for forming approximately 21 per cent of DNSs; it is                   All simulated DNS systems are shown in the P–e distributions
+prevalent for systems with initial mass ratio qZAMS ≈ 1 and, there-           in Figs 2 and 8 and in Appendix A. Most of the DNS systems
+fore, similar evolutionary time-scales of both stars in the binary.           that survived a single-core CE phase come from Channel I, while
+This channel experiences a double-core CE phase (Brown 1995;                  most of those that survived a double-core CE phase come from
+Dewi, Podsiadlowski & Sena 2006; Hwang et al. 2015), in which                 Channel II. The rest of the DNSs, about 9 per cent of the total, come
+both of the stars have a clear core-envelope separation, before the           from more exotic or fortuitous channels, including non-recycled
+first SN. Channel II proceeds as follows:                                     DNSs (≤1 per cent of all Galactic-like DNSs). Non-recycled DNS
+   Channel II:                                                                progenitors are systems that never had stable mass transfer on to
+                                                                              an NS (Belczyński & Kalogera 2001), which leads to spin up and
+   (i) Again, the two stars begin their evolution with the primary            recycling; all of them experienced CEs in our models, which we
+evolving faster than its companion.                                           assume to be inefficient at spinning up the NS and suppressing its
+   (ii) ≈1 per cent of the primaries start their first mass transfer          magnetic field (MacLeod & Ramirez-Ruiz 2015).
+episode as either a CHeB or an EAGB star with a secondary that                   We find that our Fiducial model has a formation rate of R =
+is a slightly less evolved HG or a CHeB star. Almost all of these             24.04 per Milky Way equivalent galaxy per Myr. All of our DNSs
+systems (90 per cent) initiate a double-core CE phase during this             experience and survive at least one CE phase, 23 per cent of them
+mass transfer episode.                                                        in a double-core scenario.
+   (iii) ≈35 per cent of those ≈1 per cent binaries can eject their
+envelopes. Only a tiny fraction (≈2 per cent) lose enough mass to
+become white dwarfs, whereas the majority become two HeMS
+                                                                              3.1.2 Mass ratio distribution
+stars in a tighter orbit.
+   (iv) ≈87 per cent of those ≈35 per cent systems have primaries             Fig. 7 shows the mass distribution of all the Galactic DNSs at
+that can initiate a second mass transfer episode (case BB). The               the moment of birth, while Fig. 3 shows the distribution of the
+primaries donate their helium envelope to the secondary HeMS                  predicted mass ratio qDCO for the merging Galactic DNSs. We define
+star. All these episodes are dynamically stable.                              qDCO = mNS,lighter /mNS,heavier ; the heavier NS is not necessarily the
+   (v) ≈35 per cent of those ≈87 per cent systems are able to have a          more massive star at ZAMS. In the Fiducial model, the initially
+primary experience an SN explosion producing an NS and remain-                less massive star produces the more massive NS in 31 per cent of
+ing in a bound orbit. As in Channel I, the mass transfer episodes             the systems, due to the accretion of mass from the companion, and
+reduce the masses of the primary and only 63 per cent can experi-             its core growth, during the early phases of evolution. The mass
+ence an SN explosion. They are all CCSNe and although the CE                  ratio of these systems lies between 0.58 ≤ qDCO ≤ 1. Among the
+phase leaves them in a tight orbit the higher natal kick magnitude            merging Galactic DNSs, 90 per cent of the systems have qDCO >
+still disrupts 45 per cent of these systems.                                  0.8, 50 per cent have qDCO > 0.9 and 30 per cent have qDCO >
+   (vi) ≈80 per cent of those ≈35 per cent systems begin a third              0.95. There are two significant peaks in this distribution: (i) the
+mass transfer episode (case BB) from the secondary to an NS ac-               first peak, with ≈16 per cent of systems have qDCO ≈ 0.88; most
+
+
+                                                                                                                     MNRAS 481, 4009–4029 (2018)
+4016         A. Vigna-Gómez et al.
+
+
+
+
+                                                                                                                                                              Downloaded from academic.oup.com/mnras/article/481/3/4009/5092622 by guest on 28 September 2026
+
+
+
+
+Figure 5. Evolutionary history of formation Channel I (top to bottom);        Figure 6. Evolutionary history of formation Channel II (top to bottom);
+70 per cent of all DNSs in our Fiducial population were formed through        21 per cent of all DNSs in our Fiducial population were formed through
+this channel. The numbers in the call-out symbols represent the per centage   this channel. The numbers in the call-out symbols represent the per centage
+of simulated binaries that end up in that particular stage among those that   of simulated binaries that end up in that particular stage among those that
+follow the preceding evolutionary history. For example, 22 per cent of all    follow the preceding evolutionary history. For example, 1 per cent of all
+simulated binaries experience stable mass transfer from a HG primary on       simulated binaries initiate mass transfer, while both companions are post-
+to an MS secondary; among those 22 per cent, 4 per cent of systems will       MS stars; among those 1 per cent, 35 per cent enter and survive a double-core
+have a primary that undergoes an SN producing an NS, while remaining in       CE phase, and so on.
+a bound orbit, and so on.
+
+
+
+
+MNRAS 481, 4009–4029 (2018)
+                                                                                                                  Double neutron stars                  4017
+
+
+
+
+                                                                                                                                                                   Downloaded from academic.oup.com/mnras/article/481/3/4009/5092622 by guest on 28 September 2026
+Figure 7. Predicted mass distribution of all predicted DNSs under three different SN fallback and natal kick models: (01) Fryer Rapid (left), (03) Fryer delayed
+(centre), (04) Müller (right). Primary and secondary masses of the NSs are shown in the horizontal and vertical axes, respectively. Red diamonds denote
+the observed Galactic DNSs with well-constrained masses (see Table 1), with pulsar and companion NS masses shown in the horizontal and vertical axes,
+respectively. Blue dots correspond to the DNS masses at DCO formation. The density map shows the 2D DNS mass probability distribution; the histograms
+show its 1D linear projections. See Sections 3.1.2 and 3.3 for a discussion of the evolutionary channels leading to sharp features in the histograms.
+
+systems close to this mass ratio are formed through Channel I, with                The secondary is stripped by this mass transfer and explodes in an
+their first NS being an ECSN (with gravitational mass of 1.26 M )                 USSN.
+and the second an USSN (with lower mass remnants of 1.1 M ),                         In our single stellar models at Z = Z , ECSN progenitors have
+(ii) the second peak, with ≈14 per cent of the total DNSs, has a                   masses at ZAMS of 7.8 ≤ m/M ≤ 8.1; more recent detailed mod-
+mass ratio qDCO ≈ 1, from qZAMS ≈ 1 systems that evolved through                   els find that the mass range of single star progenitors at metallic-
+the double-core CE, with a low mass CCSN and an USSN (i.e.                         ity Z = 0.02 that explode as an ECSN is 7.5 ≤ m/M ≤ 9.25
+Channel II). The mass range of NSs in our Fiducial population                      (Poelarends et al. 2008). Interaction during binary evolution in-
+is [mNS,min , mNS,max ] = [1.1, 1.9] M .                                          creases this range to 7.8 ≤ m1 /M ≤ 28.4 for the primary and
+                                                                                   4.5 ≤ m2 /M ≤ 10.8 for the secondary in our study. Detailed
+                                                                                   studies of ECSNe from interacting binary systems find that the
+3.1.3 Time distributions                                                           mass range for an interacting primary at Z = 0.02 is between
+                                                                                   13.5 ≤ m/M ≤ 17.6 (Poelarends et al. 2017), where 17.6 M is
+We define the following time-scales: (i) formation time tform as the
+                                                                                   the highest mass primary used in that study.
+time from ZAMS to DCO formation, (ii) coalescence time tc as
+                                                                                      Metallicity does not play a strong role in modifying the NS mass
+the time from DCO formation to merger, (iii) total delay time tdelay
+                                                                                   range. We explore lower metallicity populations at Z = 0.002 (17)
+as the time from ZAMS to merger. Fig. 4 shows the distributions
+                                                                                   and Z = 0.001 (18), and find that, for single stars, the ECSN
+for tform , tc , and tdelay for our Fiducial model. Time distributions
+                                                                                   progenitor masses at ZAMS decrease to 7.0 ≤ m/M ≤ 7.2 and
+were made based on only those DNSs that have a merger time of
+                                                                                   6.6 ≤ m/M ≤ 6.9, respectively. However, the remnant mass from
+less than the Hubble time. The extreme ends of the time distribu-
+                                                                                   an ECSN does not vary as a function of metallicity and is al-
+tions are systems with 8.5 ≤ tform Myr−1 ≤ 41.6, 900.0 ≤ tc yr−1 ,
+                                                                                   ways fixed to be mECSN = 1.26 M . Furthermore, our minimum
+and 12.6 ≤ tdelay Myr−1 .
+                                                                                   and maximum NS masses of [mNS,min , mNS,max ] = [1.1, 1.9] M do
+   Fewer than 0.5 per cent of merging DNSs have very short coa-
+                                                                                   not change as a function of metallicity.
+lescence times of less than 10 Myr (see the middle panel of Fig. 4
+and outliers in Fig. C1 – note that the apparent gap in the middle
+panel is a sampling artefact, and does not represent an actual gap                 3.2 Variations
+in the population). These systems usually experience CEs, reduce
+their orbit during case BB mass transfer and have fortuitous natal                 COMPAS is a modular code designed to explore the effects of
+kick directions that place them on a low-periapsis orbit at DCO                    different treatments of uncertain physical assumptions. Given the
+formation. Systems with tc > 10−3 Gyr represent the bulk of the                    complexity of the formation channels, we explore the uncertainties
+population in Fig. 2; shorter coalescence times are exhibited by                   by changing one assumption per variation. This allows us to link all
+outliers with orbital periods of 10−2 d.                                          the changes in the population and its formation channels to a specific
+                                                                                   physical treatment and test the robustness of our Fiducial model.
+                                                                                   The parameters of the physical interactions may be correlated; since
+3.1.4 Supernovae                                                                   computing these correlations is computationally expensive (see e.g.
+                                                                                   Barrett et al. 2018), we do not consider them here.
+Of all the NSs in DNS systems, 20 per cent were formed via ECSNe.
+92 per cent of the initially less massive secondaries in these DNSs
+experienced ultra-stripping before exploding. Only 0.1 per cent
+                                                                                   3.2.1 On mass transfer stability criteria
+of the DNS systems had both stars experiencing an ECSN. In
+19 per cent of the DNSs the primary went through an ECSN and                       Stable case BB mass transfer leads to orbital periods similar to
+was later recycled by case BB mass transfer from the secondary.                    the observed Galactic DNS population. Meanwhile, unstable case
+
+
+                                                                                                                          MNRAS 481, 4009–4029 (2018)
+4018                        A. Vigna-Gómez et al.
+                            (00) COMPAS_                         (01) COMPAS Fiducial                             (02) Case BB: always unstable
+                                                                                                                                                       Double
+                1                                         1                                                   1
+
+               0.8                                       0.8                                                0.8
+
+
+
+
+                                                                                                                                                                Cores in CEE
+Eccentricity
+
+
+
+
+               0.6                                       0.6                                                0.6
+                                                                                                                                                       Single
+
+               0.4                                       0.4                                                0.4
+
+               0.2                                       0.2                                                0.2
+
+                0                                         0                                                   0                                        None
+                 -4    -2     0   2    4     6       8     -4    -2   0     2    4     6       8               -4    -2   0     2    4     6       8
+                      log 10 Orbital Period [days]              log 10 Orbital Period [days]                        log 10 Orbital Period [days]
+
+
+
+
+                                                                                                                                                                               Downloaded from academic.oup.com/mnras/article/481/3/4009/5092622 by guest on 28 September 2026
+Figure 8. Predicted P–e distribution of Galactic DNSs at DCO formation: (00) Stevenson et al. (2017) standard (left), (01) Fiducial (middle), (02) variation
+with unstable case BB mass transfer (right) (for more details, see Table 1). Purple diamonds represent the Galactic DNSs. Colour denotes the type of CE phase:
+blue for no CE phase, red for a single core, and yellow for a double-core CE phase. The single-core and double-core CE formations are typically associated
+with Channel I and Channel II, respectively. Blue dots on the left-hand panel correspond to double-ECSNe with σECSN = 0 km s−1 in COMPAS α.
+
+BB, leading to a CE phase, typically results in sub-hour orbital                      to support a neutrino-driven explosion. This accretion removes the
+periods (see the right-hand panel of Fig. 8); such orbital periods                    mass gap and creates a continuous remnant mass distribution from
+yield coalescence times of 10 Myr. About 90 per cent of Galactic                     NS to BH. This continuous distribution of compact-object remnant
+DNS progenitors in the Fiducial model experience case BB                              masses requires us to define an arbitrary mass cut to distinguish
+mass transfer. At the onset of the episode, 90 per cent of systems                    NSs from BHs; we follow Fryer et al. (2012) and set this mass cut
+have mass ratio q ≥ 0.2 and 9 per cent with q ≥ 0.4. Claeys et al.                    to 2.5 M , which is higher than the maximum mass of 2.0 M from
+(2014) assume that mass transfer of HeHG donors with a degenerate                     the other explosion mechanisms used in this study.
+accretor will be stable if q > 0.21 (see table 2 of that paper), while                   The ‘delayed’ explosion mechanism formation rate is R = 28.05
+Tauris et al. (2015) propose to consider mass ratio and orbital period                per Milky Way equivalent galaxy per Myr. The ‘delayed’ explosion
+to define stability criteria in order to account for the evolutionary                 mechanism, which changes the remnant mass given a CO core at
+phase of the donor at the onset of RLOF; in that study, orbital periods               the moment of an SN, produces a slightly different P–e distribution
+of P ≥ 0.07 d at the onset of RLOF lead to stable case BB mass                        than the ‘rapid’ explosion mechanism because of the impact of
+transfer. In our Fiducial model, all Galactic DNS progenitors                         mass-loss at the moment of the explosion on the binary’s orbit.
+have P ≥ 0.07 d at the onset of case BB mass transfer.                                The middle panel of Fig. 7 shows that the ‘delayed’ explosion
+   In COMPAS, we probe the extreme cases of either stable or                          mechanism lies close to the observed population and is preferred
+dynamically unstable case BB mass transfer for a whole population.                    over the ‘rapid’ explosions mechanism in the Fiducial model
+The difference in formation rate R between the stable (01) and                        with a log K = 3.03. The ‘delayed’ explosion scenario, which does
+dynamically unstable (02) case BB mass transfer is comparable                         not have a mass gap between NSs and BHs, has the largest likelihood
+within a few per cent, with {R01 ,R02 } = {24.04, 24.54} per Galaxy                   of all models.
+per Myr. Nevertheless, the log Bayes factor of model (02) relative to
+model (01) is log K = −3.12, which favours our Fiducial model,
+and ultimately, significantly favours stable against unstable mass                    3.2.3 On the SN kick distribution and magnitude
+transfer in a dichotomous scenario. In our Fiducial population,                       Both mass-loss during an SN and the natal kick magnitude and
+the assumption of case BB mass transfer being always stable is                        direction modify the orbital parameters and determine whether the
+in broad agreement with mass ratio constraints from Claeys et al.                     binary is disrupted. Low natal kick ECSNe and USSNe therefore
+(2014), which would result in more than 90 per cent of these systems                  play a prominent role in DNS formation and possible eventual
+experiencing stable mass transfer. If instead we used the stability                   merger, as would low-mass iron-core-collapse SNe with a reduced
+criteria presented in Tauris et al. (2015) (as shown in Kruckow et al.                natal kick. Our modelling allows for testing a bimodal natal kick dis-
+2018), all of the aforementioned systems would experience stable                      tribution, which distinguishes between CCSNe (high mode, σhigh =
+mass transfer.                                                                        265 km s−1 ), ECSNe (low mode, σlow = 30 km s−1 ), and USSNe
+                                                                                      (low mode). When allowing for a bimodal distribution, but with only
+                                                                                      USSN (06) or ECSN (07) contributing to the low component of the
+3.2.2 On the ‘delayed’ explosion scenario
+                                                                                      Maxwellian distribution, the DNS formation rate R drops by a factor
+To test the effect of the explosion mechanism on our predictions,                     of ≈2 relative to the Fiducial model. We also simulated a single
+we investigate three prescriptions; one being the ‘rapid’ (01) ex-                    high-mode distribution (05) with high natal kicks for both USSNe
+plosion mechanism as presented in our Fiducial model (see                             and ECSNe, which is also the assumption in COMPAS α (00). In
+Section 3.1.4). The second one is the ‘delayed’ (03) explosion                        this case, R decreases by a factor of ≈3; this single high-mode vari-
+mechanism applied in our model (03) and to be explained be-                           ation (05) also fails to create the observed longer period DNSs with
+low, while the third is the ‘Müller’ (04) prescription presented in                  low eccentricities. The formation rates and log Bayes factors are
+Section 3.2.4.                                                                        {R05 , R06 , R07 } = {9.16, 15.11, 13.53} per Milky Way equivalent
+  The ‘delayed’ explosion mechanism proposed in Fryer et al.                          galaxy per Myr and log{K05 , K06 , K07 } = {−3.08, −1.05, −3.19}
+(2012) allows for accretion on to the proto-NS before the standing-                   for variations with a single high mode (05), σ ECSN = σ high (06)
+accretion shock instability or convection become powerful enough                      and σ USSN = σ high (07), respectively. Given the log Bayes factors,
+
+
+MNRAS 481, 4009–4029 (2018)
+                                                                                                                Double neutron stars                 4019
+
+
+
+
+                                                                                                                                                                Downloaded from academic.oup.com/mnras/article/481/3/4009/5092622 by guest on 28 September 2026
+Figure 9. Masses of merging compact binaries predicted by the Fiducial model at three different metallicities: Z = 0.001 (left), Z = 0.002 (centre) (cf.
+Stevenson et al. 2017), and solar metallicity Z = 0.0142 (right). Coloured regions correspond to masses matching advanced LIGO detections within the reported
+90 per cent credible intervals.
+
+the Fiducial model is significantly preferred over single high                       That study was successful in explaining all gravitational-wave
+mode (05) and σ USSN = σ high (07) variations. It is preferred, but not           events from the first advanced LIGO observing run (GW150914,
+significantly, over the σ ECSN = σ high (06) variation.                           LVT151012, and GW151226; Abbott et al. 2016b,a,c) via a sin-
+                                                                                  gle evolutionary scenario: isolated binary evolution. However, the
+                                                                                  same assumptions fail to reproduce the observed Galactic DNS
+3.2.4 On the Müller prescription                                                 populations (see the left-hand panel of Fig. 8). COMPAS α (00),
+                                                                                  which yields a DNS formation rate of R00 = 11.34 per Milky Way
+We introduce the ‘Müller’ (04) explosion prescription as fitting for-
+                                                                                  equivalent galaxy per Myr, is the least preferred model from our
+mulae to the detailed models described by Müller et al. (2016). The
+                                                                                  variations, with a log Bayes factor of log K = −16.78. In partic-
+full description and fitting formulae are provided in Appendix B for
+                                                                                  ular, the extreme hardening of case BB binaries through a second
+use in other population synthesis studies. The ‘Müller’ prescription
+                                                                                  CE phase in COMPAS α leads to a gap in the P–e distribution,
+maps a CO-core mass to an NS remnant mass and a natal kick.
+                                                                                  where systems such as J0737–3039 are observed. From the major
+The remnant and ejecta mass and the explosion energy are obtained
+                                                                                  changes, dynamical stability during case BB mass transfer and a
+semi-analytically and calibrated to numerical models. We update
+                                                                                  bimodal natal kick distribution are preferred over the alternatives
+the analytic SN models of Müller et al. (2016) by using a shock
+                                                                                  in the Fiducial model [see unstable case BB mass transfer (02)
+radius factor α turb = 1.18 and a compression ratio at the shock β =
+                                                                                  and single mode natal kick distribution (05) variations], which are
+3.2, which fit constraints on the progenitor masses of type IIP super-
+                                                                                  ruled out in our model comparison.
+novae (Smartt 2015) slightly better than the original version. The
+                                                                                     On the other hand, the Fiducial model is able to explain, in
+natal kick velocity is obtained from these by assuming a uniform
+                                                                                  a consistent form with Stevenson et al. (2017), the gravitational-
+ejecta anisotropy (Janka 2017). The natal kick magnitude, with a
+                                                                                  wave events from the first advanced LIGO observing run, as well as
+dominant mode at vkick ≈ 100 km s−1 is therefore correlated with
+                                                                                  GW170104 (Abbott et al. 2017a), GW170608 (The LIGO Scientific
+the NS remnant mass, unlike for the other models considered here.
+                                                                                  Collaboration et al. 2017), GW170814 (Abbott et al. 2017b), and the
+The mass range of NSs in our evolved population, using the ‘Müller’
+                                                                                  DNS merger GW170817 (Abbott et al. 2017c), all detected during
+explosion mechanism, is [mNS,min , mNS,max ] = [1.2, 2.0] M . The
+                                                                                  the second observing run of advanced LIGO and advanced Virgo
+formation rate and log Bayes factor of model (04) are R = 30.95
+                                                                                  (see Fig. 9).
+per Milky Way equivalent galaxy per Myr and log K = −2.50. This
+Bayes factor was calculated using only the P–e distribution. The
+mass distribution (Figs 7 and 10) will play an important role in
+distinguishing the ‘rapid’ (01), ‘delayed’ (03), and ‘Müller’ (04)               3.2.6 On the circularization during mass transfer
+explosion mechanism variations.
+                                                                                  Our Fiducial model does not circularize the orbit during a mass
+                                                                                  transfer episode, except as a consequence of dynamically unstable
+                                                                                  mass transfer (CE). As a variation, we consider circularization at the
+3.2.5 On the comparison with COMPAS α
+                                                                                  onset of RLOF (e.g. as a consequence of tidal dissipation prior to
+Here, we compare our Fiducial model to the one described by                       mass transfer or during the episode). We allow for two types of circu-
+Stevenson et al. (2017, (00), COMPAS α). The latter uses different                larization: (i) circularization to periastron ap = a(1 − e), which dis-
+parametrizations: both CCSNe and USSNe natal kicks are drawn                      sipates both orbital energy and angular momentum (12), (ii) circu-
+from a high-mode Maxwellian distribution and all ECSNe have a                     larization to semilatus rectum aSR = a(1 − e2 ), which conserves the
+vkick = 0 km s−1 ; stability is determined using ζ SPH for all stellar            angular momentum of the orbit (13). The DNS formation rates and
+phases, which often leads to dynamically unstable mass transfer,                  log Bayes factors are {R12 , R13 } = {14.14, 15.31} per Milky Way
+particularly during case BB RLOF; and the binding energy param-                   equivalent galaxy per Myr and log{K12 , K13 } = {2.54, 0.27}, re-
+eter is λfixed = 0.1 for all stars in any evolutionary stage.                     spectively. Rates decrease by less than a factor of 2. Circularization
+
+
+                                                                                                                       MNRAS 481, 4009–4029 (2018)
+4020        A. Vigna-Gómez et al.
+to periastron at the onset of mass transfer is slightly preferred than   the energy budget for CE ejection, in addition to the orbital energy.
+the alternatives, but not enough for us to consider it clearly pre-      The extreme value of α max = 10 is more for illustration purposes
+ferred over the Fiducial model. Circularization that conserves           rather than to mimic a particular physical interaction; in this case,
+angular momentum is not favoured nor disfavoured with respect to         α max = 10 can only be explained if it comes from nuclear energy. The
+the Fiducial assumption (i.e. no circularization at all).                formation rates of DNSs and the log Bayes factors for variations in
+                                                                         α are {R10 , R11 } = {5.26, 9.54} per Milky Way equivalent galaxy
+                                                                         per Myr and log{K10 , K11 } = {1.76, −1.97}, respectively, neither
+3.2.7 On the angular-momentum loss during non-conservative               clearly favouring nor disfavouring the α variations with respect
+mass transfer                                                            to the Fiducial model. The choice of α influences not only
+                                                                         the number of created DNSs but also the number of mergers. The
+During a non-conservative mass transfer episode, the specific angu-
+                                                                         fraction of all formed DNSs that will merge in a Hubble time is
+lar momentum of the removed matter is determined by how mass
+                                                                         {f01 , f10 , f11 } = {0.73, 0.59, 0.36}.
+leaves the system. In our Fiducial assumption, any non-accreted
+                                                                            Additionally, we also consider the ‘pessimistic’ CE assumption
+mass is removed isotropically in the reference frame of the accretor;
+                                                                         (19). This assumption yields a DNS population that is a subset of the
+this mass-loss mode is usually referred to as ‘isotropic re-emission’
+
+
+
+
+                                                                                                                                                   Downloaded from academic.oup.com/mnras/article/481/3/4009/5092622 by guest on 28 September 2026
+                                                                         population under the Fiducial model, with binaries that enter the
+(01). Another common parametrization is the ‘Jeans’ mode (14),
+                                                                         CE while the donor is classified as a HG star removed, as these are
+which consists of ejecting the mass isotropically in the reference
+                                                                         assumed to always lead to merger. The ‘pessimistic’ CE assump-
+frame of the donor, similarly to fast winds. The last possibility
+                                                                         tion (19) is therefore expected to decrease DNS formation rates. The
+we take into account is the formation of a circumbinary disc (15),
+                                                                         formation rates of DNSs and the log Bayes factors for these vari-
+with a radius of adisc = 2a (Artymowicz & Lubow 1994), from
+                                                                         ations are {R01 , R19 } = {24.04, 14.29} per Milky Way equivalent
+which the mass will be ejected. While isotropic re-emission (01)
+                                                                         galaxy per Myr and log{K01 , K19 } = {0, −0.16}, respectively. The
+and the ‘Jeans’ mode (14) tend to effectively widen the orbit, that
+                                                                         likelihood of the ‘pessimistic’ model (19) is similar to the one from
+is not the case if mass is lost from a circumbinary disc (15). The
+                                                                         the Fiducial model, which means the P–e distribution alone is
+formation rates of Galactic-like DNSs and the log Bayes factor
+                                                                         insufficient to pick between these models. Additional constraints,
+are {R14 , R15 } = {6.69, 28.05} per Milky Way equivalent galaxy
+                                                                         such as merger rates, would be needed to determine the preferred
+per Myr and log{K14 , K15 } = {−3.34, −2.67}, respectively. The
+                                                                         model.
+Fiducial model is strongly preferred over the ‘Jeans’ mode
+(14) variation; it is also mildly preferred over the circumbinary
+disc (15) variation. The mass-loss mode also affects the future fate
+of the formed DNSs. The fraction of all formed DNSs that will            3.2.9 On the effect of thermal eccentricity
+merge in a Hubble time is {f01 , f14 , f15 } = {0.73, 0.21, 0.94} for    The only initial distribution we varied in this study was eccentricity.
+the ‘isotropic re–emission’, ‘Jeans’ and ‘circumbinary disc’ mode,       In order to simulate a population with non-circular binaries at ZAMS
+respectively.                                                            we use the thermal eccentricity distribution (16), which has the form
+                                                                         of fe (e) = 2e (Heggie 1975). In this variation, the first episode of
+                                                                         mass transfer begins once the primary expands to fill its Roche lobe
+3.2.8 On the CE parameters                                               at periastron. This changes the range of initial periods leading to
+We consider several variations to the parameters that govern CE          interaction (de Mink & Belczynski 2015).
+evolution: λ, which determines the envelope binding energy, and α,          The formation rate and log Bayes factor of model (16) are
+which determines the amount of orbital energy needed to expel the        R = 10.22 per Milky Way equivalent galaxy per Myr and log K =
+envelope. In our Fiducial model, all of the DNSs experience a            −0.07, respectively. While formation rates drop by a factor of ap-
+CE phase and therefore varying λ and α from the Fiducial model           proximately 3, the P–e distribution of forming DNSs is not signif-
+choices (i.e. λNanjing and α = 1) will affect the final distributions.   icantly affected. The drop in the formation rate is due to enhanced
+   λNanjing is a function of core mass, total mass, and radius. We       rates of interactions of MS stars that only need to fill their Roche
+use a fixed value λfixed = 0.1 (08) for comparison with previous         lobe at periastron; if that mass transfer episode is unstable, the two
+population synthesis studies (e.g. Belczynski et al. 2002). Recently,    MS stars merge.
+Kruckow et al. (2016) found for several models at different mass and
+metallicity that λ depends on the radius in a roughly power-law form
+                                                                         3.3 On mass ratio distributions
+λ ∝ Rβ , with −1 ≤ β ≤ −2/3. We made a fit to fig. 1 of Kruckow
+et al. (2016) in the form λKruckow = 1600 × 0.00125−β Rβ , assuming      Fig. 3 shows the impact of the choice of the SN remnant mass model
+a monotonically decreasing function. For our particular variation,       on the DNS mass ratio distributions. The Fiducial model shows
+we use an average value where β = −5/6 (09). The formation rates         two distinct peaks in the mass ratio distribution around qDCO = 0.87
+of DNSs and the log Bayes factors for these variations in λ are          and qDCO = 1. The two peaks can be explained given the evolution
+{R08 , R09 } = {16.30, 9.08} per Milky Way equivalent galaxy per         of Channel I and Channel II, respectively. For the full discussion
+Myr and log{K08 , K09 } = {−0.07, 0.02}, respectively, not favour-       on the characteristics of the mass ratio for the Fiducial model
+ing nor disfavouring the λ variations with respect to the Fiducial       (see Section 3.1.2).
+model.                                                                      In the ‘delayed’ prescription (03), most of the USSNe change
+   Higher values of α lead to wider post-CE orbits than low values       mass from 1.1 to 1.28 M , with respect to the ‘rapid’ mechanism;
+of α. Without exploring the full and continuous parameter space,         therefore, the mass ratio of systems where the primary collapsed
+we vary α to extreme values of α min = 0.1 (10) and α max = 10           in an ECSN and the secondary in an USSN approaches 1, yielding
+(11). Values of α > 1 suppose that there are substantial additional      an even more dominant peak at qDCO = 1 in the overall mass ratio
+energy sources, such as recombination energy and/or nuclear energy       distribution. Channel II leads to the second peak, with mass ratio
+(Podsiadlowski et al. 2010; Ivanova et al. 2013) that contribute to      qDCO = 1, as in the Fiducial model. This results in a cumulative
+
+
+MNRAS 481, 4009–4029 (2018)
+                                                                                                            Double neutron stars                4021
+
+                    1       1.1      1.2      1.3      1.4      1.5             dwarf binaries; there are several non-confirmed DNSs or poorly
+     0.25                                                                       constrained DNS masses in the region favoured by the ‘rapid’
+                                                      Compas_                   mechanism (01) (Özel et al. 2010; Özel & Freire 2016). On the
+                                                      Fiducial (Rapid)          other hand, the seven existing well-constrained mass measurements
+                                                      Delayed                   in this study are inconsistent with the predictions of the Fiducial
+      0.2                                             Muller                    model (01) at a >4σ level. None of these seven measurements fall
+                                                      GW170817                  below a chirp mass of 1.1 M , while 83 per cent of DNSs in the
+                                                      B1534+12                  Fiducial model have lower chirp masses. This suggests that the
+                                                      B1913+16                  ‘rapid’ mechanism underpredicts the amount of collapsed mass for
+     0.15
+                                                      J0737-3039                the lowest-mass NSs for both ECSNe and USSNe.
+                                                      J1756-2251                   All other SN prescriptions considered here yield DNS chirp mass
+                                                      J1913+1102                distributions starting above 1.1 M . Unsurprisingly, the ‘delayed’
+      0.1                                             J1757-1854                mechanism (03) has a very similar distribution to COMPAS α that
+                                                                                uses the same explosion mechanism. They both predict systems
+
+
+
+
+                                                                                                                                                           Downloaded from academic.oup.com/mnras/article/481/3/4009/5092622 by guest on 28 September 2026
+                                                                                matching all chirp masses (see Fig. 10), with a peak close to the
+                                                                                lowest observed DNS chirp masses, J1756–2251 and J0737–3039.
+     0.05
+                                                                                The ‘Müller’ prescription (04) yields a similarly broad chirp mass
+                                                                                distribution above 1.1 M . The ‘delayed’ (03) and ‘Müller’ (04)
+                                                                                SN fallback prescriptions cannot be distinguished based on existing
+         0                                                                      mass measurements. However, the separation of ≈0.4 between the
+                    1       1.1      1.2      1.3      1.4      1.5             predicted chirp mass cumulative distribution functions for these
+                                                                                two models suggests that ∼ 10 additional chirp mass measurements
+                                                                                (whether from radio pulsars or merging DNSs) would be sufficient
+Figure 10. Chirp mass distribution of DNSs with a delay time smaller than       to tell these models apart.
+a Hubble time: (00) COMPAS α (black dotted), (01) Fiducial Fryer
+Rapid (dark grey solid), (03) Fryer Delayed (grey dashed), and (04) Müller
+(light grey dot–dashed). Galactic DNSs with an estimated delay time smaller     3.5 On kicks
+than a Hubble time are indicated at the top. GW170817, the only GW signal       When binaries survive an SN explosion, they may get significant
+detected from DNSs to date, is shown as a vertically offset thick green line,
+                                                                                centre-of-mass kicks from both natal NS kicks and Blaauw re-
+with a similar chirp mass (1.188 M ) as J1757–1854 in purple. All systems
+                                                                                coil (Blaauw 1961) from mass-loss. The resulting DNS population
+have precise mass measurements with error bars within the thickness of the
+line.                                                                           should therefore be more broadly spatially distributed in the Galaxy
+                                                                                than the regions of massive star formation. We follow a population
+                                                                                of Fiducial model DNSs with the predicted total kick distribu-
+distribution function for the ‘delayed’ mechanism (03) with a mass
+                                                                                tion in a Galactic potential starting from birth in the thin disc. While
+ratio between 0.52 ≤ qDCO ≤ 1, where 80 per cent of the systems
+                                                                                we find that, as expected, kicks broaden the distribution of Galacto-
+have qDCO > 0.80, 55 per cent have qDCO > 0.90, and 40 per cent
+                                                                                centric distances (see Fig. C1 in Appendix C, where the details of
+have qDCO > 0.95.
+                                                                                this analysis are presented), the deep Galactic potential well means
+   The remnant masses in the Müller prescription (04), as shown
+                                                                                that this broadening is relatively small and challenging to test for.
+in Figs 7 and B1, have a wider spread and vary more at the low-
+                                                                                In practice, the spreading of DNSs away from the thin disc may be
+mass end. In this model, there is no significant pile-up. There is
+                                                                                even smaller than estimated here, because our simplified case BB
+more scatter, with 70 per cent of the systems having qDCO > 0.8,
+                                                                                mass-loss models imply fairly high remaining core masses, between
+40 per cent having qDCO > 0.9, and 20 per cent having qDCO > 0.95.
+                                                                                1.6 ≤ mCO /M ≤ 4.6, while detailed calculations of ultra-stripping
+                                                                                suggest lower remnant core masses 1.45 ≤ m/M ≤ 3.15 (Tauris
+3.4 On the chirp mass distribution                                              et al. 2015). Reducing COMPAS core masses in line with Tauris
+                                                                                et al. (2015) would both reduce Blaauw kicks and DNS eccen-
+Fig. 10 shows the chirp mass distributions of DNSs that will merge              tricities. On the other hand, three quarters of short GRBs are found
+within a Hubble time. We compare the prediction of our Fiducial                 outside the effective radius of the host galaxy (Fong & Berger 2013),
+model (01) that uses the ‘rapid’ explosion mechanism, to the model              providing a strong constraint on the binary natal kick distribution;
+which uses the ‘delayed’ (03) explosion mechanism and to that                   Fong & Berger (2013) estimate total kicks of ≈20–140 km s−1 .
+which uses the ‘Müller’ (04) prescription.
+   Additionally, we also show the COMPAS α (00) chirp mass dis-
+tribution that uses the ‘delayed’ mechanism. As expected, the chirp             3.6 On rates
+mass distributions show similarities with the mass ratio distribu-
+                                                                                3.6.1 DNS merger rates
+tions, reproducing the same sharp features (peaks) explained in
+Section 3.3. In Fig. 10, we added all the confirmed DNSs with                   DNS formation and merger rates are constrained by the observed
+an estimated delay time smaller than the Hubble time, as well as                sample of Galactic binary pulsars (e.g. Kim, Kalogera & Lorimer
+GW170817.                                                                       2003; O’Shaughnessy & Kim 2010), by observations of short GRBs
+   We find that the ‘rapid’ (01) mechanism predicts that most of                (Fong & Berger 2013), and will ultimately be measured with
+the DNSs will have chirp mass lower than J1756–2251, which has                  gravitational-wave observations (see Mandel & O’Shaughnessy
+the lowest chirp mass among confirmed DNSs with good mass                       2010 for a review). Rates inferred from Galactic binary pulsars
+constraints. In fact, the ‘rapid’ SN mechanism (01) allows for low-             are dominated by a few systems and are sensitive to the imperfectly
+mass NSs, which would be difficult to differentiate from NS–white               known pulsar radio luminosity distribution (Kalogera et al. 2004).
+
+
+                                                                                                                    MNRAS 481, 4009–4029 (2018)
+4022         A. Vigna-Gómez et al.
+Short GRBs extend the observations beyond the Milky Way to cos-                 with recessional velocities less than 2000 km s−1 . More recently,
+mological distances, but inference from these is complicated by the             Shivvers et al. (2017) report that 69.6 per cent of CCSNe are hydro-
+difficulty of measuring jet opening angles and uncertain selection              gen rich (according to the definition above), while the remaining
+effects, and relies on the additional assumption of a one-to-one                30.4 per cent come from stars with stripped envelopes.
+correspondence between short GRBs and DNS mergers (Berger
+2014). Abadie et al. (2010) combined the existing observational
+constraints to suggest that the DNS merger rate lies between 1 and              4 DISCUSSION AND CONCLUSIONS
+1000 Myr−1 in a Milky Way equivalent galaxy (approximately 10–                  We used the COMPAS rapid population synthesis code to follow the
+10 000 Gpc−3 yr−1 ), with a likely value toward the middle of this              evolution of massive stellar binaries and thus generate a population
+range. All of the models presented here fall within this range, al-
+                                                                                of DCOs. We quantitatively validated our models by comparing the
+though we focus on the Milky Way DNS population rather than the                 predicted P–e distribution of DNSs against the observed Galactic
+merger rate, and hence did not consider the convolution of the DNS              DNS distribution, and qualitatively compared the predicted rate and
+formation rate and delay time distribution over cosmic history.
+                                                                                mass distribution of Galactic DNSs to observations. We considered
+   Other recent population synthesis studies give estimates that,               variations relative to the Fiducial model in order to investigate
+
+
+
+
+                                                                                                                                                           Downloaded from academic.oup.com/mnras/article/481/3/4009/5092622 by guest on 28 September 2026
+like ours, fall in the two lower decades of this range. Chruslinska             the impact of uncertain evolutionary physics. We find the following:
+et al. (2018) use STARTRACK to predict a local merger rate
+density of 48 Gpc−3 yr−1 for their standard assumptions and                        (i) Case BB mass transfer during DNS formation must be pre-
+600+600
+    −300 Gpc
+              −3
+                 yr−1 for a very optimistic set of assumptions. Bel-            dominantly stable. We considered the possibility that HeHG of the
+czynski et al. (2018) also use STARTRACK to argue that even these               secondary leads to dynamically unstable mass transfer and a sec-
+rates are two orders of magnitude larger than the contribution from             ond CE phase (Dewi & Pols 2003) in Variation (02). In fact, this
+globular or nuclear clusters. Kruckow et al. (2018) use COMBINE                 was our initial default model, consistent with COMPAS α (00) in
+to predict an upper limit of local merger rate of 400 Gpc−3 yr−1 .              this assumption. However, the lack of DNSs with few-hour orbital
+   Meanwhile, Abbott et al. (2017c) estimate a DNS merger rate of               periods (such as J0737–3039) in this variation (see Fig. 8), as well
+1540+3200
+      −1220 Gpc
+                −3
+                   yr−1 based on GW170817 alone. However, given                 as our Bayesian analysis indicates that most case BB mass transfer
+the significant Poisson uncertainty and sensitivity to rate priors from         episodes must be stable. This finding is consistent with the detailed
+a single observation,5 the addition of this one (albeit, very special)          models of Tauris et al. (2015). However, some case BB dynami-
+event to the population of merging Galactic DNSs and short GRBs                 cally unstable systems could exist without being detectable in the
+does not significantly shift the observational constraints on the DNS           observed DNS population: the very short orbital periods of DNSs
+merger rate. In fact, given the similarity of the predicted DNS for-            that were hardened by two CE phases would lead them to merge in
+mation rates among most models presented here, observational con-               less than a few hundred thousand years. While our study assumes
+straints on the rate alone will not be sufficient to distinguish between        constant star formation within the history of the Galaxy, the short
+these models in the near future.                                                orbital period DNSs would be disfavoured in Galactic star formation
+                                                                                history models without recent periods of starbursts.
+                                                                                   (ii) A bimodal SN natal kick distribution is preferred over a
+3.6.2 SN rates                                                                  single mode one. We find that a bimodal natal kick distribution
+We estimate the SN rates for our Fiducial model (01). Given the                 (with non-zero components) with lower natal kicks for ECSNe and
+ambiguity in SN classification, we make simplifying assumptions to              USSNe and higher natal kicks for standard CCSNe is preferred [see
+convert our models into observational predictions. We consider all              variations (05), (06), (07)]. If ECSNe and/or USSNe are given the
+progenitors with a hydrogen envelope to lead to hydrogen-rich SNe               high natal kicks consistent with the observed velocities of isolated
+(type II excluding type IIb) and the rest are considered stripped SNe           pulsars (Hansen & Phinney 1997; Hobbs et al. 2005), wider bi-
+(either hydrogen absent type Ib or Ic or hydrogen-poor type IIb). Our           naries are overwhelmingly disrupted by SNe, and observed wide
+total rate of SNe leading to NS formation is 0.0080 per M , which              DNSs cannot be reproduced in the models. A bimodal SN natal
+includes both ECSNe and USSNe. Among these, 75.6 per cent are                   kick distribution is consistent with the findings of other popula-
+hydrogen rich and the remaining 24.4 per cent are classified as                 tion synthesis studies [see Belczynski et al. (2002) and Pfahl et al.
+stripped SNe, including all USSNe. We predict that USSNe that                   (2002b) as well as with comparison to observations from Schwab
+follow after case BB mass transfer on to an NS companion should                 et al. (2010), Beniamini & Piran (2016), and Verbunt et al. (2017)],
+make up 1.2 per cent of all stripped SNe and 0.3 per cent of all SNe            although O’Shaughnessy et al. (2008) did not find evidence for
+leading to NS formation.                                                        multiple natal kick distributions.
+   Our total SN rate prediction is consistent with Zapartas et al.                 The aforementioned findings in our paper, stability during case
+(2017), a population synthesis study that reports CCSN rates in bi-             BB mass transfer and a bimodal natal kick distribution are broadly
+naries between 0.0035–0.0253 per M , depending on the assumed                  in agreement with those in Andrews et al. (2015), which used a
+IMF. Our estimates for the fraction of stripped SNe compare well                smaller sample of eight Galactic DNSs instead of the current 14
+with observational results. Eldridge et al. (2013) find that the frac-          confirmed systems and carried out population synthesis by mainly
+tions of hydrogen rich and stripped SNe leading to NS formation                 varying CE parameters and natal kick magnitudes. Andrews et al.
+are 61.9 per cent and 38.1 per cent, respectively; that study was               (2015) find that it is likely that short-period low-eccentricity systems
+made with SNe discovered between 1998 and 2012 in galaxies                      went through an evolutionary channel that includes stable case BB
+                                                                                mass transfer. Their study also points out that the cores of ECSN
+                                                                                progenitors should have relatively low mass, which can be related
+5 For example, shifting from a flat-in-rate prior to a p(R) ∝ 1/
+                                                                √               to lower natal kick magnitude.
+                                                                  R Jeffreys
+prior (Jeffreys 1946) would reduce the peak of the posterior by a factor of 2      (iii) Predicted DNS formation rates across variations are consis-
+following one detection. Furthermore, the posterior peak is a factor of 1.67    tent with observations. The formation rate of DNSs in the Fidu-
+lower than the posterior median quoted by Abbott et al. (2017c).                cial model is 24 Myr−1 in the Milky Way. The Milky Way DNS
+
+
+MNRAS 481, 4009–4029 (2018)
+                                                                                                      Double neutron stars             4023
+formation rate for all considered variations is 5–31 Myr−1 . All rates   detectable radio emission from non-recycled pulsars is expected to
+are consistent with observations (Abadie et al. 2010), including         last for 50 Myr (Lorimer & Kramer 2004).
+the inferred rate from the GW170817 gravitational-wave detection            The DNS formation models presented here can also be tested
+(Abbott et al. 2017c), and cannot be used to differentiate between       against observable populations of massive stars during intermedi-
+the models at this point.                                                ate phases before DNS formation. Neutron star Be/X-ray binaries
+                                                                         (e.g. Knigge, Coe & Podsiadlowski 2011) offer a particularly
+                                                                         promising test case; for example, the observed correlation between
+   We also considered multiple SN explosion mechanisms, includ-          the orbital period and the NS spin, with the latter appearing to be
+ing varying the fallback mass [Fryer ‘rapid’ (01) and Fryer ‘delayed’    bimodal, could indicate distinct SN classes in their evolutionary
+(03) variations] and a coupled mass–kick model calibrated to nu-         history (Knigge et al. 2011). Spin distribution predictions could
+merical simulations [‘Müller’ (04) prescription].                       also be compared to observed pulsar spin periods in both isolated
+   Low-mass iron-core CCSNe may have reduced natal kicks, but            pulsars (e.g. Kiel et al. 2008) and in DNS systems (e.g. Dewi,
+are given standard CCSN natal kicks in the Fryer models, including       Podsiadlowski & Pols 2005; Osłowski et al. 2011; Tauris et al.
+the Fiducial model. The mass distribution of observed systems            2017). However, determining the NS spin-up or spin-down through
+
+
+
+
+                                                                                                                                                  Downloaded from academic.oup.com/mnras/article/481/3/4009/5092622 by guest on 28 September 2026
+is not consistent with the very low masses predicted by the Fryer        binary interactions and pulsar evolution requires additional mod-
+‘rapid’ fallback prescription used in the Fiducial model (01).           elling assumptions, and hence spin models were not included in the
+Furthermore, observations do not show a peak in the mass distribu-       present study. Meanwhile, more detailed studies of natal kicks in
+tion around 1.26 M , where ECSNe should fall in our models. The         the Galactic potential could lead to additional constraints on na-
+remnant mass of an ECSN depends on the NS’s equation of state            tal kick distributions. Moreover, gravitational-wave detections will
+and indicates either that ECSNe are less common in binaries than         produce an ever larger catalogue of accurate mass measurements,
+we expected or that the ECSN models should be revisited, as sim-         at least for the chirp mass parameter. Together, these growing ob-
+ilarly noticed by Kruckow et al. (2018). With only ∼10 additional        servational data sets will enable increasingly accurate tests of the
+DNS mass measurements, it will be possible to further constrain          massive stellar binary evolution models described here.
+the SN fallback mechanisms, distinguishing between the ‘Müller’
+(04) and Fryer ‘delayed’ (03) variants, both of which are consistent
+                                                                         AC K N OW L E D G E M E N T S
+with existing observations.
+   Further input on natal kick velocity distributions should come        AVG acknowledges support from Consejo Nacional de Cien-
+from a better comparison with observed isolated pulsar natal kicks.      cia y Tecnologia (CONACYT) and thanks the PHAROS Euro-
+At the moment, the observed isolated pulsar distribution is used to      pean Cooperation in Science and Technology (COST) Action
+calibrate the CCSN natal kicks in binaries. However, the sample          (CA16214) for partial support. IM acknowledges partial support
+of observed isolated pulsars is contaminated by pulsars from dis-        from the Science and Technology Facilities Council (STFC). KB
+rupted binaries. Therefore, the approach we used here, which is also     acknowledges support from the Polish National Science Cen-
+used by most population-synthesis codes, is not self-consistent: the     ter (NCN) grants Sonata Bis 2 (DEC-2012/07/E/ST9/01360) and
+observed single-pulsar velocity distribution should be checked for       OPUS (2015/19/B/ST9/01099). SJ is partially supported by the
+consistency against a model that includes contributions from both        Strategic Priority Research Program of the Chinese Academy of
+single and binary massive stars. In particular, observations should be   Sciences ‘Multi-waveband Gravitational Wave Universe’ (grant
+tested for evidence of the predicted low natal kicks associated with     no. XDB23040000), and is also grateful to the Chinese Academy
+ECSNe, which may preferentially occur in binaries (Podsiadlowski         of Sciences (President’s International Fellowship Initiative grant
+et al. 2004) that may subsequently be disrupted.                         no. 2011Y2JB07) and the National Natural Science Foundation
+   We assumed a solar metallicity Z = 0.0142 for massive stars          of China (grant no. 11633005). SdM acknowledges the European
+in the Galaxy. In reality, the Galaxy has a distribution of metallici-   Union’s Horizon 2020 research and innovation programme for
+ties at the present day, as well as a history of metallicity evolution   funding from the European Research Council (ERC), grant agree-
+over time, since present-day DNS systems and particularly DNS            ment no. GS100010663. SdM and IM acknowledge the hospital-
+mergers may have formed at earlier times or in lower-metallicity         ity of the Kavli Institute for Theoretical physics, Santa Barbara,
+regions [see Lamberts et al. (2018) for a discussion of Galactic         CA. Their stay was supported by the National Science Founda-
+binary BH formation]. While Fig. 9 confirms that, for a suitable         tion under grant no. NSF PHY11-25915. BM was supported by the
+choice of metallicity and initial conditions, the Fiducial model         Australian Research Council (ARC) through ARC Future Fellow-
+can produce compact binary mergers with masses matching all of           ship FT160100035. SS was supported by the Australian Research
+the existing gravitational-wave observations; it also demonstrates       Council Centre of Excellence for Gravitational Wave Discovery
+that metallicity does impact the rate and properties of merging          (OzGrav), CE170100004.
+DNSs. Therefore, the metallicity-specific star formation history            We thank the Niels Bohr Institute for its hospitality while part of
+of the Milky Way could affect the details of the modelled DNS            this work was completed, and acknowledge the Kavli Foundation
+population.                                                              and the Danish National Research Foundation (DNRF) for support-
+   We do not account for selection effects in the observed Galactic      ing the 2017 Kavli Summer Program. We also thank Jeff Andrews,
+DNS population in this study [see Tauris et al. (2017) for a detailed    Christopher Berry, Ross Church, David Stops, Jason Hessels, Ser-
+discussion]. Binaries with very short orbital periods may be selected    ena Vinciguerra, and Manos Zapartas for discussions, suggestions,
+against because of the orbital acceleration of the pulsar, which         and assistance during the writing of this manuscript.
+changes the apparent spin period; they will also have short merger
+times, and their location within the Galaxy will be sensitive to the
+details of recent star formation history. Meanwhile, binaries with       REFERENCES
+extremely long orbital periods may also be challenging to detect,        Abadie J. et al., 2010, Class. Quantum Gravity, 27, 173001
+since they are less likely to be recycled during binary evolution, and   Abbott B. P. et al., 2016a, Phys. Rev. X, 6, 041015
+
+
+                                                                                                             MNRAS 481, 4009–4029 (2018)
+4024         A. Vigna-Gómez et al.
+Abbott B. P. et al., 2016b, Phys. Rev. Lett., 116, 061102                       Hulse R. A., Taylor J. H., 1975, ApJ, 195, L51
+Abbott B. P. et al., 2016c, Phys. Rev. Lett., 116, 241103                       Hurley J. R., Pols O. R., Tout C. A., 2000, MNRAS, 315, 543
+Abbott B. P. et al., 2017a, Phys. Rev. Lett., 118, 221101                       Hurley J. R., Tout C. A., Pols O. R., 2002, MNRAS, 329, 897
+Abbott B. P. et al., 2017b, Phys. Rev. Lett., 119, 141101                       Hwang J., Lombardi J. C., Jr, Rasio F. A., Kalogera V., 2015, ApJ, 806, 135
+Abbott B. P. et al., 2017c, Phys. Rev. Lett., 119, 161101                       Irrgang A., Wilcox B., Tucker E., Schiefelbein L., 2013, A&A, 549, A137
+Anderson S. B., Gorham P. W., Kulkarni S. R., Prince T. A., Wolszczan A.,       Ivanova N., Heinke C. O., Rasio F. A., Belczynski K., Fregeau J. M., 2008,
+    1990, Nature, 346, 42                                                           MNRAS, 386, 553
+Andrews J. J., Farr W. M., Kalogera V., Willems B., 2015, ApJ, 801, 32          Ivanova N. et al., 2013, A&AR, 21, 59
+Artymowicz P., Lubow S. H., 1994, ApJ, 421, 651                                 Izzard R. G., Tout C. A., Karakas A. I., Pols O. R., 2004, MNRAS, 350, 407
+Arzoumanian Z., Chernoff D. F., Cordes J. M., 2002, ApJ, 568, 289               Izzard R. G., Dray L. M., Karakas A. I., Lugaro M., Tout C. A., 2006, A&A,
+Asplund M., Grevesse N., Sauval A. J., Scott P., 2009, ARA&A, 47, 481               460, 565
+Barrett J. W., Gaebel S. M., Neijssel C. J., Vigna-Gómez A., Stevenson S.,     Izzard R. G., Glebbeek E., Stancliffe R. J., Pols O. R., 2009, A&A, 508,
+    Berry C. P. L., Farr W. M., Mandel I., 2018, MNRAS, 477, 4685                   1359
+Belczyński K., Bulik T., 1999, A&A, 346, 91                                    Janka H.-T., 2017, ApJ, 837, 84
+Belczynski K., Kalogera V., Bulik T., 2002, ApJ, 572, 407                       Janssen G. H., Stappers B. W., Kramer M., Nice D. J., Jessner A., Cognard
+
+
+
+
+                                                                                                                                                                Downloaded from academic.oup.com/mnras/article/481/3/4009/5092622 by guest on 28 September 2026
+Belczynski K., Kalogera V., Rasio F. A., Taam R. E., Zezas A., Bulik T.,            I., Purver M. B., 2008, A&A, 490, 753
+    Maccarone T. J., Ivanova N., 2008, ApJS, 174, 223                           Jaynes E., Jaynes E., Bretthorst G., Press C. U., 2003, Probability Theory:
+Belczynski K., Holz D. E., Bulik T., O’Shaughnessy R., 2016, Nature, 534,           The Logic of Science. Cambridge Univ. Press, Cambridge
+    512                                                                         Jeffreys H., 1946, Proc. R. Soc. London Ser. A, 186, 453
+Belczynski K. et al., 2018, A&A, 615, A19                                       Kalogera V. et al., 2004, ApJ, 601, L179
+Belczyński K., Kalogera V., 2001, ApJ, 550, L183                               Katz J. I., 1975, Nature, 253, 698
+Beniamini P., Piran T., 2016, MNRAS, 456, 4089                                  Keith M. J., Kramer M., Lyne A. G., Eatough R. P., Stairs I. H., Possenti A.,
+Berger E., 2014, ARA&A, 52, 43                                                      Camilo F., Manchester R. N., 2009, MNRAS, 393, 623
+Bhattacharya D., van den Heuvel E. P. J., 1991, Phys. Rep., 203, 1              Kiel P., Hurley J., Bailes M., Murray J., 2008, MNRAS, 388, 393
+Blaauw A., 1961, Bull. Astron. Inst. Netherlands, 15, 265                       Kim C., Kalogera V., Lorimer D. R., 2003, ApJ, 584, 985
+Brandt N., Podsiadlowski P., 1995, MNRAS, 274, 461                              Kippenhahn R., Weigert A., 1967, Z. Astrophys., 65, 251
+Bray J. C., Eldridge J. J., 2016, MNRAS, 461, 3747                              Knigge C., Coe M. J., Podsiadlowski P., 2011, Nature, 479, 372
+Brisken W. F., Benson J. M., Goss W. M., Thorsett S. E., 2002, ApJ, 571,        Kramer M. et al., 2006, Science, 314, 97
+    906                                                                         Kreidberg L., Bailyn C. D., Farr W. M., Kalogera V., 2012, ApJ, 757, 36
+Brown G. E., 1995, ApJ, 440, 270                                                Kroupa P., 2001, MNRAS, 322, 231
+Cameron A. D. et al., 2018, MNRAS, 475, L57                                     Kruckow M. U., Tauris T. M., Langer N., Szécsi D., Marchant P., Podsiad-
+Champion D. J., Lorimer D. R., McLaughlin M. A., Cordes J. M., Arzou-               lowski P., 2016, A&A, 596, A58
+    manian Z., Weisberg J. M., Taylor J. H., 2004, MNRAS, 350, L61              Kruckow M. U., Tauris T. M., Langer N., Kramer M., Izzard R. G., 2018,
+Chomiuk L., Povich M. S., 2011, AJ, 142, 197                                        MNRAS, 481, 1908
+Chruslinska M., Belczynski K., Klencki J., Benacquista M., 2018, MNRAS,         Lamberts A. et al., 2018, MNRAS, 480, 2704
+    474, 2937                                                                   Lazarus P. et al., 2016, ApJ, 831, 150
+Church R. P., Levan A. J., Davies M. B., Tanvir N., 2011, MNRAS, 413,           Lentz E. J. et al., 2015, ApJ, 807, L31
+    2004                                                                        Lorimer D. R., Kramer M., 2004, Handbook of Pulsar Astronomy. Cam-
+Claeys J. S. W., Pols O. R., Izzard R. G., Vink J., Verbunt F. W. M., 2014,         bridge Univ. Press, Cambridge
+    A&A, 563, A83                                                               Lynch R. S., Freire P. C. C., Ransom S. M., Jacoby B. A., 2012, ApJ, 745,
+Corongiu A., Kramer M., Stappers B. W., Lyne A. G., Jessner A., Possenti            109
+    A., D’Amico N., Löhmer O., 2007, A&A, 462, 703                             MacLeod M., Ramirez-Ruiz E., 2015, ApJ, 798, L19
+de Kool M., 1990, ApJ, 358, 189                                                 Mandel I., O’Shaughnessy R., 2010, Class. Quantum Gravity, 27, 114007
+de Mink S. E., Belczynski K., 2015, ApJ, 814, 58                                Marek A., Janka H., 2009, ApJ, 694, 664
+de Mink S. E., Pols O. R., Hilditch R. W., 2007, A&A, 467, 1181                 Martinez J. G. et al., 2015, ApJ, 812, 143
+del Peloso E. F., da Silva L., Porto de Mello G. F., Arany-Prado L. I., 2005,   Martinez J. G. et al., 2017, ApJ, 851, L29
+    A&A, 440, 1153                                                              Melson T., Janka H.-T., Marek A., 2015a, ApJ, 801, L24
+Dewi J. D. M., Pols O. R., 2003, MNRAS, 344, 629                                Melson T., Janka H.-T., Bollig R., Hanke F., Marek A., Müller B., 2015b,
+Dewi J. D. M., Podsiadlowski P., Pols O. R., 2005, MNRAS, 363, L71                  ApJ, 808, L42
+Dewi J. D. M., Podsiadlowski P., Sena A., 2006, MNRAS, 368, 1742                Müller B., Heger A., Liptai D., Cameron J. B., 2016, MNRAS, 460, 742
+Dominik M., Belczynski K., Fryer C., Holz D. E., Berti E., Bulik T., Mandel     Müller B., Melson T., Heger A., Janka H.-T., 2017, MNRAS, 472, 491
+    I., O’Shaughnessy R., 2012, ApJ, 759, 52                                    Nomoto K., 1984, ApJ, 277, 791
+Eggleton P. P., 1983, ApJ, 268, 368                                             Nomoto K., 1987, ApJ, 322, 206
+Eldridge J. J., Fraser M., Smartt S. J., Maund J. R., Crockett R. M., 2013,     Nordhaus J., Brandt T. D., Burrows A., Livne E., Ott C. D., 2010, Phys. Rev.
+    MNRAS, 436, 774                                                                 D, 82, 103016
+Farr W. M., Sravan N., Cantrell A., Kreidberg L., Bailyn C. D., Mandel I.,      O’Shaughnessy R., Kim C., 2010, ApJ, 715, 230
+    Kalogera V., 2011, ApJ, 741, 103                                            O’Shaughnessy R., Kim C., Fragos T., Kalogera V., Belczynski K., 2005,
+Faulkner A. J. et al., 2005, ApJ, 618, L119                                         ApJ, 633, 1076
+Fong W., Berger E., 2013, ApJ, 776, 18                                          O’Shaughnessy R., Kim C., Kalogera V., Belczynski K., 2008, ApJ, 672,
+Fonseca E., Stairs I. H., Thorsett S. E., 2014, ApJ, 787, 82                        479
+Fryer C. L., Belczynski K., Wiktorowicz G., Dominik M., Kalogera V., Holz       Osłowski S., Bulik T., Gondek-Rosińska D., Belczyński K., 2011, MNRAS,
+    D. E., 2012, ApJ, 749, 91                                                       413, 461
+Ge H., Webbink R. F., Chen X., Han Z., 2015, ApJ, 812, 40                       Öpik E., 1924, Publ. Tartu Astrofizica Obs., 25
+Götberg Y., de Mink S. E., Groh J. H., 2017, A&A, 608, A11                     Özel F., Freire P., 2016, ARA&A, 54, 401
+Grindlay J., Portegies Zwart S., McMillan S., 2006, Nature Phys., 2, 116        Özel F., Psaltis D., Narayan R., McClintock J. E., 2010, ApJ, 725, 1918
+Hansen B. M. S., Phinney E. S., 1997, MNRAS, 291, 569                           Paczynski B., 1976, in Eggleton P., Mitton S., Whelan J., eds, Proc. IAU
+Heggie D. C., 1975, MNRAS, 173, 729                                                 Symp. 73, Structure and Evolution of Close Binary Systems. Reidel,
+Hobbs G., Lorimer D. R., Lyne A. G., Kramer M., 2005, MNRAS, 360, 974               Dordrecht, p. 75
+
+
+MNRAS 481, 4009–4029 (2018)
+                                                                                                                         Double neutron stars              4025
+Pavlovskii K., Ivanova N., Belczynski K., Van K. X., 2017, MNRAS, 465,         where eb and log Pb are the eccentricity and log of the orbital
+    2092                                                                       period in days for the bth observed DNS, respectively; Nobs = 14
+Peters P. C., 1964, Phys. Rev., 136, B1224                                     observations were used here (see Table 1 and associated discussion).
+Pfahl E., Rappaport S., Podsiadlowski P., 2002a, ApJ, 571, L37                 The term p(log Pb , eb |M) describes the likelihood of observing
+Pfahl E., Rappaport S., Podsiadlowski P., Spruit H., 2002b, ApJ, 574, 364
+                                                                               the b-th DNS given a model M, where our models are described
+Phinney E. S., Sigurdsson S., 1991, Nature, 349, 220
+                                                                               in Table 2 and shown in Fig. A1. We therefore need a way of
+Planck Collaboration XIII, 2016, A&A, 594, A13
+Podsiadlowski P., Langer N., Poelarends A. J. T., Rappaport S., Heger A.,      calculating the 2D probability density given the discrete simulated
+    Pfahl E., 2004, ApJ, 612, 1044                                             DNS binaries we have for each model.
+Podsiadlowski P., Ivanova N., Justham S., Rappaport S., 2010, MNRAS,              We evolve the eccentricity and period of each simulated DNS, as it
+    406, 840                                                                   emits gravitational radiation according to Peters (1964). We stop the
+Poelarends A. J. T., Herwig F., Langer N., Heger A., 2008, ApJ, 675, 614       inspiral evolution when the system either merges or reaches 10 Gyr
+Poelarends A. J. T., Wurtz S., Tarka J., Cole Adams L., Hills S. T., 2017,     (a proxy for the age of the Galactic thin disc, see del Peloso et al.
+    ApJ, 850, 197                                                              2005). We place systems into linearly spaced bins in eccentricity,
+Pols O. R., 1994, A&A, 290, 119                                                with the lowest bin spanning e ∈ [0, 10−4 ], and determine the log
+
+
+
+
+                                                                                                                                                                    Downloaded from academic.oup.com/mnras/article/481/3/4009/5092622 by guest on 28 September 2026
+Pols O. R., Schröder K.-P., Hurley J. R., Tout C. A., Eggleton P. P., 1998,
+                                                                               period log Pk when the system enters each bin with eccentricity ek
+    MNRAS, 298, 525
+                                                                               and the time the system spends in that bin tk , which is subject to
+Portegies Zwart S. F., Verbunt F., 1996, A&A, 309, 179
+Portegies Zwart S. F., Yungelson L. R., 1998, A&A, 332, 173                     
+Sana H. et al., 2012, Science, 337, 444
+                                                                                      tk = tdelay .                                            (A2)
+                                                                                 k
+Scheck L., Plewa T., Janka H.-T., Kifonidis K., Müller E., 2004, Phys. Rev.
+    Lett., 92, 011103                                                             We weigh the contribution of each binary at each point in its
+Scheck L., Kifonidis K., Janka H.-T., Müller E., 2006, A&A, 457, 963          evolutionary history to the probability density map by tk , since a
+Schwab J., Podsiadlowski P., Rappaport S., 2010, ApJ, 719, 722
+                                                                               system is more likely to be observed in the part of the orbit where it
+Shivvers I. et al., 2017, PASP, 129, 054201
+Silverman B. W., 1986, Density Estimation for Statistics and Data Analysis.
+                                                                               spends more of its time. Since tight, highly eccentric binaries evolve
+    CRC Press                                                                  the fastest due to gravitational radiation, this has the effect of down
+Sivia D., 1996, Data Analysis: A Bayesian Tutorial. Oxford University Press,   weighting those binaries in our analysis (see Fig. 2).
+    Oxford                                                                        We construct the probability density map from a discrete sam-
+Smartt S. J., 2015, PASA, 32, 16                                               ple of simulated binaries by means of a weighted kernel density
+Soberman G. E., Phinney E. S., van den Heuvel E. P. J., 1997, A&A, 327,        estimator.6 We model the 2D probability density as a sum of
+    620                                                                        weighted Gaussians
+Stevenson S., Vigna-Gómez A., Mandel I., Barrett J. W., Neijssel C. J.,
+    Perkins D., de Mink S. E., 2017, Nature Commun., 8, 14906                                             n           
+                                                                                                           binaries ntime-steps,j
+                                                                                                                                       tk
+Stovall K. et al., 2018, ApJ, 854, L22                                         p(log P , e|M) =                                           N (μk ,  k ),     (A3)
+                                                                                                               j =1
+                                                                                                                                      T
+Summa A., Hanke F., Janka H.-T., Melson T., Marek A., Müller . B., 2016,                                                k=1
+    ApJ, 825, 6
+Swiggum J. K. et al., 2015, ApJ, 805, 156                                      where
+Tauris T. M., van den Heuvel E. P. J., 2006, Formation and Evolution of              n           
+                                                                                      binaries ntime-steps,j             n
+                                                                                                                          binaries
+    Compact Stellar X-ray Sources. Cambridge Univ. Press, Cambridge,           T =                                tk =               tdelay,j ;              (A4)
+    p. 623                                                                             j =1        k=1                    j =1
+Tauris T. M., Langer N., Moriya T. J., Podsiadlowski P., Yoon S.-C., Blin-
+    nikov S. I., 2013, ApJ, 778, L23                                           N (μ, ) is the 2D normal distribution with mean
+Tauris T. M., Langer N., Podsiadlowski P., 2015, MNRAS, 451, 2123
+Tauris T. M. et al., 2017, ApJ, 846, 170                                       μk = (log Pk , ek ),                                                          (A5)
+The LIGO Scientific Collaboration et al., 2017, ApJ, 851, L35
+Timmes F. X., Woosley S. E., Weaver T. A., 1996, ApJ, 457, 834                 and the covariance  k is chosen to be the same for all samples
+Toonen S., Nelemans G., Portegies Zwart S., 2012, A&A, 546, A70                       2         
+Tutukov A. V., Yungel’son L. R., 1993, AZh, 70, 812                                    b       0
+                                                                                k = log P      2 ,                                          (A6)
+Verbunt F., Cator E., 2017, J. Astrophys. Astron., 38, 40                                0    be
+Verbunt F., Igoshev A., Cator E., 2017, A&A, 608, A57
+Voss R., Tauris T. M., 2003, MNRAS, 342, 1169                                  where blog P and be are the ‘rule-of-thumb‘ (Silverman 1986) band-
+Wanajo S., Janka H.-T., Müller B., 2011, ApJ, 726, L15                        width parameters that determine how much we ‘smooth’ the dis-
+Webbink R. F., 1984, ApJ, 277, 355                                             tribution. We choose emax = 1, emin = 0, log (Pmin d−1 ) = −6 and
+Wongwathanarat A., Janka H.-T., Müller E., 2013, A&A, 552, A126               log (Pmax d−1 ) = 4 for our analysis.
+Woosley S. E., Heger A., 2015, ApJ, 810, 34                                       The log-likelihoods fluctuate by O(1) depending on the choice of
+Wyrzykowski Ł. et al., 2016, MNRAS, 458, 3012                                  bandwidth. This systematic uncertainty in the estimated likelihoods
+Xu X.-J., Li X.-D., 2010, ApJ, 716, 114
+                                                                               arises because our theoretical distributions are built from a finite
+Zapartas E. et al., 2017, A&A, 601, A29
+                                                                               number of samples, and could be improved with larger simulation
+                                                                               campaigns.
+
+A P P E N D I X A : L I K E L I H O O D C A L C U L AT I O N
+Our methodology follows Andrews et al. (2015). We can write the
+base e log-likelihood log L as
+                                                                               6 We found that density maps estimated via a 2D binned histogram, as used
+
+          
+          Nobs                                                                 by Andrews et al. (2015), were extremely sensitive to the chosen number of
+log L =          log p(log Pb , eb |M),                               (A1)     bins.
+           b=1
+
+
+                                                                                                                                      MNRAS 481, 4009–4029 (2018)
+4026        A. Vigna-Gómez et al.
+
+
+
+
+                                                                                                                                                             Downloaded from academic.oup.com/mnras/article/481/3/4009/5092622 by guest on 28 September 2026
+
+
+
+
+Figure A1. Predicted P–e distribution of Galactic DNSs under the Fiducial model. Grey dots are all DNS at DCO formation. DCO period and eccentricity
+are evolved forward from birth until present age given gravitational-wave radiation emission, likely removing short-lived short-period binaries from the
+observable population. Coloured dots represent the DNS distribution at present age. Colour denotes the type of CE phase: blue for no CE phase, red for
+a single-core and yellow for a double-core CE phase. The single-core and double-core can be, in most cases, associated with Channel I and Channel II,
+respectively (see Section 3.1.1). Purple diamonds represent the observed Galactic DNSs; all observed systems have precise P–e measurements with error bars
+within the thickness of the symbol.
+
+
+
+
+MNRAS 481, 4009–4029 (2018)
+                                                                                                                  Double neutron stars                4027
+APPENDIX B: MODEL FOR THE                                                         Ekin and Eexpl so that we obtain the natal kick velocity v kick as
+DEPENDENCE OF THE KICK VELOCITY                                                                
+O N E X P L O S I O N PA R A M E T E R S                                                  αkick 2Eexpl mej
+                                                                                  vkick =                   ,                                        (B3)
+                                                                                                 mNS
+The most viable mechanism for producing sizeable natal kicks in
+CCSN explosions is the gravitational tug-boat mechanism, which                    where mNS is the gravitational NS mass. To obtain mej , Janka (2017)
+relies on the acceleration of the NS due to the net gravitational                 related Eexpl to the mass mν of the neutrino-heated ejecta via the
+pull exerted by anisotropic ejecta during the first few seconds af-               nucleon recombination energy and then expressed mej as a mul-
+ter shock revival (Scheck et al. 2004, 2006; Nordhaus et al. 2010;                tiple thereof. The semi-analytical models of Müller et al. (2016)
+Wongwathanarat, Janka & Müller 2013). Bray & Eldridge (2016)                     directly predict mej , Eexpl , and mNS (see below), up to parameters
+suggested that this natal kick could be correlated with other ex-                 based on 3D simulations and observational constraints. These pa-
+plosion properties. An attempt to clarify these correlations based                rameters are calibrated slightly differently than in Müller et al.
+on the phenomenology of multidimensional simulations was then                     (2016) (see Section 3.2.4). We can therefore work directly with
+made by Janka (2017), whose natal kick estimate we briefly re-                    equation (B3).
+view here, since it largely agrees with the one we developed for
+
+
+
+
+                                                                                                                                                                 Downloaded from academic.oup.com/mnras/article/481/3/4009/5092622 by guest on 28 September 2026
+                                                                                     Equation (B3) needs to be evaluated at the time when the natal
+COMPAS. Invoking total momentum conservation, Janka (2017)                        kick asymptotes to its final value. One possibility, suggested by
+considered the momentum | pej | of the ejecta at a time when the                  Janka (2017), is to relate the freeze-out of the natal kick to the
+natal kick asymptotes to its final value. Introducing an anisotropy               termination of accretion on to the NS, which happens roughly when
+parameter α kick to relate | pej | to the spherical quasi-momentum of             the post-shock velocity equals the escape velocity (Marek & Janka
+the ejecta as                                                                     2009; Müller et al. 2016); this is the criterion we adopt here.
+                                                                                     Our key assumption is that the expectation value of the anisotropy
+                 | pej |                                                          parameter α kick is independent of the progenitor. This is based on
+αkick =                   ,                                          (B1)
+                                                                                  the observation that 3D explosion models (Lentz et al. 2015; Melson
+            ejecta ρ|v| dV
+                                                                                  et al. 2015b; Müller et al. 2017) with multigroup neutrino transport
+                                                                                  typically develop unipolar or bipolar explosions, i.e. there is limited
+Janka (2017) then invoked dimensional analysis to relate the ejecta
+                                                                                  variation in explosion geometry. Moreover, there is a convergence
+(and NS) momentum to the kinetic energy Ekin and mass mej of the
+                                                                                  to similar turbulent Mach number around (Summa et al. 2016) and
+anisotropic ejecta behind the shock as
+                                                                                  after shock revival, which implies a similar density contrast be-
+                                                                                 tween the underdense neutrino-heated bubbles and the surrounding
+| pej | = αkick    2Ekin mej .                                        (B2)        down flows. This is somewhat dissimilar from parametrized models
+                                                                                  (Wongwathanarat et al. 2013), which show larger variations in α kick
+In the early phase when the natal kick is determined, Ekin is of the              because they can vary the explosion energy independently of the
+order of the diagnostic explosion energy Eexpl (i.e. the net energy of            progenitor structure.
+unbound material), within a factor of 2–3 in recent 3D neutrino hy-                  While the assumption of uniform α kick is well motivated,
+drodynamics simulations. Unlike Janka (2017), we simply identify                  some caveats about its limitations are in order. Even though the
+
+
+           2                                                                          700
+
+                                                                                      600
+        1.8
+                                                                                      500
+        1.6                                                                           400
+
+        1.4                                                                           300
+
+                                                                                      200
+        1.2
+                                                                                      100
+
+           1                                                                               0
+                        1        2    3        4        5        6                                   1        2        3       4        5        6
+
+
+Figure B1. Müller SN prescription of the best-fitting relation to the models described by Müller et al. (2016) with parameters adjusted for better agreement
+with inferred SN progenitor masses (Smartt 2015). Gravitational mass (left) and natal kick (right) of the NS as a function of the CO core mass. BH formation
+is assumed to happen for 3.6 ≤ mCO < 4.05, 4.6 ≤ mCO < 5.7, and mCO > 6.0, where mCO is the CO core mass in M units.
+
+
+                                                                                                                        MNRAS 481, 4009–4029 (2018)
+4028        A. Vigna-Gómez et al.
+distribution of α kick may be relatively uniform across different pro-    A P P E N D I X C : M OV E M E N T I N T H E G A L AC T I C
+genitors (which remains to be confirmed by more 3D explosion              P OT E N T I A L
+models), α kick will show stochastic variations. Moreover, SN models
+                                                                          DNS centre-of-mass velocities in our Fiducial model, in which
+for progenitors with small CO cores are characterized by medium-
+                                                                          the second SN is typically a USSN with a low natal kick, are dom-
+scale asymmetries (Wanajo, Janka & Müller 2011; Melson, Janka &
+                                                                          inated by the Blaauw kick received as a result of the mass-loss ac-
+Marek 2015a) instead of unipolar/bipolar modes during the explo-
+                                                                          companying the collapse of the secondary. This kick is proportional
+sion phase.
+                                                                          to the orbital velocity of the secondary before the collapse, which
+   Since theoretical arguments can only constrain the assumed uni-
+                                                                          is greatest for the most compact binaries. Therefore, the binary’s
+form value of α kick within an order of magnitude, calibration is still
+                                                                          velocity is anticorrelated with the coalescence time, as shown on
+required to roughly match the observed distribution of NS natal
+                                                                          the left-hand panel of Fig. C1. If the USSN progenitors are stripped
+kicks. The fit formulae presented below are based on a normaliza-
+                                                                          even deeper than in COMPAS models during case BB mass transfer
+tion α kick = 0.08 that yields a match to the observed natal kick
+                                                                          Tauris et al. (2015), as discussed in Section 4, the mass lost during
+distribution of Hobbs et al. (2005).
+                                                                          the SN and the associated Blaauw kick would be further reduced.
+   For the NS mass mNS , we use
+                                                                             These kicks have the effect of broadening the distribution of ob-
+
+
+
+
+                                                                                                                                                   Downloaded from academic.oup.com/mnras/article/481/3/4009/5092622 by guest on 28 September 2026
+                                                                          served DNS systems in the Galaxy. We assume that each DNS is
+     ⎧
+     ⎪ 1.21 − 0.40(mCO − 1.37), 1.37 ≤ mCO < 1.49                         formed in the thin disc, at z = 0 in cylindrical coordinates, with
+     ⎪
+     ⎪
+     ⎪
+     ⎪ 1.16,                    1.49 ≤ mCO < 1.65                         a radial distribution proportional to the disc mass projected on to
+     ⎪
+     ⎪
+     ⎪
+     ⎨ 1.32 + 0.30(mCO − 1.65), 1.65 ≤ mCO < 2.40                         the Galactic equatorial plane. We use model 2 of Irrgang et al.
+mNS
+    = 1.42 + 0.70(mCO − 2.40), 2.40 ≤ mCO < 3.20 , (B4)                   (2013) for the Galactic matter distribution and total gravitational
+M   ⎪
+     ⎪
+     ⎪
+     ⎪ 1.32 + 0.25(mCO − 3.20), 3.20 ≤ mCO < 3.60                         potential. We do not account for scattering in this simplified anal-
+     ⎪
+     ⎪
+     ⎪ 1.50
+     ⎪                          4.05 ≤ mCO < 4.60                         ysis; while dynamical heating would increase the scale height of
+     ⎩
+       1.64 − 0.20(mCO − 5.70), 5.70 ≤ mCO < 6.00                         older populations, it does not appreciably impact the distribution of
+                                                                          distances from the Galactic centre, which we estimate here. After
+                                                                          choosing a random initial location for the binary as above, we apply
+where mCO is the CO core mass in units of M . BH formation is            an additional initial velocity relative to the local rotational veloc-
+assumed to happen for 3.6 ≤ mCO < 4.05, 4.6 ≤ mCO < 5.7, and              ity with a magnitude equal to the binary’s simulated kick velocity
+mCO > 6.0.                                                                and a random direction. The trajectory of the binary in the Galactic
+  The natal kicks are computed as                                         potential is solved with a Runge–Kutta integrator. We sample the
+                                                                          binary’s subsequent motion at fixed time intervals between birth
+        ⎧                                                                 and merger (or a maximum age of 10 Gyr). The right-hand panel
+        ⎪
+        ⎪ 35 + 1000(mCO − 1.37), 1.37 ≤ mCO < 1.49
+        ⎪ 90 + 650(m − 1.49), 1.49 ≤ m < 1.65
+        ⎪                                                                 of Fig. C1 shows the cumulative distribution function of the birth
+        ⎪
+        ⎪           CO                   CO
+        ⎪
+        ⎪                                                                 location, and the broader cumulative distribution function at which
+        ⎨ 100 + 175(mCO − 1.65), 1.65 ≤ mCO < 2.40
+ vkick                                                                    DNS systems are expected to reside for a snapshot of all DNSs
+       = 200 + 550(mCO − 2.40), 2.40 ≤ mCO < 3.20 . (B5)
+km s−1  ⎪
+        ⎪                                                                 existing at the present moment. The broadening of the distribution
+        ⎪
+        ⎪ 80 + 120(mCO − 3.20), 3.20 ≤ mCO < 3.60
+        ⎪
+        ⎪                                                                 would be more significant in shallower gravitational potentials of
+        ⎪ 350 + 50(mCO − 4.05), 4.05 ≤ mCO < 4.60
+        ⎪
+        ⎩                                                                 less massive galaxies, which are probed with short GRBs.
+          275 − 300(mCO − 5.70), 5.70 ≤ mCO < 6.00
+
+
+
+
+MNRAS 481, 4009–4029 (2018)
+                                                                                                                   Double neutron stars                  4029
+
+                                                                                             1
+                                 4
+             log 10 t c [Myrs]                                                              0.8
+
+                                 2
+                                                                                            0.6
+
+
+
+
+                                                                                      CDF
+                                 0
+                                                                                            0.4
+
+                                 -2                                                         0.2
+                                                                                                                       Observable location
+
+
+
+
+                                                                                                                                                                    Downloaded from academic.oup.com/mnras/article/481/3/4009/5092622 by guest on 28 September 2026
+                                                                                                                       Birth location
+                                 -4                                                          0
+                                      0   100   200   300   400       500                         0        5           10          15           20
+                                          Kick magnitude [km/s]                               Distance from Galactic center [kpc]
+
+Figure C1. Scatter plot of the binary coalescence time against the DNS kicks magnitude in the Fiducial model (left-hand panel). DNS kicks are dominated
+by the Blaauw kick during the collapse of the secondary, which is proportional to the orbital velocity of the progenitor and therefore inversely correlated with
+the coalescence time of the binary. These kicks spread the binaries in the Milky Way gravitational potential relative to birth sites, which are presumed to be in
+the disc plane (cumulative distribution function of the Galacto-centric distance for binaries born in the disc is shown in the right-hand panel).
+
+
+This paper has been typeset from a TEX/LATEX file prepared by the author.
+
+
+
+
+                                                                                                                            MNRAS 481, 4009–4029 (2018)
+

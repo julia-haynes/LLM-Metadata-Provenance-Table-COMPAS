@@ -1,0 +1,2407 @@
+Draft version December 13, 2024
+Typeset using LATEX twocolumn style in AASTeX631
+
+Not just winds: why models find binary black hole formation is metallicity dependent, while binary
+neutron star formation is not
+L. A. C. van Son ,1, 2 S. K. Roy ,3 I. Mandel ,4, 5 W. M. Farr ,3, 1 A. Lam ,6 J. Merritt
+F. S. Broekgaarden ,8 A.A.C. Sander ,9 and J. J. Andrews 10, 11
+
+,7
+
+arXiv:2411.02484v2 [astro-ph.HE] 12 Dec 2024
+
+1 Center for Computational Astrophysics, Flatiron Institute, 162 Fifth Avenue, New York, NY 10010, USA
+2 Department of Astrophysical Sciences, Princeton University, 4 Ivy Lane, Princeton, NJ 08544, USA
+3 Department of Physics and Astronomy, Stony Brook University, Stony Brook NY 11794, USA
+4 School of Physics and Astronomy, Monash University, Clayton VIC 3800, Australia
+5 ARC Center of Excellence for Gravitational-wave Discovery (OzGrav), Melbourne, Australia
+6 Graduate Center, City University of New York, 365 5th Avenue, New York, NY 10016, USA
+7 Institute for Fundamental Science, Department of Physics, University of Oregon, Eugene, OR 97403, USA
+8 Department of Astronomy & Astrophysics, University of California, San Diego, 9500 Gilman Drive, La Jolla, CA 92093, USA
+9 Zentrum für Astronomie der Universität Heidelberg, Astronomisches Rechen-Institut, Mönchhofstr. 12-14, 69120 Heidelberg, Germany
+10 Department of Physics, University of Florida, 2001 Museum Rd, Gainesville, FL 32611, USA
+11 Institute for Fundamental Theory, 2001 Museum Rd, Gainesville, FL 32611, USA
+
+(Received December 13, 2024)
+
+ABSTRACT
+Both detailed and rapid population studies alike predict that binary black hole (BHBH) formation is
+orders of magnitude more efficient at low metallicity than high metallicity, while binary neutron star
+(NSNS) formation remains mostly flat with metallicity, and black hole-neutron star (BHNS) mergers
+show intermediate behavior. This finding is a key input to employ double compact objects as tracers of
+low-metallicity star formation, as spectral sirens, and for merger rate calculations. Yet, the literature
+offers various (sometimes contradicting) explanations for these trends. We investigate the dominant cause
+for the metallicity dependence of double compact object formation. We find that the BHBH formation
+efficiency at low metallicity is set by initial condition distributions, and conventional simulations suggest
+that about one in eight interacting binary systems with sufficient mass to form black holes will lead to a
+merging BHBH. We further find that the significance of metallicities in double compact object formation is
+a question of formation channel. The stable mass transfer and chemically homogeneous evolution channels
+mainly diminish at high metallicities due to changes in stellar radii, while the common envelope channel is
+primarily impacted by the combined effects of stellar winds and mass-scaled natal kicks. Outdated giant
+wind prescriptions exacerbate the latter effect, suggesting BHBH formation may be much less metallicity
+dependent than previously assumed. NSNS formation efficiency remains metallicity independent as they
+form exclusively through the common envelope channel, with natal kicks that are assumed uncorrelated
+with mass. Forthcoming GW observations will provide valuable constraints on these findings.
+
+Keywords: Binary stars — Gravitational waves – Neutron stars – Stellar mass black holes
+1. INTRODUCTION
+
+We are nearing the conclusion of the first decade of
+gravitational-wave (GW) astronomy (Abbott et al. 2019,
+Corresponding author: L. van Son
+lvanson@flatironinstitute.org
+
+2021, 2023). The rapidly growing population of GW
+sources provides new opportunities to understand the
+lives and deaths of otherwise elusive massive stars. However, making any statements about the nature of their
+progenitor stars is very challenging due to the many uncertainties associated with the evolution of massive stars
+(e.g. Marchant & Bodensteiner 2024). These numerous
+modeling uncertainties lead to large variations in the
+
+2
+predicted properties and merger rates of double compact
+object mergers (e.g. Mandel & Broekgaarden 2022). It is
+thus rather remarkable when (rapid) population synthesis models converge on certain results, especially when
+this is achieved under various assumptions and input
+physics.
+Over the past decade, numerous studies have consistently found similar results regarding the ‘yield’ or ‘formation efficiency’ of Binary Black Hole (BHBH), Black
+Hole-Neutron Star (BHNS), and Neutron Star-Neutron
+Star (NSNS) mergers as a function of metallicity (see
+Figure 1 for a review). We define formation efficiency as
+the number of double compact object (DCO) systems
+formed per unit of star formation, that have a delay
+time to merger shorter than the present-day age of the
+Universe. In other words, the number of DCO ‘mergers’ formed per solar mass of star formation at a certain
+metallicity is
+ηform (Z) =
+
+dNDCO (Z)
+,
+dMSF
+
+(1)
+
+with units of per M⊙ . The effect of metallicity on single stars is two-fold. Firstly, radiatively-driven winds
+(like main sequence and Wolf-Rayet winds) are stronger
+at higher metallicity (e.g., Vink et al. 2001; Vink & de
+Koter 2005), thereby lowering the star’s mass and final
+core/remnant formation mass (see discussions in e.g.,
+Belczynski et al. 2010a; Renzo et al. 2017; Woosley et al.
+2020; Vink et al. 2024; Bavera et al. 2023). Second, stellar radii increase with metallicity due to higher opacity
+which makes stars more ‘puffed up’. However, the maximum radius at different metallicities is uncertain and
+depends strongly on model assumptions (see, e.g., Romagnolo et al. 2023). Moreover, at low metallicities,
+incomplete stripping during mass transfer can cause the
+stripped star to expand again (potentially leading to additional mass transfer phases Laplace et al. 2020), introducing additional metallicity dependence of (strippedstar) radii. However, this effect is not captured by typical rapid population synthesis codes. Both the wind and
+radius effects can significantly impact the formation efficiency of double compact object mergers.
+The impact of metallicity on binary evolution and ultimately the formation efficiency of double compact object mergers has been extensively studied using a wide
+range of binary physics parameters and codes. Specifically, using BSE (Hurley et al. 2002) based codes including MOBSE (fig. 12 from Giacobbo et al. 2018, fig.
+14 from Giacobbo & Mapelli 2018, fig. 1 from Santoliquido et al. 2021), StarTrack (fig. 6 from Klencki
+et al. 2018, and Belczynski et al. 2010b; Dominik et al.
+2013; Belczynski et al. 2016), COMPAS (fig. 1 from Neijssel et al. 2019, fig. 1 from Broekgaarden et al. 2022,
+
+and fig. 4 from Fishbach & van Son 2023 using models
+from van Son et al. 2022a). Furthermore, this has been
+studied using BPASS (e.g., Fig. 4 from Eldridge & Stanway 2016), which employs a version of the Cambridge
+STARS stellar evolution code to compute stellar evolution on-the-fly, and SEVN (figures 17 and 18 from Iorio
+et al. 2023), which interpolates main stellar-evolution
+properties from pre-computed tables based on PARSEC.
+All models displayed in Figure 1 agree on several key
+trends:
+The BHBH formation efficiency —plateaus at low metallicity (Z) and drops drastically at higher metallicity,
+typically above Z ≈ 0.2 Z⊙ ≈ 0.003. Several explanations have been proposed to account for the decline in
+BHBH formation efficiency at high metallicity:
+1. At high Z, more stellar winds:
+A) result in less massive carbon-oxygen cores,
+causing larger natal kicks that unbind the binary
+system (Klencki et al. 2018; Neijssel et al. 2019;
+Broekgaarden et al. 2022).
+B) result in less massive carbon-oxygen cores, thus
+requiring higher-mass ZAMS stars to create the
+same mass BH (Belczynski et al. 2010b,a, 2016;
+Chruślińska 2024; Eldridge & Stanway 2016). In
+other words, there is a metallicity-dependent maximum BH mass that increases towards low Z (e.g.,
+Vink et al. 2021; Romagnolo et al. 2024; Winch
+et al. 2024).
+C) cause wider (and lower-mass) systems at double
+compact object (DCO) formation, causing longer
+coalescence times (Peters 1964), and thus prevent
+mergers (Eldridge & Stanway 2016; Iorio et al.
+2023).
+D) remove so much mass that they keep stars more
+compact in size, thereby avoiding interaction (Iorio et al. 2023).
+2. At high Z, stars will have a larger radius while on
+the Hertzsprung gap (HG). A common envelope
+instigated from a donor that is on the HG is typically assumed to lead to a stellar merger (e.g., Dominik et al. 2012). Assuming that BHBH formation is dominated by the common envelope (CE)
+channel, this means that the formation efficiency
+would drop at high Z (Belczynski et al. 2010b;
+Mapelli et al. 2017; Giacobbo & Mapelli 2018;
+Klencki et al. 2018; Broekgaarden et al. 2022).
+The BHNS formation efficiency —plateaus at low Z, similar to BHBH, though generally at a lower absolute value.
+It also decreases at the highest Z, though less drastically
+than BHBH. In several variations, it displays a shallow
+peak around 0.2 Z⊙ . It is commonly assumed that the
+
+3
+
+Why BHBH formation is Z dependent while NSNS formation is not
+
+BHBH
+
+log10 ( form M )
+
+3.0
+
+max form, BHBH
+
+4.0
+
+BHNS
+
+3.0
+
+max form, BHNS
+
+4.0
+5.0
+
+5.0
+
+6.0
+
+6.0
+
+6.0
+
+7.0
+
+7.0
+
+7.0
+
+8.0
+
+8.0
+
+8.0
+
+2.0
+
+1.5
+
+1.0
+
+0.5
+
+log10 (Z/0.014)
+
+0.0
+
+9.0
+
+2.0
+
+1.5
+
+1.0
+
+0.5
+
+log10 (Z/0.014)
+
+0.0
+
+max form, NSNS
+
+4.0
+
+5.0
+
+9.0
+
+NSNS
+
+3.0
+
+9.0
+
+2.0
+
+1.5
+
+1.0
+
+0.5
+
+log10 (Z/0.014)
+
+0.0
+
+Figure 1. The formation efficiency of BHBH, BHNS, and NSNS as a function of the metallicity from different studies (Giacobbo
+& Mapelli 2018; Klencki et al. 2018; Neijssel et al. 2019; Santoliquido et al. 2021; Broekgaarden et al. 2022; Iorio et al. 2023).
+The solid and dashed lines show the median, 10th and 90th percentile, respectively. The BHBH yield is consistently flat at low
+metallicity, and declines by multiple orders of magnitude for Z ≳ 0.2 Z⊙ . BHNS formation exhibits a similar trend, albeit to a
+lesser extent, while NSNS formation shows minimal to no dependence on metallicity. Pink dash-dotted lines show the theoretical
+maxima from equations 3, 4, and 5, which we find to be surprisingly close to some of the simulation results.
+
+same factors affecting BHBH formation efficiency also
+influence BHNS formation efficiency (Klencki et al. 2018;
+Broekgaarden et al. 2022; Iorio et al. 2023). The plateau
+in formation efficiency at low metallicity is argued to be
+lower for BHNS than for BHBH for the following reasons:
+3. Only low-mass BHs are found in BHNS. At
+low metallicities, there is thus less to be gained
+from the initial mass function, causing the lower
+plateau value (Broekgaarden et al. 2022). This is
+in essence the analog to argument 1B.
+4. The BHNS systems receive at least one natal kick
+(at the formation of the NS), causing many more
+systems to be disrupted (Klencki et al. 2018).
+5. The formation channel where two common envelopes are required becomes inefficient at low Z
+and higher mass stars, because for these kinds
+of stars, common envelopes are less common and
+more often lead to stellar mergers (Klencki et al.
+2018, see also van Son et al. 2022b).
+Notably, Iorio et al. (2023) observe an increase in
+BHNS formation efficiency with metallicity in models
+that vary the envelope binding energy (λCE , their models LX, LC, and LK).
+The NSNS formation efficiency —remains mostly independent of Z but is highly sensitive to the chosen physics
+assumptions. One explanation for this behavior is that
+the progenitors of NSNS systems are typically lowermass stars, which undergo less mass loss overall (e.g.,
+Neijssel et al. 2019). Note that the NSNS formation
+efficiency is not necessarily constant with metallicity
+(see e.g. Gallegos-Garcia et al. 2023), but rather does
+not show the consistent drop at high metallicity observed in BHBH and BHNS formation. Instead, NSNS
+
+formation appears to be more influenced by binary
+physics assumptions than by metallicity. Variations in
+the common envelope parameters can cause changes in
+the NSNS formation efficiency by several orders of magnitude (e.g., Mapelli et al. 2017; Giacobbo & Mapelli
+2018; Santoliquido et al. 2021; Broekgaarden et al.
+2022), which explains the large spread in Figure 1.
+These arguments will be referenced throughout this
+work as we systematically investigate the dominant
+physical processes driving the metallicity dependence of
+DCO formation efficiency.
+Given that these behaviors are some of the most consistent results across population synthesis codes, they
+warrant closer inspection and scrutiny. Additionally,
+the robustness of these findings carries several significant
+implications. Firstly, the majority of cosmic star formation occurs at relatively high metallicities. Although the
+exact shape of the metallicity-dependent cosmic star formation is uncertain (e.g., Chruślińska 2024), most models agree that less than 30% of stellar mass is formed
+at low metallicity (Z < Z⊙ /10) in the past ∼ 11.5 Gyr
+(redshifts below 3, see Chruślińska et al. 2021, and figure
+6 in van Son et al. 2023). Consequently, even a slight
+shift in the metallicity at which the drop in ηform,BHBH
+occurs can lead to substantial (potentially many orders
+of magnitude) changes in the predicted merger rate (e.g.,
+Neijssel et al. 2019; Broekgaarden et al. 2022; Santoliquido et al. 2021; Chruślińska 2024). Understanding the
+metallicity dependence of formation efficiencies is thus
+crucial to reduce the uncertainty in the predicted DCO
+merger rate. The metallicity dependence of BHBH formation is therefore also intimately intertwined to claims
+
+4
+like ‘the (heavy) BHBH mergers we observe today must
+come from the early, low-metallicity Universe’ (Abbott
+et al. 2016; Belczynski et al. 2016; Stevenson et al. 2017;
+Fishbach & van Son 2023).
+Second, because the BHBH formation efficiency depends so strongly on metallicity, it has been proposed as
+a tracer of low-metallicity star formation, which is otherwise challenging to constrain (see Chruślińska 2024, and
+references therin). Hence, it is essential to understand
+if and why this low-metallicity formation efficiency prediction is robust.
+Finally, the relative independence of NSNS formation efficiency on metallicity (combined with typically
+shorter delay times and a smaller range of final masses)
+suggests that the NSNS mass distribution will vary
+much less with redshift with respect to the BHBH mass
+distribution. This implies that NSNS systems could
+serve as ‘spectral sirens’ (Chernoff & Finn 1993; Taylor et al. 2012; Taylor & Gair 2012; Farr et al. 2019;
+Ezquiaga & Holz 2022), and help infer cosmological
+parameters (Roy et al. 2024).
+In this paper, we set out to answer the following questions: I) What determines the low-metallicity plateau
+height in the BHBH and BHNS formation efficiencies?
+II) What is the dominant physics responsible for the
+metallicity-dependent behavior of formation efficiency?
+III) How robust is this behavior? Section 2 addresses
+question I). In Sections 3 and 4 we describe our method
+and systematically evaluate the different proposed explanations for the metallicity (in)dependence of double
+compact object formation, thereby addressing question
+II). We discuss the robustness of these relations (question III) in Section 5, and summarize in Section 6.
+2. THEORETICAL MAXIMUM FORMATION
+
+EFFICIENCY
+The (nonsensical) upper limit of ηform = 1/M⊙ , would
+mean that there is one merging DCO for every unit of
+stellar mass formed. This is of course impossible as more
+than 1M⊙ is needed to create a single NS or BH, let alone
+a DCO. A more useful maximum considers the formation
+efficiency when all stars that can potentially form merging double compact object binaries, would indeed do so.
+The goal of this exercise is to examine the plateau observed in simulations at low metallicities for both BHBH
+and BHNS (see Figure 1), and evaluate how far this lies
+from the maximum yield if we ignore the complexities
+of binary interactions (i.e., require only that stars are
+not effectively single cf. Sana et al. 2012a; Offner et al.
+2023). To achieve this, we use a Drake-like equation for
+formation efficiency, similar to Mandel & Farmer (2022),
+
+and Mandel & Broekgaarden (2022):
+1 
+ηform =
+fprimary × fsecondary × finit sep
+⟨MSF ⟩
+
+×fsurvive SN1 × fsurvive SN2
+
+(2)
+
+Here, fprimary represents the fraction of the initial primary masses that are high enough to form a compact
+object, and fsecondary is the fraction of that population
+with a companion mass sufficiently high to also form
+the compact object of interest. finit sep represents the
+fraction of the population born at the ‘right’ separation, while fsurvive SN1 and fsurvive SN2 are the fractions
+of systems that survive the first and second supernova
+(SN) natal kicks, respectively. We divide this by the
+average star forming mass per system formed, ⟨MSF ⟩,
+to transform this into a formation efficiency. By assuming a Kroupa IMF (Kroupa 2001) that ranges between 0.01M⊙ −300M⊙ (Doran et al. 2013), and a massdependent binary fraction following Offner et al. (2023)
+we get ⟨MSF ⟩ ≈ 0.51M⊙ (see Appendix A for more details).
+To estimate fprimary × fsecondary , we compute the fraction of the initial mass function (IMF) that forms compact objects. Using a Kroupa IMF (Kroupa 2001) and a
+minimum ZAMS mass of 20M⊙ for BH formation gives
+fprimary ≈ 4 × 10−4 . This value remains nearly the
+same when using the COMPAS rapid population synthesis code (version v03.01.02 Stevenson et al. 2017;
+Vigna-Gómez et al. 2018; Riley et al. 2022), as shown in
+Figure 7, in Appendix B where fprimary ≈ 1 × 10−3 for
+BHs. Note that this contradicts 1B from Section 1, since
+the change in fprimary with metallicity changes more for
+NS formation than for BH formation, suggesting that
+ηform,NSNS should also increase for lower Z. To properly calculate fprimary × fsecondary , we consider the joint
+probability of selecting both masses in the 20 − 300M⊙
+range, assuming a uniform mass ratio distribution (Sana
+et al. 2012b; Moe & Di Stefano 2017). This results in
+fprimary × fsecondary ≈ 5.05 × 10−4 (see Appendix A).
+Next, we would like to know what fraction of the binaries leads to the right interactions, such that they produce the compact systems that allow for GW emission.
+In reality, this is a complex function that encompasses
+all of binary interactions, and depends on the adopted
+physics. However, to zeroth order, we can require that
+binaries must interact in order to shrink their orbits
+(though cf. formation with ‘lucky SN kicks’ in e.g.,
+Belczynski et al. 2002; Broekgaarden et al. 2021). To
+compute the maximum possible yield, we set finit sep to
+be the fraction interacting binaries that do not merge at
+ZAMS. Figure 2 shows the period of first mass transfer
+for a typical NS (MZAMS = 10M⊙ , top), and BH pro-
+
+Why BHBH formation is Z dependent while NSNS formation is not
+
+6 MZAMS = 40 M
+
+HG
+FGB
+
+No interaction
+
+0
+
+6 MZAMS = 10 M
+log10 (PZAMS /days)
+
+0.8
+
+finitialsep
+
+early Case B
+
+0.4
+
+Case A
+
+0.2
+
+RLOF at ZAMS
+2.0
+1.5
+1.0
+0.5
+log10 (Z/0.014)
+ZAMS
+MS
+
+0.0
+HG
+FGB
+
+CHeB
+EAGB
+
+No interaction
+
+2 late Case B
+0
+
+1.0
+
+0.6
+
+2 late Case B
+
+4
+
+CHeB
+EAGB
+
+0.0
+1.0
+0.8
+0.6
+
+Case C
+early Case B
+
+0.4
+
+Case A
+
+0.2
+
+RLOF at ZAMS
+2.0
+1.5
+1.0
+0.5
+log10 (Z/0.014)
+
+0.0
+
+0.0
+
+Figure 2. The first mass transfer that a star will encounter
+as a function of metallicity, given its ZAMS orbital period
+and assuming an equal mass companion. Scatter points indicate the stellar evolutionary type for a typical BH progenitor (MZAMS = 40M⊙ , top), and a typical NS progenitor
+(MZAMS = 10M⊙ , bottom). Shading indicates whether mass
+transfer would be classified as Case A, B or C. Gray shading indicates RLOF at ZAMS; dark gray shows where this
+would lead to a stellar merger. See text for acronyms. We
+find finit sep ≈ 0.4 for NSs and BHs.
+
+genitor (MZAMS = 40M⊙ , bottom) assuming an equal
+mass companion. 1 The scatter points show the stellar
+type at the onset of mass transfer: Zero Age Main Sequence (ZAMS), Main Sequence (MS), Hertzsprung Gap
+(HG), First Giant Branch (FGB), Core Helium Burning
+(CHeB), or Early Asymptotic Giant Branch (EAGB).
+We assume that stars that experience RLOF at ZAMS
+lead to stellar mergers. We adopt a flat-in-log distribution of initial separations between 0.01 and 1000 AU.
+Using Figures 2, and 8 we estimate separations avoiding mergers to be roughly ≈ 0.1AU and the maximum
+1 For completeness, we show the maximum radii per Z for a range
+
+of stellar masses in Appendix B
+
+for interaction to be approximately 14AU. This leads to
+finit,sep ≈ 0.43.
+Lastly, both stars might receive a natal kick at compact object formation. The kick distribution of black
+holes remains a topic of debate (see e.g, Mirabel 2016,
+for a review), however, at least some black holes appear
+to be born without a natal kick (see Section 5.3). The
+most optimistic assumption is for BHs to receive no kick,
+setting fsurvive SN1 = fsurvive SN2 = 1.
+Combining this, we find that the expected maximum
+formation efficiency for BHBHs is about
+ηform,BHBH =
+
+finitialsep
+
+log10 (PZAMS /days)
+
+4
+
+ZAMS
+MS
+
+5
+
+5.06 · 10−4
+× 0.43 × 1 × 1
+0.52M⊙
+−4
+
+≈ 4.21 · 10
+
+(3)
+
+M−1
+⊙ .
+
+Remarkably, this is only about eight times higher than
+the median ηform,BHBH , and just four times higher than
+the 90th percentile at low metallicities, as shown in Figure 1.2 This implies that the studies reviewed in Figure
+1 suggest about one in every eight binary systems, with
+masses high enough to form a black hole and separations small enough to interact, will lead to a merging
+binary black hole. This is surprising; we would expect
+simulations to predict values far below equation 3 since
+the latter assumes none of the binary evolution leads to
+stellar mergers nor unbound systems, which is unrealistic.
+We repeat this exercise to estimate the maximum
+formation efficiency for NSNS, now assuming 8M⊙ <
+MZAMS ≤ 20M⊙ to form a NS. We find fprimary ×
+fsecondary ≈ 8.18 × 10−4 . Neutron stars are generally
+assumed to receive natal kicks following a Maxwellian
+distribution with σkick = 65 km s−1 (motivated by pulsar proper motion observations Hobbs et al. 2005).
+Electron-capture SN may also form NSs, typically with
+smaller natal kicks (σkick = 30 km s−1 , Suwa et al. 2015;
+Gessner & Janka 2018; Müller et al. 2019). Population studies estimate post-SN binary survival rates, with
+Renzo et al. (2019) finding fsurvive,SN1 = 0.14+.22
+−.10 and
+Lam et al. (in prep) predicting f survive, SN1 between
+0.09 and 0.23. The variation in these estimates arises
+from differing assumptions on e.g., the mass transfer
+physics and kick distributions. In both studies, the upper limits stem from assuming σkick ≈ 30 km s−1 , for
+part or all of compact object formation. We choose
+to adopt the upper limit from Lam et al. (in prep)
+for fsurvive,SN1 ≈ 0.23. The value for fsurvive SN2 is
+even more complex, as the binary has typically experi2 Note that the median in Figure 1 is not a ‘true’ median, since
+
+different draws from the same study/work are not completely
+independent.
+
+6
+enced two phases of mass transfer, and its orbital parameters at this stage are highly sensitive to the intricacies of binary evolution. However, generally simulations predict that fsurvive SN2 is much higher than
+fsurvive SN1 (e.g. Vigna-Gómez et al. 2018). We thus
+adopt fsurvive SN2 = 1.0, and find that
+−4
+
+ηform,NSNS =
+
+8.18 × 10
+0.52 M⊙
+
+× 0.43 × 0.23 × 1.0
+
+(4)
+
+≈ 1.57 × 10−4
+which is about a factor of 30 higher than the median
+formation efficiency, but lies very close to the upper 90th
+percentile of the NSNS formation efficiency shown in
+Figure 1.
+Lastly, for BHNS, we assume MZAMS,1 > 20M⊙ and
+8M⊙ ≤ MZAMS,2 < 20M⊙ . Typically, the secondary star
+will form the NS, and we again adopt fsurvive SN2 = 1.0.
+This leads to:
+ηform,BHNS =
+
+4.21 · 10−4
+× 0.43 × 1.0 × 1.0
+0.52M⊙
+−4
+
+≈ 3.51 × 10
+
+(5)
+
+M−1
+⊙ .
+
+In this case, the simulations predict values that are significantly lower than our theoretical maximum: Equation 5 is seventy times the median and twenty-five times
+the upper 90th percentile of the middle panel in Figure
+1. We further note how the similar values of our maximum ηform,BHNS and ηform,BHBH contradict argument 3
+from Section 1, which posits that the lower formation
+efficiency of BHNSs is due to their formation with only
+lower-mass BHs.
+The key takeaway from this experiment is that the
+plateau for BHBH formation at low metallicities is primarily influenced by assumptions about initial distributions, especially the initial mass function (aligning with
+findings from Klencki et al. 2018, de Sá et al. 2024 and
+partly with de Mink & Belczynski 2015). Surprisingly,
+the median ηform,BHBH from simulations at low metallicity is only about eight times lower than the theoretical
+maximum from eq. 3. I.e., many simulations suggest
+that forming merging BHBH at low Z is quite common,
+contrary to the belief that it is like ‘threading the needle’. This unexpectedly high efficiency is consistent with
+recent findings by Sgalletta et al. (2024), who find the
+fiducial settings in SEVN heavily overestimate the BHBH
+merger rate in a way that cannot be justified by uncertainties in the metallicity-dependent star formation
+rate. In contrast, the median ηform,BHNS is nearly two
+orders of magnitude below a plausible maximum, indicating that complexities of binary interactions have a
+more significant impact on BHNS formation. Finally,
+
+while the median ηform,NSNS is about 1.5 dex lower than
+the theoretical maximum, some models in Figure 1 reach
+this value. Generally, we suggest that simulations nearing the calculated maxima might be too optimistic.
+3. A FIXED GRID OF DCO PROGENITORS
+
+Our back-of-the-envelope calculations from Section 2
+can only help us understand what we should expect for
+the upper limits of double compact object formation.
+However, binary interactions significantly complicate
+this picture. To further investigate why potential double compact object progenitors are lost at different
+metallicities, we must simulate a population of binaries.
+We use the rapid population synthesis code from the
+COMPAS suite3 (version v03.01.02 Stevenson et al. 2017;
+Vigna-Gómez et al. 2018; Riley et al. 2022), to construct a base set of 5 × 106 binary systems. Our fiducial model follows the settings as described in (Riley
+et al. 2022), with the exception of updated prescriptions for the wind mass loss as described in Merritt et
+al. (in prep.). We emphasize that our fiducial model
+adopts the remnant mass and kick prescriptions outlined in the methods paper: the ‘delayed’ remnant-mass
+model from Fryer et al. (2012), and a Maxwellian kick
+distribution with σkick = 265 km s−1 (Hobbs et al. 2005)
+that is reduced by a fallback fraction for BH natal kicks,
+while in v03.01.02, the default settings have changed
+to use the stochastic remnant masses and corresponding momentum-preserving kicks from Mandel & Müller
+(2020). We explore a variation with the latter prescriptions to assess their impact on our results. Electroncapture, and ultra-stripped SNe are expected to have
+smaller kicks than core-collapse SNe (Suwa et al. 2015;
+Gessner & Janka 2018; Müller et al. 2019). Hence we
+adopt σkick = 30 km s−1 for these types of SNe.
+Each system in our base set is characterized by the
+ZAMS primary mass, mass ratio, period, and the supernova kick magnitude and orientation for both binary
+components (the latter will only be used when applicable). To assess the impact of metallicity, we evolve this
+exact same set of binaries at 12 different metallicities.4
+These metallicities are chosen to include the metallicities that were used to derive the fitting formulae in Hurley et al. (2000), on which COMPAS’s single stellar evolution tracks are based. To produce the properties of the
+base set of 5 × 106 binaries, we draw primary masses
+between 5M⊙ − 150M⊙ from a Kroupa (2001) initial
+3 see also https://compas.science/
+4 metallicities = [0.0001,
+
+0.00017321, 0.0003, 0.00054772, 0.001,
+0.002, 0.004, 0.00632456, 0.01, 0.01414214, 0.02, 0.03]
+
+Why BHBH formation is Z dependent while NSNS formation is not
+mass function, mass ratios from a flat distribution for
+q = M2 /M1 ∈ [0.01, 1.0] (e.g., Sana et al. 2012b; Kobulnicky et al. 2014), and initial semi-major axes from flatin-log distribution between 0.01 − 1000 AU. After drawing the aforementioned properties once, we use them as
+seeds at all different metallicities. To check that our results are converged, we have repeated our analyses with
+a reduced resolution of 1 × 106 binaries. No significant
+differences were found. We have furthermore confirmed
+that the statistical uncertainty is small in our fiducial
+simulation by bootstrapping the results shown in Figure
+3. All relevant simulation output is publicly available
+online (see the Software and Data acknowledgment).
+Metallicity dependent winds —Wind mass-loss rates are
+difficult to model and constrain due to the rarity of massive stars and complications like wind clumping and dust
+formation (see, e.g., reviews by Smith 2014; Decin 2021;
+Vink 2022). Consequently, both 1D stellar evolutionary and population synthesis codes use simple analytical
+prescriptions based on limited empirical results. Much
+progress has been made in the last 5 years, and Merritt
+et al. (in prep.) provide a comprehensive overview of
+updated prescriptions, which form the fiducial model in
+this work.
+In our simulation, we use metallicity-dependent prescriptions for three types of stellar winds: First, for OB
+stars, we use main-sequence wind-loss prescriptions from
+Vink & Sander (2021). This prescription describes a
+shallower metallicity dependence than Vink et al. (2001)
+of Ṁ ∝ Z 0.42 for stars hotter than the bi-stability jump,
+compared to the Ṁ ∝ Z 0.85 scaling adopted elsewhere.
+Second, for stars with masses above 100M⊙ , we adopt
+eq. 22 from Sabhahit et al. (2023), which is more appropriate for the expected optically thick winds of such
+high-mass stars. Lastly, for stripped helium or WolfRayet (WR) stars, we apply the prescription from Vink
+(2017) for low-luminosity stripped stars (see e.g., Ramachandran et al. 2024, for observational motivation),
+and Sander & Vink (2020) (including the temperature
+correction from Sander et al. 2023) for high-luminosity
+WR-like stars. For more details see Merritt et al. (in
+prep.).
+Red super giant winds —Although red supergiant (RSG)
+winds are not inherently metallicity dependent, high
+rates can cause RSG stars to wind-strip, altering interactions with their companions and creating a stripped
+star (with metallicity dependent winds). Most studies,
+including those in Figure 1, apply the wind prescriptions
+from de Jager et al. (1988) and Nieuwenhuijzen & de
+Jager (1990) to all cool stars. However, these prescriptions were never intended for RSGs, as the data span the
+
+7
+
+entire HR diagram and include only a hand full of RSGs.
+In this work, we adopt updated empirical mass-loss rates
+from Decin et al. (2024), who recalibrated the rates from
+Beasor et al. (2020) using ALMA observations of RSGs
+in multiple clusters. These new prescriptions result in
+mass-loss rates that are orders of magnitude lower than
+those of Nieuwenhuijzen & de Jager (1990), preventing
+RSGs from wind-stripping their envelopes.
+4. POTENTIAL MERGING DCO PROGENITORS
+
+AT DIFFERENT METALLICITIES
+From the binary star grid described in Section 3, we
+select all systems that form a merging DCO at any of
+the evaluated metallicities. For instance, a system that
+forms a merging BHBH at one metallicity may instead
+result in a BHNS or undergo a stellar merger at another metallicity. We refer to these systems as “potential DCOs” and examine their properties across metallicities. This helps us understand why a system that
+becomes a merging DCO at one metallicity may fail to
+do so at others. Unless stated otherwise, a “merging”
+DCO is defined as having a coalescence time less than
+14 Gyr.
+4.1. The endpoints of potential DCO progenitors
+Figure 3 shows the evolutionary outcomes of the potential DCOs as a fraction of the total unique number
+of potential DCOs across metallicities. Potential outcomes are grouped into the following classes: I) A stellar merger occurs, II) The binary becomes unbound (due
+to a supernova kick), III) A DCO forms i.e., a (merging) BHBH, (merging) BHNS, or (merging) NSNS, IV)
+One component becomes a white dwarf (WD), or V) A
+massless remnant.
+We see that potential BHBH mergers are lost at higher
+metallicities, mainly due to an increase in stellar mergers and unbound systems. The lack of a large number of
+wide BHBHs challenges 1C from Section 1 (which suggested that at high metallicity, stronger stellar winds
+cause wider separations at DCO formation, resulting in
+coalescence times that are too long for a merger). We
+further note that massless remnants are not visible in
+Fig. 3. Massless remnants result from pair-instability
+supernovae, which only occur in the high-mass tail of
+BH progenitors. As such they account for less than 1%
+of the potential merging BHBH population at the lowest
+metallicities.
+The increase in the number of unbound systems at
+higher metallicity is a wind effect: at higher metallicities, stronger stellar winds result in less massive carbonoxygen cores, causing larger natal kicks that unbind the
+binary (1A in Section 1). This holds true as long as
+
+8
+
+Stellar mergers
+Unbound
+
+BBH systems
+Merging BBH
+
+Fraction of sample, fend(Z)
+
+1.0 potential merging BHBH 12x17839 1.0
+
+BHNS systems
+Merging BHNS
+
+NSNS systems
+Merging NSNS
+
+potential merging BHNS 12x2358 1.0
+
+0.8
+
+0.8
+
+0.8
+
+0.6
+
+0.6
+
+0.6
+
+0.4
+
+0.4
+
+0.4
+
+0.2
+
+0.2
+
+0.2
+
+fraction stellar mergers
+
+0.0
+
+2.0
+
+1.5
+
+1.0
+
+0.5
+
+log10(Z/0.014)
+
+0.0
+
+0.0
+
+2.0
+
+1.5
+
+1.0
+
+0.5
+
+log10(Z/0.014)
+
+0.0
+
+0.0
+
+0.6
+
+0.6
+
+0.6
+
+0.4
+
+0.4
+
+0.4
+
+0.2
+
+0.2
+
+0.2
+
+0.0
+
+2.0
+
+1.5
+
+1.0
+
+0.5
+
+log10(Z/0.014)
+
+all mergers
+
+0.0
+
+0.0
+
+merger at birth
+
+2.0
+
+1.5
+
+1.0
+
+0.5
+
+log10(Z/0.014)
+
+case A CE
+
+0.0
+
+early case B CE
+
+0.0
+
+WD systems
+Massless Remnants
+
+potential merging NSNS 12x5679
+
+2.0
+
+1.5
+
+1.0
+
+0.5
+
+0.0
+
+2.0
+
+1.5
+
+1.0
+
+0.5
+
+0.0
+
+log10(Z/0.014)
+
+log10(Z/0.014)
+
+late case B CE
+
+case C CE
+
+Figure 3. Top: The evolutionary end points of potential merging DCO progenitors as a function of metallicity. The strong
+decrease in BHBH yield at higher metallicity is driven by an increase in stellar mergers and unbound systems, while we find a
+weak metallicity dependence for merging BHNS and NSNS in this fiducial simulation. Bottom: Stellar mergers (yellow area
+from top panel) colored by the stellar type of the donor star at the onset of the respective mass transfer. This shows that, at
+high metallicities, many potential BHBHs that would have formed through CHE are lost to stellar mergers at birth.
+
+the natal kick is assumed to depend on the progenitor
+mass. At the same time, these stellar winds widen the
+orbit, reducing the orbital velocity and making the system more susceptible to disruption by natal kicks. To
+determine the dominant effect, we additionally created
+a toy model where we calculate the change in orbital velocity for a stripped star undergoing WR-like winds and
+the associated kick adjustment due to a lower remnant
+mass. Assuming the binary is roughly unbound when
+vkick > vorb , we find that SN kicks clearly outweigh the
+effects of orbital widening. Although this does not account for the kick direction, we expect this conclusion to
+hold, as in our models the orbital velocity will decrease
+by at most a factor of ∼ 0.9, while the kick velocity
+distribution will range from no kick to a full MaxwellBoltzmann distribution with σkick = 265 km s−1 . 5
+5 The
+
+full calculation can be found at https://github.
+com/LiekeVanSon/ZdependentFormEff/blob/master/code/
+AdditionalAnalysisNotebooks/Vorb vs Vkick.ipynb
+
+The number of merging BHNS and NSNS fluctuates
+with metallicity, but does not show a clear decay with
+metallicity for our fiducial simulation. We furthermore
+note that the formation yields of BHNS and NSNS are
+about a factor 8 and 3 lower than the yield of BHBHs
+respectively (see title of figures), consistent with general findings shown in Figure 1. The consistently high
+fraction of unbound systems among potential BHNS and
+NSNS populations suggests that the formation efficiency
+of these systems is significantly impacted by natal kicks.
+4.2. Dissecting the stellar merger cases
+In the bottom panel of Figure 3, we investigate the
+stellar mergers within the potential DCO progenitors.
+We divide the stellar mergers by the type of the donor
+star at the onset of the mass transfer that lead to the
+merger. Case A corresponds to main-sequence (MS)
+donors, early Case B corresponds to mass transfer from
+a donor on the Hertzsprung gap (i.e., after hydrogen exhaustion, but before the central helium ignition), late
+case B happens post Hertzsprung gap, but before core
+
+Why BHBH formation is Z dependent while NSNS formation is not
+helium exhaustion, and Case C corresponds to core helium exhaustion and beyond (e.g., de Mink et al. 2008).
+For potential BHBH progenitors, we observe a clear
+increase in the number of stellar mergers at birth, defined as systems where R1 + R2 ≥ RZAMS . The number
+of case A common envelope mergers decreases at higher
+metallicity (by about 19% of the potential BHBH). The
+stellar radius increases at higher metallicity, causing
+these systems instead to contribute to the stellar mergers at birth at high metallicities. The remaining systems
+that are labeled ‘stellar mergers at birth’ at high metallicities come from stars that evolve chemically homogeneously at low Z but are over-contact systems at high
+Z (as we will show below in §5.1). In other words, at
+low metallicities, these systems successfully form BHBH
+mergers through the CHE channel. However, at higher
+metallicity, the larger radii of these systems no longer
+fit within the orbit, causing them to ‘merge at birth’.
+One could argue about the significance of systems that
+‘merge at birth,’ as they were technically never born as
+binaries. However, the key takeaway here is that, under
+our fiducial assumptions, the window for certain very
+tight orbit formation channels, like the CHE channel,
+closes at higher metallicities.
+We furthermore observe a modest rise in the number
+of early Case B common envelope mergers at higher
+metallicity. This is also a radius effect, as it reflects
+an increased interaction space during Hertzsprung gap
+phase. Common envelopes that were case C at low
+metallicity, become early case B at high metallicity.
+Under our default “pessimistic common envelope” assumption, all common envelopes from donors with presumably radiative envelopes lead to stellar mergers (i.e.,
+HG donors, see also argument 4 in Section 1). If we had
+chosen the “optimistic” common envelope assumption,
+the extra early case B mergers at high metallicity would
+not occur, highlighting the importance of common envelope ejection assumptions. Nonetheless, this effect
+appears far from dominant. There is a similar increase
+in Case A and early Case B common envelope mergers in
+the potential BHNS and NSNS systems at higher metallicities. However, the total number of stellar mergers
+for the BHNS and NSNS progenitors generally fluctuates heavily, and does not show any clear trend with
+metallicity.
+We conclude that in our fiducial model, the primary
+cause of potential BHBH mergers being lost at high
+metallicity is an increase in stellar mergers. This rise
+in stellar mergers is largely due to an increase in mergers occurring at birth, and, to a lesser extent, a higher
+number of early case B common envelope events (ar-
+
+9
+
+gument 2 from Section 1). Since this conclusion relies
+heavily on the uncertain contribution of the CHE channel to BHBH formation, we continue our investigation
+per formation channel in the sections below. The second leading factor for the loss of potential BHBH systems at high metallicity is their being unbound by natal
+kicks (arguments 1A and 1B from Section 1, as we do
+not distinguish between unbound BHBH and BHNS). In
+our fiducial model, both the potential BHNS and NSNS
+systems do not show a significant trend with metallicity.
+We do observe a modest increase in the number of early
+case B common envelopes leading to merger at higher
+metallicities, but this does not increase the total number
+of stellar mergers.
+5. ASSESSING ROBUSTNESS ACROSS
+
+ASSUMPTIONS
+To assess the robustness of our findings in Section
+4, we run several variations of our fiducial simulation.
+Specifically: i) turning off chemically homogeneous evolution (no CHE), ii) applying the remnant mass and
+natal kick prescriptions from Mandel & Müller (2020)
+(M&M remnants), iii) excluding BH kicks (No BH
+kicks), iv) excluding both BH and neutron star (NS)
+natal kicks (No natal kicks), v) removing Wolf-Rayet
+winds (No WR winds), vi) removing main-sequence and
+very-massive-star winds (No MS winds), vii) excluding
+all stellar winds (No winds), viii) using the RSG wind
+prescriptions from Nieuwenhuijzen & de Jager (1990)
+(Old RSG), ix) using all the wind prescriptions from
+Riley et al. (2022) (Old Winds).
+5.1. Formation efficiency per channel and physics
+variation
+In Figure 4 we show the formation efficiency for a selection of these variations. The formation efficiencies are
+broken down by formation channel for each DCO type:
+systems that experienced at least one common envelope
+(CE, top row), those that underwent only stable mass
+transfer (middle row), and those formed through chemically homogeneous evolution (CHE, bottom row) (see,
+e.g., Mandel & Farmer 2022, for a review of these formation channels).
+The first thing we note is that while all three formation channels contribute to BHBH formation, only
+the stable mass transfer and CE channel contribute to
+BHNS formation, and NSNS systems are almost exclusively formed through the CE channel. This plays an
+important role in understanding why BHBH formation
+is metallicity-dependent, while NSNS formation is not.
+BHBH mergers are shown in the left-most column.
+In our fiducial simulation, the CHE channel dominates
+
+10
+
+BHBH
+
+CE channel
+
+log10 ( form M )
+
+4
+
+5
+
+5
+
+6
+
+6
+
+6
+
+7
+
+7
+
+7
+
+8
+
+8
+
+8
+
+1.5
+
+4
+
+log10 ( form M )
+
+CE channel
+
+1.0
+
+0.5
+
+0.0
+
+stable channel
+
+2.0
+
+1.5
+
+4
+
+1.0
+
+0.5
+
+0.0
+
+stable channel
+
+5
+
+5
+
+6
+
+6
+
+6
+
+7
+
+7
+
+7
+
+8
+
+8
+
+8
+
+1.5
+
+4
+
+1.0
+
+0.5
+
+0.0
+
+CHE channel
+
+2.0
+
+1.5
+
+1.0
+
+0.5
+
+log10 (Z/0.014)
+
+5
+
+Fiducial
+M&M remnant
+No natal kicks
+No WR winds
+
+6
+7
+
+0.0
+
+CE channel
+
+2.0
+
+1.5
+
+2.0
+
+1.5
+
+4
+
+5
+
+2.0
+
+NSNS
+
+4
+
+5
+
+2.0
+
+log10 ( form M )
+
+BHNS
+
+4
+
+1.0
+
+0.5
+
+0.0
+
+1.0
+
+0.5
+
+0.0
+
+stable channel
+
+log10 (Z/0.014)
+
+No MS winds
+Old RSG
+Old Winds
+
+8
+2.0
+
+1.5
+
+1.0
+
+0.5
+
+log10 (Z/0.014)
+
+0.0
+
+Figure 4. The formation efficiency split by DCO flavour and formation channel. We distinguish between the chemically
+homogeneous evolution (CHE), only stable mass transfer, and common envelope (CE) channels. All three formation channels
+contribute to BHBH formation, while only stable mass transfer and CE contribute to BHNS formation, and NSNS are dominated
+by the CE channel. The metallicity dependence of the dominant formation channel will determine the metallicity dependence
+of the DCO flavour.
+
+the formation efficiency of BHBH mergers with an almost flat value of log10 (ηform,BHBH M⊙ ) = −5 until
+log10 (Z/Z⊙ ) ≃ −0.5. Indeed, the CHE channel is the
+dominant contributor to the yield in all variations, except for those with weaker BH kicks (No Natal Kicks,
+and M&M remnants). The CHE channel typically shows
+a sharp decline above log(Z/0.014) ≈ −0.25, except for
+in the No MS Winds variation, where the CHE channel
+maintains a high formation efficiency at high metallicities. This is because strong MS winds widen the orbits, thereby reducing their tidally locked spins, and so
+prevent them from evolving chemically homogeneously
+(cf. Riley et al. 2021). When CHE is excluded, the
+stable MT channel dominates the formation efficiency
+at metallicities log10 (Z) ≲ −0.5, for most variations
+(again with the exception of No Natal kicks and M&M).
+It displays a moderately flat formation efficiency below
+log10 (Z/ Z⊙ ) ≃ −1.0, followed by a somewhat shallow
+decline of about 1-1.5 dex. We note that the M&M vari-
+
+ation yields a higher BHBH formation efficiency compared to the no natal kick prescription. This is because,
+in addition to weak BH natal kicks, the M&M remnant
+mass prescription produces more BHs at the expense of
+NSs than the Fryer et al. (2012) delayed prescription.
+The CE channel shows relatively flat behavior with
+respect to metallicity in most variations, except for the
+Old Wind and Old RSG variations, where the formation
+efficiency declines steeply at high metallicities. This decline occurs because the ‘old’ RSG wind prescriptions
+from Nieuwenhuijzen & de Jager (1990) are orders of
+magnitude stronger than the newer values from Decin
+et al. (2024). At high metallicities, stars are less luminous and thus may avoid the Luminous Blue Variable
+(LBV) regime (Weis & Bomans 2020). With the less
+strong Decin et al. (2024); Beasor et al. (2023) winds,
+these stars retain their envelopes and undergo common
+envelope evolution. On the other hand, with the older
+Nieuwenhuijzen & de Jager (1990) prescription, these
+
+Why BHBH formation is Z dependent while NSNS formation is not
+stars self-strip at high Z, avoiding common envelope evolution. This primarily affects a sub-channel of the CE
+channel where the more massive star initiates a common
+envelope during the first mass transfer phase.
+For BHNS mergers, the CE channel dominates the
+stable MT formation efficiency in all explored variations.
+Both the stable MT and CE channels generally show flat
+behavior with respect to metallicity across most variations. The exceptions are the Old RSG and Old wind
+variations, which decline at high metallicities, similar to
+the BHBH merger case. These winds affect stars at the
+edge of the LBV regime (20 − 30M⊙ at ZAMS), which
+mainly form low-mass BHBH systems. The CE channel
+primarily produces lower-mass BHs (see §3.1 in van Son
+et al. 2022b), which explains the strong impact. Both
+the M&M remnants and No Natal Kicks variations furthermore show an increase in formation efficiency with
+metallicity. The M&M remnants prescription applies
+much weaker BH kicks than our fiducial model using
+the Fryer delayed prescription. This indicates that BH
+kicks, rather than NS kicks, play a more crucial role in
+BHNS formation, as the BH usually forms first, at a
+time when the binary is wider and more susceptible to
+disruption.
+NSNS formation is almost exclusively driven by the
+CE channel (in line with earlier results Wagg et al. 2022;
+Iorio et al. 2023; Gallegos-Garcia et al. 2023). The stable
+mass transfer channel is unsuccessful when low ZAMS
+mass stars are involved because the extreme mass ratios
+at the onset of mass transfer from the secondary star
+lead to unstable mass transfer instead (as described in
+more detail in van Son et al. 2022a; Picco et al. 2024).
+Most variations have little impact on efficiency, except
+for the No Natal Kicks variation, which significantly increases it.
+In summary, Figure 4 highlights three key points: (I)
+the role of metallicity in ηform depends on the formation
+channel, (II) BHBH formation appears less sensitive to
+metallicity than previously thought, with ηform,BHBH decreasing by several dex at high Z, only when Old RSG
+winds are applied, III) NSNS only form through the
+CE channel, making it particularly relevant whether this
+channel is metallicity dependent or not.
+5.2. Summary endpoints per variation
+To identify the dominant physics responsible for any
+metallicity dependence in the formation efficiency, we
+analyze the evolutionary endpoints fend (Z) as in the top
+panel of Figure 3, for each variation. We summarize the
+net change between low and high metallicity in Figure 5.
+That is, we subtract the average fend (Z) at the lowest
+two metallicities from that at the highest two metallici-
+
+11
+
+ties:
+fend (high Z) − fend (low Z),
+
+(6)
+
+where
+fend (0.03) + fend (0.02)
+2
+fend (1 · 10−4 ) + fend (1.7 · 10−4 )
+fend (low Z) =
+.
+2
+
+fend (high Z) =
+
+(7)
+(8)
+
+We calculate fend (Z) for each possible endpoint (such
+as stellar mergers, unbound systems, BHBH, etc.), for
+every variation, and every formation channel. For example, we select all systems that form a DCO merger
+through the CE channel at any metallicity (top row
+of Figure 5). If a system forms a merging DCO via
+e.g., the CE channel at one metallicity but via e.g., the
+stable channel at another, it will appear in both categories. Figure 5 should be interpreted as the change in
+dominant endpoints between low and high metallicity.
+In other words, endpoints below the null line are more
+prevalent at low metallicity, while endpoints above the
+null line are more common at high metallicity. If the
+points lie around the null line, then there is little difference between low and high Z. We note that the metallicity dependence of each DCO flavor is clearly dictated
+by whichever formation channel dominates their formation. The metallicity dependence (or lack thereof) of
+each formation channel is driven by different physics and
+therefore sensitive to different variations.
+The CHE channel —is only effective for BHBH formation
+(bottom left panel of Figure 5), and loses potential merging BHBHs to stellar mergers at high metallicity. This
+is a radius-driven effect: stars that undergo CHE at low
+metallicity have larger radii at higher metallicities, leading to stellar mergers at the ZAMS. This explains the
+significant increase in stellar mergers at high metallicity
+shown in the top panel of Figure 3.
+The stable MT channel —is effective for both BHBH and
+BHNS formation (middle row of Figure 5). The formation efficiency of BHNS increases with metallicity when
+natal kicks are low or nonexistent (no BH kick, no natal kick and M&M remnants variations). The BHNS
+formation efficiency decreases with metallicity across all
+other variations, where potential progenitors are lost to
+stellar mergers. Stellar mergers also cause a significant
+loss in potential BHBH in nearly all variations. For both
+BHBH and BHNS, the loss of potential DCO progenitors to stellar mergers is a metallicity-dependent radial
+expansion effect: the larger radii cause mass transfer to
+occur earlier in the evolution. For BHNS, we find that
+the increased number of stellar mergers comes from I) an
+increase in first mass transfer case A common envelopes
+
+0.5
+
+potential merging BHBH
+CE channel
+
+0.5
+
+potential merging BHNS
+CE channel
+
+0.5
+
+0.0
+
+0.0
+
+0.5
+
+0.5
+
+0.5
+
+0.5
+
+stable channel
+
+0.5
+0.0
+
+0.5
+
+0.5
+
+0.5
+
+CHE channel
+
+Fid
+M& n ucia
+M o CH l
+re E
+Ol mna
+d W nt
+No Old inds
+W R
+No R w SG
+MS ind
+w s
+No ind
+N w s
+No o BH inds
+na ki
+tal ck
+kic
+ks
+
+0.0
+
+stable channel
+
+0.0
+0.5
+
+Fid
+M& n ucia
+M o CH l
+re E
+Ol mna
+d W nt
+No Old inds
+W R
+No R w SG
+MS ind
+w s
+No ind
+N w s
+No o BH inds
+na ki
+tal ck
+kic
+ks
+
+0.0
+
+potential merging NSNS
+CE channel
+
+Unbound Systems
+Stellar Mergers
+wide BHBH
+merging BHBH
+wide BHNS
+merging BHNS
+wide NSNS
+merging NSNS
+WD systems
+Massless Remnants
+
+Fid
+M& n ucia
+M o CH l
+re E
+Ol mna
+d W nt
+No Old inds
+W R
+No R w SG
+MS ind
+w s
+No ind
+N w s
+No o BH inds
+na ki
+tal ck
+kic
+ks
+
+fend (high Z) fend (low Z)
+
+fend (high Z) fend (low Z)
+
+fend (high Z) fend (low Z)
+
+12
+
+Figure 5. The net change in evolutionary endpoints (as in Figure 3), for all simulated variations (x-axes) and formation channels
+(columns). Endpoints that lie below the null line are more frequent at low metallicity and less frequent at high metallicity,
+where they are replaced by (the sum of) endpoints above the null line. This shows that the metallicity dependence of each DCO
+type is a question of formation channel.
+
+II) an increase in early case B common envelopes from
+star 2, both at the expense of stable early case B mass
+transfer. For BHBH we find an increase in stable case
+A mass transfer from the first star at the expense of
+stable early case B. The more conservative nature of
+case A mass transfer results in skewed mass ratios at
+the onset of mass transfer from the second star, leading
+to more common envelopes at the expense of the stable
+mass transfer channel. Similarly, one might expect an
+increase in early case B mass transfer at the expense of
+late case B or case C mass transfer. However, this does
+not occur because stable mass transfer does not sufficiently shrink orbits wider than about azams ≳ 200 R⊙
+to produce a GW merger, thereby excluding the contribution from late case B donors. Potential BHBH
+systems are furthermore lost at higher metallicities to
+
+unbound systems in the fiducial, Old Winds, Old RSG
+winds and no WR wind variations. We find that this is
+again largely driven by a radial expansion: stable early
+case B mass transfer becomes stable case A mass transfer. Case A mass transfer leads to much lower-mass
+cores in COMPAS (and most BSE-based codes), causing more BH progenitors to be unbound by the first SN
+(cf. Shikauchi et al. 2024). The M&M remnants variation loses potentially merging BHBH at high metallicity
+to unbound systems, and to BHBH systems that are too
+wide to lead to GW emission and hence a DCO merger.
+The common envelope channel —(top row of Figure 5) is
+an effective formation channel for all three DCO flavors. We find it to be generally less sensitive to metallicity with respect to the other two channels (the end
+points are more often centered around the null line).
+
+Why BHBH formation is Z dependent while NSNS formation is not
+
+5.3. Evidence for mass-dependent BH kicks
+In §5.1 and §5.2, we found that potential BHBH mergers are predominantly lost to unbound systems in the CE
+channel at high metallicity. This increase in unbound
+systems is driven by two processes in our simulations:
+first, the metallicity dependent winds are stronger at
+high Z, lowering the core masses. Second, BH kicks are
+reduced by fallback, meaning that smaller core masses
+receive larger natal kicks. This particularly affects the
+CE channel, as it primarily produces lower-mass BHs
+(§3.1 in van Son et al. 2022b), and is thus dominated
+by systems near the threshold for receiving a natal kick.
+While the exact scaling of radiation-driven winds with
+metallicity remains debatable, the metallicity dependence of these winds is well established (Kudritzki et al.
+1987; Mokiem et al. 2007; Hainich et al. 2015; Sander
+et al. 2020). The process of natal kicks and fallback
+onto proto-BHs is far less understood.
+Theoretically, which stars leave behind NSs and which
+BHs is still unresolved. This question is also tied to
+the putative ‘NS-BH mass gap/dearth’ in the 3–5M⊙
+range (Bailyn et al. 1997; Fryer & Kalogera 2001; Özel
+et al. 2010; Farr et al. 2011). Recent discoveries like
+GW230529 (The LIGO Scientific Collaboration et al.
+2024) and the low-mass system in Gaia DR3 (UCAC4
+569-026385 Wang et al. 2024), suggest that at least some
+BHs are born with low masses. The natal-kicks of these
+
+100
+
+vkick [km/s]
+
+At high metallicities, potential BHBH systems are lost
+to unbound systems. This occurs because metallicitydependent winds reduce core masses. Since BH natal
+kicks are assumed to be reduced by fallback, smaller
+core masses result in larger natal kicks, while NS progenitors experience the full strength of their natal kick.
+The largest change with metallicity is in the Old Winds
+and Old RSG Winds variations. As discussed in §5.1,
+the old RSG winds can additionally strip stars at high
+Z, preventing the onset of a CE. The No BH Kick variation still shows a significant increase in unbound systems at high Z, suggesting that these systems contain
+a NS whose natal kick leads to unbinding. In the No
+Natal Kick variation, potential BHBH systems evolve
+into BHNS systems instead of unbound systems. In essentially all variations the formation rates of BHNS and
+NSNS are somewhat higher in the highest metallicity
+bins with respect to the lowest metallicity bins. We do
+not observe an increase in unbound systems with metallicity in the pool of potential NSNS systems, as NSs
+are always assumed to receive a natal kick. Instead, we
+consistently see an increase in systems containing a WD.
+These WD + NS systems are an interesting target for
+the LISA mission (Amaro-Seoane et al. 2017).
+
+10
+
+1
+
+13
+
+XTE J1118+480
+H 1705-250
+IC10 X-1
+MAXI J1305-704
+Gaia BH1
+GRO J1655-40
+OGLE-2011-BLG-0462
+Gaia BH3
+Gaia BH2
+Cyg X-1
+VFTS 243
+V 404 Cygni
+
+Wang et al. (2024)
+
+10
+
+20
+30
+MBH [M ]
+
+40
+
+Figure 6. Observational estimates of BH natal kick velocities as a function of black hole mass. The colors indicate
+the method with which it was first detected: XRB (blue)
+microlensing (yellow), spectroscopy (green) or astrometry
+(pink). These observations do not yet place any meaningful constraint on a relationship between BH mass and its
+natal kick.
+
+systems are even more uncertain. Some studies indicate
+that the kick velocity for BH-forming collapses could be
+only a few km/s (Walk et al. 2020; Janka & Kresse 2024),
+while others suggest that even 40M⊙ ZAMS stars might
+receive kicks of several hundred km/s (e.g., Coleman &
+Burrows 2022; Burrows et al. 2023). Additionally, we
+lack a clear understanding of the fallback process during
+and post explosion (e.g., Schrøder et al. 2018; Chan et al.
+2020).
+Observational constraints for BH natal kicks are quite
+limited. Currently, only a handful of systems have wellconstrained BH natal kicks. We review most known
+observational constraints of individual systems in Figure 6. In blue we show mass and inferred constraints
+on the natal kicks of the X-Ray binaries GRO J1655-40
+(Corral-Santana et al. 2016; Willems et al. 2005), XTE
+J1118+480 (Fragos et al. 2009), MAXI J1305-704 (Mata
+Sánchez et al. 2021; Kimball et al. 2023), V 404 Cygni
+(Khargharia et al. 2010; Burdge et al. 2024), H 1705-250
+(Dashwood Brown et al. 2024), IC10 X-1 (Wong et al.
+2014), and Cyg X-1 (Miller-Jones et al. 2021; Wong et al.
+2014). We furthermore show the spectroscopically detected VFTS 243 (Shenar et al. 2022; Vigna-Gómez et al.
+2024, see also Banagiri et al. 2023) in green, and the
+
+14
+microlensed system OGLE-2011-BLG-0462 (Andrews &
+Kalogera 2022; Sahu et al. 2022; Lam & Lu 2023) in
+yellow. Lastly we add the astrometrically detected Gaia
+BH1 (El-Badry et al. 2023a), Gaia BH2 (El-Badry et al.
+2023b; Kotko et al. 2024), and Gaia BH3 (Gaia Collaboration et al. 2024) in pink. For the Gaia BHs we
+show the kick velocity under the assumption that these
+systems formed from isolated binaries following Kotko
+et al. (2024) for BH1 and BH2, and the 68% range from
+El-Badry (2024) for BH3. However, we stress that Gaia
+BH3 likely formed through dynamical assembly (e.g.,
+Balbinot et al. 2024; Marı́n Pina et al. 2024; El-Badry
+2024). Although we have no formal constraint on the natal kick of Gaia DR3 3425577610762832384 (Wang et al.
+2024) its surprisingly wide and circular orbit of 880 days
+suggests it was born with a natal kick of at most a few
+km s−1 .
+We conclude that these observations do not yet provide meaningful constraints on the relationship between
+BH mass and natal kicks. The data could support a
+mass-dependent trend, but are equally consistent with
+a bimodal distribution independent of mass. Interestingly, recent work by Nagarajan & El-Badry (2024) finds
+no convincing evidence for mass-dependent kicks within
+the BH population, though their data hints at a bimodal
+distribution, similar to the kick distribution observed for
+NS (in agreement with Zhao et al. 2023). As shown in
+this work, if BH natal kicks are not dependent on their
+mass, this would have significant implications for the
+metallicity dependence of BHBH formation efficiency.
+This underscores the urgency of constraining mass–natal
+kick relations through observations.
+6. SUMMARY
+
+In this work, we investigate the remarkably consistent predictions for the metallicity dependence of various DCO formation efficiencies (see Figure 1).
+We first demonstrate how the yield in the lowmetallicity plateau in BHBH formation efficiency is set
+by the assumed mass and period distributions at birth
+(Section 2). Notably, this plateau implies that if BHs
+do not receive a natal kick, the efficiency of merging
+BHBH formation is quite high: approximately one in
+every eight binary systems with masses high enough to
+form a BHBH, and separations small enough to interact,
+will lead to a merging BHBH. Further metallicity dependence of DCO formation (or lack thereof) is a channel
+dependent question:
+• The formation efficiency of the CE channel with
+metallicity is generally flat (Figure 4). We only find
+a very steep (multiple orders of magnitude) drop in
+BHBH formation efficiency when Old RSG wind pre-
+
+scriptions (Nieuwenhuijzen & de Jager 1990) are used.
+These winds strip stars of their envelopes (thereby
+evading CE) even when they avoid the LBV regime
+at high metallicity. Newer prescriptions (Beasor et al.
+2023; Decin et al. 2024) prevent self-stripping, causing the flatter metallicity dependence we observe. The
+CE channel further loses potential BHBH progenitors
+to unbound systems at high metallicities (Figure 5).
+This is a wind-dependent effect: stronger winds lead
+to lower core masses, and thus stronger kicks which
+unbind the system. For potential NSNS stars this effect does not exist because NSs are assumed to receive
+a natal kick that is not proportional to their progenitor mass.
+• The stable mass transfer channel loses BHBH and
+BHNS progenitors at higher metallicity because stellar expansion, and hence mass transfer, happen earlier
+in the donor’s evolution (see Figure 2). This leads to
+an increase in case A mass transfer, at the expense
+of stable early case B mass transfer. This decreases
+the contribution of the stable mass transfer channel
+because it either skews the mass ratio at the onset of
+the second mass-transfer phase, leading to unstable
+mass transfer, or lowers core masses, increasing natal
+kicks and unbound systems (though this may reflect
+shortcomings in our handling of case A mass transfer). Similar metallicity-dependent radius effects impact NS progenitors, but NSNS mergers do not form
+through the stable mass transfer channel due to constraints imposed by the critical mass ratio for stability
+(cf. van Son et al. 2022a).
+• The CHE channel is only effective for BHBH formation. The window for CHE is Z dependent, and
+bounded by ZAMS radii. Higher metallicity stars
+have larger radii, leading to stellar mergers at ZAMS
+(bottom panel of Figure 3). At larger periods, the
+window closes due to reduced stellar rotation rates,
+with main sequence winds significantly widening the
+orbit at high metallicities.
+We conclude that BHBH formation may be less dependent on metallicity than previously thought. Key factors
+influencing DCO formation efficiency and its metallicity
+dependence are: 1) The initial distributions of masses
+and binary periods (see also de Sá et al. 2024). 2) Conditions for CHE, including the radii of massive stars on
+the zero-age main sequence (ZAMS) at varying metallicities. 3) The radial evolution of stars at different metallicities, and the corresponding progression of stable mass
+transfer, specifically mass transfer efficiency and stability. 4) The uncertain mass dependence of natal kicks
+(see §5.3). Additional electromagnetic observations of
+BHs will be particularly valuable in constraining these
+
+Why BHBH formation is Z dependent while NSNS formation is not
+uncertainties, such as Gaia astrometry (e.g., El-Badry
+et al. 2024), microlensing studies (e.g., Lu et al. 2023)
+and detached BH systems like VFTS 243 (e.g., Shenar
+et al. 2022).
+The formation efficiency of merging DCOs with metallicity can furthermore be inferred from GW observations. Evidence from GWTC-3 already suggests higher
+BHBH formation efficiency in low-metallicity environments (Schiebelbein-Zwack & Fishbach 2024), though
+these results remain heavily model-dependent due to
+limited data. As the GW-source catalog grows, particularly with the advent of third-generation observatories
+like the Einstein Telescope (Maggiore et al. 2020) and
+Cosmic Explorer (Evans et al. 2021, 2023), we expect the
+largest increase in the detection of lower-mass DCOs.
+These observations will provide critical insights into the
+nuances of different formation channels and will be able
+to confirm or disprove their metallicity dependence as
+described in this work.
+
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+
+15
+
+The authors would like to thank S. Stevenson and
+J. Riley for their essential contributions that facilitated the variations and updates in the wind prescriptions. LvS also thanks J. Goldberg for numerous constructive conversations that contributed to the development of this work. SKR thanks the Center for Computational Astrophysics at the Flatiron Institute for
+hospitality while a part of this research was carried
+out. The Center for Computational Astrophysics at the
+Flatiron Institute is supported by the Simons Foundation. IM acknowledges support from the Australian Research Council (ARC) Centre of Excellence for GravitationalWave Discovery (OzGrav), through project number CE230100016. AACS is supported by the German Deutsche Forschungsgemeinschaft (DFG) under
+Project-ID 445674056 (Emmy Noether Research Group
+SA4064/1-1, PI Sander).
+SOFTWARE AND DATA
+All code associated to reproduce the data and plots in
+this paper is publicly available at https://github.com/
+LiekeVanSon/ZdependentFormEff. This study makes
+use of rapid population synthesis code from the COMPAS
+suite version v03.01.02 (Stevenson et al. 2017; VignaGómez et al. 2018; Riley et al. 2022). The data used in
+this work is available on Zenodo under an open-source
+Creative Commons Attribution license at 10.5281/zenodo.13999532. Further software used in this work:
+Python (Van Rossum & Drake 2009), Astropy (Astropy Collaboration et al. 2013, 2018, 2022) Matplotlib
+(Hunter 2007), NumPy (Harris et al. 2020), SciPy (Virtanen et al. 2020), ipython/jupyter (Perez & Granger
+2007; Kluyver et al. 2016), Seaborn (Waskom 2021),
+hdf5 (Collette et al. 2019), and WebPlotDigitizer (Rohatgi 2017).
+
+APPENDIX
+
+A. CALCULATING THE DRAKE EQUATION
+
+The calculations in this appendix can also be found here: https://github.com/LiekeVanSon/ZdependentFormEff/
+blob/master/code/analytical yield.ipynb. We approximate the terms within the round brackets of Equation 2 with the
+probability to form a pair of massive stars with the ‘right’ set of (initial) conditions. The conditions in questions are
+random variables at ZAMS (the primary mass, m1 , secondary mass, m2 , orbital separation, a), and factors affecting the
+stars’ survival during supernovae in the first and second mass transfer phases. The joint probability density function
+(pdf) describing occurrence of a specific type of compact binary merger is given by:
+
+16
+
+p(m1 , m2 , a, survive SN1, survive SN2) = p(m1 ) × p(m2 | m1 )
+× p(a | m1 , m2 )
+× p(survive SN1 | m1 , m2 , a)
+
+(A1)
+
+× p(survive SN2 | m1 , m2 , a, survive SN1)
+≈ p(m1 ) × p(m2 |m1 ) × p(a) × p(survive SN1) × p(survive SN2)
+By integrating over the relevant ranges of m1 , m2 , a, survive SN1, survive SN2, we obtain the probability for a
+specific type of compact binary merger to occur.
+A.1. Primary and secondary masses
+We aim to compute the probability that m2 falls within a certain mass range [c, d] given that m1 within a certain
+mass range [a, b]. We can write m2 in terms of the mass ratio q ≡ m2 /m1 < 1:
+
+
+0.01 M⊙
+p(q | m1 ) = U q |
+,1 ,
+(A2)
+m1
+where U denotes a uniform distribution.
+We assume p(m1 ) follows the Kroupa IMF, defined as:
+
+
+(m1 /M⊙ )−0.3
+
+
+
+
+C (m /M )−1.3
+2
+1
+⊙
+Kroupa IMF(m1 ) = C1
+
+−2.3
+
+C
+(m
+/M
+3
+1
+⊙)
+
+
+
+
+0
+
+0.01 M⊙ ≤ m1 < 0.08 M⊙
+0.08 M⊙ ≤ m1 < 0.5 M⊙
+
+(A3)
+
+0.5 M⊙ ≤ m1 < 300 M⊙
+otherwise
+
+Here C2 = 0.08−0.3+1.3 = 0.08 and C3 = C2 · 0.5−1.3+2.3 = 0.8 · 0.5 to ensure continuity. The constant, C1 is
+determined by normalizing the IMF over the entire mass range:
+ (−1.3+1)
+
+
+
+h 0.08(−0.3+1) − 0.01(−0.3+1)
+0.5
+− 0.08(−1.3+1)
+300(−2.3+1) − 0.5(−2.3+1) i−1 −1
+C1 =
++0.08
++0.08·0.5·
+M⊙
+(−0.3 + 1)
+(−1.3 + 1)
+(−2.3 + 1)
+Note that we set the minimum and maximum stellar masses to 0.01 M⊙ and 300 M⊙ , respectively.
+Hence fprimary × fsecondary when 0.5 M⊙ < a < m1 < b < 300 M⊙ and 0.01 M⊙ < c < m2 < min (m1 , d) < 300 M⊙ is
+given by:
+Z m1 =b
+fprimary × fsecondary =
+
+Z q=min(1,d/m1 )
+dq p(m1 ) × p(q|m1 )
+
+dm1
+m1 =a
+
+q=c/m1
+
+Z m1 =b
+=
+
+Z q=min(1,d/m1 )
+dq Kroupa IMF(m1 ) × U (q|
+
+dm1
+m1 =a
+
+q=c/m1
+
+Z m1 =b
+=
+
+dm1 Kroupa IMF(m1 )
+
+0.01M⊙
+, 1)
+m1
+
+
+
+min 1, md1 − mc1
+
+M⊙
+1 − 0.01
+m1
+
+
+Z m1 =b
+min (m1 , d) − c
+=
+dm1 Kroupa IMF(m1 ) ×
+m1 − 0.01 M⊙
+m1 =a
+
+
+Z m1 =b
+min (m1 , d) − c
+−2.3
+=
+dm1 C1 · C3 · (m1 /M⊙ )
+×
+m1 − 0.01 M⊙
+m1 =a
+
+(A4)
+
+m1 =a
+
+where the last line applies for all our cases of interest, with a > 0.5M⊙ .
+For BHBH, we assume both primary and secondary masses range from a = c = 20M⊙ to b = d = 300M⊙ :
+fprimary × fsecondary = 5.05 × 10−4
+
+(A5)
+
+Why BHBH formation is Z dependent while NSNS formation is not
+
+1.0
+0.999
+0.998
+0.997
+0.996
+0.994
+0.993
+0.992
+0.991
+0.99
+
+fprimary
+
+MZAMS [M ]
+
+300 massless remnant
+52.9
+Black hole formation
+16.9
+10.9
+Neutron star formation
+8.3
+6.7
+5.7
+5.0
+4.5
+White dwarf formation
+4.1
+3.7
+3.4
+3.2
+3 2.0
+1.5
+1.0
+0.5
+0.0
+log10 (Z/0.014)
+
+17
+
+Figure 7. The approximate regions of WD, NS and BH formation from a ZAMS mass at different Z. The y-axis is scaled to
+follow a Salpeter IMF.
+
+Similarly, for NSNS, we assume both the primary and secondary range from a = c = 8 M⊙ to b = d = 20 M⊙ ,
+leading to:
+fprimary × fsecondary ≈ 8.12 × 10−4
+(A6)
+While for BHNS a = 20 M⊙ , b = 300 M⊙ while c = 8 M⊙ and d = 20 M⊙ :
+fprimary × fsecondary ≈ 4.21 × 10−4
+
+(A7)
+
+A.2. Initial separation
+We assume the ZAMS separation is independent of m1 and m2 , i.e., p(a | m1 , m2 ) = p(a). We adopt a flat-in-log
+distribution of initial separations between 0.01 and 1000 AU. Using Figures 2, and 8 we estimate separations avoiding
+mergers to be roughly ≳ 0.1AU and the maximum for interaction to be approximately 14AU. This leads to:
+finit,sep =
+
+log(14) − log(0.1)
+≈ 0.43
+log(1000) − log(0.01)
+
+(A8)
+
+A.3. Approximate probability of being disrupted by a supernova
+Lastly, we examine the survival probability of the primary star following a supernova natal kick. Population synthesis
+studies are well-suited to estimate this probability, with typical values for fsurvive,SN1 around 14% (e.g., Renzo et al.
+2019, Lam et al. in prep). For our fiducial simulation, we find that 13 − 16% of the systems survive the first supernova,
+with this range reflecting different metallicities. To align with the optimistic estimate we aim to compute, we adopt
+the upper limit from Lam et al. (in prep) for fsurvive,SN1 ≈ 0.23.
+A.4. Average stellar mass
+To compute the average stellar mass per binary, ⟨MSF ⟩, we sample Nsys masses m1 , from a Kroupa IMF (equation
+A3). We subsequently bin m1 using the following bin edges: [0.05, 0.08, 0.5, 1, 10, 300]. For each bin, we assume binary
+fractions of [0.1, 0.25, 0.5, 0.75, 1], which are chosen to approximately follow Figure 1 from Offner et al. (2023). To draw
+secondary masses, we use m2 = q · m1 , and we again sample mass ratios q from a uniform probability distribution.
+This leads to
+⟨MSF ⟩ ≈ 0.51M⊙ .
+
+(A9)
+
+B. REMNANT MASSES AND STELLAR RADII IN COMPAS
+
+In Figure 7 we show the outcomes of single stars in COMPAS as a function of MZAMS and metallicity. We find that
+fprimary ≈ 1 − 2 × 10−3 for BH and NS formation.
+
+18
+
+Rmax [R ]
+
+10000
+
+CHeB
+EAGB
+
+1000
+
+100
+
+2.0
+
+1.5
+
+1.0
+0.5
+log10(Z/Zsun)
+
+Mass [M ]
+10
+20
+30
+40
+50
+
+0.0
+
+60
+70
+90
+100
+150
+
+Figure 8. The maximum radius of stars at different metallicities. Markers indicate whether the star reaches Rmax during core
+He burning (CHeB) or on the ‘Early AGB’ phase (EAGB). Dotted lines show the metallicities of the original BSE code.
+
+In Figure 8, we show the maximum radius of stars at different ZAMS masses as a function of metallicity. The
+plot exposes interpolation effects inherent to BSE-based codes, particularly a pronounced peak at approximately
+log10 (Z/ Z⊙ ) ≈ −0.9 where stellar radii of massive stars extend up to 104 R⊙ . However, Romagnolo et al. (2023) argue
+that this does not significantly impact GW source properties, since most mass transfer events leading to GW sources
+are initiated before the donor star reaches its maximum radius. It is worth noting that at low metallicities, massive
+stars (with MZAMS > 30M⊙ ) remain more compact than lower-mass stars (MZAMS ≤ 30M⊙ ) due to our luminous blue
+variable mass-loss prescription.
+REFERENCES
+Abbott, B. P., Abbott, R., Abbott, T. D., et al. 2016,
+PhRvL, 116, 061102,
+doi: 10.1103/PhysRevLett.116.061102
+—. 2019, ApJL, 882, L24, doi: 10.3847/2041-8213/ab3800
+Abbott, R., Abbott, T. D., Abraham, S., et al. 2021, ApJL,
+913, L7, doi: 10.3847/2041-8213/abe949
+Abbott, R., Abbott, T. D., Acernese, F., et al. 2023,
+Physical Review X, 13, 011048,
+doi: 10.1103/PhysRevX.13.011048
+Amaro-Seoane, P., Audley, H., Babak, S., et al. 2017, arXiv
+e-prints, arXiv:1702.00786,
+doi: 10.48550/arXiv.1702.00786
+Andrews, J. J., & Kalogera, V. 2022, ApJ, 930, 159,
+doi: 10.3847/1538-4357/ac66d6
+Astropy Collaboration, Robitaille, T. P., Tollerud, E. J.,
+et al. 2013, A&A, 558, A33,
+doi: 10.1051/0004-6361/201322068
+Astropy Collaboration, Price-Whelan, A. M., Sipőcz, B. M.,
+et al. 2018, AJ, 156, 123, doi: 10.3847/1538-3881/aabc4f
+Astropy Collaboration, Price-Whelan, A. M., Lim, P. L.,
+et al. 2022, ApJ, 935, 167, doi: 10.3847/1538-4357/ac7c74
+
+Bailyn, C. D., Jain, R. K., Coppi, P., & Orosz, J. A. 1997,
+in American Astronomical Society Meeting Abstracts,
+Vol. 190, American Astronomical Society Meeting
+Abstracts #190, 10.01
+Balbinot, E., Dodd, E., Matsuno, T., et al. 2024, A&A,
+687, L3, doi: 10.1051/0004-6361/202450425
+Banagiri, S., Doctor, Z., Kalogera, V., Kimball, C., &
+Andrews, J. J. 2023, ApJ, 959, 106,
+doi: 10.3847/1538-4357/ad0557
+Bavera, S. S., Fragos, T., Zapartas, E., et al. 2023, Nature
+Astronomy, 7, 1090, doi: 10.1038/s41550-023-02018-5
+Beasor, E. R., Davies, B., Smith, N., et al. 2020, MNRAS,
+492, 5994, doi: 10.1093/mnras/staa255
+—. 2023, MNRAS, 524, 2460, doi: 10.1093/mnras/stad1818
+Belczynski, K., Bulik, T., Fryer, C. L., et al. 2010a, ApJ,
+714, 1217, doi: 10.1088/0004-637X/714/2/1217
+Belczynski, K., Dominik, M., Bulik, T., et al. 2010b, ApJL,
+715, L138, doi: 10.1088/2041-8205/715/2/L138
+Belczynski, K., Holz, D. E., Bulik, T., & O’Shaughnessy, R.
+2016, Nature, 534, 512, doi: 10.1038/nature18322
+Belczynski, K., Kalogera, V., & Bulik, T. 2002, ApJ, 572,
+407, doi: 10.1086/340304
+
+Why BHBH formation is Z dependent while NSNS formation is not
+Broekgaarden, F. S., Berger, E., Neijssel, C. J., et al. 2021,
+MNRAS, 508, 5028, doi: 10.1093/mnras/stab2716
+Broekgaarden, F. S., Berger, E., Stevenson, S., et al. 2022,
+MNRAS, 516, 5737, doi: 10.1093/mnras/stac1677
+Burdge, K. B., El-Badry, K., Kara, E., et al. 2024, arXiv
+e-prints, arXiv:2404.03719,
+doi: 10.48550/arXiv.2404.03719
+Burrows, A., Vartanyan, D., & Wang, T. 2023, ApJ, 957,
+68, doi: 10.3847/1538-4357/acfc1c
+Chan, C., Müller, B., & Heger, A. 2020, MNRAS, 495,
+3751, doi: 10.1093/mnras/staa1431
+Chernoff, D. F., & Finn, L. S. 1993, The Astrophysical
+Journal, 411, L5, doi: 10.1086/186898
+Chruślińska, M. 2024, Annalen der Physik, 536, 2200170,
+doi: 10.1002/andp.202200170
+Chruślińska, M., Nelemans, G., Boco, L., & Lapi, A. 2021,
+MNRAS, 508, 4994, doi: 10.1093/mnras/stab2690
+Coleman, M. S. B., & Burrows, A. 2022, MNRAS, 517,
+3938, doi: 10.1093/mnras/stac2573
+Collette, A., Caswell, T. A., Tocknell, J., et al. 2019,
+h5py/h5py: 2.10.0, 2.10.0, Zenodo, Zenodo,
+doi: 10.5281/zenodo.3401726
+Corral-Santana, J. M., Casares, J., Muñoz-Darias, T., et al.
+2016, A&A, 587, A61, doi: 10.1051/0004-6361/201527130
+Dashwood Brown, C., Gandhi, P., & Zhao, Y. 2024,
+MNRAS, 527, L82, doi: 10.1093/mnrasl/slad151
+de Jager, C., Nieuwenhuijzen, H., & van der Hucht, K. A.
+1988, A&AS, 72, 259
+de Mink, S. E., & Belczynski, K. 2015, ApJ, 814, 58,
+doi: 10.1088/0004-637X/814/1/58
+de Mink, S. E., Pols, O. R., & Yoon, S. C. 2008, in
+American Institute of Physics Conference Series, Vol.
+990, First Stars III, ed. B. W. O’Shea & A. Heger (AIP),
+230–232, doi: 10.1063/1.2905549
+de Sá, L. M., Rocha, L. S., Bernardo, A., Bachega,
+R. R. A., & Horvath, J. E. 2024, arXiv e-prints,
+arXiv:2410.01451, doi: 10.48550/arXiv.2410.01451
+Decin, L. 2021, ARA&A, 59, 337,
+doi: 10.1146/annurev-astro-090120-033712
+Decin, L., Richards, A. M. S., Marchant, P., & Sana, H.
+2024, A&A, 681, A17, doi: 10.1051/0004-6361/202244635
+Dominik, M., Belczynski, K., Fryer, C., et al. 2012, ApJ,
+759, 52, doi: 10.1088/0004-637X/759/1/52
+—. 2013, ApJ, 779, 72, doi: 10.1088/0004-637X/779/1/72
+Doran, E. I., Crowther, P. A., de Koter, A., et al. 2013,
+A&A, 558, A134, doi: 10.1051/0004-6361/201321824
+El-Badry, K. 2024, arXiv e-prints, arXiv:2404.13047.
+https://arxiv.org/abs/2404.13047
+El-Badry, K., Rix, H.-W., Quataert, E., et al. 2023a,
+MNRAS, 518, 1057, doi: 10.1093/mnras/stac3140
+
+19
+
+El-Badry, K., Rix, H.-W., Cendes, Y., et al. 2023b,
+MNRAS, 521, 4323, doi: 10.1093/mnras/stad799
+El-Badry, K., Rix, H.-W., Latham, D. W., et al. 2024, The
+Open Journal of Astrophysics, 7, 58,
+doi: 10.33232/001c.121261
+Eldridge, J. J., & Stanway, E. R. 2016, MNRAS, 462, 3302,
+doi: 10.1093/mnras/stw1772
+Evans, M., Adhikari, R. X., Afle, C., et al. 2021, arXiv
+e-prints, arXiv:2109.09882,
+doi: 10.48550/arXiv.2109.09882
+Evans, M., Corsi, A., Afle, C., et al. 2023, arXiv e-prints,
+arXiv:2306.13745, doi: 10.48550/arXiv.2306.13745
+Ezquiaga, J. M., & Holz, D. E. 2022, PhRvL, 129, 061102,
+doi: 10.1103/PhysRevLett.129.061102
+Farr, W. M., Fishbach, M., Ye, J., & Holz, D. E. 2019,
+ApJL, 883, L42, doi: 10.3847/2041-8213/ab4284
+Farr, W. M., Sravan, N., Cantrell, A., et al. 2011, ApJ, 741,
+103, doi: 10.1088/0004-637X/741/2/103
+Fishbach, M., & van Son, L. 2023, ApJL, 957, L31,
+doi: 10.3847/2041-8213/ad0560
+Fragos, T., Willems, B., Kalogera, V., et al. 2009, ApJ, 697,
+1057, doi: 10.1088/0004-637X/697/2/1057
+Fryer, C. L., Belczynski, K., Wiktorowicz, G., et al. 2012,
+ApJ, 749, 91, doi: 10.1088/0004-637X/749/1/91
+Fryer, C. L., & Kalogera, V. 2001, ApJ, 554, 548,
+doi: 10.1086/321359
+Gaia Collaboration, Panuzzo, P., Mazeh, T., et al. 2024,
+A&A, 686, L2, doi: 10.1051/0004-6361/202449763
+Gallegos-Garcia, M., Berry, C. P. L., & Kalogera, V. 2023,
+ApJ, 955, 133, doi: 10.3847/1538-4357/ace434
+Gessner, A., & Janka, H.-T. 2018, ApJ, 865, 61,
+doi: 10.3847/1538-4357/aadbae
+Giacobbo, N., & Mapelli, M. 2018, MNRAS, 480, 2011,
+doi: 10.1093/mnras/sty1999
+Giacobbo, N., Mapelli, M., & Spera, M. 2018, MNRAS,
+474, 2959, doi: 10.1093/mnras/stx2933
+Hainich, R., Pasemann, D., Todt, H., et al. 2015, A&A,
+581, A21, doi: 10.1051/0004-6361/201526241
+Harris, C. R., Millman, K. J., van der Walt, S. J., et al.
+2020, Nature, 585, 357–362,
+doi: 10.1038/s41586-020-2649-2
+Hobbs, G., Lorimer, D. R., Lyne, A. G., & Kramer, M.
+2005, MNRAS, 360, 974,
+doi: 10.1111/j.1365-2966.2005.09087.x
+Hunter, J. D. 2007, Computing in Science and Engineering,
+9, 90, doi: 10.1109/MCSE.2007.55
+Hurley, J. R., Pols, O. R., & Tout, C. A. 2000, MNRAS,
+315, 543, doi: 10.1046/j.1365-8711.2000.03426.x
+Hurley, J. R., Tout, C. A., & Pols, O. R. 2002, MNRAS,
+329, 897, doi: 10.1046/j.1365-8711.2002.05038.x
+
+20
+Iorio, G., Mapelli, M., Costa, G., et al. 2023, MNRAS, 524,
+426, doi: 10.1093/mnras/stad1630
+Janka, H.-T., & Kresse, D. 2024, Ap&SS, 369, 80,
+doi: 10.1007/s10509-024-04343-1
+Khargharia, J., Froning, C. S., & Robinson, E. L. 2010,
+ApJ, 716, 1105, doi: 10.1088/0004-637X/716/2/1105
+Kimball, C., Imperato, S., Kalogera, V., et al. 2023, ApJL,
+952, L34, doi: 10.3847/2041-8213/ace526
+Klencki, J., Moe, M., Gladysz, W., et al. 2018, A&A, 619,
+A77, doi: 10.1051/0004-6361/201833025
+Kluyver, T., Ragan-Kelley, B., Pérez, F., et al. 2016, in
+ELPUB, 87–90
+Kobulnicky, H. A., Kiminki, D. C., Lundquist, M. J., et al.
+2014, ApJS, 213, 34, doi: 10.1088/0067-0049/213/2/34
+Kotko, I., Banerjee, S., & Belczynski, K. 2024, arXiv
+e-prints, arXiv:2403.13579,
+doi: 10.48550/arXiv.2403.13579
+Kroupa, P. 2001, MNRAS, 322, 231,
+doi: 10.1046/j.1365-8711.2001.04022.x
+Kudritzki, R. P., Pauldrach, A., & Puls, J. 1987, A&A, 173,
+293
+Lam, C. Y., & Lu, J. R. 2023, ApJ, 955, 116,
+doi: 10.3847/1538-4357/aced4a
+Laplace, E., Götberg, Y., de Mink, S. E., Justham, S., &
+Farmer, R. 2020, A&A, 637, A6,
+doi: 10.1051/0004-6361/201937300
+Lu, J. R., Dawson, W. A., Golovich, N., et al. 2023,
+Hunting for Black Holes with Astrometric Microlensing,
+HST Proposal. Cycle 31, ID. #17400
+Maggiore, M., Van Den Broeck, C., Bartolo, N., et al. 2020,
+JCAP, 2020, 050, doi: 10.1088/1475-7516/2020/03/050
+Mandel, I., & Broekgaarden, F. S. 2022, Living Reviews in
+Relativity, 25, 1, doi: 10.1007/s41114-021-00034-3
+Mandel, I., & Farmer, A. 2022, PhR, 955, 1,
+doi: 10.1016/j.physrep.2022.01.003
+Mandel, I., & Müller, B. 2020, MNRAS, 499, 3214,
+doi: 10.1093/mnras/staa3043
+Mapelli, M., Giacobbo, N., Ripamonti, E., & Spera, M.
+2017, MNRAS, 472, 2422, doi: 10.1093/mnras/stx2123
+Marchant, P., & Bodensteiner, J. 2024, ARA&A, 62, 21,
+doi: 10.1146/annurev-astro-052722-105936
+Marı́n Pina, D., Rastello, S., Gieles, M., et al. 2024, A&A,
+688, L2, doi: 10.1051/0004-6361/202450460
+Mata Sánchez, D., Rau, A., Álvarez Hernández, A., et al.
+2021, MNRAS, 506, 581, doi: 10.1093/mnras/stab1714
+Miller-Jones, J. C. A., Bahramian, A., Orosz, J. A., et al.
+2021, Science, 371, 1046, doi: 10.1126/science.abb3363
+Mirabel, I. F. 2016, arXiv e-prints, arXiv:1609.08411,
+doi: 10.48550/arXiv.1609.08411
+
+Moe, M., & Di Stefano, R. 2017, ApJS, 230, 15,
+doi: 10.3847/1538-4365/aa6fb6
+Mokiem, M. R., de Koter, A., Vink, J. S., et al. 2007, A&A,
+473, 603, doi: 10.1051/0004-6361:20077545
+Müller, B., Tauris, T. M., Heger, A., et al. 2019, MNRAS,
+484, 3307, doi: 10.1093/mnras/stz216
+Nagarajan, P., & El-Badry, K. 2024, arXiv e-prints,
+arXiv:2411.16847, doi: 10.48550/arXiv.2411.16847
+Neijssel, C. J., Vigna-Gómez, A., Stevenson, S., et al. 2019,
+MNRAS, 490, 3740, doi: 10.1093/mnras/stz2840
+Nieuwenhuijzen, H., & de Jager, C. 1990, A&A, 231, 134
+Offner, S. S. R., Moe, M., Kratter, K. M., et al. 2023, in
+Astronomical Society of the Pacific Conference Series,
+Vol. 534, Protostars and Planets VII, ed. S. Inutsuka,
+Y. Aikawa, T. Muto, K. Tomida, & M. Tamura, 275,
+doi: 10.48550/arXiv.2203.10066
+Özel, F., Psaltis, D., Narayan, R., & McClintock, J. E.
+2010, ApJ, 725, 1918,
+doi: 10.1088/0004-637X/725/2/1918
+Perez, F., & Granger, B. E. 2007, Computing in Science
+and Engineering, 9, 21, doi: 10.1109/MCSE.2007.53
+Peters, P. C. 1964, Physical Review, 136, 1224,
+doi: 10.1103/PhysRev.136.B1224
+Picco, A., Marchant, P., Sana, H., & Nelemans, G. 2024,
+A&A, 681, A31, doi: 10.1051/0004-6361/202347090
+Ramachandran, V., Sander, A. A. C., Pauli, D., et al. 2024,
+arXiv e-prints, arXiv:2406.17678,
+doi: 10.48550/arXiv.2406.17678
+Renzo, M., Ott, C. D., Shore, S. N., & de Mink, S. E. 2017,
+A&A, 603, A118, doi: 10.1051/0004-6361/201730698
+Renzo, M., Zapartas, E., de Mink, S. E., et al. 2019, A&A,
+624, A66, doi: 10.1051/0004-6361/201833297
+Riley, J., Mandel, I., Marchant, P., et al. 2021, MNRAS,
+505, 663, doi: 10.1093/mnras/stab1291
+Riley, J., Agrawal, P., Barrett, J. W., et al. 2022, ApJS,
+258, 34, doi: 10.3847/1538-4365/ac416c
+Rohatgi, A. 2017, WebPlotDigitizer: Version 5.2.
+https://automeris.io
+Romagnolo, A., Belczynski, K., Klencki, J., et al. 2023,
+MNRAS, 525, 706, doi: 10.1093/mnras/stad2366
+Romagnolo, A., Gormaz-Matamala, A. C., & Belczynski, K.
+2024, ApJL, 964, L23, doi: 10.3847/2041-8213/ad2fbe
+Roy, S. K., van Son, L. A. C., Ray, A., & Farr, W. M.
+2024, arXiv e-prints, arXiv:2411.02494,
+doi: 10.48550/arXiv.2411.02494
+Sabhahit, G. N., Vink, J. S., Sander, A. A. C., & Higgins,
+E. R. 2023, MNRAS, 524, 1529,
+doi: 10.1093/mnras/stad1888
+Sahu, K. C., Anderson, J., Casertano, S., et al. 2022, ApJ,
+933, 83, doi: 10.3847/1538-4357/ac739e
+
+Why BHBH formation is Z dependent while NSNS formation is not
+Sana, H., de Mink, S. E., de Koter, A., et al. 2012a,
+Science, 337, 444, doi: 10.1126/science.1223344
+—. 2012b, Science, 337, 444, doi: 10.1126/science.1223344
+Sander, A. A. C., Lefever, R. R., Poniatowski, L. G., et al.
+2023, A&A, 670, A83, doi: 10.1051/0004-6361/202245110
+Sander, A. A. C., & Vink, J. S. 2020, MNRAS, 499, 873,
+doi: 10.1093/mnras/staa2712
+Sander, A. A. C., Vink, J. S., & Hamann, W. R. 2020,
+MNRAS, 491, 4406, doi: 10.1093/mnras/stz3064
+Santoliquido, F., Mapelli, M., Giacobbo, N., Bouffanais, Y.,
+& Artale, M. C. 2021, MNRAS, 502, 4877,
+doi: 10.1093/mnras/stab280
+Schiebelbein-Zwack, A., & Fishbach, M. 2024, ApJ, 970,
+128, doi: 10.3847/1538-4357/ad5353
+Schrøder, S. L., Batta, A., & Ramirez-Ruiz, E. 2018, ApJL,
+862, L3, doi: 10.3847/2041-8213/aacf8d
+Sgalletta, C., Mapelli, M., Boco, L., et al. 2024, arXiv
+e-prints, arXiv:2410.21401,
+doi: 10.48550/arXiv.2410.21401
+Shenar, T., Sana, H., Mahy, L., et al. 2022, Nature
+Astronomy, 6, 1085, doi: 10.1038/s41550-022-01730-y
+Shikauchi, M., Hirai, R., & Mandel, I. 2024, arXiv e-prints,
+arXiv:2409.00460, doi: 10.48550/arXiv.2409.00460
+Smith, N. 2014, ARA&A, 52, 487,
+doi: 10.1146/annurev-astro-081913-040025
+Stevenson, S., Vigna-Gómez, A., Mandel, I., et al. 2017,
+Nature Communications, 8, 14906,
+doi: 10.1038/ncomms14906
+Suwa, Y., Yoshida, T., Shibata, M., Umeda, H., &
+Takahashi, K. 2015, MNRAS, 454, 3073,
+doi: 10.1093/mnras/stv2195
+Taylor, S. R., & Gair, J. R. 2012, Physical Review D, 86,
+doi: 10.1103/physrevd.86.023502
+Taylor, S. R., Gair, J. R., & Mandel, I. 2012, Physical
+Review D, 85, doi: 10.1103/physrevd.85.023535
+The LIGO Scientific Collaboration, the Virgo
+Collaboration, & the KAGRA Collaboration. 2024, arXiv
+e-prints, arXiv:2404.04248,
+doi: 10.48550/arXiv.2404.04248
+Van Rossum, G., & Drake, F. L. 2009, Python 3 Reference
+Manual (Scotts Valley, CA: CreateSpace)
+van Son, L. A. C., de Mink, S. E., Chruślińska, M., et al.
+2023, ApJ, 948, 105, doi: 10.3847/1538-4357/acbf51
+van Son, L. A. C., de Mink, S. E., Renzo, M., et al. 2022a,
+ApJ, 940, 184, doi: 10.3847/1538-4357/ac9b0a
+van Son, L. A. C., de Mink, S. E., Callister, T., et al.
+2022b, ApJ, 931, 17, doi: 10.3847/1538-4357/ac64a3
+
+21
+
+Vigna-Gómez, A., Neijssel, C. J., Stevenson, S., et al. 2018,
+MNRAS, 481, 4009, doi: 10.1093/mnras/sty2463
+Vigna-Gómez, A., Willcox, R., Tamborra, I., et al. 2024,
+PhRvL, 132, 191403,
+doi: 10.1103/PhysRevLett.132.191403
+Vink, J. S. 2017, A&A, 607, L8,
+doi: 10.1051/0004-6361/201731902
+—. 2022, ARA&A, 60, 203,
+doi: 10.1146/annurev-astro-052920-094949
+Vink, J. S., & de Koter, A. 2005, A&A, 442, 587,
+doi: 10.1051/0004-6361:20052862
+Vink, J. S., de Koter, A., & Lamers, H. J. G. L. M. 2001,
+A&A, 369, 574, doi: 10.1051/0004-6361:20010127
+Vink, J. S., Higgins, E. R., Sander, A. A. C., & Sabhahit,
+G. N. 2021, MNRAS, 504, 146,
+doi: 10.1093/mnras/stab842
+Vink, J. S., Sabhahit, G. N., & Higgins, E. R. 2024, arXiv
+e-prints, arXiv:2407.07204,
+doi: 10.48550/arXiv.2407.07204
+Vink, J. S., & Sander, A. A. C. 2021, MNRAS, 504, 2051,
+doi: 10.1093/mnras/stab902
+Virtanen, P., Gommers, R., Oliphant, T. E., et al. 2020,
+Nature Methods, 17, 261, doi: 10.1038/s41592-019-0686-2
+Wagg, T., Broekgaarden, F. S., de Mink, S. E., et al. 2022,
+ApJ, 937, 118, doi: 10.3847/1538-4357/ac8675
+Walk, L., Tamborra, I., Janka, H.-T., Summa, A., &
+Kresse, D. 2020, PhRvD, 101, 123013,
+doi: 10.1103/PhysRevD.101.123013
+Wang, S., Zhao, X., Feng, F., et al. 2024, Nature
+Astronomy, doi: 10.1038/s41550-024-02359-9
+Waskom, M. L. 2021, Journal of Open Source Software, 6,
+3021, doi: 10.21105/joss.03021
+Weis, K., & Bomans, D. J. 2020, Galaxies, 8, 20,
+doi: 10.3390/galaxies8010020
+Willems, B., Henninger, M., Levin, T., et al. 2005, ApJ,
+625, 324, doi: 10.1086/429557
+Winch, E. R. J., Vink, J. S., Higgins, E. R., & Sabhahitf,
+G. N. 2024, MNRAS, 529, 2980,
+doi: 10.1093/mnras/stae393
+Wong, T.-W., Valsecchi, F., Ansari, A., et al. 2014, ApJ,
+790, 119, doi: 10.1088/0004-637X/790/2/119
+Woosley, S. E., Sukhbold, T., & Janka, H. T. 2020, ApJ,
+896, 56, doi: 10.3847/1538-4357/ab8cc1
+Zhao, Y., Gandhi, P., Dashwood Brown, C., et al. 2023,
+MNRAS, 525, 1498, doi: 10.1093/mnras/stad2226
+
+

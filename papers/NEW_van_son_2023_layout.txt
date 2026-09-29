@@ -1,0 +1,1317 @@
+                                                 Draft version February 28, 2023
+                                                 Typeset using LATEX/show your work! twocolumn style in AASTeX631
+
+
+
+
+                                                 The locations of features in the mass distribution of merging binary black holes are robust against
+                                                              uncertainties in the metallicity-dependent cosmic star formation history.
+                                                      L. A. C. van Son      ,1, 2, 3 S. E. de Mink   ,3, 2, 1 M. Chruślińska   ,3 C. Conroy    ,1 R. Pakmor   ,3 and
+                                                                                                       L. Hernquist 1
+                                                                 1 Center for Astrophysics | Harvard & Smithsonian, 60 Garden St., Cambridge, MA 02138, USA
+arXiv:2209.03385v2 [astro-ph.GA] 27 Feb 2023
+
+
+
+
+                                                  2 Anton Pannekoek Institute of Astronomy, Science Park 904, University of Amsterdam, 1098XH Amsterdam, The Netherlands
+                                                                  3 Max Planck Institute for Astrophysics, Karl-Schwarzschild-Str. 1, 85748 Garching, Germany
+
+
+
+                                                                                                         ABSTRACT
+                                                         New observational facilities are probing astrophysical transients such as stellar explosions and grav-
+                                                       itational wave (GW) sources at ever increasing redshifts, while also revealing new features in source
+                                                       property distributions. To interpret these observations, we need to compare them to predictions from
+                                                       stellar population models. Such models require the metallicity-dependent cosmic star formation his-
+                                                       tory (S(Z, z)) as an input. Large uncertainties remain in the shape and evolution of this function. In
+                                                       this work, we propose a simple analytical function for S(Z, z). Variations of this function can be easily
+                                                       interpreted, because the parameters link to its shape in an intuitive way. We fit our analytical function
+                                                       to the star-forming gas of the cosmological TNG100 simulation and find that it is able to capture the
+                                                       main behaviour well. As an example application, we investigate the effect of systematic variations
+                                                       in the S(Z, z) parameters on the predicted mass distribution of locally merging binary black holes
+                                                       (BBH). Our main findings are: I) the locations of features are remarkably robust against variations in
+                                                       the metallicity-dependent cosmic star formation history, and II) the low mass end is least affected by
+                                                       these variations. This is promising as it increases our chances to constrain the physics that governs
+                                                       the formation of these objects.                                                                                           ¥£
+
+                                                                 1. INTRODUCTION                                    out cosmic history; i.e. the metallicity-dependent cosmic
+                                                 A myriad of astrophysical phenomena depend criti-                  star formation history (S(Z, z), see also the recent re-
+                                               cally on the rate of star formation throughout the cosmic            view by Chruślińska 2022). Throughout this work little
+                                               history of the Universe. Exotic transient phenomena,                 z refers to the redshift and Z to the metallicity of star
+                                               including (pulsational) pair-instability supernovae, long            formation.
+                                               gamma-ray bursts and gravitational wave (GW) events                    It is difficult to observationally constrain the shape
+                                               appear to be especially sensitive to the metallicity at              of S(Z, z) – (see e.g., Chruślińska & Nelemans 2019;
+                                               which star formation occurs at different epochs through-             Boco et al. 2021, for discussion of relevant observational
+                                               out the Universe (e.g., Langer et al. 2007; Fruchter et al.          caveats). Even at low redshifts, the low metallicity part
+                                               2006; Abbott et al. 2016). Gravitational astronomy in                of the distribution is poorly constrained (Chruślińska
+                                               particular has seen explosive growth in the number of                et al. 2021). Nonetheless, several methods exist to es-
+                                               detections in the past decade (Abbott et al. 2018, 2020,             timate the metallicity-dependent cosmic star formation
+                                               2021a), while theoretical predictions vary greatly due to            history.
+                                               uncertainties in the aforementioned metallicity of star                The first method is based on empirical scaling rela-
+                                               formation (e.g., Santoliquido et al. 2021; Broekgaarden              tions, linking galaxy properties like stellar mass M? ,
+                                               et al. 2021). In order to correctly model and interpret              metallicity Z, and overall star-formation rate density
+                                               these observations, it is thus fundamental to know the               SFRD(z), with the galaxy stellar mass function, GSMF
+                                               rate of star formation at different metallicities through-           (see e.g. Dominik et al. 2013). However, the applied
+                                                                                                                    methods to infer galaxy properties and subsequently
+                                                                                                                    scaling relations such as the MZ-relation differ greatly,
+                                               Corresponding author: L. van Son                                     which makes it difficult to interpret these results in a
+                                               lieke.van.son@cfa.harvard.edu                                        consistent way (e.g., Kewley & Ellison 2008; Maiolino &
+                                                                                                                    Mannucci 2019; Cresci et al. 2019). Moreover, observa-
+2
+
+tions are generally incomplete at high redshifts and low      example application of our model by systematically
+galaxy luminosity (e.g., Chruślińska et al. 2021).          varying the parameters that determine the shape of
+   One can also directly extract the metallicity-             S(Z, z) and investigate their impact on the local distri-
+dependent cosmic star formation history from cosmo-           bution of merging BBH masses in Section 4. We sum-
+logical simulations (e.g. Mapelli et al. 2017; Briel et al.   marise our findings in Section 5.
+2022a). However, these simulations currently lack the           Throughout this work, we adopt a universal Kroupa
+resolution to resolve the lowest mass galaxies, and their     initial mass function (Kroupa 2001) with the mass limits
+variations in S(Z, z) span a smaller range than those ob-     0.01 − 200M and a flat ΛCDM cosmology with ΩM =
+served in observationally-based models (Pakmor et al.         0.31, ΩΛ = 0.69 and H0 = 67.7km s−1 Mpc−1 (Planck
+2022).                                                        Collaboration et al. 2020).
+   Alternatively, one can combine analytical models
+                                                                2. A CONVENIENT ANALYTIC EXPRESSION
+for the observed overall star-formation rate density,
+                                                                     FOR THE METALLICITY-DEPENDENT
+SFRD(z), like those from Madau & Dickinson (2014)
+                                                                     COSMIC STAR FORMATION HISTORY
+or Madau & Fragos (2017), and convolve this with an
+assumed function for the shape of the cosmic metallic-         We write the metallicity-dependent cosmic star for-
+ity density distribution, such as was was done in e.g.,       mation history as
+Langer & Norman (2006) and the phenomenological
+model in Neijssel et al. (2019).                                                                  dP
+                                                                          S(Z, z) = SFRD(z) ×        (Z, z)         (1)
+   In this work we follow the latter approach and propose                                         dZ
+a flexible analytical model for S(Z, z) that can be fit to    (similar to e.g., Langer & Norman 2006). The first term
+the output of both cosmological simulations, and obser-       is the star formation rate density, SFRD(z), that is the
+vational data constraints where available. In contrast to     amount of mass formed in stars per unit time and per
+earlier work, we adopt a skewed-lognormal distribution        unit comoving volume at each redshift, z. The second
+of metallicities that can capture the asymmetry in the        term, dP/dZ(Z, z), is a probability density distribution
+low and high metallicity tails.                               that expresses what fraction of star formation occurs at
+   The purpose of this proposed form is twofold. First        which metallicity, Z, at each redshift.
+of all, the form we propose allows for an intuitive inter-
+pretation of the free parameters. This allows us to get          2.1. The cosmic metallicity density distribution
+better insight of the impact of changes in these param-         For the probability distribution of metallicities we
+eters on the inferred ranges of astrophysical transients      draw inspiration from the approach by e.g., Neijssel
+(as we demonstrate in Section 4 using GW predictions as       et al. (2019) who used a log-normal distribution for their
+an example). By adopting an analytical, parametrized          phenomenological model. Unfortunately, a simple log-
+form for S(Z, z), the large uncertainties can be system-      normal distribution cannot capture the asymmetry that
+atically explored. Secondly, both the large complica-         we see in the cosmological simulations, which show an
+tions in observational constraints, and the many uncer-       extended tail in log10 Z towards low metallicity, com-
+tainties in cosmological simulations call for a generalised   bined with a very limited tail towards higher metallicity.
+form of S(Z, z) that can be easily updated when new in-       To capture this behaviour we adopt a skewed-log-normal
+formation becomes available. In particular, the advent        distribution instead. This is an extension of the normal
+of observations with the James Webb Space Telescope           distribution that introduces an additional shape param-
+promises a new era of high-redshift metallicity studies       eter, α, that regulates the skewness (first introduced by
+of previously unexplored regimes (e.g., Sanders et al.        O’Hagan & Leonard 1976).
+2022). We hope that this form will facilitate the flexi-        The skewed-log-normal distribution of metallicities is
+bility needed to keep up with observations. The model         defined as:
+described in this work is incorporated in the publicly
+                                                               dP         1  dP(Z, z)
+available ‘Cosmic Integration’ suite of the COMPAS code.1         (Z, z) = ×
+                                                               dZ         Z    d lnZ
+   We describe our model for S(Z, z) in Section 2. We
+                                                                                    ln Z − ξ      ln Z − ξ
+                                                                                                         
+                                                                          1  2
+fit our model to the star-forming gas in the Illustris                   = × φ                Φ α            , (2)
+                                                                          Z  ω          ω             ω
+TNG100 simulation in Section 3, and demonstrate an                              |     {z     }|    {z      }
+                                                                                         (a)             (b)
+
+    1 https://github.com/TeamCOMPAS/COMPAS/tree/dev/utils/    where (a) is the standard log-normal distribution, φ,
+     CosmicIntegration                                                                     (               2 )
+                                                                    ln Z − ξ                   1 ln Z − ξ
+                                                                                               
+                                                                                    1
+                                                                φ               ≡ √ exp −                          (3)
+                                                                        ω           2π         2     ω
+                                                                                                                        3
+
+and (b) is the new term that allows for asymmetry,             Asymmetry of the metallicity distribution: α —The skew-
+which is equal to the cumulative of the log-normal dis-       ness α could in principle also be allowed to evolve with
+tribution, Φ,                                                 redshift (e.g., α(z) = α(z = 0)10αz ·z ). However, we find
+                        h       n         oi                no significant improvement over the simpler assumption
+         Φ α ln Z−ξ
+                ω     ≡ 12 1 + erf α lnωZ−ξ
+                                        √
+                                          2
+                                               .    (4)       where alpha is kept constant. Note that the redshift
+This introduces three parameters, α, ω and ξ, each of         evolution of the ‘scale’ (eq. 9), already captures similar
+which may depend on redshift. The first parameter, α,         behaviour in our current formalism. We therefore adopt
+is known as the “shape”. It affects the skewness of the       α = α(z = 0) and αz = 0.
+distribution and thus allows for asymmetries between            In summary, Equation 2 becomes:
+metallicities that are higher and lower than the mean.
+                                                                                            ln Z − ξ(z)  ln Z − ξ(z)
+                                                                                                                  
+                                                               dP            2
+The symmetric log-normal distribution is recovered for            (Z, z) =       ×φ                Φ α                 ,
+α = 0. The second parameter, ω is known as the “scale”.        dZ          ω(z)Z                ω(z)         ω(z)
+It provides a measure of the spread in metallicities at                                                         (11)
+each redshift. Finally, ξ, is known as the “location”,        where ξ(z) and ω(z) are defined in Equations 8 and 9
+because this parameter plays a role in setting the mean       respectively and we have assumed α to be constant.
+of the distribution at each redshift.
+                                                                2.2. The overall cosmic star formation rate density
+The location and the mean of the metallicity distribution —     For the star formation rate density, we assume the
+To obtain a useful expression for the redshift dependence     analytical form proposed by Madau & Dickinson (2014),
+of the “location” ξ(z) we first express the expectation
+value or mean metallicity at a given redshift                                    d2 MSFR             (1 + z)
+                                                                                                              b
+                                                                   SFRD(z) =             (z) = a                     (12)
+                                ω2
+                                  
+                                                                                  dtdVc                          d
+             hZi = 2 exp ξ +         Φ (β ω)          (5)                                        1 + [(1 + z)/c]
+                                 2
+                                                              in units of M yr−1 cMpc−3 . This introduces four
+                                                                                           
+where β is
+                                α                             parameters: a which sets the overal normalisation and
+                      β=√            .                 (6)
+                              1 + α2                          which has the same units as SFRD(z) and b, c and d
+(For a more extended derivation of the moments of the         which are unitless and which govern the shape of the
+skewed-log-normal, see e.g., Wang et al. (2019).)             overal cosmic star formation rate density with redshift.
+   For the evolution of the mean metallicity with redshift
+we follow Langer & Norman (2006) and the phenomeno-             Lastly, we combine equations 11 and 12 to form a
+logical model from Neijssel et al. (2019) in assuming that    full metallicity specific star formation rate density as
+the mean of the probability density function of metal-        described in equation 1.
+licities evolves with redshift as:
+                                                              3. FIT AGAINST COSMOLOGICAL SIMULATION
+                hZi ≡ µ(z) = µ0 · 10µz ·z ,            (7)
+                                                                 We fit our new functional form of S(Z, z) as defined
+where µ0 is the mean metallicity at redshift 0, and µz        by equations 1, 11 and 12 to the IllustrisTNG cosmolog-
+determines redshift evolution of the location. Equating       ical simulations. We simultaneously fit for the following
+this to Equation 5, we get an expression for ξ(z),            nine free parameters α, µ0 , µz , ω0 , ωz , which govern the
+                                                              metallicity dependence and a, b, c and d, which set the
+                        µ0 · 10µz ·z     ω2
+                                    
+            ξ(z) = ln                  −    .       (8)       overall star-formation rate density. Below we briefly dis-
+                         2 Φ(β ω)        2                    cuss the IllustrisTNG simulations, and elaborate on our
+ The scale (and variance) of the metallicity distribution —   fitting procedure.
+We will also allow the “scale” ω to evolve with redshift
+                                                                    3.1. IllustrisTNG Cosmological simulations
+in a similar manner,
+                                                                Although here, we only fit our model to the TNG100
+                   ω(z) = ω0 · 10ωz ·z .               (9)    simulation, our prescription can be easily be used to fit
+where ω0 is the width of the metallicity distribution at      other simulated or observational data of the metallicity-
+z = 0, and ωz the redshift evolution of the scale.            dependent cosmic star formation history2 .
+  Note that the width, w(z) is not the same as the vari-
+ance. The variance, σ 2 (z), can be expressed as                2 We   provide a Jupyter notebook to facilitate this fit
+                                                                 here: https://github.com/LiekeVanSon/SFRD fit/blob/main/
+                                     2β 2
+                                         
+                2         2
+              σ (z) = ω (z) 1 −                     (10)         src/scripts/Notebooks/Fit model to sfrdzZ.ipynb
+                                      π
+4
+
+   The IllustrisTNG-project (or TNG in short) considers       cosmological simulations is unresolved, and thus de-
+galaxy formation and evolution through large-scale cos-       pends strongly on the implemented ‘sub-grid physics’.
+mological hydrodynamical simulations (Springel et al.         A known uncertainty is that dust is not included in the
+2018; Marinacci et al. 2018; Nelson et al. 2018; Pillepich    TNG simulations, which could mean that metallicity of
+et al. 2018a; Naiman et al. 2018; Nelson et al. 2019a;        the star-forming gas is overestimated. Feedback from ac-
+Pillepich et al. 2019). Such simulations provide the tools    tive galactic nuclei is not well understood theoretically
+to study parts of the Universe that are not easily ac-        and is described in an approximate manner (Springel
+cessible by observations. In particular of interest for       et al. 2005; Weinberger et al. 2017). Furthermore, all
+this work, they simulate the high redshift enrichment of      stellar winds mass loss from massive stars, binary inter-
+galaxies and the tail of low metallicity star formation at    actions and their ionising effects are ignored (e.g. Dray
+low redshift.                                                 et al. 2003; Smith 2014; Götberg et al. 2020; Doughty &
+   The models implemented in the publicly available           Finlator 2021; Farmer et al. 2021; Goswami et al. 2022).
+TNG simulations (Nelson et al. 2019b)3 have lead to           Moreover, the uniform ionising UV background is turned
+many successes. These models where calibrated at the          on abruptly at z = 6. This crucially impacts the amount
+resolution of the TNG100 simulation, hence TNG100 is          of low metallicity star formation at high redshift as it
+expected to provide the best overall agreement to global      allows small galaxies to produce more stars than what
+properties (like the star formation rate density). This       would be expected for a gradually increasing UV back-
+is why we adopt the TNG100 simulation as our fidu-            ground that reaches full strength at z = 6. All these
+cial simulation. For a more extended discussion focused       uncertainties underline the need for a flexible approxi-
+on the processes that govern the creation, distribution       mation of the S(Z, z), that can be easily updated when
+and mixing of metals in in the TNG simulations, we re-        cosmological models and sub-grid physics are updated.
+fer to Pakmor et al. (2022). In short, star formation in
+the TNG simulations is calibrated against the Kenni-                    3.2. Choices and binning of the data
+cutt–Schmidt relation (Schmidt 1959; Kennicutt 1989),           We fit equation 1 to the metallicity-dependent star
+using an effective equation of state (Springel & Hern-        formation rate of the star-forming gas in the TNG100
+quist 2003). The stellar metallicity yields are an up-        simulation. For this we use a binned version of the
+dated version of the original Illustris simulations as de-    TNG data S(Z, z)sim . We consider metallicities between
+scribed in Pillepich et al. (2018b). Star particles deposit   log10 Z = −5 to log10 Z = 0 in 30 bins, where we use
+metals into the gas through type Ia and type II super-        Zi to refer to the logarithmic centres of the bins. We
+novae, as well as through asymptotic giant branch stars.      ignore star formation in metallicities log10 Z ≤ −5 as
+The TNG simulations have been shown to match obser-           this accounts for less than 1% of the total cosmic star
+vational constraints on the mass-metallicity relation of      formation rate in these simulations. We consider bins in
+galaxies up to z = 2 (Torrey et al. 2019), as well as iron    redshifts between z = 0 and z = 10, with a step size of
+abundances (Naiman et al. 2018), metallicity gradients        dz = 0.05, where zj refers to the centres of the bins.
+within galaxies at low redshift (Hemler et al. 2021), and
+                                                                             3.3. Optimisation function
+the reduction of star formation in the centers of star-
+forming galaxies (Nelson et al. 2021). Several studies           To find a solution we use a method based on the sum
+have used the TNG simulations to make predictions for         of the quadratic differences between the simulations and
+astronomical transient sources (e.g. Briel et al. 2022a;      our fit function. Using a vanilla χ-squared approach
+Bavera et al. 2022; van Son et al. 2022a). Out of the         does not serve our purposes very well as it does a poor
+four S(Z, z) variations explored, Briel et al. (2022a) find   job in fitting regions where the star formation is very
+that TNG provides one of the best agreements between          low. Using a χ-squared approach on the logarithm of the
+observed and predicted cosmic rates for electromagnetic       function instead places far too much weight on trying to
+and gravitational-wave transients, when combined with         fit the star formation rate in regions where the rate is
+their fiducial binary population synthesis model.             very low or not even significant. After experimenting,
+   On the other hand, large uncertainties and crude ap-       we find that the following approach gives us satisfactory
+proximations remain in all contemporary cosmological          results.
+simulations, thus also in the TNG simulations. Gen-              We first consider a given redshift zj . For this redshift
+erally, some of the chemical evolution of galaxies in         we compute the sum of the squared residuals between
+                                                              the cosmological simulation and our fit. This is effec-
+                                                              tively the square of the l2 -norm:
+    3 https://www.tng-project.org/
+                                                                               X                                   2
+                                                                    χ2 (zj ) ≡   (S(Zi , zj )sim − S(Zi , zj )fit ) . (13)
+                                                                              Zi
+                                                                                                                             5
+
+Here, the variable Zi runs over all metallicity bins. We      et al. (2019) in dotted grey. Their model falls within the
+are particularly interested in properly fitting the low       family of functions that is encompassed by our model
+metallicity star formation at high redshifts. At high         described in Section 2, but we note that their model is
+redshifts, the overall star-formation rate density is gen-    distinctly different.4
+erally lower. To ensure that our fitting procedure gives         Although our model preforms well at reproducing the
+sufficient weight to the behaviour at all redshifts, we in-   large scale trends seen in TNG, we acknowledge that
+troduce a penalisation factor to somewhat reduce the          more complex features as suggested by some observa-
+contribution of redshifts where the peak of cosmic star       tional studies could be missed. One example is that
+formation occurs, while increasing the weight at red-         the SFRD(z) shape we adopt from Madau & Dickinson
+shifts where the overall star-formation rate density is       (2014) does not account for starburst galaxies (see dis-
+                                     2
+lower. ToP achieve this we divide χ (zj ) by the star for-    cussion in Chruślińska et al. 2021). Moreover, our model
+mation Zi S(Zi , zj ) per redshift bin before adding the      cannot capture inflection points in the mean metallicity,
+contribution of all redshifts. Our final expression for the   because we assume both µ0 and µz are constants with
+cost function reads                                           redshift (equation 7). Contrarily, Chruślińska & Nele-
+                                                              mans (2019) find an upturn in the amount of low metal-
+                      X       χ2 (zj )                        licity star formation above z = 4 if the power law of
+                 χ=         P                         (14)
+                       zj    Zi S(Zi , zj )                   the GSMF is allowed to evolve with redshift. Hence,
+                                                              although our model is more broadly applicable than
+  To minimize this cost funciton,      we use
+                                                              previous models, in it’s current form, it does not cap-
+scipy.optimize.minimize from SciPy v1.6.3 which
+                                                              ture the complete range of observationally-allowed varia-
+implements the quasi-Newton method of Broyden,
+                                                              tions. Incorporating more complex functional forms for
+Fletcher, Goldfarb, and Shanno (BFGS, Nocedal &
+                                                              our the mean metallicity could possibly capture such
+Wright 2006).
+                                                              behaviour, but this analysis is beyond the scope of this
+                 3.4. Resulting S(Z, z)                       paper.
+  Our best fitting parameters are listed in Table 1. With
+these fit parameters, χ2 (zj ) is smaller than 2 · 10−4 at
+any given redshift. To evaluate our fit, we show the          4. APPLICATION: SYSTEMATIC VARIATIONS OF
+absolute residuals and relative errors in Appendix A.                S(Z, z) AND THE EFFECT ON THE MASS
+We will refer to the S(Z, z) with the parameters listed                DISTRIBUTION OF MERGING BBHS
+in Table 1 as our fiducial model.                               We will now demonstrate the application of our ana-
+                                                              lytical model by systematically varying the parameters
+                                                              in our fiducial S(Z, z) model, and investigate their effect
+  In Figure 1 we show our fiducial model at different red-    on the local mass distribution of BBH mergers originat-
+shifts and metallicities. We also show the overall star-      ing from isolated binaries.
+formation rate density SFRD(z) in Figure 2. In general,         We use the publicly available rapid binary popula-
+our analytical model captures the metallicity-dependent       tion synthesis simulations presented in van Son et al.
+cosmic star formation history in the TNG100 simula-           (2022b).5 These simulations were run using version
+tions well (bottom panels of Figure 1). The skewed-           v02.26.03 of the open source COMPAS suite (Riley et al.
+log normal metallicity distribution is able to reproduce      2022)6 . COMPAS is based on algorithms that model the
+the overall behaviour that is observed in TNG100 (bot-        evolution of massive binary stars following Hurley et al.
+tom left panel, but cf. Pakmor et al. 2022, for an in-        (2000, 2002) using detailed evolutionary models by Pols
+depth discussion of low metallicity star formation in the     et al. (1998). In particular, we use the simulations be-
+TNG50 simulation). Only minor features like the addi-         hind Figure 1 from van Son et al. (2022b), and we re-
+tional bump just above log10 (Z) = −2 at redshift 2 are       fer the reader to their methods section for a detailed
+missed. However, for our purposes, it is more important       description of the adopted physics parameters and as-
+to prioritise fitting the large scale trends, while we are
+not so interested in smaller scale fluctuations.                4 The phenomenological model from Neijssel et al. (2019) is recov-
+  Adopting a skewed-lognormal metallicity distribution            ered by adopting µ0 = 0.035, µz = −0.23, ω0 = 0.39, ωz = 0,
+allows for a tail of low metallicity star formation out           α = 0, a = 0.01, b = 2.77, c = 2.9 and d = 4.7.
+to low redshifts. To emphasise the difference between a         5 Available for download at https://zenodo.org/record/7612755,
+
+skewed-lognormal and a symmetric lognormal distribu-              see also the Software and Data section in the acknowledgements
+                                                                6 https://github.com/TeamCOMPAS/COMPAS
+tion, we show the phenomenological model from Neijssel
+    6
+
+                                                                                                        redshift
+                                                                  0     0.1       0.25            0.5       0.75        1                       1.5        2     3            6 10
+                                                         10   2                                                                                                                            Fit parameters :
+                                                                                                              1e-07                                                           1e-05
+                                                                                                                                                 1e-06                                     Cosmic metallicity dist.
+
+
+
+
+                                                                                                                                                                               1e-
+                                                              1                                                                                                  1e-03                     µ0 = 0.025,
+                                                         10
+
+
+
+
+                                                                                                                                                                                  0
+                                                                                                                                                                                           µz = −0.049,
+
+
+
+
+                                                                                                                                                                                 4
+                                     Metallicity, Z/Z                                                                                                                                      ω0 = 1.129,
+                                                                                                                                                                                           ωz = 0.048,
+                                                         100                                                                                                                               a0 = −1.79
+                                                                                                                                                       5e-02
+                                                                                                                                   1e-02
+                                                        10−1                                                                                                                               Star formation rate
+                                                                                                                                                                                           a = 0.017,
+                                                                                                                                                                                           b = 1.487,
+                                                        10−2                                                                       1e-05                                                   c = 4.442,
+
+
+
+
+                                                                                                                                                                               -03
+                                                                                                                                                                                           d = 5.886,
+
+
+
+
+                                                                                                                                                                             1e
+                                                                       S(Z, z)/∆Z [M yr−1Mpc−3]
+
+
+
+
+                                                                                                                                                                             1e-
+                                                        10−3                                                                                                         1e
+                                                                  0           2              4          6                 8                           10             12-06
+
+
+
+
+                                                                                                                                                                              04
+                                                                                                 Lookback time [Gyr]
+                                                         TNG                  Neijssel et al. 2019                                                             TNG                      Neijssel et al. 2019
+
+                           0.07                                                                     redshift                     0.07                                                                     log10 Z/Z
+                                                                                                          0.0                                                                                                    1.3
+
+
+
+
+                                                                                                                                                                                1e-07
+                           0.06                                                                           0.2                    0.06                                                                            0.8
+             S(Z, z) [M yr−1Mpc−3]
+
+
+
+
+                                                                                                                   S(Z, z) [M yr−1Mpc−3]
+                                                                                                          0.5                                                                                                    −0.2
+                           0.05                                                                                                  0.05
+                                                                                                          1.0                                                                                                    −0.6
+                                                                                                          2.0                                                                                                    −0.9
+                           0.04                                                                                                  0.04
+                                                                                                          3.5                                                                                                    −1.2
+                           0.03                                                                           5.3                    0.03                                                                            −1.7
+                                                                                                          8.7                                                                                                    −2.2
+                           0.02                                                                                                  0.02
+
+                           0.01                                                                                                  0.01
+
+                           0.00                                                                                                  0.00
+                                     −2                           −1          0          1                                                  0              2         4           6            8      10
+                                                              log10(Z/Z )                                                                                            redshift
+
+    Figure 1. Our fiducial S(Z, z) model, adopting the best fitting parameters (listed on the top right) to fit the TNG100 simula-
+    tions. The top panel shows the full two dimensional S(Z, z) linear in time. Contours range from 10−7 −10−2 M yr−1 Mpc−3 . The
+    bottom left (right) panel shows slices of the distribution in redshift (metallicity). Each slice is displaced by 0.01M yr−1 Mpc−3
+    (note the linear scale of S(Z, z) in the bottom panel). We show the TNG100 simulation data with thick gray lines. For com-
+ó   parison, we also show the phenomenological model from Neijssel et al. (2019) in all panels with grey dotted lines. The bottom
+¥   panels show that our analytical model adequately captures the shape of the S(Z, z) from TNG100.
+
+    sumptions. 7 Metallicities of each binary system were                                                                         We combine the aforementioned yield with variations
+    sampled from a smooth probability distribution to avoid                                                                     of the fiducial S(Z, z) model described in this work.
+    artificial peaks in the BH mass distribution (e.g. Do-                                                                      By integrating over cosmic history, we obtain the local
+    minik et al. 2015; Kummer 2020). These simulations                                                                          merger rates of BBH systems, which allow us to con-
+    provide us with an estimate of the yield of BBH merg-                                                                       struct the distribution of source properties at every red-
+    ers per unit of star-forming mass and metallicity.                                                                          shift. We use the cosmic integration scheme that is part
+                                                                                                                                of the publicly available COMPAS suite, which includes
+        7 We note that the rate in van Son et al. (2022b) is slightly higher
+                                                                                                                                the S(Z, z) model described in this work. The details
+         than the fiducial rate presented in Figure 3 in this work. This                                                        of this framework are described in Neijssel et al. (2019),
+         difference is caused by the use of rounded parameter values of                                                         but also in van Son et al. (2022a), where more similar
+         S(Z, z) in van Son et al. (2022b).                                                                                     settings to this work are used.
+                                                                                                                                           4.1. Determining reasonable variations of S(Z, z)
+                                                                                                                                       7
+
+                              Table 1. Best fitting parameters for our S(Z, z) fit to TNG100 data.
+
+                    dP/dZ             description               best fit             SFRD(z)           best fit
+
+                                                                                 M yr−1 Mpc−3
+                      µ0      mean metallicity at z = 0       0.025 ± 0.036              a           0.02 ± 0.072
+                      µz      z-dependence of the mean       −0.049 ± 0.006              b           1.48 ± 0.002
+                      α       shape (skewness)               −1.778 ± 0.002              c           4.44 ± 0.001
+                      ω0      scale at z = 0                  1.122 ± 0.001              d           5.90 ± 0.002
+                      ωz      z-dependence of the scale       0.049 ± 0.009
+
+
+
+
+   Table 2. Variations on S(Z, z). For every variation,              low a certain threshold redshift. We compare this to
+   we either swap the value of an individual dP/dZ(Z, z)             the models from Chruślińska et al. (2021) in Figure 6
+   parameter, or exchange the set of four SFRD(z) pa-                in Appendix B. We have chosen our variations such
+   rameters, and replace them by the the min/max val-
+                                                                     that they span a reasonable range of cosmic metal-
+   ues listed here. All other parameters are kept fixed at
+   their fiducial value.                                             licity density distributions as allowed by observation-
+                                                                     based and cosmological simulations-based models. We
+                      min          fiducial      max                 use the models 214-f14SB-BiC FMR270 FOH z dM.dat,
+                                                                     and      302-f14SB-Boco FMR270 FOH z dM.dat           from
+    dP/dZ(Z, z)
+                                                                     Chruślińska et al. (2021)8 as a representation of a
+         µ0           0.007        0.025         0.035
+                                                                     very low and high metallicity star formation realisa-
+         µz             0.0        −0.049         -0.5
+                                                                     tion respectively. These models are the low and high
+          α            -6.0        −1.778         0.0
+                                                                     metallicity extreme under their fiducial SFR–metallicity
+         ω0             0.7         1.125         2.0                correlation, and so we will refer to them as Chr21 lowZ
+         ωz             0.0         0.048         0.1                and Chr21 highZ respectively from hereon. The dif-
+     SFRD(z)                                                         ference between these models lies in the assumptions
+      (a,b ...     (0.01, 2.60   (0.02, 1.48   (0.03, 2.6            in the underlying empirical galaxy relations. In gen-
+      ... c,d)     3.20, 6.20)   4.44, 5.90)    3.3, 5.9)            eral, low-mass galaxies contribute to low-metallicity
+                                                                     star formation and shift the peak of S(Z, z) to lower
+                                                                     metallicities. Chr21 lowZ is characterised by a star
+                                                                     formation–galaxy mass relation that is flat at high
+  We consider variations in both the shape of the cos-               galaxy masses (reducing the star formation rate for
+mic metallicity density distribution dP/dZ(Z, z), and                the highest-mass galaxies), a galaxy stellar mass func-
+the shape of the overall star-formation rate density,                tion that evolves with redshift (predicting an increasing
+SFRD(z). To determine the range that is reasonably                   number density of low-mass galaxies), and a local galaxy
+allowed by observations, we compare our variations                   mass-metallicity relation as in Pettini & Pagel (2004).
+to the observation-based S(Z, z) models described in                 This model further approximates the contribution of
+Chruślińska et al. (2021). An overview of the explored             starburst galaxies following Bisigello et al. (2018) and
+variations is shown in Table 2. Below we explain how                 Caputi et al. (2017). Assuming that starburst galax-
+we arrive at these values.                                           ies follow the empirical fundamental metallicity relation
+                                                                     (leading to anti-correlation between the SFR and metal-
+  For the cosmic metallicity density distribution, we                licity), their inclusion tends to shift the peak of S(Z, z)
+vary every parameter that determines the shape of                    to lower metallicities and broadens the low-metallicity
+dP/dZ(Z, z) independently (three left-most columns of                part of the distribution.
+Table 1, and top of Table 2 ), while keeping all other                  On the other hand, Chr21 highZ assumes the star for-
+parameters fixed at their fiducial value. For each vari-             mation–galaxy mass relation does not flatten towards
+ation, we inspect the fraction of stellar mass that is
+formed at low-metallicity (Z < 0.1Z ) versus the frac-                     8 These models including a detailed description of their con-
+tion of stellar mass that is formed at high-metallicity                     tents are publicly available at https://ftp.science.ru.nl/astro/
+(Z > Z ), for all star formation that occurred be-                          mchruslinska/Chruslinska et al 2021/
+8
+
+higher galaxy masses, a galaxy stellar mass function             In Figures 3 and 4, we show the resulting primary
+where the slope for the low-mass end is constant over         mass distribution of merging BBHs from the stable
+redshift, and a local galaxy mass-metallicity relation        channel and CE channel respectively. The primary (sec-
+following Kobulnicky & Kewley (2004). Lastly, this            ondary) component refers to the more (less) massive
+model adopts the starburst prescription from Boco et al.      component of merging BBHs. Each panel varies one
+(2021), which produces results that are similar to models     aspect of the S(Z, z). In the first five panels of Fig-
+without starburst galaxies.                                   ures 3 and 4, we vary one of the parameters that deter-
+  For every variation of our model, we inspect both the       mine the shape of the probability density distribution of
+full S(Z, z) and slices at redshifts z = 0, 0.5, 3.0 and 6    metallicities, while keeping all other values fixed at their
+by eye. At each slice we compare our model variation          fiducial values. In the last panel of Figures 3 and 4, we
+to Chr21 lowZ and Chr21 highZ, and ensure that none           vary the shape of the overall star-formation rate densi-
+of our variations significantly exceeds these extremes in     ties, SFRD(z), to one of the variations shown in Figure
+S(Z, z). This also serves as a sanity check for the overall   2, while keeping the probability density distribution of
+star-formation rate density.                                  metallicities fixed.
+  We also consider two variations of the overall star-           The first thing we note is that the location of the
+formation rate density, SFRD(z), where we keep the            features in the primary mass distribution are robust
+metallicity distribution dP/dZ(Z, z) fixed, but vary all      against variations in S(Z, z). For the stable channel,
+four SFRD(z) parameters at once (right two columns            two features are visible in all variations: a peak at
+of Table 1, and bottom of Table 2). We use Figure 11          MBH,1 ≈ 9M and a bump at MBH,1 ≈ 22M . Two
+from Chruślińska et al. (2021) to determine approximate     more features are visible in at the high mass end for al-
+upper and lower bounds to the overall star-formation          most all S(Z, z); a knee at MBH,1 ≈ 35M and another
+rate density. We choose Madau & Fragos (2017) as an           bump at MBH,1 ≈ 45M . Although the locations of
+approximation of the lower limit. For the upper limit,        these features are constant, the features themselves can
+we use the upper edge of models that adopt starbursts         disappear for variations that suppress the rate of high
+following Bisigello et al. (2018) and Caputi et al. (2017)    mass BHs (e.g., dashed lines in the top panels of Fig.
+(SB: B18/C17), combined with a non-evolving low-mass          3). Similarly, the CE channel displays a kink in the dis-
+end of the galaxy stellar mass function (shown as a thick     tribution at about 9M , and a peak at approximately
+brown line in Fig. 11 of Chruślińska et al. 2021, and       MBH,1 ≈ 17M for all variations. The latter peak is
+described in their table B1). To approximate these            the global peak of the mass distribution in almost all
+models, we fit equation 12 by eye to the broken power         variations.
+law description of this model as presented in appendix           The finding that the locations of features in the mass
+B1 of Chruślińska et al. (2021). We show all SFRD(z)        distribution do not change for different S(Z, z) is con-
+variations in Figure 2.                                       sistent with earlier work. Recent work by Chruślińska
+                                                              (2022) showed that, when comparing two very different
+                                                              models of S(Z, z) (their Figure 5), the location of the
+                                                              peaks remains the same, even though the normalisation
+4.2. The effect of the S(Z, z) on the primary masses of       between the two BBH merger rates is completely dif-
+                        merging BBH                           ferent. Furthermore, Broekgaarden et al. (2021) show
+                                                              the probability distribution of chirp masses for BBHs
+  To isolate the effect of the S(Z, z) from the effects
+                                                              in their Fig. 4. Although features can disappear when
+of different formation channels, we split the data from
+                                                              the S(Z, z) prohibits the formation of certain (typically
+van Son et al. (2022a) between the stable mass trans-
+                                                              higher) mass BHs, the location of features remains the
+fer channel (e.g., van den Heuvel et al. 2017; Inayoshi
+                                                              same. This implies that the locations of features in
+et al. 2017; Bavera et al. 2021; Marchant et al. 2021;
+                                                              the mass distribution of BBHs are determined by the
+Gallegos-Garcia et al. 2021; van Son et al. 2022a), and
+                                                              formation channel and its underlying stellar and binary
+the ‘classical’ common-envelope channel (or CE channel,
+                                                              physics. The locations of features could therefore serve
+e.g., Belczynski et al. 2007; Postnov & Yungelson 2014;
+                                                              as sign posts of the underlying physics.
+Belczynski et al. 2016; Vigna-Gómez et al. 2018). These
+channels are distinguished based on whether the binary
+                                                                Second, we see that the low mass end of the pri-
+system has experienced a common envelope phase (CE
+                                                              mary mass distribution is relatively robust against vari-
+channel) or only stable mass transfer (stable channel in
+                                                              ations in S(Z, z). To quantify this, we annotate the
+short from now on).
+                                                              ratio between the maximum and minimum rate at three
+                                                                                                                                                                                           9
+
+                                                     Lookback time [Gyr]                                                                           redshift
+                                      0.0     10.5        12.9        13.3   13.4                                   0   0.1       0.25       0.5       0.75 1       1.5 2         3    6
+                                 10   0                                                                       100
+
+
+
+
+                                                                                    dM/dtdVc [M yr−1Mpc−3]
+       dM/dtdVc [M yr−1Mpc−3]
+
+
+
+
+                                10−1                                                                         10−1
+
+
+
+                                                                                                                                         Madau and Fragos 2017
+                                                                                                             10−2                        a = 0.01, b = 2.60, c = 3.20, d = 6.20
+                                10−2
+                                                                                                                                         Approx. to upper limit:
+                                                                                                                                         a = 0.03, b = 2.60, c = 3.30, d = 5.90
+                                                                                                                                         Using best fit parameters (fiducial)
+                                                                                                                                         a = 0.02, b = 1.49, c = 4.44, d = 5.89
+                                                                                                                                         TNG100
+                                10−3                                                                         10−3
+                                          0    2     4     6      8    10     12                                    0         2          4         6         8         10         12
+                                                           redshift                                                                      Lookback time [Gyr]
+    Figure 2. Comparison of several overall star-formation rate densities, SFRD(z), with redshift (left panel) and with lookback
+    time (right panel). The solid orange and dashed red lines respectively show the star formation data from TNG100 and our
+    corresponding fit adopting eq. 12 (fiducial model). The dotted gray and solid blue lines are variations of eq. 12 used to
+    approximate the lower and upper edge of possible star-formation histories. The dotted gray line shows the model from Madau
+ó   & Fragos (2017), while the solid blue line mimics the behaviour of the powerlaw-fit to the SB: B18/C17 variations with a
+¥   non-evolving low-mass end of the galaxy stellar mass function from Chruślińska et al. (2021).
+
+    reference masses; MBH,1 = 10, 25, and 40M . At                                                    width of the cosmic metallicity density distribution at
+    MBH,1 = 10M , we find that the rate changes by at                                                 z = 0 (ω0 ), the mean metallicity of the cosmic metal-
+    most a factor of about 3.7 for the stable channel, and                                            licity density distribution at z = 0 (µ0 ), and the skew-
+    at most about a factor of 3.8 for the CE channel. On                                              ness of the cosmic metallicity density distribution (α,
+    the other hand, the change in rate at MBH,1 = 40M                                                 left columns of Figures 3 and 4). To emphasise this
+    can be as high as a factor of about 200 and 150 for the                                           point, we annotate the total BBH merger rate at redshift
+    stable and CE channels, respectively. The lowest mass                                             0.2, R0.2 , in the legends of Figures 3 and 4 (0.2 is the
+    BHs are least affected by the S(Z, z) because they can                                            redshift where the observations are best constrained Ab-
+    be formed from all metallicities above Z & 10−3 (see                                              bott et al. 2021b). Variations that increase the amount
+    e.g., Figures 7 and 13 from van Son et al. 2022a). The                                            of star formation at low metallicity (i.e. for a low mean
+    rate of star formation at metallicities above & 10−3 is                                           metallicity µ0 = 0.007 and a wide metallicity distribu-
+    observationally relatively well constrained for redshifts                                         tion ω0 = 2.0 ) increase the predicted BBH merger rate.
+    below 0.5 (which comprises the past 5 Gyr of star for-                                            This is consistent with other work that finds merging
+    mation). This is reflected in the top panel of Figure                                             BBHs form more efficiently at low metallicities (e.g. Bel-
+    6: all models show that 10% or less of the stellar mass                                           czynski et al. 2010; Stevenson et al. 2017; Mapelli et al.
+    was formed at a metallicity below Z/10 ≈ 0.0014, or                                               2017; Chruślińska et al. 2019; Broekgaarden et al. 2021).
+    in other words, about 90% or more of the stellar mass                                             A more skewed cosmic metallicity density distribution
+    was formed at a metallicity above Z/10. Hence the low-                                            pushes the peak of the distribution to higher metallici-
+    est mass BHs derive from the least uncertain parts of                                             ties and thus forms more stars at high metallicity when
+    the S(Z, z). The low-mass end of the mass distribution                                            compared to a symmetric distribution. Hence, the local
+    of merging double compact objects will also provide a                                             rate of BBH mergers is lower for the skewed distribu-
+    particularly powerful cosmological constraint in the era                                          tion (α = −6) with respect to the symmetric variation
+    of third generation gravitational wave telescopes (Marı́a                                         (α = 0.0).
+    Ezquiaga & Holz 2022). Our finding that the low mass                                                 Changing the overall star-formation rate density
+    end is more robust against variations in S(Z, z) supports                                         (SFRD(z), bottom right panels of Figures 3 and 4) also
+    this claim.                                                                                       affects the normalisation of the mass distribution, but
+      Parameter variations that affect shape of S(Z, z) at                                            has a smaller effect than the width and the mean of the
+    low redshift primarily change the normalisation of the                                            cosmic metallicity density distribution at z = 0 (ω0 and
+    mass distribution. This is the case for variations of the                                         µ0 ). This underlines the importance of the amount of
+    10
+
+                                            GWTC 3                                                                            GWTC 3
+                                                                  Width of metallicity dist.                                              Redshift evol. width of metallicity dist.
+                                      101                              0 , (scale z = 0)                                101                          z , (scale z evol.)
+
+
+
+
+                dMBH, 1 [Gpc yr M ]
+
+
+
+
+                                                                                                  dMBH, 1 [Gpc yr M ]
+                                  1
+
+
+
+
+                                                                                                                    1
+                                                                                stable channel                                                                   stable channel
+                                            3.0 ×             41.2 ×                                                          1.3 ×
+                                1
+
+
+
+
+                                                                                                                  1
+                                      100                                                                               100
+                                                                                                                                                  3.6 ×
+                             3
+
+
+
+
+                                                                                                               3
+                                  10 1                                             205.3 ×                          10 1
+                 d
+
+
+
+
+                                                                                                   d
+                                                    Narrow : ( 0 = 0.70) 0.2 = 6.3                                                                                      23.9 ×
+                                                                                                                                      Flat width : ( z = 0.00) 0.2 = 12.4
+                                                    Fiducial : ( 0 = 1.13) 0.2 = 17.1                                                 Fiducial : ( z = 0.05) 0.2 = 17.1
+                                                    Wide : ( 0 = 2.00) 0.2 = 53.1                                                     Steep width : ( z = 0.10) 0.2 = 24.1
+                                  10 20         10             20       30                  40   50                 10 20         10             20       30                 40       50
+                                                               MBH, 1 [M ]                                                                       MBH, 1 [M ]
+                                            GWTC 3                                                                            GWTC 3
+                                                                       Mean metallicity                                                      Redshift evol. of mean metallicity
+                                      101                                         0                                     101                                        z
+                dMBH, 1 [Gpc yr M ]
+
+
+
+
+                                                                                                  dMBH, 1 [Gpc yr M ]
+                                  1
+
+
+
+
+                                                                                                                    1
+                                            3.7 ×                               stable channel                                2.1 ×                              stable channel
+                                                              10.1 ×                                                                              6.8 ×
+                                1
+
+
+
+
+                                                                                                                  1
+                                      100                                                                               100
+                             3
+
+
+
+
+                                                                                                               3
+                                                                                                                                                                       26.5 ×
+                                  10 1                                                12.0 ×                        10 1
+                 d
+
+
+
+
+                                                                                                   d
+                                                    low < Z0 > : ( 0 = 0.007) 0.2 = 65.4                                              Flat : ( z = 0.0) 0.2 = 14.0
+                                                    Fiducial : ( 0 = 0.025) 0.2 = 17.1                                                Fiducial : ( z = 0.05) 0.2 = 17.1
+                                                    high < Z0 > : ( 0 = 0.035) 0.2 = 11.1                                             Steep : ( z = 0.5) 0.2 = 55.4
+                                  10 20         10             20       30                  40   50                 10 20         10             20       30                 40       50
+                                                               MBH, 1 [M ]                                                                       MBH, 1 [M ]
+                                            GWTC 3                                                                            GWTC 3
+                                                               Skewness of metallicity dist.                                                          Overall SFR history
+                                      101                              , (shape)                                        101                            SFRD(z) [a, b, c, d]
+                dMBH, 1 [Gpc yr M ]
+
+
+
+
+                                                                                                  dMBH, 1 [Gpc yr M ]
+                                  1
+
+
+
+
+                                                                                                                    1
+
+
+
+
+                                                                                stable channel                                3.2 ×                              stable channel
+                                            2.1 ×
+                                1
+
+
+
+
+                                                                                                                  1
+
+
+
+
+                                      100                       5.2 ×                                                   100                       3.3 ×
+                             3
+
+
+
+
+                                                                                                               3
+
+
+
+
+                                  10 1                                                                              10 1
+                                                                                        8.9 ×                                                                           3.5 ×
+                 d
+
+
+
+
+                                                                                                   d
+
+
+
+
+                                                    Symmetric : ( = 0.0) 0.2 = 38.6                                                   Madau and Fragos 2017 : 0.2 = 17.3
+                                                    Fiducial : ( = 1.77) 0.2 = 17.1                                                   Fiducial : 0.2 = 17.1
+                                                    Skewed : ( = 6) 0.2 = 12.2                                                        Approx. to upper limit : 0.2 = 55.6
+                                  10 20         10             20       30                  40   50                 10 20         10             20       30                 40       50
+                                                               MBH, 1 [M ]                                                                       MBH, 1 [M ]
+    Figure 3. The primary mass distribution of merging BBH systems from the stable mass transfer channel for several variations
+    in S(Z, z). The first five panels show variations of the cosmic metallicity density distribution dP/dZ(Z, z), eq. 11, (parameters
+    listed in the first three columns of Table 1), where we vary one parameter at a time while keeping the rest fixed at their fiducial
+    value. The bottom right panel shows variations in the magnitude of the star formation rate with redshift; i.e. SFRD(z). For
+    the latter we vary the four fiducial parameters of SFRD(z) simultaneously (last two columns of Table 1). All panels are shown
+    at a reference redshift of z = 0.2, with the corresponding predicted BBH merger rate indicated in the legend. For reference,
+ó   we show the power-law + peak model from Abbott et al. (2021b) in grey. We annotate the relative change in the rate at three
+¥   reference masses: 10M , 25M and 40M .
+
+    low-metallicity star formation (e.g., Chruślińska 2022),                                                      tween the resulting mass distributions are correspond-
+    and is furthermore in line with findings from Tang et al.                                                       ingly small. Our approximation of the upper limit to
+    (2020). As discussed in Section 4.1, we use Madau &                                                             the allowed SFRD(z) leads to an overall increase of the
+    Fragos (2017) and the solid blue line in Figure 2 as an                                                         BBH merger rate by a factor of about 3.
+    approximate lower and upper bound to the SFRD(z)                                                                   Parameters that change the evolution of the metallic-
+    respectively. The overall cosmic star formation rate                                                            ity distribution dP/dZ(Z, z) with redshift, such as the
+    density from Madau & Fragos (2017) is very similar to                                                           redshift dependence of the with and mean; ωz and µz
+    our fiducial model (Figure 2), and the differences be-                                                          (top right and centre right panels of Figures 3 and 4)
+                                                                                                                                                                                           11
+
+                                            GWTC 3                                                                            GWTC 3
+                                                                 Width of metallicity dist.                                               Redshift evol. width of metallicity dist.
+                                      101                             0 , (scale z = 0)                                 101                          z , (scale z evol.)
+
+                                            2.4 ×
+                dMBH, 1 [Gpc yr M ]
+
+
+
+
+                                                                                                  dMBH, 1 [Gpc yr M ]
+                                                                                                                              1.1 ×
+                                  1
+
+
+
+
+                                                                                                                    1
+                                1                                                CE channel                                                                         CE channel
+
+
+
+
+                                                                                                                  1
+                                      100                                                                               100
+                             3
+
+
+
+
+                                                                                                               3
+                                                              19.1 ×
+                                                                                                                                                  1.3 ×
+                                  10 1                                                                              10 1
+                 d
+
+
+
+
+                                                                                                   d
+                                                    Narrow : ( 0 = 0.70) 0.2 = 24.2                                                   Flat width : ( z = 0.00) 0.2 = 37.7
+                                                    Fiducial : ( 0 = 1.13) 0.2 = 41.8                                                 Fiducial : ( z = 0.05) 0.2 = 41.8
+                                                    Wide : ( 0 = 2.00) 0.2 = 111.51503.4 ×                                            Steep width : ( z = 0.10) 0.2 = 47.3
+                                  10 20         10            20       30                   40   50                 10 20         10             20       30                 40       50
+                                                              MBH, 1 [M ]                                                                        MBH, 1 [M ]
+                                            GWTC 3                                                                            GWTC 3
+                                                                      Mean metallicity                                                       Redshift evol. of mean metallicity
+                                      101                                        0                                      101                                    z
+                                                                                                                                                                 2.4 ×
+                                            3.7 ×
+                                                                                                                              1.5 ×
+                dMBH, 1 [Gpc yr M ]
+
+
+
+
+                                                                                                  dMBH, 1 [Gpc yr M ]
+                                  1
+
+
+
+
+                                                                                                                    1
+                                                                                 CE channel                                                                         CE channel
+                                1
+
+
+
+
+                                                                                                                  1
+                                      100                                                                               100
+                                                               8.5 ×
+                             3
+
+
+
+
+                                                                                                               3
+                                                                                                                                                  1.9 ×
+                                  10 1                                                                              10 1
+                 d
+
+
+
+
+                                                                                                   d
+                                                    low < Z0 > : ( 0 = 0.007) 0.2 = 144.1                                             Flat : ( z = 0.0) 0.2 = 38.6
+                                                    Fiducial : ( 0 = 0.025) 0.2 = 41.8                                                Fiducial : ( z = 0.05) 0.2 = 41.8
+                                                    high < Z0 > : ( 0 = 0.035) 0.2 = 27.8                                             Steep : ( z = 0.5) 0.2 = 74.8
+                                  10 20         10            20       30       40               50                 10 20         10             20       30                 40       50
+                                                              MBH, 1 [M ] 45.0 ×                                                                 MBH, 1 [M ]
+                                            GWTC 3                                                                            GWTC 3
+                                                              Skewness of metallicity dist.                                                           Overall SFR history
+                                                                                                                                                                  3.2 ×
+                                      101                             , (shape)                                         101                             SFRD(z) [a, b, c, d]
+                                                                                                                              3.1 ×
+                                            1.9 ×
+                dMBH, 1 [Gpc yr M ]
+
+
+
+
+                                                                                                  dMBH, 1 [Gpc yr M ]
+                                  1
+
+
+
+
+                                                                                                                    1
+
+
+
+
+                                                                                 CE channel                                                                         CE channel
+                                1
+
+
+
+
+                                                                                                                  1
+
+
+
+
+                                      100                                                                               100
+                             3
+
+
+
+
+                                                                                                               3
+
+
+
+
+                                                               3.5 ×                                                                              3.1 ×
+
+                                  10 1                                                                              10 1
+                 d
+
+
+
+
+                                                                                                   d
+
+
+
+
+                                                    Symmetric : ( = 0.0) 0.2 = 80.2                                                   Madau and Fragos 2017 : 0.2 = 37.2
+                                                    Fiducial : ( = 1.77) 0.2 = 41.8                                                   Fiducial : 0.2 = 41.8
+                                                    Skewed : ( = 6) 0.2 = 32.6                                                        Approx. to upper limit : 0.2 = 114.4
+                                  10 20         10            20       30                   40   50                 10 20         10             20       30                 40       50
+                                                              MBH, 1 [M ]                                                                        MBH, 1 [M ]
+                                                      14.6 ×
+    Figure 4. Same as Figure 3, but for the Common Envelope channel. These figures show that the low mass end of the primary
+                                                                                                          3.1 ×
+ó   mass distribution is least affected by the adopted S(Z, z). Moreover, the location of features in the mass distribution are robust
+¥   against all explored variations.
+
+    primarily affect the high mass end of the stable channel.                                                                         5. DISCUSSION & SUMMARY
+    We understand this as an effect of the different delay                                                            We present a flexible analytic expression for the
+    time distributions for both formation channels. Since                                                           metallicity-dependent cosmic star formation history,
+    both, ωz and µz influence the amount of low metallicity                                                         S(Z, z) (equations 1, 11 and 12). An analytical expres-
+    stellar mass formed at high redshifts they will mostly af-                                                      sion allows for controlled experiments of the effect of
+    fect systems with longer delay times. The stable channel                                                        S(Z, z) on dependent values, such as the rate and mass
+    has been shown to produce more high mass BHs with                                                               distribution of merging BBHs. The model presented in
+    longer delay times when compared to the CE channel                                                              this work adopts a skewed-lognormal for the distribution
+    (van Son et al. 2022a; Briel et al. 2022b). Hence we find                                                       of metallicities at every redshift (dP/dZ(Z, z)).
+    these variations affect the slope of the high mass end of
+    the BBH mass distribution for the stable channel, while
+    they have a relatively small impact on the CE channel.                                                           The model can capture the general behaviour of cosmological
+                                                                                                                    simulations, such as TNG100 —Our analytical expression
+12
+
+for S(Z, z) is composed of a cosmic metallicity density                  nates the overall normalisation of the BBH merger
+distribution that is determined by a mean, scale and                     rate.
+skewness and their redshift dependence, as well as pa-
+rameters governing the overall star-formation rate den-                • Parameters that influence the redshift evolution of
+sity. We fit our analytical expression for S(Z, z) to the                the mean and the width of the metallicity distri-
+star-forming gas in the TNG100 simulation, and provide                   bution affect the slope of the high mass end of the
+the best fit parameters in Table 1. We show that our                     primary BH mass distribution for the stable chan-
+model captures the shape and general behaviour of the                    nel. This reflects the longer delay times of the
+cosmological simulations well (Figure 1). Although our                   stable channel with respect to the CE channel.
+model is more broadly applicable than previous models,                The flexibility of the model presented in this work can
+we acknowledge that it does not capture the complete                capture the large uncertainties that remain in the shape
+range of observationally-allowed variations in it’s cur-            and normalisation of the metallicity-dependent cosmic
+rent form. Incorporating more complex functions for                 star formation history. Our hope is that this expression
+the redshift evolution of the metallicity could solve this          will provide a useful starting point for making predic-
+issue, but this is left for future research.                        tions and comparisons with observations.
+ The model allows for a controlled experiment on the effect
+                                                               1    The authors acknowledge partial financial support from
+of S(Z, z) on the local distribution of merging BBH —As an
+                                                               2    the National Science Foundation under Grant No.
+example, we use our model to calculate the local rate
+                                                               3    (NSF grant number 2009131 and PHY-1748958).” ,
+and mass distribution of the more massive components
+                                                               4    the Netherlands Organisation for Scientific Research
+from merging BBHs ( MBH,1 ) in Figures 3 and 4. We
+                                                               5    (NWO) as part of the Vidi research program Bin-
+systematically vary all five parameters that shape the
+                                                               6    Waves with project number 639.042.728 and the Euro-
+cosmic metallicity density distribution, and explore two
+                                                               7    pean Union’s Horizon 2020 research and innovation pro-
+additional variations of the overall star-formation rate
+                                                               8    gram from the European Research Council (ERC, Grant
+density SFRD(z). Our main findings are as follows:
+                                                               9    agreement No. 715063). This research was supported in
+     • The locations of features in the distribution of pri-   10   part by the National Science Foundation under Grant
+       mary BH masses are robust against variations in         11   No. NSF PHY-1748958.
+       S(Z, z). The location of features in the mass dis-
+                                                                                  SOFTWARE AND DATA
+       tribution of BHs could thus be used as sign posts
+       of their formation channel.                                    All code associated to reproduce the data and plots
+                                                                    in this paper is publicly available at https://github.
+     • For all variations, the low mass end of the mass             com/LiekeVanSon/SFRD fit. The data used in this
+       distribution is least influenced by changes in the           work is available on Zenodo under an open-source Cre-
+       S(Z, z). This is because the lowest mass BHs can             ative Commons Attribution license at 10.5281/zen-
+       be formed from all metallicities above Z & 10−3 ,            odo.7612755. All observationally constrained models of
+       for which the star formation rate is relatively well         the S(Z, z) from Chruślińska et al. (2021) can be found
+       constrained in the recent Universe. This suggests            online at: https://ftp.science.ru.nl/astro/mchruslinska/
+       that the lower end of the BH mass distribution               Chruslinska et al 2021/.
+       (component masses of ≤ 15M ) is potentially very               This research has made use of GW data provided
+       powerful for constraining the physics of the forma-          by the Gravitational Wave Open Science Center (https:
+       tion channels, irrespective of the cosmic star for-          //www.gw-openscience.org/), a service of LIGO Labo-
+       mation rate uncertainties.                                   ratory, the LIGO Scientific Collaboration and the Virgo
+                                                                    Collaboration. Further software used in this work:
+     • The metallicity distribution of star formation at            Python (Van Rossum & Drake 2009), Astropy (Astropy
+       low redshift primarily impacts the normalisation of          Collaboration et al. 2013, 2018) Matplotlib (Hunter
+       the BBH merger rate. Changing the overall star-              2007), NumPy (Harris et al. 2020), SciPy (Virtanen
+       formation rate density, SFRD(z) also affects the             et al. 2020), ipython/jupyter (Perez & Granger 2007;
+       rate, but to a lesser degree. This shows that low-           Kluyver et al. 2016), Seaborn (Waskom 2021) and hdf5
+       metallicity star formation at low redshifts domi-            (Collette et al. 2019).
+
+                                                        APPENDIX
+                                                                                                                                                                                    13
+
+                                                  A. EVALUATING OUR FIT; THE SQUARED RESIDUALS
+
+                                                                              2
+                                                                                                                                                                   3
+    Metallicities, log10 (Z/Z )
+
+
+                                  1
+
+
+
+
+                                                                                       Metallicities, log10 (Z/Z )
+                                                                                                                     1
+                                                                              3                                                                                    2
+                                                    max Z simulated COMPAS                                                           max Z simulated COMPAS
+                                  0
+
+
+
+
+                                                                              fit |
+                                                                              4                                      0                                             1
+
+
+
+
+                                                                                                                                                                       log10 | sim fit fit|
+                                                                              log10 | sim
+                                  1                                           5                                      1                                             0
+
+                                                                                                                                                                       1
+                                  2                 min Z simulated COMPAS    6                                      2               min Z simulated COMPAS
+                                                                                                                                                                       2
+                                                                              7
+                                  3                  6                                                               3                                                 3
+                                      0   2   4                8         10                                              0   2   4       6         8          10
+                                              Redshifts                                                                          Redshifts
+ó    Figure 5. log of the residuals (left), and log of the relative error (right) between the TNG100 data and our best-fitting model.
+¥    We show the minimum and maximum metallicity used in COMPAS simulations with dashed lines in each plot.
+
+
+        In the left panel of Figure 5, we show the log of the absolute residuals. The square of the residuals is used in the
+     cost function, equation 14, to optimise our fit. We observe that the maximum residuals appear near the peak of star
+     formation at high metallicities. The log of the relative errors (defined as |Ssim−Sfit|
+                                                                                     Sfit    ), is shown in the right-hand panel
+     of Figure 5. The relative errors generally exhibit an opposite trend with respect to the residuals. The relative errors are
+     largest in regions of very low-metallicity star formation at low redshift. This occurs due to the very low star-formation
+     rate in this regime (of the order 10−8 M yr−1 Mpc−3 for the TNG simulations and 10−11 M yr−1 Mpc−3 in our model
+     fit). Another regime where the relative error becomes large is at very high metallicities (about 10 times Z ). This is
+     because in this regime, the TNG data is very sparse and contains regions where the rate abruptly drops to zero. To
+     avoid sharp features in the data, we use interpolated TNG data to produce the fit. We note that we chose to minimise
+     the squared residuals (which is similar to minimising the mean squared error) in favour of minimising, for example,
+     the relative error, to prevent overfitting such regions of very low star-formation rate. For the illustration purposes
+     in this work, we are most interested in closely fitting the S(Z, z) between the minimum (10−4 ) and maximum (0.03)
+     metallicities that can be simulated with COMPAS. For applications that focus on extremely low (< 0.01Z ) or extremely
+     high (∼ 10 × Z ) metallicity star formation, a different cost function would be more appropriate.
+
+                                              B. DETERMINING REASONABLE VARIATIONS OF THE S(Z, z)
+       To determine reasonable variations of our fiducial model for S(Z, z), we compute the fraction of low and high
+     metallicity stellar mass formed for redshifts below z < 0.5, z < 3.0 and z < 10. We show the results in Figure 6,
+     which is an adaptation of Fig. 2 in Pakmor et al. (2022), which in turn builds on Fig. 9 from Chruślińska & Nelemans
+     (2019).
+    14
+
+
+
+
+                      %M∗(Z < 0.1Z )/M∗,tot
+                                     40            Chruslinska19                                                                                       z < 0.5
+                                                   Chruslinska21
+                                                   TNG50
+                                     30            Illustris
+                                                   SIMBA
+                                                                                                                           2
+                                     20            EAGLE                                                               ω 0:
+                                                   TNG100, fit
+                                                                                                                                                    5                                               5
+                                                              07                                                                                 -0.                0.1                -6 0.0
+                                                                                                                                                                                              3
+                                                          0.0                                                                                µ z:               ω z:               α 0: µ 0:
+                                     10              µ 0:
+                                                                                                                                   0
+                                                                                                                               α 0:                                         0.0                       0.7
+                                                                                                                                                                      ωµ z:                       ω 0:
+                                         0
+                                              0   10               20                      30            40                     50                  60                    70                 80
+                                                                                  %M∗(Z > Z )/M∗,tot
+                      %M∗(Z < 0.1Z )/M∗,tot
+
+
+
+
+                                     40                                                                                                                z < 3.0
+
+                                                                                       5
+                                                                                 -0.
+                                     30                                   µ z:
+                                                                                                          2
+                                                                                                   ω 0:
+
+                                     20                     07
+                                                         0.0                                                                                  0.1
+                                                  µ 0:                                                                                  ω z:                                            35
+                                                                                                                                                                          -6 0.0
+                                                                                                              α 0:
+                                                                                                                   0                                                  α 0: µ 0:
+                                     10
+                                                                                                                                                                      0
+                                                                                                                                                                0:0.0.                   0.7
+                                                                                                                                                           ωµz:z                   ω 0:
+                                         0
+                                              0   10               20                      30            40                     50                  60                    70                 80
+                                                                                  %M∗(Z > Z )/M∗,tot
+                      %M∗(Z < 0.1Z )/M∗,tot
+
+
+
+
+                                                                            5
+                                                                       -0.
+                                     40                            µ z:                                                                                z < 10.0
+
+                                                                                                    2
+                                     30                                                         ω 0:
+
+
+                                                            0  7                                                                       0.1
+                                     20                  0.0                                                                     ω z:
+                                                  µ 0:
+                                                                                                           0                                                                      35
+                                                                                                       α 0:                                                        -6 0.0
+                                                                                                                                                               α 0: µ 0:
+                                     10
+                                                                                                                                                               00.0
+                                                                                                                                                            z0:.                  0.7
+                                                                                                                                                        ωµz:                ω 0:
+                                         0
+                                              0   10               20                      30            40                     50                  60                    70                 80
+                                                                                  %M∗(Z > Z )/M∗,tot
+    Figure 6. Percentage of stellar mass formed at low metallicity (Z < 0.1Z ) , versus high metallicity (Z > Z ) for all star
+    formation below a certain threshold redshift: z < 0.5 (top), z < 3.0 (middle) and z < 10 (bottom). Data from observation-
+    based variations are shown with semi-transparent thick crosses, (Chruślińska & Nelemans 2019) and semi-transparent thick
+    plus signs (Chruślińska et al. 2021), the low- and high-metallicity extremes are indicated with opaque symbols. For data from
+    cosmological simulations, we follow Pakmor et al. (2022) and show Illustris (Vogelsberger et al. 2014, squares), Simba (Davé
+    et al. 2019, diamonds), EAGLE (Schaye et al. 2015, triangles), TNG50 and TNG100 (Springel et al. 2018, filled and open
+    circles respectively). Black thin crosses display variations of the cosmic metallicity density distribution that is part of our
+    fiducial S(Z, z). The parameter that is varied with respect to the fiducial and its new value are annotated. This shows that our
+ó   S(Z, z) variations span the range of reasonable cosmic metallicity density distributions as determined by observation-based and
+¥   cosmological simulations-based models.
+                                                                                                                        15
+
+                                                       REFERENCES
+Abbott, B. P., Abbott, R., Abbott, T. D., et al. 2016,         Chruślińska, M., Nelemans, G., & Belczynski, K. 2019,
+  ApJL, 818, L22, doi: 10.3847/2041-8205/818/2/L22               MNRAS, 482, 5012, doi: 10.1093/mnras/sty3087
+Abbott, B. P., et al. 2018, Phys. Rev.                         Chruślińska, M., Nelemans, G., Boco, L., & Lapi, A. 2021,
+  https://arxiv.org/abs/1811.12907                               MNRAS, 508, 4994, doi: 10.1093/mnras/stab2690
+Abbott, R., Abbott, T. D., Abraham, S., et al. 2020, arXiv     Collette, A., Caswell, T. A., Tocknell, J., et al. 2019,
+  e-prints, arXiv:2010.14527.                                    h5py/h5py: 2.10.0, 2.10.0, Zenodo, Zenodo,
+  https://arxiv.org/abs/2010.14527                               doi: 10.5281/zenodo.3401726
+Abbott, R., Abbott, T. D., Acernese, F., et al. 2021a, arXiv   Cresci, G., Mannucci, F., & Curti, M. 2019, A&A, 627,
+  e-prints, arXiv:2111.03606.                                    A42, doi: 10.1051/0004-6361/201834637
+  https://arxiv.org/abs/2111.03606                             Davé, R., Anglés-Alcázar, D., Narayanan, D., et al. 2019,
+—. 2021b, arXiv e-prints, arXiv:2111.03634.                      MNRAS, 486, 2827, doi: 10.1093/mnras/stz937
+  https://arxiv.org/abs/2111.03634                             Dominik, M., Belczynski, K., Fryer, C., et al. 2013, ApJ,
+Astropy Collaboration, Robitaille, T. P., Tollerud, E. J.,       779, 72, doi: 10.1088/0004-637X/779/1/72
+  et al. 2013, A&A, 558, A33,                                  Dominik, M., Berti, E., O’Shaughnessy, R., et al. 2015,
+  doi: 10.1051/0004-6361/201322068                               ApJ, 806, 263, doi: 10.1088/0004-637X/806/2/263
+Astropy Collaboration, Price-Whelan, A. M., Sipőcz, B. M.,    Doughty, C., & Finlator, K. 2021, MNRAS, 505, 2207,
+  et al. 2018, AJ, 156, 123, doi: 10.3847/1538-3881/aabc4f       doi: 10.1093/mnras/stab1448
+Bavera, S. S., Fragos, T., Zevin, M., et al. 2021, A&A, 647,   Dray, L. M., Tout, C. A., Karakas, A. I., & Lattanzio, J. C.
+  A153, doi: 10.1051/0004-6361/202039804                         2003, MNRAS, 338, 973,
+Bavera, S. S., Fragos, T., Zapartas, E., et al. 2022, A&A,       doi: 10.1046/j.1365-8711.2003.06142.x
+  657, L8, doi: 10.1051/0004-6361/202141979                    Farmer, R., Laplace, E., de Mink, S. E., & Justham, S.
+Belczynski, K., Bulik, T., Fryer, C. L., et al. 2010, ApJ,       2021, ApJ, 923, 214, doi: 10.3847/1538-4357/ac2f44
+  714, 1217, doi: 10.1088/0004-637X/714/2/1217                 Fruchter, A. S., Levan, A. J., Strolger, L., et al. 2006,
+Belczynski, K., Holz, D. E., Bulik, T., & O’Shaughnessy, R.      Nature, 441, 463, doi: 10.1038/nature04787
+  2016, Nature, 534, 512, doi: 10.1038/nature18322             Gallegos-Garcia, M., Berry, C. P. L., Marchant, P., &
+Belczynski, K., Taam, R. E., Kalogera, V., Rasio, F. A., &       Kalogera, V. 2021, arXiv e-prints, arXiv:2107.05702.
+  Bulik, T. 2007, ApJ, 662, 504, doi: 10.1086/513562             https://arxiv.org/abs/2107.05702
+Bisigello, L., Caputi, K. I., Grogin, N., & Koekemoer, A.      Goswami, S., Silva, L., Bressan, A., et al. 2022, A&A, 663,
+  2018, A&A, 609, A82, doi: 10.1051/0004-6361/                   A1, doi: 10.1051/0004-6361/202142031
+  20173139910.48550/arXiv.1706.06154                           Götberg, Y., de Mink, S. E., McQuinn, M., et al. 2020,
+Boco, L., Lapi, A., Chruslinska, M., et al. 2021, ApJ, 907,      A&A, 634, A134, doi: 10.1051/0004-6361/201936669
+  110, doi: 10.3847/1538-4357/abd3a0                           Harris, C. R., Millman, K. J., van der Walt, S. J., et al.
+Briel, M. M., Eldridge, J. J., Stanway, E. R., Stevance,         2020, Nature, 585, 357–362,
+  H. F., & Chrimes, A. A. 2022a, MNRAS, 514, 1315,               doi: 10.1038/s41586-020-2649-2
+  doi: 10.1093/mnras/stac1100                                  Hemler, Z. S., Torrey, P., Qi, J., et al. 2021, MNRAS, 506,
+Briel, M. M., Stevance, H. F., & Eldridge, J. J. 2022b,          3024, doi: 10.1093/mnras/stab1803
+  arXiv e-prints, arXiv:2206.13842.                            Hunter, J. D. 2007, Computing in Science and Engineering,
+  https://arxiv.org/abs/2206.13842                               9, 90, doi: 10.1109/MCSE.2007.55
+Broekgaarden, F. S., Berger, E., Stevenson, S., et al. 2021,   Hurley, J. R., Pols, O. R., & Tout, C. A. 2000, MNRAS,
+  arXiv e-prints, arXiv:2112.05763.                              315, 543, doi: 10.1046/j.1365-8711.2000.03426.x
+  https://arxiv.org/abs/2112.05763                             Hurley, J. R., Tout, C. A., & Pols, O. R. 2002, MNRAS,
+Caputi, K. I., Deshmukh, S., Ashby, M. L. N., et al. 2017,       329, 897, doi: 10.1046/j.1365-8711.2002.05038.x
+  ApJ, 849, 45, doi: 10.3847/1538-4357/aa901e10.48550/         Inayoshi, K., Hirai, R., Kinugawa, T., & Hotokezaka, K.
+  arXiv.1705.06179                                               2017, MNRAS, 468, 5020, doi: 10.1093/mnras/stx757
+Chruślińska, M. 2022, arXiv e-prints, arXiv:2206.10622.      Kennicutt, Robert C., J. 1989, ApJ, 344, 685,
+  https://arxiv.org/abs/2206.10622                               doi: 10.1086/167834
+Chruślińska, M., & Nelemans, G. 2019, MNRAS, 488, 5300,      Kewley, L. J., & Ellison, S. L. 2008, ApJ, 681, 1183,
+  doi: 10.1093/mnras/stz2057                                     doi: 10.1086/587500
+16
+
+Kluyver, T., Ragan-Kelley, B., Pérez, F., et al. 2016, in       Pettini, M., & Pagel, B. E. J. 2004, MNRAS, 348, L59,
+  ELPUB, 87–90                                                     doi: 10.1111/j.1365-2966.2004.07591.x10.48550/arXiv.
+Kobulnicky, H. A., & Kewley, L. J. 2004, ApJ, 617, 240,            astro-ph/0401128
+  doi: 10.1086/42529910.48550/arXiv.astro-ph/0408128             Pillepich, A., Nelson, D., Hernquist, L., et al. 2018a,
+Kroupa, P. 2001, MNRAS, 322, 231,                                  MNRAS, 475, 648, doi: 10.1093/mnras/stx3112
+  doi: 10.1046/j.1365-8711.2001.04022.x                          Pillepich, A., Springel, V., Nelson, D., et al. 2018b,
+Kummer, F. 2020, UvA Scripties                                     MNRAS, 473, 4077, doi: 10.1093/mnras/stx2656
+Langer, N., & Norman, C. A. 2006, ApJL, 638, L63,                Pillepich, A., Nelson, D., Springel, V., et al. 2019, MNRAS,
+  doi: 10.1086/500363                                              490, 3196, doi: 10.1093/mnras/stz2338
+Langer, N., Norman, C. A., de Koter, A., et al. 2007, A&A,       Planck Collaboration, Aghanim, N., Akrami, Y., et al.
+  475, L19, doi: 10.1051/0004-6361:20078482                        2020, A&A, 641, A6, doi: 10.1051/0004-6361/201833910
+Madau, P., & Dickinson, M. 2014, ARA&A, 52, 415,                 Pols, O. R., Schröder, K.-P., Hurley, J. R., Tout, C. A., &
+  doi: 10.1146/annurev-astro-081811-125615                         Eggleton, P. P. 1998, MNRAS, 298, 525,
+Madau, P., & Fragos, T. 2017, ApJ, 840, 39,                        doi: 10.1046/j.1365-8711.1998.01658.x
+  doi: 10.3847/1538-4357/aa6af9                                  Postnov, K. A., & Yungelson, L. R. 2014, Living Reviews in
+Maiolino, R., & Mannucci, F. 2019, A&A Rv, 27, 3,                  Relativity, 17, 3, doi: 10.12942/lrr-2014-3
+  doi: 10.1007/s00159-018-0112-2                                 Riley, J., Agrawal, P., Barrett, J. W., et al. 2022, ApJS,
+Mapelli, M., Giacobbo, N., Ripamonti, E., & Spera, M.              258, 34, doi: 10.3847/1538-4365/ac416c
+  2017, MNRAS, 472, 2422, doi: 10.1093/mnras/stx2123
+                                                                 Sanders, R. L., Shapley, A. E., Clarke, L., et al. 2022,
+Marchant, P., Pappas, K. M. W., Gallegos-Garcia, M.,
+                                                                   arXiv e-prints, arXiv:2207.12430.
+  et al. 2021, arXiv e-prints, arXiv:2103.09243.
+                                                                   https://arxiv.org/abs/2207.12430
+  https://arxiv.org/abs/2103.09243
+                                                                 Santoliquido, F., Mapelli, M., Giacobbo, N., Bouffanais, Y.,
+Marı́a Ezquiaga, J., & Holz, D. E. 2022, arXiv e-prints,
+                                                                   & Artale, M. C. 2021, MNRAS, 502, 4877,
+  arXiv:2202.08240. https://arxiv.org/abs/2202.08240
+                                                                   doi: 10.1093/mnras/stab280
+Marinacci, F., Vogelsberger, M., Pakmor, R., et al. 2018,
+                                                                 Schaye, J., Crain, R. A., Bower, R. G., et al. 2015,
+  MNRAS, 480, 5113, doi: 10.1093/mnras/sty2206
+                                                                   MNRAS, 446, 521, doi: 10.1093/mnras/stu2058
+Naiman, J. P., Pillepich, A., Springel, V., et al. 2018,
+                                                                 Schmidt, M. 1959, ApJ, 129, 243, doi: 10.1086/146614
+  MNRAS, 477, 1206, doi: 10.1093/mnras/sty618
+                                                                 Smith, N. 2014, ARA&A, 52, 487,
+Neijssel, C. J., Vigna-Gómez, A., Stevenson, S., et al. 2019,
+                                                                   doi: 10.1146/annurev-astro-081913-040025
+  MNRAS, 490, 3740, doi: 10.1093/mnras/stz2840
+                                                                 Springel, V., Di Matteo, T., & Hernquist, L. 2005,
+Nelson, D., Pillepich, A., Springel, V., et al. 2018, MNRAS,
+                                                                   MNRAS, 361, 776, doi: 10.1111/j.1365-2966.2005.09238.x
+  475, 624, doi: 10.1093/mnras/stx3040
+                                                                 Springel, V., & Hernquist, L. 2003, MNRAS, 339, 289,
+—. 2019a, MNRAS, 490, 3234, doi: 10.1093/mnras/stz2306
+                                                                   doi: 10.1046/j.1365-8711.2003.06206.x
+Nelson, D., Springel, V., Pillepich, A., et al. 2019b,
+  Computational Astrophysics and Cosmology, 6, 2,                Springel, V., Pakmor, R., Pillepich, A., et al. 2018,
+  doi: 10.1186/s40668-019-0028-x                                   MNRAS, 475, 676, doi: 10.1093/mnras/stx3304
+Nelson, E. J., Tacchella, S., Diemer, B., et al. 2021,           Stevenson, S., Vigna-Gómez, A., Mandel, I., et al. 2017,
+  MNRAS, 508, 219, doi: 10.1093/mnras/stab2131                     Nature Communications, 8, 14906,
+Nocedal, J., & Wright, S. 2006, Numerical optimization,            doi: 10.1038/ncomms14906
+  2nd edn., Springer series in operations research and           Tang, P. N., Eldridge, J. J., Stanway, E. R., & Bray, J. C.
+  financial engineering (New York, NY: Springer).                  2020, MNRAS, 493, L6, doi: 10.1093/mnrasl/slz183
+  http://gso.gbv.de/DB=2.1/CMD?ACT=SRCHA&SRT=                    Torrey, P., Vogelsberger, M., Marinacci, F., et al. 2019,
+  YOP&IKT=1016&TRM=ppn+502988711&sourceid=                         MNRAS, 484, 5587, doi: 10.1093/mnras/stz243
+  fbw bibsonomy                                                  van den Heuvel, E. P. J., Portegies Zwart, S. F., & de
+O’Hagan, A., & Leonard, T. 1976, Biometrika, 63, 201,              Mink, S. E. 2017, MNRAS, 471, 4256,
+  doi: 10.1093/biomet/63.1.201                                     doi: 10.1093/mnras/stx1430
+Pakmor, R., Simpson, C. M., van de Voort, F., et al. 2022,       Van Rossum, G., & Drake, F. L. 2009, Python 3 Reference
+  MNRAS, 512, 3602, doi: 10.1093/mnras/stac717                     Manual (Scotts Valley, CA: CreateSpace)
+Perez, F., & Granger, B. E. 2007, Computing in Science           van Son, L. A. C., de Mink, S. E., Callister, T., et al.
+  and Engineering, 9, 21, doi: 10.1109/MCSE.2007.53                2022a, ApJ, 931, 17, doi: 10.3847/1538-4357/ac64a3
+                                                                                                                             17
+
+van Son, L. A. C., de Mink, S. E., Renzo, M., et al. 2022b,      Wang, K., Yu, S., & Peng, W. 2019, Journal of Aerosol
+  ApJ, 940, 184, doi: 10.3847/1538-4357/ac9b0a                    Science, 134, 95,
+Vigna-Gómez, A., Neijssel, C. J., Stevenson, S., et al. 2018,    doi: https://doi.org/10.1016/j.jaerosci.2019.04.013
+  MNRAS, 481, 4009, doi: 10.1093/mnras/sty2463                   Waskom, M. L. 2021, Journal of Open Source Software, 6,
+Virtanen, P., Gommers, R., Oliphant, T. E., et al. 2020,          3021, doi: 10.21105/joss.03021
+  Nature Methods, 17, 261, doi: 10.1038/s41592-019-0686-2        Weinberger, R., Springel, V., Hernquist, L., et al. 2017,
+Vogelsberger, M., Genel, S., Springel, V., et al. 2014,           MNRAS, 465, 3291, doi: 10.1093/mnras/stw2944
+  MNRAS, 444, 1518, doi: 10.1093/mnras/stu1536
+

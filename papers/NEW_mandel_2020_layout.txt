@@ -1,0 +1,408 @@
+                                               MNRAS 000, 1–6 (2020)                           Preprint 13 November 2020              Compiled using MNRAS LATEX style file v3.0
+
+
+
+
+                                               Binary population synthesis with probabilistic remnant mass and kick
+                                               prescriptions
+                                               Ilya Mandel1,2,3 , Bernhard Müller1,2 , Jeff Riley1,2 , Selma E. de Mink4,5 ,
+                                               Alejandro Vigna-Gómez6 , Debatri Chattopadhyay7,2
+                                               1 Monash Centre for Astrophysics, School of Physics and Astronomy, Monash University, Clayton, Victoria 3800, Australia
+                                               2 The ARC Center of Excellence for Gravitational Wave Discovery – OzGrav
+                                               3 Birmingham Institute for Gravitational Wave Astronomy and School of Physics and Astronomy,
+arXiv:2007.03890v2 [astro-ph.HE] 12 Nov 2020
+
+
+
+
+                                               University of Birmingham, B15 2TT, Birmingham, UK
+                                               4 Center for Astrophysics, Harvard Smithsonian, 60 Garden Street, Cambridge, MA 02138, USA
+                                               5 Anton Pannekoek Institute for Astronomy, University of Amsterdam, Science Park 904, 1098XH, Amsterdam, The Netherlands
+                                               6 DARK, Niels Bohr Institute, University of Copenhagen, Blegdamsvej 17, 2100, Copenhagen, Denmark
+                                               7 Centre for Astrophysics and Supercomputing, Swinburne University of Technology, Hawthorn, VIC 3122, Australia
+
+
+
+
+                                               Accepted XXX. Received YYY; in original form ZZZ
+
+
+
+                                               ABSTRACT
+                                               We report on the impact of a probabilistic prescription for compact remnant masses and kicks on massive binary
+                                               population synthesis. We find that this prescription populates the putative mass gap between neutron stars and black
+                                               holes with low-mass black holes. However, evolutionary effects reduce the number of X-ray binary candidates with
+                                               low-mass black holes, consistent with the dearth of such systems in the observed sample. We further find that this
+                                               prescription is consistent with the formation of heavier binary neutron stars such as GW190425, but over-predicts the
+                                               masses of Galactic double neutron stars. The revised natal kicks, particularly increased ultra-stripped supernova kicks,
+                                               do not directly explain the observed Galactic double neutron star orbital period–eccentricity distribution. Finally,
+                                               this prescription allows for the formation of systems similar to the recently discovered extreme mass ratio binary
+                                               GW190814, but only if we allow for the survival of binaries in which the common envelope is initiated by a donor
+                                               crossing the Hertzsprung gap, contrary to our standard model.
+                                               Key words: binaries: general – supernovae: general – stars: neutron – stars: black holes – X-rays: binaries – gravita-
+                                               tional waves
+
+
+
+                                               1 INTRODUCTION                                                      yield black hole formation with complete fallback of the core
+                                                                                                                   and any remaining helium shell. Between these regimes, the
+                                               Rapid binary population synthesis models rely on simplified         outcome is probabilistic, including an intermediate possibil-
+                                               prescriptions to enable computationally efficient modelling of      ity of black hole formation with significant supernova mass
+                                               a large set of binaries under a range of assumptions about stel-    loss. In the absence of complete fallback, the remnant mass
+                                               lar and binary evolution. Recipes for predicting the masses         is a function of the carbon-oxygen core mass, with additional
+                                               and natal kicks of neutron stars or black holes left behind at      stochastic scatter. These recipes self-consistently couple natal
+                                               the end of massive stellar evolution include models by Hur-         kicks with remnant masses, with stochastic scatter on top of
+                                               ley et al. (2000); Hobbs et al. (2005); Belczynski et al. (2008);   momentum-preserving kicks based on the ratio of the ejected
+                                               Fryer et al. (2012); Spera et al. (2015); Müller et al. (2016);    carbon-oxygen core mass (a proxy for the portion of the ejecta
+                                               Bray & Eldridge (2016, 2018); Patton & Sukhbold (2020).             that have significant asymmetry) to the remnant mass.
+                                               Recently, Mandel & Müller (2020) proposed a new set of pre-
+                                               scriptions, derived from first-principle 3-dimensional super-          Here, we investigate the impact of these prescriptions on
+                                               nova simulations and parametrised simplified models. These          the evolution of massive stellar binaries using the COM-
+                                               new recipes are probabilistic (see, e.g., Clausen et al. 2015) in   PAS (Compact Object Mergers: Population Astrophysics and
+                                               order to account for the stochastic nature of stellar evolution     Statistics) rapid binary population synthesis suite (Stevenson
+                                               and supernovae. The Mandel & Müller (2020) recipes use the         et al. 2017; Vigna-Gómez et al. 2018). We follow the default
+                                               carbon-oxygen core mass of the exploding star to determine          prescriptions from these papers, with the addition of (pul-
+                                               the supernova outcome. Neutron star formation is guaranteed         sational) pair-instability supernovae following the recipes of
+                                               for the lowest carbon-oxygen core masses that allow for super-      Stevenson et al. (2019) and chemically homogeneous evolu-
+                                               novae, while sufficiently massive carbon-oxygen cores always        tion following the recipes of Riley et al. (2020). We use the
+
+                                               © 2020 The Authors
+2     I. Mandel et al.
+Mandel & Müller (2020) recipes for compact remnant masses           and gravitational-wave sources in Section 4. Here, we consider
+and kicks, with the default parameters from Table 1 in that          the impact of the Mandel & Müller (2020) remnant mass and
+paper. We consider solar metallicity (Z = 0.014, Asplund             kick model on X-ray binary predictions.
+et al. 2009) except where Z = 0.1 Z is specified. We do not             We identify any binaries in which one star collapses into a
+allow donors that are crossing the Hertzsprung gap to survive        black hole while the companion is non-degenerate as potential
+a common-envelope phase (“Pessimistic” model of Belczynski           X-ray binaries. In our binary population synthesis models, the
+et al. 2008). We assume that any binaries that would ex-             most typical companion at the time the black hole is formed
+perience Roche-lobe overflow immediately after ejecting the          (in more than 80% of such systems) is a main-sequence star
+common envelope would, in fact, fail to survive the ejection of      of above 3 solar masses (i.e., O or B star).
+the envelope and merge during this phase. When discussing               Approximately a fifth of all black holes formed in binaries
+double compact-object binaries, we select only those that will       with a non-degenerate companion are low-mass black holes,
+merge within the approximate current age of the Universe, 14         which we conservatively define as having a mass between 2
+Gyr, through gravitational-wave emission. Primary masses             and 4 solar masses. At first glance, this would suggest that
+are sampled from a Kroupa initial mass function with sec-            around a fifth of black-hole X-ray binaries should host low-
+ondary masses following a flat distribution in the mass ratio,       mass (or mass-gap) black holes.
+while separations of initially circular binaries follow a flat-in-      However this does not account for the disruption of binaries
+log distribution (Öpik 1924; Kroupa 2001; Sana et al. 2012).        due to mass loss during a supernova or natal kicks. The birth
+A total of 1 million binaries are evolved with zero-age main-        of low-mass black holes is accompanied by the highest amount
+sequence primary masses between 5 and 150 M and initial              of mass loss and, in the Mandel & Müller (2020) models (see
+separations between 0.01 and 1000 au, representing ∼ 90 mil-         also Fryer et al. 2012; Bray & Eldridge 2016, 2018; Giacobbo
+lion solar masses of total star formation, at each of Z and          & Mapelli 2020), the largest natal kicks. Consequently, bi-
+0.1 Z .                                                              naries with low-mass black holes are the most likely to be
+                                                                     disrupted by supernovae, as shown in Figure 1. In fact, while
+                                                                     the vast majority (≈ 97%) of binaries that form ≥ 5 M
+                                                                     black holes survive the first supernova, only just over a third
+2 MASS GAP AND BLACK-HOLE X-RAY BINARIES                             of binaries that form low-mass black do so. Therefore, only
+Observations of Galactic neutron stars suggest a likely maxi-        around 8% of surviving black-hole X-ray binary progenitor
+mum mass of ≈ 2.1 M (Antoniadis et al. 2016; Alsing et al.           candidate binaries host low-mass black holes.
+2018; Farr & Chatziioannou 2020). This is consistent with               Thus, only one or two of the 20 black-hole X-ray bina-
+the maximum stable neutron star mass inferred from obser-            ries with well-measured masses analysed by Farr et al. (2011)
+vations of the double neutron star merger GW170817 (Mar-             should be expected to host a black hole in the putative mass
+galit & Metzger 2017) and the maximum theoretically pos-             gap. At least one of those binaries may, in fact, be consis-
+sible mass without relying on exotic matter (e.g., Lattimer          tent with a low-mass black hole once possible measurement
+2012). On the other hand, masses of black holes in black hole        biases are accounted for (Kreidberg et al. 2012). Even if
+X-ray binaries are consistent with a minimal mass of ≈ 4.5–          none are, it is hardly surprising: the probability of this is
+5 solar masses (Özel et al. 2010; Farr et al. 2011). This led       (1 − 0.08)20 ≈ 19%.
+to the conjecture of a mass gap between neutron stars and               We only considered potential X-ray binaries and intention-
+black holes, and the emergence of remnant mass models that           ally avoided the discussion of observability, since that would
+enforced such a mass gap, e.g., the “Rapid” model of Fryer           require further assumptions to be made on the duration and
+et al. (2012).                                                       luminosity of X-ray emission. However, it is not unreasonable
+   However, more recent evidence indicates that the putative         to expect that observational selection effects would further
+mass gap is at least partly populated. Microlensing obser-           diminish the contribution of X-ray binaries with low-mass
+vations hint at a population of dark remnants in the mass            black holes to the observed sample. For example, not surpris-
+gap (Wyrzykowski & Mandel 2020). Several recent observa-             ingly, a higher fraction of potential systems with low-mass
+tion point to non-interacting binaries with dark companions          black holes have companions more massive than the black
+that are likely to fall in the mass gap (e.g., Thompson et al.       hole after the supernova. These would then be detectable as
+2019). The best-measured compact object in the mass gap is           high-mass wind-fed X-ray binaries, which are shorter-lived
+the lighter companion in the recent gravitational-wave obser-        than stably mass transferring low-mass X-ray binaries. At
+vation GW190814, with a mass of 2.59+0.08−0.09 M (Abbott et al.
+                                                                     the very least, the expected maximum Eddington luminosity
+2020). On the other hand, supernova models suggest that the          is lower for low-mass black holes.
+remnant mass range of the mass gap could be reasonably well
+populated (e.g., Ertl et al. 2020; Chan et al. 2020).
+   Therefore, to satisfy the available evidence, a remnant mass
+                                                                     3 DOUBLE NEUTRON STARS
+model must both populate the mass gap and be consistent
+with the dearth of observations of black hole X-ray binaries         Multiple binary population synthesis studies explored the ob-
+with low-mass black holes. Mandel & Müller (2020) demon-            served properties of Galactic double neutron star systems, in-
+strated that, following their remnant mass prescription, a           cluding Portegies Zwart & Yungelson (1998); Oslowski et al.
+population of single stars drawn from the initial mass function      (2011); Andrews et al. (2015); Tauris et al. (2017); Shao &
+will populate the mass gap with compact remnants, which              Li (2018); Vigna-Gómez et al. (2018); Kruckow et al. (2018).
+would, for example, explain the microlensing observations            However, while most of these studies are able to reproduce
+(the ‘Delayed’ model of Fryer et al. 2012 also populates the         individual binaries, they struggle to accurately reproduce the
+mass gap). We will return to merging compact-object binaries         distribution of the properties of neutron star binaries in the
+
+MNRAS 000, 1–6 (2020)
+                                                                               BPS with stochastic remnant recipes                     3
+
+
+
+
+Figure 1. Mass distribution of black holes at formation in binaries   Figure 2. Chirp mass distribution of double neutron stars formed
+where the companion is a non-degenerate star. The two distribu-       at solar metallicity and merging within 14 Gyr. The magenta lines
+tions show all binaries, including those disrupted by the supernova   indicates the chirp masses of Galactic double neutron stars (solid)
+(dashed) and those binaries that survive the black hole formation     and GW190425 (dashed).
+and associated kick (solid). The shaded region indicates low-mass
+(mass-gap) black holes. Simulations at Z are shown.
+                                                                      changes the compactness of the core, leading to a reduced
+                                                                      remnant mass relative to single stars with the same carbon-
+population. In particular, models struggle to match the ob-           oxygen core mass for which the Mandel & Müller (2020)
+served distribution of double neutron star masses (e.g., Tauris       model was calibrated. This could reduce the predicted masses
+et al. 2017; Vigna-Gómez et al. 2018; Kruckow 2020) and ec-          by a few hundredths of a solar mass, bringing them into closer
+centricities (e.g., Ihm et al. 2006; Chruslinska et al. 2017; An-     agreement with observations.
+drews & Mandel 2019; Chattopadhyay et al. 2020). Unfortu-                On the other hand, we find that massive binaries such as
+nately, the stochastic remnant mass and kick recipe (Mandel           GW190425, a binary neutron star merger with a chirp mass of
+& Müller 2020) is not able to resolve the discrepancy between        1.44±0.02 M , could be generically produced through binary
+predictions and observations without further modifications to         population synthesis. Among all merging binary neutron stars
+the model assumptions.                                                in our models, 3% have a chirp mass exceeding 1.42 M at
+   The first-born neutron star is formed in an electron-capture       solar metallicity, rising to 8% at 0.1 Z . This increases to 4%
+supernova in more than half of merging double neutron stars           (12%) at Z (0.1 Z ) after accounting for gravitational-wave
+in our simulations, giving it a birth mass of 1.26 M . Subse-         selection effects, which scale as M2.5
+                                                                                                          c since the detection range
+                                                                                   5/6
+quent Eddington-limited accretion raises its mass by no more          scales as Mc . There is then a ≈ 8% (21%) probability that
+than 0.001 M , producing a sharp peak in the model distri-            one of two reported gravitational-wave binary neutron stars
+bution which is not seen in observations. This suggests that,         is as massive as GW190425 (the other, GW170817 (Abbott
+contrary to our models, there is either a broader range of            et al. 2017), had a mass similar to Galactic double neutron
+electron-capture supernova birth masses, or significant super-        stars). We thus do not find the need to resort to alterna-
+Eddington accretion, perhaps during the common-envelope               tive models (e.g., Romero-Shaw et al. 2020; Safarzadeh et al.
+phase (e.g., MacLeod & Ramirez-Ruiz 2015) or during mass              2020) to explain GW190425; see Vigna-Gómez, Ramirez-Ruiz
+transfer from a post-He-main-sequence secondary onto the              and Mandel (in prep.), for more details.
+neutron star primary (case BB mass transfer, Dewi & Pols                 Andrews & Mandel (2019) argued that the default model of
+2003).                                                                binary evolution will naturally struggle to reproduce the ob-
+   Moreover, we find that the chirp mass, defined as Mc =             served bi-modal distribution of eccentricities of short-period
+   3/5 3/5
+m1 m2 (m1 + m2 )−1/5 , where m1,2 are the individual neu-             Galactic double neutron stars. The peak around eccentricity
+tron star masses, is generally over-predicted by the model rel-       0.1 is consistent with ultra-stripping during case BB mass
+ative to the observations. Figure 2 shows the predicted chirp         transfer. This leaves behind a low-mass star that easily ex-
+mass distribution of merging neutron stars, which we focus            plodes in an ultra-stripped supernova with limited mass loss
+on because the first-born pulsars in merging binaries are at          and without significant asymmetry, giving rise to reduced
+least mildly recycled, while wider binaries are more likely to        kicks (Tauris et al. 2015). However, it is challenging to ex-
+suffer from challenging selection effects (Chattopadhyay et al.       plain the cluster of three Galactic binary neutron stars, in-
+2020), and to allow for comparison with gravitational-wave            cluding the Hulse-Taylor binary B1913+16, with eccentrici-
+sources. A third of all simulated systems have a chirp mass           ties around 0.6, since such systems should have also experi-
+higher than that of PSR J1913 + 1102, the Galactic system             enced ultra-stripped supernovae, or the absence of observed
+with the highest chirp mass among the nine systems with               binaries with intermediate eccentricities.
+precisely measured masses (see, e.g., the compilation of Far-            The stochastic kick model of Mandel & Müller (2020) does
+row et al. 2019). The probability of this happening by chance         not treat ultra-stripped supernovae separately from other su-
+(ignoring any selection effects, cf. Chattopadhyay et al. 2020)       pernova types (see also Bray & Eldridge 2016; Giacobbo &
+is only 3%. One possible correction is that binary evolution          Mapelli 2020). Instead, the kick is proportional to the mass of
+
+                                                                                                                MNRAS 000, 1–6 (2020)
+4     I. Mandel et al.
+                                                                        4 MERGING BINARIES
+
+                                                                        Finally, we consider predictions for merging compact-object
+                                                                        binaries. Table 1 summarises the predicted yields per million
+                                                                        solar masses of star formation at two metallicities: solar and
+                                                                        a tenths of solar. We separately highlight the formation of
+                                                                        merging (within 14 Gyr) neutron star – black hole binaries
+                                                                        and binary black holes that include a low-mass (mass-gap)
+                                                                        black hole as one of the companions.
+                                                                           The overall yields are broadly consistent with previous
+                                                                        COMPAS studies, such as Neijssel et al. (2019). We find a re-
+                                                                        duced yield of binary neutron stars relative to that study, but
+                                                                        this is largely a consequence of a correction to the treatment
+                                                                        of the common envelope phase in COMPAS (Vigna-Gómez
+                                                                        et al. 2020) rather than a change in the remnant mass and
+                                                                        kick physics. Unlike that study, we find that binaries involving
+                                                                        neutron stars have reduced yields at lower metallicity (but see
+Figure 3. Period-eccentricity distribution of double neutron stars
+merging within 14 Gyr at the moment of formation (open blue             Laplace et al. 2020). Meanwhile, metallicity has a very large
+circles) and after the passage of 100 Myr (green solid circles – note   impact on the progenitors of binary black holes which suffer
+that merged systems no longer appear on the plot). Merging field        from strong winds at high metallicity, reducing the binary
+Galactic double neutron stars are shown with burgundy diamonds.         mass and widening the binary so much that it can no longer
+                                                                        merge. This is compounded by the impact of metallicity on
+                                                                        the radial expansion of massive stars, with a reduced window
+the carbon-oxygen core ejected during the supernova, which              for radial growth during core helium burning that is necessary
+characterises the asymmetric ejection of linear momentum,               to tighten the binary through a survivable common envelope
+and inversely proportional to the remnant mass. This re-                in the COMPAS models (e.g., Klencki et al. 2020), leading
+duces the ultra-stripped supernova kick relative to typical             to an order-of-magnitude reduction in the yield of merging
+core collapse supernovae, and puts it in line with low-mass             binary black holes at Z relative to 0.1Z . We do find in-
+iron core collapse (Podsiadlowski et al. 2004; Müller et al.           creased binary black hole yields at both Z and 0.1Z with
+2018; Stockinger et al. 2020). It nevertheless allows for mean          the Mandel & Müller (2020) remnant mass and kick prescrip-
+natal kicks of ∼ 200 km s−1 for ultra-stripped neutron stars,           tion relative to the Fryer et al. (2012) ‘Delayed’ prescription
+significantly greater than the 30 km s−1 ultra-stripped su-             (cf. Figure 7 of Riley et al. 2020) when using the same mass
+pernova kicks assumed in previous studies such as Vigna-                threshold of 2.0 M between neutron stars and black holes.
+Gómez et al. (2018). For comparison, mean natal kicks for                 The recently published gravitational-wave discovery
+electron capture supernovae are only ∼ 40 km s−1 in the                 GW190814 is a signal from the merger of a ≈ 2.6 M compact
+solar-metallicity models considered here, while those associ-           object, which we assume to be a black hole, with a ≈ 23 M
+ated with neutron star birth through regular core collapse su-          black hole (Abbott et al. 2020). This source is challenging
+pernovae are ∼ 300 km s−1 . The latter value is smaller than            to form in sufficient quantities through isolated binary evolu-
+the Hobbs et al. (2005) estimate of observed pulsar speeds              tion (Zevin et al. 2020), and alternative models have been
+(mean of ∼ 400 km s−1 ), but see Mandel & Müller (2020)                proposed ranging from formation in young stellar clusters
+for a discussion of possible evolutionary and observational             (Rastello et al. 2020) or quadruple dynamics (Fragione et al.
+selection effects.                                                      2020) to less standard models such as strong lensing (Broad-
+   We may thus expect binary population synthesis based on              hurst et al. 2020) or growth by accretion from a circumbinary
+the Mandel & Müller (2020) models to predict a broader                 ring (Safarzadeh & Loeb 2020).
+range of eccentricities for short-period neutron stars, and                We also struggle to reproduce this source, despite natu-
+that is indeed what we see in Figure 3. We find a broad,                rally allowing for black holes with the right masses. While
+relatively flat distribution of eccentricities of merging double        binary black holes with unequal mass ratios are common in
+neutron stars, both at birth and after 100 Myr of orbital decay         our simulations, with a median mass ratio of 0.6 and mass
+through gravitational-wave emission, a typical spin-down age            ratios below 0.3 in 15% of merging binaries at Z , only 2%
+for mildly recycled pulsars in the observed sample. However,            of merging binary black holes at Z have mass ratios below
+the modelled distribution does not show two clusters at ec-             0.2, and none are as extreme as GW190814. While the overall
+centricities near 0.1 and 0.6 that appear in the observed pop-          yield of merging binary black holes increases by a factor of
+ulation. Moreover, the low-eccentricity population is depleted          six at 0.1Z relative to Z , the yield of binary black holes
+relative to Vigna-Gómez et al. (2018) models by the increased          including a low-mass companion is, in fact, reduced with our
+ultra-stripped supernova kicks. We thus conclude that there             default settings.
+is missing physics in the model if, in fact, all observed field            We can reproduce systems like GW190814 at 0.1Z if we
+double neutron stars are formed through the isolated binary             allow Hertzsprung-gap donors to survive common-envelope
+evolution channel. One possibility could be the impact of in-           evolution. In that case, we find a number of systems similar
+complete stripping of the hydrogen envelope during earlier              to Channel B of Zevin et al. (2020): ≈ 3 × 10−8 merging bi-
+evolutionary phases and enhanced envelope re-expansion af-              nary black holes with one companion above 20 M and the
+ter the end of core helium burning in partially stripped stars          other between 2 and 3 M per solar mass of star formation.
+(Götberg et al. 2017; Laplace et al. 2020).                            For example, a binary with initial masses of approximately 40
+
+MNRAS 000, 1–6 (2020)
+                                                                                 BPS with stochastic remnant recipes                   5
+                                     Binaries                                    Yield, ×10−6 M−1
+                                                                                at Z       at 0.1 Z
+                                     Binary neutron stars                       4.6        2.0
+                                     Black hole – neutron star binaries (all)   16         9.0
+                                     — with 2 M < MBH ≤ 4 M                     4.7        1.7
+                                     Binary black holes (all)                   11         67
+                                     — with 2 M < min(MBH ) ≤ 4 M               6.2        4.2
+
+Table 1. Yields of compact-object binaries that will merge in 14 Gyr per million solar masses of star formation.
+
+
+and 30 M at a separation of . 30R undergoes conservative                Council Future Fellowship FT190100574. SdM acknowledges
+mass transfer while both stars are still on the main sequence,          funding by the European Union’s Horizon 2020 research and
+with mass ratio reversal gradually leading into continuing sta-         innovation program (ERC Grant No. 715063), and by the
+ble mass transfer from the Hertzsprung gap primary, widen-              Netherlands Organization for Scientific Research (Vidi Grant
+ing the binary. In the model of Hurley et al. (2000), the pri-          No. 639.042.728).
+mary is left with a sufficiently low-mass core to ultimately
+leave behind a 2.6 M black hole, although population syn-
+thesis models may under-predict the masses of stripped donor
+stars that engaged in mass transfer on the main sequence.               DATA AVAILABILITY
+Meanwhile, the secondary evolves off the main sequence and,
+                                                                        The data underlying this article will be available via https:
+as a Hertzsprung gap donor, initiates dynamically unstable
+                                                                        //zenodo.org/communities/compas/.
+mass transfer onto the primary. After the binary is hardened
+by ejecting the common envelope, the secondary collapses
+into a 23 M black hole. While the survival of common-
+envelope evolution initiated by a Hertzsprung gap donor is              REFERENCES
+inconsistent with our default model, this mass transfer could,
+in fact, be dynamically stable based on updated models of the           Abbott B. P., et al., 2017, Physical Review Letters, 119, 161101
+radial response of Hertzsprung-gap donors to mass loss (Ge              Abbott R., Abbott T. D., Abraham S., Acernese F., et al., 2020,
+et al. 2020); see Neijssel et al. (in prep.) for further discussion.        ApJ, 896, L44
+                                                                        Alsing J., Silva H. O., Berti E., 2018, MNRAS, 478, 1377
+Since the secondary is significantly more massive than the pri-
+                                                                        Andrews J. J., Mandel I., 2019, ApJ, 880, L8
+mary, and Eddington-limited mass transfer onto a black hole             Andrews J. J., Farr W. M., Kalogera V., Willems B., 2015, ApJ,
+is expected to be almost completely non-conservative, such                  801, 32
+stable mass transfer could harden the binary sufficiently to            Antoniadis J., Tauris T. M., Ozel F., Barr E., Champion D. J.,
+allow gravitational-wave emission to drive it to merger within              Freire P. C. C., 2016, arXiv e-prints, p. arXiv:1605.01665
+14 Gyr.                                                                 Asplund M., Grevesse N., Sauval A. J., Scott P., 2009, ARA&A,
+                                                                            47, 481
+                                                                        Belczynski K., Kalogera V., Rasio F. A., Taam R. E., Zezas A.,
+                                                                            Bulik T., Maccarone T. J., Ivanova N., 2008, ApJSupplement,
+5 CONCLUSION
+                                                                            174, 223
+We investigated the impact of a probabilistic recipe for neu-           Bray J. C., Eldridge J. J., 2016, MNRAS, 461, 3747
+tron star and black hole masses and kicks (Mandel & Müller             Bray J. C., Eldridge J. J., 2018, MNRAS, 480, 5657
+2020) on massive binary evolution. We found that, as ex-                Broadhurst T., Diego J. M., Smoot G. F., 2020, arXiv e-prints, p.
+                                                                            arXiv:2006.13219
+pected, this recipe produces binaries with low-mass black
+                                                                        Chan C., Mueller B., Heger A., 2020, arXiv e-prints, p.
+holes in the putative mass gap, consistent with the latest ob-
+                                                                            arXiv:2003.04320
+servations, including GW190814. At the same time, the natu-             Chattopadhyay D., Stevenson S., Hurley J. R., Rossi L. J., Flynn
+ral coupling of the remnant kicks and masses helps explain the              C., 2020, MNRAS, 494, 1587
+dearth of low-mass black holes in observed black-hole X-ray             Chruslinska M., Belczynski K., Bulik T., Gladysz W., 2017, Acta
+binaries. The recipe is consistent with the formation of more               Astron., 67, 37
+massive binary neutron stars such as GW190425. However,                 Clausen D., Piro A. L., Ott C. D., 2015, ApJ, 799, 190
+we continue to struggle to explain the mass distribution and            Dewi J. D. M., Pols O. R., 2003, MNRAS, 344, 629
+period–eccentricity distribution of Galactic double neutron             Ertl T., Woosley S. E., Sukhbold T., Janka H. T., 2020, ApJ, 890,
+stars, indicating a shortcoming in binary evolution models or               51
+the presence of multiple formation channels for these systems.          Farr W. M., Chatziioannou K., 2020, Research Notes of the Amer-
+                                                                            ican Astronomical Society, 4, 65
+                                                                        Farr W. M., Sravan N., Cantrell A., Kreidberg L., Bailyn C. D.,
+                                                                            Mandel I., Kalogera V., 2011, ApJ, 741, 103
+ACKNOWLEDGEMENTS                                                        Farrow N., Zhu X.-J., Thrane E., 2019, ApJ, 876, 18
+                                                                        Fragione G., Loeb A., Rasio F. A., 2020, ApJ, 895, L15
+Simulations in this paper made use of the COMPAS rapid
+                                                                        Fryer C. L., Belczynski K., Wiktorowicz G., Dominik M., Kalogera
+population synthesis code (version 2.15.11), which is freely                V., Holz D. E., 2012, ApJ, 749, 91
+available at http://github.com/TeamCOMPAS/COMPAS. The                   Ge H., Webbink R. F., Han Z., 2020, arXiv e-prints, p.
+authors thank colleagues in Team COMPAS for helpful dis-                    arXiv:2006.00774
+cussions, and Tim Riley for assistance in running COMPAS                Giacobbo N., Mapelli M., 2020, ApJ, 891, 141
+simulations. IM is a recipient of the Australian Research               Götberg Y., de Mink S. E., Groh J. H., 2017, A&A, 608, A11
+
+                                                                                                                   MNRAS 000, 1–6 (2020)
+6     I. Mandel et al.
+Hobbs G., Lorimer D. R., Lyne A. G., Kramer M., 2005, MNRAS,
+    360, 974
+Hurley J. R., Pols O. R., Tout C. A., 2000, MNRAS, 315, 543
+Ihm C. M., Kalogera V., Belczynski K., 2006, ApJ, 652, 540
+Klencki J., Nelemans G., Istrate A. G., Pols O., 2020, A&A, 638,
+    A55
+Kreidberg L., Bailyn C. D., Farr W. M., Kalogera V., 2012, ApJ,
+    757, 36
+Kroupa P., 2001, MNRAS, 322, 231
+Kruckow M. U., 2020, arXiv e-prints, p. arXiv:2002.08011
+Kruckow M. U., Tauris T. M., Langer N., Kramer M., Izzard R. G.,
+    2018, MNRAS, 481, 1908
+Laplace E., Götberg Y., de Mink S. E., Justham S., Farmer R.,
+    2020, A&A, 637, A6
+Lattimer J. M., 2012, Annual Review of Nuclear and Particle Sci-
+    ence, 62, 485
+MacLeod M., Ramirez-Ruiz E., 2015, ApJ, 798, L19
+Mandel I., Müller B., 2020, arXiv e-prints, p. arXiv:2006.08360
+Margalit B., Metzger B. D., 2017, ApJ, 850, L19
+Müller B., Heger A., Liptai D., Cameron J. B., 2016, MNRAS, 460,
+    742
+Müller B., Gay D. W., Heger A., Tauris T. M., Sim S. A., 2018,
+    MNRAS, 479, 3675
+Neijssel C. J., et al., 2019, MNRAS, 490, 3740
+Öpik E., 1924, Publications of the Tartu Astrofizica Observatory,
+    25, 1
+Oslowski S., Bulik T., Gondek-Rosińska D., Belczyński K., 2011,
+    MNRAS, 413, 461
+Özel F., Psaltis D., Narayan R., McClintock J. E., 2010, ApJ, 725,
+    1918
+Patton R. A., Sukhbold T., 2020, arXiv e-prints, p.
+    arXiv:2005.03055
+Podsiadlowski P., Langer N., Poelarends A. J. T., Rappaport S.,
+    Heger A., Pfahl E., 2004, ApJ, 612, 1044
+Portegies Zwart S. F., Yungelson L. R., 1998, Astron. Astrophys.,
+    332, 173
+Rastello S., Mapelli M., Di Carlo U. N., Giacobbo N., Santoliquido
+    F., Spera M., Ballone A., Iorio G., 2020, arXiv e-prints, p.
+    arXiv:2003.02277
+Riley J., Mandel I., Marchant P., Butler E., Nathaniel K., Nei-
+    jssel C., Shortt S., Vigna-Gomez A., 2020, arXiv e-prints, p.
+    arXiv:2010.00002
+Romero-Shaw I. M., Farrow N., Stevenson S., Thrane E., Zhu X.-
+    J., 2020, MNRAS,
+Safarzadeh M., Loeb A., 2020, arXiv e-prints, p. arXiv:2007.00847
+Safarzadeh M., Ramirez-Ruiz E., Berger E., 2020, arXiv e-prints,
+    p. arXiv:2001.04502
+Sana H., et al., 2012, Science, 337, 444
+Shao Y., Li X.-D., 2018, ApJ, 867, 124
+Spera M., Mapelli M., Bressan A., 2015, MNRAS, 451, 4086
+Stevenson S., Vigna-Gómez A., Mandel I., Barrett J. W., Neijssel
+    C. J., Perkins D., de Mink S. E., 2017, Nature Communica-
+    tions, 8, 14906
+Stevenson S., Sampson M., Powell J., Vigna-Gómez A., Neijssel
+    C. J., Szécsi D., Mandel I., 2019, ApJ, 882, 121
+Stockinger G., et al., 2020, arXiv e-prints, p. arXiv:2005.02420
+Tauris T. M., Langer N., Podsiadlowski P., 2015, MNRAS, 451,
+    2123
+Tauris T. M., et al., 2017, ApJ, 846, 170
+Thompson T. A., et al., 2019, Science, 366, 637
+Vigna-Gómez A., et al., 2018, MNRAS, 481, 4009
+Vigna-Gómez A., MacLeod M., Neijssel C. J., Broekgaarden F. S.,
+    Justham S., Howitt G., de Mink S. E., Mandel I., 2020, arXiv
+    e-prints, p. arXiv:2001.09829
+Wyrzykowski L., Mandel I., 2020, A&A, 636, A20
+Zevin M., Spera M., Berry C. P. L., Kalogera V., 2020, arXiv e-
+    prints, p. arXiv:2006.14573
+
+
+
+MNRAS 000, 1–6 (2020)
+

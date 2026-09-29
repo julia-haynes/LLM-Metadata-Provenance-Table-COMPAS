@@ -1,0 +1,1029 @@
+                                                Draft version May 6, 2024
+                                                Typeset using LATEX twocolumn style in AASTeX631
+
+
+
+
+                                              The Binary Black Hole Merger Rate Deviates From the Cosmic Star Formation Rate: A Tug of War
+                                                                           Between Metallicity and Delay Times
+                                                                   Adam P. Boesky,1 Floor S. Broekgaarden,1, 2, 3, 4, 5 and Edo Berger1, 6
+                                                               1 Center for Astrophysics | Harvard & Smithsonian, 60 Garden St., Cambridge, MA 02138, USA
+                                                        2 AstroAI at the Center for Astrophysics | Harvard & Smithsonian, 60 Garden St., Cambridge, MA 02138, USA
+                                                                        3 Simons Society of Fellows, Simons Foundation, New York, NY 10010, USA
+                                              4 Department of Astronomy and Columbia Astrophysics Laboratory, Columbia University, 550 W 120th St, New York, NY 10027, USA
+arXiv:2405.01623v1 [astro-ph.HE] 2 May 2024
+
+
+
+
+                                                  5 William H. Miller III Department of Physics and Astronomy, Johns Hopkins University, Baltimore, Maryland 21218, USA
+                                                                       6 The NSF AI Institute for Artificial Intelligence and Fundamental Interactions
+
+
+
+                                                                                                       ABSTRACT
+                                                       Gravitational-wave detectors are now making it possible to investigate how the merger rate of binary
+                                                     black holes (BBHs) evolves with redshift. In this study, we examine whether the BBH merger rate of
+                                                     isolated binaries deviates from a scaled star formation rate density (SFRD)—a frequently used model
+                                                     in state-of-the-art research. To address this question, we conduct population synthesis simulations
+                                                     using COMPAS with a grid of stellar evolution models, calculate their cosmological merger rates, and
+                                                     compare them to a scaled SFRD. We find that our simulated rates deviate by factors up to 3.5× at
+                                                     z ∼ 0 and 5× at z ∼ 9 due to two main phenomena: (i) The formation efficiency of BBHs is an order
+                                                     of magnitude higher at low metallicities than at solar metallicity; and (ii) BBHs experience a wide
+                                                     range of delays (from a few Myr to many Gyr) between formation and merger. Deviations are similar
+                                                     when comparing to a delayed SFRD, and even larger (up to ∼ 10×) when comparing to SFRD-based
+                                                     models scaled to the local merger rate. Interestingly, our simulations find that the BBH delay time
+                                                     distribution is redshift-dependent, increasing the complexity of the redshift distribution of mergers.
+                                                     We find similar results for simulated merger rates of BHNSs and BNSs. We conclude that the rate of
+                                                     BBH, BHNS, and BNS mergers from the isolated channel can significantly deviate from a scaled SFRD,
+                                                     and that future measurements of the merger rate will provide insights into the formation pathways of
+                                                     gravitational-wave sources.
+
+
+                                                     Keywords: Gravitational waves (678) — Binary stars (154) — Compact objects (288)
+
+                                                               1. INTRODUCTION                                    2022; Gupta et al. 2023). The rate and properties of
+                                                The rapidly increasing sample of gravitational wave               BBH, black hole–neutron star (BHNS), and binary neu-
+                                              (GW) events detected by the Advanced LIGO and                       tron star (BNS) mergers as a function of redshift can
+                                              Virgo interferometers offers a new opportunity to ex-               provide invaluable insights into the physical processes
+                                              plore the formation and properties of black holes (BHs)             underlying BH and NS formation, the massive (binary)
+                                              and neutron stars (NSs) as a function of redshift. The              stars that lead to their formation, their host galaxies,
+                                              most recent GW catalogs (GWTC-3, OGC-4) and in-                     and the different formation channels at play (e.g., Fish-
+                                              dependent GW data analyses already contain about 100                bach et al. 2018; Rodriguez & Loeb 2018; Vitale et al.
+                                              binary black hole (BBH) mergers out to redshifts z ∼ 1.5            2019; Bavera et al. 2021; Ng et al. 2021; Chu et al. 2022;
+                                              (Abbott et al. 2019, 2021, 2023, 2024; Nitz et al. 2023;            Chruślińska 2022; Mapelli et al. 2022; van Son et al.
+                                              Venumadhav et al. 2019, 2020; Zackay et al. 2019; Olsen             2022; Ray et al. 2023; Santoliquido et al. 2023; Vijayku-
+                                              et al. 2022; Mehta et al. 2023; Wadekar et al. 2023), and           mar et al. 2023). A challenge, however, is that informa-
+                                              next-generation GW detectors, such as Cosmic Explorer               tion about the formation pathway and progenitor system
+                                              and Einstein Telescope, are poised to detect stellar-mass           is not directly imprinted in the GW observations. Infer-
+                                              black hole mergers beyond z ≳ 10 (e.g., Punturo et al.              ring such properties, or making predictions for future
+                                              2010; Sathyaprakash et al. 2012; Reitze et al. 2019; Mag-           GW detectors, therefore often requires making assump-
+                                              giore et al. 2020; Evans et al. 2021, 2023; Singh et al.            tions about the underlying merger population.
+2
+
+   A common assumption in the literature is that the           sumptions about stellar and binary evolution. The pa-
+BBH (and BHNS/ BNS) merger rate, Rmerge (z), can be            per is structured as follows. We describe our models
+described by scaled versions of the cosmic star forma-         and methods in Section 2. We investigate the effects of
+tion rate density (SFRD), matched to the local observed        metallicity-dependent formation yield and delay times
+merger rate (e.g., Iacovelli et al. 2022; Gupta et al. 2023;   on Rmerge (z) in Section 3.1 and Section 3.2, respectively.
+Lehoucq et al. 2023). This assumption is based on the          In Section 3.3, we assess the accuracy of models from the
+notion that GW sources are formed from massive stars,          literature by comparing our simulated rates to SFRD-
+whose formation rate is described by the SFRD, which           based models scaled to the inferred local BBH merger
+rapidly form binary compact object systems (∼ 10 Myr;          rate and convolved with different delay time distribu-
+e.g., Kippenhahn & Weigert 1990) that merge after some         tions. We discuss our results for BHNS and BNS merg-
+time. There are many astrophysical processes in the evo-       ers in Section 3.4. We end with a discussion in Section 4
+lution of binary stars, however, that can drastically alter    and a summary of our key findings in Section 5.
+this paradigm, leading to a merger rate that might not
+follow a scaled SFRD. As will be the focal point of this                             2. METHODS
+paper, there are two key processes within the isolated
+binary evolution formation channel that can cause sig-           2.1. Population Synthesis Simulated Merger Rates
+nificant deviations from the SFRD.                               We use the simulation output and methodology from
+   First, the formation efficiency of compact object bi-       Boesky et al. (2024), which are briefly summarized here.
+naries is metallicity-dependent. The evolutionary out-         Boesky et al. (2024) presents a population of simulated
+come of massive (binary) stars can rely strongly on birth      compact object mergers formed through the isolated bi-
+metallicity, as metallicity drives mass loss through stel-     nary evolution pathway. The simulations are generated
+lar winds which impacts, for example, radial extension         using COMPAS1 (Team COMPAS: Riley et al. 2022),
+of stars and the remnant mass of compact objects (e.g.,        a rapid population synthesis code. COMPAS simulates
+Vink et al. 2000, 2001; Langer 2012). Recent work has          the evolution of massive stars based on analytical fitting
+shown that the formation yield of BBHs is strongly de-         formulae for single and binary star evolution by Hurley
+pendent on their birth metallicity (Chruslinska et al.         et al. (2000, 2002), derived from stellar evolution tracks
+2018; Giacobbo & Mapelli 2018; Broekgaarden et al.             presented in Pols et al. (1998), as well as earlier work by
+2022), resulting in a BBH merger rate that does not fol-       Eggleton et al. (1989) and Tout et al. (1996).
+low the SFRD, but an SFRD convolved with this metal-             Boesky et al. (2024) studies two two-parameter-varied
+licity dependence.                                             grids of simulations. Here, we only focus on the grid
+   Second, BBH mergers may occur with a significant            that varies the common-envelope (CE) efficiency, αCE ,
+delay relative to the formation epoch, and the distribu-       and mass transfer efficiency, β, parameters. The CE
+tion of delay times can itself be metallicity-dependent        phase results from dynamically unstable mass transfer in
+(e.g., Belczynski et al. 2016a; Giacobbo & Mapelli 2018).      which the companion star is engulfed in the donor’s en-
+Although massive binary stars form BBH systems (or             velope and tightens the binary through drag (see Ivanova
+BHNS and BNS systems) in just ∼ 10 Myr, the merger             et al. 2020, and references therein). COMPAS employs
+delay times can be as long as many Gyr (e.g. Peters            the ‘αCE − λ’ formalism (Webbink 1984; de Kool 1990)
+1964; Neijssel et al. 2019), resulting in a merger rate that   to parameterize the CE phase. The αCE parameter is of
+may follow a delayed SFRD. Indeed, some GW studies             particular interest when investigating the merger rate
+model Rmerge (z) as a scaled SFRD combined with a de-          because it is capable of significantly reducing binary
+lay time distribution, which is often assumed to follow        separation, and thus potentially altering the expected
+a simple power law, dn/ dt ∝ t−1 , with a minimum de-          dn/ dt ∝ t−1 delay time distribution (e.g. Belczynski
+lay time of ∼ 10 − 100 Myr (e.g., Regimbau et al. 2012;        et al. 2018; Vigna-Gómez et al. 2018). Our grid uses
+Belgacem et al. 2019; Borhanian & Sathyaprakash 2022;          four CE efficiency values, αCE = 0.1, 0.5, 2, and 10,
+Colombo et al. 2022; Iacovelli et al. 2022; Naidu et al.       which is a range representative of prior studies (e.g.,
+2022; Lehoucq et al. 2023).                                    Vigna-Gómez et al. 2018; Bavera et al. 2021; Dorozsmai
+   Here, we investigate how the two aforementioned ef-         & Toonen 2024; Santoliquido et al. 2021; Broekgaarden
+fects impact Rmerge (z). We employ a large set of popu-        et al. 2022). In tandem with αCE , we also vary the ac-
+lation synthesis models for the isolated binary evolution      cretion efficiency β = ∆Macc /Mdonor , where ∆Mdonor
+formation pathway to simulate BBH (as well as BHNS
+and BNS) mergers and investigate the resulting merger            1 Compact Object Mergers:    Population Astrophysics and Statis-
+rates as a function of redshift for a wide range of as-           tics, https://compas.science
+                                                                                                                                          3
+
+and ∆Macc are the changes in the mass of the donor                           To investigate whether popular, simplistic models of
+and accretor stars, respectively. We use β = 0.25, 0.5,                   the merger rate are representative of population synthe-
+and 0.75 to reflect the parameter’s theoretical range of                  sis results, we compare our simulations to three models
+[0, 1] cf. earlier work (Broekgaarden et al. 2022; van Son                from the literature. Throughout this study, we will re-
+et al. 2022; Dorozsmai & Toonen 2024). Henceforth, we                     fer to these as “toy models”. The first, and simplest, toy
+refer to the model with αCE = 2 and β = 0.5 as the                        model is a scaled SFRD. The second is a scaled SFRD
+“fiducial” model.                                                         convolved with a constant delay time of tdelay = 20 Myr.
+   Throughout our study, we adopt a popular model of                      The third is a SFRD convolved with a dn/ dt ∝ 1/t de-
+the SFRD from Madau & Dickinson (2014) (Equation                          lay time distribution that has a minimum delay time of
+15):                                                                      ∼ 20 Myr (similar to studies including Regimbau et al.
+                                                                          2012; Borhanian & Sathyaprakash 2022; Colombo et al.
+                      (1 + z)b                                            2022; Iacovelli et al. 2022; Lehoucq et al. 2023).
+       ψ(z) = a                    M⊙ yr−1 Mpc−3 ,              (1)
+                  1 + [(1 + z)/c]d                                           For all toy models, we use the SFRD described in
+                                                                          Equation 1 to match the SFRD assumed for calculat-
+with a = 0.01, b = 2.6, c = 3.2, and d = 6.2 (Madau
+                                                                          ing the merger rate. Throughout this paper, we compare
+& Fragos 2017). The true SFRD is uncertain, and ex-
+                                                                          toy models to our population synthesis simulated merger
+ploring the impact of assumed SFRD model is left for
+                                                                          rates (Equation 2) by normalizing both such that their
+future research. We expect the qualitative results in this
+                                                                          areas integrate to unity, and then dividing the simulated
+work, however, to be robust under different choices for
+                                                                          Rmerge (z) by the toy model. We first discuss results for
+the SFRD.
+                                                                          the scaled SFRD toy model, and then we describe results
+  To calculate the merger rate of a simulated binary
+                                                                          for the two delayed SFRD toy models in Section 3.3 and
+population of BBH, BHNS, or BNS mergers, we convolve
+                                                                          beyond.
+a metallicity-specific SFRD, S(Zi , z), with the formation
+rate of the population:                                                      3. RESULTS: DEVIATION FROM THE SFRD
+                                                                             In Figure 1, we show the BBH merger rates pro-
+                                                                          duced with our suite of models, and compare them
+                                d4 Nmerge
+ Rmerge (tm , M1 , M1 ) ≡                    (tm , M1 , M2 )              to an arbitrarily scaled SFRD. In the left panel, we
+                          dtm dVc dM1 dM2
+   Z       Z tm                                                           find that our simulated models produce different merger
+ = dZi           dtdelay S(Zi , z(tform = tm − tdelay ))×                 rate distributions as a function of redshift, and also
+              0                                                           lead to different merger rate magnitudes. Models with
+       d4 Nform                                                           αCE = 0.5, 2.0 produce merger rates of factors ∼ 3 − 10
+                       (Zi , tdelay , M1 , M2 ),
+ dMSFR dtdelay dM1 dM2                                                    higher than models with αCE = 0.1, 10.0. This is a result
+                                                                (2)       of αCE = 0.1 causing binaries to merge before stars are
+                                                                          able to become BBHs, while αCE = 10 does not tighten
+where tm is the time of the merger in the comov-                          the binaries enough to merge within a Hubble time3 .
+ing frame, tdelay is the time between the formation                          Most importantly for the scope of this study, we find
+and merger of a binary, and M1 and M2 are the bi-                         that the redshift evolution of our simulated merger rates
+nary component masses. To obtain the metallicity-                         deviate from the scaled SFRD toy model. These devia-
+dependent star formation rate S(Zi , z(tform )), we con-                  tions from the SFRD are highlighted in the right panel
+volve the commonly-used galaxy stellar mass function                      of Figure 1, in which we normalize the merger rates and
+from Panter et al. (2004) with the mass-metallicity rela-                 divide them by the normalized SFRD4 . We find that the
+tion from Ma et al. (2016), and multiply the result with                  normalized BBH merger rates tend to be higher (up to
+the SFRD in Equation 1 (cf. Neijssel et al. 2019; Broek-                  a factor of 3.5) compared to the SFRD at low redshift
+gaarden et al. 2022). We use astropy to transform tm                      z ≲ 1.5, as is visible by all lines exceeding unity. The
+to a redshift using the WMAP9 cosmology2 . For more                       merger rates approach the scaled SFRD around redshift
+details on the merger rate and its calculation, see the                   2, and then fall below the SFRD above redshifts ≳ 2,
+methodology in Team COMPAS: Riley et al. (2022).
+                                                                            3 We elaborate on this “sweet-spot” of α
+       2.2. SFRD-Based Toy Model Merger Rates                                                                       CE in Section 3.2.
+                                                                            4 We note that this normalization is chosen to investigate the rel-
+
+                                                                             ative differences between our simulations and the SFRD toy
+                                                                             model, but leads in practice to minimal differences around the
+  2 We find that the rates are not significantly impacted by the choice
+                                                                             merger rate peak z ∼ 2. See Section 3.3 for results that scale by
+   of cosmology (cf. Neijssel et al. 2019).                                  the local merger rate instead.
+4
+
+
+
+
+Figure 1. Left: The BBH merger rate as a function of redshift for the αCE and β model variations explored in this paper
+compared to the SFRD scaled arbitrarily (black line). Right: The BBH merger rate divided by the SFRD, where we normalize
+the areas of both to 1. The horizontal grey line indicates a merger rate that follows the SFRD. In both panels we include the
+1σ and 2σ confidence intervals calculated by bootstrapping the simulation results to show the sampling uncertainty (note that
+uncertainties are typically the same size as the width of the lines). The sharp decline in the merger rate at z ∼ 9 is due to star
+formation starting at z = 10 in our calculations and the fact that mergers are delayed.
+
+with the exact z at which this occurs depending on the              BBH formation rate relative to the scaled SFRD (the
+model. Some models only fall below the SFRD line at                 toy model). If the formation yield of BBHs were inde-
+high redshifts z ≳ 7, such as those with αCE = 0.5. We              pendent of metallicity, the formation rate of BBHs as
+find deviations of our simulated merger rates from the              a function of redshift would exactly follow the SFRD
+SFRD as high as factors 5× (for the αCE = 10 mod-                   since the simulations assume all other initial conditions
+els around z ∼ 9). The first three columns in Table 1               (e.g., initial mass, initial separation) to be independent
+in the appendix provide statistics on the relative ratios           of initial metallicity, and the time required for massive
+between the (normalized) simulated BBH merger rates                 stars to form BBHs is negligible on this scale. We find
+and SFRD from z = 0 to z = 9.                                       the following results.
+   Despite model-to-model variations, the general trend               First, we observe that, similarly to Rmerge (z) in Fig-
+among our simulated merger rates in Figure 1 indi-                  ure 1, models with αCE = 0.5, 2.0 tend have higher
+cates shared underlying physical processes that cause               Rform (z) than the other two αCE values by a factor of
+Rmerge (z) to deviate from the SFRD. As stated in Sec-              up to ∼ 5. Notably, there is very little variation in
+tion 1, the physical sources of merger rate-SFRD devia-             the redshift evolution of Rform (z) between models, and
+tions is the effect of metallicity and delay times, which           they all deviate from the scaled SFRD. Specifically, the
+we explore comprehensively in the following two sec-                peak of the BBH formation rate from all models is at
+tions.                                                              a higher redshift, z ≈ 2.5, than the peak of the SFRD,
+                                                                    z ≈ 2. As a result, we find that the BBH formation rate
+    3.1. The Effect of Metallicity on the Merger Rate               in the simulated Rform (z) is suppressed at z ≲ zpeak
+  First, we focus on the effect of the metallicity-                 compared to the scaled SFRD with deviations of up to
+dependent formation efficiency on Rmerge (z) for BBHs.              an order of magnitude at z ∼ 0. The simulated BBH
+In the left panel of Figure 2, we plot the BBH for-                 rate is relatively boosted for z ≳ zpeak by a factor of
+mation rate as a function of redshift, Rform (z) (Equa-             ∼ 2× compared to the SFRD. All in all, our results find
+tion 1 in Broekgaarden et al. 2021), for all our models             a metallicity-dependence in the formation rates of pop-
+and in the right panel of Figure 2, we plot the ratio of            ulation synthesis simulations which favors high z BBH
+                                                                                                                                   5
+
+
+
+
+Figure 2. Same as Figure 1, but for the BBH formation rate (formation is defined as the moment when the second BH forms).
+The peak of the BBH formation rate is clearly shifted to higher redshifts than the SFRD due to a higher BBH formation
+efficiency at lower metallicities.
+
+
+
+
+Figure 3. The formation yield of BBHs, BHNSs, and BNSs that will merge within a Hubble time, per solar mass of star
+formation, dRform / dMSFRD , as a function of birth metallicity, Zi , for all models. We choose initial metallicities for each binary
+by sampling randomly from a log-uniform metallicity distribution from Zi = 0.0001 to Zi = 0.03. We then obtain Rform (Zi )
+using a kernel density estimation over the initial metallicities of the simulated binaries. The decline in BBH formation efficiency
+at Zi ≳ Z⊙ /5 is clearly visible.
+6
+
+formation, thus favoring the rate of merging BBHs at          formation redshift. In the left panel of Figure 4, we
+higher redshifts compared to lower redshifts.                 show the normalized distributions of delay times for bi-
+   To further probe the metallicity dependence of BBH         naries formed at z = 0.2, 2, 6 for our fiducial model. We
+formation, we show the simulated formation rates of           do indeed find redshift dependence, as the distributions
+BBHs as a function of initial metallicity, Zi , in the top    for z = 0.2 and z = 2 have flatter slopes than 1/t—
+panel of Figure 3. We find that as Zi increases, the          specifically, the best fits are t−0.60 , t−0.77 , and t−0.95
+BBH formation yield falls off more and more rapidly, as       for z = 0.2, 2.0, and 6.0, respectively, in the region
+much as an order of magnitude by Z⊙ /2, and three or-         tdelay > 100 Myr. We also find that the delay time distri-
+ders of magnitude by 2Z⊙ . This rapid decline is consis-      butions at all three redshifts flatten out for delay times
+tent with findings for BBH mergers formed from isolated       ≲ 500 Myr (compared to tdelay > 500 Myr).
+binary evolution in recent literature (e.g., Giacobbo &          In the right panel of Figure 4 we show the distributions
+Mapelli 2018; Klencki et al. 2018; Giacobbo et al. 2018;      of delay times from our fiducial model, differentiating
+Chruslinska et al. 2018; Neijssel et al. 2019; Santoliquido   observable and unobservable mergers, where the latter
+et al. 2021; Broekgaarden et al. 2022, and Dorozsmai          are those formed at a given redshift with delay times
+& Toonen 2022). Since the mean metallicity increases          longer than the time between its formation and Hubble
+with cosmic time, higher BBH formation efficiency at          time. We find that the majority of binaries formed at
+low progenitor metallicity results in a higher BBH for-       z = 0.2 merge after z = 0. Furthermore, while there
+mation rate relative to the SFRD at higher redshifts          are around an order of magnitude more BBH mergers
+(z ≳ 2.5) (as is visible in Figure 2). The redshift at        at z = 2.0 than to z = 6.0, the proportion of observable
+which we observe notable increases in formation rate          mergers at z = 2 is less than that from z = 6.0 due
+is around where the proportion of formed stars has a          to differences in the range of delay times that lead to
+considerable change in birth metallicity based on the         mergers we can detect.
+Madau-Dickinson prescription (see Appendix B for de-             In Figure 5, we show how the median delay time for
+tails on the metallicity-dependent SFRD). Low model-          BBHs merging in Hubble time evolves with redshift for
+to-model variation in the relationship between metallic-      all models. We find two main results. First, the median
+ity and formation yield leads to the tight spread (within     delay time evolves differently as a function of redshift
+factor few) of BBH formation rates among models that          for different models. Among our simulations there are
+we observe in Figure 2 (cf. Chruslinska et al. 2018; San-     four sets of models with similar median tdelay behav-
+toliquido et al. 2021; Broekgaarden et al. 2022). Boosted     ior throughout redshift, which can be differentiated by
+BBH formation efficiency at low birth metallicity is pre-     αCE value. This suggests that the CE mass transfer
+dominantly caused by less wind loss through line-driven       phase and the CE efficiency parameter used in the sim-
+stellar winds at low metallicity, which leads to tighter      ulations are important in determining a binary’s delay
+binary systems (e.g., because more mass needs to be           time (cf. Chu et al. 2022) and that the effect of αCE on
+expelled during a CE event) and fewer systems that dis-       the delay time distribution is redshift-dependent. We
+rupt during supernova. We discuss this in more detail         find that the median delay time in Figure 5 does not
+in Appendix A.                                                increase monotonically with the αCE value. This is due
+                                                              to the relationship between αCE and the post-CE sep-
+    3.2. The Effect of Delay Times on the Merger Rate         aration: smaller αCE values require the binary’s orbit
+                                                              to shrink more for successful envelope ejection, which
+  The delay times (tdelay ) between the formation and
+                                                              in turn leads to significantly shorter delay times (Peters
+merger of BBHs, can range from a few Myr to greater
+                                                              1964). There is, however, a “sweet-spot” for the αCE
+than the Hubble time (Mennekens & Vanbeveren 2016;
+                                                              value: values that are too low prevent the CE from being
+Belczynski et al. 2016b; Lipunov et al. 2017; Steven-
+                                                              successfully ejected, and the system instead undergoes
+son et al. 2017; Eldridge et al. 2019) and lead the BBH
+                                                              a stellar merger, leading to the non-monotonic behavior
+merger rate to peak at a lower redshift than the forma-
+                                                              (cf. Kruckow et al. 2018; Bavera et al. 2021; Broekgaar-
+tion rate. It is generally thought that the delay time
+                                                              den et al. 2022). Second, the delay time medians are not
+distribution roughly follows dn/ dt ∝ t−1 with a mini-
+                                                              constant throughout cosmic history, as can be seen by
+mum delay time, tmin , typically bound between 10 Myr
+                                                              the decrease in the median BBH delay time as a func-
+– 500 Myr (e.g., Regimbau et al. 2012; Borhanian &
+                                                              tion of redshift for nearly all models in Figure 5. This is
+Sathyaprakash 2022; Colombo et al. 2022; Iacovelli et al.
+                                                              because at higher redshifts, stars form with lower metal-
+2022; Naidu et al. 2022).
+                                                              licities so experience weaker stellar winds and less radial
+  To understand the effect of delay times, we first in-
+                                                              expansion. These conditions typically lead binary sys-
+vestigate whether BBH delay times are dependent on
+                                                                                                                                                          7
+
+                                                                      z = 0.2
+                   10−3                                               z = 2.0
+                                                                      z = 6.0
+                                                                                                       102
+                                                                      ∝ 1/t
+                                                                      Unobservable
+|dRmerge/dtdelay |
+
+
+
+
+                   10−4
+
+
+
+
+                                                                                     dRmerge/dtdelay
+                                                                                                       101
+
+                   10−5
+
+
+                                                                                                       100
+                   10−6
+
+
+                              101            102            103             104                              0   2500   5000   7500   10000   12500   15000
+                                        Delay Time [Myr]                                                                Delay Time [Myr]
+
+Figure 4. The BBH delay time distributions from our fiducial model for binaries formed at redshift 0.2, 2, and 6. (Left) The
+distributions normalized to an area of 1. The bin widths are log-uniformly and uniformly spaced in the left and right panels,
+respectively. (Right) The gray hatched regions are the portion of each distribution that would not merge by z = 0. The lowest
+tdelay bins (those with tdelay ≲ 10 Myr) suffer from sampling uncertainty.
+
+                   3.5
+                                                                                         for more details on the formation channel breakdown of
+                                                                                         our simulations throughout cosmic history.
+                   3.0
+Delay Time [Gyr]
+
+
+
+
+                   2.5                                                                    3.3. Comparison to Delayed SFRD Models and Models
+                                                                                                       Scaled to the Local Merger Rate
+                   2.0
+                                                                                            So far, we have presented the deviations of popula-
+                   1.5                                                                   tion synthesis simulated BBH merger rates from a scaled
+                                                                                         SFRD, but we now consider whether our simulated
+                   1.0
+                                                                                         merger rates deviate from a delayed SFRD. This is moti-
+                   0.5                                                                   vated by—in addition to support for and use of delays in
+                                                                                         models from the literature—our findings in Section 3.2
+                   0.0                                                                   that the delay time distribution of BBH mergers can
+                          1     2   3    4         5    6    7    8     9
+                                             Redshift                                    be complex and variable between models. We use two
+                                                                                         different delayed SFRD models: (i) a scaled SFRD con-
+Figure 5. The median delay times of BBH mergers for each
+model in grid A as a function of redshift. The median only
+                                                                                         volved with a delay time distribution dn/ dt ∝ δ(t − c),
+includes BBHs that merge in Hubble time for each redshift.                               where c = 20 Myr, and (ii) a scaled SFRD convolved
+                                                                                         with a delay time distribution dn/ dt ∝ 1/t with a min-
+                                                                                         imum delay time of 20 Myr. See Section 2.2 for more
+tems to retain more mass, experience less orbital widen-
+                                                                                         details and references on delayed toy models.
+ing, and undergo the same evolutionary pathway in a
+                                                                                            The top panels in Figure 6 show the deviations of our
+tighter orbit. Combined, this causes binaries to form
+                                                                                         simulated Rmerge (z) from the SFRD model with con-
+BBH systems with shorter orbits at lower metallicity,
+                                                                                         stant tdelay . We find that at high redshifts (z ≳ 5),
+which reduces the typical simulated BBH delay time at
+                                                                                         the population synthesis merger rates deviate by factors
+higher redshifts. The models with αCE = 2.0 have the
+                                                                                         up to ∼ 3× from the constant delay toy model—this
+most distinct median delay time z-evolution; this unique
+                                                                                         is slightly less, 2% versus 4% at z = 6 and 1% versus
+redshift dependence is caused by a drastic increase in
+                                                                                         13% at z = 7, than deviations from the SFRD model
+the proportion of mergers formed through the classic
+                                                                                         with no delays (see Table 1). On the other hand, at low
+CE channel at higher redshift that leads to shorter de-
+                                                                                         redshifts, particularly for z ∼ 0, deviations are up to a
+lay times compared to the “only stable mass transfer
+                                                                                         factor 5×, which is larger than deviations without delay
+channel” for these simulations (in agreement with, e.g.,
+                                                                                         times (which has deviations up to 3× at z ∼ 0).
+Olejak et al. 2022; van Son et al. 2022). See Appendix D
+                                                                                            In the bottom panels of Figure 6 we show the devia-
+                                                                                         tions of our simulated BBH merger rates from a SFRD
+8
+
+
+
+
+Figure 6. BBH merger rate as a function of redshift compared to toy models assuming a scaled SFRDs with a constant delay
+time of 20 Myr (top row) and a delay time distribution of dn/ dt ∝ 1/t with a minimum delay time of 20 Myr (bottom row).
+Labels and colors are the same as in Figure 1.
+
+
+
+
+Figure 7. BBH merger rate as a function of redshift compared to toy model merger rates assuming a scaled SFRD (left),
+a scaled SFRD with constant delay times (middle), and a scaled SFRD with a ∝ t−1 delay time distribution (right). All
+simulations are normalized to the same intrinsic merger rate Rmerge,0 . We assumed minimum delay times for the middle and
+right panel of 20 Myr. Labels and colors are the same as in Figure 1.
+
+with a 1/t delay time distribution. This toy model peaks       considerable difference between the effect of convolving
+at a lower redshift of z ∼ 1.5 compared to z ∼ 2 for           the SFRD with a 1/t versus constant delayed distribu-
+the non-delayed or constant delayed SFRD merger rate           tion; therefore, it is crucial that the high tdelay tail is
+models. We find that our population synthesis model            considered by studies in the future.
+merger rates deviate with factors up to 5× at low red-           Lastly, in Figure 7 we show the deviations of our
+shifts z ≲ 2 from the 1/t delayed SFRD merger rate             simulated merger rates from the toy models where we
+model and up to factors 3× at high redshift z ∼ 9 (see         compare by scaling to the local merger rate R0 ≡
+Table 1). Finally, it is important to note that there is a     Rmerge (0)—a scaling often chosen for SFRD-based
+                                                                                                                               9
+
+merger rate models in the literature (e.g., Belgacem         weight to considering merger rates that deviate from a
+et al. 2019; Borhanian & Sathyaprakash 2022; Colombo         SFRD-like rate in future studies (cf. Callister & Farr
+et al. 2022; Iacovelli et al. 2022; Lehoucq et al. 2023).    2023; Payne & Thrane 2023).
+Interestingly, we find that the population synthesis sim-
+ulated merger rates deviate by factors up to 20× com-                              4. DISCUSSION
+pared to each of the SFRD models, with the most sig-                      4.1. Other Formation Channels
+nificant deviations occurring in the range of redshifts
+z ≳ 3. These deviations are significantly larger com-          This study has investigated the redshift evolution of
+pared to those experienced when we scaled the rates          the merger rate of BBHs (and BNSs and BHNSs) formed
+by area. Hence, using phenomenological models for the        by the isolated binary evolution channel. Formation
+BBH merger rate that scale SFRDs by the local merger         pathways beyond the isolated binary evolution channel,
+rate can lead to the largest deviations from simulated       however, can contribute and impact the BBH merger
+population synthesis merger rates, especially for z ≳ 3.     rate as a function of redshift beyond the effects discussed
+                                                             in this paper (e.g., Zevin et al. 2021; Franciolini et al.
+                                                             2022; Mandel & Broekgaarden 2022; Cheng et al. 2023)5 .
+        3.4. The BHNS and BNS Merger Rate                    Studying their effects in detail is beyond the scope of this
+   In Figure 8 and Figure 9, we investigate the merger       paper, but we discuss the dominant redshift behavior of
+rate for BHNSs and BNSs, respectively. For both the          these formation channels below.
+BHNS and BNS merger rates, deviations from the SFRD            BBHs formed from population III stars (i.e., extremely
+are generally similar to those of the BBH merger rate—       metal-poor stars) are thought to merger at a signifi-
+most of our simulations have a proportionally higher rate    cantly different rate than the isolated binary evolution
+of mergers than stars formed at low redshift (z ≲ 2), and    channel: they begin merging at redshifts as early as
+a lower rate at high redshift (z ≳ 4), which are caused      z ∼ 20 and peak around z ∼ 10 (Kinugawa et al.
+by our choice of scaling and the fact that the merger        2020; Belczynski et al. 2017; Hijikawa et al. 2021; Liu
+rates peak at lower redshift compared to the SFRD.           & Bromm 2021; Santoliquido et al. 2023). The redshift
+There are, however, considerably more model-to-model         evolution of population III mergers is still debated and
+variations for the BNS and BHNS merger rates than            depends strongly on assumed binary formation and in-
+the BBH. This stems from the fact that the formation         teraction mechanisms that can bring black holes close to-
+efficiency-metallicity relationship has a markedly greater   gether (e.g. Kinugawa et al. 2014; Kinugawa et al. 2020;
+influence on BHNS and BNS mergers—differing by as            Belczynski et al. 2017; Liu & Bromm 2021)
+much as two to three orders of magnitude—compared to           The merger rate for BBHs formed in dense star clus-
+BBH mergers, which vary within an order of magnitude,        ters is also still under debate and is heavily influenced by
+as can be found in Figure 3. These findings are con-         simulations assumptions and host cluster properties (see
+sistent with similar outcomes reported in the literature     Choksi et al. 2019, and references therein). Some stud-
+(Klencki et al. 2018; Chruslinska et al. 2018; Giacobbo &    ies find that the globular cluster BBH merger rate grad-
+Mapelli 2018; Neijssel et al. 2019; Román-Garza et al.       ually increases at small redshifts until a peak around
+2021; Broekgaarden et al. 2022). In our simulations,         z ∼ 2–3 and a sharp drop-off beyond z ≳ 4 (see Ro-
+BHNS and BNS mergers are more commonly formed by             driguez & Loeb 2018 and Choksi et al. 2019). Kritos
+binaries that experience a CE phase than BBHs, leading       et al. (2022) and Mapelli et al. (2022) found something
+BHNS and BNS simulations to be particularly sensitive        similar, but with a longer high-redshift tail, as they as-
+to the value of αCE .                                        sume higher cluster formation rates at high z. Other
+   Interestingly, we find that many of the BHNS and BNS      studies instead find a monotonically increasing function
+merger rates in Figure 8 and Figure 9 demonstrate sig-       of redshift starting from z ∼ 0 out to their assumed
+nificantly different behavior from the BBH rates and         starting epoch for single burst of globular cluster for-
+SFRD-based toy models. For example, most of the              mation around z ∼ 3–4, leading to a merger rate that
+BHNS merger rates have a significantly steeper drop off      peaks around z ∼ 3–4 and then drops immediately to
+after the merger rate peak in Figure 8. In addition,         zero (Rodriguez et al. 2016; Fragione & Kocsis 2018).
+some of the BNS models in Figure 9 show evidence of
+an additional break in the merger rate slope before the
+                                                               5 The evidence for multiple formation channels from observations
+peak, such as the model with αCE = 0.1 and β = 0.25             is still under debate. Recent studies (e.g. Fishbach et al. 2022;
+around z = 0.5. This phenomenon is due to the com-              Godfrey et al. 2023) find evidence for substantial contributions
+plex convolution of the SFRD, formation efficiency of           from the isolated binary evolution channel of BBHs, but large un-
+BHNSs/BNSs, and delay time distributions, and it lends          certainties remain (e.g. Franciolini et al. 2022; Tong et al. 2022).
+10
+
+
+
+
+                                     Figure 8. Same as Figure 1 for BHNSs mergers.
+
+
+
+
+                                      Figure 9. Same as Figure 1 for BNSs mergers.
+
+The sharp decrease in merger rate beyond z ≳ 4 seen in         ther lead to a peak earlier or later than isolated binary
+most simulations is because clusters have not had suf-         evolution, mostly depending on the binary interaction
+ficient time to undergo core-collapse, a process during        and initial conditions assumed in simulation (for more
+which BHs sink to the center of clusters and undergo           details see de Mink & Mandel 2016; Mandel & de Mink
+the many dynamical interactions that dominate BBH              2016; du Buisson et al. 2020; Riley et al. 2021).
+merger production. Finally, Ye & Fishbach (2024) re-             BBHs formed from primordial origins can merge as
+cently found that the redshift distribution of the BBH         early as z ∼ 1000 and are thought to follow a redshift
+merger rate from globular clusters is correlated with pri-     rate that increases monotonically with increasing red-
+                                                                                     −34/37
+mary mass, and that the peak of the merger rate is at          shift as Rmerge ∝ t(z)       (e.g., Raidal et al. 2019; De
+higher z for binaries with primary mass > 30 M⊙ , and          Luca et al. 2020, 2021; Franciolini et al. 2022).
+even higher z for primary mass > 40 M⊙ .                         It will be important for future studies to further ex-
+   The merger rate of BBHs formed from chemically ho-          plore differences between the BBH merger rates different
+mogeneous evolution is still under debate and could ei-
+                                                                                                                                11
+
+formation pathways (cf. Martinez et al. 2020; Zevin et al.             merger rate with percent level precision (e.g., Punturo
+2021; Bavera et al. 2022b; Mapelli et al. 2022).                       et al. 2010; Sathyaprakash et al. 2012; Reitze et al. 2019;
+                                                                       Maggiore et al. 2020; Evans et al. 2021, 2023; Singh et al.
+             4.2. Observing the Merger Rate                            2022; Gupta et al. 2023).
+  It is challenging to infer the merger rate as a func-
+tion of redshift from observations. The local BHNS,                                           4.3. Caveats
+BNS and BBH merger rates have been constrained using
+GWs, pulsars binary neutron stars (and the lack of black                 The behavior of the redshift-dependent merger rate of
+hole-pulsar binaries), as well as short gamma-ray bursts               BHNS, BNS, and BBH binaries is impacted by effects
+(host galaxies), and r-process enrichment arguments—                   beyond those studied in the scope of the paper. We
+nevertheless, large uncertainties in these methods re-                 mention the most important ones here.
+main (see Mandel & Broekgaarden 2022, and references                     First, as mentioned in Section 4.1, formation channels
+therein). Observations of the rate as a function of red-               beyond the isolated formation channel can impact the
+shift remain scarce. The authors of the latest GWTC-3                  merger rate by contributing additional binaries. Each
+catalog population inference study found that the rate                 of these channels comes with their own unique uncer-
+in the range 0 ≲ z ≲ 1.5 increases proportionally to                   tainties, increasing the complexity of understanding the
+                        +1.7
+(1 + z)κ with κ = 2.9−1.8     (Abbott et al. 2023). This               overall merger rate behavior (e.g., Dominik et al. 2013;
+value of κ is similar to the slope of the SFRD, indicat-               Zevin et al. 2021; Franciolini et al. 2022; Mandel &
+ing that the BBH redshift rate follows the SFRD at low                 Broekgaarden 2022; Arca Sedda et al. 2023, and ref-
+redshift (which was also confirmed by Edelman et al.                   erences therein).
+2023; Nitz et al. 2023), though large uncertainties re-                  Second, not only the merger rate, but also the prop-
+main due to the limited sample of GW observations and                  erties (i.e., masses, black hole spins, mass ratio) of the
+lack of models considered (e.g., the analysis from Ab-                 compact objects are redshift-dependent as a result of
+bott et al. 2023 assumed that the BBH mass distribution                both their birth environments depending on redshift
+does not change as a function of redshift). Other stud-                (e.g., metallicity), as well as the varying range of delay
+ies using different models to analyze the GW data found                times can merge by a given z (e.g., Dominik et al. 2013;
+evidence that the slope of the BBH merger rate might                   Kinugawa et al. 2020; Mapelli et al. 2022; McKernan
+deviate from that of the SFRD (Callister & Farr 2023;                  et al. 2022; van Son et al. 2022). Future work should
+Payne & Thrane 2023). We leave direct comparison to                    further investigate the correlation between the merger
+observations for future studies, and refer the reader to               rate and properties of NSs/BHs in source binaries as a
+the discussion in Ray et al. (2023) for more on this topic.            function of redshift to further aid in understanding the
+  Besides BBHs, the merger rates of BHNS and BNS                       underlying physics and formation channels of mergers
+systems as a function of redshift will also be constrained             (e.g. Qin et al. 2018; Fishbach et al. 2021; Abbott et al.
+by future observing runs and next-generation detectors.                2021; Belczynski et al. 2022; Bavera et al. 2022a; Biscov-
+The merger rate of BNSs (and potentially BHNSs) can                    eanu et al. 2022; van Son et al. 2022; Callister & Farr
+also be constrained from electromagnetic observations                  2023).
+of gamma-ray bursts (see e.g., Berger 2014; Fong et al.                  Third, the underlying metallicity-dependent star for-
+2015; Nugent et al. 2022; Zevin et al. 2022, and refer-                mation history is uncertain, especially at higher redshift
+ences therein)—although, in practice, this will require a              z ≳ 4 (see Chruślińska & Nelemans 2019; Chruślińska
+large sample of sGRB with associated host-galaxies as                  2022, and references therein). Although we expect the
+well as a better understanding of sGRB jet physics.                    qualitative results in this study to be the same for differ-
+  In coming years, new observing runs, including O4 and                ent S(Zi , z) models, the quantitative results (i.e. with
+O5, are poised to increase the number of BBH merger                    what factor the merger rate deviates from an SFRD’s
+detections to ∼ 500 out to z ∼ 2, which will help con-                 redshift evolution) will likely depend on the choice of
+strain the BBH merger rate as a function of redshift Ab-               the metallicity-dependent star formation rate assumed.
+bott et al. (2018)6 . Moreover, next-generation GW de-                 This is because S(Zi , z) describes the number of systems
+tectors, such as Cosmic Explorer and Einstein Telescope,               formed at a given metallicity as a function of redshift,
+are expected to detect stellar-mass black hole mergers                 and will therefore govern when and how much the drop
+out to (and beyond) redshifts z ≳ 10 and measure the                   in BBH formation efficiency (Figure 3) will impact the
+                                                                       merger rate distribution.
+                                                                         Fourth, there are many uncertainties in the physics
+  6 See https://observing.docs.ligo.org/plan/index.html for the most
+                                                                       underlying single and binary stellar evolution that can
+   up-to-date information.                                             impact our study beyond the parameters considered
+12
+
+here. A complete study is beyond the scope of this                      causing more orbital shrinking for binaries formed
+paper (and any single study), so we refer the inter-                    at low metallicity and high redshift. We find that
+ested reader to studies including Mapelli (2021); Bel-                  the common envelope efficiency parameter has a
+czynski et al. (2022); Santoliquido et al. (2021); Broek-               strong impact on this redshift evolution.
+gaarden et al. (2022); Mandel & Broekgaarden (2022);
+                                                                      4. Our simulated BBH merger rates deviate from
+Spera et al. (2022) and references therein. The most
+                                                                         SFRD models convolved with delay times (Fig-
+important effects that can impact this study will be un-
+                                                                         ure 6 and Table 1). This is because delayed SFRD
+certainties relating to the formation efficiency behavior
+                                                                         models for the BBH rate fail to include the metal-
+(Figure 3) and/or that drastically alter the delay time
+                                                                         licity dependence of BBH formation found in our
+distributions of BBH, BHNS, and BNS mergers. In par-
+                                                                         simulations which causes a decrease in BBH for-
+ticular, models with weak stellar wind loss have found a
+                                                                         mation at low z.
+more gradual decrease in the BBH merger efficiency at
+high metallicity (e.g. Broekgaarden et al. 2022). For de-             5. We find even larger deviations (up to factors ∼
+lay time distributions, the angular momentum transport                   10×) when comparing the simulated BBH merger
+and mass transfer physics (and effect from radius expan-                 rates to SFRD models scaled to the local merger
+sion, e.g. Laplace et al. (2020); Romagnolo et al. (2023))               rate, with the largest deviations at higher redshifts
+are important uncertainties that impact the separation                   z ≳ 3 (Figure 7). This means studies that use
+at which binaries form and thus the merger time. These                   SFRD-based that are matched to the local GW
+should be the focus of future work (e.g. Dorozsmai &                     merger rate might under- or overestimate the un-
+Toonen 2022; Agrawal et al. 2023).                                       derlying BBH merger rate by an order of magni-
+                                                                         tude at these higher redshifts. The high-z regime
+                    5. CONCLUSIONS
+                                                                         will be of particular relevance in coming years
+   In this paper we studied how the BBH merger rate ex-                  when the frontier of GW observation is pushed to
+pected from isolated binary evolution deviates from the                  the early years of our Universe.
+cosmic star formation rate density, focusing on two key
+effects: metallicity-dependent formation rates and delay              6. Similarly to BBHs, we find that our simulated
+times. To achieve this, we conducted a grid of 4 × 3 sim-                BHNS and BNS merger rates deviate from a scaled
+ulations using the population synthesis code COMPAS,                     SFRD rate (Figures 8, 9). We do find, however,
+varying the CE efficiency and mass transfer efficiency                   that the simulated BHNS and BNS merger rates
+parameters. We compared our simulated BBH rates to                       are more impacted by our our model’s parameter
+different SFRD-based models from the literature, and                     prescriptions than BBHs.
+performed similar analysis with BHNS and BNS merg-                    7. Some of the simulated BHNS and BNS merger
+ers from our simulations. Below, we summarize our main                   rates deviate from a simple SFRD-like redshift
+findings.                                                                evolution parameterized by two slopes and a peak,
+                                                                         and may actually include breaks before the peak
+     1. Simulated BBH merger rates can deviate signifi-
+                                                                         (e.g. our αCE = 0.1 models in Figure 9).
+        cantly (factors up to 3.5−5×) from a merger rate
+        model described by a scaled SFRD (Figure 1 and               Overall, we find that the simulated BBH, BHNS, and
+        Table 1).                                                  BNS merger rates of the isolated binary evolution chan-
+                                                                   nel can significantly deviate from a scaled cosmic star
+     2. These deviations are caused by simulations experi-
+                                                                   formation rate. This motivates the use of non-SFRD-
+        encing (i) more efficient formation of BBHs at low
+                                                                   based merger rate models for future studies and explo-
+        metallicity, leading to a shift of the BBH formation
+                                                                   ration of the merger population.
+        rate peak to z ∼ 2.5 as opposed to z ∼ 2 for the
+        SFRD (Figure 2 and Figure 3) and (ii) a broad dis-
+                                                               1   APB acknowledges support from the Harvard PRISE
+        tribution of delay times that create time gaps from
+                                                               2   and HCRP fellowships. FSB acknowledges support
+        formation to merger, boosting the merger rate at
+                                                               3   for this work through the NASA FINESST scholarship
+        lower redshifts (Figure 4).
+                                                               4   80NSSC22K1601 and from the Simons Foundation as
+     3. Many of our simulations display a redshift-            5   part of the Simons Foundation Society of Fellows under
+        dependence in the BBH delay time distribution,         6   award number 1141468. FSB also thanks the Steward
+        favoring shorter delay times at higher redshifts       7   Astronomy Department at the University of Arizona and
+        (Figure 5). This is caused by a complex inter-         8   the CCA at the Simons Foundation for providing a work
+        play between metallicity and formation channels        9   place during this project.
+                                                                                                                            13
+
+  Software:      This paper made use of simulations             STROOPWAFEL. The authors’ primary programming
+from Boesky et al. (2024) which are publicly avail-             language was Python from the Python Software
+able at GW Landscape. To create this dataset, we                Foundation available at http://www.python.org (van
+used the COMPAS rapid binary population synthesis               Rossum 1995). In addition, the following Python pack-
+code version 2.31.04, which is available for free at http:      ages were used: Matplotlib (Hunter 2007), NumPy
+//github.com/TeamCOMPAS/COMPAS (Team COM-                       (Harris et al. 2020), SciPy (Virtanen et al. 2020),
+PAS: Riley et al. 2022). The authors used STROOP-               IPython/Jupyter (Perez & Granger 2007; Kluyver
+WAFEL from (Broekgaarden et al. 2019), publicly                 et al. 2016), Astropy (Collaboration et al. 2018) and
+available at https://github.com/FloorBroekgaarden/              hdf5 (Collette 2013).
+
+
+                                                       REFERENCES
+Abbott, B., Abbott, R., Abbott, T., et al. 2018, Living Rev     Belczynski, K., Bulik, T., Olejak, A., et al. 2018, arXiv
+  Relativ, 21, 3, doi: 10.1007/s41114-018-0012-9                  e-prints, arXiv:1812.10065,
+Abbott, B. P., et al. 2019, Physical Review X, 9, 031040,         doi: 10.48550/arXiv.1812.10065
+  doi: 10.1103/PhysRevX.9.031040                                Belczynski, K., Romagnolo, A., Olejak, A., et al. 2022,
+Abbott, R., Abbott, T. D., Abraham, S., Acernese, F.,             ApJ, 925, 69, doi: 10.3847/1538-4357/ac375a
+  et al. 2021, Physical Review X, 11, 021053,                   Belgacem, E., Dirian, Y., Foffa, S., et al. 2019, JCAP, 2019,
+  doi: 10.1103/PhysRevX.11.021053                                 015, doi: 10.1088/1475-7516/2019/08/015
+—. 2024, Phys. Rev. D, 109, 022001,
+                                                                Berger, E. 2014, ARA&A, 52, 43,
+  doi: 10.1103/PhysRevD.109.022001
+                                                                  doi: 10.1146/annurev-astro-081913-035926
+Abbott, R., Abbott, T. D., Abraham, S., et al. 2021, The
+                                                                Biscoveanu, S., Callister, T. A., Haster, C.-J., et al. 2022,
+  Astrophysical Journal Letters, 913, L7,
+                                                                  The Astrophysical Journal Letters, 932, L19,
+  doi: 10.3847/2041-8213/abe949
+                                                                  doi: 10.3847/2041-8213/ac71a8
+Abbott, R., Abbott, T. D., Acernese, F., et al. 2023,
+  Physical Review X, 13, 041039,                                Boesky, A., Broekgaarden, F. S., & Berger, E. 2024,
+  doi: 10.1103/PhysRevX.13.041039                                 doi: TBD
+Abbott, R., Abbott, T. D., Acernese, F., et al. 2023, Phys.     Borhanian, S., & Sathyaprakash, B. S. 2022, arXiv e-prints,
+  Rev. X, 13, 011048, doi: 10.1103/PhysRevX.13.011048             arXiv:2202.11048, doi: 10.48550/arXiv.2202.11048
+Agrawal, P., Hurley, J., Stevenson, S., et al. 2023, Monthly    Broekgaarden, F. S., Justham, S., de Mink, S. E., et al.
+  Notices of the Royal Astronomical Society, 525, 933,            2019, MNRAS, 490, 5228, doi: 10.1093/mnras/stz2558
+  doi: 10.1093/mnras/stad2334                                   Broekgaarden, F. S., Berger, E., Neijssel, C. J., et al. 2021,
+Arca Sedda, M., Naoz, S., & Kocsis, B. 2023, Universe, 9,         Monthly Notices of the Royal Astronomical Society, 508,
+  138, doi: 10.3390/universe9030138                               5028, doi: 10.1093/mnras/stab2716
+Bavera, S. S., Fishbach, M., Zevin, M., Zapartas, E., &         Broekgaarden, F. S., Berger, E., Stevenson, S., et al. 2022,
+  Fragos, T. 2022a, A&A, 665, A59,                                Monthly Notices of the Royal Astronomical Society,
+  doi: 10.1051/0004-6361/202243724                                doi: 10.1093/mnras/stac1677
+Bavera, S. S., Franciolini, G., Cusin, G., et al. 2022b, A&A,   Callister, T. A., & Farr, W. M. 2023, arXiv e-prints,
+  660, A26, doi: 10.1051/0004-6361/202142208
+                                                                  arXiv:2302.07289, doi: 10.48550/arXiv.2302.07289
+Bavera, S. S., Fragos, T., Zevin, M., et al. 2021, Astronomy
+                                                                Cheng, A. Q., Zevin, M., & Vitale, S. 2023, The
+  & Astrophysics, 647, A153,
+                                                                  Astrophysical Journal, 955, 127,
+  doi: 10.1051/0004-6361/202039804
+                                                                  doi: 10.3847/1538-4357/aced98
+Belczynski, K., Doctor, Z., Zevin, M., et al. 2022, The
+                                                                Choksi, N., Volonteri, M., Colpi, M., Gnedin, O. Y., & Li,
+  Astrophysical Journal, 935, 126,
+                                                                  H. 2019, The Astrophysical Journal, 873, 100,
+  doi: 10.3847/1538-4357/ac8167
+Belczynski, K., Holz, D. E., Bulik, T., & O’Shaughnessy, R.       doi: 10.3847/1538-4357/aaffde
+  2016a, Nature, 534, 512, doi: 10.1038/nature18322             Chruślińska, M., & Nelemans, G. 2019, MNRAS, 488, 5300,
+—. 2016b, Nature, 534, 512, doi: 10.1038/nature18322              doi: 10.1093/mnras/stz2057
+Belczynski, K., Ryu, T., Perna, R., et al. 2017, Monthly        Chruslinska, M., Nelemans, G., & Belczynski, K. 2018,
+  Notices of the Royal Astronomical Society, 471, 4702,           Monthly Notices of the Royal Astronomical Society, 482,
+  doi: 10.1093/mnras/stx1759                                      5012, doi: 10.1093/mnras/sty3087
+14
+
+Chruślińska, M. 2022, Chemical evolution of the Universe        Fragione, G., & Kocsis, B. 2018, Phys. Rev. Lett., 121,
+  and its consequences for gravitational-wave astrophysics,       161103, doi: 10.1103/PhysRevLett.121.161103
+  arXiv, doi: 10.48550/ARXIV.2206.10622                         Franciolini, G., Cotesta, R., Loutrel, N., et al. 2022, Phys.
+Chu, Q., Yu, S., & Lu, Y. 2022, MNRAS, 509, 1557,                 Rev. D, 105, 063510, doi: 10.1103/PhysRevD.105.063510
+  doi: 10.1093/mnras/stab2882                                   Giacobbo, N., & Mapelli, M. 2018, Monthly Notices of the
+Collaboration, T. A., Price-Whelan, A. M., Sipőcz, B. M.,         Royal Astronomical Society, 480, 2011,
+  et al. 2018, The Astronomical Journal, 156, 123,                doi: 10.1093/mnras/sty1999
+  doi: 10.3847/1538-3881/aabc4f                                 Giacobbo, N., Mapelli, M., & Spera, M. 2018, MNRAS,
+Collette, A. 2013, Python and HDF5 (O’Reilly)                     474, 2959, doi: 10.1093/mnras/stx2933
+Colombo, A., Salafia, O. S., Gabrielli, F., et al. 2022, The    Godfrey, J., Edelman, B., & Farr, B. 2023, arXiv e-prints,
+  Astrophysical Journal, 937, 79,                                arXiv:2304.01288, doi: 10.48550/arXiv.2304.01288
+  doi: 10.3847/1538-4357/ac8d00                                 Gupta, I., Afle, C., Arun, K. G., et al. 2023, arXiv e-prints,
+de Kool, M. 1990, ApJ, 358, 189, doi: 10.1086/168974             arXiv:2307.10421, doi: 10.48550/arXiv.2307.10421
+De Luca, V., Desjacques, V., Franciolini, G., & Riotto, A.      Harris, C. R., Millman, K. J., van der Walt, S. J., et al.
+  2020, JCAP, 2020, 028,                                          2020, Nature, 585, 357–362,
+  doi: 10.1088/1475-7516/2020/11/028                              doi: 10.1038/s41586-020-2649-2
+De Luca, V., Franciolini, G., Pani, P., & Riotto, A. 2021,      Hijikawa, K., Tanikawa, A., Kinugawa, T., Yoshida, T., &
+  JCAP, 2021, 039, doi: 10.1088/1475-7516/2021/11/039
+                                                                  Umeda, H. 2021, Monthly Notices of the Royal
+de Mink, S. E., & Mandel, I. 2016, Monthly Notices of the
+                                                                  Astronomical Society: Letters, 505, L69,
+  Royal Astronomical Society, 460, 3545,
+                                                                  doi: 10.1093/mnrasl/slab052
+  doi: 10.1093/mnras/stw1219
+                                                                Hunter, J. D. 2007, Computing in Science and Engineering,
+Dominik, M., Belczynski, K., Fryer, C., et al. 2013, ApJ,
+                                                                 9, 90, doi: 10.1109/MCSE.2007.55
+  779, 72, doi: 10.1088/0004-637X/779/1/72
+                                                                Hurley, J. R., Pols, O. R., & Tout, C. A. 2000, MNRAS,
+Dorozsmai, A., & Toonen, S. 2022, arXiv e-prints,
+                                                                 315, 543, doi: 10.1046/j.1365-8711.2000.03426.x
+  arXiv:2207.08837, doi: 10.48550/arXiv.2207.08837
+                                                                Hurley, J. R., Tout, C. A., & Pols, O. R. 2002, MNRAS,
+—. 2024, MNRAS, doi: 10.1093/mnras/stae152
+                                                                 329, 897, doi: 10.1046/j.1365-8711.2002.05038.x
+du Buisson, L., Marchant, P., Podsiadlowski, P., et al. 2020,
+                                                                Iacovelli, F., Mancarella, M., Foffa, S., & Maggiore, M.
+  Monthly Notices of the Royal Astronomical Society, 499,
+                                                                  2022, ApJ, 941, 208, doi: 10.3847/1538-4357/ac9cd4
+  5941, doi: 10.1093/mnras/staa3225
+                                                                Ivanova, N., Justham, S., & Ricker, P. 2020, Common
+Edelman, B., Farr, B., & Doctor, Z. 2023, ApJ, 946, 16,
+                                                                  Envelope Evolution, doi: 10.1088/2514-3433/abb6f0
+  doi: 10.3847/1538-4357/acb5ed
+                                                                Kinugawa, T., Inayoshi, K., Hotokezaka, K., Nakauchi, D.,
+Eggleton, P. P., Fitchett, M. J., & Tout, C. A. 1989, ApJ,
+                                                                  & Nakamura, T. 2014, MNRAS, 442, 2963,
+  347, 998, doi: 10.1086/168190
+Eldridge, J. J., Stanway, E. R., & Tang, P. N. 2019,              doi: 10.1093/mnras/stu1022
+  MNRAS, 482, 870, doi: 10.1093/mnras/sty2714                   Kinugawa, T., Nakamura, T., & Nakano, H. 2020, Monthly
+Evans, M., Adhikari, R. X., Afle, C., et al. 2021, arXiv          Notices of the Royal Astronomical Society, 498, 3946,
+  e-prints, arXiv:2109.09882,                                     doi: 10.1093/mnras/staa2511
+  doi: 10.48550/arXiv.2109.09882                                Kippenhahn, R., & Weigert, A. 1990, Stellar Structure and
+Evans, M., Corsi, A., Afle, C., et al. 2023, arXiv e-prints,      Evolution
+  arXiv:2306.13745, doi: 10.48550/arXiv.2306.13745              Klencki, J., Moe, M., Gladysz, W., et al. 2018, Astronomy
+Fishbach, M., Holz, D. E., & Farr, W. M. 2018, ApJL, 863,         & Astrophysics, 619, A77,
+  L41, doi: 10.3847/2041-8213/aad800                              doi: 10.1051/0004-6361/201833025
+Fishbach, M., Kimball, C., & Kalogera, V. 2022, The             Kluyver, T., Ragan-Kelley, B., Pérez, F., et al. 2016, in
+  Astrophysical Journal Letters, 935, L26,                        ELPUB, 87–90
+  doi: 10.3847/2041-8213/ac86c4                                 Kritos, K., Strokov, V., Baibhav, V., & Berti, E. 2022,
+Fishbach, M., Doctor, Z., Callister, T., et al. 2021, The         arXiv e-prints, arXiv:2210.10055,
+  Astrophysical Journal, 912, 98,                                 doi: 10.48550/arXiv.2210.10055
+  doi: 10.3847/1538-4357/abee11                                 Kruckow, M. U., Tauris, T. M., Langer, N., Kramer, M., &
+Fong, W., Berger, E., Margutti, R., & Zauderer, B. A.             Izzard, R. G. 2018, MNRAS, 481, 1908,
+  2015, ApJ, 815, 102, doi: 10.1088/0004-637X/815/2/102           doi: 10.1093/mnras/sty2190
+                                                                                                                            15
+
+Langer, N. 2012, ARA&A, 50, 107,                                Nitz, A. H., Kumar, S., Wang, Y.-F., et al. 2023, ApJ, 946,
+  doi: 10.1146/annurev-astro-081811-125534                        59, doi: 10.3847/1538-4357/aca591
+Laplace, E., Götberg, Y., de Mink, S. E., Justham, S., &        Nugent, A. E., Fong, W.-F., Dong, Y., et al. 2022, ApJ,
+  Farmer, R. 2020, A&A, 637, A6,                                  940, 57, doi: 10.3847/1538-4357/ac91d1
+  doi: 10.1051/0004-6361/201937300                              Olejak, A., Fryer, C. L., Belczynski, K., & Baibhav, V.
+Lehoucq, L., Dvorkin, I., Srinivasan, R., Pellouin, C., &         2022, MNRAS, 516, 2252, doi: 10.1093/mnras/stac2359
+  Lamberts, A. 2023, MNRAS, 526, 4378,
+                                                                Olsen, S., Venumadhav, T., Mushkin, J., et al. 2022,
+  doi: 10.1093/mnras/stad2917
+                                                                  PhRvD, 106, 043009, doi: 10.1103/PhysRevD.106.043009
+Lipunov, V., Kornilov, V., Gorbovskoy, E., et al. 2017, New
+                                                                Panter, B., Heavens, A. F., & Jimenez, R. 2004, MNRAS,
+  Astronomy, 51, 122,
+                                                                  355, 764, doi: 10.1111/j.1365-2966.2004.08355.x
+  doi: https://doi.org/10.1016/j.newast.2016.08.017
+Liu, B., & Bromm, V. 2021, Monthly Notices of the Royal         Payne, E., & Thrane, E. 2023, Physical Review Research, 5,
+  Astronomical Society, 506, 5451,                                023013, doi: 10.1103/PhysRevResearch.5.023013
+  doi: 10.1093/mnras/stab2028                                   Perez, F., & Granger, B. E. 2007, Computing in Science
+Ma, X., Hopkins, P. F., Faucher-Giguère, C.-A., et al. 2016,      and Engineering, 9, 21, doi: 10.1109/MCSE.2007.53
+  MNRAS, 456, 2140, doi: 10.1093/mnras/stv2659                  Peters, P. C. 1964, Phys. Rev., 136, B1224,
+Madau, P., & Dickinson, M. 2014, Annual Review of                 doi: 10.1103/PhysRev.136.B1224
+  Astronomy and Astrophysics, 52, 415,                          Pols, O. R., Schröder, K.-P., Hurley, J. R., Tout, C. A., &
+  doi: 10.1146/annurev-astro-081811-125615                        Eggleton, P. P. 1998, Monthly Notices of the Royal
+Madau, P., & Fragos, T. 2017, ApJ, 840, 39,                       Astronomical Society, 298, 525,
+  doi: 10.3847/1538-4357/aa6af9                                   doi: 10.1046/j.1365-8711.1998.01658.x
+Maggiore, M., Van Den Broeck, C., Bartolo, N., et al. 2020,     Punturo, M., Abernathy, M., Acernese, F., et al. 2010,
+  JCAP, 2020, 050, doi: 10.1088/1475-7516/2020/03/050
+                                                                  Classical and Quantum Gravity, 27, 194002,
+Mandel, I., & Broekgaarden, F. S. 2022, Living Reviews in
+                                                                  doi: 10.1088/0264-9381/27/19/194002
+  Relativity, 25, 1, doi: 10.1007/s41114-021-00034-3
+                                                                Qin, Y., Fragos, T., Meynet, G., et al. 2018, A&A, 616,
+Mandel, I., & de Mink, S. E. 2016, Monthly Notices of the
+                                                                  A28, doi: 10.1051/0004-6361/201832839
+  Royal Astronomical Society, 458, 2634,
+                                                                Raidal, M., Spethmann, C., Vaskonen, V., & Veermäe, H.
+  doi: 10.1093/mnras/stw379
+Mapelli, M. 2021, in Handbook of Gravitational Wave               2019, JCAP, 2019, 018,
+  Astronomy, 16, doi: 10.1007/978-981-15-4702-7_16-1              doi: 10.1088/1475-7516/2019/02/018
+Mapelli, M., Bouffanais, Y., Santoliquido, F., Arca Sedda,      Ray, A., Hernandez, I. M., Mohite, S., Creighton, J., &
+  M., & Artale, M. C. 2022, Monthly Notices of the Royal          Kapadia, S. 2023, ApJ, 957, 37,
+  Astronomical Society, 511, 5797,                                doi: 10.3847/1538-4357/acf452
+  doi: 10.1093/mnras/stac422                                    Regimbau, T., Dent, T., Del Pozzo, W., et al. 2012,
+Martinez, M. A. S., Fragione, G., Kremer, K., et al. 2020,        PhRvD, 86, 122001, doi: 10.1103/PhysRevD.86.122001
+  ApJ, 903, 67, doi: 10.3847/1538-4357/abba25                   Reitze, D., Adhikari, R. X., Ballmer, S., et al. 2019, in
+McKernan, B., Ford, K. E. S., Callister, T., et al. 2022,         Bulletin of the American Astronomical Society, Vol. 51,
+  MNRAS, 514, 3886, doi: 10.1093/mnras/stac1570                   35, doi: 10.48550/arXiv.1907.04833
+Mehta, A. K., Olsen, S., Wadekar, D., et al. 2023, New          Riley, J., Mandel, I., Marchant, P., et al. 2021, Monthly
+  binary black hole mergers in the LIGO-Virgo O3b data.
+                                                                  Notices of the Royal Astronomical Society, 505, 663,
+  https://arxiv.org/abs/2311.06061
+                                                                  doi: 10.1093/mnras/stab1291
+Mennekens, N., & Vanbeveren, D. 2016, A&A, 589, A64,
+                                                                Rodriguez, C. L., Chatterjee, S., & Rasio, F. A. 2016, Phys.
+  doi: 10.1051/0004-6361/201628193
+                                                                  Rev. D, 93, 084029, doi: 10.1103/PhysRevD.93.084029
+Naidu, R. P., Ji, A. P., Conroy, C., et al. 2022, ApJL, 926,
+                                                                Rodriguez, C. L., & Loeb, A. 2018, The Astrophysical
+  L36, doi: 10.3847/2041-8213/ac5589
+Neijssel, C. J., Vigna-Gómez, A., Stevenson, S., et al. 2019,     Journal Letters, 866, L5, doi: 10.3847/2041-8213/aae377
+  MNRAS, 490, 3740, doi: 10.1093/mnras/stz2840                  Romagnolo, A., Belczynski, K., Klencki, J., et al. 2023,
+Ng, K. K. Y., Vitale, S., Farr, W. M., & Rodriguez, C. L.         MNRAS, 525, 706, doi: 10.1093/mnras/stad2366
+  2021, The Astrophysical Journal Letters, 913, L5,             Román-Garza, J., Bavera, S. S., Fragos, T., et al. 2021,
+  doi: 10.3847/2041-8213/abf8be                                   ApJL, 912, L23, doi: 10.3847/2041-8213/abf42c
+16
+
+Santoliquido, F., Mapelli, M., Giacobbo, N., Bouffanais, Y.,     van Rossum, G. 1995, Python tutorial, Tech. Rep.
+  & Artale, M. C. 2021, Monthly Notices of the Royal               CS-R9526, Centrum voor Wiskunde en Informatica
+  Astronomical Society, 502, 4877,                                 (CWI), Amsterdam
+                                                                 Venumadhav, T., Zackay, B., Roulet, J., Dai, L., &
+  doi: 10.1093/mnras/stab280
+                                                                   Zaldarriaga, M. 2019, PhRvD, 100, 023011,
+Santoliquido, F., Mapelli, M., Iorio, G., et al. 2023,             doi: 10.1103/PhysRevD.100.023011
+  Monthly Notices of the Royal Astronomical Society, 524,        —. 2020, PhRvD, 101, 083030,
+  307, doi: 10.1093/mnras/stad1860                                 doi: 10.1103/PhysRevD.101.083030
+Sathyaprakash, B., Abernathy, M., Acernese, F., et al.           Vigna-Gómez, A., Neijssel, C. J., Stevenson, S., et al. 2018,
+                                                                   MNRAS, 481, 4009, doi: 10.1093/mnras/sty2463
+  2012, Classical and Quantum Gravity, 29, 124013,
+                                                                 Vijaykumar, A., Fishbach, M., Adhikari, S., & Holz, D. E.
+  doi: 10.1088/0264-9381/29/12/124013
+                                                                   2023, arXiv e-prints, arXiv:2312.03316,
+Singh, N., Bulik, T., Belczynski, K., & Askar, A. 2022,            doi: 10.48550/arXiv.2312.03316
+  Astronomy & Astrophysics, 667, A2,                             Vink, J. S., de Koter, A., & Lamers, H. J. G. L. M. 2000,
+  doi: 10.1051/0004-6361/202142856                                 A&A, 362, 295. https://arxiv.org/abs/astro-ph/0008183
+                                                                 Vink, J. S., de Koter, A., & Lamers, H. J. G. L. M. 2001,
+Spera, M., Trani, A. A., & Mencagli, M. 2022, Galaxies, 10,
+                                                                   A&A, 369, 574, doi: 10.1051/0004-6361:20010127
+  76, doi: 10.3390/galaxies10040076
+                                                                 Virtanen, P., Gommers, R., Oliphant, T. E., et al. 2020,
+Stevenson, S., Vigna-Gómez, A., Mandel, I., et al. 2017,           Nature Methods, 17, 261, doi: 10.1038/s41592-019-0686-2
+  Nature Communications, 8, 14906,                               Vitale, S., Farr, W. M., Ng, K. K. Y., & Rodriguez, C. L.
+  doi: 10.1038/ncomms14906                                         2019, The Astrophysical Journal Letters, 886, L1,
+Team COMPAS: Riley, J., Agrawal, P., Barrett, J. W.,               doi: 10.3847/2041-8213/ab50c0
+                                                                 Wadekar, D., Roulet, J., Venumadhav, T., et al. 2023,
+  et al. 2022, ApJS, 258, 34, doi: 10.3847/1538-4365/ac416c
+                                                                   arXiv e-prints, arXiv:2312.06631,
+Tong, H., Galaudage, S., & Thrane, E. 2022, PhRvD, 106,
+                                                                   doi: 10.48550/arXiv.2312.06631
+  103019, doi: 10.1103/PhysRevD.106.103019                       Webbink, R. F. 1984, ApJ, 277, 355, doi: 10.1086/161701
+Tout, C. A., Pols, O. R., Eggleton, P. P., & Han, Z. 1996,       Ye, C. S., & Fishbach, M. 2024, arXiv e-prints,
+  Monthly Notices of the Royal Astronomical Society, 281,          arXiv:2402.12444. https://arxiv.org/abs/2402.12444
+  257, doi: 10.1093/mnras/281.1.257                              Zackay, B., Venumadhav, T., Dai, L., Roulet, J., &
+                                                                   Zaldarriaga, M. 2019, PhRvD, 100, 023007,
+van Son, L. A. C., de Mink, S. E., Callister, T., et al. 2022,
+                                                                   doi: 10.1103/PhysRevD.100.023007
+  The Astrophysical Journal, 931, 17,                            Zevin, M., Nugent, A. E., Adhikari, S., et al. 2022, ApJL,
+  doi: 10.3847/1538-4357/ac64a3                                    940, L18, doi: 10.3847/2041-8213/ac91cd
+van Son, L. A. C., de Mink, S. E., Renzo, M., et al. 2022,       Zevin, M., Bavera, S. S., Berry, C. P. L., et al. 2021, ApJ,
+  ApJ, 940, 184, doi: 10.3847/1538-4357/ac9b0a                     910, 152, doi: 10.3847/1538-4357/abe40e
+                                                                                                                                                                         17
+
+
+                                                                                                           APPENDIX
+
+
+
+                          A. THE IMPACT OF METALLICITY ON STELLAR EVOLUTION
+  Metallicity plays a major role in both single and binary star evolution (Neijssel et al. 2019; Broekgaarden et al.
+2022; Chruślińska 2022), predominantly as a direct result of its impact on stellar winds (Vink et al. 2001). Winds
+from massive stars are driven by spectral lines from metals. Wind strips mass from stars, so stars with high initial
+metallicity lose significantly more mass in their lifetimes than metal-poor stars. This leads stars born with greater
+proportions of metals to form NSs instead of BHs. The effects of metallicity on binary stellar evolution are numerous
+and even more complex than for single stars. Overall, stronger stellar winds at higher metallicity lead to a decrease
+in mergers of all types in our simulations due to a range of indirect effects including mass loss associated with stellar
+winds leading to loss of angular momentum in a binary. This causes greater widening of binaries at high metallicities,
+increasing inspiral times (Peters 1964) and the number of systems that disrupt, ultimately leading to a decrease in
+mergers from metal-rich progenitors. More mass loss through stellar winds also leads to systems with smaller stellar
+envelopes when the binary enters the CE phase. This also leads to less shrinking and fewer systems that can merge in
+a Hubble time (see Neijssel et al. 2019; Broekgaarden et al. 2022; Chruślińska 2022, and references therein). Another
+important effect is that metallicity plays a considerable role in determining stellar radial expansion during the star’s
+evolution with higher metallicities, typically leading to more radial expansion in our simulations (Hurley et al. 2000,
+2002; Romagnolo et al. 2023), increasing the probability of unstable mass transfer thus encouraging stellar mergers
+(cf. Neijssel et al. 2019).
+
+                           B. METALLICITY-DEPENDENT STAR FORMATION HISTORY
+  Figure 10 shows the assumed metallicity-dependent SFRD as a function of redshift, S(Zi , z). At high redshifts, most
+stars form with low birth metallicities Zi ≲ Z⊙ /5. At higher redshift, around z ≳ 3, most stars instead form from
+higher metallicity Zi ≳ Z⊙ /2. We showed in Figure 2 that the formation yield of BBH mergers in our simulations
+drastically drops for stars formed with Zi ≳ 5. This figure implies that metallicity effects will therefore lead to a drop
+in the formation of merging BBHs at redshifts z ≲ 3.
+
+                                                                                                                        log10(Zi)
+                                                                                        -3.50                   -3.00                        -2.50       -2.00
+
+
+                                                                                                               age universe [Gyr]
+                                                                                9   7       5          4       3          2                                      1
+
+                                                                      1.6
+                                 d2MSFR/(dtsdVc) [108 M yr−1 Gpc−3]
+
+
+
+
+                                                                      1.4
+
+                                                                      1.2
+
+                                                                      1.0
+
+                                                                      0.8
+
+                                                                      0.6
+
+                                                                      0.4
+                                                                                                                                    hZii ≈ Z /2
+                                                                                            hZii ≈ Z
+
+
+
+
+                                                                      0.2
+
+                                                                      0.0
+                                                                            0           1                  2            3                            4       5       6
+                                                                                                                    Redshift z
+
+Figure 10. The assumed SFRD colored by stars’ initial metallicity, Zi . The dotted lines show the location of the median star
+formation rate for a few metallicities (i.e. half of the stars form with higher metallicity and half with lower metallicity than the
+labeled value).
+18
+
+        C. THE SHAPE OF THE MERGER RATE DUE TO DIFFERENT DELAY TIME MAGNITUDES
+  In Figure 11, we show how delay times affect a synthetic distribution of stars throughout cosmic history. We rejection
+sample the SFRD from one million stars out to redshift 10, which we plot in black. We then age the sample stars
+by 10 Myr, 100 Myr, and 1 Gyr and plot their distributions. In the left panel, we see that the stars travel to lower
+redshift throughout their lifetimes; in other words, the distributions of the aged stars shift increasingly from the birth
+distribution toward lower redshift. Furthermore, this effect only causes a notable deviation from the star formation
+rate when the delay time is of order 500 Myr. A non-trivial aspect of this shift is the fact that the relationship between
+time and redshift is non-linear. As we can see from the difference between the x-axes on the bottom and top of the
+panels, time passes faster at higher redshift. This implies that a star born at a high redshift should travel more redshift
+during its lifetime before merging than if it were born at low redshift.
+  In the right panel of Figure 11, we take the distributions from the left panel, normalize them, and then divide by
+the normalized assumed SFRD (similarly to the right panel of Figure 1). The horizontal grey line is what we would
+observe if the distribution of stars exactly followed the SFRD. Again, we observe that the longer stars are allowed to
+evolve, the lower redshift they travel to. The stars that were aged by 1 Gyr in particular show the extent to which
+delay times can cause distributions to shift to lower redshift, as the distribution is far above SFRD (gray line) for
+reshifts lower than z ∼ 3, and higher for redshifts above.
+
+
+
+
+Figure 11. The effect of delay time on the distribution of stars throughout cosmic history. We use rejection sampling of one
+million stars to acquire a sample of stars reflecting the assumed SFRD (Madau & Fragos 2017). Then, we add 10 Myr, 100 Myr,
+and 1 Gyr to their birth ages. The left panel shows the original distribution and the distributions of the stars shifted by the
+three different example delay times. In the right panel, we normalize each distribution and then divide by the normalized SFRD.
+In doing so, we can see how delay time effects cause the population of stars at low redshift to be greater than the SFRD.
+
+
+
+                       D. BBH FORMATION CHANNELS AS A FUNCTION OF REDSHIFT
+  As was discussed in the main body of this paper, the delay time distribution is strongly correlated with the formation
+channels that lead to mergers. In Figure 12, we show the percent contribution of the main formation channels as
+described in (Broekgaarden et al. 2021) to the merger rate as a function of redshift for all models in grid A. Clearly,
+the formation pathways that BBH merger progenitors follow are highly dependent on physical assumptions—the
+contributions of each formation channel to the merger rate are vastly different from model to model. Furthermore, the
+proportion of mergers created by each channel changes considerably throughout cosmic history, again likely as a result
+of the difference in the initial metallicity of BBHs progenitors at different redshifts and their interplay with the model
+prescriptions. Noticeably, trends in channel contribution also appears to be similar for each group of models with the
+same assumed αCE . This observation is the cause of the delay time distributions being grouped by αCE —the shape
+of the median delay times throughout cosmic history are similar because the proportion of mergers created by each
+                                                                                                                     19
+
+
+
+
+Figure 12. The percent contributions of each formation channel (as described in Broekgaarden et al. 2021) for the merger
+rates as a function of redshift of all models in grid A.
+20
+
+Table 1. The minimum, maximum, and median of the normalized BBH merger rates for each model divided by normalized
+delayed variations of the SFRD for redshift values 0 - 9. The first three columns use a toy model rate by rescaling an SFRD
+with no delay, the middle three colums use as toy model a SFRD with a constant delay of 20 Myr, and the last three columns
+use for the toy model a scaled SFRD with a delay time distribution using: t−1 with min(tdelay ) = 20 Myr.
+                          No delay                      tdelay ∝ δ(t − 20 Myr)                   tdelay ∝ 1/t
+     Redshift   Minimum   Median     Maximum     Minimum       Median        Maximum   Minimum    Median        Maximum
+      z=0         1.27     2.43        3.48        1.74         3.33           4.76      0.21      0.41           0.59
+      z=1         0.94     1.26        1.62        0.90         1.22           1.56      0.59      0.80           1.02
+      z=2         0.90     0.95        1.00        0.89         0.94           0.98      1.07      1.13           1.18
+      z=3         0.79     0.90        1.02        0.78         0.89           1.00      0.97      1.11           1.26
+      z=4         0.73     0.97        1.10        0.72         0.95           1.09      0.89      1.18           1.35
+      z=5         0.67     0.99        1.12        0.68         1.01           1.15      0.94      1.39           1.58
+      z=6         0.59     0.96        1.10        0.63         1.02           1.16      1.03      1.67           1.90
+      z=7         0.49     0.87        1.01        0.56         0.99           1.16      1.10      1.94           2.26
+      z=8         0.37     0.70        0.86        0.46         0.88           1.08      1.12      2.16           2.63
+      z=9         0.20     0.41        0.59        0.30         0.61           0.89      1.03      2.07           3.00
+
+
+
+channel is the same. Furthermore, the models with αCE = 2.0, which have the most distinct median delay time shape,
+have a drastic increase in the proportion of mergers formed through the classic channel (with a common-envelope
+phase) which corresponds to a drastic decrease in median delay time from z = 0 to z ≈ 3 as at higher redshift the
+BBH systems form through the classic-CE channel that leads to shorter delay times compared to the only stable mass
+transfer channel. This is in agreement with studies such as (Olejak et al. 2022; van Son et al. 2022) which found that
+channels that include CEs tend to have lower delay times. Ultimately, the most important conclusion from this figure
+is that the delay time distribution is strongly dependent on the channels that the BBH mergers follow, and changes
+in channel contributions throughout cosmic history are highly non-trivial and dependent on the model assumptions.
+
+                          E. DEVIATIONS BETWEEN SIMULATIONS AND TOY MODELS
+  Table 1 shows the deviations at different redshifts between our simulated merger rates and the toy model merger
+rates.
+

@@ -1,0 +1,3735 @@
+MNRAS 000, 1–22 (2019)
+
+Preprint 11 September 2019
+
+Compiled using MNRAS LATEX style file v3.0
+
+arXiv:1905.00910v2 [astro-ph.HE] 10 Sep 2019
+
+STROOPWAFEL: Simulating rare outcomes from
+astrophysical populations, with application to
+gravitational-wave sources∗
+Floor S. Broekgaarden,1−5 † Stephen Justham,7,8,1,2,5 Selma E. de Mink,6,1,2
+Jonathan Gair,9,10,5 Ilya Mandel,3,4,11,5 Simon Stevenson,4,12
+Jim
+W. Barrett,13 Alejandro Vigna-Gómez,11,3,4,5 Coenraad J. Neijssel11,14
+1
+
+Anton Pannekoek Institute for Astronomy, University of Amsterdam, Postbus 94249, 1090 GE Amsterdam, The Netherlands
+
+2 GRAPPA, University of Amsterdam, Science Park 904, 1098 XH Amsterdam, The Netherlands
+3 Monash Centre for Astrophysics, School of Physics and Astronomy, Monash University, Clayton, Victoria 3800, Australia
+4 The ARC Center of Excellence for Gravitational Wave Discovery – OzGrav
+5 Dark Cosmology Centre, Niels Bohr Institute, University of Copenhagen, Juliane Maries Vej 30, DK-2100, Københaven ø, Denmark
+6 Harvard-Smithsonian Center for Astrophysics, 60 Garden Street, Cambridge, MA 02138
+7 School of Astronomy & Space Science, University of the Chinese Academy of Sciences, Beijing 100012, China
+8 National Astronomical Observatories, Chinese Academy of Sciences, Beijing 100012, China
+9 School of Mathematics, University of Edinburgh, The King‘s Buildings, Peter Guthrie Tait Road, Edinburgh, EH9 3FD, UK
+10 Max Planck Institute for Gravitational Physics (Albert Einstein Institute), Am Mühlenberg 1, Potsdam-Golm 14476, Germany
+11 Birmingham Institute for Gravitational Wave Astronomy and School of Physics and Astronomy, University of Birmingham,
+
+Birmingham, B15 2TT, United Kingdom
+12 Center for Astrophysics and Supercomputing, Swinburne University of Technology, Hawthorn VIC 3122, Australia,
+13 Klarna Bank AB (publ). Sveavägen 46, 111 34 Stockholm
+14 Albert-Einstein-Institut, Max-Planck-Institut für Gravitationsphysik, D-30167 Hannover, Germany
+
+11 September 2019
+
+ABSTRACT
+
+Gravitational-wave observations of double compact object (DCO) mergers are providing new insights into the physics of massive stars and the evolution of binary systems.
+Making the most of expected near-future observations for understanding stellar physics
+will rely on comparisons with binary population synthesis models. However, the vast
+majority of simulated binaries never produce DCOs, which makes calculating such populations computationally inefficient. We present an importance sampling algorithm,
+STROOPWAFEL, that improves the computational efficiency of population studies
+of rare events, by focusing the simulation around regions of the initial parameter space
+found to produce outputs of interest. We implement the algorithm in the binary population synthesis code COMPAS, and compare the efficiency of our implementation
+to the standard method of Monte Carlo sampling from the birth probability distributions. STROOPWAFEL finds ∼25–200 times more DCO mergers than the standard
+sampling method with the same simulation size, and so speeds up simulations by up to
+two orders of magnitude. Finding more DCO mergers automatically maps the parameter space with far higher resolution than when using the traditional sampling. This
+increase in efficiency also leads to a decrease of a factor ∼3–10 in statistical sampling
+uncertainty for the predictions from the simulations. This is particularly notable for
+the distribution functions of observable quantities such as the black hole and neutron
+star chirp mass distribution, including in the tails of the distribution functions where
+predictions using standard sampling can be dominated by sampling noise. 
+Key words: gravitational waves – stars: evolution – binaries: general – methods:
+numerical – methods: statistical
+
+∗STROOPWAFEL: Simulating The Rare Outcomes Of Populations With AIS For Efficient Learning.
+© 2019 The Authors
+
+†E-mail: fbroekgaarden@g.harvard.edu
+
+2
+1
+
+Broekgaarden et al.
+INTRODUCTION
+
+The direct detection of gravitational waves originating from
+merging binary black holes (BHs) and neutron stars (NSs)
+has opened up a new window on the Universe, and marked
+the birth of gravitational-wave astrophysics as a new field of
+research (Abbott et al. 2016, 2017). At the time of writing
+the first two observing runs of Advanced LIGO and Virgo
+have been completed (The LIGO Scientific Collaboration
+et al. 2018). A few dozen detections are expected during
+the third observing run, and we can anticipate hundreds of
+detections per year when the next generation of detectors
+with higher sensitivities come online (Abbott et al. 2018).
+The detections are starting to reveal the properties of
+the population of merging binary BHs and NSs. The distributions of the inferred masses and spins contain valuable
+information about their origin. Distinguishing different theories for their formation and learning about the complex
+physical processes that govern the lives of their possible
+massive-star progenitors requires comparing observed populations with theoretical predictions.
+Theoretical simulations of the population of merging
+DCOs are challenging because gravitational-wave events
+represent an extremely rare outcome of binary evolution.
+From a thousand massive binary systems typically only of order one, or less, yields a double compact object. A meaningful comparison with population observations requires simulating a statistically significant sample of events. When sampling from the birth distributions, which is a form of sampling commonly used in binary population synthesis, this
+often means we need to sample at least many millions of
+binary systems. For example, Kruckow et al. (2018) find
+that their DCO merger rates converge only when simulating
+N > 3 × 108 binaries (and for BH–BH mergers their statistical noise remains at the 2 percent level even with N = 109
+samples).
+To make it feasible to simulate such large numbers of
+systems, all present-day simulations pay a high price. In
+many studies computational speed is ensured by using highly
+approximate algorithms that treat the physical processes in
+a simplified way. Another way to keep the computational
+costs reasonable is to limit the total number of simulations,
+restricting the exploration of the impact of the uncertain
+physical input assumptions beyond a few variations.
+The recent detections bring to light a further challenge
+as we start to ask questions about rare subsets of the already
+rare gravitational-wave events. One example is the subset of
+heavy binary black hole mergers with total system masses in
+excess of 50 M . Such systems produce loud GW signals and
+can thus be observed over large volumes (Fishbach & Holz
+2017). The majority of currently observed BH–BH mergers
+have total masses above 50 M (The LIGO Scientific Collaboration et al. 2018). However, they are very rare in simulations of binaries sampled from the expected distribution
+of initial conditions. Most current theoretical predictions for
+the extreme tails of the mass distribution are heavily affected by Poisson noise, resulting from under sampling. A
+second example of an astrophysically important rare subset
+of the rare gravitational-wave events are the NS–NS systems
+that merge within about 50 Myrs from the moment the NS–
+NS is formed. Early NS–NS mergers are important as they
+are candidate sources for the observed early r-process en-
+
+riched ultra-faint dwarf galaxies such as Reticulum II and
+Tucana III (e.g. Safarzadeh et al. 2019). A third example are
+the subset of BH–NS mergers with sufficiently similar components masses that there is significant tidal ejection from
+the merger to produce electromagnetic counterparts (Foucart et al. 2018). Obtaining statistically accurate predictions
+for the extreme tails of the distribution functions for rare
+but astrophysically important subpopulations is currently a
+challenge for most simulations.
+Earlier studies have proposed improvements of the efficiency of population synthesis studies. Kolb (1993) and
+later Politano (1996) implemented a transformation function using Jacobian matrices to map known birth rates of
+cataclysmic variables directly into present day populations.
+Kalogera (1996) adopted this method, developed an analytical model for the kick prescription and showed that it is
+possible to obtain similar expressions for several observable
+distribution functions (Kalogera & Webbink 1998; Kalogera
+2000). More recently, Andrews et al. (2018) implemented
+Markov Chain Monte Carlo (MCMC) methods to efficiently
+simulate populations of binaries matching specified evolutionary endpoints, whereas Barrett et al. (2017) and Taylor & Gerosa (2018) use Gaussian process emulators to predict outputs of the binary population synthesis model for
+parametrised choices of physical assumptions that have not
+been simulated. However, current binary population synthesis models have complex output functions containing natural
+bifurcations (e.g., small changes in the initial mass of a star
+can lead to drastic changes in the final mass in the simulations). Moreover, binary population synthesis simulation
+output spaces often contain stochastic behaviour (e.g., due
+to the randomly drawn neutron star natal kick). Such discontinuities pose a challenge for MCMC methods and Gaussian process regression emulators, as they rely on a certain
+smoothness in order to converge and produce independent
+samples.
+In this paper we present a new algorithm, STROOPWAFEL∗,1 . We have designed STROOPWAFEL to improve the efficiency of simulations of rare astrophysical
+events, and so to enable accurate simulations of populations
+of extremely rare events at reasonable computational cost.
+The algorithm first explores the initial parameter space until
+it finds a preliminary population of systems of interest. This
+exploration is done by stochastically sampling from the birth
+distributions. STROOPWAFEL then concentrates the later
+sampling towards regions in the initial parameter space that
+are in the vicinity of the initial parameters of the interesting
+binaries found during the exploration phase. This is an example of “Adaptive Importance Sampling” (AIS), described
+further in the next section.
+We focus here on the application of the study of DCO
+mergers as gravitational-wave sources, but our algorithm is
+much more broadly applicable. The user can specify any target population of interest. An advantage of the algorithm
+is that it can handle the bifurcations and stochastic be-
+
+1
+
+All data that has been used for this study, accompanied with a
+Jupyter notebook that reproduces the main results, can be found
+here . The code for the STROOPWAFEL algorithm will be
+made publicly available after acceptance. Early inquiries can be
+addressed to the lead author.
+MNRAS 000, 1–22 (2019)
+
+STROOPWAFEL: Simulating rare events
+haviour that naturally occur in the physical prescriptions
+in binary population synthesis simulations, and which lead
+to discontinuous output surfaces. Finally, with our algorithm
+we can easily derive the uncertainties on the estimated parameters which can be a challenge for sampling methods
+such as MCMC and Gaussian Process regression emulators.
+This paper is organized as follows. In Section 2 we describe the algorithm and provide expressions for how to calculate statistical estimates and the uncertainties from the
+simulations. We further derive the optimal relative duration
+of the exploratory phase and the total number of simulations, given the rareness of the target population. In Section 3 we provide a demonstration of our algorithm. We
+apply it to population synthesis simulations of double compact object mergers. In Section 4 we outline caveats and
+future directions for further improvement and refinement of
+the algorithm. We conclude and summarise in Section 5.
+
+2
+
+METHOD
+
+Our algorithm is conceptually simple. It uses a strategy that
+may be familiar from playing the classic game Battleship.
+The aim of this game is to guess the coordinates of the ships
+of the other player, which are placed on a regular discrete
+grid. Most players will probably start with an exploration
+phase randomly trying different coordinates. After one or
+more successful “hits” most players will change their search
+strategy and instead try to refine their search by trying coordinates that are close to the successful hits until they uncover the full location and orientation of the ship. It has been
+shown that this is a more successful strategy compared to
+searching completely randomly throughout the entire game
+(e.g. Jones 1977).
+Our algorithm, STROOPWAFEL, follows a conceptually similar strategy, but instead of aiming to win a game
+of Battleship the algorithm is designed to improve the efficiency for simulating populations of rare events (that is,
+rare outcomes from the space of initial conditions). Successful hits in this analogy are finding systems of interest that are
+part of a certain target population. These may be systems
+that result in DCO mergers or anything that the user specifies. We improve the efficiency by focusing on areas of the initial parameter space near to those which produced outcomes
+of interest during a prior, exploratory, sampling phase. Instead of Monte Carlo sampling from the birth probability
+distributions, STROOPWAFEL uses information from that
+exploratory sampling phase to create an alternative distribution function, from which it then samples.
+This class of Monte Carlo methods is generically called
+“Importance Sampling” (Kahn & Harris 1951; Kahn & Marshall 1953). Since we do not know in advance which areas
+of the initial parameter space should receive extra attention
+we use adaptive importance sampling (AIS), for which see,
+e.g., Torrie & Valleau (1977); Hesterberg (1995); Ortiz &
+Pack Kaelbling (2013); Pennanen & Koivu (2006); Cappé
+et al. (2004); Cornuet et al. (2012). The nature of the AIS
+algorithm makes it straightforward to tune the focus of the
+simulation on a specific target population or function of interest (Cappé et al. 2008). Such AIS algorithms also allow for
+straightforward calculations of the sampling uncertainties.
+The STROOPWAFEL implementation of AIS is similar to
+MNRAS 000, 1–22 (2019)
+
+3
+
+that in Cornuet et al. (2012), but includes a new method to
+guide the fraction of the computational effort that should be
+spent on the exploratory phase (see Sect 2.2.4).
+Whilst the concept of our algorithm is not complicated,
+there are some mathematical details involved in making the
+implementation efficient and robust. For example, some of
+the subtlety involved is in making sure not to concentrate
+too closely on locations which previously led to success. If
+we only look exactly where we have looked before, then we
+don’t learn anything new.
+Section 2.1 introduces binary population synthesis as
+a mapping between input and output parameter spaces,
+along with some notation which is useful for the description of our algorithm. Section 2.2 presents the key details
+of STROOPWAFEL. We explain how we shape the adaptive sampling distribution from the information found in an
+initial exploratory phase, and how to optimally combine the
+samples from both the exploratory and adapted phases to
+estimate the population quantities of interest. We also describe how STROOPWAFEL self-consistently determines
+how long the exploratory phase should last as a fraction
+of the simulation time, based on continually updated estimates of the rareness of the target population. Section 2.3
+illustrates the practical characteristics of our AIS algorithm
+in an idealised way, providing an explanatory summary of
+the behaviour of STROOPWAFEL for users who do not
+wish to learn all the mathematical details.
+2.1
+
+Definition of concepts and symbols
+
+Binary population synthesis models the population observables for a particular class of event, under a set of assumptions about the physics. Predicting such an output population typically involves simulating many individual systems
+from their initial conditions. Only a small fraction of those
+simulated systems may produce outcomes which are of interest for that study.
+Selecting which specific points in the input space (i.e.,
+the initial conditions) to simulate into the output space (i.e.,
+the observables) is a key part of population synthesis. This
+process is called sampling, and must appropriately take into
+account the relative frequency of different initial conditions.
+Ideally, it should also efficiently explore the initial parameter space. Examples of these initial parameters are the initial
+masses of the two stars, m1,i and m2,i , and the initial separation ai between the two stars. For a given initial composition,
+these three dimensions are often regarded as adequate initial
+conditions. However, more generally, these input conditions
+may be distributed over many dimensions.
+Each initial binary system xi ∈ {x1 , ..., xN } in a binary population synthesis can thus be written as xi =
+(m1,i , m2,i , ai , ...), which has a combined birth distribution
+π(xi ) = π(m1,i , m2,i , ai , · · · ).
+
+(1)
+
+This distribution of initial conditions is often taken as the
+Monte Carlo sampling distribution2 . In practice, simulations
+
+2
+
+Binary population synthesis simulations often sample in the
+initial mass ratio, m2,i /m1,i , rather than the mass of the initially
+least-massive star. This includes the simulations we present later;
+see also Appendix C. Whether sampling in m2,i or the mass ratio
+
+4
+
+Broekgaarden et al.
+
+Figure 1. Illustration of the STROOPWAFEL algorithm. In the algorithm, (I) we first draw random binaries from the birth distribution
+π until a small population of events of interest (hits) is found. (II) We construct Gaussian distributions around each of the previously
+found successful events. We create an adapted instrumental distribution q(x) from the mixture of Gaussian distributions. We scale the
+width of each Gaussian with the local sampling density. (III) We draw the remaining samples from this adapted distribution which
+focuses around the target population. The top panels show a random draw of samples from the corresponding distribution in the lower
+panel. The samples are assigned a random scatter in the y-direction for the visualization.
+
+of binary-star populations which aim to study outcomes such
+as mergers between BHs and NSs do not sample from the
+full range of initial conditions of stellar binaries. Such simulations ignore stars whose mass is too low to produce a BH
+or NS, which is a simple form of importance sampling. The
+normalisation of π actually used for the sampling is then
+corrected to take this into account when predicting event
+rates.
+For each initial binary, xi , the final state of the binary yf is determined using the binary population synthesis
+model u,
+yf = u(xi ).
+
+(2)
+
+In many cases a simulation is run to study binaries that
+evolve to a certain target subtype T , e.g., maybe T is the
+population of binary black hole mergers. The following indicator function describes whether a binary yf is of interest:
+
+1T (yf ) :=
+
+(
+
+1
+0
+
+if yf ∈ T (a hit)
+if yf ∈
+/ T (a miss),
+
+(3)
+
+which equals 1 if xi simulates to the target binary system
+T (a hit) and zero if not (a miss). Combining equations (2)
+& (3) gives the function
+φ(xi ) := 1T (u(xi )),
+
+(4)
+
+which is a shorthand notation to describe whether an initially drawn binary evolved into a binary of the target population.
+The samples from the initial parameter space that produced a binary of the target population (i.e., φ(xi ) = 1) can
+then be given by the set
+xT := (m1,T , m2,T , aT , . . .).
+
+(5)
+
+At the end of a simulation, the properties of the model
+it has also been common to assume that the initial parameters are
+independent of each other, e.g.,: π(xi ) = π(m1,i )· π(m2,i /m1,i )
+·π(ai ) · . . ..
+This assumption of separability may not be valid, as found by
+Abt et al. (1990); Moe & Di Stefano (2017); Klencki et al. (2018).
+
+population and the statistical uncertainties on those predicted properties can both be determined using the standard
+Monte Carlo estimator (Fermi & Richtmyer 1948; Metropolis & Ulam 1949). For example, the relative formation rate
+of the target population, RT , is estimated with
+N
+
+Eπ [RT ] ≈
+
+1 X
+φ(xi ),
+N i=1
+
+(6)
+
+where N is the total number of samples used, E is the notation for the estimated mean and the subscript π in Eπ
+denotes that the samples xi are distributed following the
+birth distribution π (cf. Eq. 1). We shall refer to this relative formation rate, RT , throughout this section. Mathematically it is a fractional volume from the initial binary
+parameter space, weighted by the probability of forming a
+binary system at each part of that initial parameter space.
+This quantity is not a physical rate, but gives a formation
+rate for the population of interest as a fraction of the total
+number of initial binary systems formed. So it only differs
+from a true formation rate by a physical normalisation. We
+consider it appropriately intuitive to keep referring to this
+as a fractional, or relative, rate.
+2.2
+
+Adaptive sampling algorithm to increase
+efficiency of simulation
+
+Our algorithm consists of three main steps, as illustrated in
+Fig. 1:
+(I) Exploration
+We first explore the parameter space by sampling directly
+from the birth distribution π until eventually a sufficient
+population of events of interest is found.
+(II) Adaptation
+We construct multivariate Gaussian distributions in the initial parameter space around each of the events of interest
+found during the exploration phase. We scale the widths of
+each of the Gaussians with the local sampling density. We
+create the adapted sampling distribution q, from here on referred to as the instrumental distribution, by combining the
+Gaussians into a mixture distribution.
+MNRAS 000, 1–22 (2019)
+
+STROOPWAFEL: Simulating rare events
+(III) Refinement
+We draw the samples for the remaining simulations from this
+instrumental distribution. Each sample is assigned a weight
+so that the predicted population appropriately reflects the
+birth distribution π.
+The rest of this subsection explains these steps in more detail.
+2.2.1
+
+The instrumental distribution
+
+When the exploratory phase has ended, the set of binaries
+of the target population xT (i.e., hits) contains NT,expl binaries that were found using a total of Nexpl samples. In the
+STROOPWAFEL algorithm these samples are then used
+to create an adapted instrumental distribution q(x), which
+is focused around the areas in the initial parameter space
+that produced the binaries of interest during the exploratory
+phase. The remaining binaries are thereafter sampled from
+this instrumental distribution. To obtain unbiased estimates
+of the target population, weights wi are incorporated for
+each sample as is standard in importance sampling
+wi =
+
+π(xi )
+,
+q(xi )
+
+(7)
+
+where π is the distribution of initial conditions, as given in
+Eq. (1).
+The instrumental distribution q(x) can be chosen to be
+any probability distribution function, but a robust instrumental distribution is characterized by the following criteria:
+• The weights wi are always finite and well defined. That is,
+q(xi ) = 0 implies π(xi )φ(xi ) = 0 for all i.
+• The instrumental distribution is efficient if q(x) is close to
+the (unknown) target distribution of the binary population
+synthesis study, i.e., when the instrumental distribution q(x)
+is proportional to |φ(x)|π(x), as shown by Kahn & Marshall
+(1953).
+• It should be computationally inexpensive to generate random samples from q(x) as well as to calculate the probability
+q(xi ) for each sample xi .
+In order to achieve these properties the instrumental
+distribution, q(x), in STROOPWAFEL is chosen to be a
+mixture3 of NT,expl Gaussian distributions qk given by
+q(x) =
+
+1
+NT,expl
+
+NT,expl
+
+X
+
+qk (x; µk , Σk ),
+
+(8)
+
+k=1
+
+where each qk contributes 1/NT,expl to the mixture distribution.
+However, when drawing from q(x), some samples will
+fall outside the physical range of the parameter space Ω (e.g.,
+
+when drawing a binary with a negative stellar mass). Such
+samples can immediately be rejected and redrawn. By doing so, we in practice sample from the normalized physical
+mixture distribution
+1
+g =
+q(x)
+q(x) 1Ω (x)
+(9)
+(1 − Frej )
+where 1Ω (x) is the indicator function that equals 1 when the
+sample x lies in the physical range of the parameter space
+and 0 if not. The factor Frej is the fraction of samples from
+q(x) that are drawn outside of the physical parameter space.
+The factor 1/(1 − Frej ) thus corrects for the normalization of
+g It is computationally inexpensive to draw samples from
+q(x).
+g since Frej can be estimated once with a Monte Carlo
+q(x)
+simulation, and one can draw randomly from each Gaussian
+qk (x) separately.
+The Gaussian distributions qk (x; µk , Σk ) are
+parametrized by their means µk and covariance matrices Σk . The covariance matrix, Σk , determines the
+width of the Gaussian distributions. We adopt a diagonal
+covariance matrix
+
+ 2
+0
+...
+σ1,k
+
+
+..
+,
+.
+Σk = 
+(10)
+
+ 0
+..
+2
+.
+σ
+d,k
+
+where d is the number of dimensions of the initial parameter
+space.
+We scale the width of each Gaussian, given by the covariance matrix Σk , with the average distance to the next
+sampled binary xi in the initial parameter space, estimated
+via the local density of the prior distribution π. This allows
+the algorithm to construct broader Gaussian distributions
+(i.e., with larger σk ) around previously found hits that lie
+in the regions of the parameter space that are less densely
+explored. If the one dimensional marginalised prior of the jth parameter is πj then the standard deviation σj,k is given
+by:
+σj,k = κ
+
+In this context, “mixture” has a standard mathematical meaning. A sample drawn from q is drawn from each Gaussian qk with
+a probability NT,expl instead of taking the sum of normally distributed samples. The sum of two jointly normally distributed
+random variables will still have a normal distribution (even if the
+means are not the same) whereas a mixture of two normally distributed variables will have two peaks (assuming the means are
+far enough apart).
+MNRAS 000, 1–22 (2019)
+
+1
+1/d
+
+,
+
+(11)
+
+πj (xk )Nexpl
+
+where Nexpl represents the number of samples used for the
+exploration phase, the power 1/d scales this number to the
+effective number of samples per dimension and the factor
+πj (xk ) scales the width to the density of samples in the
+exploration phase around the previously found hit xk . We
+also introduce a free parameter, κ, that scales the widths of
+the Gaussian distributions. This enables us to regulate how
+tightly the mixture of Gaussian distributions covers the parameter space near the successful binaries xT . In this paper
+we adopt κ = 2, which we chose following tests with a toy
+model (for which, see Section 2.2.5 and Appendix B).
+2.2.2
+
+3
+
+5
+
+Combining samples from the exploratory phase and
+refinement phase
+
+It is desirable to make use of the samples from both the
+exploration and refinement sampling phases. The optimal
+way to achieve this is somewhat subtle. In principle this
+could be done by merging the samples and weights into a
+combined estimate (see Chapter 14 Robert & Casella 2013).
+However, Veach & Guibas (1995), Hesterberg (1995), and
+
+6
+
+Broekgaarden et al.
+
+later Owen & Zhou (2000) showed that using deterministic
+multiple mixture weights is an efficient and robust way of
+combining the samples. This approach uses the fact that the
+combined samples from the exploratory phase and refined
+sampling phase can be represented by a mixture sampling
+distribution Q(x) from both phases
+g
+Q(x) = fexpl π(x) + (1 − fexpl )q(x),
+
+(12)
+
+where fexpl = Nexpl /N is the fraction of samples spent on
+the exploratory phase. By analogy with Eq. (7), the weights
+of all the N samples can be recalculated with
+w
+fi =
+
+π(xi )
+.
+Q(xi )
+
+(13)
+
+This use of deterministic multiple mixture weights is not
+fundamental to STROOPWAFEL. Our motivation for using deterministic multiple mixture weights is conservative,
+to increase the stability against potential sampling artefacts.
+One of the samples drawn from the importance function q(x)
+may occasionally be extremely large. Such extreme weights
+could remain so large as to be problematic when merging
+the samples with the original weights wi – no matter how
+efficient the sampling is in the exploratory phase (Cornuet
+et al. 2012). Use of deterministic multiple mixture weights
+suppresses this potential rare difficulty.
+The multiple mixture weights approach ignores the distribution from which a given draw was sampled. This does
+not affect the estimators for the predicted values, although
+it does introduce a very small bias to the uncertainty estimators, which we confirmed to be negligible in our toy model
+tests. Recalculating the weights in this way yields comparable or better estimates than those which are obtained when
+merging the samples or using inverse-variance weighting for
+our adaptive importance sampling algorithm. Indeed, He &
+Owen (2014) derived a bound for the variance of the balance
+heuristic for such estimators that combine samples from different distributions and found that this is an efficient way
+of combining samples. See also sect. 3 in Veach & Guibas
+(1995) and sect. 2 in Cornuet et al. (2012) for a more detailed discussion.
+2.2.3
+
+Calculating statistical estimates using the adaptive
+distribution
+
+At the end of each run the properties of the target population, such as the rate of formation RT of members of
+the target population, and distribution functions of population observables, can be determined by standard Monte
+Carlo estimates. Because we have drawn the samples from
+a different distribution than the birth distribution we have
+to incorporate weights to make sure that the estimators for
+these quantities reflect the correct formation probabilities.
+For example, the relative formation rate RT of the target
+population within the simulation is estimated by the mean
+N
+
+RT ≈ EQ [RT ] =
+
+1 X
+φ(xi )f
+wi .
+N i=1
+
+(14)
+
+The uncertainty in this rate is represented by the variance
+about the mean by
+PN
+2
+]
+s2Q [φ(x)w(x)]
+fi 2
+i φ(xi ) w
+VQ [RT ] =
+≈
+− R2T .
+(15)
+N
+N
+
+symbol
+u
+xi
+yf
+T
+xT
+π(x)
+Ω
+q(x)
+g
+q(x)
+N
+Nexpl
+Nref
+NT
+NT,expl
+fexpl
+κ
+wi
+w
+fi
+
+description
+binary population synthesis model
+initial state of a binary system
+final state of a binary system
+target subpopulation of binaries of interest
+set of hits from the exploratory phase
+distribution of the initial conditions
+physical parameter range of the simulation
+instrumental distribution
+normalized instrumental distribution
+total number of samples in the simulation
+number of binaries in the exploratory phase
+number of binaries in the refinement phase
+number of systems of the target population
+number of hits in the exploratory phase
+fraction of samples in the exploration phase
+scale factor for the widths of the Gaussians
+statistical weight of sample xi
+recomputed statistical weight
+
+Table 1. Summary of the parameters that are used throughout
+this paper. Hits refer to binaries of the chosen target population.
+
+where sQ is the (sample) standard deviation for samples
+drawn from the mixture sampling distribution Q(x). This
+equation is known as the asymptotic variance. The other
+moments or statistical estimates for the target population
+can be similarly calculated.
+
+2.2.4
+
+The duration of the exploratory phase
+
+An important choice in adaptive importance sampling algorithms is deciding when to switch from the exploratory phase
+to the refinement phase. This choice can have a substantial
+impact on the performance of the algorithm. Leaving the
+exploratory phase too early can result in missing important
+regions of the initial parameter space which produce systems in the target population. On the other hand, switching
+to the refinement sampling phase too late will miss out on
+the advantages of the algorithm, as most time will be spent
+sampling from the birth distributions instead of the more
+efficient adapted distribution.
+A method often used in adaptive importance sampling
+algorithms to determine the fraction of samples that should
+be spent on exploringP
+the parameter
+P space is by using the effective sample size: ( k wk )2 / k (wk 2 ), (ESS, Hesterberg
+1995; Liu 2008). This is a measure of efficiency and corresponds to the equivalent number of independent samples
+drawn from the prior distribution. However, it can be difficult to know in advance what a good value for the ESS
+should be. Instead, since STROOPWAFEL is a two-step
+adaptive algorithm, we can directly derive a value for fexpl
+by using the estimated rareness of the population, which we
+self-consistently calculate during the exploration phase.
+Here we estimate the optimal fraction fexpl of the total number of samples N that we should spend on the exploratory phase. The challenge is that we do not know in
+advance how good our adaptive sampling distribution will
+be. Here, as a simplified proxy for the imperfect sampling
+distribution, we assume that the adaptive sampling distribution is determined sufficiently well that it perfectly matches
+the target distribution over most of the parameter space, but
+MNRAS 000, 1–22 (2019)
+
+STROOPWAFEL: Simulating rare events
+that a small region of the target parameter space could be
+missing samples due to a limited number of samples drawn
+during the exploratory phase, and thus have an adaptive
+sampling probability of zero (see Appendix A for details).
+In other words, we divide the volume of the input parameter space which successfully produces systems of interest into
+two parts, one which we assume we have accurately found
+and one which remains missing. We then find fexpl such that
+the event rate uncertainty is minimised; specifically, we require that the contribution to the event rate from potentially
+undiscovered islands is smaller than, or no worse than similar to, the sampling uncertainty in the rate contributed by
+the islands which are successfully found.
+We assume that we sample from the mixture distribution Q(x), and aim to estimate the rate RT with N total
+samples. After simulating N samples we assume we have
+identified a target binary forming region with total weight
+z1 , whereas a region with weight z2 is yet undiscovered such
+that the estimated rate of the target population is
+unidentified
+
+RT =
+
+z1 +
+|{z}
+
+z}|{
+z2
+
+≈ EQ [RT ].
+
+(16)
+
+identified
+
+The uncertainty on this rate estimate is described by the
+variance, which we can approximate with (see Appendix A
+for more details)
+
+
+1 
+z1
+z2
+VQ [RT ] ≈
++
+− (z1 + z2 )2  .
+N (1−fexpl ) + fexpl
+fexpl
+z1
+
+(17)
+The smallest uncertainty on the rate RT is obtained for
+the value of fexpl where the variance VQ (RT ) is the lowest.
+By taking the derivative of VQ with respect to fexpl , and
+then finding the roots of the derivative, we find that this
+minimum occurs at
+√
+√
+z1 ( 1 − z1 − z2 )
+p
+.
+(18)
+fexpl = 1 − √
+1 − z1 ( z2 (1 − z1 ) + z1 )
+To make practical use of this during our simulations,
+we need ongoing live estimates for z1 and z2 . For the region
+which has been identified, we adopt z1 ≈ Eπ [RT ] during the
+simulation using Eq. (14). We approximate the target pop1
+ulation region that is yet undiscovered, z2 , by z2 ≈ (fexpl
+.
+N)
+This represents the weight of stochastic sampling noise in
+the exploratory phase when using a total of fexpl N samples.
+Moreover, this choice of fexpl ensures that the estimated uncertainty on the rate estimate is always comparable or larger
+than the uncertainty of missing a region, 1/fexpl N .
+While the running estimate of z2 on the right hand side
+of Eq. 18 is a function of fexpl , rather than explicitly solving
+for fexpl , we choose to iteratively approach the optimal solution over the course of the exploratory phase. The resulting
+fexpl is similar to the fexpl that is obtained if we had used
+the dependency of z2 on fexpl when solving for the minimum
+in Eq. 17.
+We note that we have implicitly assumed that the adaptive sampling phase is perfectly efficient, i.e., that all the
+draws in the adaptive sampling phase find a member of the
+target output population. Here that is a conservative assumption, since a less-than-perfect efficiency will increase
+the sampling uncertainty with respect to the known islands
+MNRAS 000, 1–22 (2019)
+
+7
+
+(i.e., z1 ). Therefore, imperfect efficiency in the adaptive sampling phase decreases the chance that the uncertainty from
+undiscovered islands is significant.
+STROOPWAFEL internally uses Eq. 18 to estimate
+fexpl . For clarity here, we can additionally assume that z1
+and z2 are much smaller than 1, i.e., that the target population is a rare outcome of the initial conditions. Then we
+obtain the simplified equation
+z1
+fexpl ≈ 1 −
+(19)
+√ .
+z1 + z2
+From this simplified equation it becomes clear that we
+recover the intuitively correct limit for extremely rare events,
+i.e. if z1 = EQ [RT ] → 0, we find fexpl → 1, which suggests
+that we should spend all our simulation time on exploration,
+as expected. On the other hand once we find at least 1 hit in
+the exploratory phase we find fexpl 6= 1, and so the variance
+of our rate estimate is expected to decrease when drawing
+some of the samples from the adapted distribution, compared to taking all samples from the birth distribution.
+Lastly, from Eq. 17 it also becomes
+clear that fexpl ≈ 0.5
+p
+once we have found NT,expl ∼
+Nexpl target binaries. In
+other words, fexpl ∼ 1 if N 6 1/R2T and therefore the total
+number of samples N should generally be similar to or larger
+than 1/R2T .
+2.2.5
+
+Determining the free parameter κ from tests with a
+toy model
+
+We present results from the application of our method to
+astrophysical simulations in Section 3. Here we explore the
+methodology with a toy model to test the performance of the
+algorithm and determine the value of the free parameter κ.
+In principle κ = 1 could be adopted. Smaller values of κ will
+increase the efficiency of the STROOPWAFEL algorithm,
+but increase the chance of missing an important region of the
+output surface because the Gaussian distributions qk are too
+narrow and do not cover the output surface well. Excessively
+large values of κ, meanwhile, will decrease the efficiency of
+finding samples of interest in the refinement phase and lower
+the gain of STROOPWAFEL. After performing tests with
+a toy model, as described in Appendix B, we adopt the value
+κ = 2.However, when applying STROOPWAFEL in higher
+dimensions the optimal value for κ may well change.
+2.2.6
+
+Summary of STROOPWAFEL algorithm
+
+The algorithm for STROOPWAFEL, combining the methods discussed in this section, is summarized in Algorithm 1.
+2.3
+
+Characteristic behaviour
+
+Here we use the analytic derivations from Section 2.2 to illustrate the characteristics of our algorithm in idealised cases.
+This is intended to help users of STROOPWAFEL understand the expected behaviour without needing to master the
+details presented above.
+Key variables for this illustration are:
+• RT , the formation rate of the population under study. This
+is expressed as the fraction of binaries, when drawn from
+initial conditions following the birth probability distribution,
+that yield target systems.
+
+Broekgaarden et al.
+
+(II) Adaptation:
+17 set µ = xT ;
+18 Calculate Σ by determining σj,k (xk ) for all
+k = 1, ..., NT ;
+19 This gives q(x; µ, Σ);
+16
+
+20
+
+(III) Refinement:
+22 while Nexpl 6 i 6 N do
+23
+i += 1;
+24
+draw new sample xi ∼ q(x; µ, Σ)1Ω (x);
+25
+evaluate sample yf = u(xi );
+26 end
+21
+
+27
+
+Post processing:
+π(xi )
+;
+calculate Frej and mixture weights w
+fi = Q(x
+i)
+30 calculate desired population quantities such as the
+rate RT ;
+28
+29
+
+• N , the total number of binary systems (i.e. samples) used
+in a given population simulation, which is chosen by the
+user.
+• fexpl , the fraction of the total number of samples that
+should optimally be spent on the exploration phase. This
+is chosen automatically by STROOPWAFEL during the
+exploration phase (see Sect. 2.2.4), when the algorithm estimates the formation rate RT .
+Figure 2 presents derived quantities as a function of the
+fractional rate of the target population RT . This Figure, and
+Figure 3, include points representing simulated astrophysical
+populations, specifically for different subsets of DCO mergers. These simulations are described further in Section 3.
+The values from those simulations are included here to give
+context to the analytic expectations for the performance of
+STROOPWAFEL.
+The top panel of Figure 2 shows the optimal fexpl ,
+for simulations with a total number of samples of N =
+104 , 105 , 106 and 107 . For a rarer target population, a larger
+fraction of the total number of samples should be spent on
+the exploratory phase. This is because it takes longer to
+determine a good sampling distribution when RT is low.
+A more common target population can be optimally sim-
+
+more common
+events
+
+10−4
+10−3
+10−2
+Rate of target population
+
+100
+tra
+
+dit
+
+10−1
+
+10−2
+
+BH–BH
+ALL
+
+0.0
+10−5
+
+BH–BH ≥ 50 M
+BH–NS
+NS–NS
+
+0.2
+
+ion
+
+al u
+
+nce
+
+rta
+
+inty
+
+ST
+uncROOP
+erta WA
+inty FE
+L
+
+10−3
+10−5
+
+10−1
+
+N = 104
+
+N = 106
+10−4
+10−3
+10−2
+Rate of target population
+
+more common
+events
+
+15
+
+0.4
+
+BH–BH
+ALL
+
+end
+14 end
+13
+
+0.6
+
+NS–NS ≤ 50 Myr
+
+4
+
+NS–NS ≤ 50 Myr
+
+(I) Exploration:
+fexpl = 1;
+5 while i/N 6 fexpl do
+6
+i += 1;
+7
+draw new sample xi ∼ π(x);
+8
+evaluate sample yf = u(xi );
+9
+if yf ∈ T then
+10
+counthits += 1;
+11
+xT ← xi (add hit to the found collection of
+hits);
+12
+update estimate fexpl iteratively using Eq. 18
+1
+z1 = Eπ [RT ] and z2 = (fexpl
+;
+N)
+3
+
+0.8
+
+BH–BH ≥ 50 M
+BH–NS
+NS–NS
+
+2
+
+N = 104
+N = 105
+N = 106
+N = 107
+
+more rare
+events
+
+i = 0;
+
+more rare
+events
+
+1
+
+1.0
+Fraction exploratory phase fexpl
+
+Algorithm 1: STROOPWAFEL algorithm
+
+Fractional statistical uncertainty
+
+8
+
+10−1
+
+Figure 2. Top panel: the fraction of total samples that should
+be spent on the exploratory phase versus the fractional rate, RT ,
+of the target population in a simulation. Different curves show
+the effect of varying the total number of samples N in the simulation. Bottom panel: expected sampling uncertainty on the
+predicted event rate versus the fractional rate, for two different
+choices of N . The dashed lines show the expected
+uncertainty
+p
+from ”traditional” Monte Carlo sampling (i.e., Vπ [RT ]/RT ).
+The solid lines show the minimum possible statistical uncertainty
+from STROOPWAFEL sampling, i.e., if the efficiency in the refinement phase is 1. In practice the statistical rate uncertainty
+when using STROOPWAFEL will lie in the area shaded in grey.
+All panels: coloured vertical bars indicate the fractional rate of
+the target populations, and star symbols show the corresponding
+values of these parameters, for the six simulations with N = 106
+described in Section 3.
+
+ulated with a relatively small exploratory phase, since we
+expect this will be enough to build up a good adaptive distribution. STROOPWAFEL estimates RT during the exploration phase, when it samples from the birth probability
+distribution and self-consistently calculates fexpl based on
+the estimated RT and user-chosen N .
+The bottom panel of Figure 2 shows the expected statistical uncertainty in the event rate predicted by the population simulation, for simulations with a total number of
+samples of N = 104 and 106 . By statistical uncertainty we
+mean the uncertainty that arises from using a finite number
+of samples. In standard Monte Carlo simulation this is also
+sometimes referred
+√ to as Poisson error, given for traditional
+sampling by 1/ NT . We estimate the
+√ minimum STROOPWAFEL uncertainty in Fig. 2 as 1/ NT , where NT is now
+the total number of objects of interest found jointly in the
+exploration and refinement phases. The uncertainty as computed through Eq. 15 will be slightly greater, since the distriMNRAS 000, 1–22 (2019)
+
+3
+
+N = 106
+
+more rare
+events
+
+102
+
+more common
+events
+
+Gain
+
+103
+
+BH–BH
+ALL
+
+Efficiency of
+refinement phase
+1
+0.1
+
+NS–NS ≤ 50 Myr
+
+104
+
+BH–BH ≥ 50 M
+BH–NS
+NS–NS
+
+STROOPWAFEL: Simulating rare events
+
+101
+10−5
+
+10−4
+10−3
+10−2
+Rate of target population
+
+10−1
+
+Figure 3. The ratio of the number of target binaries found with
+STROOPWAFEL to the number found when Monte Carlo sampling from the birth distribution – i.e., the multiplicative gain
+achieved by STROOPWAFEL – as a function of rareness of the
+target population. The red curves give this gain for two different
+efficiencies in the refinement phase, as labelled. The gain is shown
+for simulations with a total of N = 106 samples. Coloured vertical
+bars and star symbols present the values for the six simulations
+described in Section 3, as given in the last column of Table 2.
+
+bution of weights means that the effective sample size of the
+target population is lower than NT . These analytic estimates
+appear to be consistent with our numerical calculations (see
+also Section 3.1).
+This is not the physical uncertainty since the model
+used for the simulation might still be wrong. In practice
+the efficiency in the refinement phase will not be perfect,
+i.e., not all samples drawn in that phase will find an outcome from the target population. So the expected uncertainty from STROOPWAFEL will lie in the shaded region
+shown in Fig. 2. STROOPWAFEL efficiency gains will be
+greatest for rare events and large N , allowing a greater fraction of time to be spent in the efficient refinement phase.
+Comparisons to observational data will typically be
+made using distribution functions of predicted quantities
+(e.g., component masses), not just event rates. We later
+demonstrate the improvements provided by our algorithm
+for predictions of distribution functions. Nonetheless this
+overall decrease in statistical rate uncertainty for fixed sample number in a simulation is indicative of the improvements
+enabled by applying STROOPWAFEL to a target population.
+Figure 3 shows the increase in the number of simulated binaries of interest versus traditional Monte Carlo sampling from a birth distribution for a simulation with fixed
+N = 106 . The efficiency in the refinement phase is not known
+in advance. We show predictions for a refinement phase efficiency of 1 and 0.1; as long as the total number of successful
+samples is dominated by those drawn during the refinement
+phase, the maximum possible gain is roughly proportional to
+the refinement phase efficiency. The value for the efficiency
+of the refinement phase varies between ∼ 3.4 · 10−2 and 3.7
+·10−1 in our example astrophysical simulations (see Section
+3 and Table 2).
+MNRAS 000, 1–22 (2019)
+
+9
+
+RESULTS
+
+In this section we demonstrate the power and advantages of
+STROOPWAFEL. Our algorithm could be applied to many
+sampling routines, but the illustration here uses the binary
+population synthesis code COMPAS (Stevenson et al. 2017;
+Barrett et al. 2018; Vigna-Gómez et al. 2018). The physical
+assumptions and parameter settings we adopt are briefly
+summarised in Appendix C.
+We combine STROOPWAFEL and COMPAS to
+model six different target populations. Four are simulations
+of subtypes of DCOs that merge in a Hubble time: (1)
+all DCO mergers (i.e., BH–NS, NS–NS and BH–BH), (2)
+BH–BH mergers, (3) NS–NS mergers and (4) BH–NS mergers. Additionally we model two simulations of extremely
+rare events by focusing on a subset of the above, namely
+(5) BH–BH mergers with total system masses in excess of
+mtot > 50M and (6) NS–NS mergers that merge within
+tc 6 50 Myrs from the moment of the DCO formation (where
+tc is the coalescence time). A summary of the results for
+these simulations can be found in Table 2.
+In this section we present detailed results from simulations 1–4, as these target populations are those most commonly discussed in the literature. We just present the key
+findings for simulations 5 and 6. For each target population we compare a simulation using our sampling algorithm
+to one which uses birth distribution Monte Carlo sampling,
+which for conciseness we will typically call traditional sampling. Both the STROOPWAFEL and the traditional simulations sample N = 106 initial binaries.
+The overall gain that is obtained when using STROOPWAFEL depends on the simulation and the initial efficiency
+of the ‘traditional’ method that the algorithm is compared
+with. For example, the choices for the initial parameter space
+can change how much the sampling can be improved when
+using STROOPWAFEL. We use settings that are commonly used in population synthesis studies of DCO mergers.
+The remainder of the section is structured as follows. Section 3.1 demonstrates the increased efficiency of
+STROOPWAFEL at finding binaries from the target population. Section 3.2 discusses how that increased efficiency
+can be used to speed up simulations. Section 3.3 shows how
+our algorithm produces better resolution of the target population. Section 3.4 describes how our sampling method leads
+to smaller statistical uncertainties in predicted population
+distribution functions. Section 3.5 shows how STROOPWAFEL becomes even more important for recovering tails
+of distribution functions and when considering observational
+bias. Section 3.6 discusses how STROOPWAFEL handles
+well the bifurcations and discontinuities in the binary population synthesis parameter space.
+
+3.1
+
+On the gain of generating binaries of the
+target distribution
+
+We find that the number of binaries of these target populations increases by factors of about 25 – 200 when using our
+STROOPWAFEL sampling algorithm compared to simulations with traditional sampling. The panels in Fig. 4 showcase this by presenting the number of systems formed from
+the target population as a function of total number of sampled binaries, for both our sampling method and traditional
+
+Broekgaarden et al.
+
+NT
+
+ALL mergers
+
+BH-BH mergers
+
+y
+
+t
+
+tud
+his s
+
+10 5 0.3% uncertainty
+
+s
+this
+
+10 4 1% uncertainty
+
+gain: ×35
+
+10 4 1% uncertainty
+
+gain: ×53
+
+nal
+
+traditio
+
+10 3 3% uncertainty
+0.1
+
+exploratory phase
+
+0.2
+
+0.4
+
+refinement phase
+
+Nbinaries ( × 10 6 )
+
+nal
+traditio
+
+10 3 3% uncertainty
+
+0.6
+
+0.8 1
+
+0.1
+
+BH-NS mergers
+
+exploratory phase
+
+0.2
+
+0.4
+
+Nbinaries ( × 10 6 )
+
+thi
+
+NT
+
+10 4 1% uncertainty
+
+gain: ×45
+
+10 3 3% uncertainty
+
+traditional
+
+traditional
+
+0.6
+
+0.8 1
+
+tudy
+this s
+
+dy
+s stu
+
+gain: ×39
+
+10 3 3% uncertainty
+exploratory phase
+
+0.6
+
+10 5 0.3% uncertainty
+
+10 4 1% uncertainty
+
+0.4
+
+refinement phase
+
+NS-NS mergers
+
+10 5 0.3% uncertainty
+
+NT
+
+tudy
+
+10 5 0.3% uncertainty
+
+NT
+
+10
+
+refinement phase
+
+Nbinaries ( × 10 6 )
+
+0.8
+
+1
+
+0.4
+
+exploratory phase
+
+0.6
+
+refinement phase
+
+Nbinaries ( × 10 6 )
+
+0.8
+
+1
+
+Figure 4. The number of simulated binaries NT falling into the target population as a function of the total number of binaries Nbinaries
+sampled for the traditional sampling method (gray dashed line) and the sampling method presented in this study (solid coloured line).
+The four panels show the simulations for each of the four target sub-populations. In each panel the duration of the exploratory phase is
+shown with a hashed gray area. In the background the standard Poisson fractional uncertainties of 0.3, 1 and 3% are shown with dashed
+lines.
+
+birth distribution Monte Carlo sampling. For these four target populations the gains are between ∼35–55. For the two
+additional extremely rare target populations we find gains
+of 24 and 203. The gains are also shown in the last column
+of Table 2, and Figure 3.
+At the beginning of each simulation, during the
+STROOPWAFEL exploratory phase, the two sampling
+methods produce similar number of binaries of interest (i.e.,
+hits), only different by random chance. The duration of
+that exploratory phase is determined by fexpl , as derived
+in Section 2.2.4. For our simulated target populations, using
+N = 106 samples, fexpl ranges between ≈ 0.2 and 0.8 (see
+fexpl in Table 2). The algorithm then switches to the more
+focused refinement phase, using the information from the
+hits found during the exploratory phase. During this refinement phase our sampling algorithm is 45 – 650 times more
+efficient at finding hits (see the sixth column in Table 2).
+
+The difference in efficiency gains between the populations originates mostly from two effects. First, the different
+rarenesses of the target populations (e.g., for these assumptions BH–NS mergers are more rarely produced than BH–
+BH mergers) influences how much the efficiency increases
+during the refinement phase and also the duration of the exploratory phase. Both are important factors for determining
+the overall gain in efficiency. Second, the structure of the output surfaces influences how well the Gaussian mixture distribution covers the regions of interest in the output space.
+A more stochastic or discontinuous output space (e.g., many
+small islands of hits) will lead to smaller efficiencies in the
+refinement phase of STROOPWAFEL. This effect is most
+noticeable in the different gains between the BH–BH systems with total masses over 50 M and the NS–NS systems
+that merge within 50 Myrs. Supernova remnants receive a
+random natal kick in our simulations. These kicks induce
+MNRAS 000, 1–22 (2019)
+
+nr
+
+Target subpopulation
+
+fexpl
+
+1
+2
+3
+4
+5
+6
+
+All DCO mergers in a Hubble time
+BH–BH mergers in a Hubble time
+BH–NS mergers in a Hubble time
+NS–NS mergers in a Hubble time
+BH–BH mergers mtot > 50 M
+NS–NS mergers with tc 6 50 Myr
+
+0.23
+0.27
+0.66
+0.59
+0.69
+0.77
+
+efficiency
+exploratory
+6.78 · 10−3
+5.25 · 10−3
+6.36 · 10−4
+9.03 · 10−4
+5.45 · 10−4
+3.43 · 10−4
+
+STROOPWAFEL: Simulating rare events
+
+11
+
+efficiency
+refinement
+3.05 · 10−1
+3.69 · 10−1
+7.38 · 10−2
+9.71 · 10−2
+3.55 · 10−1
+3.38 · 10−2
+
+gain
+overall
+35×
+53×
+39×
+45×
+203×
+24×
+
+gain
+refinement
+45×
+70×
+116×
+108×
+651×
+99×
+
+NT
+traditional
+6.71 · 103
+5.16 · 103
+6.55 · 102
+8.93 · 102
+5.44 · 102
+3.32 · 102
+
+NT
+STROOPWAFEL
+2.35 · 105
+2.71 · 105
+2.55 · 104
+4.00 · 104
+1.10 · 105
+7.95 · 103
+
+Table 2. Summary of the results from six target populations that are modelled in this paper to demonstrate our STROOPWAFEL
+algorithm. We list the fraction of samples spent in the exploratory phase, fexpl , and the efficiency of finding ‘hits’ in the exploratory
+and refinement phases. The gain in refinement is the ratio between the efficiency of finding samples of the target population during the
+refinement phase of STROOPWAFEL and traditional sampling (where the efficiency of traditional sampling is equal to the efficiency
+of the STROOPWAFEL exploratory phase). NT,traditional and NT,STROOPWAFEL represent the total number of systems of interest
+that are found by the end of the simulation (using a total of 106 samples). The last column is the overall gain that we found when
+using STROOPWAFEL compared to traditional Monte Carlo sampling from the birth distributions, which is defined by the ratio
+NT,STROOPWAFEL / NT,traditional . 
+
+stochastic and discontinuous behaviour into the output surfaces, leading to lower refinement-phase efficiency and gain.
+The kicks are typically larger for NSs than BHs, and so affect NS–NS simulations the most. Conversely, the gain is
+greatest for the BH–BH merger populations which are least
+affected by these stochastic kicks (as shown in Figs. 2 and
+3).
+The largest overall gain shown in Table 2, and Fig. 3 is
+for modelling a BH–BH population with total mass over 50
+M . For this population it would be possible to increase the
+efficiency of Monte Carlo sampling from the birth distributions by making thoughtful changes to the boundaries of the
+initial parameter space, so the factor of ≈200 improvement
+we show for STROOPWAFEL is higher than would arise
+when comparing to more carefully-targeted use of standard
+Monte Carlo sampling in this case. However, well-informed
+choices in the initial parameter space would also benefit
+STROOPWAFEL by increasing the efficiency of the initial exploration phase. Moreover, one-dimensional cuts to
+the parameter space would become increasingly inefficient
+when sampling in higher dimensions. STROOPWAFEL automatically finds the regions of interest, and avoids the risk
+of incorrect choices in restricting the initial parameter space.
+The increase in the number of events decreases the sampling uncertainty in the predicted event rates. Although the
+standard uncertainty from Poisson noise decreases with the
+square
+√ root of the number of target systems found, i.e., as
+1/ NT , in our weighted sampling case it also depends on
+the variance in the weights (see Eq. 15). We find that our
+sampling algorithm results in ≈ 3 – 10.5 times smaller sampling uncertainties compared to traditional sampling for the
+same total of samples N = 106 . This is presented in Figure 5, which shows the fractionalpstatistical uncertainty estimate on the rate estimate, i.e., V[RT ]/E[RT ] from each
+simulation.
+
+3.2
+
+Speeding up simulations
+
+Instead of using STROOPWAFEL to obtain more information from a simulation with the same number of samples, one could alternatively aim for a certain precision in
+the predicted event rates. In that case STROOPWAFEL
+can be used to speed up the simulation, since this precision will be reached using a fraction of the number of samMNRAS 000, 1–22 (2019)
+
+Figure 5. Sampling uncertainty estimate from each simulation of
+the target population. Gray bars show the uncertainty from traditional sampling methods whereas the coloured bars show the
+uncertainty from our sampling method STROOPWAFEL. All
+simulations use a total of 106 samples. The number shown on
+top of the traditional bar shows the factor in decrease in uncertainty from STROOPWAFEL compared to traditional sampling
+for that simulation. 
+
+ples required when using traditional sampling. Traditional
+sampling would require 25 – 200 more simulations than
+STROOPWAFEL to achieve the same number of target
+binaries, and a factor of around 10 – 100 times more simulations to achieve the same rate estimate precision (these
+speed-up factors differ because the statistical uncertainty depends on the variance in the weights as well as the number
+of target samples).
+The speed-up factor further depends on the computational cost of simulating samples from the chosen distribution. It might be that the binaries of interest require more or
+less computational time than other binaries. Therefore the
+
+12
+
+Broekgaarden et al.
+
+speed-up when using the adaptive distribution Q depends on
+the science case of interest. In the simulations performed for
+this study the average computational cost (in CPU time)
+of simulating typical individual binaries sampled from the
+adaptive distribution Q was up to a factor of 2 smaller than
+for individual binaries sampled from the birth distribution.
+Therefore, the total speed-up was up to another factor of 2
+larger in our simulations than from more efficient sampling
+alone.
+More generally, we note that the gain or relative speedup from using STROOPWAFEL will depend on the target population and the traditional method with which it is
+compared. First of all, the speed up from STROOPWAFEL
+will generally be greater (smaller) if the target population
+is more (less) rare. This is shown in Fig. 3. Equivalently, if
+one chooses a larger initial parameter space (e.g. sampling
+m1,i from [1, 150] M instead of m1,i from [5, 150] M used
+here), the gain would have been larger as the event of interest
+becomes rarer (assuming no binaries in the extended range
+form a binary of the target population). Secondly, in some
+binary population synthesis studies the primary mass is sampled uniformly in log m1,i space. This is a form of importance sampling. The gain of using STROOPWAFEL (with
+uniform sampling in log m1,i during the exploratory phase)
+could be lower than gains without this importance sampling
+if importance sampling makes the traditional Monte Carlo
+more efficient. Nevertheless, we would still expect a significant gain from STROOPWAFEL - especially if using that
+form of importance sampling in the exploratory phase significantly decreases the duration of this phase.
+
+3.3
+
+Mapping the parameter space with higher
+resolution
+
+The increase in computational efficiency from STROOPWAFEL leads to finding substantially more events of the
+target population which naturally enables a much higher
+resolution mapping of both the input and output parameter
+spaces. Figures 6 and 7 show examples of how the parameter space is explored in far greater detail using our sampling
+method compared to traditional birth distribution Monte
+Carlo sampling.
+Figure 6 shows the location of the target population in
+the initial parameter space of primary mass m1,i and separation log ai at birth. With our sampling method we obtain
+more detailed contours and more contour levels that map the
+initial parameter space with higher resolution. This leads to
+better knowledge of the initial conditions of a binary system
+that yield a binary of the target population. Physically the
+structures seen in the input parameter space correspond to
+the assumed physics of the different formation channels leading to compact-object mergers. More details are discussed in
+Stevenson et al. (2017); Vigna-Gómez et al. (2018).
+Meanwhile, Fig. 7 shows the higher resolution mapping
+from STROOPWAFEL for the output space of the final
+masses of the compact objects m1,f and m2,f in each DCO.
+We plot on top the gravitational-wave events found from O1
+and O2 data from The LIGO Scientific Collaboration et al.
+
+(2018) and Zackay et al. (2019)4 . The simulations with our
+STROOPWAFEL algorithm again yield higher resolutions
+and more systems of the target populations in the regions
+overlapping with the observations. This is important in order
+to compare observations and theory and test the physical
+assumptions in our models.
+Figure 7 shows that even in the STROOPWAFEL simulation, there are relatively few samples consistent with
+the 90% credible regions for some of the highest mass
+gravitational-wave events observed in O1 and O2. The samples shown here are not weighted for the sensitivity of
+gravitational-wave interferometers. In addition, they correspond to a particular model chosen in our simulation, and
+in practice many variations of this model need to be explored for a meaningful comparison with observations (e.g.,
+Barrett et al. 2018). For example, the metallicity in this
+model is fixed to Z = 0.001 and we expect to form more
+massive black holes at lower metallicities (e.g., Spera et al.
+2015; Belczynski et al. 2016; Neijssel et al. 2019). In addition, the most massive BH–BH mergers may have formed
+through a different formation channel than the classical isolated binary evolution via the common-envelope phase which
+is simulated with COMPAS. One example of such a different formation channel is chemically homogeneous evolution,
+explored by Mandel & de Mink (2016); de Mink & Mandel
+(2016); Marchant et al. (2016). Another example is dynamical formation of BH–BH mergers in a dense stellar environment (see Mandel & Farmer 2018; Mapelli 2018 for reviews).
+Another possible explanation is that some of these highestmass events are instead from instrumental origin as they also
+have a relatively high false-alarm-rate (The LIGO Scientific
+Collaboration et al. 2018; Zackay et al. 2019).
+The BH–NS and NS–NS panels in Fig. 7 show discontinuities in the NS remnant mass, with obvious gaps in the
+NS mass range. This is a consequence of discontinuities in
+the delayed Fryer et al. (2012) model describing the mapping from the carbon–oxygen core mass to the remnant (NS)
+mass, which is used in the Fiducial COMPAS model. Although such discontinuities may be physical, this mapping
+does not reproduce the mass distribution of Galactic NS–
+NS binaries (Vigna-Gómez et al. 2018). For the purposes of
+this paper, our main message is how such features in model
+populations can be clarified by improved sampling.
+3.4
+
+Smaller variances in distribution functions
+
+The most important consequence of the increase in sampling
+efficiency enabled by STROOPWAFEL is that it leads to
+a significant decrease in the statistical uncertainty of the
+predictions for the output parameter spaces. That is, it improves the precision in the predicted population observables.
+Figure 8 illustrates this improvement. The left panel in
+Fig. 8 shows the number of binaries of the target population
+NT found within a certain chirp mass bin for the BH–NS
+simulation. The chirp mass mchirp = (m1,f m2,f )3/5 /(m1,f +
+m2,f )1/5 is a combination of the masses of the DCOs that
+is particularly accurately measured with gravitational-wave
+observations. For the same histogram bin widths, i.e., the
+
+4
+
+Publicly available data can be found at https://www.
+gw-openscience.org/catalog/GWTC-1-confident/html/.
+MNRAS 000, 1–22 (2019)
+
+STROOPWAFEL: Simulating rare events
+m1,i [M ]
+20
+
+m1,i [M ]
+
+40
+
+60
+
+100
+
+140
+
+2.5
+
+2.51
+
+0.0
+−0.5
+1.0
+
+1.2
+
+1.4
+
+1.6
+
+1.8
+
+log10 m1,i [M ]
+
+log10 ai [AU]
+
+log10 Nx / ∆S
+
+0.5
+
+3.69
+3.29
+
+1.0
+
+2.9
+
+0.5
+
+2.51
+
+2.11
+
+0.0
+
+2.11
+
+1.72
+
+−0.5
+
+1.72
+
+1.33
+
+−1.0
+
+2.0
+
+100
+
+1.33
+
+0.8
+
+1.0
+
+140
+
+2.5
+
+1.2
+
+1.4
+
+3.36
+
+1.5
+
+3.01
+
+0.5
+
+2.65
+
+0.0
+−0.5
+1.6
+
+1.8
+
+3.72
+
+∆S
+
+3.36
+
+0.5
+
+2.65
+
+2.29
+
+0.0
+
+2.29
+
+1.94
+
+−0.5
+
+1.94
+
+1.58
+
+−1.0
+
+1.58
+
+1.2
+
+1.4
+
+1.6
+
+2.55
+
+0.5
+
+2.21
+
+0.0
+−0.5
+1.5
+
+log10 m1,i [M ]
+
+1.6
+
+1.7
+
+3.24
+2.89
+
+1.0
+
+2.55
+
+0.5
+
+2.21
+
+1.86
+
+0.0
+
+1.86
+
+1.52
+
+−0.5
+
+1.52
+
+1.18
+
+−1.0
+
+1.8
+
+1.18
+
+1.0
+
+1.1
+
+1.2
+
+1.3
+
+20
+
+7
+
+2.5
+
+log10 m1,i [M ]
+
+2.0
+
+3.36
+
+1.5
+
+1.0
+
+3.01
+
+0.5
+
+2.65
+
+0.0
+−0.5
+0.9
+
+1.0
+
+1.1
+
+log10 m1,i [M ]
+
+1.2
+
+1.3
+
+1.4
+
+log10 ai [AU]
+
+log10 ai [AU]
+
+3.72
+
+log10 Nx / ∆S
+
+∆S
+
+0.8
+
+10
+
+1.6
+
+1.7
+
+1.8
+
+20
+4.08
+
+STROOPWAFEL
+
+NS-NS mergers (893)
+
+2.0
+
+−1.0
+
+1.5
+
+2.5
+
+4.08
+
+1.5
+
+1.4
+
+m1,i [M ]
+
+10
+
+Traditional
+
+BH-NS mergers (25488)
+
+∆S
+
+m1,i [M ]
+7
+
+60
+3.58
+
+1.5
+
+log10 ai [AU]
+
+log10 Nx / ∆S
+
+log10 ai [AU]
+
+1.0
+
+1.4
+
+40
+
+2.0
+
+2.89
+
+1.3
+
+20
+STROOPWAFEL
+
+3.24
+
+1.2
+
+2.0
+
+2.5
+
+BH-NS mergers (655)
+
+∆S
+
+1.1
+
+1.8
+
+log10 m1,i [M ]
+
+10
+3.58
+
+1.0
+
+BH-BH mergers (271067)
+
+3.01
+
+60
+
+2.0
+
+−1.0
+
+140
+
+log10 Nx / ∆S
+
+40
+
+2.5
+
+1.5
+
+100
+
+m1,i [M ]
+
+20
+Traditional
+
+60
+
+4.08
+
+m1,i [M ]
+10
+
+2.0
+
+1.0
+
+2.0
+
+log10 m1,i [M ]
+
+log10 ai [AU]
+
+2.0
+
+log10 Nx / ∆S
+
+log10 ai [AU]
+
+3.72
+
+1.0
+
+1.4
+
+40
+
+STROOPWAFEL
+
+∆S
+
+1.2
+
+1.8
+
+2.5
+
+BH-BH mergers (5163)
+
+2.0
+
+−1.0
+
+1.6
+
+log10 m1,i [M ]
+
+20
+4.08
+
+1.5
+
+ALL mergers (234768)
+
+m1,i [M ]
+
+60
+
+Traditional
+
+140
+
+log10 Nx / ∆S
+
+40
+
+100
+
+∆S
+
+m1,i [M ]
+20
+
+60
+
+4.08
+
+1.5
+
+3.29
+2.9
+
+0.8
+
+40
+
+2.0
+
+3.69
+
+∆S
+
+1.0
+
+−1.0
+
+20
+
+STROOPWAFEL
+
+ALL mergers (6711)
+
+2.0
+1.5
+
+10
+
+2.5
+
+4.08
+
+Traditional
+
+log10 ai [AU]
+
+7
+
+log10 Nx / ∆S
+
+10
+
+NS-NS mergers (40021)
+3.72
+
+∆S
+
+3.36
+
+log10 Nx / ∆S
+
+7
+
+13
+
+1.0
+
+3.01
+
+0.5
+
+2.65
+
+2.29
+
+0.0
+
+2.29
+
+1.94
+
+−0.5
+
+1.94
+
+1.58
+
+−1.0
+
+1.58
+
+0.8
+
+0.9
+
+1.0
+
+1.1
+
+log10 m1,i [M ]
+
+1.2
+
+1.3
+
+1.4
+
+Figure 6. Contour plots of the locations in log m1,i and log ai space of the hits xT (i.e., binaries of the target population) found in each
+simulation when using traditional birth distribution Monte Carlo sampling (left panels) and the sampling method STROOPWAFEL
+developed in this study (right panels). Contours represent a constant density of binaries of the target population found per unit area
+in log m1,i – log ai space. The colour gradient indicates the number of samples per area ∆S, the size of which is shown with a black
+rectangle. If the density is below the level of our lowest contour we plot the individual points. The four different panels from top to
+MNRAS
+000, 1–22
+(2019)
+bottom represent
+the
+first four target populations shown in Table 2. The total number of hits NT found in each simulation is quoted in
+parentheses. The metallicity assumed in all simulations is Z = 0.001.
+
+Broekgaarden et al.
+50
+
+4.4
+
+4.4
+
+STROOPWAFEL
+
+ALL mergers(6711)
+
+ALL mergers (234768)
+
+3.93
+
+3.93
+
+∆S
+
+∆S
+
+40
+
+3.01
+
+2.54
+
+20
+
+m2,f [M ]
+
+30
+
+3.47
+
+log Nx / ∆S
+
+m2,f [M ]
+
+3.47
+
+30
+
+3.01
+
+2.54
+
+20
+
+2.08
+
+10
+
+2.08
+
+10
+
+1.61
+
+1.61
+
+1.15
+
+10
+
+20
+
+30
+
+40
+
+50
+
+1.15
+
+60
+
+10
+
+20
+
+30
+
+m1,f [M ]
+
+50
+
+60
+
+m1,f [M ]
+
+50
+
+50
+
+3.6
+
+Traditional
+
+40
+
+3.6
+
+STROOPWAFEL
+
+BH-BH mergers (5163)
+
+BH-BH mergers (271067)
+
+3.25
+
+3.25
+
+∆S
+
+40
+
+∆S
+
+40
+
+2.55
+
+2.2
+
+20
+
+m2,f [M ]
+
+30
+
+2.9
+
+log Nx / ∆S
+
+m2,f [M ]
+
+2.9
+
+30
+
+2.55
+
+2.2
+
+20
+
+1.85
+
+10
+
+1.85
+
+10
+
+1.5
+
+1.5
+
+1.15
+
+10
+
+20
+
+30
+
+40
+
+50
+
+1.15
+
+60
+
+10
+
+20
+
+30
+
+m1,f [M ]
+
+3.4
+
+STROOPWAFEL
+
+BH-NS mergers (655)
+
+2.75
+
+3.12
+
+∆S
+2.50
+
+2.25
+2.55
+
+2.00
+2.27
+
+1.75
+
+m2,f [M ]
+
+2.83
+
+log Nx / ∆S
+
+m2,f [M ]
+
+2.50
+
+1.25
+1.00
+10
+
+15
+
+20
+
+25
+
+30
+
+35
+
+2.83
+
+2.25
+2.55
+
+2.00
+2.27
+
+1.75
+
+1.99
+
+1.50
+
+1.99
+
+1.50
+
+1.71
+
+1.25
+
+1.42
+
+1.00
+
+40
+
+1.71
+
+1.42
+
+5
+
+10
+
+15
+
+m1,f [M ]
+
+2.92
+
+1.75
+2.46
+
+1.50
+1.25
+
+2.00
+
+2.25
+
+2.50
+
+2.75
+
+3.00
+
+m2,f [M ]
+
+3.39
+
+2.00
+
+log Nx / ∆S
+
+m2,f [M ]
+
+2.25
+
+m1,f [M ]
+
+40
+
+NS-NS mergers (40021)
+4.33
+
+∆S
+
+2.50
+
+3.86
+
+1.75
+
+35
+
+2.75
+
+4.33
+
+∆S
+
+1.50
+
+30
+
+4.8
+
+STROOPWAFEL
+
+NS-NS mergers (893)
+
+2.75
+2.50
+
+25
+
+3.00
+
+4.8
+
+Traditional
+
+20
+
+m1,f [M ]
+
+3.00
+
+1.25
+
+BH-NS mergers (25488)
+
+2.75
+
+3.12
+
+∆S
+
+1.00
+1.00
+
+60
+
+3.00
+
+3.4
+
+5
+
+50
+
+m1,f [M ]
+
+3.00
+Traditional
+
+40
+
+log Nx / ∆S
+
+40
+
+log Nx / ∆S
+
+Traditional
+
+log Nx / ∆S
+
+50
+
+3.86
+
+2.25
+3.39
+
+2.00
+2.92
+
+1.75
+2.46
+
+1.50
+
+1.99
+
+1.25
+
+1.52
+
+1.00
+1.00
+
+log Nx / ∆S
+
+14
+
+1.99
+
+1.52
+
+1.25
+
+1.50
+
+1.75
+
+2.00
+
+2.25
+
+2.50
+
+2.75
+
+3.00
+
+m1,f [M ]
+
+Figure 7. Similar to Figure 6 but now for the output parameters: the final compact object masses m1,f and m2,f of the DCO. We
+overplot the gravitational-wave observations from O1 and O2 from The LIGO Scientific Collaboration et al. (2018) in black and from
+Zackay et al. (2019) in red. Error bars indicate 90% credible regions around the median. The metallicity assumed in all simulations is
+Z = 0.001; selection effects of gravitational-wave detectors are not accounted for.
+MNRAS 000, 1–22 (2019)
+
+STROOPWAFEL: Simulating rare events
+same DCO chirp mass resolution, our improved sampling
+leads to more binaries of the target distribution per bin,
+and hence yields smaller fractional sampling uncertainties
+for each histogram bin. This is shown in the right panel
+of Fig. 8, which displays the normalised chirp mass distributions from traditional and STROOPWAFEL sampling.
+The error bars showing the statistical sampling uncertainty
+on each bin are much smaller for our sampling algorithm,
+leading to better predictions for the distribution functions.
+
+3.5
+
+Recovering tails of distribution functions
+
+The need for more efficient sampling algorithms in binary population synthesis simulations of gravitational-wave
+source progenitors becomes even more evident when we consider the observational biases of gravitational-wave detectors. These biases, which generally favour high-mass systems
+with greater gravitational-wave amplitudes, over-emphasise
+the rare and frequently under-sampled tails of the simulated distributions. An example is shown in Fig. 9, where
+we plot the predicted distribution of chirp masses for BH–
+NS systems estimated using traditional birth distribution
+Monte Carlo or by using the STROOPWAFEL algorithm.
+The shown distributions are weighted by the sensitivity of
+gravitational-wave interferometers, approximated as a bias
+dependent on the primary DCO mass ∝ m2.2
+1,f (Fishbach
+& Holz 2017). We also show 1- and 2–σ confidence intervals which are calculated by bootstrapping the samples 1000
+times. Our algorithm produces much smoother distribution
+predictions with much smaller sampling uncertainties compared to traditional sampling methods for the same number
+of samples simulated. In particular, Figure 9 demonstrates
+that simulations using the traditional Monte Carlo sampling
+from the birth distributions under-sample the high-mass end
+of the population. This will be particularly significant when
+comparing population models to observations.
+Figure 9 corresponds to a particular model choice; variations of the model have to be considered in order to compare
+with observations. The displayed distribution is from a simulation at a single metallicity of Z = 0.001, while a range of
+metallicities will contribute to the observed BH–NS merger
+population. An integration over the metallicity-dependent
+cosmic star formation history is therefore required. The
+properties of BH–NS mergers will be explored with COMPAS in future work.
+
+3.6
+
+Handling bifurcations and stochasticity
+
+One of the most important results is that our sampling algorithm STROOPWAFEL handles well the bifurcations and
+stochasticity that naturally occur in the parameter spaces of
+binary population synthesis simulations. This discontinuous
+behaviour is visible in Figs. 6 and 7 by the disconnected contours and the offset of the location of some individual points
+from those contours. Such offset points physically relate to
+extremely rare formation channels or tails of distribution
+functions, while the ridges in the birth parameter space relate to bifurcations in the fate of the binary. Not only does
+STROOPWAFEL recover the irregularly shaped structures
+in the parameter space, our algorithm also finds these more
+scattered points.
+MNRAS 000, 1–22 (2019)
+
+4
+
+15
+
+DISCUSSION
+
+We have demonstrated that the performance of STROOPWAFEL is substantially superior to traditional Monte Carlo
+sampling from the birth probability distributions. For the
+types of rare events simulated in Section 3, the gain is already so large that the current implementation of our algorithm can contribute to drastic speed-ups of binary population synthesis simulations. Hence we have postponed some
+natural improvements to STROOPWAFEL until later, but
+we discuss them here. After those, we discuss additional potential applications for our algorithm.
+4.1
+
+The exploratory phase
+
+During the exploratory phase in STROOPWAFEL the initial parameter space is sampled by drawing random binaries
+from the priors (as in traditional birth distribution Monte
+Carlo sampling) until Nexpl events of interest are found.
+There are several features of the exploratory phase that
+could be optimised and improved.
+• We now use sampling from the birth distribution π for
+drawing the random binaries in the exploratory phase. Future improvements of STROOPWAFEL could use more efficient sampling algorithms in the exploratory phase. Examples include (1) using importance sampling in the exploratory phase when there is an existing guess at a more efficient sampling distribution, or (2) implementing techniques
+such as Latin hypercube sampling (LHS, McKay et al. 1979;
+Eglajs & Audze 1977; Iman et al. 1980, 1981). LHS is a
+Monte Carlo method that generates near-random samples
+which are more equally distributed throughout the initial
+parameter space by placing only one sample in each row
+and column of the Latin square5 . By doing so, it could improve the sampling in the exploratory phase as the probability of the randomly drawn samples being clustered decreases
+slightly.
+• The duration of the exploratory phase is now determined
+with fexpl , which is optimised for the uncertainties on the
+rates of the target distribution. A future improvement would
+be to determine fexpl based on the uncertainty in the simulated output distribution function. See also Sect. 4.3.
+• The exploratory phase duration is optimised under the simplifying assumption that the instrumental distribution will
+match the target distribution except for some missing regions in parameter space. The optimisation could also consider the level of fluctuation in the instrumental sampling
+distribution (i.e., the variance in the weights).
+• If the structures in the parameter space have a known minimum volume, we could use this to derive a better informed
+estimate for the uncertainty contributing from the probability of missing such structures in the exploratory phase. This
+seems unlikely to apply to binary-star population synthesis,
+but might be relevant for other applications of STROOPWAFEL.
+
+5
+
+A Latin square of order n is an arrangement of n different
+variables in a n × n array such that each variable occurs exactly
+once in every row or column (Euler 1782).
+
+16
+104
+
+Broekgaarden et al.
+BH-NS mergers
+
+0.5
+
+5% uncertainty/bin
+
+102
+
+BH-NS mergers
+STROOPWAFEL (25488)
+Traditional (655)
+
+0.4
+
+103
+
+p(mchirp) / M
+
+Number of hits NT
+
+STROOPWAFEL (25488)
+Traditional (655)
+
+10% uncertainty/bin
+
+25% uncertainty/bin
+
+0.3
+
+0.2
+
+101
+0.1
+
+50% uncertainty/bin
+
+100
+
+2
+
+3
+
+4
+
+5
+
+6
+
+0.0
+
+mchirp [M ]
+
+2
+
+3
+
+4
+
+5
+
+6
+
+mchirp [M ]
+
+Figure 8. Left panel: histograms of the number of target BH–NS binaries NT found per chirp mass bin mchirp for traditional Monte
+Carlo sampling (grey) and the STROOPWAFEL sampling method presented in this study (green). The standard Monte Carlo fractional
+uncertainties (i.e. Poisson noise) are shown with dashed lines in the background. We mark everything below 4 events (i.e. 50% uncertainty)
+as statistically insignificant as it is consistent with no hits within 2 standard deviations. Right panel: the BH-NS chirp mass probability
+distribution; STROOPWAFEL results have been re-sampled with weights from Eq. (13). The metallicity assumed in the simulations is
+Z = 0.001. The bin width is approximately 0.2M and is constant between the traditional and STROOPWAFEL algorithm. 
+
+4.2
+
+The refined sampling phase
+
+The Gaussians which are used to form the instrumental distribution are currently constructed using diagonal covariances (Σk ). These then remain unchanged throughout the
+refinement phase of adaptive importance sampling – even
+though much more information becomes available about the
+distribution of hits in the initial parameter space. A potential future improvement is to update the instrumental sampling distribution during the refinement phase. In principle
+this might be done locally, with only the samples drawn
+from each of the individual Gaussians used to update the
+corresponding element of the instrumental distribution. Doing so would avoid a potentially expensive nearest-neighbour
+search, as the tree is automatically built for free by the
+sampling already being performed. See also for example the
+AMIS algorithm described in Cornuet et al. (2012). Adaptive
+distribution choices beyond a mixture of Gaussians could
+also be explored.
+
+4.3
+
+Adapting to uncertainty in distribution
+functions
+
+Observational selection effects must be applied to model predictions in order to statistically compare models against observations. These selection effects are generally applied after
+population synthesis models are generated, and may place
+significant weight on rarely-formed systems in the tails of
+output distribution functions (e.g., higher-mass DCO binaries). Even though STROOPWAFEL can greatly improve
+the overall number of systems produced from a simulation,
+there may still be relatively few systems in these tails.
+In principle, we could tune STROOPWAFEL to produce a model population weighted towards any observational
+population distribution, i.e., optimising for observational selection effects and spending less time on systems which do
+
+not contribute to the observed sample. This can be achieved
+by incorporating selection effects directly in the instrumental distribution rather than applying them to STROOPWAFEL outputs. This can be practically implemented by
+changing the instrumental distribution weights. At the moment all Gaussians contribute equally to the mixture distribution with a weight 1/NT,expl but instead the contribution
+of each Gaussian can be weighted with the probability of observing the system to focus the simulation on systems that
+are more likely to contribute to the observable population.
+An extreme example of this approach would be re-defining
+the target population to be an even rarer subset of the initial target population, e.g., tails of a distribution function.
+STROOPWAFEL could also be used to sample from regions of the initial parameter space giving rise to properties
+consistent with specific observed systems (see also Andrews
+et al. 2018).
+The current implementation of STROOPWAFEL
+might be thought of as something like adaptive mesh refinement, familiar from hydrodynamics, applied to the phase
+space of binary population synthesis. This potential future development of STROOPWAFEL would be refining
+in the space of predicted observables. This development of
+STROOPWAFEL could naturally be applied to modelling
+any population for comparison to observations, not only intrinsically rare populations.
+
+4.4
+
+STROOPWAFEL in higher dimensions
+
+The demonstrations in this paper have all used STROOPWAFEL to sample in a three-dimensional birth parameter space of the two component masses and the initial orbital separation. STROOPWAFEL can be readily applied
+to sample in more dimensions. The scaling parameter κ may
+well have a different optimal value for higher dimensions,
+and should be investigated before being applied to higher
+MNRAS 000, 1–22 (2019)
+
+STROOPWAFEL: Simulating rare events
+
+0.8
+
+BH-NS mergers
+
+0.7
+
+STROOPWAFEL (25488)
+Traditional (655)
+
+17
+
+p(mchirp) / M
+
+0.6
+0.5
+0.4
+0.3
+0.2
+0.1
+0.0
+
+2
+
+3
+
+4
+
+5
+
+6
+
+mchirp [M ]
+Figure 9. Predicted distribution of the chirp mass of the merging BH–NS population using STROOPWAFEL (green) and traditional
+(grey) sampling. In both cases the simulation uses N = 106 samples and the distributions are weighted by the sensitivity of gravitationalwave interferometers using Fishbach & Holz (2017). Shaded regions show the 1- and 2–σ confidence intervals which are calculated by
+bootstrapping the samples 1000 times. This distribution is for a particular set of model assumptions, including a single metallicity
+Z = 0.001, and an integration over a metallicity-dependent cosmic star formation history is required for comparisons with observations.
+The same scipy kernel density estimator smoothing with a dimensionless kernel density estimator factor of about 0.1 is used for traditional
+and STROOPWAFEL distributions (see also Appendix D).
+
+dimensions, although we anticipate moving away from using diagonal covariances (see subsection 4.2). Additional potential dimensions to add to the space of initial conditions
+include, e.g., initial compositions, the initial eccentricity of
+the system, or the spins of the stars. Moreover, in COMPAS
+systems are labelled from the start with vectors representing normalised versions of the supernova kicks that will be
+applied during compact-object formation (see also, e.g., Andrews et al. 2018); each kick adds three dimensions to the
+parameter space. Potentially, applying STROOPWAFEL
+to the kick vectors can be promising since the kick magnitudes and directions can significantly affect the fates of the
+systems. In our simulations this would be especially important to increase the gain in simulating NS–NS mergers, as
+the kicks contribute most to the current stochastic output
+surfaces for this target population.
+
+4.5
+
+Combining STROOPWAFEL with MCMC or
+Gaussian process regression emulators on
+continuous spaces
+
+STROOPWAFEL could be applied directly to the combined parameter space of initial parameters of an individual
+MNRAS 000, 1–22 (2019)
+
+system (e.g., the initial masses and separations) and hyperparameters describing the model assumptions (e.g., winddriven mass loss rates, common-envelope physics).
+Alternatively, STROOPWAFEL could be combined
+with other methods for exploring the parameter space, such
+as emulators based on Gaussian process regression (see, e.g.,
+Barrett et al. 2017; Taylor & Gerosa 2018). Some of the parameters map continuously to the output space, while others exhibit discontinuities. STROOPWAFEL distinguishes
+itself in handling bifurcations and stochastic output surfaces. On the other hand, emulators can be more efficient
+in sampling parameters that are smooth. Thus an intended
+future development is to combine STROOPWAFEL with
+such methods to obtain the best overall efficiency.
+STROOPWAFEL output samples could also be converted into probability distributions using Gaussian mixture
+models based on Dirichlet processes (Del Pozzo et al. 2018).
+
+5
+
+SUMMARY AND CONCLUSIONS
+
+We have presented a new sampling algorithm that aims to
+improve the efficiency of simulating rare events in astrophys-
+
+18
+
+Broekgaarden et al.
+
+ical populations, and demonstrated its utility for binary population synthesis of gravitational-wave merger populations.
+Our algorithm STROOPWAFEL adaptively improves the
+sampling distribution to focus more computational time on
+the target population. Some key findings of our investigation
+are:
+(i) Using STROOPWAFEL we find a factor of about 25–
+200× more systems of interest in simulations of a certain
+length, as compared to Monte Carlo sampling from the
+birth distributions. To simulate the same number of events
+of interest with such commonly-used Monte Carlo sampling
+would require up to two orders of magnitude more computational time. This gain will improve binary population
+synthesis simulations by making it computationally feasible
+both to include more details of the relevant massive-star
+physics and to explore a greater number of variations of the
+physical assumptions of the model.
+(ii) The increase in efficiency of STROOPWAFEL leads to
+higher-resolution mapping of both the input and output
+parameter space. This reduces the sampling uncertainty
+by factors of ≈ 3 to 10 for our simulations with 106 total
+samples.
+(iii) STROOPWAFEL improvements are particularly significant when simulating extremely rare events or tails of
+distribution functions, such as the most massive BH-BH
+mergers or early NS-NS mergers.
+(iv) One of the core strengths of STROOPWAFEL is that
+it can handle well the bifurcations and discontinuities
+that naturally occur in the parameter spaces of binary
+population synthesis simulations. Such stochasticity often
+poses a challenge for applying sampling and emulation
+methods such as Markov Chain Monte Carlo and Gaussian
+process regression emulators that rely on smoothness to
+converge and produce independent samples.
+Future improvements to the STROOPWAFEL algorithm (discussed in Section 4) should be able to further improve its performance. This could make it more realistic for
+next-generation binary population synthesis simulations to
+include detailed stellar evolution models whilst also exploring more variations in the model physics and assumptions.
+Such improvements will help in comparing population models to population data, and so help to constrain the physics
+of evolutionary processes occurring on timescales too long
+to directly observe.
+
+ACKNOWLEDGEMENTS
+We thank especially T. Fragos, D. Szécsi and M. Renzo for
+constructive discussions and comments. We also thank C.
+Berry, R. Willcox and M. Wassink for their helpful suggestions on this paper. We thank D. Stops for technical support.
+We thank the anonymous referee for their helpful comments
+and careful feedback on this manuscript. FSB, AVG, IM,
+SJ and JG thank the Kavli Foundation, Niels Bohr institute and DARK Cosmology Centre in Copenhagen for their
+hospitality and for organizing the Kavli summer school in
+
+gravitational-wave astrophysics 2017 where part of this work
+has been performed. The work has been performed under the
+Project HPC-EUROPA3 (INFRAIA-2016-1-730897), with
+the support of the EC Research Innovation Action under the
+H2020 Programme; in particular, FSB gratefully acknowledges the support of the School of Mathematics, University
+of Edinburgh and Birmingham Institute for Gravitational
+Wave Astronomy, University of Birmingham and the computer resources and technical support provided by EPCC.
+FSB also acknowledges support through the McKinsey excellence grant and Kapteyn grant. SJ and IM thank the Aspen Center for Physics for hospitality whilst part of this
+work was performed, supported by National Science Foundation grant PHY-1607611. SJ is further grateful for partial
+support of this work via a grant from the Simons Foundation. SdM and FSB acknowledge funding by the European
+Union‘s Horizon 2020 research and innovation programme
+from the European Research Council (ERC) (Grant agreement No. 715063), and by the Netherlands Organisation for
+Scientific Research (NWO) as part of the Vidi research program BinWaves with project number 639.042.728. SS is supported by the Australian Research Council Centre of Excellence for Gravitational Wave Discovery (OzGrav), through
+project number CE170100004. AVG acknowledges support
+from Consejo Nacional de Ciencia y Tecnologia (CONACYT).
+Software:
+COMPAS (Stevenson et al. 2017; Barrett et al. 2018; VignaGómez et al. 2018)
+Python available from python.org
+matplotlib (Hunter 2007)
+NumPy (van der Walt et al. 2011)
+ipython/jupyter (Perez & Granger 2007; Kluyver et al.
+2016)
+This research has made use of data, software and/or web
+tools obtained from the Gravitational Wave Open Science
+Center (https://www.gw-openscience.org), a service of
+LIGO Laboratory, the LIGO Scientific Collaboration and
+the Virgo Collaboration. LIGO is funded by the U.S. National Science Foundation. Virgo is funded by the French
+Centre National de Recherche Scientifique (CNRS), the Italian Istituto Nazionale della Fisica Nucleare (INFN) and the
+Dutch Nikhef, with contributions by Polish and Hungarian
+institutes.
+
+REFERENCES
+Abbott B. P., et al., 2016, Phys. Rev. Lett., 116, 061102
+Abbott B. P., et al., 2017, Phys. Rev. Lett., 119, 161101
+Abbott B. P., et al., 2018, Living Reviews in Relativity, 21, 3
+Abt H. A., 1983, ARA&A, 21, 343
+Abt H. A., Gomez A. E., Levy S. G., 1990, ApJS, 74, 551
+Andrews J. J., Zezas A., Fragos T., 2018, The Astrophysical Journal Supplement Series, 237, 1
+Barrett J. W., Mandel I., Neijssel C. J., Stevenson S., VignaGómez A., 2017, in Brescia M., Djorgovski S. G., Feigelson E. D., Longo G., Cavuoti S., eds, IAU Symposium
+Vol. 325, Astroinformatics. pp 46–50 (arXiv:1704.03781),
+doi:10.1017/S1743921317000059
+Barrett J. W., Gaebel S. M., Neijssel C. J., Vigna-Gómez A.,
+Stevenson S., Berry C. P. L., Farr W. M., Mandel I., 2018,
+MNRAS, 477, 4685
+MNRAS 000, 1–22 (2019)
+
+STROOPWAFEL: Simulating rare events
+Belczynski K., Kalogera V., Bulik T., 2002, ApJ, 572, 407
+Belczynski K., Holz D. E., Bulik T., O’Shaughnessy R., 2016,
+Nature, 534, 512
+Cappé O., Guillin A., Marin J. M., Robert C. P., 2004, Journal
+of Computational and Graphical Statistics, 13, 907
+Cappé O., Douc R., Guillin A., Marin J.-M., Robert C. P., 2008,
+Statistics and Computing, 18, 447
+Cornuet J.-M., Marin J.-M., Mira A., Robert C. P., 2012, Scandinavian Journal of Statistics, 39, 798
+de Mink S. E., Mandel I., 2016, MNRAS, 460, 3545
+Del Pozzo W., Berry C. P. L., Ghosh A., Haines T. S. F., Singer
+L. P., Vecchio A., 2018, MNRAS, 479, 601
+Dominik M., Belczynski K., Fryer C., Holz D., Berti E., Bulik T.,
+Mandel I., O’Shaughnessy R., 2012, Astrophys. J., 759, 52
+Eglajs V., Audze P., 1977, Problems of Dynamics and Strengths,
+35, 104
+Euler L., 1782, Euler Archive - All Works. 530, 9, 85
+Fermi E., Richtmyer R. D., 1948, ] 10.2172/4423221
+Fishbach M., Holz D. E., 2017, ApJ, 851, L25
+Foucart F., Hinderer T., Nissanke S., 2018, Phys. Rev. D, 98,
+081501
+Fryer C. L., Belczynski K., Wiktorowicz G., Dominik M.,
+Kalogera V., Holz D. E., 2012, ApJ, 749, 91
+Goldberg D., Mazeh T., 1994, A&A, 282, 801
+He H. Y., Owen A. B., 2014, arXiv e-prints, p. arXiv:1411.3954
+Hesterberg T., 1995, Technometrics, 37, 185
+Hunter J. D., 2007, Computing in Science and Engineering, 9, 90
+Hurley J. R., Pols O. R., Tout C. A., 2000, MNRAS, 315, 543
+Hurley J. R., Tout C. A., Pols O. R., 2002, MNRAS, 329, 897
+Iman R. L., Davenport J. M., Zeigler D. K., 1980, Technical report, Latin hypercube sampling (program user’s guide).[LHC,
+in FORTRAN]. Sandia Labs., Albuquerque, NM (USA)
+Iman R. L., Helton J. C., Campbell J. E., 1981, Journal of quality
+technology, 13, 174
+Jones N. D., 1977, DAIMI Report Series, 6
+Kahn H., Harris T. E., 1951, National Bureau of Standards applied mathematics series, 12, 27
+Kahn H., Marshall A. W., 1953, Journal of the Operations Research Society of America, 1, 263
+Kalogera V., 1996, ApJ, 471, 352
+Kalogera V., 2000, ApJ, 541, 319
+Kalogera V., Webbink R. F., 1998, ApJ, 493, 351
+Klencki J., Moe M., Gladysz W., Chruslinska M., Holz D. E.,
+Belczynski K., 2018, A&A, 619, A77
+Kluyver T., et al., 2016, in ELPUB. pp 87–90
+Kolb U., 1993, A&A, 271, 149
+Kroupa P., 2001, MNRAS, 322, 231
+Kruckow M. U., Tauris T. M., Langer N., Kramer M., Izzard
+R. G., 2018, MNRAS,
+Liu J. S., 2008, Monte Carlo strategies in scientific computing.
+Springer Science & Business Media
+Mandel I., Farmer A., 2018, arXiv e-prints, p. arXiv:1806.05820
+Mandel I., de Mink S. E., 2016, MNRAS, 458, 2634
+Mapelli M., 2018, arXiv e-prints, p. arXiv:1809.09130
+Marchant P., Langer N., Podsiadlowski P., Tauris T. M., Moriya
+T. J., 2016, A&A, 588, A50
+Mazeh T., Goldberg D., Duquennoy A., Mayor M., 1992, ApJ,
+401, 265
+McKay M. D., Beckman R. J., Conover W. J., 1979, Technometrics, 21, 239
+Metropolis N., Ulam S., 1949, Journal of the American Statistical
+Association, 44, 335
+Moe M., Di Stefano R., 2017, The Astrophysical Journal Supplement Series, 230, 15
+Neijssel C. J., et al., 2019, arXiv e-prints, p. arXiv:1906.08136
+Öpik E., 1924, Publications of the Tartu Astrofizica Observatory,
+25, 1
+MNRAS 000, 1–22 (2019)
+
+19
+
+Ortiz L. E., Pack Kaelbling L., 2013, arXiv e-prints, p.
+arXiv:1301.3882
+Owen A., Zhou Y., 2000, Journal of the American Statistical Association, 95, 135
+Pennanen T., Koivu M., 2006, in , Monte Carlo and Quasi-Monte
+Carlo Methods 2004. Springer, pp 443–455
+Perez F., Granger B. E., 2007, Computing in Science and Engineering, 9, 21
+Politano M., 1996, ApJ, 465, 338
+Pols O., Hurley J., Tout C., 1998, in IAU Symposium. p. 607
+Robert C., Casella G., 2013, Monte Carlo statistical methods.
+Springer Science & Business Media
+Safarzadeh M., Ramirez-Ruiz E., Andrews J. J., Macias P., Fragos
+T., Scannapieco E., 2019, ApJ, 872, 105
+Sana H., et al., 2012, Science, 337, 444
+Smarr L., D. Blandford R., 1976, The Astrophysical Journal, 207,
+574
+Spera M., Mapelli M., Bressan A., 2015, MNRAS, 451, 4086
+Stevenson S., Vigna-Gómez A., Mandel I., Barrett J. W., Neijssel
+C. J., Perkins D., de Mink S. E., 2017, Nature Communications, 8, 14906
+Stevenson S., Sampson M., Powell J., Vigna-Gómez A., Neijssel C. J., Szécsi D., Mandel I., 2019, arXiv e-prints, p.
+arXiv:1904.02821
+Taylor S. R., Gerosa D., 2018, Phys. Rev. D, 98, 083017
+The LIGO Scientific Collaboration et al., 2018, arXiv e-prints, p.
+arXiv:1811.12907
+Torrie G. M., Valleau J. P., 1977, Journal of Computational
+Physics, 23, 187
+Tout C. A., 1991, MNRAS, 250, 701
+van der Walt S., Colbert S. C., Varoquaux G., 2011, Computing
+in Science and Engineering, 13, 22
+Veach E., Guibas L. J., 1995, in Proceedings of the 22Nd Annual Conference on Computer Graphics and Interactive Techniques. SIGGRAPH ’95. ACM, New York, NY, USA, pp
+419–428, doi:10.1145/218380.218498, http://doi.acm.org/
+10.1145/218380.218498
+Vigna-Gómez A., et al., 2018, MNRAS, 481, 4009
+Woosley S. E., 2017, The Astrophysical Journal, 836, 244
+Zackay B., Venumadhav T., Dai L., Roulet J., Zaldarriaga M.,
+2019, arXiv e-prints, p. arXiv:1902.10331
+
+APPENDIX A: DERIVATION OF THE
+VARIANCE USED FOR OPTIMISING THE
+LENGTH OF THE STROOPWAFEL
+EXPLORATION PHASE
+In this section we derive the expression for the variance
+(Eq. 17) on the rate estimate used to optimize fexpl . We
+can estimate the optimal fraction fexpl of samples that we
+should spend in the exploratory phase by taking into account the probability of not identifying a target population
+forming region in the exploratory phase. We assume that we
+sample from the mixture distribution Q(x) which is given
+by Eq. 12:
+g
+Q(x) = fexpl π(x) + (1 − fexpl )q(x),
+
+(A1)
+
+where π is the prior (used for the exploratory phase sampling) and qe is the mixture of Gaussians. We also assume
+we aim to estimate the rate RT with N total samples. After
+simulating these N samples we may have identified a target
+binary-forming region with total weight z1 whereas a region
+with weight z2 is yet unidentified such that the estimated
+
+20
+
+Broekgaarden et al.
+
+rate of the target population is (Eq. 16)
+Z
+
+unidentified
+
+RT =
+
+z}|{
+z2
+
+z1 +
+|{z}
+
+≈ EQ [RT ].
+
+(A2)
+
+φ(x)2 w(x)π(x)
+e
+dx ≈
+
+(
+
+z1
+z2
++
+1−fexpl
+fexpl
+)
++
+f
+expl
+z1
+
+(A10)
+
+identified
+
+The variance on RT , VQ [RT ], is a measure for the uncertainty of the estimated rate EQ [RT ]. Therefore, the optimal value of fexpl is one that minimizes the variance on
+RT . To determine this we first derive an estimate for the
+variance VQ [RT ].
+Using the continuous definition for the variance we have
+
+VQ [RT ] =
+
+1
+N
+
+Z
+
+
+2
+] Q(x) dx − EQ [RT ]2 .
+φ(x)2 w(x)
+
+1
+N
+
+Z
+
+(A4)
+
+
+]
+φ(x)2 w(x)π(x)
+dx − (z1 + z2 )2 .
+
+(A5)
+
+Since we assumed the target binary forming region is
+equal to z1 + z2 , by definition no binaries of the target population are found outside this region and thus φ(x) = 0
+outside z1 and z2 . Using this we can rewrite the integral in
+Equation A5 as
+Z
+
+]
+dx =
+φ(x)2 w(x)π(x)
+
+Z
+
+Z
+
+]
+w(x)π(x)
+dx.
+
+]
+w(x)π(x)
+dx +
+z2
+
+z1
+
+(A6)
+We now assume that we have found enough binaries
+of our target population in our exploratory phase and that
+we don’t have a bias for an output function such that the
+g is effectively flat over z1 . In other
+Gaussian mixture q(x)
+words, we assume that on the target binary forming region
+z1
+g ≈ π(x) .
+q(x)
+z1
+
+(A7)
+
+where π(x) is the birth distribution.
+Using this in Eq. A1, we approximate that Q(x) ≈ (1 −
+fexpl )π(x)/z1 + fexpl π(x) in z1 such that
+1
+
+] ≈
+w(x)
+(
+
+for x in z1 .
+
+1−fexpl
+) + fexpl
+z1
+
+1
+fexpl
+
+for x on z2
+
+APPENDIX B: TOY MODEL
+We construct a toy model that can be run without too
+much computational burden and is inspired by binary population synthesis simulations to study the performance of
+STROOPWAFEL. The advantage of a toy model is that
+the moments are analytically known and the toy model can
+be repeatedly evaluated at minimal computational cost. We
+use this toy model to investigate a suitable choice for the
+scale parameter κ in the width of Gaussian sampling distributions (see Eq. 11).
+We build the toy model in the 3-dimensional parameter space defined by the initial parameters x1 , x2 and x3 .
+The distribution functions (and ranges) of x1 , x2 and x3 are
+chosen to be similar to the initial parameters m1,i , ai and
+qi , used for our binary population synthesis model (see Appendix C). Similarly to the birth distribution of ai in the
+binary population synthesis code, we sample in log x2 . The
+output of the toy model is constructed from a union of disconnected volumes D and an output function φ(xi ) given
+by
+(
+1 if xi ∈ D
+1D,toymodel (xi ) =
+(B1)
+0 otherwise,
+where D = D0 ∪ D1 ∪ D2 is the union of three cuboids with
+the following vectors for the location of the center and the
+half-length of each cuboid in the x1 , x2 and x3 direction
+D0 = [20, 34, 0.3] ± [1.9, 8.0, 0.1],
+D1 = [40, 1.0, 0.3] ± [1.7, 0.6, 0.2],
+D2 = [34, 7.0, 0.8] ± [1.8, 0.6, 0.1].
+
+(A8)
+
+In addition, we also assume that the our Gaussian mixture qe is negligible outside of the target binary forming reg = 0 outside of z1 . In other words we assume
+gions, i.e. q(x)
+that z2 is far enough from z1 that the probability is zero
+to sample it with qe, and that we have completely missed it
+during the exploratory sampling. By doing so we obtain that
+on z2 we have
+] ≈
+w(x)
+
+(A11)
+i.e., Eq. 17.
+
+and EQ [RT ] = z1 + z2 , we find that
+VQ [RT ] =
+
+z1
+
+(A3)
+
+where the 1/N factor comes from taking the variance of the
+mean (average).
+Since
+w(x)
+e
+= π(x)/Q(x),
+
+R
+R
+where we used z1 π(x) dx = z1 and z2 π(x) dx = z2 .
+We can now write the variance as
+
+
+z1
+z2
+1 
+2
+VQ (RT ) ≈
+− (z1 + z2 ) ,
++
+N (1−fexpl ) + fexpl
+fexpl
+
+(A9)
+
+Substituting Eqs. A8 and A9 into the integral expression of Eq. A6 then yields:
+
+The two-dimensional projected distribution of the union D
+in x3 and log x2 is shown in bright green in Figure B1. One
+might notice that the disconnected target regions look similar to the ‘boats’ in the game Battleship - which is often played with a strategy that is conceptually similar to
+STROOPWAFEL. The fractional rates produced by these
+regions are the integrals over their volumes of the local density of the birth probability distributions (the prior distribution). The fractional rate of D in the initial parameter space
+equals VD = 0.0013127, where a prior (birth distribution)
+of x1 ∝ x−2.3
+is assumed on x1 and flat priors are assumed
+1
+on log x2 , and x3 . The value of VD is chosen to be similar to the average yield of double compact object mergers
+MNRAS 000, 1–22 (2019)
+
+STROOPWAFEL: Simulating rare events
+
+21
+
+Figure B1. Toy model illustration: distribution of the 106 samples drawn in the the birth distribution Monte Carlo (left-panel) and
+STROOPWAFEL (right panel) simulation. The panels show two-dimensional projections of log x2 and x3 from the three dimensional
+parameter space. In both figures the sampling density (gray) is shown through a two-dimensional histogram with 100×100 bins. Over
+plotted (green) are the samples that lie within the volume VD and recover the rare outcome D. Dark regions surrounding the green areas
+of interest in the right plot indicate that our STROOPWAFEL algorithm focuses more of the computational time around the region of
+interest.
+
+in the publicly available simulations6 of Vigna-Gómez et al.
+(2018). In addition, the fractional rate produced from D0 is
+similar to that from D1 , whereas the fractional rate from D2
+is relatively 10 times smaller. (For these parameter scalings,
+the absolute volume of D0 is larger than the volume of D1 ,
+but the different prior distributions weight the volume of D1
+more highly.)
+We run repeated simulations varying the parameter κ
+in STROOPWAFEL. We fix the total number of samples
+to N = 106 . We know the true value for the volume integral
+VD and calculate for each simulation the deviation between
+the fractional rate estimate and this true weighted volume.
+The closer to zero this deviation is, the better the estimate.
+For each variation of κ we run 100 simulations.
+The result of one such simulation for κ = 2 is shown
+in Fig. B1. In the STROOPWAFEL simulation the three
+islands are recovered with much better resolution than in
+traditional Monte Carlo sampling from the prior. The dark
+regions around the islands D0 , D1 and D2 in the STROOPWAFEL simulation demonstrate that our method focuses
+more of the computational time around the regions of interest. In both simulations, the islands D0 and D1 contain
+more samples than D2 , as expected.
+Figure B2 shows, in blue, the 1σ deviation from the true
+value for STROOPWAFEL simulations as a function of κ.
+The result of repeated simulations with traditional birth distribution Monte Carlo sampling is shown as a reference on
+the right. Shades of green in the background show regions
+of 0.3%, 1% and 3% fractional sampling uncertainty on the
+rate estimate.
+
+6
+
+Populations are available at http://www.sr.bham.ac.uk/
+compas/data.
+MNRAS 000, 1–22 (2019)
+
+Excessively small values of κ lead to biases in the estimated rate of more than 10%. This is because overly narrow
+Gaussian distributions create “holes” in the adapted sampling distribution, which then no longer completely cover or
+characterize the regions of interest. As a result the refinement phase misses part of D, leading to systematic underestimation of the true rate.
+On the other hand, excessively large κ values decrease
+the efficiency of the refinement phase as many samples drawn
+from the mixture of Gaussians q(x) fall outside the target
+regions. The scatter from the true rate estimate approaches
+the scatter obtained from the traditional Monte Carlo simulation as κ increases.
+We find that κ & 1.5 is a robust for all our test simulations and yields substantially better estimates on rates and
+distribution functions compared to traditional Monte Carlo
+simulations. We therefore adopt κ = 2 (the red dotted line
+in Figure B2) when sampling in three dimensions.
+
+APPENDIX C: BINARY POPULATION
+SYNTHESIS MODEL SET-UP
+We test the performance of the algorithm STROOPWAFEL by implementing our algorithm in the rapid binary
+population synthesis code COMPAS. COMPAS (Compact
+Object Mergers: Population Astrophysics and Statistics) is
+designed to study uncertainties in stellar binary evolution
+models and constrain them with observations, particularly
+those of gravitational-wave sources (Stevenson et al. 2017;
+Barrett et al. 2018; Vigna-Gómez et al. 2018). COMPAS
+interpolates between and extrapolates beyond stellar evolutionary tracks based on algorithms from the code SSE
+(Hurley et al. 2000), which rely on analytic fits of single
+
+Deviation from rate [1E-5]
+
+22
+
+Broekgaarden et al.
+
+3
+
+Rate toy model ≈ 0.001
+
+2
+
+STROOPWAFEL
+
+Traditional
+
+1
+0
+−1
+−2
+−3
+
+.3%
+
+100
+
+1%
+
+101
+width of Gaussians: κ
+
+3% uncertainty
+
+102
+
+Figure B2. Toy model test result: 1σ deviations from the true
+volume integral VD when estimating the fractional rate using
+STROOPWAFEL with different values for the scaling factor of
+the width of the Gaussians κ (left panel). The true fractional
+rate in the toy model is known and equals approximately 0.001.
+The deviations are calculated by running 100 repeated simulations with a total number of N = 106 samples per simulation.
+The green contours show a .3%, 1% and 3% fractional sampling
+uncertainty on the rate estimate of the target population. On the
+right the 1σ uncertainty of the traditional Monte Carlo sampled
+simulation is shown with√
+an error bar; this matches the expected
+fractional uncertainty 1/ NT . In this work we adopt κ = 2 (red
+dotted line).
+
+ai ∈ [0.01, 1000]AU. We assume that all our binaries have
+circular orbits at birth. These distributions and parameter
+ranges resemble commonly used settings for binary population synthesis simulations.
+Our changes to the Fiducial model from Vigna-Gómez
+et al. (2018) are the following:
+• We use a metallicity of Z = 0.001 for all our simulations.
+• We use the DELAYED prescription for the core-collapse supernovae treatment from Fryer et al. (2012).
+• We use a prescription for pair-instability supernovae and
+pulsational pair instability supernovae based on Woosley
+(2017). The implementation in COMPAS is described in
+Stevenson et al. (2019).
+We fix the total number of binaries in each simulation
+to N = 106 both for when using birth distribution Monte
+Carlo and STROOPWAFEL sampled simulations. The total computational time for each of the birth distribution
+Monte Carlo simulations is approximately 180 CPU hours.
+The total computational time of the STROOPWAFEL simulations is up to a factor of 2 lower as a result of a decrease in
+average simulation time per sample in our sampling method
+compared to traditional sampling (see Section 3.2). This result rises from binaries that become a gravitational-wave
+source costing on average less computational time to simulate with COMPAS than other binaries.
+
+APPENDIX D: BANDWIDTH VARIATIONS OF
+KERNEL DENSITY ESTIMATOR
+star evolution from Pols et al. (1998). COMPAS relies on
+an approximate and parametrized treatment of the physical
+processes, including for binary interactions, and can typically compute a predicted final outcome for a single binary
+system within a second.
+In this work the code is used to analyse DCO systems
+that form through isolated binary evolution, which often involves the common-envelope phase (e.g. Smarr & D. Blandford 1976). The approach we use to simulate a synthetic population of DCOs is similar to other binary population synthesis studies (including, e.g., Hurley et al. 2002; Belczynski
+et al. 2002; Dominik et al. 2012). We evolve a population
+of binary systems from their birth until they form a DCO
+system or otherwise either merge or disrupt. We then make
+a sub-selection of the DCOs that consist of two compact
+objects that merge within the age of the Universe through
+gravitational-wave emission and study the properties of this
+population.
+In general, we follow the Fiducial model described in
+Vigna-Gómez et al. (2018). We mention the most important
+assumptions here. The birth distribution for the primary
+mass m1,i is chosen to be a power law distribution known
+as the initial mass function (IMF) where p(m1,i ) ∝ m−α
+1,i
+with α = 2.3 for massive stars (Kroupa 2001). For the simulations we draw m1,i in [5, 150] M . The initial mass ratio
+qi = m2,i /m1,i of binary systems is suggested from observations to follow a flat distribution (e.g. Tout 1991; Mazeh
+et al. 1992; Goldberg & Mazeh 1994; Sana et al. 2012)
+given by p(qi ) ∝ 1. We adopt qi ∈ [0, 1]. The initial separation ai is assumed to be flat in the log, also known as
+Öpiks law p(ai ) ∝ a1i (Öpik 1924; Abt 1983). We choose
+
+Figure 8 and 9 use the same resolution (i.e., bandwidth or
+bin width) to estimate the chirp mass distribution function
+for the output of both the STROOPWAFEL and birth
+distribution Monte Carlo simulation. The bin width of a
+histogram or the bandwidth of a kernel density estimator
+can strongly influence the estimated distribution. Hence, in
+practice, the bandwidth should be adapted to the resolution
+available in the data.
+We show in Figure D1 the predicted chirp mass distribution of BH–BH mergers using adapted resolutions for birth
+distribution Monte Carlo sampling and STROOPWAFEL
+sampling.
+We estimate the adapted bandwidth using Scott‘s Rule
+−1/4
+which, in one dimension, scales as ∝ NT . This is the
+default bandwidth choice in the scipy kernel density estimator function. For the STROOPWAFEL sampling we
+replace
+NTPwith the effective sample size (ESS) given by
+P
+( iw
+fi )2 / i (f
+wi 2 ) (which, in practice, is approximately
+equal to NT,STROOPWAFEL ). The top panel of Figure 9 shows
+the estimated chirp mass distribution from both sampling
+methods for a dimensionless kernel density estimator fac−1/4
+tor for the bandwidth of ESSSTROOPWAFEL ≈ 0.044. This
+bandwidth is too small for the 53× smaller birth distribution Monte Carlo BH–BH population which therefore shows
+significant statistical noise fluctuations. The middle panel of
+Fig. 9 shows the estimated chirp mass distribution from both
+−1/4
+sampling methods for a bandwidth of NT,traditional ≈ 0.12.
+This bandwidth causes smaller statistical fluctuations for the
+traditional sampling, but removes some of the more detailed
+features for the STROOPWAFEL sampled distribution. In
+the bottom panel the two plots are combined, showing the
+MNRAS 000, 1–22 (2019)
+
+STROOPWAFEL: Simulating rare events
+distributions with the relative bandwidths. The STROOPWAFEL obtains smaller uncertainties on the distribution as
+well as a higher resolution, which is a result from the higher
+number of BH–BH mergers found in this simulation.
+
+0.06
+
+BH-BH mergers
+bandwidth = 0.044
+
+STROOPWAFEL (271067)
+Traditional (5163)
+
+0.05
+
+p(mchirp) / M
+
+This paper has been typeset from a TEX/LATEX file prepared by
+the author.
+
+0.07
+
+23
+
+0.04
+0.03
+0.02
+0.01
+0.00
+
+5
+
+10
+
+15
+
+20
+
+25
+
+30
+
+35
+
+mchirp [M ]
+
+BH-BH mergers
+0.06
+
+bandwidth = 0.12
+
+STROOPWAFEL (271067)
+Traditional (5163)
+
+p(mchirp) / M
+
+0.05
+
+0.04
+
+0.03
+
+0.02
+
+0.01
+
+0.00
+
+5
+
+10
+
+15
+
+20
+
+25
+
+30
+
+35
+
+mchirp [M ]
+
+BH-BH mergers
+0.06
+
+STROOPWAFEL (271067)
+Traditional (5163)
+
+bandwidth = 0.044
+bandwidth = 0.12
+
+p(mchirp) / M
+
+0.05
+
+0.04
+
+0.03
+
+0.02
+
+0.01
+
+0.00
+
+5
+
+10
+
+15
+
+20
+
+25
+
+30
+
+35
+
+mchirp [M ]
+
+Figure D1. Predicted chirp mass distribution of the BH–BH
+merger population using STROOPWAFEL (orange) and traditional (grey) sampling. In all cases the simulation uses N = 106
+samples and the distributions are weighted to the sensitivity of
+gravitational-wave interferometers using Fishbach & Holz (2017).
+Shaded regions show the 1- and 2–σ confidence intervals which
+are calculated by bootstrapping the samples 100 times. This distribution is for a particular set of model assumptions, including a single metallicity Z = 0.001, and an integration over a
+metallicity-dependent cosmic star formation history is required
+for comparisons with observations. The same scipy kernel density estimator smoothing with a kernel density estimator factor
+for the bandwidth of about 0.044 (top panel) and 0.12 (middle
+panel) is used for the traditional and STROOPWAFEL simulations. In the bottom panel a kernel bandwidth of about 0.044
+is used for the STROOPWAFEL method whereas for the traditional method we use a bandwidth of about 0.12.
+
+MNRAS 000, 1–22 (2019)
+
+

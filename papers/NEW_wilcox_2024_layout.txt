@@ -1,0 +1,1133 @@
+                                                 Draft version August 15, 2023
+                                                 Typeset using LATEX twocolumn style in AASTeX631
+
+
+
+
+                                                          The Impact of Angular Momentum Loss on the Outcomes of Binary Mass Transfer
+                                                                 Reinhold Willcox,1, 2 Morgan MacLeod,3 Ilya Mandel,1, 2 and Ryosuke Hirai1, 2
+                                                                      1 School of Physics and Astronomy Monash University, Clayton, VIC 3800, Australia
+                                                                     2 The ARC Centre of Excellence for Gravitational Wave Discovery – OzGrav, Australia
+arXiv:2308.06666v1 [astro-ph.SR] 13 Aug 2023
+
+
+
+
+                                                            3 Center for Astrophysics |Harvard & Smithsonian 60 Garden Street, MS-16, Cambridge, MA 02138, USA
+
+
+
+                                                                                                   (Dated: August 2023)
+
+                                                                                                       ABSTRACT
+                                                         We use the rapid binary population synthesis code COMPAS to investigate commonly used pre-
+                                                       scriptions for the determination of mass transfer stability in close binaries and the orbital separations
+                                                       after stable mass transfer. The degree of orbital tightening during non-conservative mass transfer
+                                                       episodes is governed by the poorly-constrained angular momentum carried away by the ejected mate-
+                                                       rial. Increased orbital tightening drives systems towards unstable mass transfer leading to a common
+                                                       envelope. We find that the fraction of interacting binaries that will undergo only stable mass transfer
+                                                       throughout their lives fluctuates between a few and ∼ 20% due to uncertainty in the angular momen-
+                                                       tum loss alone. If mass transfer is significantly non-conservative, stability prescriptions that rely on
+                                                       the assumption of conservative mass transfer under-predict the number of systems which experience
+                                                       unstable mass transfer and stellar mergers. This may substantially impact predictions about the rates
+                                                       of various transients, including luminous red novae, stripped-envelope supernovae, X-ray binaries, and
+                                                       the progenitors of coalescing compact binaries.
+
+
+                                                       Keywords: stars:binary - stellar mergers - stable mass transfer
+
+                                                                 1. INTRODUCTION                                  integration of the two effects and generalization to the
+                                                 Stellar binaries that interact via mass transfer (MT)            entire parameter space of interacting binaries (Ivanova
+                                               during their evolution produce a wide variety of astro-            & Nandez 2016; MacLeod & Loeb 2020a,b; Marchant
+                                               physically interesting objects and transients. Despite             et al. 2021).
+                                               their central importance, these mass transfer phases                 In a somewhat simplified treatment, we often distin-
+                                               are not yet fully understood. The majority of mas-                 guish between stable mass transfer and unstable mass
+                                               sive stars, progenitors of neutron stars (NSs) and black           transfer. Although precise criteria for the onset of in-
+                                               holes (BHs), are born in close binaries that will interact         stability in mass transfer episodes have remained elu-
+                                               at some point during their evolution (Sana et al. 2012;            sive, unstable mass transfer generally involves the en-
+                                               Moe & Di Stefano 2017; De Marco & Izzard 2017). Typ-               gulfment of the accretor by the donor’s envelope, result-
+                                               ically, mass is transferred from an expanding donor star           ing in either a rapid contraction of the orbit or a stellar
+                                               onto an accreting companion. The rate of MT gener-                 merger. This is commonly known as the common enve-
+                                               ally depends on the geometry of the system, along with             lope phase, or common envelope evolution (CEE), and,
+                                               the thermodynamic and hydrodynamic behavior of the                 in cases where the stars avoid merging, involves the loss
+                                               transferred material. To date, studies can model either            of a large fraction of the donor’s envelope on a dynamical
+                                               the 3D hydrodynamics or the thermodynamics of indi-                timescale (Paczynski 1976).
+                                               vidual systems, but computational limitations preclude               By contrast, stable MT proceeds on a thermal or nu-
+                                                                                                                  clear timescale and (assuming it does not immediately
+                                                                                                                  precede a phase of unstable MT) always results in a de-
+                                               Corresponding author: Reinhold Willcox                             tached binary. However, even this slower phase of mass
+                                               reinhold.willcox@monash.edu                                        transfer is sensitive to the donor’s stellar structure – in
+2                                                    Willcox et al.
+
+particular its density and entropy profiles – which de-       the L1 point and fall toward the companion star. The
+termine the donor’s response to mass loss. The binary’s       volume-equivalent Roche-lobe radius RL of the donor is
+trajectory through all later stages of binary evolution
+                                                                                           0.49a
+critically depends on this determination of stability and                 RL =                               ,     (1)
+the binary separation following the interaction.                                 0.6 + q 2/3 ln 1 + q −1/3
+   The boundary between stable and unstable MT repre-         where a is the orbital separation, and q = Ma /Md is the
+sents one of the major ongoing questions in binary evolu-     binary mass ratio in terms of the mass of the accretor
+tion theory. Simplified, early treatments for the stability   Ma and the donor Md (Eggleton 1983). If the donor
+boundary are based on the response of the donor radius        radius Rd > RL , mass transfer ensues via Roche-lobe
+at the onset of MT and account for the effects of non-        overflow (RLOF).
+conservative MT (Hjellming & Webbink 1987; Soberman             For a binary in a circular orbit, the orbital angular
+et al. 1997). In the case of non-conservative MT, mass        momentum (AM) is
+is removed from the binary along with some of the or-                                     r
+bital angular momentum, though accurately computing                                             Ga
+                                                                              J = Ma M d               ,           (2)
+the amount of removed angular momentum is challeng-                                          Ma + M d
+ing (MacLeod et al. 2018a,b) and sensitive to the accre-      where G is the gravitational constant. If the orbit is
+tion mechanism (Kalogera & Webbink 1996; Goodwin &            eccentric, MT may begin in bursts near the point of
+Woods 2020). More modern stability criteria track the         closest approach; we assume that MT drives the binary
+entire donor structural response to mass loss on differ-      to circularize at periapsis (though see Sepinsky et al.
+ent timescales, but in order to keep the parameter space      (2007, 2009, 2010); Dosopoulou & Kalogera (2018)).
+manageable, these typically assume fully conservative           As MT proceeds, some fraction β of the mass lost from
+MT (Ge et al. 2020; Woods & Ivanova 2011; Pavlovskii          the donor will be accreted by the companion,
+et al. 2017; Temmink et al. 2022).
+   In this study, we explore the consequences of imple-                            Ṁa = −β Ṁd .                   (3)
+menting these newer stability criteria at the expense of
+flexibility in the MT accretion efficiency. We use rapid      The MT efficiency β in general depends on the proper-
+binary population synthesis (BPS) models to simulate          ties of the binary prior to the MT and changes with time,
+the evolution of stellar binaries using a variety of pre-     though it is often assumed to be a constant for a given
+scriptions for MT stability, focusing particularly on the     MT episode. β = 1 corresponds to conservative MT, in
+MT efficiency and angular momentum loss.                      which all material lost from the donor is accreted, while
+   The paper is structured as follows. In Sec. 2, we re-      β < 1 refers to non-conservative MT, and β = 0 is fully
+view the analytics of mass exchange in binary stars and       non-conservative.
+the distinction between stable and unstable MT, and              Any mass that is not accreted is ejected from the
+introduce our population synthesis models. In Sec. 3,         binary system, extracting orbital angular momentum.
+we present the results of our simulations: the fraction       Traditionally, this is represented by the specific AM γ
+of each population which experiences only stable MT           of the ejected material in units of the orbital specific
+at different evolutionary epochs, and the separation dis-     AM. For simplicity, we introduce a new parametriza-
+tributions following stable MT. In Sec. 4, we discuss         tion for the AM loss, the effective decoupling radius aγ .
+which parameter variations are the most impactful and         This can be thought of as the distance from the center
+implications for future studies.                              of mass at which matter is ejected. The parameters aγ
+                                                              and γ are related by
+                 2. METHODOLOGY
+                                                                                         !
+         2.1. Analytics of stable mass transfer                                  J˙
+                                                                                                       
+                                                                                                  J
+                                                                        γ=
+   We review the analytics for binary MT and define the                      Ṁa + Ṁd         Ma + Md
+relevant free parameters. We borrow heavily from the
+                                                                                                 
+                                                                                              J                     (4)
+                                                                         = a2γ ωorb
+                                                                                    
+didactic approach of Pols (2018) as well as Soberman                                      M a + Md
+et al. (1997). For the simplified case of a circular, co-                   a 2 (1 + q)2
+                                                                              γ
+rotating binary, the stellar material around each star                   =                 ,
+                                                                             a         q
+is gravitationally bound to its host if the stellar radius
+does not exceed its Roche lobe, the equipotential surface     where ωorb is the orbital angular frequency.
+passing through the L1 point. If the star expands be-           As with the efficiency parameter β, γ is generally de-
+yond its Roche lobe, gas will flow through a nozzle near      pendent on time and attributes of the binary, such as
+                                                            Stable MT                                                          3
+
+the mass ratio and degree of rotational synchronization               strongly depends on the mass transfer timescale, as well
+(MacLeod & Loeb 2020a,b), but is similarly often simpli-              as the evolutionary phase of the donor. Following a
+fied to a constant. For matter which is removed from the              small amount of mass loss, the stellar structure will react
+vicinity of the donor star (the “Jeans” mode for a fast,              on the short dynamical timescale to restore hydrostatic
+isotropic wind), aγ =aq/(1+q), so γ = q. Material which               equilibrium. This initial, adiabatic radial response is
+instead decouples from the binary near the accretor has               parametrized as ζ∗ = ζad .
+aγ = a/(1 + q) and γ = 1/q (the “isotropic re-emission”                  Following Soberman et al. (1997), we label mass trans-
+mode). The maximal specific AM loss for co-rotating                   fer as dynamically unstable if the adiabatic response of
+matter occurs at the L2 point, aγ ≈ aL2 ≲ 1.25a (see                  the donor to mass loss at the beginning of mass transfer
+Fig. 1)1 . Larger specific AM loss may be achieved if the             is to expand relative to its Roche lobe, ζ∗ < ζL , lead-
+ejected matter forms a circumbinary ring which applies                ing to an increase in the mass loss rate and a runaway
+a torque on the orbit, though we do not consider this                 process on the dynamical timescale. According to this
+case here.                                                            definition, unstable MT leading to CEE sets in only if
+   Taking the time derivative of Eq. (2) and re-arranging             the MT occurs on the dynamical timescale at the onset
+with the definitions of β and γ, the relative change in               of the mass exchange. Otherwise, the MT is stable.
+separation is                                                            Eq. (7) can be solved analytically for some simplified
+                                                                      polytropic models (Hjellming & Webbink 1987; Sober-
+   ȧ      Ṁd
+               
+                   β
+                             
+                                  1
+                                    
+                                      1
+                                                                     man et al. 1997), or numerically using detailed 1D mod-
+      = −2      1 − + (β − 1) γ +         .                 (5)       els of stars undergoing mass loss (de Mink et al. 2007;
+   a       Md      q              2 1+q
+                                                                      Ge et al. 2020; Klencki et al. 2021). Broadly, the adi-
+                   2.1.1. Stability criteria                          abatic response of the star is sensitive to the specific
+  To predict the outcome of the binary post-interaction,              entropy gradient at the surface. For stars with radiative
+we distinguish mass transfer which leads to CEE from                  envelopes (intermediate and high mass stars on the main
+that which does not. Using Eqs. (1) and (5), we define                sequence (MS) and early on the Hertzsprung gap (HG)),
+the response of the donor’s Roche lobe to mass loss by                the specific entropy rises steeply near the surface. Mass
+the logarithmic derivative                                            loss exposes lower entropy layers which contract rapidly
+                                                                      (ζad > 0). As the mass loss continues, in the adiabatic
+       ∂ ln RL                                                        regime (i.e. fixing the entropy profile) the entropy gra-
+ ζL =          ,                                                      dient tapers off and the donor contraction is moderated.
+       ∂ ln Md
+                                                                         In stars with convective envelopes (low mass MS stars
+        ∂ ln a     ∂ ln(RL /a) ∂ ln q
+     =          +                                                     and cool giants), energy is efficiently transported in
+       ∂ ln Md        ∂ ln q    ∂ ln Md
+                                                   (6)            convective layers leading to a flat specific entropy pro-
+                  β                   1      1
+     = − 2 1 − + (β − 1) γ +                      +                   file within the convective region. Unless the core mass
+                  q                   2 1+q                           constitutes ≳ 20% of the total stellar mass, the adi-
+                                            !
+                         −1/3     −2/3 −1                             abatic response of the donor to mass loss is to expand
+                                                    
+       1       1.2 + (q       +q       )       β
+           2−                                    +1 .                (ζad < 0) (Soberman et al. 1997). In the extreme case of
+       3        0.6 + q 2/3 ln 1 + q −1/3      q
+                                                                      a fully convective star, the response of the donor follows
+This is purely a function of q, β, and γ, and is explicitly           R ∝ M −1/3 , i.e. ζad = −1/3 (Hjellming & Webbink
+independent of the mass transfer timescale. For most                  1987; Kippenhahn et al. 2012).
+of the parameter space, mass transfer from a high mass                   However, Ge et al. (2010) argued that comparing ζ∗
+donor to a low mass accretor will tighten the binary and              and ζL only at the onset of MT may be a poor predictor
+shrink the Roche lobe, and vice versa. Eq. (6) is shown               of MT stability, since both ζ∗ and ζL change throughout
+graphically in Fig. 1 as a function of these parameters,              the MT. They found that while fully convective stars
+with γ replaced by the decoupling separation aγ /a ac-                do expand rapidly during adiabatic mass loss, the out-
+cording to Eq. (4).                                                   ermost layers which extend beyond the Roche lobe are
+  By contrast, the radial response of the donor to mass               very diffuse, so that the actual mass loss rate is low.
+loss,                                                                 Although this is initially a runaway process, the mass
+                                                                      loss rate may never exceed a (model dependent) critical
+                               ∂ ln Rd
+                        ζ∗ =           ,                    (7)       value, in which case the MT will proceed stably.
+                               ∂ ln Md
+                                                                         Conversely, for some radiative donors, ζad may be ini-
+  1 Lagrange points were calculated using the methodology described
+                                                                      tially very high (rapid contraction), but decrease over
+   in https://map.gsfc.nasa.gov/ContentMedia/lagrange.pdf             time until ζad ∼ ζL , at which point the binary will ex-
+                                                                                                                                                                                                        4
+                      q = 0.1                                     q = 0.3                             q = 0.5                                 q = 0.7                             q = 0.9
+                                            L2                                      L2                                 L2                                   L2                                L2
+                                                                                           1.0                                    1.0                                  1.0
+          1.0                               MA        1.0
+                                                                                    MA
+                                                                                                                       MA                                   MA
+                                            L1                                                                                                                                                MA
+                                                                                           0.5                                    0.5                                  0.5
+          0.5                                         0.5
+                                                                                    L1
+                                                                                                                       L1
+                                                                                                                                                            L1
+                                                                                                                                                                                              L1
+                                                                                           0.0                                    0.0                                  0.0
+                                                      0.0
+
+
+
+
+aγ /a
+          0.0                               MD
+                                                                                    MD
+                                                                                                                       MD                                   MD                                MD
+                                                                                          −0.5                                   −0.5                                 −0.5
+        −0.5                                         −0.5
+
+
+
+                                                                                          −1.0                                   −1.0                                 −1.0
+                                            L3                                      L3                                  L3                                   L3                                L3
+                                                     −1.0
+        −1.0
+            0.0            0.5        1.0               0.0         0.5       1.0               0.0        0.5       1.0            0.0         0.5       1.0            0.0        0.5     1.0
+                      q = 1.0                                     q = 1.1                             q = 1.5                                 q = 3.0                             q = 5.0
+                                        L2                                      L2                                     L2         1.0                           L2     1.0                        L2
+          1.0                                         1.0                                  1.0
+
+
+                                                                                                                                  0.5                                  0.5
+          0.5                           MA            0.5                       MA         0.5
+                                                                                                                       MA
+                                                                                                                                                                MA
+                                                                                                                                                                                                  MA
+
+                                                                                                                                  0.0                                  0.0
+          0.0                           L1            0.0                       L1         0.0
+                                                                                                                       L1
+
+
+
+
+ aγ /a
+                                                                                                                                                                L1
+                                                                                                                                                                                                  L1
+                                        MD                                      MD
+                                                                                                                                                                      −0.5
+                                                                                                                                                                                                       Willcox et al.
+
+
+
+
+                                                                                                                                 −0.5
+                                                                                                                       MD
+         −0.5                                        −0.5                                 −0.5
+                                                                                                                                                                MD
+                                                                                                                                                                                                  MD
+
+                                                                                          −1.0                                   −1.0                                 −1.0
+         −1.0                                        −1.0
+                                         L3                                      L3                                     L3                                      L3                                L3
+                0.0        0.5        1.0               0.0         0.5       1.0               0.0        0.5       1.0            0.0         0.5       1.0            0.0        0.5     1.0
+                           β                                        β                                      β                                    β                                   β
+
+
+
+
+                      −2         −1              0            1           2         3       4          5         6           7            8           9          10          11     12
+                                                                                         ζL = d ln(RRL)/d ln(Md)
+Figure 1. The Roche-lobe response to mass transfer ζL for different values of the mass ratio q = Ma /Md , efficiency β, and specific angular momentum
+of non-accreted material. Here, the specific AM is parametrized by aγ , the distance from the binary center-of-mass at which the non-accreted material decouples
+from the system, in units of the semi-major axis a. The light and dark green horizontal lines mark the positions of the donor and accretor, respectively, with the
+donor always positioned toward the bottom. The upper and lower bounds correspond to the positions of the L2 and L3 Lagrangian points, respectively, which
+slowly vary in absolute value between ∼[1.2, 1.275] a for this range in q. The pink horizontal line represents the L1 point, and aγ /a = 0.0 demarcates the binary
+center-of-mass. The range considered for AM loss in our proxy parameter fγ , thus represents the space between the dark green MA line and the top of the axis.
+                                                       Stable MT                                                        5
+
+perience what is known as the delayed dynamical insta-        zero-age main sequence (ZAMS). By default, we fol-
+bility (Hjellming & Webbink 1987; Ge et al. 2010). As         low the traditional initial sampling distributions used in
+with the convective case, this delayed effect cannot be       many BPS codes. For the more massive primary, we
+effectively captured from the initial stellar response at     draw its mass M1 from the Kroupa initial mass func-
+the onset of MT, as defined in Soberman et al. (1997),        tion (IMF) p(M1 ) ∝ M1−2.3 between 5 and 100 M⊙
+but requires a detailed treatment of the stellar response     (Kroupa 2001). The mass ratio distribution is uniform
+over the MT episode.                                          q ∈ [0.1, 1] (with no additional constraint imposed on
+                                                              the minimum of M2 ), and the separation is drawn log-
+                2.1.2. Critical mass ratios                   uniformly, log(a/AU) ∈ [−2, 2]. All single stars are in-
+   Computing the evolution of ζ∗ and ζL from detailed         cluded implicitly as very wide binaries for normalisation
+simulations for each MT event is impractical for BPS          purposes. Since wide binaries do not interact, extending
+purposes. Instead, one can define a critical mass ratio       this upper limit is analogous to increasing the effectively
+qc as the threshold mass ratio, prior to RLOF, at which       single star fraction. Initial eccentricity is fixed at 0. We
+dynamical instability sets in at any point during the         discuss variations to the initial parameter distributions
+mass transfer. In practice, critical mass ratios are cal-     in App. A.
+culated from detailed models and depend on both the             Each binary is then evolved under the specified evo-
+donor mass and radius (or, equivalently, evolutionary         lution model until one of the following termination con-
+phase). Throughout this paper, we use the convention          ditions is reached:
+q = Ma /Md , so that the mass transfer is unstable if              • The binary experiences unstable mass transfer,
+q < qc .
+   Because the Ge et al. (2010) definition includes these          • Either star experiences a supernova (SN), or
+delayed effects, most critical mass ratio prescriptions
+                                                                   • Both components evolve into white dwarfs.
+tend to predict that mass transfer from radiative stars
+is more unstable, and from convective stars more stable,         We investigate the binaries at two epochs: immedi-
+than is found in prescriptions that consider only the stel-   ately following the first mass transfer episode and fol-
+lar response at the onset of MT. However, some studies        lowing the final mass transfer episode prior to the ter-
+define critical mass ratios based on the initial MT re-       mination condition, henceforth referred to as the End
+sponse and thus do not account for the delayed effects        state. We classify binaries based on whether or not they
+(e.g Hurley et al. 2002; de Mink et al. 2007; Claeys et al.   have experienced only stable MT up to the specified
+2014).                                                        epoch. We additionally consider the orbital separations
+   Critical mass ratio prescriptions must implicitly spec-    following the first MT episode, if the MT was stable.
+ify a Roche-lobe response ζL , i.e. a choice for the effi-    The outcome of CEE is notoriously uncertain and the
+ciency β and AM loss γ. For simplicity, this is usually       subject of ongoing research, so for simplicity we do not
+taken to be β = 1 (i.e. fully conservative mass transfer).    distinguish common-envelope survival from stellar merg-
+This, however, limits the applicability of such prescrip-     ers here (Ivanova 2017; Lau et al. 2022; Hirai & Mandel
+tions, as we discuss later. Recent studies have invoked       2022).
+alternative definitions for stability, including overflow        By restricting our study to pre-SN and pre-Double
+from the L2 point (Pavlovskii & Ivanova 2015; Pavlovskii      White Dwarf interactions, and by ignoring post-CEE
+et al. 2017; Lu et al. 2022), or rapid changes to the orbit   outcomes, we limit the scope of our parameter space and
+(Temmink et al. 2022). However, these definitions also        ensure that our conclusions are more robust. Many sys-
+assume fully conservative MT, and thus are similarly          tems will not interact: this is largely dependent on the
+limited.                                                      initial conditions (and, to a lesser extent, on the stellar
+                                                              winds at early phases). These non-interacting systems
+               2.2. Population synthesis                      are generally ignored here, except where otherwise spec-
+   We use the COMPAS2 rapid binary population syn-            ified.
+thesis suite, including the fiducial parameter choices                       2.3. Parameter variations
+listed in COMPAS et al. (2022), with a few excep-
+                                                                              2.3.1. Roche-lobe response
+tions and recently added prescriptions detailed below.
+For each distinct model, we evolve 105 binaries from            The rate of accretion onto a non-degenerate compan-
+                                                              ion is often assumed to be restricted by the accretor’s
+                                                              thermal timescale, Ṁa ∼ Ma /τKH,a . We calculate the
+  2 http://github.com/TeamCOMPAS/COMPAS
+                                                              accretion efficiency as
+6                                                     Willcox et al.
+
+                                                             to this set of prescriptions encompassing all stellar types
+                 Ṁa          CMa /τKH,a                       as ζComp .
+          β=−         = min                ,1 ,          (8)
+                 Ṁd            Md /τKH,d                         We also include several prescriptions for stability
+where τKH is the Kelvin-Helmholtz timescale, and the           based on critical mass ratios, from Claeys et al. (2014)
+pre-factor C (10 in this study) is included to account for     and Ge et al. (2020). From Claeys et al. (2014) we obtain
+an increase in the maximum accretion rate due to expan-        qc, Claeys14 , which takes on constant values that depend
+sion of the accretor (Paczyński & Sienkiewicz 1972; Neo       on the donor stellar type and whether or not the accretor
+et al. 1977; Hurley et al. 2002; Schneider et al. 2015).       is a degenerate star. For giant stars, they use a function
+During Case A MT – defined when the donor is on the            of the core mass ratio (Claeys et al. 2014; Hurley et al.
+MS – β ≈ 1 if the component masses are roughly compa-          2002). The qc, Claeys14 prescription is defined based on
+rable. During Case B/C MT – defined for more evolved           the initial donor response at the onset of mass loss, and
+donors – β is typically much closer to 0. Throughout,          does not capture the delayed stability effects discussed
+we follow the stellar type convention defined by Hurley        in Sec. 2.1.1.
+et al. (2000).                                                    The prescriptions from Ge et al. (2020) use detailed
+   We first consider the impact of uncertainties in the        1D adiabatic mass loss models to account for the evolu-
+Roche-lobe response to mass loss, ζL , by varying the MT       tion of stability over the course of the MT episode (see
+efficiency β and the specific AM of non-accreted matter        Sec. 2.1.1), and build off of Ge et al. (2010, 2015) to pro-
+γ. The default efficiency in COMPAS, βComp , uses the          vide qc as a function of both donor mass and radius (or
+ratio of thermal timescales defined in Eq. (8). We also        analagously, evolutionary state). The parameter qc, Ge20
+include variations with fixed values of β = {0.0, 0.5, 1.0}.   refers to their critical mass ratios calculated using adi-
+To investigate the effect of different AM loss modes, we       abatic mass loss from their standard stellar profiles (in-
+introduce a new parameter, fγ ∈ [0, 1], which increases        cluding super-adiabatic regions where relevant), while
+linearly with the decoupling radius between the accretor       the q̃c, Ge20 variant refers to the critical mass ratios cal-
+aacc and the L2 point aL2 ,                                    culated when the donor envelopes are artificially isen-
+                                                               tropic, as a workaround for the rapid super-adiabatic
+               aγ = aacc + fγ (aL2 − aacc ),            (9)    expansion observed in their standard models (see Ge
+                                                               et al. 2020 for a more thorough explanation).
+such that fγ = 0 corresponds to the isotropic re-emission         The ζad prescriptions are shown in Fig. 2 as a function
+model and fγ = 1 corresponds to AM loss from the               of donor radius for a grid of masses. Note that ζGe20 is
+L2 point. This range in fγ reflects results from hydro-        calculated directly from the critical mass ratio qc, Ge20 ,
+dynamic simulations, which indicate that non-accreted          as ζGe20 = ζL (qc, Ge20 ; β = 1), and similarly for ζ̃Ge20
+mass could decouple from the binary between the accre-         and ζClaeys14 . We include them in Fig. 2 to highlight
+tor and the L2 point, depending on the structural prop-        differences with ζComp . In practice, the Ge et al. (2020)
+erties of the donor (MacLeod et al. 2018b,a; MacLeod           values are interpolated in both mass and radius. The
+& Loeb 2020b). Many rapid BPS codes assume the                 vertical lines represent the stellar radii in our models
+isotropic re-emission model by default.                        when the stellar type transitions to the named type.
+  Since the impact of γ is moderated by β, we consider
+pairwise combinations of these parameters, noting that                                3. RESULTS
+γ is irrelevant for fully conservative mass transfer.
+                                                                              3.1. Impact of γ variations
+               2.3.2. Donor radial response                       For a given binary undergoing RLOF, the MT effi-
+  We additionally consider variations to the radial re-        ciency β and the specific AM of non-accreted material γ
+sponse of the donor to mass loss ζad . In our default          completely determine the response of the Roche lobe, as
+model both MS and HG stars (in the mass range of in-           well as the final separation of the binary following stable
+terest) have radiative envelopes for the entirety of the       MT, via Eq. (5).
+phase, with ζad,M S = 2 and ζad,HG = 6.5, respectively            In Fig. 3, we show how the post-MT orbital sepa-
+(these values are motivated by a constant approxima-           rations of binaries that experienced stable MT depend
+tion to the Ge et al. (2020) results, see COMPAS et al.        on the specific AM loss through our proxy parameter
+(2022)). Giants, by contrast, are assumed to have con-         fγ . Here, we follow default assumptions in the other
+vective envelopes. By default, we follow the prescription      parameters, namely, ζ∗ = ζComp and β = βComp .
+outlined in Soberman et al. (1997). According to this             Fig. 3.1 shows the separation distribution before (pre-
+prescription, mass loss leads to radial expansion unless       MT, top half) and after (post-MT, bottom half) the
+the core mass fraction becomes non-negligible. We refer        first episode of mass transfer. Fig. 3.1 shows the or-
+                          4.0M                                  5.0M                 102
+                                                                                                         6.3M                 102
+                                                                                                                                                8.0M                     102
+                                                                                                                                                                                         10.0M
+                                            103
+      102
+                                            102                                       10                                       10                                         10
+       10
+                                             10
+                                                                                       1                                        1                                          1
+
+
+
+
+ζad
+         1
+                                               1                                     0.5                                      0.5                                        0.5
+       0.5                                   0.5                                       0                                        0                                          0
+         0                                     0
+      -0.5                                  -0.5                                     -0.5                                     -0.5                                       -0.5
+                 HG BGB CHeB                           HG        BGB CHeB                           HG        BGB CHeB                     HG           BGB CHeB                    HG           BGB CHeB
+                     1         2        3                  1             2       3                  1             2                        1              2                         1            2
+
+      102
+                         13.0M                                  16.0M                                    20.0M                                  25.0M                                    32.0M
+                                            102                                      102
+                                                                                                                                   2
+                                                                                                                              10                                         102
+       10                                    10                                       10
+                                                                                                                               10                                         10
+        1                                     1                                        1
+
+
+
+
+ζad
+                                                                                                                                1                                          1
+      0.5                                   0.5                                      0.5                                      0.5                                        0.5
+        0                                     0                                        0                                        0                                          0
+      -0.5                                  -0.5                                     -0.5                                     -0.5                                       -0.5
+                 HG CHeB           EAGB                    HG    CHeB        EAGB                   HG        CHeB EAGB                    HG           CHeB EAGB                   HG                   CHeB
+                 1             2                       1             2           3              1             2           3            1            2              3            1            2            3
+                         40.0M                                  50.0M                                    63.0M                                  80.0M                                   100.0M
+                                                                                                                                                                                                                Stable MT
+
+
+
+
+      102                                   102                                      102                                      102                                        102
+
+       10                                    10                                       10                                       10                                         10
+
+
+
+
+ζad
+        1                                     1                                        1                                        1                                          1
+      0.5                                   0.5                                      0.5                                      0.5                                        0.5
+        0                                     0                                        0                                        0                                          0
+      -0.5                                  -0.5                                     -0.5                                     -0.5                                       -0.5
+                     HG            CHeB                     HG               CHeB                        HG           CHeB                     HG                 CHeB                  HG               CHeB
+             1             2        3              1             2           3              1            2            3                         2             3                          2           3
+                     log(R/R )                             log(R/R )                                log(R/R )                              log(R/R )                                log(R/R )
+Figure 2. The donor response to mass loss ζad as a function of donor radius, for selected ZAMS masses. The solid, black lines are the COMPAS default
+ζComp (see text for details). The blue lines show ζGe20 (dotted, blue) and ζ̃Ge20 (dot-dashed, blue), from Ge et al. (2020), corresponding to their models for fully
+adiabatic mass loss, and an artificially isentropic convective envelope, respectively. The dashed, orange lines represent the ζClaeys14 prescription (Claeys et al. 2014).
+Values for ζad here can be compared to those in Fig. 1 for ζL to determine MT stability. However, the ζ values from Claeys et al. (2014) and Ge et al. (2020)
+are derived from their respective critical mass ratios, which implicitly require that the mass loss is fully conservative, and thus can only be compared to ζL where
+β = 1. Additionally, since Ge et al. (2020) account for the delayed dynamical instability, ζGe20 and ζ̃Ge20 do not represent the initial donor radial response to mass
+loss, but rather the effective ζad that should be compared against ζL to determine stability. The vertical lines represent the radii in our models when the stellar
+type transitions to the named type. In practice, we interpolate in both the radii and masses. Note that the y-axis is linear below 1 and logarithmic above, to better
+distinguish the regions of interest.
+                                                                                                                                                                                                                 7
+8                                                                      Willcox et al.
+
+                                                                                Fig. 3.1), in the range log(a/R⊙ ) ∈∼ [2.7, 3.5], which
+                                                                Pre-MT          show a population of systems that undergo stable MT
+             4000
+                                                                                only for very small values of fγ . The post-MT separation
+             2000                                                               distributions cluster into two peaks near log(a/R⊙ ) ∼
+    Counts
+
+
+
+                                                                                1.5 and 2.5. For fγ = 0.0, there is also a prominent
+                0
+                0
+                                                                                bump toward large post-MT separations which is not
+                                                                                seen in the pre-MT distribution, indicating that these
+             2000                                                               are systems which ultimately widened as a result of the
+                                                                                MT.
+             4000                                                                  This can be seen more directly in Fig. 3.1, which shows
+                                                             Post-MT
+                                                                                the fractional amount of tightening or widening that bi-
+                    0           1           2          3           4
+                                         log10(a/R )                            naries experience. For most values of fγ shown, the
+                                                                                separation ratio distribution is bimodal, with peaks at
+                        (a) Semi-major axis, pre- and post-MT                   apost /apre ∼ 1 (little net change in the separation) and
+                                                                                apost /apre ∼ 5 (substantial widening). Interestingly, the
+             4000                                                               peak at apost /apre ∼ 5 becomes relatively less prominent
+                         AM loss                                                with decreasing fγ , except for fγ = 0.00 when that peak
+                             fγ = 1.00                                          dominates over the one at apost /apre ∼ 1.
+             3000
+                             fγ = 0.75                                             To understand this behavior, we highlight that, for
+    Counts
+
+
+
+
+                             fγ = 0.50                                          fully conservative mass transfer, the orbital separation
+             2000            fγ = 0.25                                          decreases until the mass ratio reverses. While this is only
+                             fγ = 0.00                                          approximately true for non-conservative mass transfer,
+             1000                                                               it is nonetheless illustrative. For nearly equal mass ra-
+                                                                                tio binaries undergoing Case A MT, βComp ≈ 1, so the
+                                                                                mass ratio will reverse after only a modest amount of
+               0
+               −2.5      −2.0   −1.5     −1.0   −0.5   0.0   0.5       1.0      mass is lost, and the mass transfer will cease when the
+                                     log10(apost/apre)                          Roche lobe encompasses a donor radius only moderately
+                          (b) Orbital tightening during MT
+                                                                                smaller than it was at the onset of MT. These binaries
+                                                                                thus contribute primarily to the peak at apost /apre ∼ 1,
+Figure 3. Distributions of the binary orbital separa-                           independently of the AM loss prescription.
+tions before and after the first episode of mass trans-                            Case A MT in unequal mass ratio binaries will ini-
+fer. Panel (a) shows the orbital separations before (pre-MT,                    tially be non-conservative, leading to a dependence on
+upper half) and after (post-MT, lower half) the interaction.                    the AM loss. However, as the donor mass approaches
+The post-MT distributions have been inverted. Only sys-                         that of the accretor, the MT efficiency β will rise towards
+tems which undergo stable mass transfer during this first
+                                                                                unity. If the orbit remains sufficiently wide following the
+interaction are included. Panel (b) shows the orbital tight-
+ening ratios apost /apre for the same systems. Both use the                     initial phase of non-conservative MT, the mass ratio will
+default stellar response ζComp and efficiency βComp . Colors in                 reverse and the the orbit will widen from its minimum
+both panels correspond to different values of the specific AM                   value. These binaries thus contribute primarily to the
+loss parameter fγ , as indicated in the legend, where fγ = 0                    extended tail toward low apost /apre values. If instead
+corresponds to isotropic re-emission and fγ = 1 is mass loss                    the orbit is too tight following this phase, due perhaps
+from the L2 point (see text for discussion).                                    to a high fγ value, the two stars will merge.
+                                                                                   Case B systems, by contrast, are nearly always non-
+bital tightening ratio log(apost /apre ) for the same sys-                      conservative, βComp → 0. If the binary has a mass ratio
+tems. Different colors represent different values for fγ ,                      close to unity, the orbit will not shrink much before the
+as indicated in the legend. Only binaries that undergo                          mass ratio reversal, and is unlikely to become unstable.
+stable MT are shown, so variations in the normalization                         The mass loss will then act to substantially widen the
+for different values of fγ correspond to differences in the                     binary, populating the second peak at apost /apre ∼ 5.
+number of binaries which remain stable.
+  As expected, increasing fγ leads to a reduction in the                                     3.2. Impact of γ-β variations
+number of systems that undergo stable MT, as many of
+these are driven toward instability. This is particularly                         The impact of fγ variations is maximal for low val-
+prominent for the pre-MT distributions (upper half of                           ues of the MT efficiency β and reduced as β → 1. We
+                                                                                investigate the influence of β and fγ by varying both pa-
+                                                              Stable MT                                                            9
+
+           0.6                                                             0.3
+
+
+           0.5
+
+
+           0.4                                                             0.2
+    fSMT
+
+
+
+
+                                                                    fSMT
+           0.3
+
+                                                                           0.1
+           0.2            β =1.0                                                          β =1.0
+                          β =0.5                                                          β =0.5
+           0.1
+                          β =0.0                                                          β =0.0
+                                                                           0.0
+           0.0
+                          βComp                                                           βComp
+                  0.0     0.2      0.4      0.6         0.8   1.0                0.0      0.2       0.4       0.6      0.8   1.0
+                        Specific angular momentum, fγ                                   Specific angular momentum, fγ
+                        (a) SMT fraction after 1st MT                                  (b) SMT fraction at the End state
+
+Figure 4. Outcomes of mass transfer, as a function of accretion efficiency and specific angular momentum.
+The ordinate shows the fraction of interacting systems which undergo stable mass transfer fSMT . The remainder (1-fSMT )
+experience unstable MT, possibly resulting in a merger. The abscissa indicates different values of the specific AM parameter
+fγ , with fγ = 0 corresponding to isotropic re-emission and fγ = 1 corresponding to mass loss from the L2 point. Different
+curves represent different values of the MT efficiency parameter β = {1.0, 0.5, 0.0}, corresponding to red dashed, blue dotted,
+and green dot-dashed, respectively. The solid black lines show the non-constant COMPAS default βComp (see text for further
+details). Panel (a) shows fSMT for the first interaction in a given binary. Panel (b) shows this fraction at the End state (see
+Sec. 2.2). Here, fSMT corresponds to the fraction of interacting binaries that have experienced only stable MT throughout all
+prior interactions. The donor’s response to mass loss is ζ∗ = ζComp for all curves. As expected, fSMT decreases with increasing
+fγ (if β ̸= 1) at both epochs. Notably, there is a subset of binaries which are only stable if the MT is non-conservative, and
+if fγ ≲ 0.2 (as can be seen in Fig. 1, an increase in β and a decrease in fγ both increase the likelihood of stability for a given
+system).
+
+rameters simultaneously in Fig. 4. In Fig. 3.2, we show             those on the right vary the donor response prescription
+how the stable MT fraction during the first MT episode              and implicitly fix β = 1. For models which depend on
+depends on the adopted value of fγ (shown on the ab-                β and fγ , we include only the extremal values of these
+scissa), assuming the default donor response ζ∗ = ζComp .           parameters (as well as our default βComp ) for brevity.
+Higher β values (represented by line color) decrease the              All of the models which define stability based on criti-
+sensitivity of this fγ dependence. Fig. 3.2 shows the               cal mass ratios qc assume fully conservative mass trans-
+same analysis for systems evaluated prior to the first              fer (β = 1). The ζComp model furthest to the right
+SN, which we discuss in more detail in Sec. 3.4.                    also includes fully conservative mass transfer to facil-
+   The height of each line represents the stable MT                 itate comparison with the critical mass ratio models.
+fraction fSMT . The remaining fraction, 1 − fSMT , in-              The (ζComp , β = 1) model and qc, Claeys14 both define
+cludes systems that experienced unstable MT during the              stability at the onset of MT, i.e. ignoring delayed insta-
+first interaction, including any stellar mergers. Non-              bilities.
+interacting systems are excluded. When β = 0, fSMT                    By contrast, the Ge et al. (2020) models consider the
+varies over a very broad range from ∼ 0 − 50%. Even                 evolution of stability over the course of MT. The aggre-
+for more realistic values of β = βComp , the range is still         gate effect is to increase the fraction fSMT of systems
+substantial, closer to ∼ 20 − 50%.                                  undergoing stable MT during the 1st MT event from
+                                                                    ∼ 40% for the (ζComp , β = 1) model to ∼ 70% for the
+                 3.3. Donor radial response ζad and qc              Ge et al. (2020) models. This is primarily due to the re-
+  In Fig. 5, we show fSMT across all model variations               duction in convective envelope donors which experience
+following the first MT episode (solid, red line) and at             instability in Ge et al. (2020), since the delayed dynami-
+the End state (dashed, green line), which we discuss                cal instability mechanism in radiative donors acts in the
+further in Sec. 3.4. Model variations are listed on the             other direction, to increase the number of unstable sys-
+abscissa. The ordering groups together similar models;              tems that would previously have been considered stable.
+those on the left fix ζ = ζComp and vary β and γ, while
+10                                                     Willcox et al.
+
+        1.0
+                      1st MT
+                      End state
+        0.8
+
+
+
+        0.6
+     fSMT
+
+
+
+
+        0.4
+
+
+
+        0.2
+
+
+
+        0.0
+
+                xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                               Non-conservative                        xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                                                                                         Conservative
+                       .00 0.0
+
+
+                       .00 0.0
+
+
+                               1 .0
+                        .00 omp
+
+
+                         .00 mp
+
+
+
+
+                          1 .0 4
+                      = eys1
+
+
+                      = e20
+
+
+                      = e20
+                               )
+
+
+                               )
+
+
+                               )
+                     =1 Co
+
+
+
+
+                          1 .0
+
+
+                          1 .0
+                   =0 βC
+
+
+
+
+                   =0 =
+
+
+                   =1 =
+
+
+
+                           =
+                            *
+                fγ mp ; β
+
+
+
+
+                  (β qc,G
+
+
+                  (β q̃c,G
+                  (β c,Cla
+               fγ p ; β
+
+
+               fγ p ; β
+
+
+
+                        β
+               fγ mp ;
+
+
+
+
+                      q
+                    p;
+            o
+
+
+
+
+                    o
+
+
+
+                 om
+
+
+
+
+                 om
+
+
+
+
+                 om
+       ζC
+
+
+                 ζC
+
+
+              ζC
+
+
+              ζC
+
+
+
+              ζC
+
+
+
+
+Figure 5. Stable mass transfer fraction, for all model variations. As in Fig. 4, we plot the fraction of interacting
+systems which experienced only stable mass transfer fSMT during the first MT event (solid, red curve), and by the End state
+(green, dashed curve), see Sec. 2.2. Model names are listed on the abscissa. The left-most starred model is the COMPAS
+default. Models on the left fixed the donor radial response to mass loss ζComp while varying the accretion parameters β and fγ .
+Those on the right varied the donor response via the stability condition (assuming fully conservative MT).
+
+  Meanwhile, we see as before that varying just β and γ            ues. For fγ ≳ 0.7, fSMT drops to a few percent with
+at fixed ζ∗ = ζComp drives significant changes in fSMT .           only a weak dependence on fγ , which suggests that if
+The maximal variation in fSMT from all variations in β             fγ is universally high, even binaries which remain stable
+and γ is ∼ 50% – seen in the difference between (ζComp ,           during the first MT will eventually experience unstable
+β = 0.0, fγ = 0.0) and (ζComp , β = 0.0, fγ = 1.0). For            MT.
+the default COMPAS efficiency β = βComp , fSMT varies                We show fSMT at the End state across all model varia-
+by ∼ 25% across the full range of fγ . Fluctuations in             tions in Fig. 5 (dashed, green line). Here, the differences
+the stable mass transfer fraction fSMT due to changes in           between models are qualitatively similar to differences
+the efficiency and specific AM loss during mass transfer           following the first MT episode, though not quite as pro-
+are comparable in magnitude to the variations from the             nounced. Interestingly, although fSMT is still sensitive
+donor stability prescriptions.                                     to β−γ variations at the end of the evolution, the impact
+                                                                   of different donor responses (for fully conservative MT,
+        3.4. Mass transfer outcomes pre-supernova                  β = 1) is greater at this epoch, with fSMT ranging from
+                                                                   ∼ 15 − 45%. Taken at face value, this suggests that un-
+  In Fig. 3.2, we consider the impacts of the β − γ varia-
+                                                                   certainties in the donor response are more influential for
+tions at the End State. We find that ∼ 0 − 20% of inter-
+                                                                   the long term evolution than uncertainties in the Roche-
+acting binaries will undergo only stable MT throughout
+                                                                   lobe response, though we emphasize that it is difficult
+their evolution.
+                                                                   to estimate without models that vary both the donor
+  As with the first MT episode, the stable mass transfer
+                                                                   response and the Roche-lobe response simultaneously.
+fraction at the End state is strongly dependent on the
+adopted AM loss prescription fγ (for values of β < 1),
+but here the impact is more concentrated at low fγ val-                     4. DISCUSSION AND CONCLUSION
+                                                       Stable MT                                                       11
+
+   We investigated the conditions and outcomes of sta-         and convective envelopes, such as those from Ge et al.
+ble mass transfer in populations of interacting, isolated      (2020), show that stable mass transfer is significantly
+binaries. Model variations included the treatment of           more common than is suggested by prescriptions that
+transferred material and its impact on the Roche lobe,         are restricted to the onset of mass transfer. However,
+and the radial response of the donor to mass loss. We fo-      these more nuanced prescriptions are computed based
+cused in particular on the fraction of systems that expe-      on the assumption of fully conservative MT. To the ex-
+rience stable MT during the first MT event and the effect      tent that this is not an accurate representation of most
+on the post-MT orbital separations, as well as the frac-       binary interactions, this assumption under-predicts the
+tion of systems that experience only stable MT events          likelihood of instability.
+throughout their evolution, prior to any supernovae.              In Fig. 2, we show the prescriptions for ζad derived
+                                                               from the detailed models from Ge et al. (2020), ζGe20
+                   4.1. Sensitivity to γ                       and ζ̃Ge20 , as well as the default ζComp used in COM-
+  The fraction of systems that undergo stable MT dur-          PAS, and ζClaeys14 from Claeys et al. (2014). ζGe20 and
+ing the first MT event, as well as the fraction of sys-        ζ̃Ge20 are generally very similar, but both are higher than
+tems that will experience only stable MT throughout            ζComp and ζClaeys14 for virtually all masses and radii, in-
+their evolution, strongly depends on the specific angu-        dicating that stable MT may be more abundant than is
+lar momentum γ carried away by non-accreted mate-              currently estimated, variations to β and γ notwithstand-
+rial (or equivalently, our proxy parameter fγ ), as shown      ing.
+in Fig. 5. BPS codes often assume that non-accreted               Notably, in response to Ge et al. (2010), Woods &
+matter follows the “isotropic re-emission” model, taking       Ivanova (2011) argue that the thermal timescale in the
+with it the the specific AM of the accretor, i.e. fγ = 0,      super-adiabatic surface layers is comparable to the dy-
+in all cases. However, both models and observations            namical timescale, thus invalidating the adiabatic as-
+suggest that this may not be the case.                         sumption of Ge et al. (2010, 2015, 2020). They pre-
+  Using detailed hydrodynamic simulations, MacLeod             dict that the thermal contraction and restructuring of
+et al. (2018a,b) find that fγ should not be constant, but      the superadiabatic layer occurs faster than the mass
+depends sensitively on properties of the system, such as       can be removed, except for unrealistically high mass
+the evolutionary state of the donor. Kalogera & Web-           loss rates. This prediction is supported by Pavlovskii
+bink (1996) argue that fγ ∼ 0 if the accretor is an NS         & Ivanova (2015), who find no evidence for rapid ex-
+or BH on the basis that gas ejection is driven by accre-       pansion when recombination energy is included in the
+tion energy deposited very close to the compact object.        superadiabatic layers. They argue instead that matter
+However, Goodwin & Woods (2020) find that fγ < 0               flowing through the nozzle around the L1 point is con-
+(mass lost near the L1 point) is required to explain the       stricted, and that MT instability only sets in once stel-
+large period derivative of SAX J1808.4-3658. Moreover,         lar material begins to overflow through either the L2 or
+there may exist mechanisms to keep ejected matter syn-         L3 points (Pavlovskii & Ivanova 2015; Pavlovskii et al.
+chronized to the binary orbit beyond the L2 point, such        2017). Lu et al. (2022) explored the threshold conditions
+as magnetic fields, collisions in the ejecta streams, or       for mass loss from the L2 point, and find that this occurs
+continuous torquing from circumbinary disks. Thus fγ           only for fairly high donor mass loss rates ≳ 10−4 M⊙ /yr,
+may not be a priori limited to fγ ≤ 1.                         though this is dependent on the geometry of the system
+  We find that the fraction of systems which undergo           and the assumed cooling rate of the accretion stream.
+stable MT during the first MT event is sensitive to the        This is marginally consistent with Ge et al. (2010), who
+value of fγ across the entire range fγ ∈ [0, 1], but that by   find that MT instability sets in around ∼ 10−5 M⊙ /yr
+the end of the evolution, nearly all systems experience        but quickly rises above ∼ 10−4 M⊙ /yr (see their Fig.
+CEE at some point if fγ ≳ 0.7 (see Fig. 4). If very            5), though a full population synthesis study to properly
+high fγ values are more representative of reality, this        compare the models is warranted.
+would efficiently kill off the stable MT channel for the          In a recent paper, Temmink et al. (2022) compared
+formation of binaries containing a compact object (in          several different stability definitions, including a criti-
+agreement with van Son et al. 2022, in the context of          cal mass loss rate at which the donor response becomes
+binary black hole formation).                                  adiabatic, overflow through the L2 point, and rapid con-
+                                                               traction of the orbit. They found that MT is generally
+          4.2. Uncertainties in donor response                 more stable than is predicted in the prescriptions com-
+                                                               monly in use in BPS codes, although they also computed
+  Mass transfer stability prescriptions based on the de-
+                                                               their stability criteria assuming fully conservative MT,
+layed onset of mass transfer instability in both radiative
+12                                                      Willcox et al.
+
+and their study focused on a lower mass regime than is          the most useful observations will be those which involve
+considered here. Crucially, they conclude that none of          binaries which have experienced stable mass transfer re-
+the definitions for stability are self-consistent – or par-     cently in their evolution (e.g. Algols), to reduce mod-
+ticularly reliable – for very evolved stars, which suggests     elling uncertainties. By contrast, binaries which are be-
+that the difference between stable and unstable MT it-          lieved to have survived a supernova or common enve-
+self may not be well-defined, or perhaps that the tran-         lope event, must necessarily be convolved with models
+sition between the two regimes is not as discrete as has        for these more uncertain phases, reducing the viability
+been assumed historically.                                      of any claimed constraints. The choice taken in this
+   In practice, the convective/radiative nature of an en-       paper to study the stable mass transfer rate only up
+velope is not directly aligned with its stellar type as         to the first supernova reflects this preference to reduce
+defined in Hurley et al. (2000). Convective instabili-          the modelling complexity in order to derive more robust
+ties develop in cool envelopes where the opacity is suffi-      conclusions.
+ciently high to make radiation transport inefficient. We
+implemented an improved prescription in which a gi-                           ACKNOWLEDGEMENTS
+ant’s envelope is radiative if the surface effective temper-
+                                                                  We thank Rosanne Di Stefano for productive discus-
+ature is greater than a given threshold temperature, and
+                                                                sions on the limitations of current observations of mul-
+convective otherwise. We considered several values for
+                                                                tiple stars, Max Moe and Mads Sørensen for providing
+this threshold temperature, including log(Teff /K) = 3.73
+                                                                the correlated distribution sampler (see App. A), and
+from Belczynski et al. (2008) and log(Teff /K) = 3.65
+                                                                Michela Mapelli, Fabian Schneider, Floor Broekgaar-
+from Klencki et al. (2021). However, we found that
+                                                                den, and members of Team COMPAS for useful feed-
+these variations had only a marginal impact on mass
+                                                                back on the manuscript. RTW thanks the Harvard Cen-
+transfer stability, and thus did not pursue them further.
+                                                                ter for Astrophysics for its hospitality while this work
+This may suggest that the convective/radiative bound-
+                                                                was completed. RTW, IM, and RH are supported by
+ary is not so uncertain as to substantially impact the sta-
+                                                                the Australian Research Council Centre of Excellence
+ble mass transfer fraction, however population synthesis
+                                                                for Gravitational Wave Discovery (OzGrav), through
+with more detailed stellar structures and responses to
+                                                                project number CE170100004. This work made use of
+mass loss will certainly provide some clarity here.
+                                                                the OzSTAR high performance computer at Swinburne
+             4.3. Observational constraints                     University of Technology. OzSTAR is funded by Swin-
+                                                                burne University of Technology and the National Col-
+  Observations of interacting binaries are crucial in con-
+                                                                laborative Research Infrastructure Strategy (NCRIS).
+straining the parameters β and γ. Binaries engaged in
+                                                                IM is a recipient of the Australian Research Council
+ongoing MT can provide vital constraints on the instan-
+                                                                Future Fellowships (FT190100574). MM gratefully ac-
+taneous values of β and γ in a given mass exchange
+                                                                knowledges support of the Clay postdoctoral fellowship
+episode, via measurable changes to the orbital period.
+                                                                of the Smithsonian Astrophysical Observatory.
+In tandem, the properties of observed populations of
+specific classes of post-interaction binaries, or their asso-
+ciated transients, can also be informative in determining                       CODE AVAILABILITY
+the values and universality of β and γ in different con-          Simulations in this paper made use of COMPAS
+texts, though these are subject to modelling constraints.       (COMPAS et al. 2022) v02.38.07. Data analysis was
+  For an in-depth review of the possible classes of in-         performed using python v3.9 (van Rossum 1995), numpy
+teracting binary observations, we refer the reader to           v1.21 (Harris et al. 2020), and matplotlib v3.5 (Hunter
+De Marco & Izzard (2017), particularly their Table 1            2007). Data and post-processing scripts are available on
+and the references therein. However, we emphasize that          request to the corresponding author.
+
+
+                                                        REFERENCES
+Belczynski, K., Kalogera, V., Rasio, F. A., et al. 2008, The    COMPAS, T., Riley, J., Agrawal, P., et al. 2022, The
+  Astrophysical Journal Supplement Series, 174, 223,             Journal of Open Source Software, 7, 3838,
+  doi: 10.1086/521026                                            doi: 10.21105/joss.03838
+Claeys, J. S. W., Pols, O. R., Izzard, R. G., Vink, J., &       De Marco, O., & Izzard, R. G. 2017, Publications of the
+  Verbunt, F. W. M. 2014, Astronomy & Astrophysics,               Astronomical Society of Australia, 34, e001,
+  563, A83, doi: 10.1051/0004-6361/201322714                      doi: 10.1017/pasa.2016.52
+                                                         Stable MT                                                          13
+
+de Mink, S. E., Pols, O. R., & Hilditch, R. W. 2007,            Lau, M. Y. M., Hirai, R., Price, D. J., & Mandel, I. 2022,
+  Astronomy and Astrophysics, 467, 1181,                          Monthly Notices of the Royal Astronomical Society,
+  doi: 10.1051/0004-6361:20067007                                 doi: 10.1093/mnras/stac2490
+Dosopoulou, F., & Kalogera, V. 2018                             Lu, W., Fuller, J., Quataert, E., & Bonnerot, C. 2022,
+Eggleton, P. P. 1983, The Astrophysical Journal, 268, 368,        arXiv:2204.00847 [astro-ph]. http://ascl.net/2204.00847
+  doi: 10.1086/160960                                           MacLeod, M., & Loeb, A. 2020a, The Astrophysical
+Ge, H., Hjellming, M. S., Webbink, R. F., Chen, X., & Han,       Journal, 895, 29, doi: 10.3847/1538-4357/ab89b6
+ Z. 2010, The Astrophysical Journal, 717, 724,                  —. 2020b, The Astrophysical Journal, 893, 106,
+ doi: 10.1088/0004-637X/717/2/724                                doi: 10.3847/1538-4357/ab822e
+Ge, H., Webbink, R. F., Chen, X., & Han, Z. 2015, The           MacLeod, M., Ostriker, E. C., & Stone, J. M. 2018a, The
+ Astrophysical Journal, 812, 40,                                 Astrophysical Journal, 868, 136,
+ doi: 10.1088/0004-637X/812/1/40                                 doi: 10.3847/1538-4357/aae9eb
+—. 2020, The Astrophysical Journal, 899, 132,                   —. 2018b, The Astrophysical Journal, 863, 5,
+ doi: 10.3847/1538-4357/aba7b7                                   doi: 10.3847/1538-4357/aacf08
+Goodwin, A. J., & Woods, T. E. 2020, Monthly Notices of         Marchant, P., Pappas, K. M. W., Gallegos-Garcia, M.,
+ the Royal Astronomical Society, 495, 796,                       et al. 2021, Astronomy and Astrophysics, 650, A107,
+ doi: 10.1093/mnras/staa1234
+                                                                 doi: 10.1051/0004-6361/202039992
+Grudić, M. Y., Offner, S. S. R., Guszejnov, D.,
+                                                                Moe, M., & Di Stefano, R. 2017, The Astrophysical Journal
+  Faucher-Giguère, C.-A., & Hopkins, P. F. 2023, Does
+                                                                 Supplement Series, 230, 15,
+  God Play Dice with Star Clusters?, arXiv.
+                                                                 doi: 10.3847/1538-4365/aa6fb6
+  http://ascl.net/2307.00052
+                                                                Neo, S., Miyaji, S., Nomoto, K., & Sugimoto, D. 1977,
+Harris, C. R., Millman, K. J., van der Walt, S. J., et al.
+                                                                  Publications of the Astronomical Society of Japan, 29,
+  2020, Nature, 585, 357, doi: 10.1038/s41586-020-2649-2
+                                                                  249
+Hirai, R., & Mandel, I. 2022, A Two-Stage Formalism for
+                                                                Paczynski, B. 1976, in Structure and Evolution of Close
+  Common-Envelope Phases of Massive Stars
+                                                                  Binary Systems; Proceedings of the Symposium, Vol. 73
+Hjellming, M. S., & Webbink, R. F. 1987, The
+                                                                  (D. Reidel Publishing Co.), 75
+  Astrophysical Journal, 318, 794, doi: 10.1086/165412
+                                                                Paczyński, B., & Sienkiewicz, R. 1972, Acta Astronomica,
+Hunter, J. D. 2007, Computing in Science and Engineering,
+                                                                  22, 73
+ 9, 90, doi: 10.1109/MCSE.2007.55
+                                                                Pavlovskii, K., & Ivanova, N. 2015, Monthly Notices of the
+Hurley, J. R., Pols, O. R., & Tout, C. A. 2000, Mon. Not.
+                                                                  Royal Astronomical Society, 449, 4415,
+ R. Astron. Soc, 000, 1
+                                                                  doi: 10.1093/mnras/stv619
+Hurley, J. R., Tout, C. A., & Pols, O. R. 2002, Monthly
+                                                                Pavlovskii, K., Ivanova, N., Belczynski, K., & Van, K. X.
+ Notices of the Royal Astronomical Society, 329, 897,
+                                                                  2017, Monthly Notices of the Royal Astronomical
+ doi: 10.1046/j.1365-8711.2002.05038.x
+                                                                  Society, 465, 2092, doi: 10.1093/mnras/stw2786
+Ivanova, N. 2017, 329, 199, doi: 10.1017/S1743921317003398
+Ivanova, N., & Nandez, J. L. A. 2016, Monthly Notices of        Pols, O. R. 2018, Course Notes - Binary Stars.
+  the Royal Astronomical Society, 462, 362,                       https://www.astro.ru.nl/˜onnop/
+  doi: 10.1093/mnras/stw1676                                    Sana, H., De Mink, S. E., De Koter, A., et al. 2012,
+Kalogera, V., & Webbink, R. F. 1996, The Astrophysical            Science, 337, 444, doi: 10.1126/science.1223344
+ Journal, 458, 301, doi: 10.1086/176813                         Schneider, F. R. N., Izzard, R. G., Langer, N., & de Mink,
+Kippenhahn, R., Weigert, A., & Weiss, A. 2012, Stellar            S. E. 2015, The Astrophysical Journal, 805, 20,
+  Structure and Evolution (Springer-Verlag Berlin                 doi: 10.1088/0004-637X/805/1/20
+  Heidelberg)                                                   Sepinsky, J. F., Willems, B., Kalogera, V., & Rasio, F. A.
+Klencki, J., Nelemans, G., Istrate, A. G., & Chruslinska, M.      2007, The Astrophysical Journal, 667, 1170,
+  2021, Astronomy and Astrophysics, 645, A54,                     doi: 10.1086/520911
+  doi: 10.1051/0004-6361/202038707                              —. 2009, The Astrophysical Journal, 702, 1387,
+Kroupa, P. 2001, Monthly Notices of the Royal                    doi: 10.1088/0004-637X/702/2/1387
+  Astronomical Society, 322, 231,                               —. 2010, Astrophysical Journal, 724, 546,
+  doi: 10.1046/j.1365-8711.2001.04022.x                          doi: 10.1088/0004-637X/724/1/546
+14                                                    Willcox et al.
+
+Soberman, G. E., Phinney, E. S., & van den Heuvel, E.         van Son, L. A. C., de Mink, S. E., Renzo, M., et al. 2022,
+  P. J. 1997, arXiv:astro-ph/9703016.                           No Peaks without Valleys: The Stable Mass Transfer
+  http://ascl.net/astro-ph/9703016                              Channel for Gravitational-Wave Sources in Light of the
+Temmink, K. D., Pols, O. R., Justham, S., Istrate, A. G., &     Neutron Star-Black Hole Mass Gap, arXiv,
+  Toonen, S. 2022, Coping with Loss: Stability of Mass          doi: 10.48550/arXiv.2209.13609
+  Transfer from Post-Main Sequence Donor Stars                Woods, T. E., & Ivanova, N. 2011, The Astrophysical
+van Rossum, G. 1995, Python Tutorial, Centrum voor             Journal, 739, L48, doi: 10.1088/2041-8205/739/2/L48
+  Wiskunde en Informatica (CWI)
+                                                      Stable MT                                                                                                            15
+
+
+                                                       APPENDIX
+
+
+     A. CORRELATED INITIAL CONDITIONS                                           2.5
+                                                                                                                                2.5
+
+
+   To test the robustness of our results against variations
+
+
+
+
+                                                               Sample density
+                                                                                                                                2.0
+                                                                                2.0
+
+in the initial conditions, we have implemented an alter-                                                                        1.5
+                                                                                1.5
+native set of initial binary distributions based on the
+results of Moe & Di Stefano (2017), who found that the                          1.0                                             1.0
+
+
+orbital parameters of observed binaries are better repro-                       0.5                                             0.5
+duced by correlated distributions in the primary mass
+                                                                                0.0                                             0.0
+M1 , the mass ratio q, and the period P . They addition-                              0.75   1.00   1.25   1.50   1.75   2.00         0.0     0.2   0.4   0.6     0.8     1.0
+                                                                                      Primary Mass log(M1/M )                               Mass Ratio q = M2/M1
+ally identify an overall bias towards systems with short
+periods and unequal mass ratios, compared with the tra-
+ditional distributions (used here) which are uniform in                         0.5
+
+
+
+
+                                                               Sample density
+q and loguniform in the orbital separation a (Sana et al.                       0.4                                                        34.1%
+                                                                                                                                       True Binaries            15.4%
+2012).                                                                                                                                                          Singles
+                                                                                0.3
+   Of course, these distributions are modelled after sys-
+                                                                                                                                                   50.5%
+tems as they are observed today, which may deviate sub-                         0.2
+                                                                                                                                               Inner Binaries
+stantially from those at birth, but such corrections add                        0.1
+
+further complications which are outside the scope of this                       0.0
+                                                                                              0            2             4
+paper. Furthermore, Moe & Di Stefano (2017) find that                                    Periapsis log(rP /AU)
+the average stellar multiplicity rises with increasing pri-
+mary mass, such that primaries with M ≳ 10 M⊙ are             Figure 6.        Initial condition distributions from Moe &
+more likely than not to have two or more companions           Di Stefano (2017) for single stars (blue), isolated binaries
+                                                              (green), and binaries which are the inner components of hi-
+(see their Fig. 39). A similar conclusion about the cor-
+                                                              erarchical systems (orange). Inner binaries make up more
+relation of multiplicity with either P or q cannot yet        than half of all systems and are preferentially found at very
+be drawn, due to the current lack of sufficient measure-      tight separations with unequal mass ratios.
+ments of the masses and separations of the higher order
+bodies in hierarchical systems (Rosanne Di Stefano, pri-      lium Burning (CHeB), and Asymptotic Giant Branch
+vate comm.). Multiplicity beyond binarity is not cur-         (AGB) stars, respectively. The shapes indicate the out-
+rently included in COMPAS.                                    come of this interaction: a star for stellar mergers, a
+   Using the multiplicity correlation with primary mass,      circle for CEE survivors, and a triangle for stable MT.
+we can estimate the likelihood that a given sampled bi-       Non-interacting binaries are represented by a black X.
+nary is in fact a true binary, or is the inner binary of      Both plots use the default evolutionary model.
+a higher multiplicity system. In Fig. 6, we show the             We emphasize that these two initial condition distri-
+sampling distributions for the initial parameters, split      butions are not meant to be representative of the large
+into single stars, true binaries, and inner binaries. Inner   parameter space of possible input distributions. Both
+binaries constitute a majority of the systems and dom-        distributions, for example, assume a Kroupa IMF for
+inate over true binaries at low mass ratios and small         the primary mass, though the universality of the IMF is
+separations.                                                  a matter of ongoing debate (Grudić et al. 2023). Nev-
+   Samples drawn from the Traditional Sampler and Moe         ertheless, their substantial differences provide a useful
+& Di Stefano (2017) distributions are presented for com-      comparison.
+parison in Fig. 7. Each point in these plots repre-              Surprisingly, the rates of different mass transfer out-
+sents a simulated binary, with initial orbital periapsis      comes, including the stable and unstable MT channels
+rP and mass ratio q indicated by the abscissa and or-         and stellar mergers, showed a surprising insensitivity to
+dinate, respectively. The initial primary mass is repre-      differences in the initial distributions. This insensitivity
+sented by the size of the point. The colors correspond        holds even across variations to the MT efficiency, AM
+to the primary stellar type immediately prior to the          loss, and the donor stability criteria. However, a more
+first MT interaction (if any), with orange, red, blue,        careful treatment of higher multiplicity systems may re-
+green, and pink corresponding to Main Sequence (MS),          sult in a greater sensitivity to the initial conditions.
+Hertzsprung Gap (HG), Giant Branch (GB), Core He-
+16                                                      Willcox et al.
+
+                                                   Traditional Sampler
+                     1.0                                                               Primary type at 1st MT
+                                                                                               N/A              GB
+                                                                                               MS               CHeB
+                     0.8
+                                                                                               HG               AGB
+      Mass Ratio q
+
+
+
+
+                     0.6                                                                  Outcome of 1st MT
+                                                                                            Isolated         CEE
+                                                                                            Merger           Only SMT
+                     0.4
+
+                                                                                       Primary mass at ZAMS
+                     0.2                                                                       M1 = 10M
+                                                                                               M1 = 25M
+                                                                                               M1 = 40M
+                     0.0
+                           10−1          100                 101                102                    103              104
+                                                        Periapsis rP [AU]
+                                               Moe & Di Stefano (2017)
+                     1.0                                                               Primary type at 1st MT
+                                                                                               N/A              GB
+                                                                                               MS               CHeB
+                     0.8
+                                                                                               HG               AGB
+      Mass Ratio q
+
+
+
+
+                     0.6                                                                  Outcome of 1st MT
+                                                                                            Isolated         CEE
+                                                                                            Merger           Only SMT
+                     0.4
+
+                                                                                       Primary mass at ZAMS
+                     0.2                                                                       M1 = 10M
+                                                                                               M1 = 25M
+                                                                                               M1 = 40M
+                     0.0
+                           10−1          100                 101                102                    103              104
+                                                        Periapsis rP [AU]
+Figure 7.      The initial conditions and outcomes of the first mass transfer event for binaries sampled from the
+Traditional Sampler and Moe & Di Stefano (2017) distributions. The plots show the sampled values for initial mass ratio and
+periapsis, with the size of the symbol indicating the initial primary mass. Periapsis is more indicative of future evolution than
+semi-major axis for the Moe & Di Stefano (2017) sampler (which includes non-zero eccentricities), because we circularize about
+the periapsis when MT starts (see text). The marker shape indicates the outcome of the first binary interaction. The color
+represents the stellar type of the primary when it first interacts with its companion. Non-interacting binaries are indicated with
+a black X. The cluster of short period, equal mass ratio binaries from the top plot corresponds to over-contact binaries, which
+are then equilibrated to have equal masses.
+

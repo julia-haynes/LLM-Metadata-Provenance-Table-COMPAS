@@ -1,0 +1,1521 @@
+MNRAS 000, 1–16 (2021)
+
+Preprint 4 May 2021
+
+Compiled using MNRAS LATEX style file v3.0
+
+Chemically Homogeneous Evolution: A rapid population synthesis
+approach
+Jeff Riley1,2 , Ilya Mandel1,2,3,4 , Pablo Marchant5 , Ellen Butler3 ,
+Kaila
+Nathaniel6 , Coenraad Neijssel3,1 , Spencer Shortt7 , Alejandro Vigna-Gómez8
+1
+School of Physics and Astronomy, Monash University, Clayton, Victoria 3800, Australia
+
+arXiv:2010.00002v2 [astro-ph.SR] 2 May 2021
+
+2 ARC Centre of Excellence for Gravitational Wave Discovery – OzGrav, Australia
+3 Birmingham Institute for Gravitational Wave Astronomy and School of Physics and Astronomy,
+
+University of Birmingham, B15 2TT, Birmingham, UK
+4 ARC Centre of Excellence for All Sky Astrophysics in 3 Dimensions – ASTRO 3D, Australia
+5 Institute of Astronomy, KU Leuven, Celestijnenlaan 200D, 3001 Leuven
+6 Argelander-Institut für Astronomie, Universität Bonn, Auf dem Hügel 71, 53121 Bonn, Germany,
+7 Department of Mathematics, University of Colorado Boulder, Boulder, CO, USA
+8 DARK, Niels Bohr Institute, University of Copenhagen, Jagtvej 128, 2200, Copenhagen, Denmark
+
+Accepted 2021 April 30. Received 2021 April 14; in original form 2020 September 29
+
+ABSTRACT
+
+We explore chemically homogeneous evolution (CHE) as a formation channel for massive merging binary black holes (BBHs). We develop methods to include CHE in a
+rapid binary population synthesis code, Compact Object Mergers: Population Astrophysics and Statistics (COMPAS), which combines realistic models of binary evolution
+with cosmological models of the star-formation history of the Universe. For the first
+time, we simultaneously explore conventional isolated binary star evolution under the
+same set of assumptions. This approach allows us to constrain population properties and make simultaneous predictions about the gravitational-wave detection rates
+of BBH mergers for the CHE and conventional formation channels. The overall mass
+distribution of detectable BBHs is consistent with existing gravitational-wave observations. We find that the CHE channel may yield up to ∼ 70% of all gravitational-wave
+detections of BBH mergers coming from isolated binary evolution.
+Key words: black hole mergers – gravitational waves – binaries: close – stars: massive
+– stars: evolution
+
+1
+
+INTRODUCTION
+
+On September 14th, 2015 the first direct observation of gravitational waves was made by the Advanced Laser Interferometer Gravitational-wave Observatory (aLIGO) (Abbott
+et al. 2016). The detected signal, now known as GW150914,
+was also the first observation of two black holes merging,
+thus confirming the existence of binary stellar-mass black
+hole systems and providing evidence that they can merge
+within the current age of the Universe. Based on 10 binary
+black hole (BBH) detections during the first two observing
+runs of aLIGO and advanced Virgo, Abbott et al. (2019)
+estimate a local BBH merger rate of 25 – 109 Gpc−3 yr−1 at
+90% confidence.
+How the BBH sources of these gravitational wave signals form remains an open question. To be the source of
+gravitational waves detected at aLIGO, which is sensitive
+to signals with frequencies of tens to hundreds of Hz, com© 2021 The Authors
+
+pact objects orbiting each other must spiral in as they lose
+energy through the emission of gravitational waves. Orbital
+energy loss through gravitational wave emission is not efficient at wide separations, and the timescale for gravitational wave emission to drive a binary to merger scales as
+the fourth power of the orbital separation (Peters 1964).
+In order for two 30 M black holes to merge within ≈ 14
+Gyr, the current age of the Universe, their initial separation
+must be below . 50 R . And therein lies a problem, as this
+is smaller than the radial extent reached by typical slowly
+rotating massive stars during their evolution. The different
+astrophysical channels proposed for forming merging BBHs
+generally fall into two categories (see, e.g., Mandel & Farmer
+2018; Mapelli 2018, for reviews):
+
+(i) isolated binary evolution, in which two stars may interact through tides and mass transfer, but are dy-
+
+2
+
+J. Riley et al.
+
+namically decoupled from other stars (e.g., Tutukov &
+Yungelson 1973, 1993; van den Heuvel 1976).
+(ii) dynamical formation, where dynamical interactions in
+a dense environment and/or a hierarchical triple system play a key role in forming and hardening a compact BBH (Sigurdsson & Hernquist 1993; Miller &
+Lauburg 2009; Ziosi et al. 2014; Rodriguez et al. 2015;
+Antonini et al. 2016; Bartos et al. 2017; Stone et al.
+2017).
+A variant of the isolated binary evolution channel relies on rotationally-induced chemical mixing in massive stars
+to prevent the establishment of a strong chemical gradient
+(Maeder 1987; Maeder & Meynet 2000; Heger et al. 2000).
+As long as the star continues to rotate at a sufficiently high
+rate, it will remain quasi-chemically homogeneous (Maeder
+1987; Langer 1992). Contrary to the core-envelope structure exhibited by conventional, more slowly rotating stars,
+and the characteristic expansion of the envelope as the core
+contracts, the radius of quasi-chemically homogeneous stars
+will shrink or remain constant as they become hotter and
+brighter (Yoon et al. 2006; Mandel & de Mink 2016).
+As we discuss below, previous work on the chemically
+homogeneous evolution (CHE) channel for BBH formation
+(Mandel & de Mink 2016; Marchant et al. 2016; de Mink &
+Mandel 2016; du Buisson et al. 2020) explored this channel
+independently of the usual isolated binary evolution channel. In this paper, we present our rapid population synthesis
+model for the CHE of binary systems, allowing for a direct
+comparison of the rates and properties of CHE and nonCHE BBHs under the same set of assumptions. Our CHE
+model is implemented in the rapid binary population synthesis code COMPAS (Stevenson et al. 2017; Vigna-Gómez
+et al. 2018), with thresholds on CHE evolution computed using rotating stellar models in the Modules for Experiments
+in Astrophysics (MESA) code (Paxton et al. 2015; Paxton
+et al. 2013, 2011).
+The remainder of this paper is organised as follows. Section 2 is a brief outline of CHE and previous work on the
+formation of BBHs through this channel. Section 3 presents
+a description of our CHE model and the implementation of
+the model in COMPAS. We present our results in Section 4.
+We provide some concluding remarks in Section 5.
+
+2
+
+CHEMICALLY HOMOGENEOUS EVOLUTION
+
+Stars evolving on the main sequence (MS) typically develop
+increasingly helium-rich cores and hydrogen-rich envelopes
+as radial mixing is inefficient. However, von Zeipel (1924)
+showed that rotating stars cannot simultaneously be in hydrostatic and thermal equilibrium if the rotational velocity
+is a function of radius only, which has been argued to result
+in meridional currents in the radiative layers of a rotating
+star (Sweet 1950; Eddington 1929). In massive rapidly rotating stars in low-metallicity environments, these currents can
+mix material from the convective core throughout the radiative envelope, leading to chemically homogeneous evolution
+for rapidly rotating stars (Maeder 1987).
+Due to strong chemical mixing, chemically homogeneous stars do not maintain a hydrogen-rich envelope – thus
+avoiding the dramatic expansion exhibited during the postmain sequence phase by non-chemically homogeneous stars.
+
+The radius of a chemically homogeneous star remains stable,
+or shrinks slowly, as the star becomes increasingly helium
+rich over the course of the main sequence, with the star contracting to a massive naked helium star post-main sequence.
+Chemically homogeneous components of a very close binary
+system can thus avoid overfilling their Roche lobes, mass
+transfer, and probable merger.
+de Mink et al. (2009) modelled the evolution of rotating
+massive stars using the hydrodynamic stellar evolution code
+described by Yoon et al. (2006) and Petrovic et al. (2005),
+which includes the effects of rotation on the stellar structure
+and the transport of angular momentum via rotationallyinduced hydrodynamic instabilities (Heger et al. 2000). The
+binary models developed by de Mink et al. (2009) and Song
+et al. (2016) show that constituent stars in very tight binary
+systems can achieve rotational frequencies sufficient to induce CHE. de Mink et al. (2009) proposed CHE as a viable
+formation channel for high-mass black-hole X-ray binaries.
+VFTS 352 (Almeida et al. 2015) and HD 5980 (Koenigsberger et al. 2014) are examples of observed binary systems
+thought to have undergone CHE (de Mink & Mandel 2016).
+Mandel & de Mink (2016) and Marchant et al. (2016)
+introduced and investigated CHE as a channel for forming
+merging BBHs. They concluded that for sufficiently high
+masses and sufficiently low metallicities, a narrow range of
+initial orbital periods (short enough to allow rapid rotation necessary for CHE, but not so short that the binary
+would immediately merge) could allow this channel to produce merging BBHs.
+Mandel & de Mink (2016); de Mink & Mandel (2016)
+used approximate thresholds for CHE based on the models of
+Yoon et al. (2006) to investigate the rates and properties of
+BBHs formed through the CHE channel. They estimated a
+merger rate of ∼ 10 Gpc−3 yr−1 in the local Universe for this
+channel, subject to a number of evolutionary uncertainties,
+which they explored in a population-synthesis-style study.
+Marchant et al. (2016) used the MESA code to conduct
+detailed simulations of the CHE channel, which were followed until the BBH stage. The simulations were conducted
+for close binaries with component masses above ∼ 20 M ,
+and included the over-contact phase in a majority of CHE
+BBH progenitors. Marchant et al. (2016) suggested that as
+long as material does not overflow the L2 point in overcontact binaries, co-rotation can be maintained, and a spiralin due to viscous drag can be avoided. In this scenario, close
+binary systems typically enter the over-contact phase in the
+early stages of core hydrogen burning, and then equilibrate
+their masses through mass transfer between the constituent
+stars. du Buisson et al. (2020) extended the results of the
+MESA simulations performed by Marchant et al. (2016) and
+combined them with the cosmological simulations of the
+chemical and star-formation history on the universe by Taylor & Kobayashi (2015). Their population synthesis study investigated the population properties, cosmological rates and
+aLIGO detection rates of BBHs, including the dependence
+on the early-Universe star formation rate (SFR), which they
+find to be mild for moderate variations in the high-redshift
+SFR.
+MNRAS 000, 1–16 (2021)
+
+Chemically Homogeneous Evolution: A rapid population synthesis approach
+3
+
+METHODS
+
+In this section, we describe the implementation of CHE
+within the COMPAS rapid binary population synthesis code.
+Using COMPAS allows us to rapidly evolve a large synthetic
+population of binaries, which includes binaries whose component stars evolve conventionally (i.e. along a redwards track
+on the Hertzsprung-Russell diagram (HRD)), and others
+whose components evolve via CHE (i.e. along a bluewards
+track on the HRD), thus providing data for both pathways
+that can be compared directly. Below, we summarise the
+key physics implemented in COMPAS, starting with our approximate model of quasi-chemically homogeneous evolution
+based on MESA experiments, as well as the choices made for
+the metallicity-specific star formation history.
+3.1
+
+Physics implemented in COMPAS
+
+The basics of stellar and binary evolution and BBH population modelling in COMPAS are described by Stevenson et al.
+(2017); Vigna-Gómez et al. (2018); Neijssel et al. (2019).
+Here, we provide a brief summary and describe differences
+from previous COMPAS studies.
+3.1.1
+
+CHE in COMPAS
+
+We used a set of MESA models of single stars with a fixed
+rotational frequency and no mass loss to determine the minimal angular frequency ω necessary for chemically homogeneous evolution as a function of mass and metallicity. Our
+fits to these angular frequency thresholds are provided in
+Appendix A. COMPAS uses these fits to determine whether
+a star is evolving chemically homogeneously.
+Stellar evolution in COMPAS follows the analytical fits
+of Hurley et al. (2000) to the stellar models from Pols
+et al. (1998). In order to address CHE, we introduce a new
+chemically homogeneous (CH) stellar type to the Hurley
+et al. (2000) collection of stellar types. In our simplified
+model, we neglect the very limited radial evolution of a
+CH star and set its radius equal to the zero-age main sequence (ZAMS) radius of a non-rotating star of the same
+mass and metallicity (see Appendix A). We compute the
+mass loss rate for CH stars in the same way as for regular
+MS stars, but with this fixed rather than evolving radius.
+As a consequence, the total mass lost over the MS by CH
+stars in our COMPAS models is generally within . 10%
+of that lost by non-CH stars of the same ZAMS mass and
+metallicity, except for the most massive stars in our simulations, with initial masses above 100 M , where the absence of radial expansion leads to significantly reduced MS
+mass loss estimates for CH stars. Finally, we assume that if
+a star evolves chemically homogeneously through the main
+sequence, it contracts directly into a naked helium star at
+the end of the main sequence, retaining its full mass at that
+point. Future evolution follows the Hurley et al. (2000) models of helium stars.
+Tides are very efficient at ensuring circularisation and
+synchronisation in very close binaries through tidal locking
+(e.g., Hut 1981). We therefore assume that all potential candidates for CHE are tidally synchronised at birth, so that
+their rotational angular frequency equals the orbital angular frequency. We check this angular frequency at birth to
+MNRAS 000, 1–16 (2021)
+
+3
+
+determine whether a star belongs to the CH type and continue to check it at every time step on the main sequence. If
+the angular frequency ever drops below the threshold value
+for CHE, e.g., because of binary widening as a consequence
+of mass loss through winds, the star is henceforth evolved
+as a regular main sequence star (in our simplified treatment, it immediately jumps to the track of a regular main
+sequence star of the same mass). We assume that once a
+chemical gradient is formed, it is very challenging to overcome and ensure efficient mixing, so in our model, a star that
+is not evolving chemically homogeneously cannot become a
+CH star (cf. BPASS models, which allow quasi-chemically
+homogeneous evolution through accretion-induced spin-up
+Eldridge et al. 2017). Although we assume perfect tidal synchronisation for CH stars, we disregard the angular momentum stored in the stellar rotation when considering binary
+evolution with mass loss.
+
+3.1.2
+
+Initial conditions
+
+Each binary system in a COMPAS simulation is described
+at birth (i.e. at zero-age main sequence (ZAMS)) by its initial conditions: constituent star masses, separation, eccentricity and metallicity. Initial conditions for our experiments
+were chosen using statistical distribution functions from the
+literature that were themselves based on observations. We
+describe the most important of these, and some important
+parameters that affect the evolution of the constituent stars
+as well as the binary system, in the following paragraphs.
+The mass of the primary star in the binary system (the
+more massive star at ZAMS) m1,i is described by the Kroupa
+(2001) initial mass function (IMF), the distribution function
+of which is given by
+p(m1,i ) ∝ m−α
+1,i ,
+
+(1)
+
+where α = 2.3 for the simulated range of primary masses
+m1,i ∈ [5, 150] M . We assume that the IMF is the same for
+all metallicities.
+The mass of the secondary star (less massive at ZAMS)
+m2,i is determined by drawing a mass ratio between the
+constituent stars qi ≡ m2,i / m1,i that follows a flat distribution, p(qi ) = 1 (Sana et al. 2012; Kobulnicky et al. 2014).
+Since we are interested in BBH formation, we explore only
+m2,i ≥3.0 M here. However, for both the primary and secondary mass, we consider the full mass range to normalise
+the simulation results to a given star-forming mass or star
+formation rate (e.g., Neijssel et al. 2019).
+The initial separation is drawn from a flat-in-log distribution independently of the masses (see Moe & Di Stefano
+2017 for coupled initial conditions):
+p(ai ) ∝
+
+1
+,
+ai
+
+(2)
+
+where ai ∈ [0.01, 1000] AU (Öpik 1924; Abt 1983).
+We assume all binaries are circular at birth (i.e. ei = 0),
+see Vigna-Gómez et al. (2020) for further discussion. Close
+binaries are tidally circularised at birth, so this has no impact on potential CHE systems.
+We simulate thirty different metallicities spaced uniformly in the logarithm across the range −4 ≤ log10 Z ≤
+−1.825.
+
+4
+
+J. Riley et al.
+
+3.1.3
+
+Wind-driven mass loss
+
+We use the mass loss rates as prescribed by Hurley et al.
+(2000, 2002) and references therein for cooler stars with
+temperatures of 12, 500 K and below. For stars hotter than
+12, 500 K we use the wind mass loss rates from Vink et al.
+(2001), as implemented in Belczynski et al. (2010).
+The luminous blue variable (LBV) stars (Maeder 1989;
+Pasquali et al. 1997), located close to the HumphreysDavidson limit in the HRD (Humphreys & Davidson 1979),
+are treated differently. For these stars we use the LBV wind
+mass loss rate prescribed by Belczynski et al. (2010):
+dM
+= fLBV ×10−4 M yr−1 ,
+dt
+
+(3)
+
+where fLBV = 1.5.
+For massive, hot and bright naked helium stars, we use
+a metallicity-dependent Wolf-Rayet (WR) wind mass loss
+rate (Vink & de Koter 2005). We parametrise the rate of
+mass loss by following Belczynski et al. (2010):
+dM
+Z m
+= fWR ×10−13 L1.5 (
+) M yr−1 ,
+dt
+Z
+
+(4)
+
+where L is the luminosity, m = 0.86 (Vink & de Koter 2005),
+we take Z = 0.014 (Asplund et al. 2009) and fWR = 1.0 in
+our default model.
+In our model all stars that remain chemically homogeneous on the main sequence convert their entire mass into
+helium at the end of their main sequence lifetime, so all such
+stars evolve into naked helium stars. Lower mass loss rates
+would promote the formation of black holes as the end products of the evolution of these massive stars, so we consider
+four different values of fWR in order to study the impact of
+WR mass loss on CHE: fWR ∈ { 0.0 , 0.2 , 0.6 , 1.0 }.
+All mass lost in winds is assumed to promptly depart
+the binary without further interaction with the companion
+in so-called ‘Jeans mode’ mass loss, carrying away the specific angular momentum of the donor.
+Our mass loss rate models do not include the impact
+of stellar rotation, which is likely to drive additional mass
+loss. In particular, the WR star formed when the CH star
+contracts and spins up at the end of its MS is likely to be
+critically rotating, and the same process may repeat during
+core contraction after core helium depletion. The star’s angular momentum can be reduced to sub-critical levels with
+a small amount of mass loss, and therefore does not significantly impact the overall mass budget; however, this does
+affect the remnant spin Marchant & Moriya (2020).
+3.1.4
+
+Mass transfer and over-contact systems
+
+We use the prescriptions described in Vigna-Gómez et al.
+(2018); Neijssel et al. (2019) to determine the dynamical stability of mass transfer through Roche-lobe overflow
+(RLOF), the fraction of mass accreted onto the companion and the specific angular momentum carried away by
+non-conservative dynamically stable mass transfer, and the
+outcome of common-envelope evolution. For non-CHE binaries that go through a common-envelope phase, we assume that Hertzsprung-gap donors do not survive (the ’pessimistic’ prescription of Belczynski et al. 2007; Neijssel et al.
+
+2019) and we assume that immediate post-common-envelope
+RLOF indicates a merger.
+We deviate from previous COMPAS models in the treatment of binaries that experience RLOF at ZAMS. Unlike
+previous work, we now allow such binaries to equilibrate
+their masses. The new separation of the equal-mass binary
+with a conserved total mass is determined by angular momentum conservation. Binary components are allowed to
+over-fill their Roche lobes, creating over-contact systems.
+However, if the components extend past the L2 Lagrange
+points after equilibration, we assume that the binary loses
+co-rotation and promptly merges (Marchant et al. 2016). For
+equal-mass circular binaries, the volume-equivalent radius
+for half of the volume within the L2 equipotential surface
+equals half the orbital separation. Therefore, our criterion
+for avoiding a prompt merger is equivalent to demanding
+that the sum of the unperturbed stellar radii is smaller than
+the orbital separation a.
+3.1.5
+
+Pair-instability supernovae
+
+Stellar evolution models predict that single stars with helium cores in the range ∼ 60 – 130 M can become unstable
+due to electron-positron pair production, leading to pairinstability supernovae (PISNe) which disrupt the star, leaving no remnant behind (e.g., Fowler & Hoyle 1964; Barkat
+et al. 1967; Fraley 1968; Woosley et al. 2002; Woosley 2019;
+Farmer et al. 2019). Stars with helium cores more massive than 130 M also experience a rapid collapse driven
+by pair production, but in these stars photodisintegration
+prevents a subsequent explosion; such stars may again produce merging BBHs (e.g., Marchant et al. 2016; du Buisson
+et al. 2020), but are not explored in our models, which have
+maximum initial stellar masses of 150 M . Meanwhile, stars
+with somewhat lower helium core masses, between ∼ 35 and
+∼ 60 M , are predicted to eject significant fractions of their
+total mass over several episodes (e.g., Yoshida et al. 2016;
+Woosley 2017; Marchant et al. 2019; Renzo et al. 2020).
+Such pulsational pair-instability supernovae (PPISNe) leave
+behind a black hole remnant, albeit with a reduced mass.
+PISNe and PPISNe are expected to produce a PISN mass
+gap in the distribution of remnant masses from single stellar evolution – a dearth of black holes with masses between
+∼ 45M and ∼ 130M .
+Some superluminous supernovae have been identified as
+PISN candidates (Gal-Yam 2012, and references therein),
+while iPTF2014hls has been identified as a PPISN candidate (Arcavi et al. 2017). Furthermore, the distribution of
+masses of gravitational-wave observations appeared consistent with a cutoff due to (P)PISNe (Abbott et al. 2019),
+though GW190521 is a BBH merger with at least one component in the predicted PISN mass gap (Abbott et al. 2020).
+Here, we follow the Stevenson et al. (2019) fit to the
+Marchant et al. (2019) models for predicting the range of
+PISN masses and the PPISN remnant masses from the
+masses of the progenitor helium cores. We apply the entire
+PPISN mass loss in one time step. Moreover, in our treatment both supernovae happen in one timestep for equalmass stars. This over-estimates the post-supernova period
+and eccentricity of binaries whose components lose significant mass in a PPISN.
+We use the ’Delayed’ prescription of Fryer et al. (2012)
+MNRAS 000, 1–16 (2021)
+
+Chemically Homogeneous Evolution: A rapid population synthesis approach
+for compact object remnant masses and modulate the natal
+kicks by fallback for regular core-collapse supernovae, with
+reduced kicks for electron-capture and ultra-stripped supernovae as in Vigna-Gómez et al. (2018).
+
+3.2
+
+Star formation rate
+
+The local merger rate of BBHs depends on their formation
+rate at higher redshifts due to the possibly significant time
+delays between formation and merger, and is therefore sensitive to the star formation rate as a function of redshift. Furthermore, the yield of BBHs per unit star forming mass, the
+BBH mass distribution, and the distribution of delay times
+between formation and merger are all sensitive functions
+of the metallicity of progenitor stars, both for CHE (e.g.
+Marchant et al. 2016) and non-CHE (Neijssel et al. 2019;
+Chruslinska et al. 2019) systems. We must therefore specify
+a metallicity-specific star formation rate (MSSFR) in order
+to estimate the merger rate and properties of BBHs. We use
+the preferred model of Neijssel et al. (2019) for the MSSFR.
+Figure 1 shows the contribution of different ranges of star
+formation metallicities to the total star formation rate. This
+model has higher star formation metallicities in the local
+Universe than the Taylor & Kobayashi (2015) model used
+by du Buisson et al. (2020) (cf. their Figure 2).
+
+Our simulations are based on a Monte Carlo sampling
+of binaries. We estimate the sampling uncertainty on all derived quantities via bootstrapping: we uniformly resample,
+with replacement, a new population of 12 million binaries
+from the original, evolved, population of 12 million. Error
+bars on plots, where shown, correspond to the 5th and 95th
+percentiles from bootstrapping.
+4.1
+
+4
+
+RESULTS AND DISCUSSION
+
+We evolved a total of 12 million binaries as described in
+section 3. These were equally divided into 30 metallicity bins
+and 4 choices of the WR mass loss rate multipliers fWR , for
+a total of 100, 000 binaries for each of 120 combinations of
+Z and fWR . Binaries are evolved until a double compact
+object is formed, or until an event happens which makes
+this outcome impossible (e.g., the stars merge or the binary
+becomes unbound), or the system reaches 14 Gyr in age.
+MNRAS 000, 1–16 (2021)
+
+Population statistics
+
+The population statistics are shown in Table 1. From a population of 11,025,296 binaries that survived beyond ZAMS
+(i.e. did not merge at ZAMS), 16,891 were composed of two
+CH stars at ZAMS, with a further 10,419 composed of one
+CH star and one MS star at ZAMS. Furthermore, in all of the
+binaries with only one CH star at ZAMS it was, as we would
+expect, the primary, more massive, star that was chemically
+homogeneous. A total of 261,741 BBHs were formed in the
+simulation, but only 43,625 of these were close enough to
+merge within 14 Gyr, the current age of the Universe. Among
+the 13,644 simulated binaries that evolved chemically homogeneously throughout the main sequence, 9,670 went on
+to form BBHs, the vast majority of which, 9,062, merged
+within 14 Gyr (the few non-merging ones are those which
+lost significant mass in PPISNe).
+4.2
+
+Figure 1. The total star formation rate as a function of redshift (red) and subdivided into different ranges of metallicity, following the preferred model of Neijssel et al. (2019).
+The dark blue and green curves are most relevant for BBH
+formation.
+
+5
+
+Evolved system properties
+
+Figure 2 presents a visual summary of the evolutionary outcomes for each of the 12 million binary systems synthesised,
+with each point on the plot representing a single binary system, and the colour indicating the initial parameters and
+the outcome of the evolution (per the legend). We are particularly interested in systems for which both stars evolve
+chemically homogeneously and eventually collapse to form
+a BBH, so we have agglomerated some of the less interesting progenitor types and outcomes into groups so that the
+plot is not overly busy. Because Figure 2 is a summary over
+the entire grid of metallicities and WR mass loss rate multipliers synthesised, it allows us to see on a broad scale the
+evolutionary outcomes for both CHE systems and non-CHE
+systems. The COMPAS models for the formation of nonCHE BBHs have been discussed by (Neijssel et al. 2019), so
+we will focus our discussions hereafter one the CHE channel.
+Figure 3 shows the parameter space in which CHE is expected to occur in synchronously rotating binaries according
+to our CHE threshold. The darkest grey area in the lower
+part of the diagram indicates the region in which L2 overflow
+occurs and the stellar components merge; the lighter grey
+area in the upper part indicates the region in which the stellar components do not rotate rapidly enough to induce CHE.
+The central, lighter, area of the diagram indicates the region
+in which we expect CHE to occur, with the darker, lower,
+part of the central area indicating the important region of
+binaries whose components overflow their Roche lobes but
+avoid L2 overflow, occupied by the over-contact systems described by Marchant et al. (2016). This over-contact region
+is responsible for much of the BBH formation through CHE
+(cf. Figure 2).
+As expected (given our PPISN and PISN mass limits,
+see section 3.1.5), we see BBHs from PPISNe begin to appear at a total ZAMS mass of & 70 M while PISN events
+
+6
+
+J. Riley et al.
+
+Table 1. Population Statistics
+
+Number of binaries evolved
+L2 overflow at ZAMS
+Surviving binaries
+At least one star experiencing RLOF at ZAMS
+Both stars in binary CH at ZAMS
+Primary only CH at ZAMS
+Secondary only CH at ZAMS
+Post-ZAMS Merger
+BBHs formed
+BBHs merging in 14 Gyr
+At least one star experiencing RLOF at ZAMS
+Both stars remained CH on MS
+Primary only remained CH on MS
+Secondary only remained CH on MS
+Neither star remained CH on MS
+BBHs formed
+BBHs merging in 14 Gyr
+At least one star experiencing RLOF at ZAMS
+Primary remained CH on MS
+BBHs formed
+BBHs merging in 14 Gyr
+
+Population
+fWR = 0
+fWR = 0.2
+3,000,000
+3,000,000
+243,717
+243,638
+2,756,283
+2,756,362
+Surviving Population
+75,530
+75,410
+4,193
+4,281
+2,607
+2,615
+0
+0
+618,001
+616,749
+68,231
+67,200
+11,004
+11,048
+Both stars CH at ZAMS
+3,661
+3,761
+3,444
+3,461
+43
+89
+0
+0
+706
+731
+2,152
+2,370
+2,057
+2,322
+Primary only CH at ZAMS
+0
+0
+1,405
+1,353
+0
+2
+0
+0
+
+appear at a total ZAMS mass of & 120 M . A few unbound
+CHE systems correspond to simultaneous PISNe that instantaneously removed more than half the mass of the binary in our treatment (see Section 3.1.5). In practice, such
+systems will undergo a series of pulsations leading to nonsimultaneous mass loss and may survive, but at separations
+too large to merge within the current age of the Universe.
+The horizontal band of PISNe just above the CH binaries in
+Figure 2 are hybrid systems comprised of a CH star and a
+MS star, whereas the vertical band of PISNe at the upper
+right of the plot are systems comprised of two MS stars.
+4.3
+
+Population synthesis
+
+The initial system total masses and orbital periods of CHE
+systems that go on to form BBHs merging within 14 Gyr are
+shown in Figure 4. We show binaries evolved with the WR
+mass loss multiplier fWR = 1. Each point on the plot represents a simulated binary shaded according to its metallicity. Higher metallicity binaries are shifted toward the top of
+the plot. This is consistent with Figure 3, which shows that
+higher-metallicity stars have greater stellar radii and hence
+greater minimal separation, as well as lower CHE threshold
+rotational frequency.
+Binaries with reduced WR winds have similar initial
+distributions, but show a clear-cut maximum total mass of
+≈ 120 M , which matches the mass threshold of 60 M for
+individual He star masses beyond which PISNe occur and
+leave no remnants. At higher fWR , high-metallicity systems
+can lose a significant fraction of their mass, so binaries with
+initial total masses above 120 M can avoid PISNe.
+To illustrate this, we plot the mass lost by a CH star
+with a ZAMS mass of 40.5 M over the naked helium phase
+in Figure 5, for a range of WR mass loss multipliers and
+
+fWR = 0.6
+3,000,000
+243,419
+2,756,581
+
+fWR = 1.0
+3,000,000
+243,930
+2,756,070
+
+Total
+12,000,000
+974,704
+11,025,296
+
+75,328
+4,201
+2,593
+0
+618,425
+66,016
+10,926
+
+75,707
+4,216
+2,604
+0
+620,250
+60,294
+10,647
+
+301,975
+16,891
+10,419
+0
+2,473,425
+261,741
+43,625
+
+3,715
+3,379
+116
+0
+706
+2,527
+2,377
+
+3,715
+3,360
+160
+0
+696
+2,621
+2,306
+
+14,852
+13,644
+408
+0
+2,839
+9,670
+9,062
+
+0
+1,341
+3
+0
+
+0
+1,337
+7
+0
+
+0
+5,436
+12
+0
+
+metallicities. At fWR = 1 and Z = Z , this star loses nearly
+half of its mass in WR winds. Meanwhile, at low metallicities, which are typical for high formation redshifts, the total
+mass lost in WR winds is very low, except at artificially
+enhanced fWR values of 5 and 10, which disagree with observational constraints and are not considered in this study.
+Consequently, we do not expect to see a significant impact
+of fWR on low-metallicity BBH formation, which matches
+our findings as discussed below.
+Table 1 shows, across all simulated metallicities and WR
+mass loss multipliers, ∼ 80% of binaries composed of two
+CH stars at ZAMS retain two CH stars at the end of the
+main sequence. For binaries composed of one CH star and
+one MS star at ZAMS, the CH star will remain chemically
+homogeneous by the end of the MS in only ∼ 50% of simulations. Since we assume tidal locking in the CHE model implemented in COMPAS, as a binary widens due to mass loss
+and the orbital frequency of the binary slows, the rotational
+frequency of the constituent CH stars slows commensurably.
+Binaries in which only the primary is CH at ZAMS avoided
+RLOF and are typically wider, so further widening through
+winds is more likely to spin down the primary sufficiently to
+evolve off the CHE track.
+Figure 6 shows the distribution of the BBH total masses
+and orbital periods just after BBH formation for systems
+evolving through the CHE channel. As in Figure 4, we select
+only BBHs that will merge in 14 Gyr and shade binaries by
+metallicity. On this plot, we select fWR = 0.2. This allows
+us to show not only the sharp disappearance of BBHs with
+total masses above ≈ 80 M due to PPISN mass loss and
+complete disruption in PISNe, but also their reappearance at
+masses above ≈ 250 M , on the other side of the ‘PISN mass
+gap’. There are only very few such high-mass binaries in our
+simulations because, with our ZAMS mass upper limit of
+MNRAS 000, 1–16 (2021)
+
+Chemically Homogeneous Evolution: A rapid population synthesis approach
+
+7
+
+Figure 2. Initial parameters and final outcomes for each of the binary systems synthesised, showing the initial orbital period TZAMS
+(in days) vs the initial total mass (in M ). The population represents a grid of 30 metallicities evenly spaced over the range
+-4 ≤ log10 (Z) ≤ -1.825, and 4 WR mass loss multipliers, fWR ∈ { 0.0 , 0.2 , 0.6 , 1.0 }. Regions shaded in black represent all systems
+that experienced L2 overflow at ZAMS; pale green represents systems that did not form BBHs. Systems for which both stars were chemically homogeneous at ZAMS and remained so throughout their main sequence lifetime are represented by regions shaded cyan if they
+formed BBHs via regular core-collapse supernovae, blue if they formed BBHs after undergoing PPISNe, and magenta if they exploded
+as PISNe. Systems in which at least one of the stars did not evolve chemically homogeneously for its entire main sequence lifetime are
+represented by areas shaded light green if they formed BBHs via core-collapse supernovae, dark green if they formed BBHs following
+PPISNe, and maroon if either star exploded as a PISN.
+
+150 M , they require very low mass loss. Consequently, there
+are no such binaries in our fWR = 1.0 simulations because
+their progenitors lose too much mass to remain above the
+PISN threshold.
+The shortest post-BBH formation periods, and thus the
+shortest delay times, are seen for the lowest-metallicity systems. This is due to the combined effects of their lower
+period at ZAMS as seen in Figure 4 and the reduced orbital widening due to reduced mass loss at low metallicities.
+However, some low-metallicity binaries lose sufficient mass
+in PPISNe to create wider, more eccentric binaries found
+toward the top of Figure 6.
+
+4.4
+
+Binary Black Holes
+
+4.4.1
+
+Formation rates
+
+Figure 7 shows the merging BBH yield: the formation rate
+per unit star forming mass as a function of metallicity for
+systems that will merge within 14 Gyr. The solid lines are
+the rates for the entire population — both CHE and nonCHE binaries — while the dashed lines are the rates for CHE
+binaries only. WR mass loss multipliers are differentiated by
+the colour of the lines.
+The overall yield of merging BBHs is quantitatively simMNRAS 000, 1–16 (2021)
+
+ilar to the simulations of Neijssel et al. (2019), who predicted
+a yield of ∼ 6, 4, and 1 merging BBHs per 105 M of star
+formation at Z = 0.01 Z , 0.1 Z , and 0.3 Z , respectively.
+The small differences are due partly to the inclusion of the
+CHE channel as well as PISNe and PPISNe in this work,
+which were not included in Neijssel et al. (2019).
+Meanwhile, the low-metallicity CHE channel yield of
+slightly less than 1 merging BBHs per 105 M of star formation is similar to both the Mandel & de Mink (2016) backof-the-envelope estimate and the Marchant et al. (2016) detailed models which indicate ∼ 0.7 merging BBHs below
+the PISN mass gap per 1000 core-collapse supernovae or per
+105 M of star formation at Z = 0.02 Z .
+The paucity of CHE BBHs at high metallicity,
+Z & 0.3 Z , is due primarily to a combination of the upward shifting of the allowed initial periods at higher metallicities (see Figures 3 and 4) and greater orbital widening
+by stronger high-metallicity winds. The increase in orbital
+period at BBH formation increases the delay times, preventing the BBHs from merging within 14 Gyr. The widening
+by mass loss is ameliorated by reduced WR mass loss rates.
+However, the WR mass loss multipliers have negligible effect
+at low metallicities because the total mass loss rate is too
+low even for fWR = 1 (see Figure 5 and associated discussion). Neijssel et al. (2019) discuss the impact of metallicity
+
+8
+
+J. Riley et al.
+
+Figure 3. Parameter space for equal-mass binary systems with the indicated companion mass at which chemically homogeneous evolution
+is expected to occur at ZAMS. Solid lines show the thresholds for CHE implemented in COMPAS (see Appendix A), dotted lines are
+RLOF thresholds, and dashed lines are L2 overflow thresholds. Colours differentiate metallicities. Shading corresponds to Z = 0.001: the
+dark colour at the bottom indicates L2 overflow at ZAMS, grey at the top indicates periods too low for CHE at ZAMS, while the region
+below the solid line and above the dashed lined indicates the possible range for CHE, with the parameter space for over-contact binaries
+that undergo RLOF at ZAMS shaded more darkly.
+
+Figure 4. Initial total masses and orbital periods for CHE systems
+that go on to form BBHs that will merge within 14 Gyr. Each
+point represents one simulated binary, evolved with WR mass loss
+multiplier fWR = 1, shaded according to its metallicity.
+
+on the non-CHE BBHs yield, highlighting the contributions
+of wind-driven widening and stellar evolutionary stage at
+mass transfer.
+Figure 8 shows the BBH formation rate per unit comoving volume per unit source time as a function of redshift. The formation rate for CHE BBHs peaks at z ≈ 4.25
+for fWR = 1.0, and at z ≈ 3.5 for other WR mass loss multi-
+
+Figure 5. Total mass lost by a WR star with a ZAMS mass of
+40.5 M as a function of metallicity. Line colour indicates the
+WR mass loss rate multiplier (solid lines). Also shown are the
+mass (on the same scale as the mass loss curves) and luminosity
+at the start of the WR phase as a function of metallicity (dashed
+lines).
+
+pliers for the chosen metallicity-specific star formation rate
+history. The BBH formation rate for both CHE and nonCHE channels peaks at higher redshifts than the assumed
+star formation rate because both have higher yields per unit
+MNRAS 000, 1–16 (2021)
+
+Chemically Homogeneous Evolution: A rapid population synthesis approach
+
+Figure 6. Total masses and orbital periods immediately after BBH
+formation for CHE systems that will merge within 14 Gyr. Each
+point represents a simulated binary, evolved with WR mass loss
+multiplier fWR = 0.2, shaded according to its metallicity. The
+empty area between ≈ 80 M and ≈ 250 M is a consequence
+of systems that lost mass as PPISNe or left no remnants after
+exploding as PISNe.
+
+9
+
+Figure 8. BBH formation rate per Gpc3 of comoving volume per
+year as a function of redshift for BBHs that will merge within 14
+Gyr. Error bars indicate sampling uncertainty.
+
+Figure 9. Distribution of delay times between formation and
+merger for BBHs. All metallicities from the simulation are combined with equal weights and arbitrary counts per uniform bins
+in log delay time are shown. Error bars indicate sampling uncertainty.
+Figure 7. Yield of BBHs that will merge within 14 Gyr per unit
+star forming mass as a function of metallicity. The solid lines are
+the rates for the entire population — both CHE and non-CHE
+binaries — while the dashed lines are the rates for the CHE binaries only. Colours indicate WR mass loss rate multipliers. Error
+bars indicate 90% confidence intervals from sampling uncertainty.
+
+star formation at lower metallicities, which are prevalent at
+higher redshifts.
+MNRAS 000, 1–16 (2021)
+
+4.4.2
+
+Merger delay times
+
+Figure 9 indicates the distribution of delay times between
+star formation and BBH mergers. This figure combines all
+metallicities with equal weights, without considering their
+contribution to the observable systems, so should be viewed
+as an indicative sketch.
+Non-CHE binaries in Figure 9 have a very broad distribution of delay times. Some are very short, less than 10 Myr,
+due to significant hardening during mass transfer episodes,
+including through dynamically unstable mass transfer and
+
+10
+
+J. Riley et al.
+
+common-envelope ejection, as well as fortuitously directed
+supernova natal kicks. Meanwhile, there is an almost flat
+tail of long delay times on this logarithmic plot, corresponding to a p(τdelay ) ∼ 1/τdelay distribution.
+On the other hand, binaries formed through CHE are
+seen to have a more strongly clustered delay time distribution, with typical delay times of between 100 Myr and 1 Gyr.
+There are no ultra-short delay times because, with the exception of RLOF at ZAMS, such binaries do not undergo
+mass transfer that could harden the binary. Moreover, the
+high masses of CHE stars imply that they do not experience asymmetric supernovae and associated natal kicks in
+the COMPAS model.
+The smallest time delay between formation and merger
+for CHE systems in our simulations ranges from ∼ 0.025 Gyr
+for fWR = 0.0 to ∼ 0.033 Gyr for fWR = 1.0. The combination of lower metallicities and reduced mass loss rates yields
+the shortest delay times, allowing binaries to start evolution
+from closer separations while avoiding L2 overflow and to
+avoid subsequent widening through mass loss. This is consistent with the minimal delay times found in other studies.
+Mandel & de Mink (2016), who consider only Z = 0.004 Z ,
+estimate minimum delay times of ∼ 3.5 Gyr. Marchant et al.
+(2016) find minimal delay times of ∼ 0.4 Gyr and point out
+the metallicity dependence. du Buisson et al. (2020) consider
+the lowest metallicities among these studies, Z = 10−5 , and
+find the shortest delay times, ∼ 0.02 Gyr.
+Some CHE binaries will be significantly widened by
+mass loss, potentially losing up to a factor of ∼ 2 in mass
+during the WR phase (see Figure 5) and thereby increasing
+their separation by the same factor. The gravitational-wave
+driven coalescence time scales as a4 M −3 (Peters 1964), so
+a factor of 2 each in mass decrease and semi-major axis increase would yield a factor of 27 ∼ 100 increase in the delay
+time. This explains the long delay time tail of the CHE BBH
+distribution, as well as the decrease in the prominence of this
+tail as the WR wind mass loss multiplier is reduced. Even
+when fWR = 0, some CHE BBHs will have long delay times
+due to the mass lost in PPISNe.
+4.4.3
+
+Figure 10. BBH merger rate per Gpc3 of comoving volume per
+year of source time as a function of redshift. Error bars indicate
+sampling uncertainty.
+
+Merger rates
+
+Figure 10 shows the BBH merger rate per Gpc3 of comoving volume per year of source time as a function of redshift. The merger rate for CHE BBHs peaks at z ≈ 4 for
+fWR = 1.0, and at z ≈ 3 for other WR mass loss multipliers. Both CHE and total BBH merger rates peak at higher
+redshifts than the star formation rate, which peaks at z ≈ 2
+(see Figure 1), because both CHE and non-CHE channels
+have higher yields at lower metallicity (see Figure 7). The
+relatively small difference between the peak formation and
+merger rates is explained by the short delay times for the
+CHE systems (see Figures 8 and 9). The delay times are
+particularly short for fWR = 0 CHE BBHs, which explains
+their suppressed merger rate in the local Universe.
+The merger rates of BBHs that could be observed by
+aLIGO operating at final design sensitivity merger rates
+are shown in Figure 11. Binaries formed through CHE
+have higher average masses than non-CHE binaries, which
+increases the range within which they are detectable by
+aLIGO. Therefore, CHE BBHs make up a higher fraction
+of all detections at greater redshifts.
+
+Figure 11. The merger rate of BBHs detectable by aLIGO at final
+design sensitivity, as a function of merger redshift. Error bars
+indicate sampling uncertainty.
+
+4.4.4
+
+aLIGO detection rates
+
+Figures 12 and 13 show the predicted cumulative detection
+rates per year of observing time as a function of redshift for
+aLIGO O1 and final design sensitivities, respectively.
+Figure 12 shows that the total expected detection rate
+at O1 sensitivity is 38–55 detections per year, depending on
+the assumed value of the WR mass loss rate multiplier. This
+would correspond to 17–25 detections over the 166 days of
+coincident data over the first two advanced detector observing runs, O1 and O2. In fact, only 10 BBHs were observed
+during this time (Abbott et al. 2019).
+The increased detection rate relative to the preferred
+MNRAS 000, 1–16 (2021)
+
+Chemically Homogeneous Evolution: A rapid population synthesis approach
+
+Figure 12. Cumulative BBH detections as a function of merger
+redshift, per year of observing at aLIGO O1 sensitivity. Error
+bars indicate sampling uncertainty.
+
+inson (2014); Madau & Fragos (2017) models. This would
+naturally bring rate predictions in line with the O1 and O2
+observations and correspondingly reduce predicted detection
+rates for future detectors.
+Using the preferred cosmic metallicity star formation
+model of Neijssel et al. (2019), as we do here, and assuming
+fWR = 1, we predict a total BBH detection rate of ≈ 660
+per year at aLIGO design sensitivity (vs. ≈ 37 at O1 sensitivity), with ≈ 470 (≈ 27) of these coming from the CHE
+channel. The CHE BBH detection rates are a factor ∼ 2
+larger than those estimated by du Buisson et al. (2020),
+who found that ≈ 250 (≈ 13) CHE BBHs per year may be
+detected at aLIGO design (O1) sensitivity. The differences
+in the assumed metallicity-specific star formation rates in
+these studies are responsible for much of this difference.
+We note that in both Figures 12 and 13 the order of
+the lines with respect to the number of detections does not
+match the order of the WR mass loss multipliers. This is due
+to the interplay between the formation rate of BBHs and
+their delay times as a function of fWR , which are described
+in Figures 8 and 9 and associated discussion. For example,
+in the absence of WR winds (fWR = 0), reduced delay times
+due to a lack of binary widening relative to simulations with
+higher WR mass loss rates mean that very few CHE BBHs,
+which predominantly form at lower metallicities and thus
+higher redshifts, merge in the local Universe, where they
+would be detectable.
+4.4.5
+
+Figure 13. Cumulative BBH detections as a function of merger
+redshift, per year of observing at aLIGO final design sensitivity.
+Error bars indicate sampling uncertainty.
+
+metallicity-specific star formation rate model of Neijssel
+et al. (2019), who predicted 22 detections per year, in agreement with the O1 and O2 observations, is due to the contribution of CHE BBHs. CHE BBHs may constitute up to
+∼ 70% of all BBH detections at both the O1 sensitivity and
+the final design sensitivity of aLIGO.
+The star formation history model of Neijssel et al.
+(2019) was tuned to the gravitational-wave observations, and
+explaining the relatively high masses of observed BBHs required significant high-redshift, low-metallicity star formation. The inclusion of CHE BBHs naturally yields a population of high-mass sources, allowing for the high-mass star
+formation rate to be reduced in line with the Madau & DickMNRAS 000, 1–16 (2021)
+
+11
+
+Mass distribution of detectable BBH mergers
+
+The cumulative distribution functions for the modelled chirp
+mass distribution of detectable BBH mergers are shown in
+Figure 14. The dark blue lines indicate the chirp mass distribution of all BBHs while the light blue lines indicate the
+chirp mass distribution of CHE BBHs. In both cases, results
+for the WR mass loss multiplier fWR = 1.0 are reported,
+and the O1 aLIGO sensitivity, which is similar to that of
+the second observing run, is used. We show cumulative distribution functions for sets of 10 randomly selected samples
+from the COMPAS models – the number of BBHs detected
+during O1 and O2 – in order to indicate the variation due to
+sampling fluctuations. To avoid granularity due to the discreteness of the metallicity grid in COMPAS models (see
+Dominik et al. 2015; Neijssel et al. 2019, for a discussion),
+we used continuous sampling in metallicity to construct the
+model predictions for this plot.
+As mentioned previously, CHE BBHs are more massive
+than typical non-CHE BBHs. The initial masses of CHE
+BBHs must be high to allow for CHE (see Figure 3). Moreover, CHE in our model allows stars to convert all of their
+mass to helium, whereas non-CH massive stars typically
+have & 50% of their mass in hydrogen-rich envelopes, which
+they lose prior to collapse into black holes in the course of
+binary evolution. This is highlighted in Figure 15, which indicates the fraction of all BBHs detectable at aLIGO O1
+sensitivity that formed through the CHE channel, as a function of chirp mass. The CHE channel dominates the production of BBHs at high chirp masses, particularly for reduced
+WR mass loss models, when it yields increasingly large chirp
+masses (& 30 M in the absence of WR winds).
+Figure 14 allows for a direct comparison between the
+modelled chirp mass distribution and the aLIGO observa-
+
+12
+
+J. Riley et al.
+tions from the first two observing runs. The individual posterior samples from the 10 aLIGO BBH detections during
+those observing runs are plotted at the bottom of the plot.
+Randomly sampled cumulative distribution functions of the
+chirp mass of observed events are constructed by taking 10
+random samples, one from each of the 10 aLIGO observation
+posteriors and displayed as light lavender curves. The overlap of the lavender and dark blue lines in Figure 14 shows
+that the COMPAS model of BBH formation, which includes
+the contribution of CHE, yields a chirp mass distribution of
+detectable BBH mergers that is consistent with detections
+during the first two aLIGO observing runs.
+
+5
+
+Figure 14. Chirp mass posteriors for the 10 BBH mergers detected
+during the first and second aLIGO observing runs (Abbott et al.
+2019) are shown in colour at the bottom, with labels at top. These
+are randomly sampled to construct the cumulative density functions shown in lavender (each curve corresponds to a cumulative
+distribution through 10 samples, one from each posterior). Cumulative density functions for COMPAS chirp mass predictions
+based on fWR = 1.0 models are also based on 10 samples from
+either the full population (dark blue lines) or CHE systems only
+(light blue lines).
+
+Figure 15. The fraction of BBHs formed through the CHE channel
+among all BBHs detectable at aLIGO O1 sensitivity, plotted as
+a function of chirp mass.
+
+CONCLUDING REMARKS
+
+We described the model of chemically homogeneous evolution (CHE) that we implemented in the rapid population
+synthesis code COMPAS. We used MESA models to determine the critical rotation thresholds for CHE, and provided
+fits that can be used in other rapid binary population synthesis applications. We synthesised 12 million binary systems
+over a range of metallicities (30 metallicities evenly spaced
+across the range −4 ≤ log10 Z ≤ −1.825) and WR wind mass
+loss multipliers (fWR ∈ { 0.0 , 0.2 , 0.6 , 1.0 }). We confirmed
+that our simplified models match detailed binary evolution
+simulations (Marchant et al. 2016; du Buisson et al. 2020)
+well.
+We investigated the contribution of CHE and non-CHE
+channels to BBH formation under a single set of assumptions. We found that the CHE channel may contribute more
+than half, and perhaps as much as three quarters, of all
+aLIGO BBH detections arising from isolated binary evolution. CHE BBHs may represent & 80% of detectable sources
+with the highest chirp masses of & 30 M . A comparison between our model population and the population of detected
+binaries from the first two advanced detector observing runs
+indicates that the current model over-predicts the total number of sources by a factor of ∼ 2, but matches the observed
+chirp mass distribution.
+We made a number of simplifying assumptions in this
+study that can be investigated and improved on in the future. We generally erred on the side of being conservative
+about CHE predictions:
+• We used Hurley et al. (2000) non-rotating MS models to
+set the radii and mass loss rates of CH MS stars. The imperfect radius model for rapidly-rotating CH stars in turn
+leads to differences in the orbital separation boundary for
+avoiding merger through L2 overflow between the COMPAS
+and MESA models (see Appendix A).
+• We used simplified tidal interaction assumptions under
+which CH stars are immediately tidally synchronised, yet
+do not store angular momentum. Accounting for the angular momentum stored in stars – and the additional angular
+momentum carried away by winds from a rotating star –
+impacts the response of the binary’s orbit to mass loss, and
+reduces the amount of orbital widening by wind mass loss
+in close binaries.
+• Contrary to our simplified assumptions, winds may interact
+with binary companions. This is particularly true in close
+binaries, when the wind speeds are comparable to the orbital
+speeds, and wind interactions may produce additional drag
+MNRAS 000, 1–16 (2021)
+
+Chemically Homogeneous Evolution: A rapid population synthesis approach
+and reduce the amount of orbital widening (e.g., Brookshaw
+& Tavani 1993; MacLeod & Loeb 2020).
+• We ignored the possibility of initially non-CH stars switching to CHE in response to mass accretion.
+• We assumed that all mass loss in PPISNe happens instantaneously, rather than over several pulsations (although the
+first pulsation is likely to be dominant, so this approximation
+may not be especially problematic).
+Our predicted BBH merger rate at redshift zero of
+50 Gpc−3 yr−1 (including 20 Gpc−3 yr−1 from the CHE
+channel) for the default WR mass loss rate fWR = 1.0 overestimates the number of BBH detections during the first
+two observing runs of gravitational-wave detectors. This is
+at least partly due to our using a metallicity-specific star
+formation rate prescription from Neijssel et al. (2019) that
+was designed to reproduce gravitational-wave observations
+without accounting for CHE. A resolution may involve reducing the high-redshift star formation rate back to levels
+more closely matching the models of Madau & Dickinson
+(2014); Madau & Fragos (2017).
+Two other observational constraints on CHE BBH formation come from the spins of observed BBH mergers and
+from potential electromagnetic observations of their progenitors. At first glance, the effective spins of BBHs observed to
+date (Abbott et al. 2019) do not match the large reservoirs
+of angular momentum in CH stars. However, WR winds can
+carry away much of angular momentum. Marchant et al.
+(2016) argued that typical dimensionless effective spins of
+CHE sources should be ∼ 0.4, much lower than the supercritical spins expected at WR star formation. The fraction
+of stellar angular momentum lost in winds during the WR
+phase can be estimated as
+
+2
+∆L
+∆M
+2
+RWR
+∼
+,
+(5)
+L
+3 RWR,g
+M
+where the ratio of the radius of the WR star to its gyration radius is RWR /RWR,g ∼ 10. Thus, Wolf-Rayet winds
+could lose the overwhelming bulk of the angular momentum
+that CHE stars have, as long as ∆M/M > 0.01, which is
+true even at Z = 0.01 Z if WR mass loss is not suppressed
+(see Figure 5). Unlike binaries that are hardened during the
+common-envelope phase to the point where tides can efficiently spin up the WR companion (Kushnir et al. 2016;
+Belczynski et al. 2020; Bavera et al. 2020), binaries evolving
+through the CHE channel will tidally decouple during the
+WR phase. For example, a typical binary from our simulations with component ZAMS masses of 60 M at metallicity
+Z = 0.00089 and an initial orbital period of just over 1 day
+will evolve through the CHE channel and form a merging
+BBH with individual black hole masses of 38 M . By the end
+of the WR phase, following mass loss with fWR = 1.0, the
+components will have masses of 52 M and an orbital separation of 25 R . The WR radius at this time is < 2R (e.g.,
+Yoon et al. 2012), so the tidal synchronisation timescale will
+be several hundred Myr. This is much longer than the duration of the WR phase, so once spun down by winds, these
+stars cannot be spun up again by tides.
+CHE BBH progenitors could yield interesting observational candidates. Systems such as WR20a (Rauw et al.
+2004) and BAT99-32 (Shenar et al. 2019) may belong in
+this category. The metallicity of the Galaxy is too high to
+allow for merging CHE BBHs according to our models, but
+MNRAS 000, 1–16 (2021)
+
+13
+
+we expect them to be formed at a rate of ∼ 3 × 10−6 per
+year in the Magellanic clouds. Given the typical MS and WR
+phase lifetimes of 3 × 106 and 3 × 105 years, respectively, we
+may hope to detect ∼ 10 MS CH binaries and ∼ 1 binary
+composed of two naked helium stars formed through CHE
+and en route to BBH formation in the Magellanic clouds
+today.
+The joint model for the classical and CHE isolated binary evolution channels developed here will enable simultaneous inference on binary evolution model parameters and
+the metallicity-specific star formation history once the full
+trove of observations from the third gravitational-wave observing run is available. Ultimately, the relatively short delay
+times of CHE BBHs make them ideal probes of high-redshift
+star formation history, while their high masses make them
+perfect targets for third-generation gravitational-wave detectors with good low-frequency sensitivity, such as the Einstein Telescope (Punturo et al. 2010) or the Cosmic Explorer
+(Abbott et al. 2017).
+
+ACKNOWLEDGEMENTS
+Simulations in this paper made use of the COMPAS rapid
+population synthesis code, which is freely available at http:
+//github.com/TeamCOMPAS/COMPAS. The version of COMPAS used for these simulations was v02.11.01a, built specifically for these simulations; functionality in this release was
+integrated into the public COMPAS code base in v02.11.04.
+The authors thank Selma de Mink and other colleagues
+in Team COMPAS, as well as Morgan MacLeod, for helpful discussions. We also thank Tim Riley for assistance in
+running COMPAS simulations. IM is a recipient of the Australian Research Council Future Fellowship FT190100574.
+AVG acknowledges funding support by the Danish National
+Research Foundation (DNRF132).
+
+DATA AVAILABILITY
+The data underlying this article will be available via https:
+//zenodo.org/communities/compas/.
+
+REFERENCES
+Abbott, B. P., Abbott, R., Abbott, T. D., et al. 2017, Classical
+and Quantum Gravity, 34, 044001, doi: 10.1088/1361-6382/
+aa51f4
+—. 2019, ApJ, 882, L24, doi: 10.3847/2041-8213/ab3800
+Abbott, B. P., Abbott, R., Abbott, T. D., et al. 2019, Physical
+Review X, 9, doi: 10.1103/physrevx.9.031040
+Abbott, B. P., et al. 2016, Phys. Rev. Lett., 116, 061102, doi: 10.
+1103/PhysRevLett.116.061102
+Abbott, R., Abbott, T. D., Abraham, S., Acernese, F., et al. 2020,
+arXiv e-prints, arXiv:2009.01075. https://arxiv.org/abs/
+2009.01075
+Abt, H. A. 1983, ARA&A, 21, 343, doi: 10.1146/annurev.aa.21.
+090183.002015
+Almeida, L. A., Sana, H., Mink, S. E. d., et al. 2015, The Astrophysical Journal, 812, 102, doi: 10.1088/0004-637x/812/
+2/102
+Angulo, C., Arnould, M., Rayet, M., et al. 1999, Nuclear Phys. A,
+656, 3, doi: 10.1016/S0375-9474(99)00030-5
+
+14
+
+J. Riley et al.
+
+Antonini, F., Chatterjee, S., Rodriguez, C. L., et al. 2016, The
+Astrophysical Journal, 816, 65, doi: 10.3847/0004-637x/816/
+2/65
+Arcavi, I., Howell, D. A., Kasen, D., et al. 2017, Nature, 551, 210,
+doi: 10.1038/nature24030
+Asplund, M., Grevesse, N., Sauval, A. J., & Scott, P. 2009,
+ARA&A, 47, 481, doi: 10.1146/annurev.astro.46.060407.
+145222
+Barkat, Z., Rakavy, G., & Sack, N. 1967, Physical Review Letters,
+18, 379, doi: 10.1103/PhysRevLett.18.379
+Bartos, I., Kocsis, B., Haiman, Z., & Márka, S. 2017, ApJ, 835,
+165, doi: 10.3847/1538-4357/835/2/165
+Bavera, S. S., Fragos, T., Zevin, M., et al. 2020, arXiv e-prints,
+arXiv:2010.16333. https://arxiv.org/abs/2010.16333
+Belczynski, K., Bulik, T., Fryer, C. L., et al. 2010, The Astrophysical Journal, 714, 1217–1226, doi: 10.1088/0004-637x/714/2/
+1217
+Belczynski, K., Taam, R. E., Kalogera, V., Rasio, F. A., & Bulik,
+T. 2007, ApJ, 662, 504, doi: 10.1086/513562
+Belczynski, K., Klencki, J., Fields, C. E., et al. 2020, A&A, 636,
+A104, doi: 10.1051/0004-6361/201936528
+Brookshaw, L., & Tavani, M. 1993, ApJ, 410, 719, doi: 10.1086/
+172789
+Brott, I., de Mink, S. E., Cantiello, M., et al. 2011, A&A, 530,
+A115, doi: 10.1051/0004-6361/201016113
+Caughlan, G. R., & Fowler, W. A. 1988, Atomic Data and Nuclear
+Data Tables, 40, 283, doi: 10.1016/0092-640X(88)90009-5
+Chaboyer, B., & Zahn, J. P. 1992, A&A, 253, 173
+Chruslinska, M., Nelemans, G., & Belczynski, K. 2019, MNRAS,
+482, 5012, doi: 10.1093/mnras/sty3087
+de Mink, S. E., Cantiello, M., Langer, N., et al. 2009, A&A, 497,
+243, doi: 10.1051/0004-6361/200811439
+de Mink, S. E., & Mandel, I. 2016, Monthly Notices of the Royal
+Astronomical Society, 460, 3545–3553, doi: 10.1093/mnras/
+stw1219
+Dominik, M., Berti, E., O’Shaughnessy, R., et al. 2015, ApJ, 806,
+263, doi: 10.1088/0004-637X/806/2/263
+du Buisson, L., Marchant, P., Podsiadlowski, P., et al. 2020,
+arXiv e-prints, arXiv:2002.11630. https://arxiv.org/abs/
+2002.11630
+Eddington, A. S. 1929, Monthly Notices of the Royal Astronomical Society, 90, 54, doi: 10.1093/mnras/90.1.54
+Eldridge, J. J., Stanway, E. R., Xiao, L., et al. 2017, Publ. Astron.
+Soc. Australia, 34, e058, doi: 10.1017/pasa.2017.51
+Farmer, R., Renzo, M., de Mink, S. E., Marchant, P., & Justham,
+S. 2019, ApJ, 887, 53, doi: 10.3847/1538-4357/ab518b
+Fowler, W. A., & Hoyle, F. 1964, ApJS, 9, 201, doi: 10.1086/
+190103
+Fraley, G. S. 1968, Ap&SS, 2, 96, doi: 10.1007/BF00651498
+Fryer, C. L., Belczynski, K., Wiktorowicz, G., et al. 2012, ApJ,
+749, 91, doi: 10.1088/0004-637X/749/1/91
+Gal-Yam, A. 2012, Science, 337, 927, doi: 10.1126/science.
+1203601
+Grevesse, N., & Sauval, A. J. 1998, Space Sci. Rev., 85, 161,
+doi: 10.1023/A:1005161325181
+Heger, A., Langer, N., & Woosley, S. E. 2000, The Astrophysical
+Journal, 528, 368–396, doi: 10.1086/308158
+Heger, A., Langer, N., & Woosley, S. E. 2000, ApJ, 528, 368,
+doi: 10.1086/308158
+Humphreys, R. M., & Davidson, K. 1979, ApJ, 232, 409, doi: 10.
+1086/157301
+Hurley, J. R., Pols, O. R., & Tout, C. A. 2000, Mon. Not. Roy. Astron. Soc., 315, 543, doi: 10.1046/j.1365-8711.2000.03426.x
+Hurley, J. R., Tout, C. A., & Pols, O. R. 2002, Mon. Not. Roy. Astron. Soc., 329, 897, doi: 10.1046/j.1365-8711.2002.05038.x
+Hut, P. 1981, A&A, 99, 126
+Iglesias, C. A., & Rogers, F. J. 1996, ApJ, 464, 943, doi: 10.1086/
+177381
+
+Kippenhahn, R. 1974, in Late Stages of Stellar Evolution, ed.
+R. J. Tayler & J. E. Hesser, Vol. 66, 20
+Kobulnicky, H. A., Kiminki, D. C., Lundquist, M. J., et al. 2014,
+ApJS, 213, 34, doi: 10.1088/0067-0049/213/2/34
+Koenigsberger, G., Morrell, N., Hillier, D. J., et al. 2014, The
+Astronomical Journal, 148, 62, doi: 10.1088/0004-6256/148/
+4/62
+Kroupa, P. 2001, Mon. Not. Roy. Astron. Soc., 322, 231, doi: 10.
+1046/j.1365-8711.2001.04022.x
+Kushnir, D., Zaldarriaga, M., Kollmeier, J. A., & Waldman, R.
+2016, MNRAS, 462, 844, doi: 10.1093/mnras/stw1684
+Langer, N. 1992, A&A, 265, L17
+MacLeod, M., & Loeb, A. 2020, arXiv e-prints, arXiv:2007.07252.
+https://arxiv.org/abs/2007.07252
+Madau, P., & Dickinson, M. 2014, Annual Review of Astronomy and Astrophysics, 52, 415–486, doi: 10.1146/
+annurev-astro-081811-125615
+Madau, P., & Fragos, T. 2017, ApJ, 840, 39, doi: 10.3847/
+1538-4357/aa6af9
+Maeder, A. 1987, A&A, 178, 159
+—. 1989, Astrophysics and Space Science Library, Vol. 157, On
+the Evolutionary Status and Instability Mechanism of the Luminous Blue Variables, ed. K. Davidson, A. F. J. Moffat, &
+H. J. G. L. M. Lamers, 15
+Maeder, A., & Meynet, G. 2000, Annual Review of Astronomy
+and Astrophysics, 38, 143–190, doi: 10.1146/annurev.astro.
+38.1.143
+Mandel, I., & de Mink, S. E. 2016, Monthly Notices of the Royal
+Astronomical Society, 458, 2634–2647, doi: 10.1093/mnras/
+stw379
+Mandel, I., & Farmer, A. 2018, ArXiv e-prints. https://arxiv.
+org/abs/1806.05820
+Mapelli, M. 2018, arXiv e-prints. https://arxiv.org/abs/1809.
+09130
+Marchant, P., Langer, N., Podsiadlowski, P., Tauris, T. M., &
+Moriya, T. J. 2016, Astron. Astrophys., 588, A50, doi: 10.
+1051/0004-6361/201628133
+Marchant, P., & Moriya, T. J. 2020, A&A, 640, L18, doi: 10.
+1051/0004-6361/202038902
+Marchant, P., Renzo, M., Farmer, R., et al. 2019, The Astrophysical Journal, 882, 36, doi: 10.3847/1538-4357/ab3426
+Miller, M. C., & Lauburg, V. M. 2009, The Astrophysical Journal,
+692, 7, doi: 10.1088/0004-637X/692/1/917
+Moe, M., & Di Stefano, R. 2017, ApJS, 230, 15, doi: 10.3847/
+1538-4365/aa6fb6
+Neijssel, C. J., Vigna-Gómez, A., Stevenson, S., et al. 2019,
+arXiv e-prints, arXiv:1906.08136. https://arxiv.org/abs/
+1906.08136
+Öpik, E. 1924, Publications of the Tartu Astrofizica Observatory,
+25, 1
+Pasquali, A., Langer, N., Schmutz, W., et al. 1997, ApJ, 478, 340,
+doi: 10.1086/303767
+Paxton, B., Bildsten, L., Dotter, A., et al. 2011, ApJS, 192, 3,
+doi: 10.1088/0067-0049/192/1/3
+Paxton, B., Cantiello, M., Arras, P., et al. 2013, ApJS, 208, 4,
+doi: 10.1088/0067-0049/208/1/4
+Paxton, B., Marchant, P., Schwab, J., et al. 2015, The Astrophysical Journal Supplement Series, 220, 15, doi: 10.1088/
+0067-0049/220/1/15
+Peters, P. C. 1964, Physical Review, 136, B1224
+Petrovic, J., Langer, N., Yoon, S. C., & Heger, A. 2005, A&A,
+435, 247, doi: 10.1051/0004-6361:20042545
+Pols, O. R., Schröder, K.-P., Hurley, J. R., Tout, C. A., &
+Eggleton, P. P. 1998, MNRAS, 298, 525, doi: 10.1046/j.
+1365-8711.1998.01658.x
+Potekhin, A. Y., & Chabrier, G. 2010, Contributions to Plasma
+Physics, 50, 82, doi: 10.1002/ctpp.201010017
+Punturo, M., Abernathy, M., Acernese, F., et al. 2010, Classical
+MNRAS 000, 1–16 (2021)
+
+Chemically Homogeneous Evolution: A rapid population synthesis approach
+and Quantum Gravity, 27, 084007, doi: 10.1088/0264-9381/
+27/8/084007
+Rauw, G., De Becker, M., Nazé, Y., et al. 2004, A&A, 420, L9,
+doi: 10.1051/0004-6361:20040150
+Renzo, M., Farmer, R., Justham, S., et al. 2020, arXiv e-prints,
+arXiv:2002.05077. https://arxiv.org/abs/2002.05077
+Rodriguez, C. L., Morscher, M., Pattabiraman, B., et al. 2015,
+Phys. Rev. Lett., 115, 051101, doi: 10.1103/PhysRevLett.
+115.051101
+Rogers, F. J., & Nayfonov, A. 2002, ApJ, 576, 1064, doi: 10.1086/
+341894
+Sana, H., de Mink, S. E., de Koter, A., et al. 2012, Science, 337,
+444, doi: 10.1126/science.1223344
+Saumon, D., Chabrier, G., & van Horn, H. M. 1995, ApJS, 99,
+713, doi: 10.1086/192204
+Shenar, T., Sablowski, D. P., Hainich, R., et al. 2019, A&A, 627,
+A151, doi: 10.1051/0004-6361/201935684
+Sigurdsson, S., & Hernquist, L. 1993, Nature, 364, 423, doi: 10.
+1038/364423a0
+Song, H. F., Meynet, G., Maeder, A., Ekström, S., & Eggenberger,
+P. 2016, A&A, 585, A120, doi: 10.1051/0004-6361/201526074
+Stevenson, S., Sampson, M., Powell, J., et al. 2019, ApJ, 882, 121,
+doi: 10.3847/1538-4357/ab3981
+Stevenson, S., Vigna-Gómez, A., Mandel, I., et al. 2017, Nature
+Communications, 8, 14906, doi: 10.1038/ncomms14906
+Stone, N. C., Metzger, B. D., & Haiman, Z. 2017, MNRAS, 464,
+946, doi: 10.1093/mnras/stw2260
+Sweet, P. A. 1950, Monthly Notices of the Royal Astronomical
+Society, 110, 548, doi: 10.1093/mnras/110.6.548
+Taylor, P., & Kobayashi, C. 2015, MNRAS, 448, 1835, doi: 10.
+1093/mnras/stv139
+Timmes, F. X., & Swesty, F. D. 2000, ApJS, 126, 501, doi: 10.
+1086/313304
+Tutukov, A., & Yungelson, L. 1973, Nauchnye Informatsii, 27, 70
+Tutukov, A. V., & Yungelson, L. R. 1993, MNRAS, 260, 675,
+doi: 10.1093/mnras/260.3.675
+van den Heuvel, E. P. J. 1976, in IAU Symposium, Vol. 73, Structure and Evolution of Close Binary Systems, ed. P. Eggleton,
+S. Mitton, & J. Whelan, 35
+Vigna-Gómez, A., MacLeod, M., Neijssel, C. J., et al. 2020,
+arXiv e-prints, arXiv:2001.09829. https://arxiv.org/abs/
+2001.09829
+Vigna-Gómez, A., Neijssel, C. J., Stevenson, S., et al. 2018, MNRAS, 481, 4009, doi: 10.1093/mnras/sty2463
+Vink, J. S., & de Koter, A. 2005, Astronomy & Astrophysics, 442,
+587–596, doi: 10.1051/0004-6361:20052862
+Vink, J. S., de Koter, A., & Lamers, H. J. G. L. M. 2001, Astronomy & Astrophysics, 369, 574–588, doi: 10.1051/0004-6361:
+20010127
+von Zeipel, H. 1924, MNRAS, 84, 665, doi: 10.1093/mnras/84.9.
+665
+Woosley, S. E. 2017, ApJ, 836, 244, doi: 10.3847/1538-4357/836/
+2/244
+—. 2019, arXiv e-prints, arXiv:1901.00215. https://arxiv.org/
+abs/1901.00215
+Woosley, S. E., Heger, A., & Weaver, T. A. 2002, Reviews of
+Modern Physics, 74, 1015, doi: 10.1103/RevModPhys.74.1015
+Yoon, S. C., Dierks, A., & Langer, N. 2012, A&A, 542, A113,
+doi: 10.1051/0004-6361/201117769
+Yoon, S.-C., Langer, N., & Norman, C. 2006, Astronomy & Astrophysics, 460, 199–208, doi: 10.1051/0004-6361:20065912
+Yoon, S. C., Langer, N., & Norman, C. 2006, A&A, 460, 199,
+doi: 10.1051/0004-6361:20065912
+Yoshida, T., Umeda, H., Maeda, K., & Ishii, T. 2016, MNRAS,
+457, 351, doi: 10.1093/mnras/stv3002
+Ziosi, B. M., Mapelli, M., Branchesi, M., & Tormen, G. 2014,
+MNRAS, 441, 3703, doi: 10.1093/mnras/stu824
+
+MNRAS 000, 1–16 (2021)
+
+15
+
+APPENDIX A: CHE THRESHOLDS
+We evolved single stars over a range of masses, metallicities,
+and rotational frequencies with version 10108 of the MESA
+code in order to find the boundary between CHE and regular
+non-CH stellar evolution.1 Simulations were performed until
+the end of the main sequence without mass loss, while enforcing solid body rotation at a constant angular frequency.
+Opacities are computed using tables from the OPAL
+project (Iglesias & Rogers 1996) with solar-scaled metal
+mass fractions as given by Grevesse & Sauval (1998). The
+equation of state is a combination of the OPAL (Rogers
+& Nayfonov 2002), HELM (Timmes & Swesty 2000), PC
+(Potekhin & Chabrier 2010) and SCVH (Saumon et al. 1995)
+equations of state. Nuclear reaction rates are taken from
+Caughlan & Fowler (1988) and Angulo et al. (1999) with
+preference for the latter when available.
+Our choices for overshooting and rotational mixing processes follow those of Brott et al. (2011). Namely, overshooting from convective hydrogen burning cores is modeled as
+step overshooting, increasing the size of the convective core
+by 0.335HP , where HP is the pressure scale height at the
+edge of the convective boundary. As we consider solid body
+rotation, the only significant mixing process included in our
+simulations is the effect of Eddington-Sweet circulations as
+described by Kippenhahn (1974), with an efficiency factor
+of 1/30 (Chaboyer & Zahn 1992; Heger et al. 2000). We also
+include the inhibiting effect of composition gradients in rotational mixing as described by Heger et al. (2000), given
+by the dimensionless parameter fµ = 0.1 (Yoon et al. 2006).
+The star was considered to evolve chemically homogeneously
+if the difference between the helium fraction across the star
+did not exceed 0.2.
+Figure A1 shows the maximum rotational frequency at
+which the star remains non chemically homogeneous (upward triangles), and the minimum rotational frequency at
+which the star becomes chemically homogeneous (downward
+triangles), for a grid of masses ranging from 10 to 150 M
+and three metallicities, Z = 0.01, 0.001, 0.0001.
+The following fits for the threshold angular frequency
+for chemically homogeneous evolution are implemented in
+COMPAS and shown in Figure A1:
+
+ωM,Z =
+
+ωM,Z0.004
+Z
+0.09 ln(
+)+1
+0.004
+
+(A1)
+
+where
+
+(P
+5
+Mi
+i=0 ai M0.4
+ωM,Z0.004 = P5
+100i
+i=0 ai M0.4
+and
+
+rad s−1 ,M≤100 M
+rad s−1 ,M>100M
+
+(A2)
+
+a0 = 5.7914×10−4
+a1 =−1.9196×10−6
+a2 =−4.0602×10−7
+a3 = 1.0150e×10−8
+a4 =−9.1792×10−11
+a = 2.9051×10−13
+5
+
+1
+
+The complete set of MESA input files necessary to reproduce
+these simulations will be made available after acceptance of the
+manuscript.
+
+16
+
+J. Riley et al.
+
+Figure A1. Rotational frequency threshold for chemically homogeneous evolution as a function of mass and metallicity. Downward and
+upward triangles represent the slowest-rotating CHE model and fastest-rotating non-CHE model at the given mass and metallicity,
+respectively. The curves indicate the fits of Eqs. (A1) and (A2).
+
+We expect these fits to be valid over the range where
+they are constructed (10 M ≤ M ≤ 150M , 10−4 ≤ Z ≤
+0.01) but caution should be exercised if the fits are extrapolated significantly beyond these boundaries.
+Figure A2 shows the range of binaries in mass – orbital
+period space that lead to CHE at Z = 0.001. Red points
+indicate the population of binaries that remain CH through
+the main sequence according to the model described here
+and implemented in COMPAS. For comparison, the background colours show the outcomes from detailed MESA binary models of du Buisson et al. (2020), with cyan, purple
+and blue denoting binaries that undergo CHE on the main
+sequence without merging. In general, there is good agreement between the two sets of models, particularly at higher
+orbital periods. For the tightest orbits, du Buisson et al.
+(2020) models predict mergers through L2 overflow when
+our COMPAS fits suggest that the over-contact binary may
+still survive with CHE stars. This is likely due to the combination of rotational and tidal deformation, as well as some
+mild expansion early during CHE evolution, that are not
+accounted for in the COMPAS models.
+
+Figure A2. Comparison between the COMPAS mass and orbital
+period range leading to CHE, implemented as described in this
+appendix (red dots), and the detailed MESA binary models of du
+Buisson et al. (2020) (background colour shading of cyan, blue
+and purple indicates binaries that survive CHE on the main sequence) at Z = 0.001.
+
+MNRAS 000, 1–16 (2021)
+
+

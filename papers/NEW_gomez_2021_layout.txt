@@ -1,0 +1,753 @@
+                                                 Draft version September 23, 2021
+                                                 Typeset using LATEX twocolumn style in AASTeX62
+
+
+
+
+                                               Fallback supernova assembly of heavy binary neutron stars and light black hole−neutron star pairs and the common
+                                                                                 stellar ancestry of GW190425 and GW200115
+                                                    Alejandro Vigna-Gómez,1, 2 Sophie L. Schrøder,1 Enrico Ramirez-Ruiz,3, 1 David R. Aguilera-Dena,4, 5, 6
+                                                                       Aldo Batta,7 Norbert Langer,5, 6 and Reinhold Willcox8, 9
+                                                               1 DARK, Niels Bohr Institute, University of Copenhagen, Jagtvej 128, 2200, Copenhagen, Denmark
+                                                           2 Niels Bohr International Academy, The Niels Bohr Institute, Blegdamsvej 17, 2100 Copenhagen, Denmark.
+arXiv:2106.12381v2 [astro-ph.HE] 22 Sep 2021
+
+
+
+
+                                                               3 Department of Astronomy and Astrophysics, University of California, Santa Cruz, CA 95064, USA
+                                                4 Institute of Astrophysics, FORTH, Dept. of Physics, University of Crete, Voutes, University Campus, GR-71003 Heraklion, Greece
+                                                                5 Argelander-Institut für Astronomie, Universität Bonn, Auf dem Hügel 71, 53121 Bonn, Germany
+                                                                      6 Max-Planck-Institut für Radioastronomie, Auf dem Hügel 69, 53121 Bonn, Germany
+                                                                   7 Instituto Nacional de Astrofı́sica, Óptica y Electrónica, Tonantzintla, Puebla 72840, México
+                                                                      8 School of Physics and Astronomy, Monash University, Clayton, Vic. 3800, Australia
+                                                                           9 The ARC Centre of Excellence for Gravitational Wave Discovery – OzGrav
+
+
+
+                                                                                                            ABSTRACT
+                                                          The detection of the unusually heavy binary neutron star merger GW190425 marked a stark contrast
+                                                       to the mass distribution from known Galactic pulsars in double neutron star binaries and gravitational-
+                                                       wave source GW170817. We suggest here a formation channel for heavy binary neutron stars and light
+                                                       black hole - neutron star binaries in which massive helium stars, which had their hydrogen envelope
+                                                       removed during a common envelope phase, remain compact and avoid mass transfer onto the neutron
+                                                       star companion, possibly avoiding pulsar recycling. We present three-dimensional simulations of the
+                                                       supernova explosion of the massive stripped helium star and follow the mass fallback evolution and the
+                                                       subsequent accretion onto the neutron star companion. We find that fallback leads to significant mass
+                                                       growth in the newly formed neutron star. This can explain the formation of heavy binary neutron star
+                                                       systems such as GW190425, as well as predict the assembly of light black hole - neutron star systems
+                                                       such as GW200115. This formation avenue is consistent with the observed mass-eccentricity correlation
+                                                       of binary neutron stars in the Milky Way. Finally, avoiding mass transfer suggests an unusually long
+                                                       spin-period population of pulsar binaries in our Galaxy.
+                                                                  1. INTRODUCTION                            masses (Kiziltan et al. 2013; Özel & Freire 2016; Farrow
+                                                 On April 25th, 2019, the LIGO-Virgo network de-             et al. 2019). By contrast, GW190425 has a total mass
+                                               tected its second-ever signal of two neutron stars merg-      equal to about 3.4 solar masses (Abbott et al. 2020).
+                                               ing, tagged as GW190425 (Abbott et al. 2020). But                Since the detection of the Hulse–Taylor binary (Hulse
+                                               unlike the first detection of a binary neutron star (BNS)     & Taylor 1975), there is consensus that the progenitors
+                                               merger (GW170817, Abbott et al. 2017), which con-             of BNSs are massive stellar binaries (e.g., van den Heuvel
+                                               formed to expectations, GW190425 was extraordinary.           1976). A crucial phase in the evolutionary pathway to
+                                               Most of what we know about neutron stars comes pri-           BNS formation occurs when a giant star fills its Roche
+                                               marily from observations of pulsars, magnetized rotat-        lobe and initiates a dynamically-unstable mass-transfer
+                                               ing neutron stars, in our own Milky Way. Of the thou-         episode onto the neutron star companion (e.g., Bhat-
+                                               sands of known pulsars, almost twenty are visible as re-      tacharya & van den Heuvel 1991). The stellar core and
+                                               cycled millisecond pulsars paired with another neutron        the neutron star become engulfed by the expanding en-
+                                               star companion (Tauris et al. 2017; Andrews & Man-            velope, a process where gas drag dissipates orbital en-
+                                               del 2019). These light neutron star binaries, including       ergy of the binary (e.g., Ivanova et al. 2013; MacLeod
+                                               GW170817, weighed the equivalent of about 2.6 solar           & Ramirez-Ruiz 2015). This common envelope phase
+                                                                                                             ends when the hydrogen envelope is ejected and a com-
+                                                                                                             pact, stripped, helium-rich star of a few solar masses is
+                                               Corresponding author: Alejandro Vigna-Gómez                  left to reside in a tight (≈ R ) near circular orbit (Fra-
+                                               avignagomez@nbi.ku.dk                                         gos et al. 2019; Law-Smith et al. 2020). The subsequent
+2                                                Vigna-Gómez et al.
+
+evolution of the binary (Figure 1) depends on the mass        a
+
+and composition of the stripped helium star (Woosley
+2019) after the envelope is ejected. Most low-mass he-
+lium stars expand (e.g., Woosley et al. 1995; Götberg
+et al. 2017; Laplace et al. 2020) and engage in an addi-
+tional stable mass-transfer episode. During this episode,
+the mass transferred from the helium-rich donor recy-
+cles the pulsar, a process in which the neutron star spin
+increases to milliseconds and becomes radio visible for
+several Gyr (e.g., Srinivasan 2010). Moreover, the donor
+star becomes an ultra-stripped core (Tauris et al. 2013,
+2015). These low-mass systems lead to BNSs such as
+GW170817 and those observed in the Milky Way (e.g.,
+                                                                                  q~
+                                                                                   > 0.3                  q~
+                                                                                                           ~ 0.3                  q~
+                                                                                                                                   < 0.3
+Ramirez-Ruiz et al. 2019).                                        b                        c                       d
+   In this Letter we propose an alternative channel for-
+mation channel for heavy BNSs. In this formation chan-
+nel, massive (& 9 M ) helium stars remain compact and
+avoid mass transfer onto a neutron star and thus pulsar
+recycling. Non-recycled, young, pulsars become radio
+quiet after only tens of Myr (e.g., Lorimer & Kramer
+2004; Tauris et al. 2017) and, as a result, these massive
+helium stars could lead to radio-quiet compact binaries
+that can only be detected by gravitational-wave obser-
+vatories. The structure of the helium star at core col-
+lapse will determine if the system will become a BNS or
+black hole - neutron star (BH-NS) binary. These sys-
+tems offer an alternative evolutionary pathway which                   GW170817                GW190425                GW200115
+                                                                      Galactic BNSs
+can explain the dichotomy between the observed BNSs
+hosting recycled pulsars, GW170817, and the unusually
+heavy gravitational-wave source GW190425 (Figure 1).        Figure 1. Late stages of BNS formation. The giant star
+                                                            expands and engulfs the neutron star companion in an stage
+                                                            commonly referred to as a common-envelope evolution (a).
+    2. METHODS AND INITIAL CONDITIONS                       A successful ejection of the envelope leaves the neutron star
+                                                            in a close orbit with a stripped-envelope star. The evolution
+   In this Letter we present three-dimensional (3D) hy-
+                                                            of the system depends on the mass ratio q = MNS /Mstripped .
+drodynamic models of GW190425-like progenitor bina-         Less-massive stripped stars with q & 0.3 experience an ad-
+ries using the smoothed-particle hydrodynamics (SPH)        ditional mass transfer phase that further strips the star and
+code GADGET-2 (Springel 2005). Our approach is              recycles the pulsar companion. Such evolutionary sequence
+hybrid, since we approximate the evolution of a star        leads to systems such as the observed BNSs in the Milky
+that is stripped by a binary companion through a de-        Way and GW170817 (b). More massive stripped stars with
+tailed stellar evolution of a single star, then map the     q ≈ 0.3 do not expand as much, therefore avoiding further
+pre-collapse 1D stellar model onto a 3D binary to model     stripping and companion recycling. Such evolutionary se-
+                                                            quence, on the other hand, is expected to lead to BNS sys-
+the explosion. To generate our initial models we make
+                                                            tems such as GW190425 (c). Finally, even more massive
+use of the one-dimensional (1D) stellar evolution code      stripped stars with q . 0.3 will lead to BH-NS binaries such
+MESA (Paxton et al. 2011) version 10398. In particu-        as GW200115 (d).
+lar, we model the evolution of a 10.0 M stripped star
+at Z = 0.02 from helium zero-age main sequence to core
+                                                            a 1.3 M neutron star companion at a separation of
+collapse. At core collapse, the heavy helium star has
+                                                            apre−SN = 1.4 R in a circular orbit. Details on the
+a mass of Mpre−SN ≈ 5.4 M , a radius of ≈ 0.7 R ,
+                                                            setup and numerical tests can be found in Appendix B.
+and more than 95% of its gravitational binding energy
+                                                            The initial proto-neutron-star mass is assumed to be
+contained below a radius of 0.01 R . The reader is
+                                                            Mproto−NS = 1.3 M , consistent with the observed mass
+refer to Appendix A for specifics. We then map the
+                                                            distribution of BNSs (Kiziltan et al. 2013; Özel & Freire
+MESA model into GADGET-2 in order to simulate
+                                                            2016; Farrow et al. 2019) and with the properties of
+the supernova explosion of a heavy helium star with
+                                  Formation of heavy BNSs and light BH-NSs                                             3
+
+the 1D pre-supernova stellar model (Müller et al. 2016).        The ejected envelope material during a supernova ex-
+An explosion energy of 1.5 bethes1 , consistent with es-      plosion imparts a recoil kick on the system. Even if the
+timates from a 1D neutrino-hydrodynamics code for a           supernova is spherically-symmetric in the frame of refer-
+similar progenitor model (Ertl et al. 2020), is deposited     ence of the exploding star, the explosion will increase the
+in a shell above the proto-neutron star. We focus on the      orbital period and eccentricity (Blaauw 1961). If, on the
+long-term, post-explosion fallback evolution of the ejecta    other hand, the supernova material is ejected anisotrop-
+in order to account for mass accretion of the newly born      ically, the magnitude of the resultant kick to the newly
+neutron star and for pulsar recycling of the companion.       born neutron star is expected to be of the order of
+We do not account for magnetic fields.                        ≈ 100 km s−1 for isolated massive stars (e.g., Burrows &
+                                                              Vartanyan 2021) and reduced to ≈ 10 km s−1 for ultra-
+ 3. NEUTRON STAR BIRTH FROM SUPERNOVA
+                                                              stripped or electron-capture supernovae (e.g., Vigna-
+                           FALLBACK
+                                                              Gómez et al. 2018). BNSs assembled via common-
+  The resultant hydrodynamical evolution of the explo-        envelope episodes end up in close orbits with relative
+sion is depicted in Figure 2. The shock initially propa-      orbital velocities well in excess of 1000 km s−1 and are
+gates through the iron core until it reaches the envelope,    likely to remain gravitationally bound after the explo-
+fractions of a second after the explosion. At this point, a   sion. Depending on the direction and magnitude of the
+reverse shock wave emerges, which propagates back to-         natal kick, some binaries might actually end up shrink-
+wards the newly-formed neutron star and triggers mass         ing to even closer orbits. The explosion of massive he-
+fallback. The fallback mass accretion rate peaks 20 s         lium stars with a light neutron star companion are ex-
+after the explosion at ≈ 10−2 M s−1 (Figure 2). Ap-           pected to lead to the formation of more eccentric bina-
+proximately 0.8 M are accreted during the first hun-          ries.
+dred seconds after the explosion, roughly the same time
+scale in which the expanding layers of the exploding star            4. DISCUSSION AND CONCLUSIONS
+reach the neutron star companion (Figure 2). The rapid
+                                                                    4.1. Light BH-NS binaries and GW200115
+velocity of the expanding shock (≈ 1000 km s−1 ) and the
+small cross section of the neutron star companion result        On January 15th, 2020, the LIGO-Virgo network de-
+in . 10−3 M of accreted material. The accretion of            tected GW200115, the second ever confident detection of
+this small amount of material will not effectively recycle    a BH-NS coalescence (Abbott et al. 2021). GW200115 is
+the neutron star companion (e.g., Tauris et al. 2017).        composed of a neutron star and a black hole with masses
+  After thousands of seconds the newly formed neutron         of 1.5+0.7               +1.8
+                                                                    −0.3 M and 5.7−2.1 M , respectively. Such light
+star approaches a final mass of ≈ 2.1 M , a value in          BH-NS can be assembled via isolated binary evolution
+broad agreement with earlier results (Fryer et al. 2012;      according to population studies (Broekgaarden & Berger
+Ertl et al. 2020) in the literature. During the whole         2021). However, the component masses of GW200115
+simulation the accretion rate remains above hypercrit-        are peculiar. The mass of the neutron star is marginally
+ical (Chevalier 1993) and neutrinos provide the main          more massive the 1.33 M mean observed in Galactic
+cooling mechanism until after ≈ 106 s.                        BNSs mass distribution (Farrow et al. 2019). The black
+  The amount of fallback mass accretion increases with        hole is close to lower side of the black hole mass distri-
+decreasing explosion energy (Figure 3). Energies of           bution. This mass can be easily explained by the low
+Eexp . 0.5 bethes lead to almost complete fallback            explosion energies from our model (Figure 3).
+while explosions energies of Eexp & 2.5 bethes lead             According to the fallback model presented in this Let-
+to a complete ejection of the envelope. The fallback-         ter, a helium star of 10.0 M forms either a heavy neu-
+dominated transition from neutron star to black hole          tron star or a light black hole. However, semi-analytical
+remnants occurs at Eexp . 1.3 bethes. Explosion ener-         and numerical models predict that the remnant mass
+gies between 1.3 . Eexp . 2.4 bethes lead to remnant          function does not necessarily increases monotonically
+masses 1.6 . Mrem,exp /M . 2.7, which are in the in-          with the mass at core collapse (Sukhbold et al. 2016;
+ferred range for the heavy neutron star in GW190425           Müller et al. 2016; Ertl et al. 2020), and that the out-
+(Abbott et al. 2020). Future detections of BNSs and           come depends on the structure of the stellar model as
+BH-NS binaries would thus help improve the so far weak        well as stochasticity in the explosion mechanism. There-
+constrains of supernova explosion energies from massive       fore, similar stars in similar binaries could lead to both
+helium stars.                                                 heavy BNSs and light BH-NSs, and the fallback explo-
+                                                              sion mechanism might explain both simultaneously. The
+                                                              absence of one population could serve as a constrain on
+  1 1 bethe := 1051 erg.
+                                                              the explosion energy of stripped stars.
+4                                                                       Vigna-Gómez et al.
+              ρmin                       log column density [cgs]                ρmax
+                                                                                            8
+                a                          b                        c
+                                                                                            7
+
+
+                                                                                            6
+
+                             t =7.97 s                  t =100 s         t =1004 s
+                                                                                            5
+
+               d
+    10-2
+                                                                                            4
+
+
+                                                                                            3
+         -4
+    10               7.97s                           100s                  1004s
+                                                                                            2
+
+
+                                                                                            1
+                                                                                                0   0.5    1     1.5     2     2.5     3     3.5     4
+     2.2 e
+         2
+                                                                                        Figure 3. Mass of the newly formed remnant as a function
+     1.8
+                                                                                        of the supernova explosion energy after the fallback accre-
+     1.6                                                                                tion has ceased. The black diamonds represent the models
+     1.4                                                                                explored in this work, and the thick solid black line is a
+                     10                           100                   1000            linear interpolation between the values. The range of the
+                                                                                        component mass for gravitational-wave sources GW170817,
+                                                                                        GW190425, and GW200115 is shown in pink, beige, and
+Figure 2. The hydrodynamical evolution of the second su-                                blue, respectively, while the maximum mass of a non-rotating
+pernova and the accompanying mass fallback that leads to a                              neutron star, MTOV (Rezzolla et al. 2018), in shown in gray.
+heavy BNS merger. Panels (a)-(c) show the column density                                For reference, the birth mass of the neutron star is 1.3 M ,
+(cgs units) in base 10 logarithmic scale and span [-1,3] in (a),                        same as the mass of the neutron star companion. The semi-
+[-2,2] in (b) and [-3,1] in (c). The location of the newly born                         analytical prediction (Müller et al. 2016) of the explosion en-
+neutron star is shown as a filled black circle and the com-                             ergy for this particular model is shown as a dashed black line.
+panion neutron star is shown as a black cross. The second                               The upper limits of supernova models with explosion energies
+and third outer Lagrangian points of the binary are shown                               which include fallback are shown as dotted and dash-dotted
+as blue stars in panel (a). The tick marks on each panel                                lines (Fryer et al. 2012; Ertl et al. 2020). Main numerical un-
+correspond to a solar-radius scale. The only interaction with                           certainties are included as error bars, some of them within
+the neutron star companion is from the blasted ejecta and                               the symbols (Appendix B).
+there is only a tiny mass of material accreted, implying that
+the pulsar companion will not be effectively recycled. Panels
+(d) and (e) show the fallback mass accretion rate onto the                              low eccentricities at double compact object formation.
+newly born neutron star and its cumulative mass accretion                               The fallback scenario presented here thus provides an
+growth, both with vertical lines marking the snapshots from                             explanation for the observed mass-eccentricity correla-
+panels (a)-(c).                                                                         tion without the need to rely on a dynamical-formation
+                                                                                        scenario (Andrews & Mandel 2019). To date, there is
+                     4.2. Mass-eccentricity correlation                                 no evidence of heavy (> 2.9 M ) BNSs in the Milky
+                                                                                        Way. This suggests at least one of the following three
+   There are hints of a mass-eccentricity correlation in
+                                                                                        things about heavy BNSs: they have very short orbital
+short period (< 1 day) BNSs in the Milky Way, where
+                                                                                        periods (. few hours) and thus avoid detection in accel-
+millisecond pulsars paired with more massive compan-
+                                                                                        eration searches (Abbott et al. 2020; Safarzadeh et al.
+ions (≈ 1.4 M ) are in more eccentric (≈ 0.6) orbits
+                                                                                        2020; Galaudage et al. 2021), they are radio quiescent,
+(e.g., Tauris et al. 2017; Andrews & Mandel 2019). The
+                                                                                        or such systems are rare in the Milky Way (Kruckow
+formation channel proposed here for GW190425 is con-
+                                                                                        2020; Galaudage et al. 2021). A priori, there is no rea-
+sistent with this trend, as mass loss during the second
+                                                                                        son why heavy BNSs should be preferentially born in
+supernova in heavy BNS formation can lead to large
+                                                                                        short orbital periods (but see Romero-Shaw et al. 2020)
+eccentricities. In contrast, the formation of light BH-
+                                                                                        and standard formation models are unable to predict
+NSs such as GW200115 will result in decreased mass
+loss during the second supernova, and would lead to
+                                   Formation of heavy BNSs and light BH-NSs                                                 5
+
+enough fast mergers to be reconciled with the detection        (cf. Figure 6 of Klencki et al. 2021), lower metallicities,
+of GW190425 (Safarzadeh et al. 2020).                          or different assumptions about energy requirements (Ev-
+                                                               erson et al. 2020; Vigna-Gómez et al. 2021), might lead
+  4.3. Electromagnetic counterparts and gravitational          to a successful ejection.
+                          waves                                  For models considered in this Letter, we assumed that
+   The merger of a heavy neutron star pair or a light          the orbit remains effectively unchanged after the en-
+BH-NS binary is expected to produce an electromag-             velope ejection. However, the evolution of the post-
+netic counterpart that will further shed light on its origin   common-envelope binary can entail energy-momentum
+(Roberts et al. 2011). Particularly, the merger of a heavy     transfer and losses via, e.g., stellar winds and tidal dis-
+neutron star pair is expected to produce a luminous red        sipation. Mass loss via isotropic winds, aka the Jeans
+kilonova likely powered by an accretion disc wind (Kasen       mode, can widen the orbit by a factor of . 2, and in
+et al. 2017), which might likely be accompanied by a blue      some cases counteract stellar expansion and therefore
+kilonova component (Metzger & Fernández 2014). The            Roche-lobe overflow. This is particularly relevant for
+merger of a light BH-NS binary, on the other hand, is          stars with mass 6 . Mstripped /M . 10 that will ex-
+expected to experience tidal disruption and be only ob-        pand by a factor of a few at most. Avoiding Roche-lobe
+servable as faint red kilonova (Kasen et al. 2017). The        overflow after the common-envelope phase would result
+accompanying electromagnetic signatures would provide          in avoiding further pulsar recycling of the companion
+a natural test to distinguish between different compact        and leading to remnant masses Mrem,exp > 1.33 M .
+binary mergers.                                                However, alternative mass loss modes or wind interac-
+   The formation channel presented here hints to the           tion with the companion could decrease the widening of
+presence of heavy BNSs or light BH-NSs in the Milky            the orbit (e.g., Schrøder et al. 2021).
+Way. These and similar systems, such as non-recycled             Throughout this Letter, we do not consider tidal dis-
+light BNSs (Belczyński & Kalogera 2001), are expected         sipation. The dynamical tide is unlikely to play a dom-
+to be uncovered by the Laser Interferometer Space An-          inant role in the orbital evolution during late stages of
+tenna (Amaro-Seoane et al. 2017; Lau et al. 2020).             BNS assembly, but it might (partially) counteract the
+                                                               widening of stellar winds.
+ 4.4. Some open questions in stellar binary evolution            4.5. Mass accretion onto a neutron star and pulsar
+   The evolution from zero-age main sequence to dou-                                    recycling
+ble compact formation is rather complex. We have as-              A pulsar binary can be spun-up and recycled if an-
+sumed here that the evolution of the system follows the        gular momentum is efficiently transferred onto the pul-
+canonical assembly of BNSs (e.g., Bhattacharya & van           sar. This is a complex process that depends on the mass
+den Heuvel 1991; Tauris et al. 2017), which includes a         transfer rate, orbital properties of the binary, and accre-
+common-envelope phase of a giant star with a neutron           tion physics, as well as on the equation-of-state, mag-
+star companion (Fragos et al. 2019; Law-Smith et al.           netic field, and overall properties of the neutron star
+2020). Vigna-Gómez et al. (2020) predicts that, at the        (Tauris et al. 2012; Tauris et al. 2017). Roche-lobe over-
+onset of the common-envelope phase, only . 5% of neu-          flow from a stripped-star with a helium-rich envelope is
+tron star binary progenitors will have donor stars with        an efficient way to form an accretion disc around the
+masses & 20 M . However, that study does not incor-            pulsar that can spin it up to tens of milliseconds and
+porate the recently explored stellar evolution models of       (mildy) recycle it; this is believed to be the preferred
+stripped stars (Appendix A) nor the explosion mecha-           spin-up mechanism for Galactic BNSs (Tauris et al.
+nism explored in this Letter (Appendix B). These up-           2017). Avoiding such mass transfer episode, like we sug-
+dates are likely to alter the predictions of assembly and      gest in this Letter, will avoid the main mass and angular
+merger rates for heavy BNSs and light BH-NS binaries.          momentum transfer mechanism, which for Galactic-like
+   Single unperturbed stellar models have been used to         BNSs results in a mass growth of 6−9×10−3 M and ob-
+explore envelope ejection in massive binaries (Kruckow         served2 recycled pulsar spins between 17 < Pspin < 186
+et al. 2016; Klencki et al. 2021). Heavy (& 25 M )             milliseconds (Tauris et al. 2017; Stovall et al. 2018).
+progenitors with low-mass (1 M ) companions are not               However, post-common-envelope winds can also lead
+likely to eject the envelope at high (≈ solar) metal-          to mass accretion. For the system presented in this
+licities, a scenario which has been predicted to result        Letter, the amount of accreted mass ∆Macc = facc ×
+in Thorne–Żytkow objects (Thorne & Zytkow 1975;
+Thorne & Zytkow 1977). However, it is possible that
+                                                                 2 We do not consider Galactic BNSs in Globular Clusters.
+modeling of progenitors with more massive companions
+6                                                   Vigna-Gómez et al.
+
+∆Mwinds , with facc ≈ 10−4 is the estimated wind ac-            should allow us to uncover the detailed nature of these
+cretion efficiency (Tauris et al. 2017) and ∆Mwinds ≈           most remarkable systems and provide us with an excit-
+4.6 M is the amount of mass lost via stellar winds from         ing opportunity to study novel regimes of binary stellar
+the helium zero-age main sequence until core collapse           evolution.
+(Appendix A), results in ∆Macc ≈ 4.6 × 10−4 M . This
+amount of mass increases the spin period to Pspin ≈ 683           The authors thank Ilya Mandel, Simon Stevenson, and
+milliseconds if this mass is accreted from a neutrino           the anonymous referee for useful discussions. A.V.-G.,
+cooled disc (MacLeod & Ramirez-Ruiz 2015). During               S.L.S., and E.R.-R. acknowledge support by Heising-
+the second supernova, a small fraction of the fast ejecta       Simons Foundation, the Danish National Research
+(≈ 10−4 − 10−3 M ) is ballistically accreted onto the           Foundation (DNRF132) and NSF (AST-1911206 and
+pulsar companion, and therefore we do not expect it to          AST-1852393). D. R. A.-D. was supported by the
+recycle the pulsar.                                             Stavros Niarchos Foundation (SNF) and the Hellenic
+                                                                Foundation for Research and Innovation (H.F.R.I.) un-
+                     4.6. Conclusions                           der the 2nd Call of “Science and Society” Action Always
+                                                                strive for excellence – “Theodoros Papazoglou” (Project
+  Our understanding of merging binaries has come a
+                                                                Number: 01431).
+long way since the discovery of gravitational waves al-
+most 6 years ago, but these enigmatic sources continue            Software:       Data and scripts used for this study
+to offer major puzzles and challenges. Our results sug-         available via zenodo.org/record/4682798. GADGET-2
+gest that ground-based facilities, like LIGO and Virgo,         is publicly available at https://wwwmpa.mpa-garching.
+will detect these merging binary populations which have         mpg.de/gadget/. MESA is publicly available at https:
+currently avoided detection in the Milky Way. Space-            //mesa.sourceforge.net. SPLASH is publicly available at
+and ground-based observations over the coming decade            https://users.monash.edu.au/∼dprice/splash/.
+
+
+                                                         REFERENCES
+Abbott, B. P., Abbott, R., Abbott, T. D., et al. 2017,          Ertl, T., Woosley, S. E., Sukhbold, T., & Janka, H. T.
+ PhRvL, 119, 161101,                                              2020, ApJ, 890, 51, doi: 10.3847/1538-4357/ab6458
+ doi: 10.1103/PhysRevLett.119.161101                            Everson, R. W., MacLeod, M., De, S., et al. 2020, ApJ,
+Abbott, B. P., Abbott, R., Abbott, T. D., et al. 2020,            899, 77. doi:10.3847/1538-4357/aba75c
+ ApJL, 892, L3, doi: 10.3847/2041-8213/ab75f5                   Farrow, N., Zhu, X.-J., & Thrane, E. 2019, ApJ, 876, 18,
+Abbott, R., Abbott, T. D., Abraham, S., et al. 2021, ApJL,        doi: 10.3847/1538-4357/ab12e3
+ 915, L5, doi: 10.3847/2041-8213/ac082e                         Fragos, T., Andrews, J. J., Ramirez-Ruiz, E., et al. 2019,
+Aguilera-Dena, D. R., et al. in prep.                             ApJL, 883, L45, doi: 10.3847/2041-8213/ab40d1
+Amaro-Seoane, P., Audley, H., Babak, S., et al. 2017, arXiv
+                                                                Fryer, C. L., Belczynski, K., Wiktorowicz, G., et al. 2012,
+ e-prints, arXiv:1702.00786.
+                                                                  ApJ, 749, 91, doi: 10.1088/0004-637X/749/1/91
+ https://arxiv.org/abs/1702.00786
+                                                                Galaudage, S., Adamcewicz, C., Zhu, X.-J., Stevenson, S.,
+Andrews, J. J., & Mandel, I. 2019, ApJL, 880, L8,
+                                                                  & Thrane, E. 2021, ApJL, 909, L19,
+ doi: 10.3847/2041-8213/ab2ed1
+                                                                  doi: 10.3847/2041-8213/abe7f6
+Batta, A., Ramirez-Ruiz, E., & Fryer, C. 2017, ApJL, 846,
+                                                                Górski, K. M., Hivon, E., Banday, A. J., et al. 2005, ApJ,
+  L15, doi: 10.3847/2041-8213/aa8506
+                                                                  622, 759, doi: 10.1086/427976
+Belczyński, K., & Kalogera, V. 2001, ApJL, 550, L183,
+  doi: 10.1086/319641                                           Götberg, Y., de Mink, S. E., & Groh, J. H. 2017, A&A,
+Bhattacharya, D., & van den Heuvel, E. P. J. 1991, PhR,           608, A11, doi: 10.1051/0004-6361/201730472
+  203, 1, doi: 10.1016/0370-1573(91)90064-S                     Hulse, R. A., & Taylor, J. H. 1975, ApJL, 195, L51,
+Blaauw, A. 1961, BAN, 15, 265                                     doi: 10.1086/181708
+Böhm-Vitense, E. 1958, ZA, 46, 108                             Ivanova, N., Justham, S., Chen, X., et al. 2013, A&A Rv,
+Broekgaarden, F. S. & Berger, E. 2021, arXiv:2108.05763           21, 59, doi: 10.1007/s00159-013-0059-2
+Burrows, A., & Vartanyan, D. 2021, Nature, 589, 29,             Kasen, D., Metzger, B., Barnes, J., Quataert, E., &
+  doi: 10.1038/s41586-020-03059-w                                 Ramirez-Ruiz, E. 2017, Nature, 551, 80,
+Chevalier, R. A. 1993, ApJL, 411, L33, doi: 10.1086/186905        doi: 10.1038/nature24453
+                                   Formation of heavy BNSs and light BH-NSs                                                 7
+
+Kiziltan, B., Kottas, A., De Yoreo, M., & Thorsett, S. E.       Romero-Shaw, I. M., Farrow, N., Stevenson, S., Thrane, E.,
+  2013, ApJ, 778, 66, doi: 10.1088/0004-637X/778/1/66             & Zhu, X.-J. 2020, MNRAS, 496, L64,
+Klencki, J., Nelemans, G., Istrate, A. G., & Chruslinska, M.      doi: 10.1093/mnrasl/slaa084
+  2021, A&A, 645, A54, doi: 10.1051/0004-6361/202038707         Safarzadeh, M., Ramirez-Ruiz, E., & Berger, E. 2020, ApJ,
+                                                                  900, 13, doi: 10.3847/1538-4357/aba596
+Kruckow, M. U., Tauris, T. M., Langer, N., et al. 2016,
+                                                                Schootemeijer, A., Langer, N., Grin, N. J., & Wang, C.
+  A&A, 596, A58, doi: 10.1051/0004-6361/201629420
+                                                                  2019, A&A, 625, A132,
+Kruckow, M. U. 2020, A&A, 639, A123,
+                                                                  doi: 10.1051/0004-6361/201935046
+  doi: 10.1051/0004-6361/202037519
+                                                                Schrøder, S. L., Batta, A., & Ramirez-Ruiz, E. 2018, ApJL,
+Laplace, E., Götberg, Y., de Mink, S. E., Justham, S., &         862, L3, doi: 10.3847/2041-8213/aacf8d
+  Farmer, R. 2020, A&A, 637, A6,                                Schrøder, S. L., MacLeod, M., Ramirez-Ruiz, E., et al.
+  doi: 10.1051/0004-6361/201937300                                2021, arXiv:2107.09675
+Lau, M. Y. M., Mandel, I., Vigna-Gómez, A., et al. 2020,       Springel, V. 2005, MNRAS, 364, 1105,
+  MNRAS, 492, 3061, doi: 10.1093/mnras/staa002                    doi: 10.1111/j.1365-2966.2005.09655.x
+Law-Smith, J. A. P., Everson, R. W., Ramirez-Ruiz, E.,          Srinivasan, G. 2010, NewAR, 54, 93,
+  et al. 2020, arXiv e-prints, arXiv:2011.06630.                  doi: 10.1016/j.newar.2010.09.026
+                                                                Stovall, K., Freire, P. C. C., Chatterjee, S., et al. 2018,
+  https://arxiv.org/abs/2011.06630
+                                                                  ApJL, 854, L22, doi: 10.3847/2041-8213/aaad06
+Lorimer, D. R., & Kramer, M. 2004, Handbook of Pulsar
+                                                                Sukhbold, T., Ertl, T., Woosley, S. E., et al. 2016, ApJ,
+  Astronomy, Vol. 4
+                                                                  821, 38, doi: 10.3847/0004-637X/821/1/38
+MacLeod, M. & Ramirez-Ruiz, E. 2015, ApJL, 798, L19,            Tauris, T. M., Langer, N., & Kramer, M. 2012, MNRAS,
+  doi: 10.1088/2041-8205/798/1/L19                                425, 1601, doi: 10.1111/j.1365-2966.2012.21446.x
+Metzger, B. D. & Fernández, R. 2014, MNRAS, 441, 3444,         Tauris, T. M., Langer, N., Moriya, T. J., et al. 2013, ApJL,
+  doi: 10.1093/mnras/stu802                                       778, L23, doi: 10.1088/2041-8205/778/2/L23
+Müller, B., Heger, A., Liptai, D., & Cameron, J. B. 2016,      Tauris, T. M., Langer, N., & Podsiadlowski, P. 2015,
+  MNRAS, 460, 742, doi: 10.1093/mnras/stw1083                     MNRAS, 451, 2123, doi: 10.1093/mnras/stv990
+                                                                Tauris, T. M., Kramer, M., Freire, P. C. C., et al. 2017,
+Ohlmann, S. T., Röpke, F. K., Pakmor, R., & Springel, V.
+                                                                  ApJ, 846, 170, doi: 10.3847/1538-4357/aa7e89
+  2017, A&A, 599, A5, doi: 10.1051/0004-6361/201629692
+                                                                Thorne, K. S., & Zytkow, A. N. 1975, ApJL, 199, L19,
+Özel, F., & Freire, P. 2016, ARA&A, 54, 401,
+                                                                  doi: 10.1086/181839
+  doi: 10.1146/annurev-astro-081915-023322                      Thorne, K. S. & Zytkow, A. N. 1977, ApJ, 212, 832,
+Paxton, B., Bildsten, L., Dotter, A., et al. 2011, ApJS, 192,     doi: 10.1086/155109
+  3, doi: 10.1088/0067-0049/192/1/3                             van den Heuvel, E. P. J. 1976, in Structure and Evolution
+Paxton, B., Cantiello, M., Arras, P., et al. 2013, ApJS, 208,     of Close Binary Systems, ed. P. Eggleton, S. Mitton, &
+  4, doi: 10.1088/0067-0049/208/1/4                               J. Whelan, Vol. 73, 35
+Paxton, B., Marchant, P., Schwab, J., et al. 2015, ApJS,        Vigna-Gómez, A., Neijssel, C. J., Stevenson, S., et al. 2018,
+                                                                  MNRAS, 481, 4009, doi: 10.1093/mnras/sty2463
+  220, 15, doi: 10.1088/0067-0049/220/1/15
+                                                                Vigna-Gómez, A., MacLeod, M., Neijssel, C. J., et al. 2020,
+Paxton, B., Schwab, J., Bauer, E. B., et al. 2018, ApJS,
+                                                                  PASA, 37, e038, doi: 10.1017/pasa.2020.31
+  234, 34, doi: 10.3847/1538-4365/aaa5a8
+                                                                Vigna-Gómez, A., Wassink, M., Klencki, J., et al. 2021,
+Price, D. J. 2007, PASA, 24, 159, doi: 10.1071/AS07022            arXiv:2107.14526
+Rezzolla, L., Most, E. R., & Weih, L. R. 2018, ApJL, 852,       Woosley, S. E., Langer, N., & Weaver, T. A. 1995, ApJ,
+  L25, doi: 10.3847/2041-8213/aaa401                              448, 315, doi: 10.1086/175963
+Ramirez-Ruiz, E., Andrews, J. J., & Schrøder, S. L. 2019,       Woosley, S. E. 2019, ApJ, 878, 49,
+  ApJL, 883, L6, doi: 10.3847/2041-8213/ab3f2c                    doi: 10.3847/1538-4357/ab1b41
+Roberts, L. F., Kasen, D., Lee, W. H., & Ramirez-Ruiz, E.       Yoon, S.-C., Dessart, L., & Clocchiatti, A. 2017, ApJ, 840,
+                                                                  10, doi: 10.3847/1538-4357/aa6afe
+  2011, ApJL, 736, L21, doi: 10.1088/2041-8205/736/1/L21
+8                                               Vigna-Gómez et al.
+
+
+                                                     APPENDIX
+                                    A. 1D EVOLUTION OF STRIPPED STARS.
+  We model the evolution of stripped stars using the 1D stellar evolution code MESA (Paxton et al. 2011) version
+10398 (Paxton et al. 2013, 2015, 2018) as presented in Aguilera-Dena et al. (2021). We follow the evolution from helium
+zero-age main sequence until the onset of core collapse, which we define as the moment where core infall velocity is
+larger than 1000 km s−1 .
+
+                                                A.1. Numerical setup.
+  The initial models are created by artificially mixing hydrogen-rich models from the pre-main-sequence phase, and
+until the beginning of helium burning. There is no mass loss until the beginning of helium burning, but the condition of
+homogeneity is relaxed at core nitrogen ignition; this guarantees the appropriate CNO element distribution (enhanced
+N, reduced C and O) for the stripped star. We follow Yoon et al. (2017) to account for mass loss through stellar
+winds, dependent on the stellar type (WN or WC) and metallicity. We use the approx21 nuclear network and set
+resolution variables to varcontrol target=10−5 , and mesh delta coef=0.5, which results in a finer resolution than
+MESA’s default. Convection was modeled using standard mixing length theory (Böhm-Vitense 1958) with αM LT = 2.0,
+adopting the Ledoux criterion for instability, employing efficient semiconvection with αSC = 1.0 (Schootemeijer et al.
+2019), and using predictive mixing in the helium burning regions (Paxton et al. 2018). We use MESA’s mlt++ for the
+treatment of energy transport in the envelope and neglect radiative acceleration in layers with T > 108 K during late
+phases of evolution. This results in compact helium zero-age main sequence radius of . 1.2 R , and a minimum mass
+threshold of 9.5 M for the Z = 0.02 model. We do not include convective overshooting, which could result in larger
+core masses for initially less massive stars.
+
+                              A.2. Evolution of two representative models at Z = 0.02.
+  The more massive model is initially 10.0 M and reaches advanced stages of burning faster and collapses before being
+able to expand above its initial radius (Figure 5). A 10.0 M helium core corresponds, for a single star, to a zero-age
+main sequence mass of ≈ 32.0 M (according to the models from Woosley 2019); however, the models presented here
+could have accreted matter via mass transfer episodes at some point in their lives. At the end of the evolution, this
+model has a very compact envelope that decreases sharply in density until reaching the outer layers (Figure 4). The
+less massive model is 6.0 M and is computed to show the contrast with the more massive counterpart. If this less
+massive model is in a close binary, it is likely to experience a mass transfer episode. This less massive model is more
+similar to the canonical helium models that explain ultra-stripped stars, the progenitors of ultra-stripped supernovae,
+Galactic BNSs and GW170817 (Tauris et al. 2013, 2015, 2017; Abbott et al. 2017).
+
+                                          A.3. Metallicity and mixing study.
+   There is a dichotomy between stripped stars that do or do not expand which is mass, model and metallic-
+ity dependent (Woosley 2019). To test the mass and metallicity dependence we performed calculations for he-
+lium zero-age main sequence masses between 4.0 ≤ M/M ≤ 14.0 in steps of 0.5 M and at metallicities
+Z = {0.010, 0.015, 0.020, 0.025, 0.030} (Figure 6). These are a subset of the simulations done in Aguilera-Dena et al.
+(2021). Stripped stars have helium zero-age main sequence radii of . 1.5 R and are more compact at lower metallic-
+ities. In order to distinguish between stars which significantly expand and those which remain compact, we introduce
+a dimensionless factor Rfinal /RHe−ZAMS , where RHe−ZAMS is the radius at helium zero-age main sequence and Rfinal
+is the radius at the moment when the central carbon abundance is . 5 × 10−3 , a proxy for central carbon depletion.
+Stars with Rfinal /RHe−ZAMS . 1 remain compact. The minimum mass threshold to remain compact is 9.0 M at
+Z = 0.02. We test for alternative energy transport envelope treatment by turning off mlt++ and allowing for radiative
+acceleration in the envelope. This variation results in helium zero-age main sequence radii of . 1.5 R , and mass
+threshold of 10.0 M for the Z = 0.02 model. The overall uncertainties on the minimum mass threshold are of order
+. 1.0 M .
+
+                  B. 3D HYDRODYNAMICAL SIMULATION OF FALLBACK SUPERNOVAE.
+  We study the explosion and fallback accretion of a stripped star with a neutron star companion using the 3D
+Lagrangian hydrodynamic SPH code GADGET-2 (Springel 2005). We use a modified version of GADGET-2 that
+                                     Formation of heavy BNSs and light BH-NSs                                                9
+
+                 10 51
+             8                                                           6
+
+             7
+                                                                         5
+             6
+                                                                         4
+             5
+
+             4                                                           3
+
+             3
+                                                                         2
+             2
+                                                                         1
+             1
+
+            0                                                            0
+            10 -4            10 -2                10 0                   10 -4          10 -2           10 0
+
+
+
+
+                                         10
+
+
+
+                                          5
+
+
+
+                                          0
+
+
+
+                                         -5
+
+
+
+                                        -10
+                                          10 -6          10 -4   10 -2           10 0
+
+
+
+Figure 4. Stellar structure of exploding model at the onset of core collapse. Gravitational binding energy (a), mass coordinate
+(b) and density (c) as a function of radial coordinate for the models with helium zero-age main sequence mass of 10.0 M at
+metallicity Z = 0.02.
+
+
+has been previously used to simulate supernovae in binary black hole forming binaries (Batta et al. 2017; Schrøder
+et al. 2018). Visualization of the hydrodynamical evolution (Figure 2) was made using SPLASH (Price 2007).
+
+
+
+                                       B.1. Initial conditions and system properties.
+  Here we describe the initial properties of our fiducial model. The system is initialized as a circular gravitationally
+bound binary comprised of an exploding star and a neutron star companion at a separation of 1.4 R . The neutron star
+companion is defined as a sink particle type of mass 1.3 M . In order to build the initial conditions of the exploding
+star we use a 1D MESA model of a heavy compact progenitor at core collapse (Appendix A). This progenitor, with a
+helium zero-age main sequence mass of 10.0 M and metallicity of Z = 0.02, has mass of 5.4 M at core collapse. The
+star’s final properties at core collapse are then mapped onto a 3D SPH particle distribution that reproduces the density
+profile. A million SPH particles are uniformly distributed on spherical shells generated with the HEALPix algorithm
+(Górski et al. 2005). The shells are then spaced according to the local density (Batta et al. 2017). Due to the extremely
+low densities at the outer layers of the star, mapping with SPH particles became challenging. Therefore, we neglected
+low density material above 0.5 R resulting in ≈ 0.1 M artificially removed from the system (Figure 4). For the
+newly born neutron star, the innermost 1.3 M of the 3D stellar structure is removed and replaced by a sink particle
+with the same mass. For our fiducial model (Figure 2) a kinetic explosion energy of 1.5 bethes is instantaneously
+deposited in the shell with mass dm = 0.7 M right above the 1.3 M that comprises the newly born neutron star.
+We ran a series of models with different explosion energies (Figure 3) spanning from 0.5 ≤ Eexp ≤ 4.0 bethes resulting
+in different fallback evolution (Figure 7).
+10                                                    Vigna-Gómez et al.
+
+
+
+
+           2.5                                                                                                10
+
+
+                                                                                                              9
+              2
+
+                                                                                                              8
+           1.5
+                                                                                                              7
+
+              1
+                                                                                                              6
+
+           0.5
+                                                                                                              5
+
+
+              0                                                                                               4
+                  0              2                4                6                8              10
+                                                                                               10 5
+Figure 5. Time evolution of stripped stars. Radial (y-axis) and mass (colorbar) time evolution (x-axis) of two helium stars,
+from helium zero-age main sequence to core collapse, at metallicity Z = 0.02. The initial helium star masses are 10.0 (initially
+more expanded) and 6.0 (initially more compact) M , and reach core collapse with masses of 5.4 and 4.2 M , respectively. The
+initially more expanded star contracts and the initially more compact star expands.
+
+
+                                                   B.2. Resolution study.
+  We ran simulations for different resolutions to ensure that the remnant mass estimates are accurate for different
+choices of numerical parameters. For resolutions from 5 × 105 to 5 × 106 particles we found remnant mass variations
+smaller than 0.1 M and convergence as the number of particles increases (Figure 8). For our fiducial model we
+settled for a resolution of 106 particles resulting in a mass difference of less than 0.04 M compared with the highest
+resolution. The mass of shell in which the kinetic explosion energy is deposited is the main source of physical and
+numerical uncertainty. For the E51 = 1.5 model, where 1 E51 = 1 bethe, thin shell masses of dm ≈ 0.2 M lead to
+remnant masses of ≈ 3 M , more than twice the remnant mass predicted by models which do not incorporate fallback
+(Müller et al. 2016). Thicker shell masses of dm ≈ 0.7 M converge to more reasonable remnant masses of ≈ 2.1 M
+(Figure 7). The mapping of 1D stellar models to 3D hydrodynamic ones is known to lead to discretization errors
+in the hydrostatic equilibrium (Ohlmann et al. 2017). However, the effects of this mapping seem to be negligible in
+our simulations: while some of the outer layers of the star are artificially ejected because of this, the supernova of
+a non-exploding model is fully consistent with our lowest explosion energy model, implying complete fallback (see
+comment about equation on state in Section 4). We lastly checked for any effect that a natal kick could have on the
+remnant mass. Natal kicks of magnitudes of ≈ 10, ≈ 100, and, ≈ 1000 km s−1 at random directions, which affect the
+orbit in timescales longer than the fallback timescale, made little difference with respect to our fiducial model.
+                                     Formation of heavy BNSs and light BH-NSs                                           11
+
+
+
+
+                            10
+
+
+
+
+                             1
+
+
+
+
+                                 4          6           8          10           12           14
+
+
+
+
+                            10
+
+
+
+
+                             1
+
+
+
+
+                                 4          6           8          10           12           14
+
+
+
+Figure 6.      Summary of radial evolution of stripped helium stars. The behavior of the radial evolution of stripped stars
+is shown as a function of helium mass (x-axis) and metallicity (color). We parameterize the radii in terms of RHe−ZAMS
+and Rfinal (see Methods). Stars remain compact when Rfinal /RHe−ZAMS < 1; alternatively, significant expansion occurs when
+Rfinal /RHe−ZAMS > 1. The results are shown in solid lines (a) for our standard model including mlt++ and in dashed lines
+(b) for an alternative numerical treatment of mixing (Appendix A). The former ultimately leads to stars with less extended
+envelopes at lower masses.
+12                                                 Vigna-Gómez et al.
+
+
+                              0
+                         10
+
+
+
+                        10-1
+
+
+
+                        10-2
+
+
+
+                        10-3
+
+
+
+                             -4
+                        10
+
+
+                                    10                       100                       1000
+
+
+
+
+                        10-1
+
+
+
+
+                        10-2
+
+
+
+                             -3
+                        10
+
+
+
+
+                        10-4
+
+
+
+
+                                    10                       100                       1000
+
+
+Figure 7. Fallback mass accretion rate of the exploding star. All models (a) and resolution study (b) exploring the evolution
+depending on the size of the mass shell where the kinetic explosion energy is deposited (Appendix B).
+                                 Formation of heavy BNSs and light BH-NSs                                               13
+
+
+
+
+            2.3
+            2.2
+            2.1
+               2
+            1.9
+            1.8
+            1.7
+            1.6
+            1.5
+            1.4
+            1.3
+                                      10 1                              10 2                             10 3
+
+
+Figure 8. Post-supernova time evolution, including mass accretion, of the newly born neutron star. Number of particle (Np )
+resolution study to determine convergence in our simulations (Appendix B).
+
+
+                               B.3. Open questions in Supernova Explosion Mechanisms
+  Supernovae are also very complicated processes to model numerically. We do not present a self-consistent explosion
+model. Instead, we use a simplified approach to study the long-term evolution of supernova fallback in binaries and
+explore the sensitivity to the currently unknown supernova energy. This allows us to understand the role of fallback in
+creating light black holes rather than heavy neutron star pairs. These uncertainties in the explosion energy propagate
+directly into the rates estimates. Moreover, because of the amount of ejected mass, it is more likely to have a binary
+remain bound the second explosion lead to a black hole instead of a neutron star. Future observations will clarify the
+most likely outcome of stripped supernovae with neutron star companions and will allow us to place strict constraints
+on the explosion mechanism of massive stars.
+  Here we follow the model from Batta et al. (2017) in order to quantify the accretion history of the newly born
+neutron star. We define an accretion radius racc < 0.01 R from the edge of the innermost stable circular orbit (ISCO)
+of the compact object, in this case the 1.3 M proto-neutron-star. Particles within the accretion radius and with
+less specific angular momentum (j) than the one needed to orbit ISCO are considered to be accreted, transferring
+their entire mass and angular momentum onto the compact object. Particles within the accretion radius and with
+jISCO ≤ j < 10 × jISCO are assumed to be accreted via an accretion disc on a viscous timescale. To this end we neglect
+any additional feedback from this accretion.
+

@@ -1,0 +1,1968 @@
+The Astrophysical Journal, 940:184 (17pp), 2022 December 1
+
+https://doi.org/10.3847/1538-4357/ac9b0a
+
+© 2022. The Author(s). Published by the American Astronomical Society.
+
+No Peaks without Valleys: The Stable Mass Transfer Channel for Gravitational-wave
+Sources in Light of the Neutron Star–Black Hole Mass Gap
+L. A. C. van Son1,2,3
+
+, S. E. de Mink2,3
+
+1
+
+, M. Renzo4 , S. Justham2,3,5 , E. Zapartas6
+W. M. Farr4,7 , and C. Conroy1
+
+, K. Breivik4
+
+, T. Callister4
+
+,
+
+Center for Astrophysics | Harvard & Smithsonian, 60 Garden Street, Cambridge, MA 02138, USA; lieke.van.son@cfa.harvard.edu
+2
+Anton Pannekoek Institute for Astronomy, University of Amsterdam, Science Park 904, 1098XH Amsterdam, The Netherlands
+3
+Max Planck Institute for Astrophysics, Karl-Schwarzschild-Strasse 1, D-85748 Garching, Germany
+4
+Center for Computational Astrophysics, Flatiron Institute, New York, NY 10010, USA
+5
+School of Astronomy and Space Science, University of the Chinese Academy of Sciences, Beijing 100012, People’s Republic of China
+6
+IAASARS, National Observatory of Athens, Vas. Pavlou and I. Metaxa, Penteli, 15236, Greece
+7
+Department of Physics and Astronomy, Stony Brook University, Stony Brook NY 11794, USA
+Received 2022 August 23; revised 2022 September 27; accepted 2022 October 7; published 2022 December 5
+
+Abstract
+Gravitational-wave (GW) detections are starting to reveal features in the mass distribution of double compact
+objects. The lower end of the black hole (BH) mass distribution is especially interesting as few formation channels
+contribute here and because it is more robust against variations in the cosmic star formation than the high-mass
+end. In this work we explore the stable mass transfer channel for the formation of GW sources with a focus on the
+low-mass end of the mass distribution. We conduct an extensive exploration of the uncertain physical processes
+that impact this channel. We note that, for ﬁducial assumptions, this channel reproduces the peak at ∼9 M☉ in the
+GW-observed binary BH mass distribution remarkably well and predicts a cutoff mass that coincides with the
+upper edge of the purported neutron star–black hole (NS–BH) mass gap. The peak and cutoff mass are a
+consequence of the unique properties of this channel; namely (1) the requirement of stability during the mass
+transfer phases, and (2) the complex way in which the ﬁnal compact object masses scale with the initial mass. We
+provide an analytical expression for the cutoff in the primary component mass and show that this adequately
+matches our numerical results. Our results imply that selection effects resulting from the formation channel alone
+can provide an explanation for the purported NS–BH mass gap in GW detections. This provides an alternative to
+the commonly adopted view that the gap emerges during BH formation.
+Uniﬁed Astronomy Thesaurus concepts: Stellar mass black holes (1611); Supernova remnants (1667);
+Gravitational wave sources (677); Gravitational waves (678); Interacting binary stars (801)
+to the uncertain origin of the compact object mergers. Many
+channels have been proposed to explain the formation of
+double compact objects (see the reviews from Mapelli 2021
+and Mandel & Farmer 2022, and references therein). The
+mixing fraction between these formation channels is unclear
+(e.g., Wong et al. 2021; Zevin et al. 2021). Moreover, large
+uncertainties in the evolution of massive stellar binaries lead to
+signiﬁcant uncertainties in the predictions for the formation of
+GW sources; this is especially true for predictions from binary
+population synthesis models (e.g., Abadie et al. 2010; de Mink
+& Belczynski 2015; Dominik et al. 2015; Giacobbo &
+Mapelli 2018; Tang et al. 2020; Broekgaarden et al. 2021;
+Bavera et al. 2021; Belczynski et al. 2022) It is therefore crucial
+to ﬁnd predicted features in the source property distributions
+that are characteristic and unique to a single formation channel.
+The lower end of the BH mass distribution (component
+masses of 15 Me) is the most promising site to reveal the
+origin of double compact objects for two reasons. First, the
+low-mass end of the binary black hole (BBH) mass distribution
+is least affected by the uncertainties in the metallicitydependent star formation rate (van Son et al. 2022a). Second,
+only a few formation channels are relevant at the low-mass
+regime. Only isolated binary evolution channels have been
+suggested to produce a global peak of the BH mass distribution
+at the low-mass end (Belczynski et al. 2016; Giacobbo et al.
+2018; Giacobbo & Mapelli 2018; Wiktorowicz et al. 2019;
+Belczynski et al. 2020; Tanikawa et al. 2022). The mass
+
+1. Introduction
+Gravitational-wave (GW) events are revealing substructure
+in the mass distribution of merging double compact objects
+(Abbott et al. 2021a, 2021b; see further Fishbach et al. 2020a;
+Tiwari & Fairhurst 2021, and Tiwari 2022). Understanding the
+origin of these features provides insight into the physics of
+binary formation and evolution (e.g., Stevenson et al. 2015;
+Fishbach et al. 2017; Barrett et al. 2018; Wysocki et al. 2019;
+Fishbach et al. 2020b; Belczynski et al. 2020; Doctor et al.
+2020; Vitale et al. 2022; Romero-Shaw et al. 2021; Wong et al.
+2021). A better understanding of features in the mass
+distribution may enable us to break the degeneracy between
+the observed source mass and redshift from GW sources, which
+would provide a powerful cosmological probe (also known as
+“dark sirens” or “spectral sirens”; e.g., Schutz 1986; Farmer
+et al. 2019; Farr et al. 2019; María Ezquiaga & Holz 2022).
+Additionally, redshift evolution of different parts of the mass
+distribution can provide constraints on the cosmic star
+formation rate from a completely new perspective (e.g., Vitale
+et al. 2019; van Son et al. 2022b; Chruślińska 2022).
+At present it is difﬁcult to take full advantage of the
+information that is contained within the mass distribution due
+Original content from this work may be used under the terms
+of the Creative Commons Attribution 4.0 licence. Any further
+distribution of this work must maintain attribution to the author(s) and the title
+of the work, journal citation and DOI.
+
+1
+
+The Astrophysical Journal, 940:184 (17pp), 2022 December 1
+
+van Son et al.
+
+relative dearth of merging BBH observations with component
+masses between 3 Me and 5 Me. Although at the time of
+writing, deﬁnitive statements about this dearth are hindered by
+the scarcity of detections in this mass range, Farah et al. (2021),
+Ye & Fishbach (2022), and Biscoveanu et al. (2022) ﬁnd that
+models for the mass distribution as observed in GWs with a gap
+are preferred over models without a gap. If such a gap is
+allowed in the model, Farah et al. (2021) ﬁnd that a “rise” from
+this gap is expected between about 4.5 and 8.5 Me (see the
+blue band in Figure 1). Future detectors will decisively probe
+the existence and location of a low-mass gap in the
+observations (e.g., Baibhav et al. 2019).
+Several works have suggested a gap in the remnant mass
+distribution between the most massive neutron stars (NSs) and
+the least massive BHs as an explanation of the dearth of lowmass BHs observed in GWs (e.g., Zevin et al. 2020; Farah et al.
+2021; Olejak et al. 2022). This notion of a “NS–BH mass gap”
+was originally inspired by observations of X-ray binaries
+(XRBs), and has been a topic of active debate for over a decade
+(e.g., Bailyn et al. 1998; Özel et al. 2010; Farr et al. 2011;
+Kreidberg et al. 2012; Casares et al. 2017; Wyrzykowski &
+Mandel 2020). The discussion ranges from the observational
+selection biases that could create the appearance of a mass gap
+(e.g., Jonker et al. 2021; Liotine et al. 2022; Siegel et al. 2022),
+to the theoretical explanation under the assumption that the
+mass gap is real (e.g., a fallback mechanism as proposed by
+Fryer et al. 2012 and Fryer et al. 2022, or a failed supernova
+(SN) as proposed by Kochanek 2014 and Kochanek 2015).
+Alternatively, it could be that there is an evolutionary
+selection bias at play that excludes the formation of merging
+double compact objects with component masses of about
+3–5 Me. In this case, features in the mass distribution could be
+a telltale sign of the dominant formation channel.
+The channels that are expected to dominate BBH formation
+with low component masses are the stable mass transfer
+channel (e.g., Inayoshi et al. 2017; van den Heuvel et al. 2017;
+Bavera et al. 2021; Gallegos-Garcia et al. 2021; Marchant et al.
+2021; van Son et al. 2022b), and the “classical” commonenvelope channel (or CE channel; e.g., Belczynski et al. 2007;
+Postnov & Yungelson 2014; Belczynski et al. 2016; VignaGómez et al. 2018). These channels are both forms of isolated
+binary evolution, and are distinguished based on whether the
+binary experiences common-envelope evolution (CE channel)
+or only stable mass transfer (stable channel in short from now
+on). Recent work suggests that the contribution of the CE
+channel to the BBH merger rate might be overestimated in
+rapid population synthesis simulations (e.g., Pavlovskii et al.
+2017; Gallegos-Garcia et al. 2021; Klencki et al. 2021;
+Marchant et al. 2021; Olejak et al. 2021). They argue that
+many of the systems that are assumed to lead to successful CE
+ejection in rapid population synthesis codes should instead
+either lead to stable mass transfer or a stellar merger. This has
+caused the stable mass transfer channel to receive renewed
+attention as a plausible dominant channel for the formation of
+merging BBHs (e.g., Briel et al. 2022; Shao & Li 2022).
+
+Figure 1. Intrinsic distribution of primary masses from binary black hole
+(BBH) merging at redshift 0.2. We show the ﬁducial predictions for the stable
+channel in the pink kernel density distributions. The light-shaded area shows
+the 90% sampling uncertainty as obtained from bootstrapping. The total merger
+rate of BBHs at z = 0.2 is annotated in the legend. The power law+peak model
+from Abbott et al. (2021b) is shown in gray; light gray bands show the 90%
+credible intervals. We indicate a tentative rise observed in the GW data with the
+ﬁlled blue area (see text). We see that the local rate and the location of the peak
+at the low-mass end of the primary black hole mass distribution can be
+explained remarkably well by the stable channel under our ﬁducial
+assumptions.
+
+distributions from other channels, such as hierarchical formation (Askar et al. 2017; Antonini et al. 2019; Rodriguez et al.
+2019; Antonini & Gieles 2020; Fragione et al. 2020; Fragione
+& Silk 2020), chemically homogeneous evolution (CHE; e.g.,
+de Mink et al. 2009; Mandel & de Mink 2016; Marchant et al.
+2016; Riley et al. 2021), population III binaries (e.g., Marigo
+et al. 2001; Belczynski et al. 2004; Kinugawa et al. 2014;
+Inayoshi et al. 2017), and binaries merging in the disks of
+active galactic nuclei (e.g., Baruteau et al. 2011; Bellovary
+et al. 2016; Leigh et al. 2018; Secunda et al. 2019; Yang et al.
+2019; McKernan et al. 2020) are expected to peak at masses
+above 20 Me. Antonini et al. (2022) furthermore show that the
+globular cluster channel underpredicts the observed rate of
+BBH mergers at the low-mass end (around 10 Me) by about
+two orders of magnitude. Less confusion about the dominant
+formation channel also makes the low-mass end one of the
+most promising sites to distinguish any astrophysical redshift
+evolution of the mass distribution from cosmological evolution
+(e.g., María Ezquiaga & Holz 2022).
+The latest catalog of GW events has revealed two new
+features at the low end of the mass distribution of merging
+BBHs. We expect that these ﬁndings are most likely two sides
+of the same coin and hence need to be jointly investigated.
+First, the distribution of more massive components of merging
+BBH systems peaks at approximately 9 Me (Abbott et al.
+2021b; Li et al. 2021; Veske et al. 2021; Edelman et al. 2022;
+Tiwari 2022). From here on, we will use “primary” (secondary)
+to describe the more (less) massive component of double
+compact objects. This feature at 9 Me forms the global peak in
+the primary BH mass distribution (Tanikawa et al. 2022),
+which implies that the merger rate of 3 Me BHs is lower than
+the rate of 9 Me BHs. This is surprising, because lower-mass
+BHs are expected to form from lower-mass progenitor stars
+(e.g. Woosley et al. 2002; Spera et al. 2015; Woosley et al.
+2020), which are heavily favored by the initial mass function
+(e.g., Kroupa 2001). Second, there is tentative evidence for a
+
+1.1. Motivation for This Work
+The inspiration for the work in this paper is shown in
+Figure 1. This ﬁgure was produced shortly after the release of
+the third GW catalog (GWTC-3; Abbott et al. 2021b, 2021c),
+using COMPAS version v02.26.03 with the exact same
+settings as the ﬁducial model for isolated binary formation from
+2
+
+The Astrophysical Journal, 940:184 (17pp), 2022 December 1
+
+van Son et al.
+
+van Son et al. (2022b), i.e., this is not optimized to match the
+observations. In pink we show the ﬁducial predictions from the
+stable channel. The characteristic of this channel is that every
+mass transfer episode throughout the binary evolution is
+dynamically stable and no CE occurs. The main reason for
+the orbit to shrink in this channel is loss of mass with high
+speciﬁc angular momentum from the vicinity of the lower-mass
+companion.
+There is a striking similarity between the GW-inferred BBH
+mass distribution and our predictions for the stable channel,
+shown in Figure 1. This model reproduces both (a) the dearth
+of merging primary BH masses between 2.5 and 6 Me, and (b)
+a peak around 8–10 Me. It also matches the local intrinsic rate
+of BBH mergers. As shown in van Son et al. (2022a), the
+location of features could in particular serve as signposts of the
+underlying physics. However, at present it is not clear whether
+this resemblance is coincidental given the uncertainties that
+plague population synthesis modeling (see, e.g., de Mink &
+Belczynski 2015; Dominik et al. 2015; Giacobbo &
+Mapelli 2018; Broekgaarden et al. 2021; Belczynski et al.
+2022) and the signiﬁcant model dependence involved in the
+GW inference of the mass distribution (e.g., Abbott et al.
+2021b). That is, it could be that we are getting the right result
+for the wrong reasons.
+To better understand why this model provides a good ﬁt, we
+investigate the stable mass transfer channel in more detail in
+this work. In particular, we set out to explore (1) why the stable
+channel experiences a sharp rise that turns into a peak around
+6 Me, (2) the physical processes that dominate the shape of the
+mass distribution, and (3) how robust this feature is against
+variations. We ﬁnd that the stable channel leads to a cutoff in
+the primary mass, Mprimary, for BBH and black hole-neutron
+star (BHNS) systems. Adopting a set of simplifying assumptions, we analytically express this minimum mass as a function
+of birth mass ratio, and determine the main uncertainties in the
+physical assumptions that dictate the minimum value of
+Mprimary. We discuss how this cutoff mass affects the location
+of the peak of the BBH mass distribution, while it could also
+lead to a decrease or even a gap in the mass distribution of
+Mprimary that follows from GW events, without the need for a
+gap in the SN remnant mass function.
+The remainder of this paper is structured as follows. We
+deﬁne the key parameters and assumptions needed to describe
+typical evolution through the stable channel, and show how
+these lead to a cutoff mass in Section 2. In Section 3 we
+compare our analytically derived minimum to numerical
+simulations and conﬁrm that the physics variations considered
+lead to a comprehensive understanding of the minimum mass.
+We furthermore compute the corresponding mass distribution
+for every variation considered. We explore the effect of a more
+complex SN remnant mass function and of mass loss into a
+circumbinary disk in Section 3.3. Finally, we discuss implications of constraints on the primary mass as expected for the
+“stable mass transfer channel” in Section 4, and we summarize
+our ﬁndings in Section 5.
+
+Figure 2. Cartoon depiction of the stable mass transfer channel, including the
+most relevant parameters. See Section 2.1 and Table 1 for an explanation of the
+parameters.
+
+The parameters discussed throughout this section are shown in
+Figure 2, which depicts the key evolutionary steps of the stable
+channel. In Section 2.2 we investigate constraints on the
+masses that follow from this channel.
+2.1. The Evolutionary Steps of the Stable Channel
+At the zero-age main sequence (ZAMS; step A in Figure 2 )
+we deﬁne masses MZAMS,a and MZAMS,b for the, respectively,
+more and less massive binary component at the onset of
+hydrogen burning. Throughout this work, we will refer to these
+components using the subscripts a and b accordingly.
+The more massive star evolves on a shorter timescale and will
+typically overﬂow its Roche lobe ﬁrst. We will refer to this as the
+ﬁrst mass transfer event (step B in Figure 2). We assume that the
+donor star loses its complete envelope, which implicitly assumes
+a well-deﬁned CE structure, typical for post-main-sequence mass
+transfer. The relevant type of mass transfer is known as Case B
+mass transfer, which is the most common type of binary
+interaction, especially for increasing metallicity (e.g., van den
+Heuvel 1969; de Mink et al. 2008; Renzo et al. 2019). We will
+discuss the effects of this assumption in Section 4.5.
+We deﬁne the core mass fraction, fcore , as the fraction of the
+ZAMS mass that ends up in the helium core mass (Mcore ) at the
+end of the main sequence, i.e., fcore = Mcore MZAMS. The
+fraction of mass lost by the donor star will be 1 - fcore . We
+assume a fraction, βacc, of the transferred mass will be accreted
+by the companion star. We will refer to this as the mass transfer
+efﬁciency. We assume that any mass lost from the system
+during a stable mass transfer event will carry away the speciﬁc
+angular momentum of the accretor (also known as isotropic
+reemission; e.g., Soberman et al. 1997).
+At step C in Figure 2, the initially more massive star has
+become a helium star, and the initially less massive star is still a
+main-sequence star with a new mass Mpost,MT1 = MZAMS,b +
+bacc MZAMS,a (1 - fcore ). In the latter approximation we neglect
+wind mass loss. We assume that the initially more massive star
+
+2. Analytic Approximation of the Stable Mass Transfer
+Channel
+In Section 2.1 we describe the typical evolution of a binary
+through the stable channel in chronological order. We describe
+the key evolutionary steps in terms of uncertain physics
+parameters and explain our adopted analytical assumptions.
+3
+
+The Astrophysical Journal, 940:184 (17pp), 2022 December 1
+
+van Son et al.
+
+will collapse to form a compact object (step D). This is
+typically a BH for the systems we consider and we denote its
+mass as MBH,a. Note that this will not necessarily be the more
+massive compact object. Not all the mass of the core will end
+up in MBH,a. Part could be lost during the SN, and part will be
+lost to stellar winds. The SN mass loss is expected to become
+particularly important for low-mass BHs. We parameterize this
+mass loss as dMSN º Mcore,1 - MBH,a (see “top down”
+approach in Renzo et al. 2022). Because both winds and SN
+mass loss are expected to be mass dependent, dMSN is also
+mass dependent. Here, we assume mass lost from the system
+carries away the speciﬁc angular momentum of the donor (i.e.,
+“Jeans mode”).
+A second mass transfer phase occurs as the initially less
+massive star evolves off the main sequence and overﬂows its
+Roche lobe (step E). Typically, accretion on BHs is limited by
+radiation pressure in the accretion ﬂow, which leads to very low
+accretion rates (i.e., Eddington-limited accretion). Hence, we
+adopt βacc = 0 during the second mass transfer phase. Finally,
+the initially less massive component collapses to form either a
+BH or a NS. We again parameterize the difference between the
+core mass and ﬁnal remnant mass with dMSN (step F).
+In this work, unless stated otherwise we deﬁne mass ratios as
+the initially less massive over the initially more massive binary
+component. Hence qZAMS ≡ MZAMS,b/MZAMS,a. The mass
+ratios right before the ﬁrst and second mass mass transfer
+phases are thus, respectively, qpre MT,1 = MZAMS,b MZAMS,a
+and qpre MT,2 = Mpost,MT1 MBH,a .
+To determine the dynamical stability of mass transfer, we
+approximate the response of the Roche radius to mass lost,
+zRL º d ln RRL d ln M , and compare this to an approximation
+of the adiabatic response of the donor star to mass loss,
+z  º d ln R  d ln  (see, e.g., Soberman et al. 1997; Riley et al.
+2022). Mass transfer is assumed to be stable as long as
+ζRL  ζå. The value of ζå is determined by the stellar structure
+of the donor in the adiabatic approximation (e.g., Ge et al.
+2015, 2020). Throughout the rest of this work, we adopt
+ζå = ζeff = 6.0 as our reference value for Hertzsprung-gap
+donor stars (these are subject to the delayed dynamical
+instability, for which see Hjellming & Webbnik 1987). ζRL is
+a function of βacc and the mass ratio between the accretor and
+donor (q = Md/Ma). The dependence of ζeff on βacc, and the
+mass ratio between the accretor and the donor, is shown in
+Figure 4 of Soberman et al. (1997). For clarity, we also show
+this dependence for different values of βacc in Appendix A.
+The requirement of mass transfer stability leads to a limit on
+the mass ratio between the accretor and donor. We will refer to
+these critical mass ratios as qcrit,1 and qcrit,2 for the ﬁrst and
+second mass transfer phase, with βacc = 0.5 and βacc = 0,
+respectively. The mass ratio right before the ﬁrst mass transfer
+phase is qpre MT,1 = Mb Ma , which we approximate with
+qpre MT,1 = MZAMS,b MZAMS,a in our analytical approximation.
+Since, at this point, the initially more massive star is
+overﬂowing its Roche lobe, mass transfer will be dynamically
+stable as long as MZAMS,b/MZAMS,a = Maccretor/Mdonor qcrit,1.
+Similarly, right before the second mass transfer, the mass
+ratio is deﬁned as qpre MT,2 = Mb Ma = Mpost MT1/MBH,a =
+Mdonor/Maccretor  qcrit,2.
+
+mass distribution for the stable mass transfer channel. The
+characteristic constraint of the stable mass transfer channel is
+that both the ﬁrst and the second mass transfer phases must be
+stable. We start from the constraint on the second mass transfer
+phase, as we ﬁnd that it is particularly decisive for the ﬁnal
+masses involved. This leads to an inequality between the mass
+ratio of the system at the onset of the second mass transfer
+phase and qcrit,2,
+qpre MT,2 =
+
+Mpost,MT1
+MBH,a
+
+ qcrit,2 ,
+
+(1 )
+
+where qcrit,2 is the critical mass ratio during the second mass
+transfer phase (i.e., assuming βacc = 0; see Section 2.1).
+Mpost, MT1 is the mass of the initially less massive star postmass accretion from the ﬁrst mass transfer event. We can
+approximate this as
+Mpost,MT1 = MZAMS,b + MZAMS,abacc (1 - fcore ) ,
+
+(2 )
+
+and MBH,a as
+MBH,a = fcore MZAMS,a - dMSN.
+
+(3 )
+
+Rewriting Equation (1) using Equations (2), (3), and
+qZAMS = MZAMS,b/MZAMS,a gives
+qZAMS + bacc (1 - fcore )
+dMSN
+
+fcore - M
+
+ qcrit,2.
+
+(4 )
+
+ZAMS,a
+
+In this work, we are speciﬁcally interested in placing a lower
+bound on the possible masses of BBH and BHNS systems
+formed through the stable mass transfer channel. At this point,
+the only explicit mass dependence left is MZAMS,a. However,
+both fcore and dMSN implicitly depend on MZAMS,a. In order to
+ﬁnd a lower bound on MZAMS,a, we would like to make these
+dependencies explicit.
+In general, fcore is expected to increase with mass. It is,
+however, reasonable to adopt an approximately constant value
+for fcore as long as the MZAMS,a range of interest is not too large.
+This is the case for the range of ZAMS masses relevant for
+producing the lowest-mass BHs in our simulations. For
+MZAMS,a ≈ 20–40 Me, stellar evolution tracks in COMPAS lead
+to core mass fractions of effectively fcore » 0.3–0.34 (which is
+a result of the assumptions in Pols et al. 1998, on which the
+COMPAS code was based). Hence from here on we continue
+using the simpliﬁcation that is constant at fcore = 0.34 (though
+see Appendix B for an alternative scenario).
+In reality, dMSN is a complicated function that depends on
+both the structure of the core at the moment of core collapse as
+well as on the dynamics of the collapse, bounce, and shock
+propagation. However, in general we expect that lower-mass
+cores more easily lead to a successful explosion, and hence lead
+to more mass loss, than higher-mass cores (e.g., Fryer et al.
+2012; Müller et al. 2018). For our reference model we adopt the
+“Delayed” model from Fryer et al. (2012), which is a
+continuous function that maps CO core masses to ﬁnal remnant
+masses. This allows us to express dMSN as a linear function of
+the core mass:
+
+2.2. Derivation of Low-mass Cutoff for Primary Components
+
+a M
++ bSN Mcore  Mthresh
+dMSN (Mcore) = ⎧ SN core
+Mcore > Mthresh.
+⎨
+⎩0
+
+The main objective of this work is to understand constraints
+on the allowed compact object masses at the low end of the
+
+Here Mthresh = 14.8 Me is the threshold core mass above
+which we assume full fallback occurs, and aSN = -0.9 and
+4
+
+(5 )
+
+The Astrophysical Journal, 940:184 (17pp), 2022 December 1
+
+van Son et al.
+
+Table 1
+Physics Parameters and Their Reference Values
+Variable
+βacc
+ζeff
+(qcrit,1, qcrit,2)
+
+fcore
+aSN , bSN
+Mthresh
+
+Description
+
+Reference Value
+
+Explored Variations
+
+Mass transfer efﬁciency: fraction of donated mass accreted by the companion star
+Response of donor star to mass loss z eff º d ln R  d ln M
+Effective critical mass ratio for stable mass transfer, using βacc = 0.5 and 0,
+respectively (ﬁrst and second mass transfer phase)
+Core mass fraction
+Fit parameters for supernova mass loss dMSN (Equation (5))
+Boundary mass for full fallback (Equation (5))
+
+0.5
+6.0
+(0.25, 4.32)
+
+[0.0, 0.25, 0.5, 0.75, 1.0]
+[3.5, 4.5, 5.5, 6.0, 6.5]
+[(0.41,3.03), (0.35,3.55), (0.30,4.06),
+(0.28,4.32), (0.26,4.58)]
+[0.28, 0.31, 0.34, 0.38, 0.41]
+Varied prescription to Fryer et al. (2022)
+Varied prescription to Fryer et al. (2022)
+
+bSN = 13.9 are obtained through a linear ﬁt to our reference
+model (see also in Table 1). For dMSN we approximate the core
+mass as Mcore = fcore MZAMS,a , with fcore constant.
+Going back to Equation (4), we can now explicitly write all
+terms that depend on MZAMS,a on one side of the equation:
+qcrit,2fcore - bacc (1 - fcore ) - qZAMS
+qcrit,2
+
+
+
+dMSN (Mcore)
+,
+MZAMS,a
+
+0.34
+−0.9, 13.9 Me
+14.8 Me
+
+more or less massive star. Therefore, we consider
+min (Mprimary) = max {min (MBH,a ) , min (MBH,b)}.
+
+(10)
+
+Equation (10) sets a minimum to the primary mass that can
+originate from the stable channel. It is an analytical function
+that depends on the initial condition qZAMS, and the uncertain
+physics parameters qcrit,2, βacc, fcore , and dMSN (aSN , bSN ). See
+Table 1 for the reference values of these parameters as used in
+this work.
+
+(6 )
+
+which we can rewrite to
+MZAMS,a 
+
+bSN qcrit,2
+qcrit,2 fcore (1 - aSN) - bacc (1 - fcore ) - qZAMS
+
+3. Results: Effect of the Minimum Mass for the Stable
+Channel
+
+.
+
+In this section we discuss a comparison of our analytical
+results presented in Section 2 with numerical simulations. For
+this we adopt a reference model that is very similar to the
+ﬁducial model in van Son et al. (2022b), presented also in
+Figure 1. Below, we will shortly describe the differences. We
+refer the reader to the methods section of van Son et al. (2022b)
+for a more detailed description of the remainder of the adopted
+physics parameters.
+Motivated by the variables in our analytical expression, we
+explore variations in the stability of the second mass transfer
+qcrit,2, the mass transfer efﬁciency βacc, and the core mass
+fraction fcore . We discuss direct changes to the SN remnant
+mass function in Section 3.3. The varied physics parameters
+and their reference values are listed in Table 1. In contrast to
+the model in van Son et al. (2022b), we adopt a ﬁxed mass
+transfer efﬁciency value of βacc = 0.5 as our reference value
+(Meurs & van den Heuvel 1989; Belczynski et al. 2008), to
+enable a clear illustration of the effect described in Section 2.
+The effect of adopting a mass transfer efﬁciency that varies
+with accretor properties is discussed in Section 4.5. We adopt
+ζeff = 6.0 as our reference for radiative envelope donors with a
+clear core-envelope structure, compared to ζeff = 6.5 in van Son
+et al. (2022b). For ζeff = 6.0, the maximum mass ratio
+that leads to a stable mass transfer qcrit,2 ≈ 4.32 for fully
+nonconservative mass transfer, compared to 4.6 for ζeff = 6.5.
+Both values of ζeff are in agreement with the work of Ge et al.
+(2015). The value of fcore = 0.34 is chosen as the best ﬁt to our
+reference simulation. Similarly, the values for aSN and bSN are
+obtained from a ﬁt to the difference between the pre-SN core
+mass and remnant mass as a function of the pre-SN core mass
+for our reference simulation.
+In total we ran 25 variations on our reference model. Each
+simulation set contains 107 binaries run with version v.02.26.03
+of the COMPAS suite (Riley et al. 2022). To reduce sampling
+noise, we have sampled binaries using adaptive importance
+sampling (Broekgaarden et al. 2019) optimizing for BBH and
+BHNS mergers.
+
+(7 )
+
+So far, we have only used the mass transfer stability constraint
+from the second mass transfer phase. The requirement that the
+ﬁrst mass transfer must be stable also places a constraint on the
+minimum allowed value for qZAMS ä [qcrit,1, 1]. Hence, we can
+derive a cutoff mass for MZAMS,a by adopting qZAMS = qcrit,1.
+Equation (7) implies that the minimum ZAMS mass that can
+lead to double compacts objects through the stable channel is
+determined by the physics parameters that are relevant to mass
+transfer stability at the ﬁrst and second mass transfer phase.
+These parameters include qcrit,1 and qcrit,2, but also parameters
+determining the mass ratio at mass transfer, namely βacc, fcore ,
+and dMSN (aSN , bSN ).
+We can use Equation (7) to further derive a minimum mass
+for each of the ﬁnal compact objects. For the remnant from the
+initially more massive star,
+min (MBH,a ) = fcore min (MZAMS,a ) - dMSN (Mcore,a ) ,
+
+(8 )
+
+where dMSN (Mcore,a ) is a shorthand for Equation (5) at
+Mcore,a = MZAMS,afcore . Similarly, for the remnant from the
+initially less massive star,
+min (MBH,b) = fcore min (Mpost,MT1) - dMSN (Mcore,b) ,
+
+(9 )
+
+where dMSN (Mcore,b ) is Equation (5) at Mcore,b = Mpost, MT1 fcore .
+Using Equation (1), we can constrain min (Mpost, MT1) as
+min (Mpost, MT1) = qcrit,2 min (MBH,a ).
+
+Finally, to compare with GW observations, we are interested
+in the BH that will form the more massive (primary)
+component of the double compact objects, since we cannot
+infer from the GW if the primary descends from the initially
+5
+
+The Astrophysical Journal, 940:184 (17pp), 2022 December 1
+
+van Son et al.
+
+3.1. Comparison to Numerical Data
+
+different from Figure 1, where we show only merging BBHs.
+The reason for showing both BBHs and BHNSs is twofold.
+First, we would like to conﬁrm if the stable channel could lead
+to a dearth of low-mass BHs that could be interpreted as a NS–
+BH mass gap (see Section 1). Excluding BHNS systems could
+unintentionally create an artiﬁcial dearth of low-mass BHs.
+Second, we aim to explore and explain the behavior of the
+stable channel. Hence, in order to investigate the effect of the
+minimum Mprimary on the resulting mass distribution, we
+integrate each of the physics variations as shown in the lefthand panels of Figure 3, over the metallicity-dependent star
+formation rate density as described in van Son et al. (2022b)
+and van Son et al. (2022a; which is based on the approach of
+earlier work, e.g., Dominik et al. 2013, 2015; Belczynski et al.
+2016c; Neijssel et al. 2019, and Broekgaarden et al. 2022a). To
+emphasize the steep features in the mass distribution, we use a
+histogram instead of a kernel density distribution to display the
+distribution of primary masses.
+We see that a higher cutoff mass can move the minimum
+primary mass to values that are signiﬁcantly higher than the
+maximum NS mass. This affects the location of the peak of the
+mass distribution, while also potentially opening up a gap
+between the most massive NS and the least massive BH.
+Whether such a gap occurs is determined by the adopted
+physics variations. For many of our physics variations, the
+stable mass transfer channel is unable to form BBH or BHNS
+mergers with primary masses Mprimary ∼ 3–4 Me. Below we
+consider the effect of each physics variation on the primary
+mass in more detail. For completeness, we also show the chirp
+mass and ﬁnal mass ratio distributions in Appendix C.
+Throughout this section, we will refer to the combined rate
+of BBH and BHNS as  0.2 . We include an overview of the
+individual BBH and BHNS rates as predicted by the stable
+channel in Appendix D.
+Variations in the mass transfer stability ζeff. Lower values of
+ζeff, and equivalently lower values of qcrit,2, leave less room for
+stable mass transfer and severely restrict the window for stable
+mass transfer. Lower values of ζeff (darker green) lead to higher
+cutoff masses in Mprimary. A higher cutoff mass also shifts the
+peak of the mass distribution toward higher masses. Less room
+for stable mass transfer furthermore signiﬁcantly reduces the total
+merger rate for the stable channel (from  0.2 » 49 Gpc-3 yr-1
+for ζeff = 6.5 to  0.2 » 0.9 Gpc-3 yr-1 for ζeff = 3.5 ). For
+ζeff = 6.5 the stable mass transfer channel can form almost all
+primary BH masses, though primary BH masses of about 3 Me
+are still much less common than Mprimary ∼ 8 Me. For ζeff = 3.5,
+the stable mass transfer only produces BHNSs and BBHs with
+primary masses above about 9 Me. We further note how Mprimary
+derives from the initially more massive component (MBH,a), for
+systems with qZAMS  0.65, while it derives from the initially less
+massive component (MBH,b) for qZAMS  0.65, for every
+variation of ζeff (as can be seen in the upper-left panel of
+Figure 3).
+Variations in the accreted mass βacc. Higher values of βacc
+signiﬁcantly raise the minimum value of Mprimary at constant
+qZAMS. Moreover, the slope of min (Mprimary ) with qZAMS
+increases for higher βacc. We understand this through the
+change in Mpost MT1. For larger βacc, Mpost MT1 will be larger,
+leading to larger qpre MT,2 , which leaves less room for stable
+mass transfer. This effect is more severe for qZAMS ∼ 1, since
+this implies a more massive companion star at ZAMS. βacc
+inﬂuences whether Mprimary derives from MBH,a versus MBH,b.
+
+For this analysis, we include all BBH and BHNS that have
+experienced exclusively stable mass transfer (i.e., we do not
+include chemically homogeneously evolving systems). We
+choose to show both BBH and BHNS, because our analytical
+prescription in Equation (10) does not require the outcome to
+be either a BBH or BHNS. We furthermore exclude binaries
+that never interact or experience only one phase of mass
+transfer, since such systems are not expected to obey to our
+derived min (Mprimary ), and because such systems are much too
+wide to form GW events.
+We compare Equation (10) to our grid of numerical
+simulations in the left column of Figure 3. Triangles show
+where 99% of each simulation has a mass Mprimary larger than
+that value, for bins in qZAMS of width 0.02. We do not include
+bins with less than 10 samples. Lines show our analytical
+prediction from Equation (10). Solid (dashed) lines indicate
+that Mprimary comes from MBH,a (MBH,b) and is described by
+Equations (8) and (9). Figure 3 shows that our analytical
+prediction of min (Mprimary ), described by Equation (10), is in
+good agreement with the numerical data at almost every qZAMS
+for all physics variation explored here.
+The strongest deviations occur at two points. For ζeff = 3.53
+(dark green line, top-right panel) we see that our prescription
+underpredicts the minimum primary mass from numerical
+simulations. This is effectively sampling noise: at low ζeff, we
+heavily reduce the window for stable mass transfer. Hence, for
+this variation, we barely sample any systems with high qZAMS
+that do not experience unstable mass transfer. Furthermore, at
+βacc = 0 and qZAMS ≈ 1 (bright red line, middle-right panel),
+we overpredict the minimum primary mass. We ﬁnd that this is
+caused by the nearly equal lifetimes of the two stars: in these
+cases, the initially more massive star has not yet ﬁnished the
+He-core burning phase when the initially less massive star
+evolves off the main sequence and overﬂows its Roche lobe.
+This means that qpre MT,2 = MZAMS,b ( fcore MZAMS,a ), which
+will be smaller than the assumed qpre MT,2 = MZAMS,b MBH,a in
+our analytical formula. Hence, the second mass transfer phase
+is more stable than our analytical formula predicts, and lower
+primary masses can be formed.
+We note that for all variations, min (Mprimary ) increases with
+qZAMS. If there is a relation between qZAMS and the ﬁnal double
+compact object mass ratio qﬁnal, then this implies a relation
+between min (Mprimary ) and the observed qﬁnal.
+The absolute minimum Mprimary formed through the stable
+channel is found at qZAMS = qcrit,1. In other words, the stable
+channel will only contribute signiﬁcantly to systems with
+qZAMS qcrit,1. Because qcrit,1 is a function of both βacc and ζeff
+(see Appendix A), we expect that the minimum qZAMS at which
+the stable channel contributes signiﬁcantly will also depend on
+βacc and ζeff. We see this effect in the top-left and middle-left
+panels of Figure 3. For lower ζeff, the minimum qZAMS shifts to
+higher values because qcrit,1 increases. That is, we only ﬁnd
+systems with qZAMS 0.25 for ζeff = 6.5, while for ζeff = 3.5,
+this shifts to qZAMS 0.4. Similarly, for βacc = 0.0 systems
+with qZAMS  0.25 contribute to the distribution while for
+βacc = 1.0, qZAMS  0.33.
+3.2. Effect of Minimum Mass on Mass Distributions
+We show the distribution of Mprimary for merging BBH and
+BHNS systems in the right column of Figure 3. Note that this is
+6
+
+The Astrophysical Journal, 940:184 (17pp), 2022 December 1
+
+van Son et al.
+
+Figure 3. Model predictions for the masses of BBH and BHNS systems formed through the stable channel. Left: min (Mprimary ) as a function of the ZAMS mass ratio
+qZAMS. Lines show our analytical prediction from Equation (10). Solid (dashed) lines indicate that Mprimary comes from MBH,a (MBH,b), described by Equations (8) and
+(9). Triangles show results from numerical simulations; 99% of the simulation has a mass Mprimary larger than that value for bins in qZAMS of 0.02. Right: Histogram of
+Mprimary for BBH and BHNS from the stable channel for bins in Mprimary of 1 Me. The rate is calculated at redshift 0.2; the total rate is annotated in the legend. Star
+markers indicate the reference model (see Table 1). The light-shaded area shows the 90% sampling uncertainty, obtained by bootstrapping. We show variations in the
+stability criteria (ζeff and qcrit,2, top), the mass transfer efﬁciency (βacc, middle), and the core mass fraction ( fcore , bottom). This shows that the analytically derived
+minimum can explain the numerical results well. It furthermore displays how the cutoff mass in the stable channel leads to a dearth of BBH and BHNS systems with
+low primary masses for most variations.
+
+7
+
+The Astrophysical Journal, 940:184 (17pp), 2022 December 1
+
+van Son et al.
+
+For βacc = 1.0, Mprimary almost always derives from the initially
+less massive star (except for qZAMS < 0.35, light pink line). For
+βacc = 0.0, Mprimary is always MBH,a (e.g., Broekgaarden et al.
+2022b; Zevin & Bavera 2022). For βacc = 1, the distribution in
+Mprimary drops off steeply below about 8 Me, while for βacc = 0
+there no real gap left in the mass distribution. We again note
+how the location of the peak of the mass distribution is
+determined by the cutoff mass in Mprimary.
+Variations in the core mass fraction fcore . The general
+behavior of the core mass fraction is similar to the effect of
+variations in the mass transfer stability: the peak of the primary
+mass distribution shifts to higher masses while the overall rate
+decreases. Increasing the core mass fraction makes the second
+mass transfer phase more stable for constant values of qZAMS.
+This is because for higher fcore , qpre MT,2 is lower and thus less
+likely to exceed qcrit,2. qpre MT,2 = Mpost, MT1 MBH,a is lower
+for higher fcore both because MBH,a is more massive due to the
+higher core mass of the initially more massive star, and because
+Mpost MT1 is reduced since there is less envelope left to be
+accreted during the ﬁrst mass transfer phase. Hence, higher
+core mass fractions allow lower Mprimary to contribute to the
+stable mass transfer channel. Increasing the core mass fraction
+by 20% ( fcore ~ 0.41) with respect to our ﬁducial simulation
+causes the stable mass transfer channel to produce Mprimary with
+masses down to the NS limit of 2.5 Me. Moreover, this
+increases the rate to about 103 Gpc−3 yr−1. Conversely,
+lowering the core mass fraction by 20% to fcore ~ 0.27 lowers
+the rate to about 4 Gpc−3 yr−1, while only allowing
+Mprimary 7 Me.
+
+Figure 4. Mass distributions in Mprimary for BBH and BHNS systems from the
+stable channel. We show variations in the supernova remnant mass function
+using the prescription from Fryer et al. (2022). Similar to the right column of
+Figure 3, but using a kernel density distribution. To prevent the kernel from
+smoothing over the cutoff mass in Mprimary, we only draw the distribution for
+Mprimary values where the corresponding histogram predicts a rate
+above 10-5 Gpc-3 yr-1 M-1.
+
+models predict the rate of systems with Mprimary below about
+4 Me to be less than 10−5 Gpc−3 yr−1. In other words, all of
+these models predict a lack of BHs with masses below 4 Me.
+This is not surprising since our ﬁducial model was chosen such
+that it is most efﬁcient in forming low-mass BHs. The
+variations in Figure 4 are only expected to increase the gap
+between NS and BH masses. We furthermore see that the
+overall merger rate density varies by a factor of about 2
+between fmix = 0.5 ( 0.2 » 5 Gpc-3 yr-1) and fmix = 4.0
+( 0.2 » 11 Gpc-3 yr-1). Low fmix causes a shallow rise in
+the mass distribution with no clear peak. For higher values in
+fmix, a peak starts to occur around 11 Me. This peak becomes
+more pronounced and moves to lower Mprimary for increasing
+fmix. For fmix = 4.0 the distribution peaks strongly at
+Mprimary = 9.5 Me, below which it decays steeply toward
+Mprimary = 6 Me.
+The shape of the mass distribution is similar to the results
+from Olejak et al. (2022; top-right panel of their Figure 5). In
+line with their results, we ﬁnd the rate of Mprimary = 6 Me is
+much higher for fmix = 0.5 with respect to fmix = 4.0. However,
+in contrast to Olejak et al. (2022), we only show the
+contribution of the stable channel. We speculate that this
+explains why the merger rate density between 3 Me and
+15 Me is an order of magnitude higher in Olejak et al. (2022)
+with respect to our results.
+
+3.3. Variations in the SN Mass Loss and Angular
+Momentum Loss
+In this section we explore two further variations that are not
+captured by our simpliﬁed analytical model, while they are
+expected to signiﬁcantly impact the mass distribution of
+merging double compact objects resulting from the stable
+channel.
+Supernova Remnant Mass Function
+
+In Section 3.2 we explore variations on all variables that
+appear in our analytical expression Equation (10), except for
+the SN mass loss dMSN (Equation (5)). The SN mass loss is
+special, because variations in this function can cause a gap
+between BH and NS masses even in single stars, regardless of
+whether a double compact object forms (see also Section 1).
+Here, we explore variations in the SN remnant mass function
+by applying the new prescription from Fryer et al. (2022). In
+this prescription the remnant mass is a function of the carbon
+oxygen core mass at core collapse, Mcrit = 5.75 Me; the lower
+boundary on the CO core mass for BH formation (lower-mass
+cores will form a NS) and fmix, which describes the mixing
+growth time; higher fmix corresponds to a more rapid growth of
+the convection. Similar to Fryer et al. (2022) and Olejak et al.
+(2022), we explore variations between fmix = 0.5, which is
+closest to the Delayed model in Fryer et al. (2012), and
+fmix = 4.0, which is most similar to the “Rapid” model in Fryer
+et al. (2012). We apply BH kicks according to the fallback
+model from Fryer et al. (2012), where we adopt the proto-NS
+masses (Mproto) from the Delayed model.
+We show the resulting Mprimary distribution of merging BBH
+and BHNS systems for the stable channel in Figure 4. All
+
+Loss of Orbital Angular Momentum through a Circumbinary Disk
+
+A key ingredient determining the population of merging
+double compact objects is the orbital angular momentum loss
+during mass transfer that is not fully conservative. In order to
+form a binary compact enough to merge within a Hubble time
+through GW emission, it is generally crucial for the binary to
+shrink to a tight orbit during the second mass transfer phase.
+Which binaries manage to lose enough orbital angular
+momentum during this mass transfer phase will thus determine
+the shape of the mass distribution.
+8
+
+The Astrophysical Journal, 940:184 (17pp), 2022 December 1
+
+van Son et al.
+
+Figure 5. Same as Figure 3, but for variations in the fraction of the mass that is assumed to be lost from a circumbinary disk, fdisk. Because Equation (10) does not
+capture variations in the orbital angular momentum loss, we only show the analytical solution for fdisk = 0.0 in the left panel. Furthermore, we do not show fdisk = 1.0
+in the left panel because it contains too few samples to properly bin the distribution.
+
+In our ﬁducial model we assume isotropic reemission of
+matter during nonconservative stable mass transfer. This means
+that mass lost from the donor star is assumed to be transported to
+the vicinity of the accretor (in the form of, for example, an
+accretion disk), from where it is then ejected as a fast isotropic
+wind. Hence, the mass lost from the binary system carries the
+speciﬁc angular momentum of the accretor (e.g., Soberman et al.
+1997). When mass is transferred at high rates, it is conceivable
+that some of the mass is lost through the L2 Lagrange point (see,
+e.g., discussion in Marchant et al. 2021). This mass can end up
+in a circumbinary ring which removes angular momentum much
+faster than mass lost through isotropic reemission (e.g.,
+Artymowicz & Lubow 1994; Soberman et al. 1997; Renzo
+et al. 2019; Lu et al. 2022). An observational example of a
+system that has been argued to experience mass loss through L2
+is SS433 (Fabrika 1993, 2004). One explanation of the
+observational outﬂow signatures of this system is mass loss
+through a circumbinary disk; see, e.g., Cherepashchuk et al.
+(2020) and references therein (for an alternative explanation to
+L2 mass loss, see, e.g., Blundell et al. 2001).
+We explore the effect of the speciﬁc angular momentum of
+mass lost from the system by assuming that a fraction, fdisk, of
+the mass lost during every stable mass transfer event will be
+lost with the speciﬁc angular momentum of a circumbinary
+disk. We assume the circumbinary ring to be located at twice
+the orbital separation (as ﬁrst suggested by Tutukov &
+Yungelson 1979). In Figure 5 we show variations of fdisk
+ranging from fdisk = 0 (all mass is lost though isotropic
+reemission, our ﬁducial model) to fdisk = 1 (all mass is lost
+from a circumbinary disk).
+Variations in fdisk have a signiﬁcant impact on both the rate
+and the shape of the mass distribution (right panel of Figure 5).
+Both the location and the peak of the mass distribution change.
+Moreover, for fdisk = 0.75 and 1.0, the stable mass transfer
+channel is effectively killed: the total local merger rate density
+is decreased to 0.5 Gpc−3 yr−1 and 0.3 Gpc−3 yr−1, respectively. We ﬁnd this is mainly due to an increased number of
+stellar mergers. This result is in line with previous work that
+studied the effect of a circumbinary ring on the population of
+
+Be XRBs and GW sources (e.g., Portegies Zwart 1995; De
+Donder & Vanbeveren 2004; Mennekens & Vanbeveren 2014;
+Vinciguerra et al. 2020).
+Furthermore, the local merger rate density rises to about
+141 Gpc−3 yr−1 for fdisk = 0.25. This is higher than the ﬁducial
+merger rate from the CE channel in van Son et al. (2022b). For
+fdisk = 0.5 the rate has dropped back down to about
+16 Gpc−3 yr−1, which implies that the contribution of the
+stable mass transfer channel experiences some maximum in the
+local merger rate density between fdisk = 0 and fdisk = 0.5. The
+actual value of fdisk most likely depends on the mass transfer
+rate (see Lu et al. 2022, for a detailed analysis). Lu et al. (2022)
+ﬁnd that for nonextreme mass ratios (not much less, or much
+greater than 1), fdisk can become of order unity for
+rates  few × 10−4 Me yr−1.
+Finally, the minimum primary mass from the stable channel
+increases as a larger fraction of the mass is lost though a
+circumbinary disk. In other words, higher fdisk corresponds to a
+higher value of min (Mprimary ) at constant qZAMS. This can be
+seen in the left-hand panel of Figure 5. This ﬁgure also shows
+that min (Mprimary ) increases with qZAMS, following a similar
+trend as that described by Equations (8), (9), and (10).
+4. Discussion
+In this work, we investigate the low-mass end of the primary
+mass distribution (Mprimary) for BBH and BHNS systems as
+predicted from the stable mass transfer channel. We ﬁnd that
+the stable mass transfer channel leads to a sharp cutoff at the
+low-mass end of the primary mass distribution. This feature is a
+consequence of the requirement of stable mass transfer, which
+is a characteristic property of the channel. We analytically
+express the minimum allowed primary mass, min (Mprimary ), as a
+function of the ZAMS mass ratio qZAMS. We identify the key
+physical processes that determine the value of min (Mprimary ),
+and discuss the robustness of this minimum against variations.
+Depending on the adopted physics, we ﬁnd that min (Mprimary )
+leads to a low-mass cutoff in the primary masses between 2.5
+and 9 Me. Our main results, as presented in Figure 3, provide
+several direct predictions.
+9
+
+The Astrophysical Journal, 940:184 (17pp), 2022 December 1
+
+van Son et al.
+
+emphasized the importance of systems in which the ﬁrst phase
+of mass transfer is stable but the second mass transfer phase is
+unstable. Numerous works have investigated formation channels in which the last mass transfer phase (which resulted in a
+double WD) is stable (e.g., Nelson et al. 2004; Kalomeni et al.
+2016; Sun & Arras 2018; Chen et al. 2022). An analysis similar
+to the one in this paper might be used to study the potential
+population of double WDs formed following only stable mass
+transfer in both directions.
+
+4.1. Remnant Mass Function or Binary Physics Effect?
+Many of the physics variations explored in this work lead to
+a dearth of merging BBH and BHNS systems with low primary
+masses. This lack of low-mass BHs also dictates the location of
+the peak of the BBH primary mass distribution. In this case, the
+shape of the mass distribution at the low-mass end is thus
+determined by binary physics.
+Alternatively, adopting a remnant mass function with a lowmass gap can also cause the models to predict a pile up just
+above the upper edge of this gap. Several isolated binary
+evolution models predict a peak near 10 Me when adopting the
+“Rapid” SN engine prescription from Fryer et al. (2012; see,
+e.g., Belczynski et al. 2016; Giacobbo et al. 2018; Giacobbo &
+Mapelli 2018; Wiktorowicz et al. 2019; Belczynski et al. 2020;
+Tanikawa et al. 2022). In this case, the remnant mass function
+determines the shape of the low-mass end of the mass
+distribution.
+The crucial difference between these two scenarios is that the
+remnant mass distribution is expected to affect all BH and NS
+formation, while we expect the constraints discussed in this
+work to affect only those systems that evolve through the stable
+channel, i.e., that have experienced two phases of stable mass
+transfer.
+A smoking gun to determine whether the stable mass transfer
+channel dominates the low-mass end of the BH mass
+distribution observed in a GW would thus be if the dearth of
+low-mass BHs persists in the distribution of primary BH
+masses observed in GWs, while a signiﬁcant number of lowmass BHs are detected as part of systems that are not expected
+to have evolved through the stable mass transfer channel.
+Examples of the latter are low-mass XRBs (see the discussion
+on XRBs below in Section 4.3)
+
+4.3. Results in the Context of X-Ray Binary Observations
+In this work, we have discussed a potential dearth of BHs
+with low masses as observed in GW events. The original
+proposal for a gap in the mass distribution between NSs and
+BHs was based on the detection of XRBs (Bailyn et al. 1998;
+Özel et al. 2010; Farr et al. 2011). One might therefore wonder
+if the stability criteria discussed in this work could also lead to
+a dearth of low-mass BHs in observed XRBs. However, it is
+unclear whether XRB systems and GW progenitors belong to
+the same astrophysical population (see, e.g., Belczynski et al.
+2021; Fishbach & Kalogera 2021). It is difﬁcult to resolve this
+issue because the observed population of XRB represents a
+wide variety of binary star evolutionary stages. In order to
+understand our results in the context of XRB observations, we
+take a closer look at the XRB populations that were used to
+infer a NS–BH mass gap in the ﬁrst place.
+The population of XRBs is commonly subdivided into two
+classes, characterized by the mass of the donor star. First, there
+are low-mass XRBs, where the compact objects accrete from
+low-mass donor stars below about 23 Me through Roche-lobe
+overﬂow. The origin of short-period, low-mass XRBs is
+unknown, but it is most commonly assumed that they are the
+outcome of a CE event (see, e.g., Podsiadlowski et al. 2003, for
+a discussion on plausible evolutionary origins). However,
+many different evolutionary pathways have been proposed
+(e.g., Eggleton & Verbunt 1986; Ivanova 2006; Michaely &
+Perets 2016; Klencki et al. 2017). Due to the extreme ZAMS
+mass ratios required to form a compact object and a low-mass
+companion, we do not expect the ﬁrst mass transfer phase to be
+stable, and thus we do not expect the stable mass transfer
+channel to contribute to the population of low-mass XRBs.
+Hence, if there is truly a dearth of low-mass BHs in low-mass
+XRBs, this would not be caused by the stability requirements
+discussed in this work.
+Second, there are high-mass XRBs, which accrete from a
+typically higher-mass (5 Me) companion star. Due to the
+longer timescales involved, these systems are often expected to
+be wind fed as opposed to experiencing stable Roche-lobe
+overﬂow (which possibly occurs in phase D of Figure 2). In
+this work, we have found that the stability of the second mass
+transfer phase is a crucial element in min (Mprimary ). Hence, we
+also do not expect the mechanisms as discussed in this work to
+lead to any dearth of low-mass BHs in high-mass XRBs.
+There is third population of XRB systems: Wolf–Rayet
+X-ray binaries (or WR-XRBs for short), which are expected to
+be the direct descendants of high-mass XRBs. They are
+composed of a (stripped) helium star and a compact object and
+exist on the He-burning nuclear timescale. One would thus
+expect the birth rate of WR-XRB systems to be approximately
+equal to the birth rate of high-mass XRBs. However, while
+there are hundreds of Galactic high-mass XRBs (see Liu et al.
+2006, for the most recent review), there is only one known
+
+4.2. NSNS and Binary White Dwarf Mergers
+In principle, the arguments presented in this work should
+hold for all binary systems that have experienced stable mass
+transfer from the initially more massive to the initially less
+massive star, and vice versa. This implies that the stable mass
+transfer channel is inefﬁcient at producing lower-mass systems
+like NSNSs. This ﬁnding agrees with earlier work that suggests
+the formation of NSNS mergers is dominated by the CE
+channel (e.g., Chruslinska et al. 2018; Vigna-Gómez et al.
+2018). Earlier work has also found that different channels
+dominate the formation of NSNS mergers with respect to BBH
+mergers (see the Appendix of Wagg et al. 2022 and the
+discussion in Broekgaarden et al. 2022a). If we assume that the
+CE channel dominates the formation of NSNS systems, while
+the stable mass transfer channel dominates the shape of the
+primary mass distribution around the peak at 9 Me, then the
+transition between these two channels happens within a narrow
+range of remnant masses. This would have large implications
+on the efﬁciency of the CE for different donor masses, as it
+suggests that successful CE ejection is only possible for lowermass stars that produce NSs (see also Klencki et al.
+2020, 2021).
+A similar constraint on the primary mass could be explored
+for binary white dwarf (WD) formation. However, many of our
+assumptions (such as SN mass loss, and an approximately
+constant core mass fraction fcore » 0.34; see also Appendix B)
+cannot simply be directly adopted for WD progenitors. In the
+context of the formation of double WDs, Woods et al. (2012)
+10
+
+The Astrophysical Journal, 940:184 (17pp), 2022 December 1
+
+van Son et al.
+
+WR-XRB system in the Milky Way (Cygnus X-3; van
+Kerkwijk et al. 1992). This is known as the “missing WRXRB” problem (e.g., Lommen et al. 2005). van den Heuvel
+et al. (2017) argue that this problem can be explained based on
+arguments of mass transfer stability in the same way as we
+explain a lack of low-mass BHs in the population of GW
+sources: only when the mass ratio at the second mass transfer
+phase is in the right regime for stable mass transfer can the
+system avoid CE evolution. Although the results in our work
+do not explain a dearth in low- or high-mass XRBs, they can
+provide an explanation for the missing WR-XRB problem as
+well as an explanation for a dearth of primary BHs with low
+masses inferred from GW events.
+As mentioned above, if the dearth of low-mass BHs persists
+in the distribution of primary BH masses observed in GWs
+while a signiﬁcant number of low-mass BHs are detected as the
+less massive components of GW events or as part of low- and
+high-mass XRBs, this could serve as a smoking gun to
+determine whether the stable mass transfer channel dominates
+the low-mass end of the mass distribution observed in GWs.
+On the other hand, if a dearth of low-mass BHs remains in all
+mass observations of BHs, we argue that a gap in the remnant
+mass distribution is a more likely explanation. A rapidly
+increasing number of recent detections through various
+observational methods already seem to challenge whether the
+NS–BH mass gap is empty (e.g., Breivik et al. 2019; Giesers
+et al. 2019; Thompson et al. 2019; Rivinius et al. 2020;
+Wyrzykowski & Mandel 2020; Gomez & Grindlay 2021;
+Jayasinghe et al. 2021; van der Meij et al. 2021; Andrews et al.
+2022; Jayasinghe et al. 2022; Lam et al. 2022; Sahu et al.
+2022). At the same time, many of these candidates are
+controversial (see El-Badry et al. 2022, and references therein),
+and the existence of a gap in the remnant mass distribution
+remains an open question to this day. A large increase in BH
+mass measurements is expected from both GW observations
+(Abbott et al. 2018), as well as from detections of BH+mainsequence systems in the Gaia Data Release 3 (e.g., Breivik
+et al. 2017; Mashian & Loeb 2017; Andrews et al. 2019;
+Langer et al. 2020; Andrews et al. 2021; Chawla et al. 2022;
+Halbwachs et al. 2022; Janssens et al. 2022). Hence, we are
+hopeful that near-future detection surveys will provide
+evidence in favor of or against the existence of a NS–BH
+mass gap.
+
+Hamers et al. (2021) considered repeated mergers of NSs and
+BHs in stellar 2+2 quadruple systems and found that secondgeneration mergers are about ten million times less common
+that ﬁrst-generation counterparts. Hence, we do not expect
+hierarchical mergers to “ﬁll the gap from below,” nor cause a
+peak at about 9 Me.
+4.5. Caveats
+Adopting a ﬁxed value for the accretion efﬁciency. In the
+model variations presented in Section 3, we have adopted a
+ﬁxed value for βacc = 0.5 (Meurs & van den Heuvel 1989;
+Belczynski et al. 2008; Dominik et al. 2012). In contrast, in the
+model shown in Figure 1 we adopt an accretion rate that is
+limited to the thermal timescale of the accretor to simulate
+accretors that remain in thermal equilibrium. This limits the
+accretion rate to M a = C ´ Ma tKH, a , where Ma and tKH,a are
+the mass and Kelvin–Helmholtz time of the accretor, and
+C = 10 is a constant factor assumed to take into account the
+expansion of the accreting star due to mass transfer (Paczyński
+& Sienkiewicz 1972; Neo et al. 1977; Hurley et al. 2002;
+Schneider et al. 2015). Adopting this accretion rate will cause
+βacc to be effectively zero for binary systems with low
+qZAMS ∼ 0.3 (see, e.g., the top panels of Figures 19 and 20
+from Schneider et al. 2015). The value of min (Mprimary ) is
+lowest at low values of βacc and qZAMS (Figure 3), and such
+systems will thus pollute any dearth in the mass range
+Mprimary = 2.5–6 Me.
+It is hard to say what the real accretion rate will be, since this
+depends critically on the response of the accretor, which is here
+merely encompassed in the constant C. A more realistic
+treatment of the expanding accretor could also affect mass
+transfer stability, since this expansion may lead to a contact
+phase and subsequent CE evolution (see, e.g., Pols 1994;
+Langer & Heger 1998; Justham et al. 2014). On top of this, the
+post-mass-transfer properties of the accreting star are not
+captured by single-star models (Renzo & Gotberg 2021), and
+will further inﬂuence the details of the second mass transfer
+phase (Renzo et al. 2022).
+Treatment of Case A mass transfer. Mass transfer where the
+donor star overﬂows its Roche lobe while still on the main
+sequence is known as “Case A” mass transfer. In general, rapid
+population synthesis simulations oversimplify the processes
+involved in a mass transfer episode, but the outcome of Case A
+mass transfer is particularly difﬁcult to predict (e.g., Pols 1994;
+Sen et al. 2022). In this work, we adopt a set value of ζMS = 2
+to determine the stability of mass transfer for donor stars on the
+main sequence (see Section 2). In our simulations, Case A mass
+transfer is thus more prone to unstable mass transfer, which in
+part explains why we ﬁnd that Case A mass transfer is
+subdominant in the stable mass transfer channel. Our
+simulations underpredict the size of the donor’s core following
+Case A mass transfer. Nonetheless, Case A mass transfer is
+generally assumed to lead to smaller core masses and to be
+more conservative than Case B mass transfer (e.g., Schneider
+et al. 2015; Sen et al. 2022), and we expect the former
+prediction to hold even when core masses are corrected since
+both smaller cores and more conservative mass transfer lead to
+higher values of min (Mprimary ) (see Figure 3). Hence, we ﬁnd
+that systems from Case A mass transfer are not dominant in
+determining the cutoff mass in Mprimary.
+
+4.4. Filling the Low-mass Gap from Below
+Several works have investigated if it is possible to populate
+the lower-mass gap between 3 and 5 Me through hierarchical
+mergers. Samsing & Hotokezaka (2021) considered NSNS
+merger products in dense cluster environments. They concluded that populating the low-mass gap through in-cluster
+mergers of NSs is a much too slow process to be relevant, even
+for a highly idealized case. In response to the detection of
+GW190814 (a compact binary coalescence involving a less
+massive component with a mass of 2.50–2.67 Me; Abbott et al.
+2020), Lu et al. (2021) proposed that GW190814 was a secondgeneration merger from a hierarchical triple system. They
+anticipate that this scenario would lead to a narrow peak in the
+mass distribution of the less massive component masses
+between 2.5 and 3.5 Me. They ﬁnd that it is plausible, though
+rare, for a NSNS merger to give rise to a second-generation
+merger, and estimate that 0.1%–1% of NSNS mergers
+occurring in triples could contribute to this channel. Similarly,
+11
+
+The Astrophysical Journal, 940:184 (17pp), 2022 December 1
+
+van Son et al.
+
+observations, this would be a telltale sign of a dominant
+contribution by the stable channel in this mass range.
+
+5. Conclusions
+We explore the low-mass end of the primary mass
+distribution of BBH and BHNS systems that can lead to GW
+sources. We argue that a dearth of BHs with masses between 3
+and 5 Me, as observed in the GW-inferred mass distribution,
+should be jointly investigated with the observed peak of
+primary masses at about 9 Me. With this in mind, we
+investigate the stable mass transfer channel to GW emitters.
+We make predictions for the expected merger rates and mass
+distributions that follow from this channel, and explain their
+origins. Our main ﬁndings are listed below:
+
+L.v.S. would like to thank Eric Burns, Chris Fryer, and
+David Hendriks for useful comments and informative
+discussions on the impact of the supernova remnant mass
+prescriptions. L.v.S. performed portions of this study as part
+of the pre-doctoral Program at the Center for Computational
+Astrophysics of the Flatiron Institute, supported by the
+Simons Foundation. The authors thank the anonymous
+reviewer for helpful comments that improved this work.
+The authors acknowledge partial ﬁnancial support from the
+National Science Foundation (under NSF grant number No.
+2009131 and PHY-1748958), the Netherlands Organisation
+for Scientiﬁc Research (NWO) as part of the Vidi research
+program BinWaves with project number 639.042.728 and the
+European Unions Horizon 2020 research and innovation
+program from the European Research Council (ERC, grant
+agreement No. 715063). E.Z. acknowledges funding support
+from the European Research Council (ERC) under the
+European Unionʼs Horizon 2020 research and innovation
+program (grant agreement No. 772086).
+
+1. The low-mass end of the primary BH mass distribution
+inferred from GW detections can be explained remarkably well by the stable mass transfer channel alone. For
+our ﬁducial assumptions, we naturally match the local
+rate (20 Gpc−3 yr−1 at redshift 0.2) and key features of
+BBH mass distribution (the dearth of primary masses
+between 2.5 and 6 Me, and the subsequent peak around
+8–10 Me) without need for additional channels (see
+Figure 1).
+2. A unique prediction of the stable channel is that it is
+unable to produce GW events with primary BH masses
+below a certain cutoff mass. The reason for the existence
+of the cutoff is (1) the requirement of stability during the
+mass transfer phases, which imposes constraints on the
+mass ratios, and (2) the fact that the ﬁnal BH masses do
+not simply scale with the initial mass. Speciﬁcally, at the
+onset of the second mass transfer phase, the masses of the
+binary components can be expressed as a function of the
+initial masses. This places a bound on the zero-age mass
+of the initially most massive star and consequently the
+mass of the BH it gives rise to. Similarly, the requirement
+of stability during the second mass transfer phase places
+bounds on the mass of the compact object resulting from
+secondary star (see Section 2).
+3. Our results imply that the binary physics involved in the
+stable channel alone can provide an explanation for the
+purported NS–BH mass gap in GW detections. This is an
+alternative explanation to the common assertion that the
+gap results from SN physics. This also implies that GW
+detections may not directly reﬂect the remnant mass
+function, as selection effects of the formation channels
+cannot be neglected.
+4. We provide an analytical expression for the lower limit
+for the cutoff mass. We ﬁnd expressions for the binary
+components at all relevant stages using parameterised
+assumptions for the dominant physical processes (see
+Figure 2), namely, the mass transfer efﬁciency, the core
+mass fraction, the mass transfer stability, and the
+difference between the core mass and ﬁnal remnant mass
+(Equations (8), (9), and (10)).
+5. Using numerical simulations, we conduct an extensive
+exploration of the uncertain physical processes that
+impact the stable channel. We show these impact the
+shape of the shape of the low end of the mass distribution
+and location of the peak (Figures 3, 4, and 5).
+6. The difference between the remnant mass function
+inferred from electromagnetic observations and the mass
+distribution from GW observations may serve as a
+smoking gun. Speciﬁcally, if the NS–BH gap ﬁlls in for
+electromagnetic observations but remains for GW
+
+Software and Data
+All code associated with reproducing the data and plots in
+this paper is publicly available at https://github.com/
+LiekeVanSon/LowMBH_and_StableChannel. The data used
+in this work are available on Zenodo under an open-source
+Creative Commons Attribution license at doi:10.5281/
+zenodo.7080725, and doi:10.5281/zenodo.7080164. Simulations in this paper made use of the COMPAS rapid binary
+population synthesis code (v02.26.03), which is freely
+available at http://github.com/TeamCOMPAS/COMPAS
+(Riley et al. 2022). This research has made use of GW data
+provided by the GW Open Science Center (https://www.gwopenscience.org/), a service of the LIGO Laboratory, the
+LIGO Scientiﬁc Collaboration, and the Virgo Collaboration.
+Further software used: astropy (Astropy Collaboration et al.
+2013, 2018), Python (Van Rossum & Drake 2009), Matplotlib (Hunter 2007), NumPy (Harris et al. 2020), SciPy
+(Virtanen et al. 2020), ipython/jupyter (Perez &
+Granger 2007; Kluyver et al. 2016), Seaborn (Waskom 2021),
+and hdf5 (Collette et al. 2019).
+Appendix A
+The Dependence of Mass Transfer Stability on the Mass
+Ratio and the Mass Transfer Accretion Fraction
+In Figure 6 we show ζRL as a function of qZAMS.8 Mass transfer
+is dynamically stable as long as ζRL  ζeff. The intersection of
+the colored lines with the adopted value of ζeff (gray horizontal
+lines) leads to a value of qcrit. For example, if we assume
+βacc = 0.0 for the second mass transfer and ζeff = 6.0, we can
+see qcrit,2 = mdonor/maccretor ≈ 4.4 for this mass transfer phase.
+Note that we deﬁne qcrit,1 = MZAMS,b/MZAMS,a, which is the
+inverse of mdonor/maccretor.
+
+8
+
+The full functional form of ζRL can be found at https://github.com/
+LiekeVanSon/LowMBH_and_StableChannel/blob/master/Code/AppendixFig6_
+zeta_q_beta_relations.ipynb, where we closely follow Soberman et al. (1997).
+
+12
+
+The Astrophysical Journal, 940:184 (17pp), 2022 December 1
+
+van Son et al.
+
+MTAMS,2 = Mpost,MT1. Applying this to Equation (4), we get
+qZAMS + bacc
+ fcore = a f MZAMS,a + bf .
+qcrit,2 + bacc
+
+(B2)
+
+Note that we deﬁne all mass ratios (including qcrit,1 and
+qcrit,2) as the ratio between the initially less massive component
+over the initially more massive component. This means that for
+the ﬁrst mass transfer phase, mass transfer will be dynamically
+stable as long as MZAMS,b/MZAMS,a = qZAMS = Maccretor/
+Mdonor qcrit,1. While for the second mass transfer
+qpre MT,2 = Mb Ma = Mpost MT1 MBH,a = Mdonor Maccretor  qcrit,2 .
+And, thus,
+MZAMS,a 
+
+1 ⎡ qZAMS + bacc
+- bf ⎤
+⎥.
+af ⎢
+q
++
+b
+acc
+⎣ crit,2
+⎦
+
+(B3)
+
+The minimum cutoff mass is reached for qZAMS = qcrit,1,
+which leads to
+MZAMS, a 
+
+Figure 6. ζRL as a function of the mass ratio between the donor and accretor
+star. Mass transfer is dynamically stable as long as ζRL  ζeff. The intersections
+of ζRL and ζeff reveal different values of qcrit,1 and qcrit,2. Our default value of
+ζeff = 6.0 for a star with a clear core-envelope structure is annotated. ζMS = 2
+shows the adopted stability criteria assumed for main-sequence stars (Ge
+et al. 2015).
+
+(B4)
+
+Applying this to Equations (8) and (9), we get a different
+relation for min (Mprimary ) from Equation (10).
+Appendix C
+Chirp Mass and Final Mass Ratios
+In the left column of Figure 7 we show the mass distributions
+for the chirp masses, MChirp, for merging BBHs and BHNSs
+from the stable mass transfer channel. This shows that the less
+massive components can form masses low enough for NS
+formation for most variations. Only for the more extreme
+assumptions of ζeff = 3.5 and βacc = 1.0 does a signiﬁcant gap
+remain between the lowest chirp mass and the upper boundary
+for NS formation (set to 2.5 Me in this work). For almost all
+variations explored, the distribution of component masses
+(individual BH and NS masses) does not display an empty
+“gap” between the most massive NS and the least massive BH.
+In the right column of Figure 7 we show the ﬁnal mass ratio
+qﬁnal = Msecondary/Mprimary. The mass ratio distributions are all
+rather ﬂat but display a slight bimodality, with a ﬁrst peak
+around qﬁnal ∼ 0.35 and a second peak around qﬁnal ∼ 0.75.
+This bimodality disappears for βacc = 0.75 and βacc = 1.0
+because for these mass transfer efﬁciencies the lower values of
+qﬁnal are excluded. Similarly, ζeff = 3.5 does not produce any
+qﬁnal near one. For all physics variations, the mass ratio
+distribution drops off steeply below qﬁnal ≈ 0.2, i.e., the stable
+mass transfer channel is very inefﬁcient at creating the most
+extreme mass ratio systems.
+
+Appendix B
+Mass-dependent Core Mass Fraction
+Throughout this work we have assumed that the difference in
+mass between the core post-mass transfer and the ﬁnal remnant
+mass is nonzero (i.e., dMSN ¹ 0 ). Note that we use dMSN as a
+shorthand for all mass lost between the core mass post-mass
+transfer and the ﬁnal remnant mass, i.e., including stellar winds
+such as Wolf–Rayet-like winds. We have adopted this because
+we ﬁnd that this leads to a more stringent constraint on the BH
+and NS masses that form from the stable channel. However, in
+some cases such as the formation of double WDs through
+stable (early) Case B mass transfer, assuming dMSN = 0 may
+be closer to the truth.
+In this section we thus look at an alternative to Equation (7),
+by assuming dMSN = 0 , but fcore is a function of the ZAMS
+mass:
+fcore1 = a f MTAMS + bf ,
+
+1 ⎡ qcrit,1 + bacc
+- bf ⎤
+⎢
+⎥.
+a f ⎣ qcrit,2 + bacc
+⎦
+
+(B1)
+
+where MTAMS refers to the mass at the terminal age main
+sequence (TAMS). We approximate MTAMS,1 = MZAMS,a and
+
+13
+
+The Astrophysical Journal, 940:184 (17pp), 2022 December 1
+
+van Son et al.
+
+Figure 7. The distributions for the chirp mass, MChirp, and the ﬁnal mass ratio, qﬁnal = Msecondary/Mprimary, for merging BBHs and BHNSs. Colors and symbols are the
+same as the right-hand panels of Figure 3. This shows that the less massive components can form NS masses, often closing any gap between the most massive NS and
+the least massive BH.
+
+14
+
+The Astrophysical Journal, 940:184 (17pp), 2022 December 1
+
+van Son et al.
+
+Appendix D
+Overview of Rates
+In Tables 2 and 3 we split  0.2 , as shown in Figures 3, 4, and
+5, into the individual contributions from the BBH and BHNS
+merger rate.
+Table 2
+Merger Rates of BBHs, BHNSs, and Their Combined Rate at Redshift 0.2, for the Core Mass Fraction, Mass Transfer Stability, and Mass Transfer Efﬁciency
+Variations of the Stable Channel (as Described in Section 3.1)
+[ Gpc−3 yr−1]
+
+Core Mass Fraction ( fcore )
+
+Mass Transfer Stability (ζeff)
+
+Mass Transfer Efﬁciency (βacc)
+
+Variations
+
+0.27
+
+0.31
+
+0.34
+
+0.374
+
+0.408
+
+3.5
+
+4.5
+
+5.5
+
+6
+
+6.5
+
+0
+
+0.25
+
+0.5
+
+0.75
+
+1
+
+BHNS, 0.2
+BBH, 0.2
+ 0.2
+
+0.7
+3.5
+4.2
+
+2.7
+10
+12.7
+
+7.4
+25.8
+33.2
+
+11.7
+53.9
+65.5
+
+15.5
+87.3
+102.8
+
+0
+0.9
+0.9
+
+0.3
+4.6
+4.8
+
+3.3
+16.7
+19.9
+
+6.5
+25.3
+31.7
+
+13
+35.9
+48.9
+
+3.9
+10.1
+14
+
+6.6
+17.4
+24
+
+6.5
+25.3
+31.7
+
+0.1
+34
+34.1
+
+0
+39.6
+39.6
+
+Table 3
+Merger Rates of BBHs, BHNSs, and Their Combined Rate at Redshift 0.2, for the Supernova Prescription and Angular Momentum Variations of the Stable Channel
+(as Described in Section 3.3)
+[ Gpc−3 yr−1]
+
+Supernova Prescription ( fmix)
+
+Angular Momentum ( fdisk)
+
+Variations
+
+0.5
+
+0.7
+
+1
+
+1.4
+
+2
+
+2.8
+
+4
+
+0
+
+0.25
+
+0.5
+
+0.75
+
+1
+
+BHNS, 0.2
+BBH, 0.2
+ 0.2
+
+0.6
+4.2
+4.8
+
+0.6
+4.1
+4.7
+
+0.7
+5.5
+6.1
+
+0.9
+6.8
+7.8
+
+0.8
+8
+8.8
+
+0.9
+9.2
+10.1
+
+1.1
+9.7
+10.8
+
+7.1
+26
+33.1
+
+4.5
+118.4
+122.9
+
+1.1
+12
+13.1
+
+0.4
+0.1
+0.5
+
+0.3
+0
+0.3
+
+ORCID iDs
+
+Baruteau, C., Cuadra, J., & Lin, D. N. C. 2011, ApJ, 726, 28
+Bavera, S. S., Fragos, T., Zevin, M., et al. 2021, A&A, 647, A153
+Belczynski, K., Bulik, T., & Rudak, B. 2004, ApJL, 608, L45
+Belczynski, K., Done, C., & Lasota, J. P. 2021, arXiv:2111.09401
+Belczynski, K., Holz, D. E., Bulik, T., & O’Shaughnessy, R. 2016, Natur,
+534, 512
+Belczynski, K., Kalogera, V., Rasio, F. A., et al. 2008, ApJS, 174, 223
+Belczynski, K., Repetto, S., Holz, D. E., et al. 2016c, ApJ, 819, 108
+Belczynski, K., Taam, R. E., Kalogera, V., Rasio, F. A., & Bulik, T. 2007, ApJ,
+662, 504
+Belczynski, K., Klencki, J., Fields, C. E., et al. 2020, A&A, 636, A104
+Belczynski, K., Romagnolo, A., Olejak, A., et al. 2022, ApJ, 925, 69
+Bellovary, J. M., Low, M.-M.-M., McKernan, B., & Ford, K. E. S. 2016, ApJL,
+819, L17
+Biscoveanu, S., Landry, P., & Vitale, S. 2022, MNRAS
+Blundell, K. M., Mioduszewski, A. J., Muxlow, T. W. B., Podsiadlowski, P., &
+Rupen, M. P. 2001, ApJL, 562, L79
+Breivik, K., Chatterjee, S., & Andrews, J. J. 2019, ApJL, 878, L4
+Breivik, K., Chatterjee, S., & Larson, S. L. 2017, ApJL, 850, L13
+Briel, M. M., Stevance, H. F., & Eldridge, J. J. 2022, arXiv:2206.13842
+Broekgaarden, F. S., Stevenson, S., & Thrane, E. 2022b, ApJ, 45, 938
+Broekgaarden, F. S., Justham, S., de Mink, S. E., et al. 2019, MNRAS,
+490, 5228
+Broekgaarden, F. S., Berger, E., Neijssel, C. J., et al. 2021a, MNRAS, 508, 5028
+Broekgaarden, F. S., Berger, E., Stevenson, S., et al. 2022a, MNRAS,
+416, 5737
+Casares, J., Jonker, P. G., & Israelian, G. 2017, in Handbook of Supernovae,
+ed. A. W. Alsabti & P. Murdin (Cham: Springer), 1499
+Chawla, C., Chatterjee, S., Breivik, K., et al. 2022, ApJ, 931, 107
+Chen, H.-L., Tauris, T. M., Chen, X., & Han, Z. 2022, ApJ, 925, 89
+Cherepashchuk, A., Postnov, K., Molkov, S., Antokhina, E., & Belinski, A.
+2020, NewAR, 89, 101542
+Chruślińska, M. 2022, arXiv:2206.10622
+Chruslinska, M., Belczynski, K., Klencki, J., & Benacquista, M. 2018,
+MNRAS, 474, 2937
+Collette, A., Caswell, T. A., Tocknell, J., et al. 2019, h5py/h5py: 2.10.0,
+Zenodo, doi:10.5281/zenodo.3401726
+De Donder, E., & Vanbeveren, D. 2004, NewA, 9, 1
+de Mink, S. E., & Belczynski, K. 2015, ApJ, 814, 58
+de Mink, S. E., Pols, O. R., Langer, N., & Izzard, R. G. 2009, A&A,
+507, L1
+
+L. A. C. van Son https://orcid.org/0000-0001-5484-4987
+S. E. de Mink https://orcid.org/0000-0001-9336-2825
+M. Renzo https://orcid.org/0000-0002-6718-9472
+S. Justham https://orcid.org/0000-0001-7969-1569
+E. Zapartas https://orcid.org/0000-0002-7464-498X
+K. Breivik https://orcid.org/0000-0001-5228-6598
+T. Callister https://orcid.org/0000-0001-9892-177X
+W. M. Farr https://orcid.org/0000-0003-1540-8562
+C. Conroy https://orcid.org/0000-0002-1590-8551
+References
+Abadie, J., Abbott, B. P., Abbott, R., et al. 2010, CQGra, 27, 173001
+Abbott, B. P., Abbott, R., Abbott, T. D., et al. 2018, LRR, 21, 3
+Abbott, R., Abbott, T. D., Abraham, S., et al. 2020, ApJL, 896, L44
+Abbott, R., Abbott, T. D., Abraham, S., et al. 2021a, ApJL, 913, L7
+Abbott, R., Abbott, T. D., Acernese, F., et al. 2021b, arXiv:2111.03634
+Abbott, R., Abbott, T. D., Acernese, F., et al. 2021c, arXiv:2111.03606
+Andrews, J. J., Breivik, K., & Chatterjee, S. 2019, ApJ, 886, 68
+Andrews, J. J., Breivik, K., Chawla, C., Rodriguez, C., & Chatterjee, S. 2021,
+arXiv:2110.05549
+Andrews, J. J., Taggart, K., & Foley, R. 2022, arXiv:2207.00680
+Antonini, F., & Gieles, M. 2020, PhRvD, 102, 123016
+Antonini, F., Gieles, M., Dosopoulou, F., & Chattopadhyay, D. 2022,
+arXiv:2208.01081
+Antonini, F., Gieles, M., & Gualandris, A. 2019, MNRAS, 486, 5008
+Artymowicz, P., & Lubow, S. H. 1994, ApJ, 421, 651
+Askar, A., Szkudlarek, M., Gondek-Rosińska, D., Giersz, M., & Bulik, T.
+2017, MNRAS, 464, L36
+Astropy Collaboration, Robitaille, T. P., Tollerud, E. J., et al. 2013, A&A,
+558, A33
+Astropy Collaboration, Price-Whelan, A. M., Sipőcz, B. M., et al. 2018, AJ,
+156, 123
+Baibhav, V., Berti, E., Gerosa, D., et al. 2019, PhRvD, 100, 064060
+Bailyn, C. D., Jain, R. K., Coppi, P., & Orosz, J. A. 1998, ApJ, 499, 367
+Barrett, J. W., Gaebel, S. M., Neijssel, C. J., et al. 2018, MNRAS, 477, 4685
+
+15
+
+The Astrophysical Journal, 940:184 (17pp), 2022 December 1
+
+van Son et al.
+
+de Mink, S. E., Pols, O. R., Yoon, S. C., et al. 2008, in AIP Conf. Ser. 990,
+First Stars III, ed. B. W. O’Shea & A. Heger (Melville, NY: AIP), 230
+Doctor, Z., Wysocki, D., O’Shaughnessy, R., Holz, D. E., & Farr, B. 2020,
+ApJ, 893, 35
+Dominik, M., Belczynski, K., Fryer, C., et al. 2013, ApJ, 779, 72
+Dominik, M., Belczynski, K., Fryer, C., et al. 2012, ApJ, 759, 52
+Dominik, M., Berti, E., O’Shaughnessy, R., et al. 2015, ApJ, 806, 263
+Edelman, B., Doctor, Z., Godfrey, J., & Farr, B. 2022, ApJ, 924, 101
+Eggleton, P. P., & Verbunt, F. 1986, MNRAS, 220, 13P
+El-Badry, K., Seeburger, R., Jayasinghe, T., et al. 2022, MNRAS, 512, 5620
+Fabrika, S. 2004, ASPRv, 12, 1
+Fabrika, S. N. 1993, MNRAS, 261, 241
+Farah, A. M., Fishbach, M., Essick, R., Holz, D. E., & Galaudage, S. 2021,
+ApJ, 931, 108
+Farmer, R., Renzo, M., de Mink, S. E., Marchant, P., & Justham, S. 2019, ApJ,
+887, 53
+Farr, W. M., Fishbach, M., Ye, J., & Holz, D. E. 2019, ApJL, 883, L42
+Farr, W. M., Sravan, N., Cantrell, A., et al. 2011, ApJ, 741, 103
+Fishbach, M., Essick, R., & Holz, D. E. 2020a, ApJL, 899, L8
+Fishbach, M., Farr, W. M., & Holz, D. E. 2020b, ApJL, 891, L31
+Fishbach, M., Holz, D. E., & Farr, B. 2017, ApJL, 840, L24
+Fishbach, M., & Kalogera, V. 2021, ApJL, 929, L26
+Fragione, G., Loeb, A., & Rasio, F. A. 2020, ApJL, 902, L26
+Fragione, G., & Silk, J. 2020, MNRAS, 498, 4591
+Fryer, C. L., Belczynski, K., Wiktorowicz, G., et al. 2012, ApJ, 749, 91
+Fryer, C. L., Olejak, A., & Belczynski, K. 2022, ApJ, 931, 94
+Gallegos-Garcia, M., Berry, C. P. L., Marchant, P., & Kalogera, V. 2021, ApJ,
+922, 110
+Ge, H., Webbink, R. F., Chen, X., & Han, Z. 2015, ApJ, 812, 40
+Ge, H., Webbink, R. F., Chen, X., & Han, Z. 2020, ApJ, 899, 132
+Giacobbo, N., & Mapelli, M. 2018, MNRAS, 480, 2011
+Giacobbo, N., Mapelli, M., & Spera, M. 2018, MNRAS, 474, 2959
+Giesers, B., Kamann, S., Dreizler, S., et al. 2019, A&A, 632, A3
+Gomez, S., & Grindlay, J. E. 2021, ApJ, 913, 48
+Halbwachs, J.-L., Pourbaix, D., Arenou, F., et al. 2022, arXiv:2206.05726
+Hamers, A. S., Fragione, G., Neunteufel, P., & Kocsis, B. 2021, MNRAS,
+506, 5345
+Harris, C. R., Millman, K. J., van der Walt, S. J., et al. 2020, Natur, 585, 357
+Hjellming, M. S., & Webbnik, R. F. 1987, ApJ, 318, 794
+Hunter, J. D. 2007, CSE, 9, 90
+Hurley, J. R., Tout, C. A., & Pols, O. R. 2002, MNRAS, 329, 897
+Inayoshi, K., Hirai, R., Kinugawa, T., & Hotokezaka, K. 2017, MNRAS,
+468, 5020
+Ivanova, N. 2006, ApJL, 653, L137
+Janssens, S., Shenar, T., Sana, H., et al. 2022, A&A, 658, A129
+Jayasinghe, T., Stanek, K. Z., Thompson, T. A., et al. 2021, MNRAS,
+504, 2577
+Jayasinghe, T., Thompson, T. A., Kochanek, C. S., et al. 2022, MNRAS,
+516, 5945
+Jonker, P. G., Kaur, K., Stone, N., & Torres, M. A. P. 2021, ApJ, 921, 131
+Justham, S., Podsiadlowski, P., & Vink, J. S. 2014, ApJ, 796, 121
+Kalomeni, B., Nelson, L., Rappaport, S., et al. 2016, ApJ, 833, 83
+Kinugawa, T., Inayoshi, K., Hotokezaka, K., Nakauchi, D., & Nakamura, T.
+2014, MNRAS, 442, 2963
+Klencki, J., Nelemans, G., Istrate, A. G., & Chruslinska, M. 2021, A&A,
+645, A54
+Klencki, J., Nelemans, G., Istrate, A. G., & Pols, O. 2020, A&A, 638, A55
+Klencki, J., Wiktorowicz, G., Gładysz, W., & Belczynski, K. 2017, MNRAS,
+469, 3088
+Kluyver, T., Ragan-Kelley, B., Pérez, F., et al. 2016, in Positioning and Power
+in Academic Publishing: Players, Agents and Agendas, ed. F. Loizides &
+B. Schmidt (Amsterdam: IOS Press), 87
+Kochanek, C. S. 2014, ApJ, 785, 28
+Kochanek, C. S. 2015, MNRAS, 446, 1213
+Kreidberg, L., Bailyn, C. D., Farr, W. M., & Kalogera, V. 2012, ApJ, 757, 36
+Kroupa, P. 2001, MNRAS, 322, 231
+Lam, C. Y., Lu, J. R., Udalski, A., et al. 2022, ApJL, 933, L23
+Langer, N., & Heger, A. 1998, in Astrophysics and Space Science Library,
+B[e] stars, ed. A. M. Hubert & C. Jaschek, 233 (Dordrecht: Kluwer) 235
+Langer, N., Schürmann, C., Stoll, K., et al. 2020, A&A, 638, A39
+Leigh, N. W. C., Geller, A. M., McKernan, B., et al. 2018, MNRAS, 474, 5672
+Li, Y.-J., Wang, Y.-Z., Han, M.-Z., et al. 2021, ApJ, 917, 33
+Liotine, C., Zevin, M., Berry, C., Doctor, Z., & Kalogera, V. 2022, arXiv:2210.
+01825
+Liu, Q. Z., van Paradijs, J., & van den Heuvel, E. P. J. 2006, A&A,
+455, 1165
+
+Lommen, D., Yungelson, L., van den Heuvel, E., Nelemans, G., &
+Portegies Zwart, S. 2005, A&A, 443, 231
+Lu, W., Beniamini, P., & Bonnerot, C. 2021, MNRAS, 500, 1817
+Lu, W., Fuller, J., Quataert, E., & Bonnerot, C. 2022, arXiv:2204.00847
+Mandel, I., & de Mink, S. E. 2016, MNRAS, 458, 2634
+Mandel, I., & Farmer, A. 2022, PhR, 955, 1
+Mapelli, M. 2021, in Handbook of Gravitational Wave Astronomy, ed.
+C. Bambi, S. Katsanevas, & K. D. Kokkotas (Singapore: Springer), 1
+Marchant, P., Langer, N., Podsiadlowski, P., Tauris, T., & Moriya, T. 2016,
+A&A, 588, A50
+Marchant, P., Pappas, K. M. W., Gallegos-Garcia, M., et al. 2021, A&A,
+650, 107
+María Ezquiaga, J., & Holz, D. E. 2022, PhRvL, 129, 061102
+Marigo, P., Girardi, L., Chiosi, C., & Wood, P. R. 2001, A&A, 371, 152
+Mashian, N., & Loeb, A. 2017, MNRAS, 470, 2611
+McKernan, B., Ford, K. E. S., & O’Shaughnessy, R. 2020, MNRAS,
+498, 4088
+Mennekens, N., & Vanbeveren, D. 2014, A&A, 564, A134
+Meurs, E. J. A., & van den Heuvel, E. P. J. 1989, A&A, 226, 88
+Michaely, E., & Perets, H. B. 2016, MNRAS, 458, 4188
+Müller, B., Gay, D. W., Heger, A., Tauris, T. M., & Sim, S. A. 2018, MNRAS,
+479, 3675
+Neijssel, C. J., Vigna-Gómez, A., Stevenson, S., et al. 2019, MNRAS,
+490, 2457
+Nelson, L. A., Dubeau, E., & MacCannell, K. A. 2004, ApJ, 616, 1124
+Neo, S., Miyaji, S., Nomoto, K., & Sugimoto, D. 1977, PASJ, 29, 249
+Olejak, A., Belczynski, K., & Ivanova, N. 2021, A&A, 651, A100
+Olejak, A., Fryer, C. L., Belczynski, K., & Baibhav, V. 2022, MNRAS,
+516, 2252
+Özel, F., Psaltis, D., Narayan, R., & McClintock, J. E. 2010, ApJ, 725, 1918
+Paczyński, B., & Sienkiewicz, R. 1972, AcA, 22, 73
+Pavlovskii, K., Ivanova, N., Belczynski, K., & Van, K. X. 2017, MNRAS,
+465, 2092
+Perez, F., & Granger, B. E. 2007, CSE, 9, 21
+Podsiadlowski, P., Rappaport, S., & Han, Z. 2003, MNRAS, 341, 385
+Pols, O. R. 1994, A&A, 290, 119
+Pols, O. R., Schröder, K.-P., Hurley, J. R., Tout, C. A., & Eggleton, P. P. 1998,
+MNRAS, 298, 525
+Portegies Zwart, S. F. 1995, A&A, 296, 691
+Postnov, K. A., & Yungelson, L. R. 2014, LRR, 17, 3
+Renzo, M., & Gotberg, Y. 2021, ApJ, 923, 277
+Renzo, M., Hendriks, D. D., van Son, L. A. C., & Farmer, R. 2022, RNAAS,
+6, 25
+Renzo, M., Zapartas, E., de Mink, S. E., et al. 2019, A&A, 624, A66
+Riley, J., Mandel, I., Marchant, P., et al. 2021, MNRAS, 505, 663
+Riley, J., Agrawal, P., Barrett, J. W., et al. 2022, ApJS, 258, 34
+Rivinius, T., Baade, D., Hadrava, P., Heida, M., & Klement, R. 2020, A&A,
+637, L3
+Rodriguez, C. L., Zevin, M., Amaro-Seoane, P., et al. 2019, PhRv, D100,
+043027
+Romero-Shaw, I. M., Kremer, K., Lasky, P. D., Thrane, E., & Samsing, J.
+2021, MNRAS, 506, 2362
+Sahu, K. C., Anderson, J., Casertano, S., et al. 2022, ApJ, 83, 933
+Samsing, J., & Hotokezaka, K. 2021, ApJ, 923, 126
+Schneider, F. R. N., Izzard, R. G., Langer, N., & Mink, S. E. d. 2015, ApJ,
+805, 20
+Schutz, B. F. 1986, Natur, 323, 310
+Secunda, A., Bellovary, J., Low, M.-M.-M., et al. 2019, ApJ, 878, 85
+Sen, K., Langer, N., Marchant, P., et al. 2022, A&A, 659, A98
+Shao, Y., & Li, X.-D. 2022, ApJ, 930, 26
+Siegel, J. C., Kiato, I., Kalogera, V., et al. 2022, arXiv:2209.06844
+Soberman, G. E., Phinney, E. S., & van den Heuvel, E. P. J. 1997, A&A,
+327, 620
+Spera, M., Mapelli, M., & Bressan, A. 2015, MNRAS, 451, 4086
+Stevenson, S., Ohme, F., & Fairhurst, S. 2015, ApJ, 810, 58
+Sun, M., & Arras, P. 2018, ApJ, 858, 14
+Tang, P. N., Eldridge, J. J., Stanway, E. R., & Bray, J. C. 2020, MNRAS,
+493, L6
+Tanikawa, A., Yoshida, T., Kinugawa, T., et al. 2022, ApJ, 926, 83
+Thompson, T. A., Kochanek, C. S., Stanek, K. Z., et al. 2019, Sci, 366, 637
+Tiwari, V. 2022, ApJ, 928, 155
+Tiwari, V., & Fairhurst, S. 2021, ApJL, 913, L19
+Tutukov, A. V., & Yungelson, L. R. 1979, AcA, 29, 665
+van den Heuvel, E. P. J. 1969, AJ, 74, 1095
+van den Heuvel, E. P. J., Portegies Zwart, S. F., & de Mink, S. E. 2017,
+MNRAS, 471, 4256
+
+16
+
+The Astrophysical Journal, 940:184 (17pp), 2022 December 1
+
+van Son et al.
+
+van der Meij, V., Guo, D., Kaper, L., & Renzo, M. 2021, A&A, 655, A31
+van Kerkwijk, M. H., Charles, P. A., Geballe, T. R., et al. 1992, Natur,
+355, 703
+Van Rossum, G., & Drake, F. L. 2009, Python 3 Reference Manual
+(CreateSpace: Scotts Valley, CA)
+van Son, L. A. C., de Mink, S. E., Chruslinska, M., et al. 2022a, arXiv:2209.
+03385
+van Son, L. A. C., de Mink, S. E., Callister, T., et al. 2022b, ApJ, 931, 17
+Veske, D., Bartos, I., Márka, Z., & Márka, S. 2021, ApJ, 922, 258
+Vigna-Gómez, A., Neijssel, C. J., Stevenson, S., et al. 2018, MNRAS,
+481, 4009
+Vinciguerra, S., Neijssel, C. J., Vigna-Gómez, A., et al. 2020, MNRAS,
+498, 4705
+Virtanen, P., Gommers, R., Oliphant, T. E., et al. 2020, NatMe, 17, 261
+Vitale, S., Farr, W. M., Ng, K. K. Y., & Rodriguez, C. L. 2019, ApJL, 886, L1
+Vitale, S., Gerosa, D., Farr, W. M., & Taylor, S. R. 2022, in Handbook of
+Gravitational Wave Astronomy, ed. C. Bambi, S. Katsanevas, &
+K. D. Kokkotas (Singapore: Springer)
+
+Wagg, T., Broekgaarden, F. S., de Mink, S. E., et al. 2022, ApJ, 937, 118
+Waskom, M. 2021, JOSS, 6, 3021
+Wiktorowicz, G., Wyrzykowski, Ł., Chruslinska, M., et al. 2019, ApJ,
+885, 1
+Wong, K. W. K., Breivik, K., Kremer, K., & Callister, T. 2021, PhRvD, 103,
+083021
+Woods, T. E., Ivanova, N., van der Sluys, M. V., & Chaichenets, S. 2012, ApJ,
+744, 12
+Woosley, S. E., Heger, A., & Weaver, T. A. 2002, RvMP, 74, 1015
+Woosley, S. E., Sukhbold, T., & Janka, H.-T. 2020, ApJ, 896, 56
+Wyrzykowski, Ł., & Mandel, I. 2020, A&A, 636, A20
+Wysocki, D., Lange, J., & O’Shaughnessy, R. 2019, PhRvD, 100, 043012
+Yang, Y., Bartos, I., Gayathri, V., et al. 2019, PhRvL, 123, 181101
+Ye, C., & Fishbach, M. 2022, ApJ, 937, 73
+Zevin, M., & Bavera, S. S. 2022, ApJ, 933, 86
+Zevin, M., Spera, M., Berry, C. P. L., & Kalogera, V. 2020, ApJL,
+899, L1
+Zevin, M., Bavera, S. S., Berry, C. P. L., et al. 2021, ApJ, 910, 152
+
+17
+
+

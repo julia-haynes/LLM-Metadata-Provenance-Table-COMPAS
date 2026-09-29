@@ -1,0 +1,823 @@
+                                                  Draft version August 4, 2026
+                                                  Typeset using LATEX twocolumn style in AASTeX7
+
+
+
+
+                                                            On Bimodality in the Eccentricity Distribution of Galactic Double Neutron Stars
+                                                                   Aldana Grichener,1 Paul Disberg,2, 3 Ryosuke Hirai,4, 2, 3 and Ilya Mandel2, 3
+                                               1 Steward Steward Observatory and Department of Astronomy, University of Arizona, 933 North Cherry Avenue, Tucson, AZ 85721, USA
+                                                                     2 School of Physics and Astronomy, Monash University, Clayton, Victoria 3800, Australia
+                                                                      3 The ARC Centre of Excellence for Gravitational Wave Discovery—OzGrav, Australia
+                                                 4 Astrophysical Big Bang Laboratory (ABBL), RIKEN Pioneering Research Institute (PRI), 2–1 Hirosawa, Wako, Saitama 351-0198,
+
+                                                                                                              Japan
+
+
+                                                                                                         ABSTRACT
+                                                          The detection of Galactic double neutron stars (DNSs) through pulsar timing offers a unique op-
+                                                        portunity to probe massive stellar and binary evolution. The observed DNS population exhibits an
+                                                        apparently bimodal eccentricity distribution, with an absence of systems at measured intermediate
+                                                        eccentricities, 0.4 ≲ em ≲ 0.58, whose origin remains unclear. We propose that this possible gap
+                                                        can arise naturally if the relationship between the progenitor masses and neutron star (NS) masses is
+arXiv:2608.00174v1 [astro-ph.SR] 31 Jul 2026
+
+
+
+
+                                                        non-monotonic, provided that the second-born NS receives a sufficiently small natal kick. We illus-
+                                                        trate this scenario using the population synthesis code compas, and find that our DNS population
+                                                        model can reproduce the observed orbital period–eccentricity distribution relatively well, including the
+                                                        apparent bimodality. Although a larger observed sample is required to draw more robust conclusions,
+                                                        our results suggest that this model provides a natural pathway for explaining current observations of
+                                                        Galactic DNSs through isolated binary evolution.
+
+                                                                  1. INTRODUCTION                                     giant (RSG) and interacts with its companion via mass
+                                                 Double neutron star (DNS) systems are central to                     transfer. It later experiences a SN explosion, leaving a
+                                               massive-star research, and can provide insights into stel-             neutron star (NS) behind. The newly born NS might
+                                               lar evolution, supernova (SN) explosions, and related                  receive a natal kick due to asymmetries in the explo-
+                                               transients. Galactic DNSs at orbital periods ranging                   sion (e.g., A. G. Lyne & D. R. Lorimer 1994) and a
+                                               from just under 2 hours to 45 days have been observed                  Blaauw kick caused by instantaneous mass loss during
+                                               through radio pulsar timing. Since the discovery of the                core collapse (A. Blaauw 1961), which could potentially
+                                               Hulse-Taylor system five decades ago (R. A. Hulse &                    disrupt the binary system. If the binary remains bound
+                                               J. H. Taylor 1975), the sample of observed galactic DNSs               after the explosion, a common envelope evolution (CEE)
+                                               has been significantly expanding, and is currently com-                stage (N. Ivanova et al. 2020) can occur when the ini-
+                                               posed of 29 binaries (see Table 1), with an average of                 tially lighter companion evolves into a RSG, driving the
+                                               one new detection per year over the past decade. More                  NS and its core closer together due to dynamical fric-
+                                               than 40% of these systems are expected to merge within                 tion. Unless they merge during this CEE phase (e.g.,
+                                               the Hubble time (M. Colom i Bernadich et al. 2023).                    A. Grichener 2025), the surviving core can explode in a
+                                               This sample provides the best observational constraint                 second SN event. If the system is not disrupted by the
+                                               to date on the origin of DNSs.                                         explosion, a DNS binary is born. Therefore, the assump-
+                                                 DNSs are expected to form through isolated evolu-                    tions regarding the masses and kicks of the NSs formed
+                                               tion of massive binary systems (e.g., B. P. Flannery &                 in the SN explosion, and the treatment of binary mass
+                                               E. P. J. van den Heuvel 1975; T. M. Tauris et al. 2017;                transfer and CEE, are crucial for studying DNS binaries,
+                                               A. Vigna-Gómez et al. 2018; A. Grichener 2023). They                  both at the single system and population levels.
+                                               typically begin their evolution from two massive main                    The formation and evolution of DNSs have been ex-
+                                               sequence (MS) stars orbiting their common center of                    plored in dozens of population synthesis studies (see I.
+                                               mass. The more massive star evolves into a red super-                  Mandel & F. S. Broekgaarden 2022 for a review), whose
+                                                                                                                      predictions for the birth and merger rate of DNSs span
+                                                                                                                      several orders of magnitude. While many of these stud-
+                                                Corresponding author: Aldana Grichener                                ies were able to use the constraints provided by radio
+                                                agrichener@arizona.edu                                                and gravitational-wave (GW) observations to reproduce
+2
+
+the potential merger rates of DNSs along with additional      (e.g. E. S. Phinney & S. Sigurdsson 1991), and therefore
+observational features, they struggle to explain the ap-      cannot be directly compared to models of isolated binary
+parent bimodality in the measured eccentricity distribu-      evolution. It is possible that some field DNSs without a
+tion of the Galactic DNS population: 21 systems exhibit       GC association, particularly high-eccentricity ones, were
+low measured eccentricities of em ≲ 0.4, while the re-        originally formed in star clusters and were later ejected
+maining eight are characterized by high eccentricities of     (J. J. Andrews & I. Mandel 2019). However, C. S. Ye
+em ≳ 0.58. To date, this bimodality cannot be explained       et al. (2020) estimate the rate of this scenario to be low.
+by existing models (e.g., J. J. Andrews & I. Mandel           We include the ‘potential/GC DNSs’ in our qualitative
+2019; I. Mandel et al. 2021; A. Chattaraj et al. 2025;        analysis, since they follow similar trends in orbital pe-
+A. Nair & S. Stevenson 2025). The eccentricity of the         riod and eccentricity (see also, e.g., R. Valli et al. 2025),
+binary immediately after the second SN is largely set by      but note their different or uncertain origin in our quan-
+the natal kick imparted in the explosion, together with       titative estimates.
+the associated mass loss that drives the Blaauw kick.            From the ATNF catalog, we obtain the observed or-
+Since population synthesis studies typically assume con-      bital period, eccentricity, and characteristic spin-down
+tinuous distributions for these quantities, they naturally    age. Since the binary orbits have changed due to the
+produce a continuous eccentricity distribution.               emission of GWs, we use the model of P. C. Peters
+   In this study, we argue that the apparent bimodality       (1964) to integrate these orbits back in time for a dura-
+in DNS eccentricities can result from a non-monotonic         tion equal to the characteristic age of the observed radio
+relationship between progenitor mass and NS mass, and         pulsar and estimate the orbital period and eccentricity
+weak, potentially negligible natal kicks associated with      immediately after the second SN. For this integration,
+the ultra-stripped supernovae (USSNe) that form the           we take NS masses of 1.4M⊙ , but note that using mass
+second NS in close binaries. The break in the remnant         estimates from the literature (e.g., H. Ding et al. 2024)
+mass function (see left panel of Fig. 1, for instance)        would not noticeably change our results. This method
+would translate into a non-monotonic distribution of          assumes that the characteristic age of the observed pul-
+mass lost during the second SN, and hence into a poten-       sar approximately equals the time since the formation
+tially bimodal distribution of Blaauw kicks. If the natal     of the DNS. Although (1) the characteristic age does
+kicks are small, this mechanism could provide a natu-         not always accurately reflect the true pulsar age (e.g.
+ral explanation for the apparent bimodality in Galac-         A. G. Lyne et al. 1996), and (2) the observed pulsar
+tic DNS eccentricities. We present the observed sample        is typically the recycled primary and thus slightly older
+in Section 2, motivate our model and illustrate it with       than the age of the DNS, characteristic age estimates are
+population synthesis in Section 3, discuss observational      generally consistent with kinematic ages (A. P. Igoshev
+constraints on the second SN kick in Section 4, address       2019; P. Disberg et al. 2024a, 2025), and are therefore
+potential caveats and alternative solutions in Section 5,     usually considered reasonable pulsar age proxies (e.g.,
+and summarize in Section 6.                                   D. Maoz & E. Nakar 2025).
+                                                                 In Table 1, we list the measured orbital periods and
+                2. DNS OBSERVATIONS
+                                                              eccentricities together with their back-integrated values,
+  As our sample of observed Galactic DNS systems, we          characteristic ages, and total mass estimates. While
+consider the pulsars listed in the Australia Telescope Na-    the measurement uncertainties are relatively small, with
+tional Facility (ATNF) Pulsar Catalog1 (R. N. Manch-          log10 (σPm /days) ≲ −6 for the periods and log10 (σem ) ≲
+ester et al. 2005), and select those with companions that     −4 for the eccentricities, the back-integrated values are
+are labeled as NSs, even if their nature is uncertain. We     considerably more uncertain, especially for short-period
+classify systems as ‘Observed DNSs’ when the compan-          systems. The uncertainties in mass measurements vary
+ion is generally accepted to be a NS and the system           more substantially (e.g., H. Ding et al. 2024).
+does not reside in a globular cluster (GC), and as ‘po-          The DNSs in our sample show an apparent bimodal-
+tential/GC DNSs’ if there is discussion in the literature     ity in eccentricity, as also presented in Fig. 2, with an
+about the nature of the pulsar’s companion (e.g. M. J.        absence of systems at measured eccentricities between
+Keith et al. 2009; J. van Leeuwen et al. 2015; C. Ng et al.   0.4 and 0.58, and one system (J1208–5936) having an
+2018; E. D. Barr et al. 2024), or if the DNS is associated    eccentricity of ∼0.5 after integrating its orbit back in
+with a GC. In the latter case, the NSs or their progeni-      time. However, it is not obvious whether this bimodal-
+tors may have been influenced by dynamical interactions       ity is statistically significant, as we discuss in Appendix
+                                                              B. In this sense, our suggested model, in which the ap-
+ 1 https://www.atnf.csiro.au/research/pulsar/psrcat/.         parent bimodality arises naturally, provides a testable
+                                                                                                                                3
+
+Table 1. Properties of Galactic DNSs. For each system we              prediction: future DNS detections will either strengthen
+list the measured orbital period (Pm ) and eccentricity (em ),        the evidence for a bimodal eccentricity distribution, sup-
+followed by the period (Pb ) and eccentricity (eb ) immediately       porting this interpretation, or fill in the intermediate-
+after the second SN. We also present their characteristic age
+                                                                      eccentricity gap.
+(τc ), and the total mass estimate (MT ) when available. The
+upper block shows the ‘observed DNSs’ whose classification              We note that there are several observational biases at
+is generally agreed upon in the literature, and the lower block       play that shape the observed DNS properties. Firstly,
+lists the ‘potential/GC DNSs’                                         DNSs that form in tight binaries will have relatively
+                                                                      short merger times due to the emission of GWs, limiting
+ Name          Pm       em       Pb      eb          τc  MT    ref
+                                                                      their observable window in pulsar surveys; very short-
+             [days]            [days]             [Myr] [M⊙ ]
+ J0453+1559   4.07     0.113    4.08    0.113      3900  2.73  (1)
+                                                                      period DNSs, below about 15 minutes, are difficult to
+ J0509+3801  0.380     0.586   0.459    0.627       153  2.81  (1)    extract due to the rapid change in the observed pul-
+ J0641+0448   3.73     0.145    3.74    0.146      6200  2.59  (2)    sation period caused by pulsar acceleration (e.g., I. M.
+ J0737–3039A 0.102     0.088   0.171    0.147       204  2.59  (1)    Romero-Shaw et al. 2020). Therefore, there is an obser-
+ J1155–6529   3.69     0.260    3.68    0.260      3574    -
+ J1208–5936  0.632     0.348    1.03    0.471   >10000* 2.59   (1)
+                                                                      vational bias against short periods and against (very)
+ J1325–6253   1.82     0.064    1.86    0.065      9560  2.57  (1)    high eccentricities. Secondly, the DNSs in our sample
+ J1411+2551   2.62     0.170    2.64    0.172    10300   2.54  (1)    are observed because one of the NSs is visible as a pul-
+ J1518+4904   8.63     0.249    8.64    0.250    23900†  2.72  (1)    sar, meaning that there might be an observational bias
+ B1534+12    0.421     0.274   0.439    0.283       248  2.68  (1)
+ J1756–2251  0.320     0.181   0.357    0.200       443  2.57  (1)
+                                                                      in the orbital properties if there is a causal relationship
+ J1757–1854  0.183     0.606   0.490    0.777       130  2.73  (1)    between the binary evolution and the pulsar lifetime.
+ J1811–1736  18.78     0.828   18.80    0.828      1830  2.57  (1)    Lastly, if the binary receives a significant kick and there-
+ J1829+2456   1.18     0.139    1.29    0.152    12400   2.61  (1)    fore a high systemic velocity, its resulting Galactic orbit
+ J1846–0513  0.613     0.209   0.624    0.213       363  2.63 (1,3)
+ J1901+0658   14.5     0.366    14.5    0.366      5500  2.79  (1)
+                                                                      will typically be at larger distances from the solar neigh-
+ J1913+1102  0.206     0.090   0.432    0.186      2690  2.89  (1)    borhood, making it less likely to be observed (P. Disberg
+ B1913+16    0.323     0.617   0.420    0.670       109  2.83  (1)    et al. 2024b, 2025).
+ J1930–1852   45.1     0.399    45.1    0.399       163  2.59  (1)
+ J1946+2052  0.078     0.064   0.182    0.150       292  2.50  (1)
+                                                                      3. UNDERSTANDING THE ECCENTRICITY GAP
+ J2150+3427   10.6     0.601    10.6    0.602      2880  2.59  (1)
+ J0514–4002E 7.45      0.708    7.45    0.708       459  3.89  (4)       In this Section, we show that the gap at intermediate
+ J1018–1523   8.98     0.228    8.99    0.228    12100   2.30  (1)
+                                                                      eccentricities arises naturally in a model where the pro-
+ J1753–2240   13.6     0.304    13.6    0.304      1550    -
+ J1755–2550   9.70     0.089    9.70    0.089      2.05    -          genitor mass-NS mass relation is discontinuous and the
+ J1759+5036   2.04     0.308    2.11    0.316    11500   2.62  (1)    second-born NS receives only a small natal kick. If the
+ J1807–2459B 9.96      0.747    9.97    0.747       806    -          natal kick velocity of the second SN in the DNS system
+ J1906+0746  0.166     0.085   0.166    0.085     0.113  2.61  (1)
+                                                                      is very low, then the post-SN orbits are mostly deter-
+ B2127+11C   0.335     0.681   0.493    0.746        97  2.71  (5)
+                                                                      mined by the Blaauw kicks. A break in the remnant
+  Note—The measured periods (Pm ), eccentricities (em ), and          mass function, i.e., non-monotonicity as a function of
+   ages (τc ) were taken from the ATNF Pulsar Catalog R. N.
+                                                                      the progenitor mass of the second SN progenitor, would
+ Manchester et al. (2005), and the listed values of Pb and eb are
+  the result of integrating the orbits back in time following the
+                                                                      produce a bimodal ejecta-mass distribution and there-
+formalism of P. C. Peters (1964) to correct for the effects of GW     fore a bimodal Blaauw kick distribution, which would
+ emission. We assume NS masses of 1.4M⊙ for the integration,          translate to an apparent gap in eccentricity. To demon-
+  but note that this has negligible effect on the resulting values    strate that this yields DNS eccentricities with a gap sim-
+ compared to adopting the total mass estimates. (*) We use an         ilar to observations, we employ a population synthesis
+  age of 10 Gyr to determine the birth properties, but changing       simulation adopting the I. Mandel & B. Müller (2020)
+ this to 14 Gyr does not affect the results significantly. (†) Age
+                                                                      SN recipes with small USSN kicks.
+exceeds a Hubble time, we therefore use an age of 14 Gyr for the
+  back integration. We note that this does not affect the period
+   and eccentricity estimates. References for total masses: (1)
+                                                                       3.1. Non-monotonicity in SN remnant mass function
+Catalog of A. Chattaraj et al. (2025) and references therein; (2)       There is no consensus in the literature regarding the
+Z. L. Yang et al. (2026); (3) D. Zhao et al. (2024); (4) E. D. Barr   relationship between progenitor and NS masses, with
+           et al. (2024); (5) B. A. Jacoby et al. (2006).
+                                                                      different studies finding different trends (e.g. C. L. Fryer
+                                                                      et al. 2012; M. Ugliano et al. 2012; K. Nakamura et al.
+                                                                      2015; B. Müller et al. 2016; T. Ertl et al. 2016; T.
+                                                                      Sukhbold et al. 2016; R. A. Patton & T. Sukhbold 2020;
+                                                                      D. Shishkin & N. Soker 2022; A. Burrows et al. 2024).
+                                                                      We consider a physically plausible break in the mass of
+4
+
+the newly formed NS as a function of the progenitor             Taken together, the physical mechanisms discussed
+mass, as found in several previous studies (e.g., I. Man-    above, along with the existence of breaks or bifurca-
+del & B. Müller 2020; F. R. N. Schneider et al. 2023; K.    tions as found in several previous studies, motivate us
+Maltsev et al. 2025).                                        to adopt a break in the NS remnant mass function, and
+   In lower-mass core-collapse SN progenitors, carbon        use the I. Mandel & B. Müller (2020) prescription as an
+typically burns convectively at the center, while in more    illustrative case. In this model, the core mass exhibits
+massive stars it tends to burn radiatively (e.g. W. D. Ar-   a sharp change at the CO core mass Mcore ≃ 3M⊙ , as-
+nett 1972; F. X. Timmes et al. 1996; G. E. Brown et al.      sociated with a transition in the structure of the final
+2001; T. Sukhbold & S. Adams 2020; E. Laplace et al.         burning shells. I. Mandel & B. Müller (2020) account
+2025), producing different silicon-core masses and den-      for this behavior by introducing a break in the remnant-
+sity profiles prior to collapse. The resulting structural    mass prescription at this core mass.
+differences can shift the shock revival time and explosion
+energy, leading to different amounts of mass accreted               3.2. Illustration with population synthesis
+onto the proto-NS prior to explosion and hence to a dis-
+                                                                We illustrate our argument by adopting the I. Mandel
+continuity or branching in the resulting NS mass func-
+                                                             & B. Müller 2020 SN prescription within the popula-
+tion. Furthermore, a discontinuity can arise as a con-
+                                                             tion synthesis code compas (S. Stevenson et al. 2017;
+sequence of discrete composition-shell interfaces in the
+                                                             A. Vigna-Gómez et al. 2018; J. Team COMPAS: Riley
+pre-SN structure. Density and entropy typically change
+                                                             et al. 2022; Team COMPAS: I. Mandel et al. 2025),
+abruptly across major shell boundaries (e.g., Si/O or
+                                                             which features a mass break between the CO core and
+O/C), and when such an interface reaches the shock,
+                                                             the resulting NS mass. It connects the core mass of the
+the associated drop in accretion ram pressure can facil-
+                                                             exploding star and the mass of the resulting NS or black
+itate shock acceleration (e.g., A. Summa et al. 2016; Y.
+                                                             hole remnant, and stochastically assigns their natal kicks
+Yamamoto & S. Yamada 2016). Therefore, shell bound-
+                                                             based on the CO core mass ejected in the explosion and
+aries act as natural anchors for the effective mass cut,
+                                                             the remnant mass. We use 630 km s−1 for the NS kick
+separating ejected and retained material. Small varia-
+                                                             scaling parameter in this model and take a NS kick dis-
+tions in progenitor mass can shift which interface is dy-
+                                                             tribution width of σkick,NS = 0.45 (V. Kapil et al. 2023,
+namically most important for triggering shock runaway,
+                                                             as amended by P. Disberg et al. 2026). We treat USSNe,
+so the mass cut can move from one boundary to another,
+                                                             through which most of the second NSs in DNS systems
+producing a break in the resulting NS mass distribution
+                                                             are formed in these simulations, separately, and assume
+even for similar core masses.
+                                                             they have lower kick velocities. For illustrative purposes,
+   As a result, several studies find non-monotonicity in
+                                                             we run a model where USSN kick velocities are set to
+the remnant mass function. The models of F. R. N.
+                                                             zero. Hereafter, we will refer to this model as M&M,0.
+Schneider et al. (2021) and K. Maltsev et al. (2025), for
+                                                                compas evolves each star using the analytic fitting
+instance, have two different windows of NS formation
+                                                             formulae of J. R. Hurley et al. 2000, calibrated to the
+in terms of the carbon-oxygen (CO) core mass, provid-
+                                                             stellar models of O. R. Pols et al. (1998), and mod-
+ing a natural bifurcation, but the more massive branch
+                                                             els binary interactions following recipes based on J. R.
+would require progenitors with CO core masses ≳ 7 M⊙
+                                                             Hurley et al. (2002) but modified as described in the ref-
+at the time of the second SN, leading to binaries that
+                                                             erences above. For 106 binaries, we draw the zero-age
+would almost always be disrupted by A. Blaauw (1961)
+                                                             MS mass of the primary (initially more massive star)
+kicks. The same alternation between NS and black hole
+                                                             from the Kroupa initial mass function (P. Kroupa 2001),
+forming regimes may also create distinct black hole mass
+                                                             in the range 5M⊙ ≤ Mprimary ≤ 100M⊙ , and the zero-
+branches, potentially explaining (apparent) features in
+                                                             age MS mass of the secondary companion Msecondary
+the mass distribution of binary black holes observed
+                                                             according to a flat distribution in mass ratio 0.1 ≤
+through GWs (e.g., P. Disberg & G. Nelemans 2023;
+                                                             q ≡ Msecondary /Mprimary ≤ 1 (H. Sana et al. 2012).
+F. R. N. Schneider et al. 2023; E. Laplace et al. 2025;
+                                                             We sample the initial orbital separation of circular bi-
+R. Willcox et al. 2025); The L. Boccioli & G. Fragione
+                                                             naries from a flat-in-the-log distribution in the range
+(2024) SN models, in turn, indicate a non-monotonicity
+                                                             0.1 ≤ a/au ≤ 1000 (E. Öpik 1924). All the stars in our
+between the mass of the silicon-oxygen core and the rem-
+                                                             population model have solar metallicity Z⊙ = 0.0142
+nant NS mass, but the dependence on the CO core in
+                                                             (M. Asplund et al. 2009). Running a model with a log-
+these models is non-trivial due to the complex interplay
+                                                             normal metallicity distribution between metallicities of
+between compactness and explosion energy (L. Boccioli
+                                                             0.001 and 0.03, which favors low metallicities, has a neg-
+et al. 2025).
+                                                             ligible impact on the trends we find. This is in agree-
+                                                                                                                         5
+
+ment with recent studies that showed metallicity does          eventual disappearance (Fig. A2 in Appendix A). The
+not play a significant role for DNS formation and prop-        absence of observed systems at short orbital periods is
+erties (e.g, A. Vigna-Gómez et al. 2018; L. A. C. van         consistent with the previously discussed selection effects.
+Son et al. 2025). Therefore, even though Galactic DNSs            In the right panel of Fig. 2, we show the distribution of
+were formed at a range of metallicities, we use solar          total binary mass as a function of eccentricity in our pop-
+metallicity as a representative value. All other model         ulation synthesis model, and compare it to the observed
+parameters are taken from the default compas settings.         mass distribution. We focus on total binary masses in-
+                                                               ferred from pulsar timing, since individual NS masses
+      3.3. Reproducing the eccentricity bimodality             are typically only well constrained if one NS is close to
+                                                               the line of sight to the pulsar, allowing the Shapiro de-
+   The left panel of Fig. 1 shows the second NS mass at
+                                                               lay to be measured, and are otherwise highly uncertain.
+DNS formation as a function of the CO core mass (equal
+                                                               Our simulated distribution agrees reasonably well with
+to the total mass for USSN progenitors) for the three
+                                                               the observed DNS masses in some eccentricity regimes,
+different core mass regimes in the I. Mandel & B. Müller
+                                                               but shows discrepancies in others.
+(2020) SN prescription implemented in our population
+                                                                  For binaries with low DNS eccentricities at birth (eb ≲
+synthesis simulation. For Mcore < M1 , where M1 =
+                                                               0.2), which are associated with small CO core progen-
+2M⊙ , the central remnant is always an NS (green dots);
+                                                               itors in the I. Mandel & B. Müller 2020 model (green
+if M1 ≤ Mcore < M3 , where M3 = 7M⊙ , the compact
+                                                               dots), our simulations predict slightly lower masses than
+remnant has a probability of being an NS or a black hole,
+                                                               observed. This discrepancy may partly result from our
+which depends on the CO core mass. The purple and
+                                                               Eddington-limited treatment of mass accretion onto the
+blue dots show remnants that resulted in NSs. Despite
+                                                               NS, which yields negligible mass growth. Observations
+the stochasticity in the recipe that leads to a scatter in
+                                                               of ultra luminous X-ray sources show that the accretion
+the results, we can see there is a pronounced jump in
+                                                               rate of NSs can surpass the Eddington limit by several
+the remnant mass at a CO core mass of M2 = 3M⊙
+                                                               orders of magnitude (e.g., G. L. Israel et al. 2017; P.
+(between the purple and blue dots).
+                                                               Kaaret et al. 2017). Additional evidence for high ac-
+   Consider a binary with a secondary pre-SN progeni-
+                                                               cretion rates and mass gain could also be inferred from
+tor just below this threshold mass, an ultra-stripped 2.99
+                                                               the observed spin periods of recycled pulsars, as in the
+M⊙ CO core. In most cases, the primary is a ∼ 1.26 M⊙
+                                                               case of pulsar – white dwarf binaries (e.g., T. M. Tau-
+NS formed through an electron-capture SN. At collapse,
+                                                               ris et al. 2012, though in DNS systems the recycling
+the secondary loses ≲ 1.2 M⊙ . The retained total mass
+                                                               is generally milder and might therefore indicate a more
+fraction is β ≳ 0.72, producing a binary with an eccen-
+                                                               moderate mass gain, T. M. Tauris et al. 2017). Mass ac-
+tricity of ≲ 0.4 in the absence of a natal kick (right panel
+                                                               cretion during the CEE episode, which we do not model,
+of Fig. 1). On the other hand, if the secondary progen-
+                                                               may further contribute to such mass growth; however,
+itor had a mass of 3.01 M⊙ , just above the threshold
+                                                               its impact on the NS mass is expected to be small (see
+mass, it would lose ≳ 1.5 M⊙ during the SN, resulting
+                                                               e.g., M. MacLeod & E. Ramirez-Ruiz 2015; A. Grichener
+in β ≲ 0.64 and leaves behind a DNS with an eccentric-
+                                                               2023). Overall, accounting for modest NS mass gain due
+ity of ≳ 0.55. This is what gives rise to an eccentricity
+                                                               to the aforementioned effects could reduce the discrep-
+gap, as shown in the right panel of Fig. 1.
+                                                               ancy between the simulated and observed masses in this
+   In the left panel of Fig. 2 we present the orbital period
+                                                               low-eccentricity regime.
+– eccentricity distribution of the M&M,0 simulated DNS
+                                                                  At the highest birth eccentricities below the eccen-
+population colored according to the different CO core
+                                                               tricity gap (0.25 ≲ eb ≲ 0.4), our model reproduces
+mass regimes of the I. Mandel & B. Müller (2020) pre-
+                                                               the observed mass range, but also predicts a popula-
+scription, and compare it to observations of confirmed
+                                                               tion with higher total binary masses than currently de-
+DNSs (filled gray squares), as well as potential DNSs
+                                                               tected. We find that the second NS in these predicted
+and DNSs associated with GCs (open gray squares, see
+                                                               high-mass DNS systems forms from progenitors with
+Section 2 for details). We find that the eccentricity gap
+                                                               CO core masses just below 3M⊙ in the I. Mandel &
+that arises from the combination of the I. Mandel & B.
+                                                               B. Müller 2020 model (purple dots) and the DNSs have
+Müller (2020) remnant mass break and lack of USSN
+                                                               short orbital periods (left panel of Fig. 2). This implies
+kick roughly coincides with the observed eccentricity bi-
+                                                               that the subsequently formed DNSs will merge more
+modality. Models with significant natal kicks or a mono-
+                                                               rapidly due to GW emission, as shown in Fig. 3, lower-
+tonic NS mass prescription do not predict a DNS eccen-
+                                                               ing the chances of detecting them through pulsar timing.
+tricity gap, as can be seen in Fig. A1 in Appendix A.
+                                                               We note, however, that a few high-eccentricity Galactic
+Gradually increasing the USSN kick results in the gap’s
+6
+
+
+
+
+Figure 1. Properties of DNSs evolved with the I. Mandel & B. Müller (2020) prescription for the remnant mass and kick
+distribution, assuming the USSN kicks equal zero; M&M,0. The different colors correspond to different CO core mass regimes
+in the I. Mandel & B. Müller (2020) formalism, where M1 = 2M⊙ , M2 = 3M⊙ , and M3 = 7M⊙ . Left panel: mass of the NS
+formed in the second SN explosion vs the CO core mass, which is equivalent to the mass of the SN progenitor in an USSN. Right
+panel: eccentricity just after DNS formation vs fraction β of total mass retained in the binary during the second SN explosion.
+
+
+
+
+Figure 2. Observables of Galactic DNSs. Dots show the results of the M&M,0 model, with colors defined as in Fig. 1. The gray
+squares are observations of Galactic DNSs taken from the ATNF Pulsar Catalog and integrated back in time to DNS formation
+for comparison. Empty squares are potential DNSs, or DNSs that reside in GCs (as explained in Section 2). Left panel: orbital
+period – eccentricity distribution immediately after the second SN explosion. Right panel: total mass of the DNS system vs
+eccentricity at the same time (observed DNSs with no total mass measurement are excluded).
+
+DNSs (eb ≳ 0.6) have been detected, despite also hav-              4. CONSTRAINTS ON SECOND SN NATAL KICK
+ing short GW merger times. Furthermore, we do not                     While velocity measurements of isolated pulsars sug-
+account for radio lifetimes, which affect how long the             gest typical kick velocities of hundreds of km/s (e.g. F.
+NSs can be observed as pulsars and remain highly un-               Verbunt et al. 2017; A. P. Igoshev 2020; P. Disberg &
+certain due to the poorly constrained magnetic fields,             I. Mandel 2025), there is growing observation-driven ev-
+birth spins, and possible recycling histories. We discuss          idence that SN kicks in binary systems that evolve to
+alternative explanations for the non-detection of massive          DNSs might be fairly small. When the first SN occurs,
+DNSs in Section 5.                                                 for instance, the binary must be in a wide orbit accord-
+                                                                                                                         7
+
+                                                                 tal kick perpendicular to the orbital plane to be ≲ 35
+                                                                 km s−1 , much smaller than the typical value for regular
+                                                                 core-collapse SNe, and within the previously estimated
+                                                                 natal kick range of 5 − 120 km s−1 for PSR J0737-3039
+                                                                 (T.-W. Wong et al. 2010). For the low-mass second
+                                                                 SN progenitor range discussed by I. H. Stairs (2004),
+                                                                 ≃ 1.37M⊙ − 2M⊙ , the eccentricity driven by symmetric
+                                                                 mass loss alone would be in the range ≃ 0.05 − 0.29.
+                                                                 The back-integrated eccentricity we infer, eb = 0.147,
+                                                                 lies well within this range. Therefore, this extremely
+                                                                 well measured double pulsar provides strong, relatively
+                                                                 model-independent constraints on the out-of-plane kick
+                                                                 component of the second-born NS, and appears to be
+                                                                 consistent with relatively low asymmetric natal kicks
+                                                                 and A. Blaauw (1961) kicks from symmetric mass loss.
+Figure 3. Same as the right panel of Fig. 2, but with popu-      The small observed transverse velocity of PSR J0737-
+lation data and observations colored by the GW merger time,
+                                                                 3039 (M. Kramer et al. 2006; A. T. Deller et al. 2009),
+tGW . The color scale is limited to 10 Gyr, which is a proxy
+for the age of the Galactic thin disc (E. F. del Peloso et al.
+                                                                 ∼ 10 km s−1 , further supports a weak kick for the sec-
+2005). Systems with longer merger times are assigned the         ond SN.
+same color as 10 Gyr. The dashed grey line corresponds to           If the eccentricity at DNS formation, eb = 0.147, is
+a total binary mass of MT = 2.9M⊙ , above which observed         entirely due to symmetric mass loss with no natal kick,
+systems are rare but our models still predict binaries.          then eb = (1 − β)/β, where β is the fraction of the total
+                                                                 binary mass retained after the explosion. This gives β ≃
+ing to most models to allow successful envelope ejection         0.87 (see right panel of Fig. 1), corresponding to a total
+during the subsequent CEE phase between the NS and               instantaneous mass loss of ≃ 0.38 M⊙ that formed the
+its companion. To avoid disruption in such a wide or-            currently 2.59 M⊙ binary. However, part of this mass
+bit, the first SN kick has to be weak, favoring electron-        loss is expected to be carried away by neutrinos dur-
+                                                                                                                      2
+capture SNe in DNS progenitors (e.g., N. Giacobbo &              ing core collapse. Using ∆Mν ≃ 0.075 (MNS /M⊙ ) M⊙
+M. Mapelli 2018; R. Willcox et al. 2021). The second             (C. L. Fryer et al. 2012, and references therein), the
+SN in most DNS systems is believed to impart relatively          baryonic–gravitational mass difference for the second-
+low kick velocities on the newly born NS (e.g., J. J. An-        born NS is ≃ 0.12 M⊙ , although the exact value depends
+drews et al. 2015; P. Beniamini & T. Piran 2016; Y.              on the NS equation of state. Thus, in a purely Blaauw-
+Shao & X.-D. Li 2018), which hints towards a USSN.               kick interpretation, only ≃ 0.26 M⊙ of baryonic material
+They mostly occur when a stripped helium star retains            was promptly ejected during the second SN. Conversely,
+only a small helium envelope, potentially after case BB          if the only mass lost in the supernova was in neutrinos,
+mass transfer removes most of the envelope from the              an in-plane natal kick of order ≲ 30 km s−1 could ac-
+helium-star progenitor (e.g., T. M. Tauris et al. 2015;          count for the remaining eccentricity. While some fine
+T. M. Tauris et al. 2017; T. J. Moriya et al. 2017; K. De        tuning of the A. Blaauw (1961) mass loss and natal-kick
+et al. 2018; A. Chattaraj et al. 2025).                          direction could allow slightly larger values, J0737-3039
+   Pulsar timing observations of DNSs can provide a              is consistent with very little prompt mass ejection and
+powerful framework for placing better constraints on             a very small natal kick in the second SN.
+their kick magnitudes through spin-orbit misalignments.             Using a similar simple spin-orbit tilt argument for the
+Consider the low-eccentricity double pulsar J0737-3039           DNS system PSR B1534+12, which has a spin-orbit mis-
+(em = 0.088; integrated back to eb = 0.147 at DNS                alignment of 25 ± 4◦ , however, results in a perpendicular
+formation) as an example. The first NS is a recycled             natal kick component of ≃ 150 − 220 km s−1 . This is
+pulsar with a 22.7 ms spin period (M. Burgay et al.              broadly consistent with the larger kick magnitude in-
+2003). Since it was recycled by accretion from its com-          ferred by S. E. Thorsett et al. (2005), 170 − 290 km s−1 ,
+panion, we can expect its spin axis to be aligned with           from a detailed reconstruction combining the misalign-
+the binary’s angular momentum axis before the second             ment with orbital and kinematic constraints. Neverthe-
+SN. Currently, it is observed to be misaligned by less           less, PSR B1534+12 remains below the eccentricity gap,
+than 3.2◦ from the binary’s orbital axis (R. D. Ferdman          with em = 0.274 and eb = 0.283. For a second SN pro-
+et al. 2013). This constrains the component of the na-           genitor mass near the ∼ 3M⊙ central estimate of S. E.
+8
+
+Thorsett et al. (2005), symmetric mass loss alone would        USSN kicks in order to isolate the effect of the remnant
+give an eccentricity of ∼ 0.6, larger than observed and        mass break. A more realistic possibility, however, might
+above the gap. This suggests a natal kick component            be that the second SN kick distribution has a bimodal
+with a direction roughly opposed to the pre-SN orbital         natal kick distribution correlated with the SN progen-
+motion could have partially counteracted the eccentric-        itor mass loss (e.g., P. Beniamini & T. Piran 2016).
+ity increase due to mass loss, while an out-of-plane com-      In this case, a dominant weak kick mode would pre-
+ponent still produces the observed spin-orbit misalign-        serve the Blaauw driven eccentricity bifurcation, while
+ment. Therefore, B1534+12 is in clear tension with             a subdominant high kick mode could either push sys-
+the simplifying assumption that all second SNe in close        tems above the bifurcation point to even higher eccen-
+DNSs occur with negligible natal kicks. At the same            tricities or, for favorable kick geometries, leave them
+time, it illustrates that the mapping between kick mag-        on the low-eccentricity branch while producing a sig-
+nitude and post-SN eccentricity can also be direction-         nificant spin–orbit misalignment, as may be the case for
+dependent (see Section 5 for further discussion).              B1534+12. We note however, that a bimodal kick distri-
+                                                               bution might also drive some DNSs into the eccentricity
+                    5. DISCUSSION                              gap. A larger DNS sample, together with improved kick
+                                                               and mass estimates, will be required to test this scenario
+  We propose and demonstrate that a break in the SN
+                                                               observationally.
+remnant mass function, combined with low natal kicks
+                                                                  Alternatively, the eccentricity gap could result from
+during the second SN, may account for the observed
+                                                               partial stripping of the helium-star progenitors. The
+bimodality in DNS eccentricities. However, there are
+                                                               compas models used here assume complete removal of
+several remaining caveats to our model.
+                                                               the helium envelope from all stripped helium stars that
+  The total mass of Galactic DNSs observed with pul-
+                                                               expand after the helium MS and undergo case BB mass
+sar timing at intermediate eccentricities, for instance, is
+                                                               transfer. Detailed models by T. M. Tauris et al. (2015),
+generally lower than our population model predictions
+                                                               however, suggest that more massive helium donors,
+(right panel of Fig. 2). However, we note that the de-
+                                                               which expand less during the helium Hertzsprung gap
+tected DNS merger GW190425 has a total mass of about
+                                                               and evolve on shorter timescales, may retain part of
+3.4M⊙ (B. P. Abbott et al. 2020), coinciding with our
+                                                               their envelopes prior to the SN explosion. Furthermore,
+higher predicted range. This could be consistent with
+                                                               some helium stars may expand less than predicted by
+the possibility that some high-mass DNSs are formed
+                                                               compas (S. E. Woosley 2019), avoiding case BB mass
+with short orbital periods and rapid merger timescales
+                                                               transfer and ultra-stripping altogether. This could cre-
+(Fig. 3). Such systems would be detectable, or even fa-
+                                                               ate a natural bifurcation in the progenitor masses before
+vored, in GW observations, but could largely be missed
+                                                               the second SN, and consequently in DNS eccentricities,
+by radio pulsar searches, biasing the observed radio pop-
+                                                               without requiring a break in the SN remnant mass pre-
+ulation against higher-mass systems.
+                                                               scription.
+  Another possibility is that the USSN in which the sec-
+                                                                  Galactic DNSs are not the only binary systems that
+ond NS is born is a very weak explosion, in which not
+                                                               exhibit a bimodality distribution in eccentricity. R.
+all of the mass is ejected promptly. Since only mass
+                                                               Valli et al. (2025) identified a similar eccentricity bi-
+loss that occurs on a timescales shorter than the or-
+                                                               furcation among Galactic Be X-ray binaries. However,
+bital timescale can be regarded as instantaneous and
+                                                               the high-eccentricity branch in their case has a clear
+produces a A. Blaauw (1961) kick, the mass and eccen-
+                                                               period-eccentricity correlation which appears to be dif-
+tricity of the DNS at birth could be consistent with a
+                                                               ficult to explain with a A. Blaauw (1961) kick alone.
+scenario in which ∼ 1 M⊙ is ejected at velocities faster
+                                                               Pulsar – white dwarf binaries may also have a less pro-
+than orbital, causing an eccentricity change, while the
+                                                               nounced eccentricity gap at slightly higher eccentricities
+remaining ∼ 0.5 M⊙ are expelled slowly relative to the
+                                                               of ∼ 0.5 − 0.6. Since these systems are typically wider,
+orbital velocity, with little influence on the eccentricity.
+                                                               however, the SNe may not be fully ultra-stripped.
+It is also possible that some mass is lost through pulsa-
+tions prior to the SN, again weakening the Blaauw kick
+while also reducing the remnant mass (S. E. Woosley                                 6. SUMMARY
+2019).                                                           In this study, we showed that a non-monotonic rela-
+  The small number of observed DNSs with measured              tionship between progenitor mass and NS mass, com-
+misalignment angles and radial velocities does not cur-        bined with negligible natal kicks in the second SN dur-
+rently allow us to determine a clear trend in the second       ing DNS formation, can naturally produce a bimodal
+SN natal kick. Our illustrative model assumes negligible       Blaauw kick distribution and, consequently, a bimodal-
+                                                                                                                                9
+
+ity in DNS eccentricities broadly consistent with the ob-         tion 4), our explored model provides a possible expla-
+served Galactic DNS sample. In particular, we curated a           nation for the apparent eccentricity bimodality in cur-
+sample of observed DNSs (Section 2), and used the pop-            rent DNS observations and makes a prediction for fu-
+ulation synthesis code compas to illustrate this model            ture DNS detections. Expanding the Galactic sample
+(Section 3).                                                      with SKA (R. Braun et al. 2019), improved mass mea-
+   There are several reasons to expect the relationship           surements, and more detailed modeling of SN ejecta and
+between the progenitor mass and NS mass to be non-                kick physics will be crucial for testing this interpretation
+monotonic (Section 3.1). Variations in pre-SN core                and distinguishing among DNS formation scenarios.
+structure, especially around the transition from con-
+vective to radiative carbon burning, can produce sharp                            ACKNOWLEDGMENTS
+changes in the collapse and explosion dynamics, leading             We are grateful to Jeff Andrews, Mike Lau, Mar-
+to different amounts of fallback or accretion onto the            cus Lower, Bernhard Müller, Gijs Nelemans, Mathieu
+proto-NS. In addition, abrupt composition-shell inter-            Renzo, Thomas Tauris and Reinhold Willcox for very
+faces can shift the effective mass cut between ejected and        useful comments and stimulating discussions. AG ac-
+retained material, naturally giving rise to a discontinuity       knowledges support from the Steward Observatory Fel-
+or branching in the NS mass distribution. Therefore, we           lowship in Theoretical and Computational Astrophysics,
+adopted the I. Mandel & B. Müller (2020) prescription            the IAU-Gruber Fellowship, and the CHE Fellowship.
+that features such a break (Section 3.2).                         PD, RH and IM acknowledge support from the Aus-
+   We found that the resulting DNS population repro-              tralian Research Council (ARC) Centre of Excellence
+duces the observed orbital period – eccentricity distri-          for Gravitational Wave Discovery (OzGrav), through
+bution, including the scarcity of systems at intermedi-           project number CE230100016.
+ate eccentricities (Section 3.3), which has been difficult
+to explain in isolated binary evolution. Although the                              DATA AVAILABILITY
+current sample is too small to establish an eccentricity            In this work we used the population synthesis code
+gap with confidence (Appendix B) or to constrain the              compas, version 03.27.01. The population synthesis
+kick distribution of the second SN observationally (Sec-          data generated for this project is publicly available on
+                                                                  Zenodo at doi:10.5281/zenodo.21651784.
+
+
+                                                         REFERENCES
+Abbott, B. P., Abbott, R., Abbott, T. D., et al. 2020,            Braun, R., Bonaldi, A., Bourke, T., Keane, E., & Wagg, J.
+  ApJL, 892, L3, doi: 10.3847/2041-8213/ab75f5                      2019, arXiv e-prints, arXiv:1912.12699,
+Andrews, J. J., Farr, W. M., Kalogera, V., & Willems, B.            doi: 10.48550/arXiv.1912.12699
+  2015, ApJ, 801, 32, doi: 10.1088/0004-637X/801/1/32             Brown, G. E., Heger, A., Langer, N., et al. 2001, NewA, 6,
+Andrews, J. J., & Mandel, I. 2019, ApJL, 880, L8,                   457, doi: 10.1016/S1384-1076(01)00077-X
+  doi: 10.3847/2041-8213/ab2ed1                                   Burgay, M., et al. 2003, Nature, 426, 531
+
+Arnett, W. D. 1972, ApJ, 176, 699, doi: 10.1086/151672            Burrows, A., Wang, T., & Vartanyan, D. 2024, arXiv
+                                                                    e-prints, arXiv:2401.06840,
+Asplund, M., Grevesse, N., Sauval, A. J., & Scott, P. 2009,
+                                                                    doi: 10.48550/arXiv.2401.06840
+  ARA&A, 47, 481,
+                                                                  Chattaraj, A., Andrews, J. J., Bavera, S. S., et al. 2025,
+  doi: 10.1146/annurev.astro.46.060407.145222
+                                                                    arXiv e-prints, arXiv:2508.00186,
+Barr, E. D., Dutta, A., Freire, P. C. C., et al. 2024, Science,
+                                                                    doi: 10.48550/arXiv.2508.00186
+  383, 275, doi: 10.1126/science.adg3005
+                                                                  Colom i Bernadich, M., Balakrishnan, V., Barr, E., et al.
+Beniamini, P., & Piran, T. 2016, MNRAS, 456, 4089,
+                                                                    2023, A&A, 678, A187,
+  doi: 10.1093/mnras/stv2903
+                                                                    doi: 10.1051/0004-6361/202346953
+Blaauw, A. 1961, Bull. Astron. Inst. Netherlands, 15, 265         De, K., Kasliwal, M. M., Ofek, E. O., et al. 2018, Science,
+Boccioli, L., & Fragione, G. 2024, PhRvD, 110, 023007,              362, 201, doi: 10.1126/science.aas8693
+  doi: 10.1103/PhysRevD.110.023007                                del Peloso, E. F., da Silva, L., Porto de Mello, G. F., &
+Boccioli, L., Vartanyan, D., O’Connor, E. P., & Kasen, D.           Arany-Prado, L. I. 2005, A&A, 440, 1153,
+  2025, MNRAS, 540, 3885, doi: 10.1093/mnras/staf963                doi: 10.1051/0004-6361:20053307
+10
+
+Deller, A. T., Bailes, M., & Tingay, S. J. 2009, Science,        Kapil, V., Mandel, I., Berti, E., & Müller, B. 2023,
+  323, 1327, doi: 10.1126/science.1167969                         MNRAS, 519, 5893, doi: 10.1093/mnras/stad019
+Ding, H., Deller, A. T., Swiggum, J. K., et al. 2024, ApJ,       Keith, M. J., Kramer, M., Lyne, A. G., et al. 2009,
+  970, 90, doi: 10.3847/1538-4357/ad4883                           MNRAS, 393, 623, doi: 10.1111/j.1365-2966.2008.14234.x
+Disberg, P., Bahramian, A., & Mandel, I. 2026, ApJL,             Kramer, M., Stairs, I. H., Manchester, R. N., et al. 2006,
+  1000, L56, doi: 10.3847/2041-8213/ae52f1                         Science, 314, 97, doi: 10.1126/science.1132305
+Disberg, P., Gaspari, N., & Levan, A. J. 2024a, A&A, 689,        Kroupa, P. 2001, MNRAS, 322, 231,
+  A348, doi: 10.1051/0004-6361/202450790                           doi: 10.1046/j.1365-8711.2001.04022.x
+Disberg, P., Gaspari, N., & Levan, A. J. 2024b, A&A, 687,        Laplace, E., Schneider, F. R. N., & Podsiadlowski, P. 2025,
+  A272, doi: 10.1051/0004-6361/202449996                           A&A, 695, A71, doi: 10.1051/0004-6361/202451077
+Disberg, P., Gaspari, N., & Levan, A. J. 2025, A&A, 700,         Lyne, A. G., & Lorimer, D. R. 1994, Nature, 369, 127,
+  A75, doi: 10.1051/0004-6361/202554349                            doi: 10.1038/369127a0
+Disberg, P., & Mandel, I. 2025, ApJL, 989, L8,                   Lyne, A. G., Pritchard, R. S., Graham-Smith, F., &
+  doi: 10.3847/2041-8213/adf286                                    Camilo, F. 1996, Nature, 381, 497, doi: 10.1038/381497a0
+Disberg, P., & Nelemans, G. 2023, A&A, 676, A31,                 MacLeod, M., & Ramirez-Ruiz, E. 2015, ApJL, 798, L19,
+  doi: 10.1051/0004-6361/202245693                                doi: 10.1088/2041-8205/798/1/L19
+Ertl, T., Ugliano, M., Janka, H.-T., Marek, A., & Arcones,       Maltsev, K., Schneider, F. R. N., Mandel, I., et al. 2025,
+  A. 2016, ApJ, 821, 69, doi: 10.3847/0004-637X/821/1/69          arXiv e-prints, arXiv:2503.23856,
+Ferdman, R. D., Stairs, I. H., Kramer, M., et al. 2013, ApJ,      doi: 10.48550/arXiv.2503.23856
+  767, 85, doi: 10.1088/0004-637X/767/1/85                       Manchester, R. N., Hobbs, G. B., Teoh, A., & Hobbs, M.
+Flannery, B. P., & van den Heuvel, E. P. J. 1975, A&A, 39,        2005, AJ, 129, 1993, doi: 10.1086/428488
+  61                                                             Mandel, I., & Broekgaarden, F. S. 2022, Living Reviews in
+Fryer, C. L., Belczynski, K., Wiktorowicz, G., et al. 2012,       Relativity, 25, 1, doi: 10.1007/s41114-021-00034-3
+  ApJ, 749, 91, doi: 10.1088/0004-637X/749/1/91                  Mandel, I., & Müller, B. 2020, MNRAS, 499, 3214,
+Giacobbo, N., & Mapelli, M. 2018, MNRAS, 480, 2011,               doi: 10.1093/mnras/staa3043
+  doi: 10.1093/mnras/sty1999                                     Mandel, I., Müller, B., Riley, J., et al. 2021, MNRAS, 500,
+Grichener, A. 2023, MNRAS, 523, 221,                              1380, doi: 10.1093/mnras/staa3390
+  doi: 10.1093/mnras/stad1449                                    Maoz, D., & Nakar, E. 2025, ApJ, 982, 179,
+Grichener, A. 2025, Ap&SS, 370, 11,                               doi: 10.3847/1538-4357/ada3bd
+  doi: 10.1007/s10509-025-04402-1                                Massey Jr, F. J. 1951, Journal of the American statistical
+Hulse, R. A., & Taylor, J. H. 1975, ApJL, 195, L51,               Association, 46, 68
+ doi: 10.1086/181708                                             Moriya, T. J., Mazzali, P. A., Tominaga, N., et al. 2017,
+Hurley, J. R., Pols, O. R., & Tout, C. A. 2000, MNRAS,            MNRAS, 466, 2085, doi: 10.1093/mnras/stw3225
+ 315, 543, doi: 10.1046/j.1365-8711.2000.03426.x                 Müller, B., Heger, A., Liptai, D., & Cameron, J. B. 2016,
+Hurley, J. R., Tout, C. A., & Pols, O. R. 2002, MNRAS,            MNRAS, 460, 742, doi: 10.1093/mnras/stw1083
+ 329, 897, doi: 10.1046/j.1365-8711.2002.05038.x                 Nair, A., & Stevenson, S. 2025, MNRAS, 543, 233,
+Igoshev, A. P. 2019, MNRAS, 482, 3415,                             doi: 10.1093/mnras/staf1397
+  doi: 10.1093/mnras/sty2945                                     Nakamura, K., Takiwaki, T., Kuroda, T., & Kotake, K.
+Igoshev, A. P. 2020, MNRAS, 494, 3663,                             2015, PASJ, 67, 107, doi: 10.1093/pasj/psv073
+  doi: 10.1093/mnras/staa958                                     Ng, C., Kruckow, M. U., Tauris, T. M., et al. 2018,
+Israel, G. L., Belfiore, A., Stella, L., et al. 2017, Science,     MNRAS, 476, 4315, doi: 10.1093/mnras/sty482
+   355, 817, doi: 10.1126/science.aai8635                        Öpik, E. 1924, Publications of the Tartu Astrofizica
+Ivanova, N., Justham, S., & Ricker, P. 2020, Common                Observatory, 25, 1
+  Envelope Evolution (IOP Publishing),                           Patton, R. A., & Sukhbold, T. 2020, MNRAS, 499, 2803,
+  doi: 10.1088/2514-3433/abb6f0                                    doi: 10.1093/mnras/staa3029
+Jacoby, B. A., Cameron, P. B., Jenet, F. A., et al. 2006,        Peters, P. C. 1964, Physical Review, 136, 1224,
+  ApJL, 644, L113, doi: 10.1086/505742                             doi: 10.1103/PhysRev.136.B1224
+Kaaret, P., Feng, H., & Roberts, T. P. 2017, ARA&A, 55,          Phinney, E. S., & Sigurdsson, S. 1991, Nature, 349, 220,
+ 303, doi: 10.1146/annurev-astro-091916-055259                     doi: 10.1038/349220a0
+                                                                                                                           11
+
+Pols, O. R., Schröder, K.-P., Hurley, J. R., Tout, C. A., &    Team COMPAS: Riley, J., Agrawal, P., Barrett, J. W.,
+  Eggleton, P. P. 1998, MNRAS, 298, 525,                          et al. 2022, ApJS, 258, 34, doi: 10.3847/1538-4365/ac416c
+  doi: 10.1046/j.1365-8711.1998.01658.x                         Thorsett, S. E., Dewey, R. J., & Stairs, I. H. 2005, ApJ,
+Romero-Shaw, I. M., Farrow, N., Stevenson, S., Thrane, E.,        619, 1036, doi: 10.1086/426668
+  & Zhu, X.-J. 2020, MNRAS, 496, L64,                           Timmes, F. X., Woosley, S. E., & Weaver, T. A. 1996, ApJ,
+  doi: 10.1093/mnrasl/slaa084                                     457, 834, doi: 10.1086/176778
+                                                                Ugliano, M., Janka, H.-T., Marek, A., & Arcones, A. 2012,
+Sana, H., de Mink, S. E., de Koter, A., et al. 2012, Science,
+                                                                  ApJ, 757, 69, doi: 10.1088/0004-637X/757/1/69
+  337, 444, doi: 10.1126/science.1223344
+                                                                Valli, R., de Mink, S. E., Justham, S., et al. 2025, arXiv
+Schneider, F. R. N., Podsiadlowski, P., & Laplace, E. 2023,
+                                                                  e-prints, arXiv:2505.08857,
+  ApJL, 950, L9, doi: 10.3847/2041-8213/acd77a
+                                                                  doi: 10.48550/arXiv.2505.08857
+Schneider, F. R. N., Podsiadlowski, P., & Müller, B. 2021,     van Leeuwen, J., Kasian, L., Stairs, I. H., et al. 2015, ApJ,
+  A&A, 645, A5, doi: 10.1051/0004-6361/202039219                  798, 118, doi: 10.1088/0004-637X/798/2/118
+Shao, Y., & Li, X.-D. 2018, ApJ, 867, 124,                      van Son, L. A. C., Roy, S. K., Mandel, I., et al. 2025, ApJ,
+  doi: 10.3847/1538-4357/aae648                                   979, 209, doi: 10.3847/1538-4357/ada14a
+Shishkin, D., & Soker, N. 2022, MNRAS, 513, 4224,               Verbunt, F., Igoshev, A., & Cator, E. 2017, A&A, 608, A57,
+  doi: 10.1093/mnras/stac1075                                     doi: 10.1051/0004-6361/201731518
+Stairs, I. H. 2004, 304, 547                                    Vigna-Gómez, A., Neijssel, C. J., Stevenson, S., et al. 2018,
+Stevenson, S., Vigna-Gómez, A., Mandel, I., et al. 2017,         MNRAS, 481, 4009, doi: 10.1093/mnras/sty2463
+  Nat. Commun., 8, 14906, doi: 10.1038/ncomms14906              Willcox, R., Mandel, I., Thrane, E., et al. 2021, ApJL, 920,
+                                                                  L37, doi: 10.3847/2041-8213/ac2cc8
+Sukhbold, T., & Adams, S. 2020, MNRAS, 492, 2578,
+                                                                Willcox, R., Schneider, F. R. N., Laplace, E., et al. 2025,
+  doi: 10.1093/mnras/staa059
+                                                                  arXiv e-prints, arXiv:2510.07573,
+Sukhbold, T., Ertl, T., Woosley, S. E., Brown, J. M., &
+                                                                  doi: 10.48550/arXiv.2510.07573
+  Janka, H.-T. 2016, ApJ, 821, 38,
+                                                                Wong, T.-W., Willems, B., & Kalogera, V. 2010, ApJ, 721,
+  doi: 10.3847/0004-637X/821/1/38
+                                                                  1689, doi: 10.1088/0004-637X/721/2/1689
+Summa, A., Hanke, F., Janka, H.-T., et al. 2016, ApJ, 825,      Woosley, S. E. 2019, ApJ, 878, 49,
+  6, doi: 10.3847/0004-637X/825/1/6                               doi: 10.3847/1538-4357/ab1b41
+Tauris, T. M., Langer, N., & Kramer, M. 2012, MNRAS,            Yamamoto, Y., & Yamada, S. 2016, ApJ, 818, 165,
+  425, 1601, doi: 10.1111/j.1365-2966.2012.21446.x                doi: 10.3847/0004-637X/818/2/165
+Tauris, T. M., Langer, N., & Podsiadlowski, P. 2015,            Yang, Z. L., Han, J. L., Wang, P. F., et al. 2026, ApJL,
+  MNRAS, 451, 2123, doi: 10.1093/mnras/stv990                     1000, L1, doi: 10.3847/2041-8213/ae4801
+Tauris, T. M., Kramer, M., Freire, P. C. C., et al. 2017,       Ye, C. S., Fong, W.-f., Kremer, K., et al. 2020, ApJL, 888,
+  ApJ, 846, 170, doi: 10.3847/1538-4357/aa7e89                    L10, doi: 10.3847/2041-8213/ab5dc5
+                                                                Zhao, D., Wang, N., Yuan, J. P., et al. 2024, ApJL, 964, L7,
+Team COMPAS: I. Mandel, Riley, J., Boesky, A., et al.
+                                                                  doi: 10.3847/2041-8213/ad2fb3
+  2025, ApJS, 280, 43, doi: 10.3847/1538-4365/adf8d0
+12
+
+
+
+
+Figure A1. Properties of DNSs for the different remnant mass and kick prescriptions described in Appendix A: the M&M
+model (i, pink dots), Fryer model (ii, violet dots), and Fryer,0 model (iii, light blue dots). M&M,0 (dark blue dots) is presented
+for comparison. Left panel: period – eccentricity distribution at DNS birth. The filled gray squares are observations of Galactic
+DNSs, and the empty squares are systems that reside in GCs or whose nature is debated (see Table 1). Right panel: cumulative
+distribution functions (CDFs) of kicks applied to the NS born in the second SN explosion.
+
+
+
+                                                          APPENDIX
+
+
+                                A. ADDITIONAL POPULATION SYNTHESIS MODELS
+  To test how different components of our population synthesis model affect its compatibility with observations, and
+particularly its ability to reproduce the observed eccentricity bimodality, we perform additional simulations in which
+we vary key assumptions:
+     i. M&M: I. Mandel & B. Müller (2020) remnant mass prescriptions and kick formalism with the model parameters
+        as in M&M,0 and no special treatment of the USSN kick.
+     ii. Fryer: remanent mass distribution and delayed SN engine prescription from C. L. Fryer et al. (2012); two-
+         component Maxwellian kick distribution with σkick,CCSN = 217 km s−1 for core-collapse SNe (P. Disberg & I.
+         Mandel 2025), and σkick,ECSN = 30 km s−1 , σkick,USSN = 30 km s−1 for electron-capture SNe and USSNe (e.g.,
+         A. Vigna-Gómez et al. 2018), respectively.
+  iii. Fryer,0: remanent mass distribution and delayed SN engine prescription from C. L. Fryer et al. (2012); three-
+       component Maxwellian kick distribution with σkick,CCSN = 217 km s−1 for core-collapse SNe (P. Disberg &
+       I. Mandel 2025), σkick,ECSN = 30 km s−1 for electron-capture SNe (e.g., A. Vigna-Gómez et al. 2018), and
+       σkick,USSN = 0 km s−1 for USSNe.
+  Fig. A1 shows the orbital period – eccentricity distribution (left panel) of models (i)-(iii) immediately after the kick
+imparted by the second SN explosion (right panel) for binaries that ultimately form DNSs, along with the M&M,0
+results for comparison. Remnant mass and kick prescriptions without a combination of a mass jump and very low
+USSN kick fail to reproduce the apparent eccentricity bimodality in the Galactic DNS observations.
+  In addition to these three different prescriptions, we run six simulations with similar model parameters to the M&M,0
+model, varying the kick imparted by USSNe from vkick,USSN = 5 km s−1 to vkick,USSN = 50 km s−1 . In Fig. A2, we
+present orbital period–eccentricity distributions, analogous to the left panel of Fig. 2, for these simulations. When the
+second NS receives a non-zero natal kick at birth, the post-SN eccentricity is no longer set solely by the A. Blaauw
+(1961) kick; instead, the additional natal kick broadens the eccentricity distribution. As the USSN kick magnitude
+increases, the eccentricity gap becomes progressively populated.
+                                                                                                                            13
+
+
+
+
+Figure A2. Orbital period – eccentricity distributions for population synthesis simulations run with the I. Mandel & B. Müller
+(2020) recipes assuming USSN kicks of magnitude vkick,USSN , labeled in the top left of each panel. The notation for simulated
+and observed data is the same as in Fig. 2.
+
+
+                                   B. STATISTICAL SIGNIFICANCE OF THE GAP
+  Observations suggest an apparent gap at intermediate eccentricities of Galactic DNSs, with only one system with
+eccentricity of ∼ 0.5 after back integration. We evaluate whether such a gap is statistically significant given the
+small sample size. We adopt a smooth eccentricity distribution that contains no gaps and approximately matches the
+observed CDF at e ≳ emin = 0.05. This choice is intended as an illustrative, smooth benchmark rather than a unique
+physically-motivated prescription; however, a nonzero lower eccentricity bound can be qualitatively motivated by a
+14
+
+minimum eccentricity imparted by neutrino mass loss in the second SN. Specifically, we consider a CDF of the form
+
+                                                                    ln(e)
+                                                P (E ≤ e) = 1 −             ,                                           (B1)
+                                                                  ln(emin )
+
+as shown in Fig. B, and compare it to the observational CDF, and to CDFs computed with the population synthesis
+data of the M&M,0 model and the rest of the models described in Appendix A.
+  First, we compare the empirical eccentricity CDF of the observed, back-integrated DNSs to the smooth eccentricity
+distribution using a Kolmogorov–Smirnov (KS) test (F. J. Massey Jr 1951). We find that the observed CDF is
+consistent with the smooth distribution, with a KS p−value of ≃ 0.12, implying that if the continuous eccentricity
+distribution is correct, a discrepancy at least as large as observed would occur in ∼ 12% of samples of the same size due
+to statistical fluctuations. Thus, the data does not provide strong evidence to reject a smooth, gap-free eccentricity
+distribution at conventional significance thresholds. The 95% uncertainty interval, though, disfavors M&M and Fryer,
+while favoring the no-kick models (Fig. B).
+  We next compute the probability that, under the same smooth distribution, a sample of size N contains zero systems
+(as in the observed values) or one system (as in the back-integrated values) in a specified eccentricity interval [e1 , e2 ].
+The probability of observing systems in this range is
+
+                                                                       ln(e1 /e2 )
+                                           pgap = P (e1 ≤ E ≤ e2 ) =               ,                                    (B2)
+                                                                        ln(emin )
+
+which results in pgap ≃ 0.124 for the apparent [0.4, 0.58] eccentricity gap. Assuming independent draws, the probability
+of observing zero systems in this interval is
+
+                                                   p0,gap = (1 − pgap )N .                                              (B3)
+
+For the N = 21 confident observed non-GC DNSs, the probability that none of the systems would fall in the observed
+e ∈ [0.4, 0.58] gap is p0,gap ≃ 0.06, implying the absence of systems in this region is not statistically unusual under a
+smooth distribution given the current sample size. Since the gap boundaries were chosen after inspecting the data,
+the estimates above should be interpreted as upper limits on the evidential weight of a gap when the boundaries were
+chosen post hoc. The probability to observe one system in the gap is given by
+
+                                              p1,gap = N pgap (1 − pgap )N −1 ,                                         (B4)
+
+which translates to p1,gap ≃ 0.18 in our case.
+  Therefore, only a much larger observed sample, potentially enabled by SKA (R. Braun et al. 2019), which is expected
+to detect dozens to hundreds of new Galactic DNSs, will reveal whether an eccentricity gap really exists.
+                                                                                                                           15
+
+
+
+
+Figure B. CDFs of Galactic DNS orbital eccentricities compared to finite-sample model predictions. Each panel shows one
+model: the gray step curve is the observed empirical CDF of the 21 confident non-GC Galactic DNSs, and the colored curve
+is the model CDF. The orange curve represents the CDFs of a potential continuous distribution (equation B1), while the dark
+blue, pink, violet and light blue curves are the CDFs of the M&M,0, M&M, Fryer, and Fryer,0 models, respectively. The shaded
+region is the 95% uncertainty interval on model predictions for samples of size N = 21. The observed eccentricity distribution
+strongly disfavors M&M and disfavors Fryer at the 5% level.
+

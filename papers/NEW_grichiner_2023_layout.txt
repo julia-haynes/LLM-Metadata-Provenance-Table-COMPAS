@@ -1,0 +1,864 @@
+                                                Draft version June 8, 2023
+                                                Typeset using LATEX twocolumn style in AASTeX62
+
+
+
+
+                                                         Mergers of neutron stars and black holes with cores of giant stars: a population synthesis study
+                                                                                                   Aldana Grichener1
+                                                                   1 Department of Physics, Technion, Haifa, 3200003, Israel; aldanag@campus.technion.ac.il
+
+
+
+                                                                                                        ABSTRACT
+                                                         We perform population synthesis of massive binaries to study the mergers of neutron stars (NSs) and
+                                                      black holes (BHs) with the cores of their giant secondaries during common envelope evolution (CEE).
+arXiv:2302.06663v2 [astro-ph.HE] 7 Jun 2023
+
+
+
+
+                                                      We use different values of the efficiency parameter αCE in the framework of the energy formalism for
+                                                      traditional CEE (αCE ≤ 1) and including additional energy sources to unbind the envelope (αCE > 1).
+                                                      We constrain the possible values of αCE by comparing the results of our simulations with local rate
+                                                      densities of binary compact object mergers as inferred from gravitational-wave observations. We find
+                                                      two main evolutionary pathways of binary systems that result in NS-core mergers, while only one of
+                                                      them can also lead to the merger of a BH with the core of the giant star. We explore the zero age
+                                                      main sequence (ZAMS) statistical properties of systems that result in NS/BH-core mergers and find
+                                                      that the two evolutionary channels correspond to a bimodal distribution of orbital separations. We
+                                                      estimate the percentage of the mergers’ event rates relative to core collapse supernovae (CCSNe). We
+                                                      include the effect of mass accreted by the NS/BH during CEE in a separate set of simulations and find
+                                                      it does not affect the mergers’ event rates.
+
+                                                      Keywords: binaries: general – stars: neutron stars – stars: black holes – stars: massive –methods:
+                                                                numerical
+
+                                                                1. INTRODUCTION                                       Mergers of NSs/BHs with cores of giant stars are a
+                                                 Most massive stars are in close multiple systems con-             topic of ongoing research in a variety of contexts (e.g.,
+                                              sisting of two or more stars in orbit around their com-              Fryer & Woosley 1998; Zhang & Fryer 2001; Barkov &
+                                              mon center of mass (e.g., Sana et al. 2012). The swelling            Komissarov 2011; Chevalier 2012; Schrøder et al. 2020;
+                                              of one or both stars in a binary system at late evolu-               Metzger 2022; Guarini et al. 2022). In particular, such
+                                              tionary phases might lead to the filling of the Roche                mergers can lead to transient events known as common
+                                              lobe around them to the point where mass transfer takes              envelope jet supernovae (CEJSNe; Soker & Gilkis 2018).
+                                              place. If the mass transfer becomes unstable then the                In a CEJSN event a NS/BH is engulfed by a giant star
+                                              system might enter a common envelope evolution (CEE)                 and spirals-in inside its envelope. The compact object
+                                              phase (e.g., Paczynski 1976; Iben & Livio 1993; Taam &               accretes mass via an accretion disk and launches two op-
+                                              Sandquist 2000; Izzard et al. 2012; Ivanova et al. 2013;             posite jets that propagate through the giant’s envelope
+                                              Roepke & De Marco 2022) in which the envelopes of                    and expel mass. Eventually, the NS/BH reaches the
+                                              both stars merge, or a stellar remnant with no envelope              dense core of the giant star and launches more energetic
+                                              is immersed within the envelope of its companion. In                 jets as they merge. The effects of the jets that the com-
+                                              cases where at the onset of CEE the stars in the bi-                 pact object launches on the envelope and on the core of
+                                              nary are a neutron star (NS) or a black hole (BH) and a              the giant star are broadly studied in one dimensional and
+                                              massive giant, the compact object 1 is swallowed by the              three dimensional simulations (e.g., Moreno Méndez et
+                                              giant star and spirals closer to its core. This can lead to          al. 2017; Moriya 2018; Gilkis et al. 2019; López-Cámara
+                                              either the ejection of the envelope and a surviving com-             et al. 2019; Grichener et al. 2021; Ragoler et al. 2022;
+                                              pact object-core pair or to the merger of the core with              Hillel et al. 2022; Schreier et al. 2023). Another pro-
+                                              the NS/BH.                                                           posed alternative is the formation of a stable Thorne-
+                                                                                                                   Żytkow object when a NS merges with the core of a
+                                                                                                                   red supergiant (e.g., Thorne & Żytkow 1975; Thorne &
+                                                1 Throughout the manuscript “compact object” refers only to
+                                                                                                                   Żytkow 1977; Eich et al. 1989).
+                                              a NS or a BH.
+                                                                                                                      Unfortunately, the high opacity of the giant’s envelope
+                                                                                                                   does not allow for direct observations of core-NS/BH
+2
+
+mergers with existing facilities. Moreover, even though      et al. 2019; Mapelli et al. 2020; Iorio et al. 2022). To
+the merger of a compact object with the core of a giant      our knowledge, the only study which performed popula-
+star emits gravitational waves (e.g., Ginat et al. 2020),    tion synthesis of NS/BH-core mergers is Schrøder et al.
+their signal is much lower than in the case of binary        (2020) (see section 4 for more details). Here we include
+compact object mergers, and is undetectable at the mo-       in the simulations the effects of additional energy sources
+ment. A future detection by next-generation gravita-         that are required to unbind the envelope and estimate
+tional waves detectors, such as LISA/DECIGO/BBO,             the merger rates in these scenarios. Moreover, we find
+can serve as an observational signature of a merger          different evolutionary routes that lead to NS/BH-core
+event.                                                       mergers and study the structure of the core during the
+  Meanwhile, we can study indirect evidence for              merger event.
+NS/BH-core mergers. Due to the high energies of the            Our study is organized as follows. We begin by de-
+jets in their correlated CEJSN transient, NS/BH-core         scribing the initial parameters and prescriptions we use
+mergers might account for several astrophysical phe-         in our population models (section 2). We then present
+nomena, such as heavy r-process nucleosynthesis that         the main evolutionary channels towards NS/BH-core
+occurs inside jets that a NS launches as it merges with      mergers, the properties of binary systems that result
+the core of a giant star (Papish et al. 2015; Grichener &    in these mergers and their event rates (section 3). We
+Soker 2019a; Grichener et al. 2022; Grichener & Soker        summarize our findings and discuss their relevance to
+2022) and high-energy neutrino emission from jets that       previous works (section 4).
+a BH launches while spiraling-in inside the envelope of
+a giant prior to the merger with its core (Grichener &              2. POPULATION SYNTHESIS MODEL
+Soker 2021). Moreover, some peculiar transient events
+                                                               We use the population synthesis code Compact Ob-
+such as fast blue optical transients and other rare su-
+                                                             ject Mergers: Population, Astrophysics and Statistics
+pernovae (SNe) might hint to NS/BH-core mergers and
+                                                             (COMPAS; Stevenson et al. 2017; Vigna-Gómez et al.
+the CEJSN mechanism as well (e.g., Thöne et al. 2011;
+                                                             2018; Team COMPAS: Riley et al. 2022) to find the
+Soker & Gilkis 2018; Soker et al. 2019; Dong et al.
+                                                             evolutionary pathways of binary systems that result in
+2021; Soker 2022a; Soker 2022b). The recently pro-
+                                                             the merger of a NS/BH and the core of a giant star, ex-
+posed hypernebula transient that is powered by jets
+                                                             plore their statistical properties and estimate the merg-
+accompanying hyper-Eddington mass transfer from an
+                                                             ers’ event rate.
+evolved post-main sequence (MS) star onto a NS/BH
+                                                               COMPAS generates populations of isolated stellar bi-
+shortly before CEE (Sridhar & Metzger 2022; Sridhar
+                                                             nary systems and evolves the stars in the binary us-
+et al. 2022) might serve as a precursor of a NS/BH-core
+                                                             ing the analytical fits in Hurley et al. (2000) based on
+merger. Estimating the mergers’ event rates is cru-
+                                                             the stellar models of Pols et al. (1998). We sample the
+cial to understand whether they can account for said
+                                                             initial distribution of binary properties at the ZAMS
+phenomena.
+                                                             (zero age main sequence) according to the “Fiducial
+  In this study we use the population synthesis code
+                                                             model” of Vigna-Gómez et al. (2018) as described be-
+COMPAS (Team COMPAS: Riley et al. 2022) to find
+                                                             low. Henceforth we refer to the initially heavier star
+the merger rates of NSs/BHs with cores of giant stars.
+                                                             as the primary star, and the initially lighter star as the
+Many population synthesis studies of massive binaries
+                                                             secondary star. We draw the mass of the primary star
+were performed using codes such as COMPAS (e.g.,
+                                                             from the Kroupa initial mass function (IMF) in the form
+Stevenson et al. 2017; Vigna-Gómez et al. 2018; Neijssel                          −2.3
+                                                             dN/dM1,ZAMS ∝ M1,ZAMS        (Kroupa 2001) with masses
+et al. 2019; Vigna-Gómez et al. 2020; Broekgaarden et
+                                                             in the range 5 ≤ M1,ZAMS /M⊙ ≤ 100, and the mass of
+al. 2021; Raveh et al. 2022; Rauf et al. 2023), BSE (e.g.,
+                                                             the secondary star from a flat distribution in the mass
+Hurley et al. 2002; Zhang et al. 2005; Hernández-Pérez
+                                                             ratio with 0.1 ≤ qZAMS ≡ M2,ZAMS /M1,ZAMS ≤ 1 (Sana
+& Bruzual 2013; Shao & Li 2021), BINARY C (e.g.,
+                                                             et al. 2012). The initial separations follow the flat-in-
+Izzard et al. 2006; Izzard et al. 2018), BPASS (e.g., El-
+                                                             the-log distribution between 0.1 ≤ aZAMS /AU ≤ 1000
+dridge et al. 2017; Stanway & Eldridge 2018; Stanway
+                                                             (Sana et al. 2012). We take all of the orbits to be circu-
+& Eldridge 2019; Stevance & Eldridge 2021; Aadland
+                                                             lar at ZAMS (i.e., eZAMS = 0), and all the stars in our
+et al. 2022; Ghodla et al. 2022; Patton et al. 2022),
+                                                             sample have solar metallicity Z = 0.0142 (Asplund et
+STARTRACK (e.g., Belczynski et al. 2002; Belczynski
+                                                             al. 2009).
+et al. 2008; Oslowski et al. 2011; Dominik et al. 2012;
+                                                               In general, massive stars end their lives in SN explo-
+Belczynski et al. 2016; Mondal et al. 2020; Périgois et
+                                                             sions. COMPAS differentiates between three SN sce-
+al. 2021) and SEVN(e.g., Spera & Mapelli 2017; Spera
+                                                             narios: regular core collapse supernovae (CCSNe), elec-
+                                                                                                                       3
+
+tron capture supernovae (ECSNe) and ultra stripped su-       for this purpose. However, many hydrodynamical simu-
+pernovae (USSNe), according to the core and envelope         lations do not find full envelope ejection, in contradiction
+masses prior to the explosion. We set the maximum            to observations of post common envelope systems (e.g.,
+allowed NS mass to be MNS,max = 2 M⊙ , as accord-            Passy et al. 2012; Ricker & Taam 2012; Kuruwita et al.
+ing to Özel et al. (2010) this value reproduces the ob-     2016; Ohlmann et al. 2016; Iaconi et al. 2017; Glanz
+servational mass gap between NSs and BHs. For NS             & Perets 2021a; Glanz & Perets 2021b), implying that
+remnants, we take a bimodal natal-kick velocity dis-         additional energy sources are required to unbind the en-
+tribution where CCSNe constitute the higher mode of          velope. Several physical processes have been suggested
+σhigh = 265 kms−1 and ECSNe together with USSNe              as possible mechanism for the ejection of the common
+contribute to the lower mode of σlow = 30 kms−1 . We         envelope, such as the core-companion system’s interac-
+draw the BH natal kicks from the same bimodal distri-        tion with a circumbinary disk in the final CEE stages
+bution reduced according the fallback model of Fryer et      (e.g., Kashi & Soker 2011; Kuruwita et al. 2016), jets
+al. (2012).                                                  launched from the compact object while it is inside the
+  Throughout the evolution of a binary system the stars      envelope of the secondary star (e.g., Sabach et al. 2017;
+in the binary might interact through mass transfer. If       Soker 2017), the recombination energy of hydrogen and
+the mass transfer is dynamically unstable a CEE phase        helium (e.g., Ivanova et al. 2015; Lau et al. 2022), en-
+begins (see Team COMPAS: Riley et al. 2022 for the           velope inflation followed by long period pulsations (e.g.,
+implementation of mass transfer and its stability criteria   Clayton et al. 2017) and dust driven winds (Glanz &
+in COMPAS). To determine the orbital separation be-          Perets 2018). In the energy formalism an additional en-
+tween both stars in the binary system after CEE, COM-        ergy source can be represented by αCE > 1 regardless of
+PAS uses the energy formalism in which the energy dif-       its nature.
+ference between the orbital energies before and after the       We perform simulations of binaries with solar metl-
+CEE phase is compared with the binding energy of the         laicity for 0.1 ≤ αCE ≤ 5 to allow for both traditional
+envelope (van den Heuvel 1976; Webbink 1984; Livio &         CEE and scenarios with additional energy sources. For
+Soker 1988; Iben & Livio 1993; see Ivanova et al. 2013       each value of αCE , we evolve 107 isolated binaries with
+for a review). In the case of a NS/BH that is swallowed      the initial parameter distribution described above. In
+by a giant star                                              addition, we explore our results’ dependence on metal-
+                                                             licity by performing a grid of simulations with Z =
+                  αCE GMgiant,pre−CE MNS/BH
+         Ebind =                                             10−4 , 10−3 , 2.5 × 10−2 over αCE = 0.5, 1, 2, and present
+                          2apre−CE                           our conclusions at the end of section 3.4.
+                                                      (1)
+                 αCE GMgiant,post−CE MNS/BH
+               −                                                                   3. RESULTS
+                        2apost−CE
+                                                                       3.1. Constraining the values of αCE
+where αCE is the common envelope efficiency param-
+                                                               Due to the lack of ability to observe systems in the rel-
+eter, MNS/BH is the mass of the compact object,
+                                                             atively short and low luminosity CEE phase (see Ivanova
+Mgiant,pre−CE and Mgiant,post−CE are the masses of the
+                                                             et al. 2013 for typical timescales of CEE) we cannot
+giant star before and after the CEE phase respectively,
+                                                             compare the results of our population synthesis simu-
+and apre−CE and apost−CE are the orbital separations
+                                                             lations to direct observations. However, since roughly
+before and after CEE respectively. The binding energy
+                                                             80 − 90% progenitors of binary compact object merg-
+is calculated using the lambda formalism of de Kool
+                                                             ers in our simulations go through the same evolutionary
+(1990) as implemented by Xu & Li (2010a,b). To find
+                                                             stages as progenitors of NS/BH-core mergers until the
+whether the NS/BH merges with the giant star’s core,
+                                                             CEE of the compact objects with the giant star (Fig.
+we compare the orbital separation of the systems after
+                                                             2), we find their merger rates for different values of αCE
+the CEE phase with the radius of the core, which is es-
+                                                             and compare these rates with observations to determine
+timated using approximate analytical relations between
+                                                             the possible values of the efficiency parameter.
+the mass and radius of the core in different evolutionary
+                                                               We crudely estimate the local transient rate density
+phases from Hall & Tout (2014). If the orbital separa-
+                                                             of different events in our COMPAS simulations using
+tion is smaller than the radius of the core, we assume
+that a NS/BH-core merger has occurred.                                                         nSFR fpop
+                                                                             Revent = fevent             ,           (2)
+  Traditionally, the maximal value of the common enve-                                           ⟨M ⟩
+lope efficiency parameter αCE is one, representing a case    where Revent is the local transient rate density in
+where the entire emitted orbital energy goes to unbind       Gpc−3 yr−1 , fevent = Nevent /Ntotal is the ratio be-
+the envelope of the giant star and is precisely sufficient   tween the number of systems that result in this type of
+4
+
+event and the total number of systems simulated in our               remnant, depending on the mass of the stripped core.
+COMPAS simulation, nSFR ∼ 107 M⊙ Gpc−3 yr−1 is the                   The natal kick might drive the compact object away
+local star formation rate (Madau & Dickinson 2014),                  from the SN location, but a low enough kick allows for
+fpop is the fraction of the Kroupa IMF (Kroupa 2001)                 a bound NS/BH-MS binary system (e.g., Kochanek et
+we simulate and ⟨M ⟩ is the average stellar mass. In-                al. 2019). The secondary star continues to evolve and
+tegrating over the Kroupa IMF between Mmin = 5 M⊙                    when the hydrogen in its core is depleted it enters the
+and Mmax = 100 M⊙ and dividing by the total mass we                  Hertzsprung Gap (HG) phase where it expands until the
+find that fpop ≃ 0.007. The average stellar mass accord-             ignition of helium in its core. From the HG phase and
+ing to the Kroupa IMF is ⟨M ⟩ ≃ 0.39 M⊙ . Substituting               onward, mass transfer occurs in the opposite direction,
+all of the above into equation (2) gives                             i.e. from the secondary star to the primary. The ex-
+                                                                     panding secondary becomes a giant and it can engulf
+          Revent = 1.79 × 105 fevent Gpc−3 yr−1 .             (3)    the NS/BH initiating a CEE phase where the compact
+   In Fig. 1 we present the local merger rate density                object spirals-in inside the envelope of the giant star.
+of NS-NS binaries (upper panel; blue dots), BH-BH bi-                The compact object might be swallowed by the giant
+naries (middle panel; green dots) and NS-BH binaries                 star later in the evolution as well, e.g, during core helium
+(lower panel; red dots) in our COMPAS simulations as                 burning, as we show in Fig. 9. Tidal forces can bring the
+computed by using equation (3). The rectangular filled               NS/BH into the envelope even if the binary separation
+areas in each panel are the possible observational ranges            is several times larger than the radius of the giant star
+of these rates as inferred from gravitational waves de-              (e.g., Soker 1996). Currently the COMPAS code does
+tected by the first three observing runs of the Advanced             not include tidal evolution, implying that it underesti-
+LIGO and the Advanced Virgo observatories (denoted                   mates the number of systems that go through NS/BH-
+as O1,O2 and O3) according to The LIGO Scientific                    giant star CEE, and therefore the rates of NS/BH core
+Collaboration et al. (2021). We conclude that the lo-                mergers and their resultant transients.
+cal merger rate densities are well within the observa-                  The giant star-NS/BH CEE has two possible out-
+tional error margin for αCE ≳ 0.5. This is in accordance             comes. If the envelope is not ejected before the NS/BH
+with previous studies which favour αCE ≃ 2 compared                  enters the core then the NS/BH merges with the core
+to small αCE to explain the observed merger rates of                 of the giant star as shown on the left in the left panel
+double compact object binaries (e.g., Garcı́a et al. 2021;           of Fig. 2. However, if the envelope is entirely un-
+Zevin et al. 2021; Broekgaarden & Berger 2021).                      bound before the NS/BH reaches the core, then the
+                                                                     core will keep evolving and eventually ends its life in
+    3.2. Evolutionary channels towards NS/BH-core                    a stripped-envelope SN explosion resulting in another
+                          mergers                                    NS/BH (right side in the left panel of Fig. 2). If the bi-
+  The two main evolutionary channels of binary systems               nary remains bound after the second SN explosion, and
+that result in the merger of a NS/BH with the core of                the two compact objects are close enough, they might
+a giant star are presented in Fig. 2. Both scenarios                 merge on a timescale shorter than the Hubble time emit-
+begin with two massive stars on the MS. The initially                ting potentially detectable gravitational waves (the ma-
+heavier star M1 , to which we will refer as the primary              jority of systems shown in Fig. 1). Vigna-Gómez et al.
+star, evolves faster and becomes a giant while the lighter           (2018) find that this formation channel is responsible for
+secondary star M2 keeps burning hydrogen at its core.                roughly 70% of the Galactic binary NSs.
+  In the main channel, denoted as channel I (left panel                 Less massive and wider binaries evolve through a sec-
+of Fig. 2), a stable mass transfer episode from the giant            ondary channel (channel II ; right panel of Fig. 2), where
+primary to its MS secondary occurs at this stage. The                dynamically unstable mass transfer between the post
+giant star eventually loses its envelope through mass                MS primary star and its MS secondary leads to an early
+transfer and the remaining naked core keeps evolving                 CEE phase that brings the core of the giant and the MS
+until it explodes in an stripped-envelope SN event in                star closer together. At the end of CEE the envelope
+the same manner as Wolf-Rayet stars2 (e.g., Wheeler &                is ejected and the evolution continues as in channel I.
+Levreault 1985; Woosley et al. 1995; Eldridge & Tout                 We note that this formation channel can only involve
+2004; McClelland & Eldridge 2016), leaving a NS/BH                   a NS compact object due to the relatively low masses
+                                                                     of the SN progenitor. A massive BH progenitor always
+                                                                     leads to stable mass transfer from the post-MS primary
+  2 We note that the stripped core in our scenario is not neces-
+                                                                     to its MS secondary (second stage of channel I in Fig.
+sarily a Wolf-Rayet star according to the observational definition
+(Shenar et al. 2020).
+                                                                     2), implying that all BH-core mergers evolve through
+                                                                                                                              5
+
+
+
+                                  103
+                                  102
+                                  101                                              NS-NS mergers
+                   R[Gpc 3yr 1]
+                                  103
+                                  102
+                                  101                                              BH-BH mergers
+                                  103
+                                  102
+                                  101                                              NS-BH mergers
+                                        0   2           4              6            8         10
+                                                                CE
+
+Figure 1. Local rate density of NS-NS mergers (blue dots), BH-BH mergers (green dots) and NS-BH mergers (red dots) for
+different values of common envelope efficiencies. Statistical error bars are smaller than the marker size. The rectangular areas
+represent the error margin of mergers observation taken from The LIGO Scientific Collaboration et al. (2021).
+
+
+channel I. This evolution channel always ends with the               In Figs. 4-7 we show different distributions of these pro-
+merger of the NS with the core of the giant star due to              genitors at the ZAMS for representative values of αCE .
+the small orbital separation at the end of first CEE (see               Several interesting trends emerge from these figures.
+equation 1). In both formation channels presented in                 While NS-core mergers occur for M1,ZAMS ≳ 6.5 M⊙
+Fig. 2) several short dynamically stable mass transfer               up to the heaviest stars in our mass distribution, BH-
+episodes might occur throughout the evolution besides                core mergers tend to involve much heavier stars in
+the mass transfer events mentioned above.                            the initial binary system, with M1,ZAMS ≳ 37.7 M⊙
+   Fig. 3 presents the percentage of systems that evolve             (left panels of Figs. 4-7). This can be explained by
+through channel I (purple dots; left panel of Fig. 2) and            the heavier masses required to produce a BH in a SN
+through channel II (blue dots; right panel of Fig. 2) for            event under the assumptions of COMPAS. Binary sys-
+different values of αCE in our simulations. A remaining              tems with higher mass ratios at the ZAMS are more
+small percentage of the systems evolved through various              likely to result in NS/BH-core mergers. For both merg-
+other channels, including binary evolution where there               ers of NSs and BHs with cores of giant stars most
+is no mass transfer between the stars in the binary sys-             of the progenitor binaries have initial mass ratios of
+tem when the primary star is a giant. We note a non-                 qZAMS ≡ M2,ZAMS /M1,ZAMS ≳ 0.5 (middle panels of
+monotonic behaviour with αCE as a result of two sep-                 Figs. 4-7), while NS-core mergers can also originate from
+arate CEE phases that are affected by this parameter.                0.25 ≲ qZAMS ≲ 0.5. The percentage of systems of the
+A larger value of αCE implies a larger orbital separation            latter mass ratio strongly decreases with αCE .
+in the end of CEE. In channel II this means that on                     We note a bimodal distribution in the initial orbital
+the one hand more systems survive the first CEE phase                separation of systems that result in a core-NS merger
+(between the giant primary and the MS secondary) and                 (right upper panels of Figs. 4-7) where each peak cor-
+therefore can lead to NS-core mergers, but on the other              responds to one of the evolution channels presented in
+hand in the second CEE (NS primary-giant secondary)                  Fig. 2. We find that the higher/lower peak in the initial
+more NSs do not manage to enter the core of the giant                separation coincide with the percentage of systems that
+star.                                                                evolve through channel I/II (Fig. 3).
+                                                                        The larger population is in small separations and has
+    3.3. Properties of binary systems that result in                 a peak at aZAMS ≃ 0.65 AU ≃ 130 R⊙ for most values of
+                    NS/BH-core mergers                               αCE we simulated. It corresponds to channel I, which is
+  As mentioned in section 2, we use COMPAS to ex-                    characterized by stable mass transfer from the post MS
+plore the properties of NS/BH-core merger progenitors.               primary to the MS secondary. One might expect that
+6
+
+
+                            Channel I: 𝑎𝑍𝐴𝑀𝑆 ≲ 1.3 𝐴𝑈                                 Channel II: 3 𝐴𝑈 ≲ 𝑎𝑍𝐴𝑀𝑆 ≲ 7 𝐴𝑈
+
+                      𝑀1               𝑀2 ≲ 𝑀1                                   𝑀1                   𝑀2 ≲ 𝑀1
+
+                     MS                     MS                                   MS                      MS
+
+                                                                                             Unstable mass
+                              Stable mass                                                      transfer
+                                transfer
+                  Post MS                                                       Post MS
+
+
+
+
+                     core
+
+                SN
+                                                                                                             An early CEE reduces
+                                                                                      core
+              NS/BH                                                                                          the orbital separation.
+
+                                                                                        envelope
+
+
+                                                   Unstable mass transfer;
+                                       Post MS
+                                       Post MS     The post MS star expands
+                                                   and swallows the NS/BH             core
+
+
+                                                                                 SN
+
+                                                                                  NS
+
+                                        The NS/BH spirals-in inside
+                              core
+                                        the envelope of the giant star.
+                                                                                                         Unstable mass transfer;
+                            envelope                                                             Post
+                                                                                                 Post MS
+                                                                                                      MS The MS star expands
+                                                                                                         and swallows the NS
+
+
+
+
+                                                   core                                                 The NS spirals-in inside the
+                                                                                              core
+                                                                                                        envelope of the giant star.
+                                                                                         envelope
+      NS/BH-core merger                                   SN
+
+
+
+
+                               Binary compact Unbound compact
+                               objects merger     objects                             NS-core merger
+
+
+
+
+Figure 2. A schematic illustration of the evolution of a massive binary system. Two massive MS stars evolve towards a giant
+star-NS/BH CEE. The NS/BH spirals-in inside the envelope of the giant star. The CEE can lead either to the merger of the
+NS/BH with the core of the giant star potentially powering a bright transient event, or to the formation of double compact
+objects binary that might merge in the future by emission of gravitational waves. Left panel: main evolution channel, where
+dynamically stable mass transfer from the post MS primary star to its MS secondary companion takes place. Right Panel:
+Secondary evolution channel in which a dynamically unstable mass transfer leads to the formation of a common envelope that
+surrounds the secondary MS star and the core of its post MS primary, reducing their orbital separation, and allowing only for
+NS-core mergers.
+                                                                                                                                        7
+                       100
+                                                                      aration significantly 4 . At some point the common enve-
+                                                                      lope is ejected and a bound, more compact system of a
+                       80                                             MS star and the naked core remains behind, and keeps
+% of NS-core mergers
+
+
+
+
+                                                                      evolving towards a NS-core merger as in channel I. Even
+                       60                                             though stable mass transfer can occur between the post
+                                                       channel I
+                                                       channel II     MS primary and the MS secondary in this regime of ini-
+                       40                                             tial orbital separations, the stars in such binaries are
+                                                                      not close enough to lead to a CEE between the NS and
+                       20                                             the giant at a later stage, and therefore cannot lead to
+                                                                      a NS-core merger event. For even larger initial orbital
+                        0                                             separations stars in the binary systems would mainly
+                             1   2        3       4            5      evolve separately.
+                                     CE
+
+   Figure 3. Percentage of NS-core mergers that evolved                                  3.4. Mergers’ event rate
+   through channel I (purple dots) and channel II (blue dots)
+                                                                         We can estimate the merger rates of NSs/BHs with
+   from all NS-core mergers for values of αCE that coincide with
+   observations of double compact object mergers (Fig. 1). Sta-
+                                                                      the cores of the giant secondaries using the results of
+   tistical error bars are smaller than the marker size.              our population synthesis models. We present the per-
+                                                                      centage of these rates relative to CCSNe events in Fig.
+                                                                      8 for the values of αCE we find in section 3.1. The or-
+   small initial separation would typically lead to unstable          ange and turquoise dots are the percentages of NS-core
+   mass transfer and CEE, and this is indeed a common                 and BH-core mergers, respectively, from CCSNe in our
+   outcome in our population models. However, in most                 population model.
+   such systems the secondary star merges with the core                  We note that for both NS and BH mergers with the
+   of the giant primary while still on the MS and hence               giant’s cores the event rate decreases with αCE , a trend
+   cannot lead to a NS/BH-core merger, i.e. the prevalence            we can also see by comparing the left panels of Figs. 4-7.
+   of stable mass transfer we find at small separations is            In the energy formalism (see equation 1), higher values
+   a selection effect. The stars in binary systems whose              of αCE imply that more energy is transmitted from the
+   initial orbital separation is sufficiently small remain close      orbit (or from an additional energy source) to the en-
+   enough so that the resulting NS can be swallowed by the            velope and it is ejected earlier in the evolution. The
+   secondary at its giant phase and eventually merge with             underlying physical concept is that if a larger amount
+   its core, while for systems that begin further apart the           of energy is deposited inside the envelope it expands to
+   NS and the giant star do not engage in CEE. BH-core                larger radii before the outer layers are ejected, becoming
+   mergers exhibit only the first peak in the initial orbital         less dense and reducing the dynamical friction between
+   separation, i.e., evolve only through channel I 3 .                the spiraling-in primary and the gas of the secondary’s
+      The second population of binaries that end their                envelope. This results in larger orbital separations at
+   lives in a merger of a NS with the core of a giant                 the end of CEE, implying that more NSs/BHs remain
+   star during CEE is smaller and has a peak around                   outside the core rather than merge with it. BH-core
+   aZAMS ≃ 4.65 AU ≃ 1000 R⊙ . This population corre-                 mergers reduce to nearly nothing for αCE ≳ 4 while the
+   sponds to channel II. Primaries with masses in the range           event rate of NS-core mergers drops about an order of
+   6.5 M⊙ ≲ M1,ZAMS ≲ 20 M⊙ evolve through this chan-                 magnitude between the lowest and highest values of αCE
+   nel. In this case a common envelope is formed around               we simulate.
+   the core of the post MS primary star and the MS sec-                  In Fig. 9 we present how the percentage of systems
+   ondary, and dynamical friction between the core-MS sys-            where a NS merges with the helium (magenta dots) or
+   tem and the gas of the envelope reduces the orbital sep-           carbon-oxygen (brown dots) core of a giant star from
+                                                                      all NS-core mergers varies with the efficiency parameter
+                                                                      αCE . For larger values of αCE the number of mergers
+     3 We made sure the single peak is not due to a small sample of
+                                                                      where the core is composed of helium is overall larger,
+   BH-core mergers by performing simulations of 107 binaries draw-
+   ing the mass of the primary from Kroupa IMF with masses in the     i.e., the mergers occur at earlier times during the giant-
+   range 35 ≤ M1 /M⊙ ≤ 100. This is equivalent to running 1.6×108
+   systems in the range 5 ≤ M1 /M⊙ ≤ 100.
+                                                                         4 As there is still no analytical formulation for dynamical fric-
+
+                                                                      tion, the reduction in orbital separation during CEE in COMPAS
+                                                                      is handled through the energy formalism.
+8
+
+
+
+
+Figure 4. Distributions of binary properties at the ZAMS of systems that result in NS-core mergers (upper panels; orange) or
+in BH-core mergers (lower panels; turquoise) for a common envelope efficiency parameter αCE = 0.5. Left panels: initial mass
+of the NS/BH (orange dots/turquoise dots) progenitors (primary star, M1,ZAMS ) vs the initial mass of the star that swallows
+the NS/BH (secondary star, M2,ZAMS ). Middle panels: initial mass ratio qZAMS ≡ M2,ZAMS /M1,ZAMS that leads to NS/BH-core
+mergers. The orange bins represent the percentage of binary systems that begin with a certain mass ratio and result in a NS-core
+merger from all systems where the compact object merges with the core of the giant star during the CEE phase. The width of
+each bin is 0.015. The turquoise bins, whose width is 0.037 depict this percentage for BH-core mergers. Right panels: Similar
+to the middle panels for the binary initial orbital separations. In these distributions the widths of the orange and turquoise bins
+are 0.1 AU, and 0.15 AU, respectively.
+
+
+
+
+                      Figure 5. Similar to Fig. 4 for a common envelope efficiency parameter αCE = 1.
+                                                                                    9
+
+
+
+
+Figure 6. Similar to Fig. 4 for a common envelope efficiency parameter αCE = 1.5.
+
+
+
+
+Figure 7. Similar to Fig. 4 for a common envelope efficiency parameter αCE = 2.
+10
+
+
+
+
+                   % of NS/BH-core mergers relative to CCSNe
+                                                                100                                  NS-core mergers
+                                                                                                     BH-core mergers
+                                                               10 1
+
+                                                               10 2
+
+                                                               10 3
+
+                                                               10 4
+
+                                                               10 5
+                                                                          1         2            3       4             5
+                                                                                         CE
+
+Figure 8. Percentage of NS-core mergers (orange dots) and BH-core mergers (turquoise dots) of all CCSNe for the values
+of common envelope efficiencies that coincide with observations of binary compact object mergers (Fig. 1). The error bars
+represent statistical uncertainty.
+
+
+
+
+                                                               100                                                         26
+
+                                                                                                                            Mean secondary mass at ZAMS [M ]
+                                                                                                                           24
+                                                               80
+                                                                                                                           22
+                  % of NS-core mergers
+
+
+
+
+                                                               60                                                          20
+                                                                      He core                                M2, ZAMS
+                                                                      CO core                                              18
+                                                               40                                                          16
+                                                                                                                           14
+                                                               20
+                                                                                                                           12
+                                                                0                                                          10
+                                                                      1         2            3       4             5
+                                                                                        CE
+
+Figure 9. Percentage of NS-core mergers where the core of the giant secondary star is composed of helium (magenta dots) or
+Carbon-Oxygen (brown dots) from all NS-core mergers for different values of the efficiency parameter αCE . The black dots are
+the average mass of the secondary at the ZAMS for each value of αCE . Most statistical error bars are smaller than the marker
+size.
+                                                                                                                     11
+
+NS/BH CEE. As larger amounts of energy go to unbind              We found one main evolution route of NS-core and
+the envelope it is ejected at an earlier stage, and the       BH-core merger events (channel I ; left panel of Fig. 2;
+orbital separation at the end of the CEE phase is larger      same evolution channel as in Schrøder et al. 2020) and
+(equation 1). This implies that mergers between the           an additional secondary evolution pathway for NS-core
+giant’s core and the NS for larger values of αCE occur for    mergers (channel II ; right panel of Fig. 2). The right
+more massive secondaries with higher envelope binding         panels of Figs. 4-7 exhibit a bimodal distribution in the
+energies (as we indeed see in the trend of the black dots     initial orbital separation of NS-core merger progenitors
+in 9). Such giants are larger to begin with and thus          whose modes are consistent with the two different evo-
+can swallow the NS as they expand at earlier stages,          lution routes. For relatively close binaries (with initial
+before core helium burning. We find that binary systems       orbital separation aZAMS ≲ 1.3 AU ) only cases where
+whose outcome is BH-core mergers require ⟨M2,ZAMS ⟩ ≳         dynamically stable mass transfer occurs when the pri-
+37.7 M⊙ (section 3.3). Therefore, all BH-core mergers         mary star is in its post MS phase can lead to NS (and
+occur when the core of the giant secondary is composed        also BH)-core mergers (channel I ). However, at larger
+mainly of helium regardless of the αCE value.                 initial orbital separations (3 AU ≲ aZAMS ≲ 7 AU ) a
+   We examine the effects of mass accretion by the            CEE is required to reduce the separation of the core-
+NS/BH while inside the envelope of the giant star and         MS binary and bring them close enough to allow for a
+find no statistically significant differences in any of the   later CEE between the NS and the giant in which the
+quantities we have discussed due to relatively low mass       NS might merge with its core (channel II ).
+accretion rates (appendix). Moreover, to explore the ef-         We compute the mergers’ event rates and find their
+fect of metallicity on our results we performed a grid        percentage relative to CCSNe for different values of the
+of simulations with Z = 10−4 , 10−3 , 2.5 × 10−2 over         CEE efficiency parameter we simulated (section 3.4).
+αCE = 0.5, 1, 2. We find that while the rate of NS-           We found that for αCE = 1, which is the commonly
+core mergers does not vary much with metallicity, there       used value for CEEs that involve massive giants, there
+are less BH-core mergers in higher values of Z, up to an      is about 1 NS-core merger per 100 CCSN events and
+order of magnitude difference between the highest and         about 1 BH-core merger per 1000 CCSN events. For
+lowest metallicity we explored. We attribute these find-      nearly the same parameters space Schrøder et al. (2020)
+ings to the increase of stellar mass loss with metallicity    find about 3 merger events per 1000 CCSNe for both NS
+(e.g., Nieuwenhuijzen & de Jager 1990; Kudritzki et al.       and BH-core mergers. From a comparison between the
+1989) that leads to less massive stellar remnants after       percentage of systems that go through each stage of the
+the SN explosion in higher values of Z, i.e., less BHs are    evolution towards NS/BH-core merger, we attribute the
+formed in higher metallicites. This leads to less BH-core     difference in the results mainly to changes in the way
+mergers, but does not affect much the NS-core merger          different versions of COMPAS handle the entrance to
+rates due to the much larger number of NSs formed in          CEE.
+the simulations relative to BHs.                                 As we can see in Fig. 8, the number of mergers de-
+                                                              creases with the CEE efficiency parameter αCE as ex-
+                                                              pected from the energy formalism and its underlying
+          4. SUMMARY AND DISCUSSION                           physics. For αCE ≳ 4 the event rate of BH-core merg-
+                                                              ers reduces to nearly nothing within the accuracy of our
+  In this work we performed population synthesis of
+                                                              simulations. We estimate the amount of accreted mass
+massive binaries in search of NSs and BHs mergers with
+                                                              by the NS and by the BH while inside the envelope of
+cores of giant stars. We used COMPAS to generate
+                                                              the giant star in the CEJSN scenario (appendix) and
+populations of massive binary systems (section 2) and
+                                                              find it does not affect the mergers’ event rate. We ex-
+followed the evolution of binaries that result in these
+                                                              plored the effect of metallicity on our results and found
+mergers (section 3.2). We used the energy formalism to
+                                                              that while changes in the systems’ metallicities do not
+determine whether a merger occurred during the CEE
+                                                              affect much the merger rates of NSs with cores of giant
+of the giant secondary star with the NS/BH. We simu-
+                                                              stars, there is an order of magnitude difference between
+lated cases of traditional CEE in which the orbital en-
+                                                              the rates of BH-core mergers in the highest and in the
+ergy released due to the decay in the orbit is the main
+                                                              lowest metallicities in our simulations.
+cause for envelope ejection (αCE ≤ 1), and other cases
+                                                                 The energy formalism for CEE has several shortcom-
+where we assume an additional energy source (αCE > 1).
+                                                              ings. The large uncertainty in the energy and mass
+We constrained the possible values of αCE by compar-
+                                                              transfer during the CEE phase might greatly affect the
+ing observations of binary compact object mergers to
+                                                              rates of transients whose progenitor binaries go through
+our simulated rates (section 3.1).
+12
+
+CEE (e.g., Olejak et al. 2021). Moreover, many hy-              r-process abundance (above 10%) 1.25 ≲ αCE ≲ 1.75 is
+drodynamical simulations find that the orbital energy           required.
+cannot be the sole energy source that contributes to en-           Grichener & Soker (2021) found that jets launched by
+velope ejection in massive binaries (see references in sec-     a BH inside the envelope of a giant star might emit neu-
+tion 2). Using values of αCE > 1 to represent additional        trinos with energies of 1015 eV as detected by IceCube
+energy sources, as we did in the present study, disregards      (Aartsen et al. 2013). The event rate required to explain
+that these energy sources do not depend on the orbital          the high-energy neutrino flux assuming the properties of
+separation in the same way as the orbital energy. How-          the model described in Grichener & Soker (2021), and
+ever, keeping in mind this formalism is a phenomeno-            based on Aartsen et al. (2021) is ≈ 3% from CCSNe,
+logical treatment, αCE > 1 yields that the spiraling-in         and can be lower for jets with higher energies. We find
+star can end at a larger radius, and allows to obtain rea-      that the percentage of systems that result in CEE of a
+sonable results in population synthesis of massive stars.       BH with the giant secondary star (stage six in channel
+A possible refinement of our analysis would take into           I ; left panel of Fig. 2) is about ≃ 0.6% from CCSNe
+account that αCE is in general system-dependant. For            for all values of αCE we simulate. This implies that the
+instance, if jets are the additional energy source that un-     CEJSN scenario for high-energy neutrinos might have a
+binds the envelope αCE is naturally larger for a NS ac-         significant contribution to the high-energy neutrino flux.
+cretor than a MS star, and even larger for a BH. Another           We note that even though the motivation for this work
+example is the study of De Marco et al. 2011 which finds        was the CEJSN scenario and its possible outcomes, the
+that αCE is inversely correlated with the binary mass ra-       population model presented in this manuscript is not ex-
+tio. We note that other prescriptions of CEE applicable         clusive for the jets powering mechanism, and the merger
+to population synthesis, such as Hirai & Mandel (2022)          rates shown in Fig. 8 can be used for any model that
+and Di Stefano et al. (2023) were recently suggested,           aims to explain NS/BH-core mergers in both frame-
+but are not yet implemented in the available codes. It          works of traditional CEE (αCE ≤ 1), or models that
+would be interesting to compare the results presented           assume another energy source besides the orbital energy
+in this manuscript with results obtained using different        (αCE > 1).
+CEE formalisms.
+   The results of this study can be used to test whether                       ACKNOWLEDGMENTS
+NS/BH-core mergers and their resultant CEJSN tran-                 I thank Noam Soker, Vladimir Kalnitsky, Amit Kashi,
+sient events can account for several high energy astro-         Avishai Gilkis, Jan J. Eldridge, Alejandro Vigna-
+physical phenomena (as proposed and studied in e.g.,            Gomez, Hila Glanz and Dmitry Shishkin for helpful
+Papish et al. 2015; Soker & Gilkis 2018; Soker et al. 2019;     discussions and important suggestions that helped in
+Grichener & Soker 2019a; Grichener & Soker 2021; Soker          improving this manuscript. I thank an anonymous
+2021; Grichener et al. 2022; Soker 2022b) and what              referee for detailed comments and suggestions that
+would be their overall contribution to said events. Merg-       made this manuscript better. This research was sup-
+ers with different core structures, for instance, can lead      ported by a grant from the Israel Science Foundation
+to transient events with different properties. R-process        (769/20). I acknowledge support from Irwin and Joan
+nucleosynthesis in CEJSN requires that the merger of            Jacobs Fellowship. Simulations in this paper made
+the giant’s core with the NS occurs when the core is CO         use of the COMPAS rapid binary population synthe-
+rich. Grichener & Soker (2019a) found that one CEJSN            sis code (version 02.31.06), which is freely available at
+r-process events per ≃ 1000 CCSNe suffices to explain           http://github.com/TeamCOMPAS/COMPAS.
+the solar system r-process abundances by the CEJSN r-
+process scenario, which is consistent with our results for                      DATA AVAILABILITY
+αCE ≃ 1.25 (Fig. 8 and the brown dots of Fig. 9). For             The data underlying this article will be shared on rea-
+this scenario to account for a substantial fraction of the      sonable request to the corresponding author.
+
+
+                                                         REFERENCES
+Aadland, E., Massey, P., Hillier, D. J., et al. 2022, ApJ,      Aartsen, M. G., Abbasi, R., Ackermann, M., et al. 2021,
+  931, 157. doi:10.3847/1538-4357/ac66e7
+                                                                  Journal of Physics G Nuclear Physics, 48, 060501.
+Aartsen, M. G., Abbasi, R., Abdou, Y., et al. 2013, PhRvL,
+                                                                  doi:10.1088/1361-6471/abbd48
+  111, 021103
+                                                                                                                         13
+
+The LIGO Scientific Collaboration, the Virgo                     Glanz, H. & Perets, H. B. 2018, MNRAS, 478, L12.
+  Collaboration, the KAGRA Collaboration, et al. 2021,             doi:10.1093/mnrasl/sly065
+  arXiv:2111.03634                                               Glanz, H. & Perets, H. B. 2021, MNRAS, 500, 1921.
+Asplund, M., Grevesse, N., Sauval, A. J., et al. 2009,             doi:10.1093/mnras/staa3242
+  ARA&A, 47, 481.                                                Glanz, H. & Perets, H. B. 2021, MNRAS, 507, 2659.
+  doi:10.1146/annurev.astro.46.060407.145222                       doi:10.1093/mnras/stab2291
+Barkov, M. V., & Komissarov, S. S. 2011, MNRAS, 415, 944         Grichener, A., & Soker, N. 2019a, ApJ, 878, 24
+Belczynski, K., Kalogera, V., & Bulik, T. 2002, ApJ, 572,        Grichener, A. & Soker, N. 2021, MNRAS, 507, 1651.
+  407. doi:10.1086/340304                                          doi:10.1093/mnras/stab2233
+Belczynski, K., Kalogera, V., Rasio, F. A., et al. 2008,         Grichener, A., Cohen, C., & Soker, N. 2021, ApJ, 922, 61.
+  ApJS, 174, 223. doi:10.1086/521026                               doi:10.3847/1538-4357/ac23dd
+Belczynski, K., Heger, A., Gladysz, W., et al. 2016, A&A,        Grichener, A., Kobayashi, C., & Soker, N. 2022, ApJL, 926,
+  594, A97. doi:10.1051/0004-6361/201628980                        L9. doi:10.3847/2041-8213/ac4f68
+Broekgaarden, F. S. & Berger, E. 2021, ApJL, 920, L13.           Grichener, A. & Soker, N. 2022, Research Notes of the
+  doi:10.3847/2041-8213/ac2832                                     American Astronomical Society, 6, 263.
+Broekgaarden, F. S., Berger, E., Neijssel, C. J., et al. 2021,     doi:10.3847/2515-5172/acaa9f
+  MNRAS, 508, 5028. doi:10.1093/mnras/stab2716                   Guarini, E., Tamborra, I., & Margutti, R. 2022, ApJ, 935,
+Chevalier, R. A. 2012, ApJL, 752, L2                               157. doi:10.3847/1538-4357/ac7fa0
+                                                                 Hall, P. D. & Tout, C. A. 2014, MNRAS, 444, 3209.
+Clayton, M., Podsiadlowski, P., Ivanova, N., et al. 2017,
+                                                                   doi:10.1093/mnras/stu1678
+  MNRAS, 470, 1788. doi:10.1093/mnras/stx1290
+                                                                 Hernández-Pérez, F. & Bruzual, G. 2013, MNRAS, 431,
+de Kool, M. 1990, ApJ, 358, 189. doi:10.1086/168974
+                                                                   2612. doi:10.1093/mnras/stt368
+De Marco, O., Passy, J.-C., Moe, M., et al. 2011, MNRAS,
+                                                                 Hillel, S., Schreier, R., & Soker, N. 2022, MNRAS, 514,
+  411, 2277. doi:10.1111/j.1365-2966.2010.17891.x
+                                                                   3212. doi:10.1093/mnras/stac1341
+Di Stefano, R., Kruckow, M. U., Gao, Y., et al. 2023, ApJ,
+                                                                 Hirai, R. & Mandel, I. 2022, ApJL, 937, L42.
+  944, 87. doi:10.3847/1538-4357/acae9b
+                                                                   doi:10.3847/2041-8213/ac9519
+Dominik, M., Belczynski, K., Fryer, C., et al. 2012, ApJ,
+                                                                 Hurley, J. R., Pols, O. R., & Tout, C. A. 2000, MNRAS,
+ 759, 52. doi:10.1088/0004-637X/759/1/52
+                                                                   315, 543. doi:10.1046/j.1365-8711.2000.03426.x
+Dong, D. Z., Hallinan, G., Nakar, E., et al. 2021, Science,
+                                                                 Hurley, J. R., Tout, C. A., & Pols, O. R. 2002, MNRAS,
+ 373, 1125. doi:10.1126/science.abg6037
+                                                                   329, 897. doi:10.1046/j.1365-8711.2002.05038.x
+Eich, C., Zimmermann, M. E., Thorne, K. S., et al. 1989,
+                                                                 Iaconi, R., Reichardt, T., Staff, J., et al. 2017, MNRAS,
+  ApJ, 346, 277. doi:10.1086/168008
+                                                                   464, 4028. doi:10.1093/mnras/stw2377
+Eldridge, J. J. & Tout, C. A. 2004, MNRAS, 353, 87.
+                                                                 Iben, I. & Livio, M. 1993, PASP, 105, 1373.
+  doi:10.1111/j.1365-2966.2004.08041.x                             doi:10.1086/133321
+Eldridge, J. J., Stanway, E. R., Xiao, L., et al. 2017, PASA,    Iorio, G., Costa, G., Mapelli, M., et al. 2022,
+  34, e058. doi:10.1017/pasa.2017.51                               arXiv:2211.11774. doi:10.48550/arXiv.2211.11774
+Frank, J., King, A., & Raine, D. J. 2002, Accretion Power        Ivanova, N., Justham, S., Chen, X., et al. 2013,A&A Rv,
+  in Astrophysics, by Juhan Frank and Andrew King and              21, 59. doi:10.1007/s00159-013-0059-2
+  Derek Raine, pp. 398. ISBN 0521620538. Cambridge,              Ivanova, N., Justham, S., & Podsiadlowski, P. 2015,
+  UK: Cambridge University Press, February 2002., 398              MNRAS, 447, 2181. doi:10.1093/mnras/stu2582
+Fryer, C. L., & Woosley, S. E. 1998, ApJL, 502, L9               Izzard, R. G., Dray, L. M., Karakas, A. I., et al. 2006,
+Fryer, C. L., Belczynski, K., Wiktorowicz, G., et al. 2012,        A&A, 460, 565. doi:10.1051/0004-6361:20066129
+  ApJ, 749, 91. doi:10.1088/0004-637X/749/1/91                   Izzard, R. G., Preece, H., Jofre, P., et al. 2018, MNRAS,
+Garcı́a, F., Simaz Bunzel, A., Chaty, S., et al. 2021, A&A,        473, 2984. doi:10.1093/mnras/stx2355
+ 649, A114. doi:10.1051/0004-6361/202038357                      Izzard, R. G., Hall, P. D., Tauris, T. M., et al. 2012, IAU
+Ghodla, S., van Zeist, W. G. J., Eldridge, J. J., et al. 2022,     Symposium, 283, 95. doi:10.1017/S1743921312010769
+ MNRAS, 511, 1201. doi:10.1093/mnras/stac120                     Kashi, A. & Soker, N. 2011, MNRAS, 417, 1466.
+Gilkis, A., Soker, N., & Kashi, A. 2019, MNRAS, 482, 4233          doi:10.1111/j.1365-2966.2011.19361.x
+Ginat, Y. B., Glanz, H., Perets, H. B., et al. 2020, MNRAS,      Kochanek, C. S., Auchettl, K., & Belczynski, K. 2019,
+  493, 4861. doi:10.1093/mnras/staa465                             MNRAS, 485, 5394. doi:10.1093/mnras/stz717
+14
+
+Kroupa, P. 2001, MNRAS, 322, 231.                                Rauf, L., Howlett, C., Davis, T. M., et al. 2023,
+  doi:10.1046/j.1365-8711.2001.04022.x                             arXiv:2302.08172
+Kudritzki, R. P., Pauldrach, A., Puls, J., et al. 1989, A&A,     Raveh, Y., Michaely, E., & Perets, H. B. 2022, MNRAS,
+ 219, 205                                                          514, 4246. doi:10.1093/mnras/stac1605
+Kuruwita, R. L., Staff, J., & De Marco, O. 2016, MNRAS,          Ricker, P. M. & Taam, R. E. 2012, ApJ, 746, 74.
+ 461, 486. doi:10.1093/mnras/stw1414                               doi:10.1088/0004-637X/746/1/74
+Lau, M. Y. M., Hirai, R., Price, D. J., et al. 2022, MNRAS,      Roepke, F. K. & De Marco, O. 2022, arXiv:2212.07308
+  516, 4669. doi:10.1093/mnras/stac2490                          Sabach, E., Hillel, S., Schreier, R., et al. 2017, MNRAS,
+Livio, M. & Soker, N. 1988, ApJ, 329, 764.                         472, 4361. doi:10.1093/mnras/stx2272
+  doi:10.1086/166419                                             Sana, H., de Mink, S. E., de Koter, A., et al. 2012, Science,
+López-Cámara, D., De Colle, F., & Moreno Méndez, E.             337, 444. doi:10.1126/science.1223344
+   2019, MNRAS, 482, 3646. doi:10.1093/mnras/sty2959             Schreier, R., Hillel, S., & Soker, N. 2023, MNRAS, 520,
+Madau, P. & Dickinson, M. 2014, ARA&A, 52, 415.                    4182. doi:10.1093/mnras/stad360
+ doi:10.1146/annurev-astro-081811-125615                         Schrøder, S. L., MacLeod, M., Loeb, A., et al. 2020, ApJ,
+Mapelli, M., Spera, M., Montanari, E., et al. 2020, ApJ,           892, 13. doi:10.3847/1538-4357/ab7014
+ 888, 76. doi:10.3847/1538-4357/ab584d                           Shao, Y. & Li, X.-D. 2021, ApJ, 920, 81.
+McClelland, L. A. S. & Eldridge, J. J. 2016, MNRAS, 459,           doi:10.3847/1538-4357/ac173e
+ 1505. doi:10.1093/mnras/stw618                                  Shenar, T., Gilkis, A., Vink, J. S., et al. 2020, A&A, 634,
+Metzger, B. D. 2022, ApJ, 932, 84.                                 A79. doi:10.1051/0004-6361/201936948
+ doi:10.3847/1538-4357/ac6d59                                    Soker, N. 1996, ApJL, 460, L53. doi:10.1086/309970
+Mondal, S., Belczyński, K., Wiktorowicz, G., et al. 2020,       Soker, N. 2017, MNRAS, 471, 4839.
+ MNRAS, 491, 2747. doi:10.1093/mnras/stz3227                       doi:10.1093/mnras/stx1978
+Moreno Méndez, E., López-Cámara, D., & De Colle, F.           Soker, N. & Gilkis, A. 2018, MNRAS, 475, 1198.
+ 2017, MNRAS, 470, 2929. doi:10.1093/mnras/stx1385                 doi:10.1093/mnras/stx3287
+Moriya, T. J. 2018, MNRAS, 475, L49                              Soker, N., Grichener, A., & Gilkis, A. 2019, MNRAS, 484,
+Neijssel, C. J., Vigna-Gómez, A., Stevenson, S., et al. 2019,     4972. doi:10.1093/mnras/stz364
+  MNRAS, 490, 3740. doi:10.1093/mnras/stz2840                    Soker, N. 2021, MNRAS, 506, 2445.
+Nieuwenhuijzen, H. & de Jager, C. 1990, A&A, 231, 134              doi:10.1093/mnras/stab1860
+Ohlmann, S. T., Röpke, F. K., Pakmor, R., et al. 2016,          Soker, N. 2022, MNRAS, 516, 4942.
+ ApJL, 816, L9. doi:10.3847/2041-8205/816/1/L9                     doi:10.1093/mnras/stac2592
+Olejak, A., Belczynski, K., & Ivanova, N. 2021, A&A, 651,        Soker, N. 2022, Research in Astronomy and Astrophysics,
+  A100. doi:10.1051/0004-6361/202140520                            22, 055010. doi:10.1088/1674-4527/ac5b40
+Oslowski, S., Bulik, T., Gondek-Rosińska, D., et al. 2011,      Spera, M. & Mapelli, M. 2017, MNRAS, 470, 4739.
+  MNRAS, 413, 461. doi:10.1111/j.1365-2966.2010.18147.x            doi:10.1093/mnras/stx1576
+Özel, F., Psaltis, D., Narayan, R., et al. 2010, ApJ, 725,      Spera, M., Mapelli, M., Giacobbo, N., et al. 2019, MNRAS,
+   1918. doi:10.1088/0004-637X/725/2/1918                          485, 889. doi:10.1093/mnras/stz359
+Paczynski, B. 1976, Structure and Evolution of Close             Sridhar, N. & Metzger, B. D. 2022, ApJ, 937, 5.
+  Binary Systems, 73, 75                                           doi:10.3847/1538-4357/ac8a4a
+Papish, O., Soker, N., & Bukay, I. 2015, MNRAS, 449, 288         Sridhar, N., Metzger, B. D., & Fang, K. 2022,
+Passy, J.-C., De Marco, O., Fryer, C. L., et al. 2012, ApJ,        arXiv:2212.11236
+  744, 52. doi:10.1088/0004-637X/744/1/52                        Stanway, E. R. & Eldridge, J. J. 2018, MNRAS, 479, 75.
+Patton, R. A., Sukhbold, T., & Eldridge, J. J. 2022,               doi:10.1093/mnras/sty1353
+  MNRAS, 511, 903. doi:10.1093/mnras/stab3797                    Stanway, E. R. & Eldridge, J. J. 2019, A&A, 621, A105.
+Périgois, C., Belczynski, C., Bulik, T., et al. 2021, PhRvD,      doi:10.1051/0004-6361/201834359
+  103, 043002. doi:10.1103/PhysRevD.103.043002                   Stevance, H. F. & Eldridge, J. J. 2021, MNRAS, 504, L51.
+Pols, O. R., Schröder, K.-P., Hurley, J. R., et al. 1998,         doi:10.1093/mnrasl/slab039
+  MNRAS, 298, 525. doi:10.1046/j.1365-8711.1998.01658.x          Stevenson, S., Vigna-Gómez, A., Mandel, I., et al. 2017,
+Ragoler, N., Bear, E., Schreier, R., et al. 2022, MNRAS,           Nature Communications, 8, 14906.
+  515, 5473. doi:10.1093/mnras/stac2148                            doi:10.1038/ncomms14906
+                                                                                                                          15
+
+Taam, R. E. & Sandquist, E. L. 2000, ARA&A, 38, 113.             Vigna-Gómez, A., MacLeod, M., Neijssel, C. J., et al. 2020,
+  doi:10.1146/annurev.astro.38.1.113                               PASA, 37, e038. doi:10.1017/pasa.2020.31
+                                                                 Webbink, R. F. 1984, ApJ, 277, 355. doi:10.1086/161701
+Riley, J., Agrawal, P., Barrett, J. W., et al. 2022, ApJS,
+                                                                 Wheeler, J. C. & Levreault, R. 1985, ApJL, 294, L17.
+  258, 34. doi:10.3847/1538-4365/ac416c
+                                                                   doi:10.1086/184500
+Thöne, C. C., de Ugarte Postigo, A., Fryer, C. L., et al.       Woosley, S. E., Langer, N., & Weaver, T. A. 1995, ApJ,
+  2011, Nature, 480, 72                                            448, 315. doi:10.1086/175963
+Thorne, K. S. & Zytkow, A. N. 1975, ApJL, 199, L19.              Xu, X.-J. & Li, X.-D. 2010, ApJ, 716, 114.
+  doi:10.1086/181839                                               doi:10.1088/0004-637X/716/1/114
+                                                                 Xu, X.-J. & Li, X.-D. 2010, ApJ, 722, 1985.
+Thorne, K. S. & Zytkow, A. N. 1977, ApJ, 212, 832.
+                                                                   doi:10.1088/0004-637X/722/2/1985
+  doi:10.1086/155109
+                                                                 Zevin, M., Bavera, S. S., Berry, C. P. L., et al. 2021, ApJ,
+van den Heuvel, E. P. J. 1976, Structure and Evolution of          910, 152. doi:10.3847/1538-4357/abe40e
+  Close Binary Systems, 73, 35                                   Zhang, W., & Fryer, C. L. 2001, ApJ, 550, 357
+Vigna-Gómez, A., Neijssel, C. J., Stevenson, S., et al. 2018,   Zhang, F., Han, Z., Li, L., et al. 2005, MNRAS, 357, 1088.
+  MNRAS, 481, 4009. doi:10.1093/mnras/sty2463                      doi:10.1111/j.1365-2966.2005.08739.x
+16
+
+
+                                                      APPENDIX
+       THE EFFECT OF MASS ACCRETION BY THE NS/BH DURING CEE WITH THE GIANT STAR
+  The NS/BH merger with the core of the giant star can power a bright transient event. In the CEJSN scenario (e.g.,
+Soker et al. 2019) the NS/BH launches two opposite jets, one on each side of the equatorial plane, while spiralling-in
+inside the envelope and later through the core of the giant secondary star. The collision of these jets with the giant’s
+envelope and the giant’s winds converts kinetic energy to thermal energy and then radiation, leading to a bright
+transient that might mimic a SN explosion.
+  The energy that the two jets a NS launches deposit to the envelope of the giant secondary star is
+                                                          GMNS Macc,NS
+                                                E2j = η                ,                                             (1)
+                                                             RNS
+where MNS and RNS are the mass and the radius of the NS, respectively, and η is an efficiency parameter. Assuming
+that the energy of the jets is about the binding energy of the envelope Ebind , as required to unbind the envelope
+considering that hydrodynamical simulations find that most of the envelope’s mass remains bound at the end of CEE
+(e.g., Passy et al. 2012), we can find the amount of mass accreted by the NS in the CEE phase to be
+                                                                              
+                                                              Ebind         RNS
+                                     Macc,NS ≃ 0.001 M⊙
+                                                          5 × 1049 erg     10 km
+                                                                   −1                                       (2)
+                                                             MNS           η −1
+                                                      ×                           .
+                                                           1.25 M⊙        0.05
+
+We calibrate Ebind , RNS and MNS with typical values from our COMPAS models and we take the efficiency parameter
+to be η = 0.05 (e.g., López-Cámara et al. 2019).
+  The jets that a BH launches inside the envelope of the giant secondary star are relativistic, and their energy is given
+by
+                                                   E2j = ηMacc,BH c2 ,                                                (3)
+implying that the amount of mass that the BH accretes while inside the envelope of the giant secondary star is
+                                                                   
+                                                           Ebind         η −1
+                                 Macc,BH ≃ 0.002 M⊙                            .                                     (4)
+                                                       3 × 1050 erg     0.1
+
+We take the typical value of Ebind from the COMPAS simulations and the efficiency parameter η = 0.1 from Frank
+et al. (2002).
+  Including the mass that is accreted by the NS/BH during CEE in our COMPAS simulations yields practically
+no difference in the rates of NS/BH-core mergers for all values of αCE we simulated. The rates remain similar even
+for the higher bounds of the accreted masses inferred from substituting the upper limits of the parameters from the
+simulations in equations (2) and (4), which results in both cases in masses about an order of magnitude higher than
+the calibrated values. Inside the core of the giant star the energies of the jets are higher and hence the accretion has
+a more significant role.
+

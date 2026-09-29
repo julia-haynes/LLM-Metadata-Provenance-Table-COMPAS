@@ -1,0 +1,4442 @@
+arXiv:2109.10352v3 [astro-ph.IM] 28 Dec 2021
+
+Draft version December 30, 2021
+Typeset using LATEX twocolumn style in AASTeX63
+
+Rapid stellar and binary population synthesis with COMPAS
+Team COMPAS,1 Jeff Riley,2, 3 Poojan Agrawal,4, 3 Jim W. Barrett,5 Kristan N. K. Boyett,6
+Floor S. Broekgaarden,7 Debatri Chattopadhyay,4, 3 Sebastian M. Gaebel,8 Fabian Gittins,9 Ryosuke Hirai,2, 3
+George Howitt,10, 3 Stephen Justham,11, 12, 13 Lokesh Khandelwal,11 Floris Kummer,11 Mike Y. M. Lau,2, 3
+Ilya Mandel,2, 3, 5 Selma E. de Mink,13, 11, 7 Coenraad Neijssel,5, 3 Tim Riley,2, 3 Lieke van Son,7, 11, 13
+Simon Stevenson,4, 3 Alejandro Vigna-Gómez,14, 15 Serena Vinciguerra,11 Tom Wagg,16, 7, 13 Reinhold Willcox,2, 3
+1 The public COMPAS code is a product of work by the entire COMPAS collaboration over many years; we therefore kindly request that,
+
+in recognition of this team effort, the paper is cited as “Team COMPAS: J. Riley et al.”
+2 School of Physics and Astronomy, Monash University, Clayton, Victoria 3800, Australia
+3 OzGrav, Australian Research Council Centre of Excellence for Gravitational Wave Discovery, Australia
+4 Centre for Astrophysics and Supercomputing, Swinburne University of Technology, Hawthorn, VIC 3122, Australia
+5 Institute of Gravitational Wave Astronomy and School of Physics and Astronomy, University of Birmingham, Birmingham, B15 2TT,
+
+United Kingdom
+6 Department of Physics, University of Oxford, Denys Wilkinson Building, Keble Road, Oxford OX1 3RH, UK
+7 Center for Astrophysics | Harvard & Smithsonian, 60 Garden St., Cambridge, MA 02138, USA
+8 Max Planck Institute for Gravitational Physics (Albert Einstein Institute), Callinstrasse 38, D-30167 Hannover, Germany
+9 Mathematical Sciences and STAG Research Centre, University of Southampton, Southampton SO17 1BJ, UK
+10 School of Physics, University of Melbourne, Parkville, Victoria, 3010, Australia
+11 Anton Pannekoek Institute of Astronomy and GRAPPA, Science Park 904, University of Amsterdam, 1098XH Amsterdam, The
+
+Netherlands
+12 School of Astronomy & Space Science, University of the Chinese Academy of Sciences, Beijing 100012, China
+13 Max Planck Institute for Astrophysics, Karl-Schwarzschild-Str. 1, 85748 Garching, Germany
+14 DARK, Niels Bohr Institute, University of Copenhagen, Jagtvej 128, 2200, Copenhagen, Denmark
+15 Niels Bohr International Academy, The Niels Bohr Institute, Blegdamsvej 17, 2100 Copenhagen, Denmark
+16 Department of Astronomy, University of Washington, Seattle, WA, 98195
+
+(Dated: December 30, 2021)
+
+ABSTRACT
+Compact Object Mergers: Population Astrophysics and Statistics (COMPAS; https://compas.
+science) is a public rapid binary population synthesis code. COMPAS generates populations of
+isolated stellar binaries under a set of parameterized assumptions in order to allow comparisons
+against observational data sets, such as those coming from gravitational-wave observations of merging compact remnants. It includes a number of tools for population processing in addition to
+the core binary evolution components. COMPAS is publicly available via the github repository
+https://github.com/TeamCOMPAS/COMPAS/, and is designed to allow for flexible modifications
+as evolutionary models improve. This paper describes the methodology and implementation of COMPAS. It is a living document that will be updated as new features are added to COMPAS; the current
+document describes COMPAS v02.21.00.
+jeff.riley@monash.edu,
+floor.broekgaarden@cfa.harvard.edu,
+ilya.mandel@monash.edu, spstevenson@swin.edu.au
+
+2
+
+Team COMPAS
+Keywords: stars: stellar evolution, stars: binaries, black holes, gravitational waves
+
+Contents
+1. Introduction
+
+3
+
+2. COMPAS
+2.1. Overview
+2.2. Mode: Single Star versus Binary Star
+2.3. Architecture
+2.4. Evolutionary Models
+2.4.1. SSE Model
+2.4.2. BSE Model
+2.5. Time Stepping
+2.6. Input and Configuration
+2.7. Default Model
+2.7.1. Program Options
+2.7.2. Grid files
+2.8. Output
+
+4
+4
+4
+4
+5
+5
+5
+5
+5
+6
+7
+8
+8
+
+3. Single Stellar Evolution
+3.1. Evolutionary Algorithms
+3.2. Evolutionary Stages
+3.3. Evolutionary Timescales
+3.4. Rotation
+3.5. Wind Mass Loss (Single Star)
+3.5.1. Hurley Model
+3.5.2. Belczynski Model
+3.6. Treatment of the Impact of Mass Loss and
+Gain
+3.7. Stellar Remnants
+3.7.1. White Dwarfs
+3.7.2. Neutron Stars and Black Holes
+3.8. Supernova Types
+3.8.1. Electron-capture Supernovae
+3.8.2. Core-collapse Supernovae
+3.8.3. Ultra-stripped Supernovae
+3.8.4. Pair-instability Supernovae
+3.9. Supernova Natal Kicks
+
+9
+9
+9
+10
+11
+13
+13
+14
+
+4. Binary Stellar Evolution
+4.1. Wind Mass Loss (Binary System)
+4.2. Mass Transfer
+4.2.1. Roche-lobe Overflow
+4.2.2. Stability Criteria
+4.2.3. Stable Mass Transfer
+4.2.4. Common Envelope Phase
+(Dynamically Unstable Mass
+Transfer)
+4.2.5. Stellar Mergers
+4.2.6. Massive Overcontact Binaries
+
+14
+15
+15
+15
+16
+16
+17
+17
+17
+18
+19
+19
+19
+20
+20
+21
+
+21
+22
+23
+
+4.3. Supernovae (Binary)
+4.4. Gravitational Radiation
+4.5. Caveats to Binary Evolution in COMPAS
+5. Evolving a Population
+5.1. Sampling
+5.2. Single Star/Primary Mass
+5.3. Mass Ratio and Secondary Mass
+5.4. Metallicity
+5.5. Semimajor Axis
+5.6. Orbital Period
+5.7. Orbital Eccentricity
+5.8. Supernova Kicks
+5.9. Stellar Rotation
+
+23
+23
+23
+23
+23
+24
+24
+24
+24
+24
+24
+25
+25
+
+6. Postprocessing
+25
+6.1. Recording Properties
+25
+6.2. Selecting Binary Systems of Interest
+25
+6.3. Converting to Yields per Star-forming Mass 25
+6.4. Calculating Astrophysical Rates over the
+Cosmic History of Our Universe: The Case of
+Double Compact Object Mergers
+26
+6.4.1. Double Compact Object Merger Rates
+for Ground-based GW Detectors
+26
+6.5. Metallicity-specific Star Formation Rate
+Density Prescriptions
+27
+6.5.1. Star Formation Rate Density
+Prescriptions
+27
+6.5.2. Metallicity distribution function over
+redshift (GSMF + MZR)
+28
+6.5.3. Galaxy Stellar-Mass Function
+Prescriptions
+29
+6.5.4. Mass-Metallicity Relation
+Prescriptions
+30
+6.6. Gravitational-wave selection effects
+30
+7. Usage Examples
+7.1. Detailed Evolution of a Binary
+7.2. Chirp Mass Distribution of LIGO BBHs
+
+31
+31
+31
+
+8. Conclusions
+
+32
+
+9. Acknowledgements
+
+33
+
+COMPAS code paper
+1. INTRODUCTION
+
+The majority of massive stars are born in a stellar
+binary- or multiple-star system with other stellar companions (e.g., Chini et al. 2012; Sana et al. 2012, 2014;
+Kobulnicky et al. 2014; Almeida et al. 2017; Moe &
+Di Stefano 2017). The subsequent evolution of massive stellar binaries plays a critical role in many fields
+of astronomy. Massive binaries are thought to play key
+roles in the reionization of the universe (e.g., Conroy
+& Kratter 2012; Ma et al. 2016b; Eldridge et al. 2017;
+Rosdahl et al. 2018; Götberg et al. 2019, 2020), nucleosynthesis (e.g., Dray & Tout 2003; Izzard et al. 2006;
+Woosley & Heger 2007; Langer 2012), and the diversity
+of observed supernovae (e.g., Podsiadlowski et al. 1992;
+Eldridge et al. 2013, 2018, 2019a; Tauris et al. 2015;
+Moriya et al. 2017; Yoon et al. 2017, 2019; Zapartas et al.
+2019, 2021). Some massive binaries will evolve into systems containing one or two compact objects, which can
+be observed as X-ray binaries (e.g., Remillard & McClintock 2006), double neutron stars (e.g., Tauris et al.
+2017), short gamma-ray bursts (e.g., Woosley & Bloom
+2006; Berger 2014), and gravitational-wave transients
+(e.g. Mandel & Farmer 2018; Abbott et al. 2019; Mandel & Broekgaarden 2021).
+Many physical processes in the evolution of a binary
+system are uncertain. The uncertainties in stellar wind
+mass loss, mass transfer, common envelope physics, supernova remnant masses, and natal kicks, among others,
+can be constrained by comparing the observed populations listed above against theoretical predictions under
+a range of assumptions. The essence of binary population synthesis (BPS) simulations is to enable modeling of
+large populations by combining prescriptions for single
+star evolution (SSE) and binary star evolution (BSE),
+modelling the evolution of stars from zero-age main sequence (ZAMS) until their final states.
+In this paper we present the publicly available BPS
+suite Compact Object Mergers: Population Astrophysics and Statistics (COMPAS). The core of COMPAS is a BPS code that models the evolution of a population of binary stars using a set of simplified prescriptions or recipes for stellar and binary evolution. By
+doing so, COMPAS can compute the full evolution of a
+typical binary system in around 10 ms on a modern laptop, and compute the evolution of a million binaries in a
+few CPU hours. The general approach is similar to other
+BPS codes including the Scenario Machine (Lipunov
+et al. 1996b,a, 2009), IBiS (Tutukov & Yungelson 1996),
+SeBa (Portegies Zwart & Verbunt 1996; Portegies Zwart
+& Yungelson 1998; Nelemans et al. 2001; Toonen et al.
+2012), BSE (Hurley et al. 2002), StarTrack (Belczynski
+et al. 2002, 2008, 2020a), binary c (Izzard et al. 2004,
+
+3
+
+2006, 2009), MOBSE (Giacobbo & Mapelli 2018; Giacobbo et al. 2018) and COSMIC (Breivik et al. 2020).
+In addition to the core BPS code, COMPAS also
+provides several other publicly available tools, including rapid single stellar evolution, postprocessing tools
+to study the evolution of populations over cosmic time
+(Neijssel et al. 2019), postprocessing scripts to model
+the detectability of double compact object (DCO) [comprising double neutron star (DNS), binary black hole
+(BBH), and black hole-neutron star (BH–NS)] mergers
+by ground-based gravitational-wave observatories (e.g.,
+Barrett et al. 2018), a statistical sampling framework to
+optimize the computational cost of BPS (Broekgaarden
+et al. 2019), and models for specific evolutionary phases
+such as X-ray binaries and pulsars (e.g., Chattopadhyay
+et al. 2020; Vinciguerra et al. 2020).
+COMPAS was developed with a primary focus on the
+study of compact object mergers that serve as sources
+of gravitational waves. It has been used extensively
+to investigate the properties of compact binaries containing neutron stars and black holes. Stevenson et al.
+(2017) studied the formation history of the first three
+BBHs detected via gravitational waves. Barrett et al.
+(2018) explored how future gravitational-wave observations will allow us to determine the physics of massive
+binary evolution. Stevenson et al. (2019) included the
+impact of (pulsational) pair-instability supernovae. Neijssel et al. (2019) investigated the consequences of uncertain metallicity-specific star formation history on the
+rate and properties of DCO mergers. Lau et al. (2020)
+predicted the number of DNSs detectable with LISA
+and the inference these observations will enable. Bavera
+et al. (2020) used COMPAS to predict the spin distribution of merging BBHs. van Son et al. (2020) investigated the robustness of the predicted pair-instability
+mass gap to uncertainties in the accretion efficiency for
+black holes. Riley et al. (2021) studied chemically homogeneous evolution as a pathway to BBH formation.
+Mandel et al. (2021) considered the consequences of
+an alternative, stochastic recipe for compact remnant
+masses. Vigna-Gómez et al. (2021) explored sequential BBH mergers during triple evolution. Broekgaarden et al. (2021a) and Broekgaarden & Berger (2021)
+focused on the formation of black hole – neutron star
+binaries. van Son et al. (2021) investigated the relative
+contributions of dynamically stable and unstable mass
+transfer to BBH mergers over cosmic history. Broekgaarden et al. (2021b) investigated the relative impact
+from uncertain metallicity-specific star formation history to that from uncertain stellar evolution on the rate
+and properties of DCO mergers.
+
+4
+
+Team COMPAS
+
+A number of other consequences of massive binary
+evolution have been explored with COMPAS. VignaGómez et al. (2018) used observations of Galactic
+DNSs to constrain evolutionary physics. Chattopadhyay et al. (2020) used the same population to constrain
+birth distributions of pulsar spin periods and magnetic
+field strengths, as well as magnetic field decay scales.
+Schrøder et al. (2020) investigated optical counterparts
+to common envelope (CE) events which fail to eject the
+envelope and result in a merger. Howitt et al. (2020)
+explored luminous red novae: red optical transients associated with CE events. Vigna-Gómez et al. (2020) cataloged the CE events en route to DNS formation. Mandel & Müller (2020) took advantage of COMPAS SSE
+modules in formulating a stochastic compact remnant
+mass prescription and momentum-conserving natal kick
+prescription. Vinciguerra et al. (2020) studied the population of Be X-ray binaries to establish constraints for
+mass accretion efficiency. Chattopadhyay et al. (2021)
+explored the prospects for observing neutron star–black
+hole binaries in future radio pulsar surveys. Miller-Jones
+et al. (2021) and Neijssel et al. (2021) constrained the
+massive stellar wind mass loss with observations of the
+black hole (BH) high-mass X-ray binary Cygnus X-1.
+Willcox et al. (2021) compared COMPAS models to
+observed pulsar velocities in order to study neutron star
+natal kicks.
+COMPAS has also played an important role in developing more efficient sampling, inference, and model
+emulation techniques. Barrett et al. (2017) attempted
+to generate computationally efficient surrogate models
+of binary population synthesis through Gaussian process emulation. Taylor & Gerosa (2018) used COMPAS
+public data as an example in their hierarchical inference
+study. Broekgaarden et al. (2019) applied importance
+sampling to enable computationally efficient DCO simulations. Lin et al. (2021) developed new tools for classification and emulation based on (local) Gaussian process
+models and the COMPAS suite.
+In this paper we introduce the COMPAS code and
+discuss its methodology and implementation. The paper
+is organized as follows. Section 2 presents the main features of COMPAS. Section 3 discusses the implementation of single stellar evolution in COMPAS. Section 4
+discusses binary stellar evolution prescriptions. In Section 5 we describe how COMPAS can be used to model
+populations of binaries. Section 6 describes the postprocessing tools available within COMPAS. Section 7
+illustrates a few applications of COMPAS. We conclude
+in Section 8.
+2. COMPAS
+
+2.1. Overview
+1
+
+COMPAS is an open-source integrated suite of software tools combining a robust, rapid, and flexible population synthesis application for both single-star evolution and binary star evolution, with tools for deployment
+on a range of platforms, including high-performance
+computing platforms, and a set of Python postprocessing analysis and plotting scripts.
+The heart of the COMPAS suite is the SSE and BSE
+simulation code, developed in the C++ programming
+language. C++ is a cross platform, object-oriented programming (OOP) language that gives a clear structure
+to programs and allows code to be easily understood
+and maintained - it is one of the world’s most popular
+programming languages, and has an established history
+of being used to create high-performance applications.
+The COMPAS C++ code is a modular, object-oriented
+code, designed to be easily understood and extended.
+Results produced with COMPAS are publicly available2 .
+2.2. Mode: Single Star versus Binary Star
+COMPAS operates in either one of two selectable
+modes: SSE or BSE. As the names suggest, in SSE
+mode COMPAS evolves single stars, and in BSE mode
+COMPAS evolves binary stars.
+The SSE algorithm covers all evolution phases from
+the Zero-age Main Sequence (ZAMS) up to and including the remnant stages. The allowed range of ZAMS
+masses, M ∈ [0.1, 150] M , extends the range of Hurley
+et al. (2000) models by extrapolation; the allowed range
+of metallicities Z ∈ [10−4 , 0.03] follows these models (see
+Section 3 for a full description).
+In BSE mode, the SSE code provides the stellar attributes (e.g., luminosity, radius, temperature, etc.) for
+each of the component stars as they evolve. COMPAS
+evolves binary stars until a DCO is formed, the component stars merge, or, optionally, the binary is disrupted.
+In either mode (SSE or BSE), users can specify a maximum evolution time and/or maximum number of evolutionary steps, after which evolution is halted.
+2.3. Architecture
+The SSE and BSE simulation code at the heart of
+COMPAS is written in C++ using OOP concepts. The
+architecture is based on stellar type, with each stellar
+type being described by a separate C++ class. Figure 1
+shows the SSE class and container diagram, where the
+1 compas.science.
+
+Code available at https://github.com/
+TeamCOMPAS/COMPAS
+2 https://zenodo.org/communities/compas/
+
+5
+
+COMPAS code paper
+arrows indicate inheritance (the OOP mechanism used
+to base one class upon another: the inheriting class inherits the implementation of the inherited class). The
+COMPAS C++ code is implemented using multiple inheritance, and all stellar classes also inherit directly from
+the BaseStar class (arrows not shown in Figure 1 for
+clarity). Each of the stellar classes encapsulates data
+structures and algorithms specific to the evolutionary
+phase corresponding to the class.3
+The Star class shown in Figure 1 is a container class
+for the stellar classes. An instance of the Star class is a
+single star being evolved by COMPAS, and contains an
+object that is created as a BaseStar object, and evolves,
+over time, through various SSE classes shown in Figure 1.
+Figure 2 shows the BSE class and container diagram.
+The main class for binary star evolution is the BinaryStar class. The BinaryStar class is a wrapper, containing
+a BaseBinaryStar class object, and abstracts away the
+details of the binary star and the evolution. The BaseBinaryStar class is a container class for the objects that
+represent the component stars of a binary system. An
+instance of the BaseBinaryStar class is a binary system
+being evolved by COMPAS, and contains a BinaryConstituentStar class object for each of the component stars
+(i.e. the primary and secondary stars), as well as data
+structures and algorithms specific to the evolution of a
+binary system. The BinaryConstituentStar class inherits from the SSE Star class, so objects instantiated from
+the BinaryConstituentStar class inherit the characteristics of the SSE Star class, particularly the stellar evolution model. The BinaryConstituentStar class defines
+additional data structures and algorithms (to the data
+structures and algorithms provided by the SSE classes)
+required to support the evolution of a binary system
+component star.
+2.4. Evolutionary Models
+2.4.1. SSE Model
+The SSE model implemented in COMPAS (see Section 3 for more details) follows Hurley et al. (2000), using
+their analytical fits to the models of Pols et al. (1998).
+After the creation of the star according to the initial conditions (specified or sampled), the evolution of a single
+star proceeds by integrating the attributes of the star
+over its lifetime, and stops when the star evolves to a
+remnant, or the maximum time, or maximum number
+of time steps is reached.
+3 The class names shown in Figure 1 do not match the class names
+
+used in the COMPAS C++ code, which are abbreviated into
+single words or acronyms.
+
+Figure 3 shows a high-level overview of the code flow
+for SSE.
+2.4.2. BSE Model
+The binary evolution model implemented in COMPAS is broadly similar to the BSE population synthesis
+application (Hurley et al. 2002), and other population
+synthesis applications derived from it, such as binary c
+(Izzard et al. 2004, 2006, 2009; de Mink et al. 2013) and
+StarTrack (Belczynski et al. 2002, 2008).
+After the creation of the binary system according to
+the initial conditions (specified or sampled), the evolution of a binary system proceeds by integrating the
+attributes of the system over its lifetime and stops if the
+component stars merge, when the system forms a DCO,
+is disrupted, or the maximum time or maximum number
+of time steps is reached.
+Figure 4 shows a high-level overview of the code flow
+for BSE.
+2.5. Time Stepping
+The initial estimate of the time step used in SSE follows Hurley et al. (2000), where the time step varies
+depending upon the evolutionary phase of the star (see
+Section 3 for a full list of the stellar types). COMPAS
+then checks whether the time step produces excessive
+change, defined as either
+(a) mass loss greater than 1%, or
+(b) radial change greater than 10%
+over the time step, and limits the time step accordingly.
+For nuclear timescale evolution, we limit the time step
+to a minimum of 100 yr, and we impose an overall
+minimum time step of 100 s, including for dynamical
+timescale evolution (see Section 3.3).
+For the BSE time step, COMPAS uses the minimum
+of the binary constituent stars’ SSE time steps: this
+allows the constituent stars to evolve using time steps
+that do not produce excessive change. Changes in binary
+properties are not separately considered when calculating the time step since large changes in binary properties would be accompanied by similarly large changes in
+constituent star properties.
+COMPAS provides a mechanism for the user to scale
+the calculated time step by a positive scaling factor.
+Scaling is performed prior to limiting of the time step.
+2.6. Input and Configuration
+COMPAS provides wide-ranging functionality and affords users much flexibility in determining how the synthesis and evolution of stars (single or binary) is conducted. Users configure COMPAS’s functionality and
+
+6
+
+Team COMPAS
+
+Figure 1. SSE class and container diagram (arrows indicate inheritance).
+
+Figure 2. BSE class and container diagram.
+
+provide initial conditions via the use of program options and input grid files. The full list and description of program options and grid files can be found in
+the COMPAS online documentation, https://compas.
+science/docs/.
+2.7. Default Model
+Investigating massive star and binary evolution requires modeling many complicated astrophysical pro-
+
+cesses. In BPS codes, this is often done through the use
+of simple analytic prescriptions, which are calibrated either to theoretical predictions or to results from observations (see Sections 3 and 4 for more details in the context
+of SSE and BSE). In this paper, we refer to our default
+set of modeling assumptions, including which prescriptions are used, as our Default (or ‘default’) model. This
+model is summarized in Table 1. This model has been
+calibrated to match a range of observations (see Section
+
+7
+
+COMPAS code paper
+
+Figure 3. High-level SSE evolution.
+
+1 for a brief overview). There are, however, large uncertainties in the prescriptions used. COMPAS is flexible,
+and in many cases, we provide additional options to allow users to easily vary their choices from our defaults.
+2.7.1. Program Options
+COMPAS provides a rich set of configuration parameters via program options, allowing users to vary many
+parameters that define the initial attributes and/or
+affect the evolution of single and binary stars being
+evolved. Furthermore, COMPAS allows some parameters to be specified as ranges or sets of values via the program options, allowing users to specify a grid of parameter values on the command line. Combining commandline program options, particularly ranges and sets, with
+a grid file allows users great flexibility in specifying more
+complex combinations of parameter values.
+
+Figure 4. High-level BSE evolution.
+
+8
+
+Team COMPAS
+
+Table 1. Initial Values and Default Settings for Binary Population Synthesis Simulation with COMPAS. Note: COMPAS users who wish to provide a similar table accompanying their publication can find a template at https://github.com/
+FloorBroekgaarden/templateForTableBPSsettings.
+Description and Name
+
+Value/Range
+
+Initial mass M1,i
+Initial mass ratio qi = M2,i /M1,i
+Initial semi-major axis ai
+Initial metallicity Zi
+Initial orbital eccentricity ei
+Chemically homogeneous evolution
+Stellar winds for hydrogen rich stars
+Stellar winds for hydrogen-poor helium stars
+Mass transfer stability criteria
+Mass transfer accretion rate
+Non-conservative mass loss
+Case BB mass transfer stability
+Circularisation at the onset of RLOF
+CE prescription
+CE efficiency α-parameter
+CE λ-parameter
+Hertzsprung gap (HG) donor in CE
+SN natal-kick magnitude for white dwarfs
+SN natal-kick magnitude vk for neutron star (NS)
+SN natal-kick magnitude for BH
+SN natal-kick polar angle θk
+SN natal-kick azimuthal angle φk
+SN mean anomaly of the orbit
+Core-collapse SN remnant mass prescription
+USSN remnant mass prescription
+ECSN remnant mass prescription
+1D
+Core-collapse SN velocity dispersion σrms
+1D
+USSN and ECSN velocity dispersion σrms
+PISN/PPISN remnant mass prescription
+Maximum NS mass
+Tides and rotation
+Binary fraction
+Solar metallicity Z
+
+Note/Setting
+
+Initial conditions
+Kroupa (2001) IMF ∝ M1,i −αIMF with αIMF = 2.3 for stars in this mass range
+We assume a flat mass ratio distribution p(qi ) ∝ 1 with M2,i ≥ 0.1 M
+Distributed flat-in-log p(ai ) ∝ 1/ai
+Distributed flat-in-log p(Zi ) ∝ 1/Zi
+All binaries are assumed to be circular at birth
+Fiducial parameter settings
+Enabled
+Following Riley et al. (2021), “pessimistic” version checking for threshold throughout evolution (§3.4).
+Belczynski et al. (2010) Based on Vink et al. (2000, 2001), including LBV wind mass loss with fLBV = 1.5.
+Belczynski et al. (2010) Based on Hamann & Koesterke (1998) and Vink & de Koter 2005.
+ζ-prescription
+Based on Vigna-Gómez et al. (2018) and references therein
+Thermal timescale
+Limited by thermal timescale for stars Vigna-Gómez et al. (2018); Vinciguerra et al. (2020)
+Eddington-limited
+Accretion rate is Eddington-limited for compact objects
+Isotropic re-emission
+Massevitch & Yungelson (1975); Bhattacharya & van den Heuvel (1991)
+Soberman et al. (1997); Tauris & van den Heuvel (2006)
+Always stable
+Based on Tauris et al. (2015, 2017); Vigna-Gómez et al. (2018) (§4.2)
+On
+Instantly circularised to periapsis (§4.2)
+α−λ
+Based on Webbink (1984); de Kool (1990)
+1.0
+(§4.2.4)
+λNanjing
+Based on Xu & Li (2010a,b) and Dominik et al. (2012)
+Pessimistic
+Defined in Dominik et al. (2012): HG donors do not survive a CE phase
+0
+We assume WDs do not receive natal kicks (§3.7.1)
+−1
+1D
+[0, ∞) km s
+Drawn from Maxwellian distribution with standard deviation σrms
+[0, ∞) km s−1
+Reduced relative to NS kicks by the fallback fraction (Fryer et al. 2012), see Section 3.9
+[0, π]
+p(θk ) = sin(θk )/2
+[0, 2π]
+Uniform p(φ) = 1/(2π)
+[0, 2π]
+Uniformly distributed
+Delayed
+From Fryer et al. (2012), which has no lower BH mass gap
+Delayed
+From Fryer et al. (2012)
+mf = 1.26 M
+Based on Equation 8 in Timmes et al. (1996)
+−1
+265 km s
+1D rms value based on Hobbs et al. (2005)
+30 km s−1
+1D rms value based on e.g., Pfahl et al. (2002), Podsiadlowski et al. (2004)
+Marchant et al. (2019)
+As implemented in Stevenson et al. (2019)
+maxNS = 2.5 M
+Mass division between NS and BH (§3.7.2)
+No tides and/or rotation except chemically homogeneous evolution
+Simulation settings
+fbin = 1
+Corrected factor to be consistent with, e.g., Sana (2017)
+Z = 0.0142
+Based on Asplund et al. (2009)
+[5, 150] M
+[0.01, 1]
+[0.01, 1000] au
+[0.0001, 0.03]
+0
+
+2.7.2. Grid files
+
+• detailed information at each time step,
+
+A grid file allows users to specify, in plain text, initial
+values and physics assumptions for multiple systems for
+both SSE and BSE. Each line of a grid file is used by
+COMPAS to set the initial values of an individual single
+star (SSE) or an individual binary system (BSE), and
+the physics assumptions to be used to evolve the star or
+system.
+
+• detailed information at the time of each stellar
+type switch,
+
+2.8. Output
+
+• detailed information for all Roche-lobe overflow
+(RLOF) events during BSE,
+
+COMPAS provides real-time status information during the evolution of systems. Detailed and summary
+information about the star or system being evolved is
+written to log files as the evolution proceeds.
+A number of COMPAS log files may be produced
+depending upon the simulation type (SSE or BSE) and
+user specifications. These log files record, for each star
+or system being evolved:
+• summary information at the completion of evolution,
+
+• summary information for all supernova (SN)
+events,
+• summary information for all CE events during
+BSE,
+
+• summary information for all DCOs formed during
+BSE, and
+• detailed pulsar evolution information.
+COMPAS log files are created and written as
+hierarchical data format, version 5 (HDF5) files,4 ,
+4 https://www.hdfgroup.org/
+
+9
+
+COMPAS code paper
+comma separated values (CSV) files, tab separated values (TSV) files, or plain text files, as specified by the
+user.
+The COMPAS software suite includes a Python
+postprocessing script to combine all COMPAS output
+HDF5, CSV, or TSV files into a single HDF5 file, which
+is especially useful if a single large experiment is spread
+over several virtual machines.
+3. SINGLE STELLAR EVOLUTION
+
+As stars evolve, they experience nuclear fusion while
+balancing gravity with pressure and radiating away excess energy. Consequently, their composition, radius,
+temperature, and luminosity all change, they may lose
+mass in stellar winds, and sufficiently massive stars may
+explode in supernovae at the end of their lives.
+COMPAS currently relies on rapid algorithms that
+provide estimates for how various fundamental stellar
+properties, such as their radii and luminosities, change
+as a star evolves through different evolutionary phases.
+The algorithms that capture how stars evolve—the SSE
+library—are at the core of the COMPAS code. These
+routines govern the evolution of single stars, as the name
+suggests, but they are also used to capture how a star
+evolves under the external influence of a binary companion.
+In this section we begin by giving an overview of the
+evolutionary algorithms implemented in COMPAS that
+govern the evolution of the main properties of stars (Section 3.1). We then discuss some of the key evolutionary stages that stars evolve through (Section 3.2), and
+highlight several important evolutionary timescales in
+stellar evolution (Section 3.3). We proceed to describe
+the effects of rapid rotation that are included in COMPAS (Section 3.4), and describe the prescriptions available in COMPAS for incorporating mass loss in stellar
+winds (Section 3.5). We end this section by discussing
+the properties of stellar remnants: white dwarfs (WDs),
+NSs, and BHs.
+3.1. Evolutionary Algorithms
+COMPAS computes the properties of a star (such as
+luminosity, radius, or core mass) as functions of a star’s
+mass, metallicity, and age using analytic formulae, fit to
+detailed stellar models. The ZAMS radius RZAMS and
+luminosity LZAMS are calculated as functions of mass
+and metallicity using the analytic formulae from Tout
+et al. (1996). During the evolution we use the formulae from Hurley et al. (2000), developed to match the
+detailed stellar models of Pols et al. (1998) (see also
+Eggleton et al. 1989 and Tout et al. 1997 for the basis
+of this approach).
+
+The Pols et al. (1998) stellar models are for nonrotating stars and span ZAMS masses between 0.1 M and
+50 M . The original models do not include any mass
+loss. We incorporate mass loss following Hurley et al.
+(2000) as described in Section 3.5. Since the Hurley
+et al. (2000) formulae are polynomials in MZAMS , they
+can easily be extrapolated to higher masses by evaluating them outside of this range. We find that the fits
+extrapolate smoothly to at least 150 M . We note that
+this approach is not ideal, but significantly improving
+upon this is far from trivial. The evolution of high-mass
+stars is still very uncertain (Maeder & Meynet 2000;
+Langer 2012; Agrawal et al. 2020; Bowman 2020; Belczynski et al. 2021). This is particularly true for the
+later, faster evolutionary phases, where observations are
+scarce, and for internal properties such as core masses,
+which we cannot probe directly. Although grids of detailed models exist, they vary widely in their predictions.
+Given the limitations in the accuracy of massive star
+models and the absence of robust rapid prescriptions
+that clearly provide a significant improvement, we opt
+for simply extrapolating the fits in the present version
+of COMPAS.
+The models are applicable for metallicities between
+Z = 10−4 and Z = 0.03. We do not extrapolate in
+metallicity, as we find that some of the fitting formulae
+are not well behaved outside of this range. We discuss
+the implications for population studies in Section 6.4.
+3.2. Evolutionary Stages
+To introduce some of the evolutionary stages captured
+by the SSE formulae, we briefly summarize the main
+evolutionary stages of single stars. Our extremely brief
+sketch of stellar evolution generally follows the characteristic behavior of massive stars, and should not be
+taken as fully general.
+We follow the lives of stars from the ZAMS (we do not
+include pre-main sequence evolution in COMPAS). Stars
+spend most of their lives on the main sequence, fusing
+hydrogen in their cores. Following Hurley et al. (2000),
+we distinguish between low-mass (MZAMS ≤ 0.7 M )
+main sequence stars (stellar type 0) which are expected
+to be fully convective, and more massive main sequence
+stars (MZAMS > 0.7 M , stellar type 1). During main
+sequence evolution, most stars increase their luminosity
+and decrease their effective temperature Teff . Following the main sequence, sufficiently massive stars experience a rapid thermal timescale (see Section 3.3) phase
+of expansion, evolving to lower effective temperatures
+at near constant luminosity. This phase of evolution
+is sometimes known as the Hertzsprung gap (HG), as
+the short timescale leads to a paucity of stars observed
+
+10
+
+Team COMPAS
+
+in this phase. Stars then begin a longer-lived phase of
+core helium burning (CHeB), evolving onto and up the
+giant branch. We note that at low metallicity, massive stars may not reach the giant branch before beginning CHeB. Helium-shell-burning stars evolve along the
+asymptotic giant branch (AGB). We choose to use the
+name early asymptotic giant branch (EAGB) for H-rich
+massive stars with a C/O core, in addition to its usual
+meaning. Stars that lose their outer hydrogen envelopes,
+either through stellar winds or binary mass transfer, become helium main sequence (HeMS) stars, which then
+evolve analogously to hydrogen-rich stars through to the
+helium giant branch (HeGB). Finally, most stars end
+their lives as a stellar remnant, either a WD, NS or BH
+depending on their initial mass, while some stars leave
+behind no remnant.
+We show the evolution of single stars of particular
+masses in the mass range 0.5–150 M at solar (Z =
+0.0142, Asplund et al. 2009) and low (Z = 0.001) metallicity in the Hertzsprung–Russell diagram according to
+COMPAS in Figure 5, with the different evolutionary
+phases identified for each track.
+A complete list of stellar phases is given in Table 2, following Hurley et al. (2000). See Figure 1 for a schematic
+of the corresponding classes in the COMPAS code.
+Figure 6 shows the maximum radial extent of a star
+during each evolutionary phase for a star with ZAMS
+mass between 0.5 and 150 M at solar (Z = 0.0142)
+and low (Z = 0.001) metallicity. Phases during which
+a star expands are the phases when binary interactions
+are most likely to occur. We discuss binary interactions
+further in Section 4.
+
+3.3. Evolutionary Timescales
+
+τdyn =
+
+R3
+≈ 1600 s
+GM
+
+
+
+R
+R
+
+3/2 
+
+M
+M
+
+Stellar phase
+
+Abbreviation
+
+Number
+
+Main sequence, M < 0.7 M
+Main sequence, M > 0.7 M
+Hertzsprung gap
+First giant branch
+Core helium burning
+Early asymptotic giant brancha
+Thermally pulsing
+asymptotic giant branch
+Helium main sequence
+Helium hertzsprung gap
+Helium giant branch
+Helium white dwarf
+Carbon-oxygen white dwarf
+Oxygen-Neon white dwarf
+Neutron star
+Black hole
+Massless remnant
+Chemically homogeneously evolving
+...
+
+MS
+MS
+HG
+FGB
+CHeB
+EAGB
+
+0
+1
+2
+3
+4
+5
+
+TPAGB
+HeMS
+HeHG
+HeGB
+HeWD
+COWD
+ONeWD
+NS
+BH
+MR
+CHE
+NONEb
+
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+19
+
+a
+
+We apply the term EAGB to all H-rich stars with an inert C/O
+core that are primarily powered by He shell fusion, regardless of
+mass or location in the Hertzsprung-Russell diagram.
+b
+Stellar type 19 (NONE) can sometimes appear as a temporary
+placeholder in COMPAS outputs before the stellar type is set.
+
+τKH = Eint /L. We estimate this as
+
+7
+
+Three key timescales in single and binary stellar evolution – dynamical, thermal, and nuclear – often create
+a very convenient timescale hierarchy. The separation
+of timescales allows many approximations to be made.
+The shortest timescale is almost always the dynamical
+(or freefall) timescale, defined as
+r
+
+Table 2. Stellar phases and abbreviations used in COMPAS.
+Types 0–15 are from Hurley et al. (2000), whilst CHE stars
+(type 16) are an addition in COMPAS (Riley et al. 2021).
+
+−1/2
+, (1)
+
+where R is the radius of a star and M is its mass. The
+dynamical timescale is used as the minimum timescale
+in COMPAS (with a minimum cutoff of 100 s).
+The Kelvin-Helmholtz (or thermal) timescale is the
+time required for a star’s internal energy Eint to be
+radiated at its current luminosity L, and is given by
+
+τKH ≈ 3.0×10 yr
+
+
+
+M
+M
+
+
+
+Ms/env
+M
+
+
+
+R
+R
+
+−1 
+
+L
+L
+
+−1
+,
+
+(2)
+where L is the luminosity of the star and Ms/env is either
+the total mass of the star M for stellar types without
+a clearly defined envelope, or the mass of the envelope
+Menv for stars with a clearly defined envelope (see Hurley et al. 2002, for more details). This is used, e.g., when
+calculating thermal timescale mass transfer (see Section
+4.2.3).
+The nuclear timescale is relevant when nuclear fusion
+is setting the timescale at which the star evolves. This
+applies, e.g., to main sequence stars that burn hydrogen
+in their centers, and stars that are undergoing central
+helium burning. The nuclear timescale is approximately
+
+M c2
+≈ 1010 yr
+τnuc ≈ φfnuc
+L
+
+
+
+M
+M
+
+
+
+L
+L
+
+−1
+,
+
+(3)
+
+11
+
+COMPAS code paper
+
+6
+5
+
+100
+
+R
+
+log10(L/L )
+
+0R
+
+R
+
+R
+
+1R
+
+0.1
+
+0.0
+1R
+
+0.5M
+
+R
+
+5.5
+
+1.0M
+0.8M
+0.7M
+
+01
+
+MS
+HG
+1 FGB
+CHeB
+EAGB
+TPAGB
+0 HeMS
+HeHG
+HeGB
+1 HeWD
+COWD
+ONeWD
+
+0.0
+
+4.5
+
+log10(Teff/K)
+
+2
+
+10
+
+R
+
+1R
+
+R
+
+1R
+
+R
+
+5.0
+
+3
+
+LBV Regime
+150.0M
+115.0M
+90.0M
+65.0M
+45.0M
+33.0M
+26.0M
+21.0M
+16.5M
+13.0M
+10.3M
+8.2M
+6.5M
+5.2M
+4.0M
+3.2M
+2.5M
+2.0M
+1.6M
+1.3M
+
+100
+
+R
+10
+
+0.8M
+0.7M
+0.5M
+4.0
+3.5
+
+0.1
+
+0.0
+01
+
+5.5
+
+1.0M
+
+0.0
+
+MS
+HG
+1 FGB
+CHeB
+EAGB
+TPAGB
+0 HeMS
+HeHG
+HeGB
+1 HeWD
+COWD
+ONeWD
+
+4
+
+100
+
+2
+
+5
+0R
+
+3
+
+6
+
+100
+
+4
+
+LBV Regime
+150.0M
+115.0M
+90.0M
+65.0M
+45.0M
+33.0M
+26.0M
+21.0M
+16.5M
+13.0M
+10.3M
+8.2M
+6.5M
+5.2M
+4.0M
+3.2M
+2.5M
+2.0M
+1.6M
+1.3M
+
+7 Z = 0.001
+
+log10(L/L )
+
+7 Z = 0.0142
+
+5.0
+
+4.5
+
+log10(Teff/K)
+
+4.0
+
+3.5
+
+Figure 5. Evolutionary tracks in the Hertzsprung–Russell diagrams for single stars with ZAMS masses between 0.5 and 150 M
+at solar (Z = 0.0142) and low (Z = 0.001) metallicity using COMPAS default settings, limited to a maximum evolution time
+of 14 Gyr. The shaded region (bounded by the Humphreys–Davidson limit and a minimum luminosity) illustrates the regime
+in which luminous blue-variable (LBV) mass loss dominates. Diagonal contours show lines of constant radii.
+
+where c is the speed of light, φ is the efficiency which
+the rest mass of the relevant reacting nuclei is converted
+into energy (for hydrogen, φ = 0.007), and fnuc is the
+fraction of the stellar mass that can serve as nuclear
+fuel. We do not use this timescale in any calculations; it
+is provided here, and optionally in COMPAS outputs,
+for reference only. Instead, we use the fitting formulae
+for stellar lifetimes in Hurley et al. (2000). The main
+sequence lifetimes given by these fits are shown in Figure 7. At masses of & 50 M the Hurley et al. (2000)
+formulae, which extrapolate the Pols et al. (1998) model
+grid in this mass range, overestimate the stellar lifetimes
+by approximately 30% compared to the detailed stellar
+models considered in Agrawal et al. (2020).
+3.4. Rotation
+Most stars rotate sufficiently slowly (e.g. Dufton et al.
+2013; Ramı́rez-Agudelo et al. 2013) for the impact of rotation to be modest. Rotation is expected to enhance
+mass loss rates (e.g. Chiosi & Maeder 1986; Friend & Abbott 1986, see also Section 3.5), slightly increase main
+
+sequence luminosities and lifetimes (e.g. Talon et al.
+1997; Maeder & Meynet 2000), and lead to increased
+core masses (e.g. Maeder 1987; Langer 1992; Heger et al.
+2000).
+However, very rapid rotation, especially coupled with
+significant tidal effects in very close binaries, can have a
+dramatic impact on the evolution of a star. Sufficiently
+rapid rotation can lead to enhanced mixing within a star,
+which may lead to chemically homogeneous evolution
+(Maeder 1987), where a star can burn almost all of its
+hydrogen into helium.
+The stellar tracks used in COMPAS are based on
+nonrotating stellar models (Pols et al. 1998). We do not
+account for the effects of mild rotation, but we do implement chemically homogeneous evolution (CHE) following the recipes of Riley et al. (2021). COMPAS implements a metallicity-dependent rotational frequency
+threshold to determine whether a star is evolving chemically homogeneously. If a star is rotating faster than the
+threshold given by Riley et al. (2021) at ZAMS, we consider it to be evolving chemically homogeneously. We
+
+12
+
+102
+
+102
+
+MWR
+
+MFGB
+
+MSN
+
+Rmax [R ]
+
+103
+
+Rmax [R ]
+
+103
+
+MHeF
+
+MHT
+
+MWR
+
+MFGB
+
+MSN
+
+MHeF
+
+MHT
+
+Team COMPAS
+
+101
+
+101
+
+100
+
+100
+100
+
+101
+MZAMS [M ]
+
+Z = 0.0142
+102
+
+100
+
+101
+MZAMS [M ]
+
+Z = 0.001
+102
+
+Main Sequence Lifetime [Myr]
+
+Figure 6. Maximum radial extent of stars with ZAMS masses between 0.5 and 150 M during different phases of stellar
+evolution, from the main sequence to the helium giant branch, using default settings. Solid lines show the maximum extent of
+stars during a given evolutionary phase, whose colors have the same meaning as in Figure 5. We additionally show RZAMS in
+gray to indicate how much the star expands during the main sequence. Note that the FGB curve is invisible when it overlaps
+with the CHeB curve. Shading indicates regions in which different types of mass transfer can occur due to the expansion of the
+donor; on the main sequence (yellow), after hydrogen exhaustion (orange) and after helium exhaustion (blue). The dashed lines
+indicate important transition masses in the Hurley et al. (2000) fitting formulae, where MHT is the minimum mass of a star
+that will complete its main sequence in a Hubble time, MHeF is the maximum initial mass for which helium ignites degenerately
+in a helium flash, MSN is the mass above which a star collapses into an NS or BH, possibly with a supernova explosion, MFGB
+is the maximum initial mass for which helium ignites on the first giant branch and MWR is the minimum mass at which a star
+will self-strip to become a Wolf–Rayet star.
+
+Z = 0.0142
+0.0001 < Z < 0.03
+
+105
+104
+103
+102
+101
+100
+
+101
+
+MZAMS [M ]
+
+102
+
+Figure 7. Main sequence lifetimes of stars between 0.5 and
+150 M using Hurley et al. (2000) fitting formulae across the
+range of metallicities at which these formulae can be used.
+
+neglect the very limited radial evolution of a CHE star
+and fix its main sequence radius equal to the ZAMS ra-
+
+dius of a nonrotating star of the same mass and metallicity. The main sequence evolution of a CHE star thus
+follows the Hurley et al. (2000) model of main sequence
+stars, albeit with a fixed radius. COMPAS can be configured by the user to check, or not, the rotational frequency of the star against the CHE threshold at every
+time step on the main sequence. In the default model,
+the rotational frequency check is enabled, and if the rotational frequency drops below the threshold value for
+CHE (e.g., due to the orbit of the binary widening as
+a consequence of mass loss through winds), the star is
+thereafter evolved as a regular main sequence star (i.e.,
+it immediately jumps to the track of a regular main sequence star of the same mass). If the rotational frequency check is disabled by the user, the star evolves
+chemically homogeneously through its main sequence
+lifetime once it satisfies the CHE threshold at ZAMS.
+Finally, we assume that if a star evolves chemically homogeneously through the main sequence, it contracts
+directly into a naked helium star at the end of the main
+sequence, retaining its full mass at that point. Evolution
+then follows the Hurley et al. (2000) models of helium
+stars.
+
+13
+
+COMPAS code paper
+3.5. Wind Mass Loss (Single Star)
+Stars lose mass through stellar winds. This impacts
+their evolution, and affects what remnants they form.
+Stars lose mass throughout their lives through several
+mechanisms. Hot stars lose mass through steady-state
+line-driven winds (Castor et al. 1975; Vink et al. 2001),
+whilst the mechanism through which cool stars like red
+supergiants (RSGs) lose mass is less well understood
+theoretically, leading to most mass loss prescriptions for
+these stars being empirically derived (e.g., de Jager et al.
+1988; Beasor & Davies 2018). In addition, stars close to
+the Humphreys–Davidson limit (Humphreys & Davidson 1994) are known to experience eruptive mass loss.
+For a review of mass loss from massive stars, see Smith
+(2014). Low-mass stars generally experience weaker stellar winds than their high-mass counterparts. However,
+they can experience strong wind mass loss during the
+later stages of their evolution on the AGB (see e.g.
+Höfner & Olofsson 2018, for a recent review).
+Wind mass loss rates are highly uncertain, and can
+have a substantial impact on the evolution of a star (e.g.
+Renzo et al. 2017; Belczynski et al. 2020b). There is
+recent observational evidence that mass loss rates may
+be overestimated for certain evolutionary phases (e.g.,
+Smith 2014; Beasor & Davies 2018; Sander et al. 2020;
+Miller-Jones et al. 2021; Neijssel et al. 2021).
+COMPAS currently includes two simple analytic prescriptions for wind mass loss based on a combination
+of theoretical simulations and observational measurements: the original wind prescription from Hurley et al.
+(2000) and an updated prescription from Belczynski
+et al. (2010), which is our default.
+
+3.5.1. Hurley Model
+Hurley et al. (2000) define the total mass loss rate as
+the dominant mass loss rate during each stellar phase of
+the star (see Table 2), with a possible addition of LBVlike mass loss if the star is an luminous blue variable
+(LBV). This can be summarized as
+
+
+ṀNJ ,
+
+
+
+
+
+
+
+max{ṀNJ , ṀKR , ṀWR } + ṀLBV ,
+ṀH = max{ṀNJ , ṀKR , ṀWR , ṀVW },
+
+
+
+
+
+max{ṀNJ , ṀKR , ṀWR (µ = 0)},
+
+
+
+
+0,
+
+MS
+if HG-CHeB
+AGB
+HeMS-HeGB
+
+otherwise,
+(4)
+where ṀNJ , ṀKR , ṀWR , ṀVW , ṀLBV are defined as follows.
+
+For stars across the whole Hertzsprung-Russell (HR)
+diagram, Hurley et al. (2000) apply
+
+
+
+(L/ L ) − 4000
+−15
+ṀNJ = 9.6 × 10
+max 0, min 1,
+500
+1/2 
+0.81
+
+R
+Z
+×
+0.02
+R
+
+1.24 
+0.16
+L
+M
+×
+M yr−1 ,
+L
+M
+(5)
+which is the mass loss rate from Nieuwenhuijzen & de
+Jager (1990), modified by the metallicity scaling Z 1/2
+(Kudritzki et al. 1989). This is only non-zero for luminous massive stars with L > 4000 L .
+For stars on the giant branch and beyond, this model
+adopts the results of Kudritzki & Reimers (1978)
+ṀKR = η×4×10
+
+−13
+
+−1
+
+M yr
+
+
+
+L
+L
+
+
+
+R
+R
+
+
+
+M
+M
+
+−1
+,
+
+(6)
+where η is a phenomenological scaling parameter of order unity. By default, we adopt η = 0.5 following Hurley
+et al. (2000).
+For stars on the asymptotic giant branch they use the
+results of Vassiliadis & Wood (1993)
+
+ṀVW = min 10−11.4+0.0125(P0 −P1 ) ,
+(7)
+L 
+1.36 × 10−9
+M yr−1 ,
+L
+where P0 , the Mira pulsation period, is given by
+h
+P0 /days = min 1.995 × 103 ,
+
+−0.9 
+1.94 i
+M
+R
+8.51 × 10−3
+,
+M
+R
+
+(8)
+
+and P1 /days = 100 × max(M/ M − 2.5, 0).
+Wolf–Rayet like wind mass loss is included for small
+hydrogen-envelope mass, µ < 1.0, stars according to
+
+1.5
+L
+ṀWR = 10−13
+(1 − µ) M yr−1 .
+(9)
+L
+where the parameter µ describes the ratio of the envelope mass to the total mass, so that µ = 1 on the main
+sequence (MS), 0 < µ < 1 for stars with a developed
+core, and µ = 0 for stripped stars with no hydrogen envelope. The full expressions for µ are given in Eq. 97 in
+Hurley et al. (2000).
+We designate post main sequence stars with L >
+6 × 105 L and HD ≡ 10−5 (R/ R )(L/ L )0.5 > 1.0
+as LBV, following Humphreys & Davidson (1994). For
+
+14
+
+Team COMPAS
+
+these LBV stars Hurley et al. (2000) add an LBV-like
+mass loss, intended to account for eruptive mass loss in
+an averaged sense
+
+
+L/ L
+3
+−
+1.0
+M yr−1 .
+ṀLBV = 0.1 (HD − 1.0)
+6 × 105
+(10)
+3.5.2. Belczynski Model
+Belczynski et al. (2010) use a model for stellar winds
+based on results from Monte Carlo radiative transfer
+simulations of Vink et al. (2000, 2001). For stars that
+are not LBVs or helium stars, they define the mass loss
+rate as
+
+
+T /K < 12500
+
+ṀH ,
+ṀB =
+
+ṀVink,BBJ , 12500 ≤ T /K < 25000
+
+
+
+ṀVink,ABJ , 25000 ≤ T /K,
+
+(11)
+
+where ṀH is the Hurley mass loss rate defined in Section 3.5.1 and the Vink mass loss rates are defined as
+
+log
+
+ṀVink,BBJ
+M yr−1
+
+!
+= −6.688 + 2.210 log(L/105 L )
+
+−1.339 log(M/30 M ) − 1.601 log(V/2.0)+
+
+0.85 log(Z/ Z ) + 1.07 log(T/20000 K),
+(12)
+
+below the bistability jump, where the ratio of the wind
+speed at infinity to the star’s escape velocity is V =
+v∞ /vesc = 1.3, and as
+!
+ṀVink,ABJ
+log
+= −6.697 + 2.194 log(L/105 L )
+M yr−1
+−1.313 log(M/30 M ) − 1.226 log(V/2.0)
+
++0.85 log(Z/ Z ) + 0.933 log(T/40000K)
+2
+
+−10.92 [log(T /40000K)] ,
+(13)
+above the bi-stability jump, where the ratio of the
+wind speed at infinity to the stars escape velocity is
+V = v∞ /vesc = 2.6. The mass loss rate in equations
+12 and 13 above scales with metallicity as Ṁ ∝ Z 0.85 ,
+in agreement with observationally determined scaling of
+the mass loss rates of O and B stars with metallicity
+in the Milky Way and the Magellanic Clouds (Mokiem
+et al. 2007).
+For helium stars, Belczynski et al. (2010) assume a
+mass loss rate
+1.5 
+m
+
+L
+Z
+ṀB,He = fWR × 10−13
+M yr−1 ,
+L
+Z
+(14)
+
+from Hamann & Koesterke (1998), with m = 0.86, as
+given by Vink & de Koter (2005). We have introduced
+the phenomenological scaling parameter fWR to allow
+the strength of WR winds to be varied (Barrett et al.
+2018). Our default choice is fWR = 1.
+LBV stars have high mass loss rates due to both linedriven winds and eruptive mass loss. The uncertainty
+in LBV mass loss rates is parametrized with a scaling
+parameter fLBV with a default value of 1.5 (Belczynski
+et al. 2010):
+ṀB,LBV = fLBV × 10−4 M yr−1 .
+
+(15)
+
+3.6. Treatment of the Impact of Mass Loss and Gain
+The stellar tracks computed by Pols et al. (1998) assumed no mass loss. When a star loses mass during a
+core-burning phase (either through stellar winds, as described in Section 3.5, or through mass transfer), its luminosity will decrease. This will extend the remaining
+lifetime. Meanwhile, mass gain through mass transfer
+(COMPAS does not account for accretion of winds from
+the companion) can rejuvenate the star. After mass gain
+such a star will appear younger than a single star of the
+same mass and age (a blue straggler ).
+For a star losing or gaining mass through either mass
+transfer or winds (mass loss only) on the main sequence,
+we follow Hurley et al. (2000) (see also Tout et al. 1997)
+in modifying the lifetime according to
+t0
+t0 = frej MS t,
+tMS
+
+(16)
+
+where t and tMS are the effective age and main sequence
+lifetime prior to a small change in mass, and t0 and t0MS
+are the age and main sequence lifetime of the star after
+a small amount of mass loss/gain. Mass changes for
+helium main sequence stars are treated by analogy with
+the above equation, with the main sequence lifetimes
+tMS and t0MS replaced with tHeMS and t0HeMS respectively
+(Hurley et al. 2000).
+The prefactor frej is unity for all mass-losing stars
+(and for low-mass M ≤ 0.7 M main sequence stars,
+stellar type 0), whilst it is taken to be the ratio of
+the mass before/after mass gain for main sequence
+stars initially more massive than 0.7 M (Belczynski
+et al. 2008) and helium main sequence stars. The ages
+of Hertzsprung gap stars are updated following mass
+changes as described in Hurley et al. (2000). For giants
+with clearly decoupled cores and envelopes, we assume
+that changes to the envelope (such as mass loss/gain)
+do not affect the remaining lifetime. See Schneider et al.
+(2015) and references therein for more details and possible improvements.
+
+15
+
+COMPAS code paper
+10.0 HeWD
+
+Standard stellar evolution theory predicts that low
+and intermediate mass stars (with initial masses .
+8 M ) typically end their lives as WDs (Section 3.7.1),
+while more massive stars end their lives by collapsing
+into NSs and BHs (Section 3.7.2). We show the relation
+between initial masses, core masses and remnant masses
+of stars evolved under default COMPAS assumptions in
+Figure 8.
+
+Core Mass [M ]
+
+3.7. Stellar Remnants
+
+3.7.1. White Dwarfs
+
+3.7.2. Neutron Stars and Black Holes
+Stars with initial masses more than ∼ 8 M collapse
+into an NS or a BH at the end of their lives. This collapse may be accompanied by a supernova explosion.
+Asymmetry in the supernova may give the remnant a
+substantial momentum boost, commonly known as a natal kick (see Section 3.9). The mass of the supernova
+
+1.0
+
+Z=Z
+100.0
+
+0.1
+0.1
+
+1.0
+
+10.0
+
+Initial Mass [M ]
+
+20
+
+Core Mass [M ]
+
+10.0 15
+10
+5
+20
+
+40
+
+60
+
+80
+
+100 120 140
+
+1.0
+
+Z = 0.01
+Z = 0.001
+Z = 0.0001
+
+0.1
+0.1
+
+1.0
+
+10.0
+
+100.0
+
+Initial Mass [M ]
+
+10
+
+Remnant Mass [M ]
+
+We distinguish between three different types of WDs
+based on their mass and composition, following Hurley et al. (2000). Stars that lose their envelopes prior
+to helium ignition leave behind helium white dwarfs
+(HeWDs), while those that lose their envelopes after
+core-He exhaustion leave behind either carbon-oxygen
+white dwarf (COWDs) or oxygen-neon white dwarf
+(ONeWD) depending on their core masses upon reaching the base of the asymptotic giant branch. Larger core
+masses are associated with higher temperatures that
+allow carbon to fuse, forming oxygen-neon or oxygenneon-magnesium cores. We assume that helium core
+masses below 1.6 M at the base of the asymptotic giant branch lead to COWD formation, while core masses
+above that lead to ONeWD formation. For our default
+model, we find that single stars with initial masses .
+0.8 M form HeWDs (though the evolutionary timescale
+for these stars to evolve is longer than a Hubble time),
+while heavier stars with initial masses up to ≈ 7 M
+form COWDs. Only stars in a narrow mass range
+of ≈ 7–8 M form ONeWD (see upper panel of Figure 8). The boundary between stars that form WDs
+and those that form NSs/BHs is uncertain (see, for example, Doherty et al. 2017, for further discussion). WDs
+have masses . 1.4 M (the Chandrasekhar mass) in our
+model. We determine the radius of WDs following Tout
+et al. (1997) and Hurley et al. (2000). WDs cool as they
+age (Mestel 1952). We model the luminosity of WDs
+using the Mestel cooling track given in Equation 90 in
+Hurley et al. (2000). By default we assume that WDs
+do not receive any kick during formation (but see ElBadry & Rix 2018 for a discussion of evidence for small
+∼ 1 km s−1 recoil velocities associated with WD formation).
+
+COWD
+ONeWD
+NS
+BH
+
+1
+
+Z=Z
+Fryer+2012 Delayed
+Fryer+2012 Rapid
+Mandel & Mueller 2020
+10
+
+Initial Mass [M ]
+
+100
+
+Figure 8. Top: the relation between the initial (ZAMS)
+mass of single stars at solar metallicity (Z = 0.0142) and
+either the WD remnant mass or the CO core mass at the
+moment of compact object formation for NSs and BHs, assuming the COMPAS default model, where colors denote
+the remnant type. Middle: the same relation at Z = 0.01
+(solid), Z = 0.001 (dashed) and Z = 0.0001 (dotted) to show
+the metallicity dependence. The inset panel shows the same
+quantities as the main panel, but with linear axes, focusing
+on BH masses. Bottom: the initial–compact object mass
+relation at Z plotted for different remnant mass models (see
+Section 3.8.2): the delayed (dotted line) and rapid (dashed
+line) prescriptions from Fryer et al. (2012), and the stochastic model from Mandel & Müller (2020) (points converging
+to a solid line).
+
+16
+
+Team COMPAS
+
+remnant (and by extension its stellar type), as well as
+the natal kick all depend on which kind of supernova it
+undergoes. In COMPAS we distinguish between several different types of supernovae, which are discussed
+in Section 3.8.
+COMPAS distinguishes NSs from BHs by the remnant mass; the default value of the maximum NS mass
+is 2.5 M , following Fryer et al. (2012).
+Figure 8 shows the core mass and remnant mass as
+a function of initial mass for single stars in the mass
+range 0.1–150 M in the COMPAS default model. The
+top panel of Figure 8 shows the mass ranges in which
+each type of stellar remnant is formed at solar metallicity. The middle panel of Figure 8 shows how the initial
+mass-core mass relation varies with metallicity, whilst
+the bottom panel shows how the relation depends on
+which remnant mass prescription is used for solar metallicity. This figure can be compared to results from Belczynski et al. (2010) and Banerjee et al. (2020).
+By default, in COMPAS we follow Hurley et al.
+(2000) in assuming all NSs have a radius of 10 km. We
+also include the possibility of defining the NS radius as
+a function of its mass RNS (MNS ), as expected from the
+equation of state. Currently, the NS equation of state
+from Akmal et al. (1998) is implemented in COMPAS,
+which gives NS radii of 11–12 km for NSs in the astrophysically relevant mass range 1–2.4 M ,. The maximum NS mass predicted by this equation of state is
+2.4 M .
+The NS moment of inertia is assumed to follow the
+‘universal’ (equation of state insensitive) relation given
+by Lattimer & Schutz (2005). The luminosity of NSs is
+estimated following Hurley et al. (2000).
+For output purposes only, the “radius” of a BH is given
+by its Schwarzschild radius
+RBH =
+
+2GM
+M
+≈ 4.24 × 10−6 R
+2
+c
+M
+
+(17)
+
+and we follow Hurley et al. (2000) in arbitrarily setting
+the BH luminosity to 10−10 L .
+Pulsar evolution is implemented in COMPAS as described in Chattopadhyay et al. (2021); Chattopadhyay
+et al. (2020). We assign a spin period and an initial
+magnetic field to each newly born NS. We provide several options for the initial distribution of pulsar spin
+periods and magnetic fields, see Chattopadhyay et al.
+(2020) for details. The evolution of the pulsar spin period and spindown rate are followed as a function of
+time, assuming the canonical magnetic dipole model for
+a pulsar. In this model, pulsars spindown over time due
+to magnetic braking, but may be spun up again (or recycled) through mass accretion. Our approach closely
+
+follows the methodology of Oslowski et al. (2011), Kiel
+et al. (2008) and Faucher-Giguere & Kaspi (2006) (see
+also Ye et al. 2019). Other pulsar properties, such as the
+pulsar luminosity or beaming fraction, are not directly
+computed by COMPAS, but can easily be modeled in
+postprocessing (see Chattopadhyay et al. 2021; Chattopadhyay et al. 2020, for details). Pulsar evolution is
+optional in COMPAS, and is disabled in the default
+model.
+BHs are assumed to be nonspinning. However, the
+spins of BHs have been modeled by postprocessing
+COMPAS data in a number of papers (Bavera et al.
+2020; Chattopadhyay et al. 2021).
+3.8. Supernova Types
+In COMPAS we distinguish between several different types of supernovae. In the following, we describe
+the types of supernovae we model and the conditions
+under which each type of supernova is assumed to occur. COMPAS records whether the supernova progenitor star has a hydrogen-rich envelope, allowing for a
+crude estimation of whether it would appear observationally as a type I or II supernova.
+3.8.1. Electron-capture Supernovae
+In COMPAS we assume that a star undergoes an
+electron-capture supernova (ECSN; Miyaji et al. 1980;
+Nomoto 1984, 1987; Ivanova et al. 2008) if it has a helium core mass in the range 1.6–2.25 M (Hurley et al.
+2002) at the base of the asymptotic giant branch, and
+the carbon-oxygen core mass reaches a threshold of
+1.38 M . In our default model, this corresponds to a
+ZAMS mass range of 7.5–8.1 M for single stars at Z .
+The mass range of stars that undergo ECSNe is somewhat uncertain and model dependent. For example,
+Podsiadlowski et al. (2004) argued that a more realistic
+range of helium core masses leading to ECSNe is 1.4–
+2.5 M . Andrews et al. (2015) and Vinciguerra et al.
+(2020) use different core mass ranges for ECSNe (2–
+2.5 M and 1.83–2.25 M , respectively, where the latter
+is based on Fryer et al. 2012, which could better reproduce observations of NSs). Willcox et al. (2021) argued
+that the (ZAMS) mass range of (effectively) single stars
+undergoing ECSNe cannot be wider than 0.2 M to
+avoid overproducing low velocity pulsars, but ECSNe
+could be more common in binaries.
+If a star undergoes an electron-capture supernova, we
+set its remnant to be a NS with a mass of 1.26 M , as an
+approximation to the solution of Eq. 8 in Timmes et al.
+(1996), assuming a baryonic mass of 1.38 M .
+Massive oxygen-neon WDs (ONeWDs) close to the
+Chandrasekhar mass can accrete enough mass to undergo an accretion-induced collapse (AIC) to an NS
+
+17
+
+COMPAS code paper
+(Nomoto & Kondo 1991). While AIC is nominally possible in COMPAS when the mass of a ONeWD reaches
+1.38 M , when the ECSN prescription is followed for the
+remnant mass and natal kick, this is based on a very
+simplistic implementation of accretion onto WDs.
+3.8.2. Core-collapse Supernovae
+Stars with helium core masses greater than 2.25 M
+at the base of the asymptotic giant branch undergo corecollapse supernovae (CCSNe) in COMPAS, if/when
+their carbon-oxygen core mass reaches the threshold
+given by Hurley et al. (2000), where we replace their
+Chandrasekhar mass threshold with 1.38 M .
+There is still a great deal of uncertainty regarding the
+mechanism of CCSNe, including which stars explode,
+how they explode, and what the properties of their remnants are (see Müller 2020 and Burrows & Vartanyan
+2021 for recent reviews). Some recent supernova simulations predict that whether a supernova is successful
+and leads to an explosion, or fails and leads to an implosion, is a nonmonotonic function of a star’s initial mass
+(Ugliano et al. 2012; Sukhbold & Woosley 2014; Nakamura et al. 2015; Ertl et al. 2016; Sukhbold & Adams
+2020). COMPAS uses simple parameterized models (described below) to relate the properties of supernova remnants to their progenitor stars. We attempt to parameterize some of this uncertainty by including several different models.
+By default, COMPAS uses the delayed supernova
+remnant mass prescription from Fryer et al. (2012) to
+map the carbon-oxygen core masses of stars to compact
+object remnant masses during core-collapse supernova
+events. An alternative rapid prescription assumes supernova explosions occur within 250 ms (compared to
+longer timescales assumed for the delayed model) and
+reproduces, by construction, a mass gap between NSs
+and BHs. Mandel & Müller (2020) proposed a model
+for compact object masses and kicks which is stochastic, with both NS and BH formation possible in certain
+regions of parameter space; this model was implemented
+in COMPAS in Mandel et al. (2021). Schneider et al.
+(2021) predict that the history of mass transfer impacts
+the remnant mass, and we include their remnant mass
+prescription. We also include the slightly older remnant
+mass prescriptions from Hurley et al. (2000) and Belczynski et al. (2008), which define the remnant mass as
+a piecewise function or linear function, respectively, of
+the progenitor carbon-oxygen core mass; these models
+are provided for historical consistency reasons, but are
+somewhat outdated.
+We convert the baryonic mass of the remnant to a
+gravitational mass using Eq. (13) of Fryer et al. (2012)
+
+for NSs. For BHs, the gravitational mass is assumed
+to be 0.1 M less than the baryonic mass to account
+for mass lost in neutrinos in the default prescription
+(Stevenson et al. 2019). This amount can be adjusted,
+or, alternatively, a fixed fraction of the mass can be lost
+in neutrinos during BH formation as in Eq. (14) of Fryer
+et al. (2012).
+We show the difference in the initial-final remnant
+mass relation between the two models from Fryer et al.
+(2012) and the stochastic model from Mandel & Müller
+(2020) in the bottom panel of Figure 8.
+3.8.3. Ultra-stripped Supernovae
+Mass transfer from a helium star that re-expands after
+core helium burning (so-called ‘case BB mass transfer’;
+Delgado & Thomas 1981; Tauris et al. 2015) in short
+period binaries leads to severe stripping of the donor,
+leaving behind a helium envelope with mass . 0.1 M .
+If the remaining stellar core is sufficiently massive to
+undergo core collapse, then we say that it undergoes
+an ultra-stripped supernova (USSN; Tauris et al. 2013,
+2015). Due to the lack of envelope, USSNe remnants
+are NSs with characteristically lower mass, and may receive smaller natal kicks than typical NSs (Suwa et al.
+2015; Moriya et al. 2017; Müller et al. 2018). We discuss
+kicks further in Section 3.9. By default in COMPAS we
+assume that case BB mass transfer is always stable (cf.
+Vigna-Gómez et al. 2018) and removes the entire helium
+envelope but none of the underlying carbon-oxygen core.
+3.8.4. Pair-instability Supernovae
+Stars with helium cores in the mass range ∼ 50–
+150 M are believed to become unstable as a result
+of electron-positron pair production (Fowler & Hoyle
+1964; Barkat et al. 1967; Woosley 2017; Farmer et al.
+2019). This causes the radiation pressure support in
+the core to drop, causing the core to contract. As it
+contracts, the temperature increases, triggering explosive oxygen burning. This may reverse the contraction
+and completely unbind the star in a pair-instability supernova (PISN) explosion, leaving no remnant behind
+(Fowler & Hoyle 1964; Barkat et al. 1967; Fraley 1968;
+Kozyreva et al. 2014a,b, 2017; Takahashi 2018; Leung
+et al. 2019; Woosley 2019). BH formation is expected
+again above a helium core mass of ∼ 150 M (Woosley
+et al. 2002; Woosley 2019). In addition, it is theoretically well established that stars with helium core masses
+in the range ∼ 30–60 M lead to pulsational PISNe (e.g.
+Woosley 2017; Yoshida et al. 2016; Spera & Mapelli
+2017; Takahashi 2018; Farmer et al. 2019; Marchant
+et al. 2019; Renzo et al. 2020), where material from the
+star is ejected in several supernova-like pulses, whilst
+the star returns to equilibrium between each pulse, and
+
+18
+
+Team COMPAS
+
+eventually undergoes an iron core collapse to form a BH.
+Together, these effects lead to a dearth of BHs in the
+mass range ∼ 45–130 M and a possible excess in the
+∼ 35–45 M mass range with the current COMPAS
+default prescription.
+The implementation of PISNe in COMPAS is discussed in detail in Stevenson et al. (2019). In brief,
+by default stars with helium core masses in the range
+between 35 and 60 M lose mass through pulsational
+PISNe prior to collapse, while those with helium core
+masses between 60 and 135 M explode in PISNe and
+leave no remnants behind. We use fits based on results
+from Marchant et al. (2019) in the COMPAS default
+model for the relation between the helium core mass
+and the final presupernova mass in the pulsational PISN
+regime. In addition, COMPAS also provides the simple
+model from Belczynski et al. (2016b) to allow for comparison with StarTrack models, along with additional
+models based on detailed results from Woosley (2017)
+and Farmer et al. (2019).
+3.9. Supernova Natal Kicks
+Galactic pulsars are observed to have large proper motions, from which a distribution of their velocities is
+inferred (e.g. Gunn & Ostriker 1970; Lyne & Lorimer
+1994; Hansen & Phinney 1997; Arzoumanian et al. 2002;
+Hobbs et al. 2005; Beniamini & Piran 2016; Verbunt
+et al. 2017). The high velocities are attributed to significant asymmetries in the supernova explosions which
+“kick” the pulsars, though the exact mechanism is uncertain and may be attributed to either hydrodynamic
+effects (e.g., Janka & Müller 1994; Burrows & Hayes
+1996; Wongwathanarat et al. 2013) or neutrino emission
+(Woosley 1987; Bisnovatyi-Kogan 1993; Socrates et al.
+2005; Nagakura et al. 2019). See Lai et al. (2001) for a
+broad overview of natal kicks.
+By default, for NSs we draw the the natal-kick magnitudes from a Maxwell-Boltzmann distribution.
+r
+
+
+2
+2
+2 vkick
+vkick
+p(vkick |σkick ) =
+exp − 2
+,
+(18)
+3
+π σkick
+2σkick
+with root-mean-square
+√ 1D velocity σkick (i.e., rootmean-square speed of 3σkick ). For CCSNe, we assume
+that σkick = σCCSN = 265 km s−1 (Hobbs et al. 2005).
+ECSNe and USSNe are expected to have smaller kicks
+than standard iron core-collapse supernovae (e.g. Suwa
+et al. 2015; Gessner & Janka 2018; Müller et al. 2019).
+By default, we assume σECSN = σUSSN = 30 km s−1
+(Vigna-Gómez et al. 2018). These lower natal kicks for
+ECSN and USSN follow Pfahl et al. (2002) and Podsiadlowski et al. (2004), which are motivated by the subset
+of DNSs and NS-binary systems with low velocities and
+
+small eccentricities (Brisken et al. 2002; Schwab et al.
+2010; Beniamini & Piran 2016; Tauris et al. 2017), as
+well as NS retention fractions in globular clusters (e.g.
+Pfahl et al. 2002).
+Several authors have proposed that NS kicks should be
+proportional to the amount of ejecta, and inversely proportional to the remnant mass (Bray & Eldridge 2016,
+2018; Giacobbo & Mapelli 2020; Mandel & Müller 2020).
+A scaling with ejecta mass would naturally account for
+reduced kicks in USSNe with low ejecta mass. In COMPAS we have implemented the fits of this form from
+Bray & Eldridge (2018) and Mandel & Müller (2020),
+where the latter model self-consistently predicts both
+the remnant mass and natal kick.
+COMPAS also includes a model for remnant masses
+and kicks based on the 1D parameterized supernova simulations of Müller et al. (2016) (see Vigna-Gómez et al.
+2018, for details).
+We further provide the option to use a uniform distrimax
+, as
+bution of kick velocities up to some maximum vkick
+well as kicks fixed at a specific value.
+Whether BHs also receive natal kicks, and what their
+magnitudes are is an open astrophysical question. There
+is some evidence, both theoretical and observational,
+that BHs receive smaller kicks than NSs (see e.g. Janka
+2013; Mandel 2016; Repetto et al. 2017; Atri et al. 2019).
+COMPAS currently includes four different models for
+BH natal kicks: ‘full,’ ‘reduced,’ our default model ‘fallback,’ and ‘zero.’ In the ‘full’ model, we assume that
+BHs receive the full kick drawn from Equation 18, where
+by default we assume σkick = σCCSN for BHs. In both
+the ‘reduced’ and the ‘fallback’ models, we calculate the
+intensity of the kick velocity imparted to newly born
+BHs from the kick that a NS would have received according to Equation 18 with σkick = σCCSN . In the
+‘reduced’ model, we assume that NSs and BHs receive
+the same momentum during the explosion, such that the
+kick velocity of a BH should be rescaled according to
+vBH =
+
+MNS
+vNS ,
+MBH
+
+(19)
+
+where MNS is taken to be 1.4 M . In the ‘fallback’
+model, we scale the BH kick by the fraction of mass
+falling back onto the proto-NS ffb (Fryer et al. 2012)
+vBH = vNS (1 − ffb ).
+
+(20)
+
+Note that unlike Fryer et al. (2012), we apply Equation 20 even if the amount of mass falling back is less
+than M = 0.2 M . In COMPAS, by default we apply
+Equation 20 to all compact objects when using this prescription. In the ‘zero’ kicks model, BHs receive no kick
+during their collapse.
+
+19
+
+COMPAS code paper
+By default, we assume the supernova kick angle is
+drawn isotropically from the unit sphere in the rest
+frame of the supernova progenitor. However, there
+is some tentative observational evidence for spin-kick
+alignment in pulsars (e.g. Lai et al. 2001; Johnston et al.
+2005; Noutsos et al. 2012; Yao et al. 2021), which may
+indicate that kicks are preferentially aligned to the spin
+axis of the progenitor. We provide various alternative models for preferential kick directionality, including
+along the progenitor spin axis (or in a finite cone around
+it), or within the progenitor spin plane (or in a wedge
+around it). We describe the impact of the supernova on
+the orbit of a binary in Section 4.3.
+4. BINARY STELLAR EVOLUTION
+
+Interacting binaries are the core case of study for
+COMPAS. Mass transfer is arguably the most important process in interacting binaries, modifying the component stars and the orbital properties (Podsiadlowski
+et al. 1992; Podsiadlowski 2010). Binary evolution can
+lead to stellar mergers, disruption, or DCO formation.
+A binary in COMPAS is parameterized by the orbital properties: the component masses of the primary
+M1 and secondary M2 , the semi-major axis a and eccentricity e. The orbital angular momentum of a binary
+with nonrotating stars is
+p
+Jorb = µ GMtot a(1 − e2 ),
+(21)
+where Mtot = M1 + M2 and µ = M1 M2 /Mtot is the
+reduced mass. The effects of binary interactions on the
+stellar components, such as mass transfer and rejuvenation, are considered within our SSE framework (Section
+3). We currently only account for stellar rotation in the
+context of CHE systems (Section 3.4). In the absence
+of rotation and tides, the binary can be treated as a
+two-body problem in the point mass approximation.
+In this Section we present the details of our treatment
+of BSE. In Section 4.1 we discuss stellar winds in the
+context of binaries. In Section 4.2 we present our implementation of mass transfer. In Section 4.3 we describe
+the effect of supernovae on the orbit of the binary. In
+Section 4.4 we describe our implementation of gravitational radiation. Finally, in Section 4.5 we briefly discuss the main caveats in our implementation of binary
+evolution.
+4.1. Wind Mass Loss (Binary System)
+In Section 3.5 we presented the prescriptions and parameterization of stellar wind mass loss rates in COMPAS. Here we present the effect of wind mass loss on
+the orbit of the binary system.
+We consider the case of gradual mass loss (M/Ṁ 
+Porb ) in which material rapidly leaves the system with
+
+the specific angular momentum of the mass-losing star
+(wind velocities are fast compared to the orbital velocity). We assume that the fast winds are emitted
+spherically symmetrically from the star’s surface (Huang
+1956). This is known as the Jeans mode or fast winds
+mode (Huang 1963). In the case, the orbit widens according to
+ȧ
+Ṁtot
+=−
+,
+(22)
+a
+Mtot
+which can be simplified as aMtot = constant, while eccentricity is unchanged (Dosopoulou & Kalogera 2016).
+Winds can thus be considered as an extreme case of
+nonconservative mass transfer (Section 4.2).
+Currently we do not consider wind accretion (e.g.,
+Bondi & Hoyle 1944), wind RLOF (Mohamed & Podsiadlowski 2007; Hirai & Mandel 2021), or wind interaction with the companion (Brookshaw & Tavani 1993;
+Schrøder et al. 2021).
+4.2. Mass Transfer
+The physics and time scales involved in mass exchange
+are broad, complex, and their parameterizations can be
+convoluted. In COMPAS, we use a simplified approach
+to this complicated problem. Our approach is similar
+to that of Belczynski et al. (2002, 2008), Hurley et al.
+(2002), and Postnov & Yungelson (2014), among others. We distinguish between a donor (subscript d ) and
+an accretor (subscript a). The donor is the star which
+transfers (and loses) mass, while the accretor gains mass.
+The accretor can be a star or a compact object, and
+can fully retain the transferred mass (conservative mass
+transfer) or only a fraction of it (nonconservative mass
+transfer). If the mass transfer is nonconservative, i.e.
+some mass is lost from the binary, there is a change in
+the total angular momentum of the binary. We follow
+the orbital evolution of the binary through a mass transfer episode by taking the time derivative of Equation 21
+and rearranging it as
+ȧ
+J˙orb
+Ṁd
+Ṁa
+Ṁd + Ṁa
+2eė
+=2
+−2
+−2
++
++
+. (23)
+a
+Jorb
+Md
+Ma
+Md + Ma
+1 − e2
+The default COMPAS assumption is that the binary is
+instantly circularized to periapsis, rp = a(1 − e), at the
+onset of RLOF. COMPAS options allow circularization
+with angular momentum conservation (at a separation
+of the semilatus rectum, a(1 − e2 )) or mass transfer with
+unchanged eccentricity.
+We parameterize the fraction of mass lost by the donor
+which is accreted by the accretor with a factor β:
+Ṁa = −β Ṁd ,
+
+(24)
+
+20
+
+Team COMPAS
+
+with 0 ≤ β ≤ 1. We parameterize the change in angular momentum by assuming the nonaccreted matter
+leaves the system with γ times the specific orbital angular momentum, i.e. J˙orb /Ṁ = γJorb /M . Following
+these assumptions we can rewrite Equation 23 as5
+"
+#
+
+
+ȧ
+Ṁd
+Md
+1
+Md
+= −2
+1−β
+− (1 − β) γ +
+,
+a
+Md
+Ma
+2 Md + Ma
+(25)
+which is the equation we use to solve for the orbital
+evolution during a mass transfer episode. Note that fully
+nonconservative mass transfer (β = 0), where mass is
+lost with the specific angular momentum of the donor
+star (γ = Ma /Md ), is equivalent to fast wind mass loss
+from Section 4.1.
+Before solving for the orbital evolution during a mass
+transfer phase, we first need to determine if mass transfer will occur (Section 4.2.1) and, if so, whether the
+mass transfer episode will be dynamically stable (Sections 4.2.2 and 4.2.3). If the mass transfer episode is
+dynamically unstable, it will lead to a common envelope phase (Section 4.2.4).
+4.2.1. Roche-lobe Overflow
+A mass transfer phase can be initiated either by the
+radial expansion of a star as a consequence of stellar
+evolution or by a decrease in the binary separation. The
+star overflows its Roche lobe and the surface material is
+transferred from the donor to the companion through
+the first Lagrangian point. The first Lagrangian point
+is the juncture between the two Roche lobes, which are
+the regions that contain the gravitationally bound material around each star. In COMPAS we follow Eggleton
+(1983) and approximate the radius of the donor’s Roche
+lobe normalized by the separation as
+2/3
+
+rRL = RRL /a = 0.49
+
+qRL
+2/3
+
+1/3
+
+,
+
+(26)
+
+0.6qRL + ln(1 + qRL )
+
+with qRL = Md /Ma . Equation 26 assumes point-like
+masses in a circular orbit. The Roche lobe is generally
+shaped like a teardrop, but here the Roche lobe radius
+is defined as the radius of a sphere which has the same
+volume as the Roche lobe. The condition for RLOF, and
+therefore for initiating mass transfer, is when the radius
+of the star is larger than the Roche radius at periapsis,
+i.e. when R > RRL (1 − e).
+4.2.2. Stability Criteria
+
+5 See
+
+the educational lecture notes on binary evolution by
+Onno Pols: http://www.astro.ru.nl/∼onnop/education/binaries
+utrecht notes/
+
+When the condition for RLOF is satisfied, we need
+to determine if the mass transfer episode will be dynamically stable or lead to a common envelope event.
+In COMPAS, the stability of the mass transfer phase
+is determined based on approximations to the massradius relationships ζ ≡ d ln R/ d ln M (see, e.g., Soberman et al. 1997). Namely, the response of the radius
+of the donor star to mass loss ζ∗ ≡ d ln R∗ / d ln M
+is compared to the response of the Roche-lobe radius
+ζRL ≡ d ln RRL / d ln M to mass transfer (Paczyński &
+Sienkiewicz 1972; Hjellming & Webbink 1987; Soberman
+et al. 1997). If ζ∗ ≥ ζRL , then the mass transfer episode
+is assumed to be stable, otherwise, mass transfer is assumed to lead to a common envelope phase.
+We approximate the value of ζ∗ based on stellar types
+(Section 3.2). We assume ζ∗ = 2 for main sequence
+and HeMS stars and ζ∗ = 6.5 for HG stars, as implemented in Vigna-Gómez et al. (2018), based on typical
+values from Ge et al. (2015). These ζ∗ values translate into critical mass ratios for stable mass transfer
+of Md /Ma < 1.72 (Md /Ma < 2.25) for fully conservative (fully nonconservative) mass transfer from main sequence donors and Md /Ma < 3.83 (Md /Ma < 4.58) for
+HG donors. For stellar types HG, FGB, CHeB, EAGB,
+and TPAGB (where we use these stellar types, defined
+in Section 3.2, as loose proxies for having a convective
+envelope, but see, e.g., Klencki et al. 2021) we follow
+Soberman et al. (1997) in the form
+
+
+
+
+2
+mSPH
+1 1 − mSPH
+ζSPH =
+−
+3 1 − mSPH
+3 1 + 2mSPH
+
+
+mSPH
+−0.03mSPH + 0.2
+,
+1 + (1 − mSPH )−6
+
+(27)
+
+where mSPH = Mcore /M and Mcore is the core mass
+as defined by Hurley et al. (2000). In COMPAS, we
+consider stripped post-helium-burning stars as a special case and assume by default that any mass transfer
+episode from HeHG and HeGB stellar types is always
+stable. This is in agreement with the expected outcome
+of mass transfer episodes from stripped stars onto NSs
+or BHs as suggested by Tauris et al. (2013, 2015). We
+currently do not model mass transfer from white dwarf
+donors (HeWD, COWD, and ONeWD).
+The Roche-lobe mass-radius exponent ζRL depends on
+the accreted mass fraction β and the specific angular momentum that nonaccreted mass removes from the system
+(see Section 4.2.3 to see how we determine these). We
+follow Soberman et al. (1997) and Woods et al. (2012)
+in rewriting
+ζRL =
+
+∂ ln a
+∂ ln rRL ∂ ln qRL
+d ln RRL
+=
++
+,
+d ln M
+∂ ln Md
+∂ ln qRL ∂ ln Md
+
+(28)
+
+21
+
+COMPAS code paper
+where the terms are taken from Equation 25 and the
+partial derivative of Equation 26.
+4.2.3. Stable Mass Transfer
+The amount of mass transferred during a dynamically stable mass transfer episode is calculated depending on the stellar type of the donor (Section 3.2).
+Broadly, we distinguish between stars that have a clear
+core/envelope separation (HG, FGB, CHeB, EAGB,
+TPAGB, HeHG, and HeGB) and those which do not
+(MS and HeMS). We do not consider other donor types.
+For donor stars with a clear core/envelope separation
+we transfer their entire envelope. For donor stars without a clear core/envelope separation, we calculate and
+remove the minimal mass necessary in order to have the
+donor fit within its Roche lobe. Numerically, we accomplish this by using a root-finder with specified tolerances.
+We compute the accreted mass fraction β once, at the
+start of the mass transfer phase, as follows.
+We compute the donor and accretor mass transfer
+rates. For the donor, we assume a thermal timescale
+mass transfer rate
+Ṁd = Md /τKH,d .
+
+(29)
+
+For the accreting object, the maximum accretion rate is
+limited depending on its stellar type
+
+Ṁ
+KH,a if stellar accretor,
+(30)
+Ṁa =
+Ṁ
+if compact object accretor.
+edd
+
+In Equation 30, the thermal mass accretion rate is given
+by
+ṀKH,a = C · Ma /τKH,a ,
+(31)
+where the factor C = 10 (default value) is assumed
+to take into account the expansion of the star due to
+mass transfer, following Paczyński & Sienkiewicz (1972);
+Neo et al. (1977), Hurley et al. (2002) and Schneider
+et al. (2015). Meanwhile, the Eddington-limited accretion rate is given by
+Ṁedd = 1.5 × 10−8
+
+R∗ M
+,
+10 km yr
+
+(32)
+
+where for a black hole the radius R∗ is given by the
+Schwarzschild radius as in Equation 17. The Eddington
+accretion rate assumptions in COMPAS are flexible and
+can be change to a user-specified function (see van Son
+et al. 2020 for more details).
+By comparing the donor and accretor mass transfer rates, we can determine how conservative the mass
+transfer episode is. Only for main sequence (MS and
+HeMS) and Hertzsprung gap (HG and HeHG) stars,
+
+mass accretion leads to stellar rejuvenation (Section 3.6)
+as the accretor star transitions to a more massive and
+less evolved stellar track (Tout et al. 1997; Hurley et al.
+2002; Belczynski et al. 2008). For fully conservative
+mass transfer, i.e. β = 1, there is no angular momentum
+drained from the binary and Equation 25 simplifies to
+Md2 Ma2 a = constant. For nonconservative mass transfer, i.e. β < 1, the nonaccreted mass is lost, by default,
+through isotropic re-emission from the vicinity of the
+accreting star (e.g. Massevitch & Yungelson 1975; Bhattacharya & van den Heuvel 1991; Soberman et al. 1997).
+Isotropic re-emission corresponds to γ = Md /Ma .
+We briefly point out some alternatives from the default mass transfer model which the user can choose in
+COMPAS. The user can specify a fixed value for β,
+which enforces that a fraction β of the mass transferred
+by the donor is accreted, except for Eddington-limited
+accretion. The value of γ can also be changed. We
+have mentioned the Jeans (γ = Ma /Md ) mass loss mode
+in the context of winds, but we also include the userdefined possibility of choosing these mass loss modes in
+semiconservative and fully nonconservative mass transfer episodes. COMPAS also includes a mode of nonconservative mass transfer that represents mass loss via a
+circumbinary ring as an option (see, e.g., Soberman et al.
+1997). In this case, the nonaccreted
+mass carries
+p
+√ a specific angular momentum γ = aring /aM/µ = 2M/µ
+for a ring at radius aring = 2a.
+4.2.4. Common Envelope Phase (Dynamically Unstable
+Mass Transfer)
+
+In COMPAS, dynamically unstable mass transfer occurs if ζ∗ < ζRL or if both stars simultaneously experience RLOF (see Section 4.2.6 for an exception for CHE
+binaries). Dynamically unstable mass transfer leads to
+a CE phase. In this phase, the binary is engulfed in a
+shared envelope and experiences gas drag, which causes
+a dynamical timescale inspiral (Paczynski 1976; Podsiadlowski 2001; Ivanova et al. 2013). CE events are
+thought to be especially relevant for the formation of
+DCOs in tight orbits (van den Heuvel 1976; Ivanova
+et al. 2013).
+In COMPAS we follow the energy formalism in the
+form of the αCE -λ prescription to estimate the post-CE
+orbital separation (Webbink 1984; de Kool 1990). In the
+αCE -λ prescription the initial (pre-CE) binding energy
+of the donor is equated to the orbital energy reservoir
+Ebind = αCE × ∆Eorb ,
+
+(33)
+
+where ∆Eorb is the difference between the binary orbital
+energies before and after the CE phase and αCE is a
+user-specified efficiency factor which parameterizes the
+
+22
+
+Team COMPAS
+
+fraction of the orbital energy that is used to unbind the
+CE. The default value is αCE = 1.0.
+The value of the binding energy of the envelope depends on the location of the envelope’s inner boundary
+and the sources of energy considered. We follow de Kool
+(1990) and express it in terms of a structure parameter
+λ:
+GM Menv
+Ebind = −
+.
+(34)
+λR
+By default, COMPAS calculates λ using the “Nanjing
+lambda” prescription described by Xu & Li (2010a,b),
+who provide fitting formulae for λ. Our implementation is identical to that of StarTrack (Dominik et al.
+2012), including the several improvements they have
+made to the λ fits. This λ was computed in two different ways; one using only the gravitational binding
+energy (λg ) and one that also includes the contribution
+of the full internal energy6 (λb ). COMPAS allows the
+user to specify a linear combination of the two parameters, λ = αth λb + (1 − αth )λg . The default is αth = 1,
+i.e. including the full internal energy.
+Alternative COMPAS options to estimate λ include
+prescriptions for calculating the envelope binding energy
+from Loveridge et al. (2011), fitting formulae to results
+from Kruckow et al. (2016) as implemented in VignaGómez et al. (2018), and the option of using a fixed
+constant value.
+We generalize Equations 33 and 34 to include the potential case of a double-core CE (Brown 1995) in the
+form
+GM1 M1,env
+GM2 M2,env
+−
+=
+λ1 R1
+λ2 R2
+!
+GM1 M2
+GM1,core M2,core
+−
+,
+2apre−CE
+2apost−CE
+
+−
+= αCE
+
+(35)
+
+where apre−CE and apost−CE are the separation before
+and after the CE phase, respectively; if one of the
+Menv = 0 then Equation 35 simplifies to the classic
+single-core energy formalism. Given the simplicity of our
+parameterization and the short (dynamical) timescales
+involved in a CE episode, we assume the phase is instantaneous. Equation 35 is used to predict the post-CE
+orbital separation given the pre-CE binary parameters
+and the post-CE component masses. The criterion for
+successful envelope ejection is apost-CE > R1 + R2 .
+After a successful envelope ejection we always assume
+a circular orbit (see, e.g., Ivanova et al. 2013, for discussion of this). Besides a successful envelope ejection,
+6 Note that this includes the thermal energy, radiation energy, ion-
+
+ization energy, and the dissociation energy of molecular hydrogen.
+
+which leads to a close binary, the CE phase can lead
+to immediate RLOF or a stellar merger (Section 4.2.5).
+Immediate RLOF implies that the stripped star or its
+companion is filling the respective post-CE Roche lobe.
+By default we allow these systems to engage in a mass
+transfer episode again, but we flag them so they can be
+considered as mergers in postprocessing.
+A key uncertainty in CE evolution is the fate of
+Hertzsprung gap donors (Belczynski et al. 2007). Such
+stars are not expected to have developed a steep density
+gradient between core and envelope (Taam & Sandquist
+2000; Ivanova & Taam 2004) making it challenging to
+successfully eject the envelope. It is not clear whether
+Hertzsprung gap donor stars can survive CE evolution,
+or whether instead, this would lead to a merger. In order
+to account for this uncertainty, we adopt two extreme
+models following Dominik et al. (2012). In the “optimistic” model, CE events involving a Hertzsprung gap
+donor are treated in the same way as a more evolved star,
+determining the fate of the binary according to the energy budget (Equation 35). In the “pessimistic” model,
+it is assumed that all CE events involving a Hertzsprung
+gap donor result in a stellar merger. COMPAS keeps
+track of systems that experience an “optimistic” CE
+event, allowing the user to remove them in postprocessing. For the results presented in this paper we use the
+pessimistic model as the default assumption.
+CE events initiated by RLOF from main sequence
+donors always lead to a stellar merger. CE events with
+main sequence accretors are treated as all other CE
+events by default, but may optionally always lead to
+stellar mergers.
+There is no mass accretion onto the companion during
+a CE phase in the default COMPAS model. However,
+different optional CE accretion rate prescriptions exist
+for the case of NS accretors, including a user-defined
+fixed value, or following prescriptions from Oslowski
+et al. (2011) and MacLeod & Ramirez-Ruiz (2015), as
+described by Chattopadhyay et al. (2020). Mass accretion during a CE phase involving a BH companion
+has been investigated with COMPAS by van Son et al.
+(2020), who considered both accretion of a user-defined
+fixed fraction of the envelope and the Hoyle-Lyttleton
+(Hoyle & Lyttleton 1939) accretion rate within a CE
+following prescriptions from MacLeod & Ramirez-Ruiz
+(2015) based on Chevalier (1993).
+4.2.5. Stellar Mergers
+In COMPAS, two stars are assumed to merge when
+a ≤ (R1 + R2 ). This can occur following runaway stable
+mass transfer, if the envelope fails to be ejected during
+a CE phase, or if the direction of the supernova kick
+
+23
+
+COMPAS code paper
+drastically shrinks the orbit. Currently, stellar mergers are flagged and the calculation is stopped, without
+subsequent evolution of the merger product.
+4.2.6. Massive Overcontact Binaries
+COMPAS includes prescriptions for CHE stars (Section 3.4), particularly in the context of CHE binaries
+(Riley et al. 2021). CHE binaries may arise from massive overcontact binaries, in which stars overflow their
+Roche lobes and share mass during the main sequence
+(see, e.g., Marchant et al. 2016). We therefore make an
+exception for them and relax our criteria for RLOF and
+mergers (see Riley et al. 2021). We consider that CHE
+stars in massive overcontact binaries can be filling their
+Roche lobe throughout the main sequence as long as
+they don’t overflow the second (outer) Lagrangian point
+(Marchant et al. 2016; Riley et al. 2021). In our model,
+CHE binaries filling the second (outer) Lagrangian point
+lead to an imminent stellar merger.
+4.3. Supernovae (Binary)
+In COMPAS, supernovae lead to NS or BH formation7 (the nomenclature is not necessarily associated
+with their observational signature). Supernovae occur
+on timescales much shorter than the timescales we resolve in COMPAS; we therefore assume that they are
+instantaneous events and that they could occur with uniform probability over all orbital phases.
+Supernovae affect the orbit of a binary via instantaneous mass loss and natal kicks (Blaauw 1961; Hills
+1983; Brandt & Podsiadlowski 1995; Kalogera 1996;
+Tauris & Takens 1998; Hurley et al. 2002). We follow Appendix B of Pfahl et al. (2002) to solve for the
+response of the orbital elements to a supernova. This
+prescription accounts for the natal kick, mass ejection,
+interaction with the companion during the supernova,
+and modification of the center-of-mass velocity. If the
+postsupernova eccentricity of the binary exceeds one, we
+label the binary as gravitationally unbound and cease
+further calculations (with an option to continue stellar
+evolution of the noncompact-object companion, if any).
+4.4. Gravitational Radiation
+Gravitational radiation releases energy and angular
+momentum from a binary, reducing both the orbital separation and the eccentricity. In COMPAS we only consider gravitational waves (GWs) after DCO formation
+and follow Peters (1964) to calculate the time to coalescence as
+15
+a4DCO c5
+τGW =
+κ(eDCO ),
+(36)
+304 G3 M1 M2 Mtot
+7 With the exception of PISNe as discussed in Section 3.8.4.
+
+where aDCO and eDCO are the separation and eccentricity of the binary after the second supernova and κ(eDCO )
+is a function of the eccentricity given by
+"
+870 #4
+
+− 2299
+(1 − e2DCO )
+121 2
+e
+κ(eDCO ) =
+1+
+12/19
+304 DCO
+eDCO
+(37)
+1181
+Z eDCO 29/19
+2 2299
+e
+(1 + 121
+e
+)
+304
+de,
+×
+3
+(1 − e2 ) 2
+0
+where the integral is calculated as a Riemann sum over
+10,000 linearly spaced eccentricity bins. For almost circular (e < 0.01) or very eccentric (e > 0.99) binaries,
+we use the approximations as presented following Eq.
+5.14 in Peters (1964). If τGW is less than a Hubble time,
+computed with H0 = 67.8 km s−1 Mpc−1 (Planck Collaboration et al. 2016), we classify the DCO as a merger
+candidate (but see Section 6.4 to see how we account for
+cosmological evolution).
+4.5. Caveats to Binary Evolution in COMPAS
+We currently do not include tidal evolution in COMPAS, although tides are believed to play a non-negligible
+role in massive binary evolution.
+We also do not include magnetic braking evolution in
+COMPAS. Most massive stars are non-magnetic (Donati & Landstreet 2009). Moreover, unlike for low-mass
+stars, the magnetic braking assumption of negligible
+mass loss does not hold for radiatively driven stellar
+winds. We do not expect magnetic braking to play a
+significant role in the formation of NS and BH binaries.
+COMPAS has not been adequately tested in the context of systems hosting white dwarfs.
+5. EVOLVING A POPULATION
+
+Typically users wish to study particular outcomes of
+stellar or binary system evolution: BBHs that merge
+within the age of the universe, DNSs, X-ray binaries,
+etc. The initial attributes of these systems are usually
+not known a priori, so a population of systems is evolved
+with the expectation that some of the systems will evolve
+into systems of interest.
+Each single star or binary system in a COMPAS simulation is described at ZAMS by the initial values of
+the salient attributes: mass and metallicity for single
+stars; component star masses, separation, eccentricity,
+and metallicity for binary systems. Users can specify
+values to be used for each of the initial attributes, or
+allow values to be drawn from specified distributions.
+5.1. Sampling
+The population of objects (stars or binary systems)
+synthesized by COMPAS is intended to be a representative sample from the full population of stars or binary
+
+24
+
+Team COMPAS
+
+systems in the universe. Sampling allows us to infer
+information about the full population based on results
+from the sampled subset – the sampled collection is used
+as a proxy for the actual population.
+COMPAS provides functionality that allows users
+to sample the initial attributes of systems outside the
+COMPAS application and provide those initial attribute values to COMPAS via input grid files (Section
+2.7.2). This makes it possible to interface with importance sampling via STROOPWAFEL (Broekgaarden
+et al. 2019), and in principle, allows for interfaces with
+other sampling tools such as Dartboard (Andrews et al.
+2018) or emulation packages (e.g., Barrett et al. 2017).
+COMPAS also includes a basic set of initial condition
+distributions within the main code. This enables Monte
+Carlo sampling in which users specify, for each star or
+binary system to be evolved, fixed values for initial attributes that should not be sampled, and COMPAS will
+sample the remainder using the distributions described
+below. Each star or binary system is then evolved to its
+final state, and the results recorded in output files (see
+Section 2.8).
+Here we briefly describe the basic initial parameter
+distributions available in the core COMPAS code. For
+simplicity, we assume that the overall distribution of initial parameters is an outer product over independent parameter distributions, despite evidence to the contrary
+(Abt et al. 1990; Duchêne & Kraus 2013; Moe & Di
+Stefano 2017; Klencki et al. 2018).
+5.2. Single Star/Primary Mass
+The initial mass of a single star, or the primary star
+(the more massive star at ZAMS) in a binary system,
+M1,i , is, unless specified by the user, determined by the
+initial mass function (IMF) being used. By default,
+COMPAS uses the Kroupa (2001) IMF, the distribution function of which is given by
+−2.3
+p(M1,i ) ∝ M1,i
+
+(38)
+
+above 0.5 M , and M1,i ∈ [5.0, 150.0] M . Other IMF
+functions (e.g. Salpeter 1955) are available as configurable options. For simplicity, we assume that the IMF
+is the same for all metallicities.
+5.3. Mass Ratio and Secondary Mass
+The mass of the secondary star (less massive at
+ZAMS), M2,i , in a binary system being evolved by
+COMPAS is, unless specified by the user, determined
+by the mass ratio
+qi ≡ M2,i / M1,i ,
+
+where qi ∈ [0.01, 1.0].
+
+(39)
+
+In the default COMPAS model, the mass ratio is
+drawn from a flat distribution (Sana et al. 2012; Kobulnicky et al. 2014). Other distributions for mass ratio
+provided in COMPAS as options are the distributions
+described by Duquennoy & Mayor (1991a) and Sana
+et al. (2012) (Table S3). A minimum value for M2,i
+can be specified by the user.
+5.4. Metallicity
+The metallicity, Zi , of a single star, or both component
+stars of a binary system, is, unless otherwise specified
+by the user, given by Zi = Z = 0.0142 (Asplund et al.
+2009).
+Users can specify that metallicity be sampled for each
+single or binary star (for binary stars, both component
+stars use the same, sampled, value for metallicity), using
+a log-uniform distribution:
+p(Zi ) ∝
+
+1
+,
+Zi
+
+(40)
+
+where Zi ∈ [0.0001, 0.03].
+5.5. Semimajor Axis
+The initial semi-major axis of a binary star, ai , is,
+unless specified by the user, sampled independently of
+the masses using a log-uniform distribution:
+p(ai ) ∝
+
+1
+,
+ai
+
+(41)
+
+where ai ∈ [0.01, 1000] au (Öpik 1924; Abt 1983).
+Other distributions for semi-major axis provided in
+COMPAS as options are those described by Duquennoy & Mayor (1991b) and Sana et al. (2012). A custom
+method allows the user to specify parameters of the distribution.
+5.6. Orbital Period
+The orbital period can be specified for binary stars instead of the semi-major axis. The user can either specify
+a value for the orbital period, Pi , or that the value be
+sampled. If the value is sampled, a log-uniform distribution is used:
+p(Pi ) ∝
+
+1
+,
+Pi
+
+(42)
+
+where Pi ∈ [1.1, 1000] days.
+5.7. Orbital Eccentricity
+Unless otherwise specified by the user, the COMPAS
+default model assumes all binary stars are circular at
+birth (i.e., initial eccentricity ei = 0). Other distributions for eccentricity provided in COMPAS as options
+are:
+
+25
+
+COMPAS code paper
+• a flat distribution, p(ei ) = 1,
+• a thermal eccentricity distribution p(ei ) = 2ei
+(Heggie 1975),
+• the M35 distribution described by Geller et al.
+(2013),
+• the distribution described by Duquennoy & Mayor
+(1991a), and
+• the distribution described by Sana et al. (2012,
+Table S3).
+5.8. Supernova Kicks
+Stars that experience a supernova event may experience a momentum boost as a result of the explosion (see
+Section 3.7). Unless otherwise specified by the user, the
+attributes of these so-called natal kicks (i.e. magnitude
+and direction) are drawn from default distributions, depending upon the supernova type and expected remnant. The COMPAS model for natal kicks is described
+in detail in Section 3.9.
+5.9. Stellar Rotation
+Unless otherwise specified by the user, the COMPAS
+default model assumes that all stars are nonrotating at
+birth (i.e., the initial rotational velocity vrot = 0 km/s).
+Other rotation distributions provided in COMPAS as
+options are:
+• the initial, individual rotational velocities for the
+two stars can be provided separately,
+• the rotational velocity distribution from Hurley
+et al. (2000);
+• a rotational velocity distribution for O and B stars
+based on results from the VLT-FLAMES survey
+(Ramı́rez-Agudelo et al. 2013).
+We describe the limited aspects of rotation currently
+modeled by COMPAS in Section 3.4. For stars in binaries, if CHE is enabled (default), COMPAS overwrites
+the drawn or zero rotational velocities of the binary components with the orbital velocity of the binary (i.e. tidal
+locking is assumed).
+6. POSTPROCESSING
+
+Using binary population synthesis simulations to make
+predictions and calculations for astrophysical populations requires converting the data from the simulation
+into meaningful astrophysical quantities. The foremost
+example, for compact objects, is calculating DCO formation and merger rates as a function of redshift and/or
+
+component masses. The strengths of the COMPAS
+suite include its publicly available postprocessing scripts
+where these calculations are performed. This section describes the methodology behind the main postprocessing scripts that are publicly available in COMPAS at
+https://github.com/TeamCOMPAS/COMPAS.
+6.1. Recording Properties
+As described in Section 2.8, during the simulation,
+COMPAS calculates and records properties of the stars
+and/or binary systems such as the ages, masses, stellar
+radii, effective temperatures, velocities, eccentricities,
+and separations. The user can specify which properties are recorded and when during the simulation they
+are reported. Examples include the option to save the
+properties at every time step (detailed output, an example is given in Section 7.1) or only printing the properties of the binary at important evolutionary stages of
+the binary such as CE episodes and SNe. A detailed description of how the output can be specified is given in
+the code documentation; https://compas.science/docs/.
+6.2. Selecting Binary Systems of Interest
+During a simulation, COMPAS returns the recorded
+properties of all of the simulated binary systems. Further subselection of binaries of specific interest, such as
+BBHs that merge in a Hubble time or systems that experienced a CE event, is done by means of postprocessing. The “optimistic” and “pessimistic” CE selection (as
+mentioned in Section 4.2.4) is also performed in postprocessing. The subselection of systems of interest is typically done in COMPAS by “slicing” or “masking” the
+data, which is described in the publicly available jupyter
+notebooks.
+6.3. Converting to Yields per Star-forming Mass
+A COMPAS simulation is typically performed by
+modeling only a fraction of the underlying stellar population by, for example, not simulating single stars and/or
+not drawing the simulated binaries from their full initial
+birth distributions (e.g., by only simulating stars with
+masses ≥ 5 M ). To obtain meaningful estimates for
+formation rates of the binaries of interest, the population synthesis simulation is typically re-normalized to
+a formation yield per unit star forming mass. In this
+section we will often write this DCO formation yield as
+a function of: birth metallicity Zi 8 , delay time tdelay
+(i.e., the time between the formation and the merger of
+8 Before we used Z instead of Z for metallicity. In the remaining
+i
+
+section we use Zi to be consistent with the notation for other
+birth parameters.
+
+26
+
+Team COMPAS
+
+a binary, see Figure 9), and compact object masses M1 ,
+M2 . Doing so, the DCO formation yield for a binary
+with metallicity Zi , delay time tdelay and final compact
+object masses M1 and M2 can be written as
+d4 Nform
+(Zi , tdelay , M1 , M2 ),
+dMSFR dtdelay dM1 dM2
+where Nform is the number of systems of interest that
+form and MSFR is a unit of star forming mass. To get
+the total yield dNform / dMSFR this is marginalized over
+tdelay , M1 and M2 . This yield is typically computed
+with a Monte Carlo approach through COMPAS simulations. The subsequent conversion to merger and detection rates is then done in postprocessing, as described
+below.
+6.4. Calculating Astrophysical Rates over the Cosmic
+History of Our Universe: The Case of Double
+Compact Object Mergers
+These COMPAS suite scripts to calculate cosmological formation and merger rates of astrophysical events,
+often referred to as “cosmological integration”, are based
+on the work presented in Neijssel et al. (2019). We describe the method behind these postprocessing scripts
+for the example of calculating DCO merger rates over
+redshift below, similarly to Neijssel et al. (2019) and
+Broekgaarden et al. (2021a), but the idea can be easily
+generalized to other phenomena.
+6.4.1. Double Compact Object Merger Rates for
+Ground-based GW Detectors
+
+The DCO merger rate measured by a comoving observer in the source frame of the merger at a given
+merger time tm (measured since the Big Bang) is given
+by
+d4 Nmerger
+Rm (tm , M1 , M2 ) ≡
+(tm , M1 , M2 )
+dtm dVc dM1 dM2
+Z
+Z tm
+= dZi
+dtdelay SFRD(Zi , z(tform = tm − tdelay )) ×
+0
+
+d4 Nform
+(Zi , tdelay , M1 , M2 ),
+dMSFR dtdelay dM1 dM2
+
+(43)
+
+where we convolve the yield with the the metallicityspecific star formation rate density SFRD(Zi , z(tform )),
+which is a function of birth metallicty Zi and redshift z 9 .
+In Equation 43 Vc is the comoving volume and the relevant star formation rate is computed at a redshift corresponding to the formation time tform = tm −tdelay . Delay
+9 We
+
+use SFRD for the star formation rate density, and
+SFRD(Zi , z) for the metallicity-specific star formation rate density.
+
+times and metallicities are integrated over. We describe
+the merger rate in Equation 43 as an explicit function
+of M1 and M2 because the probability of a DCO merger
+detection depends on their values (see below), but the
+total merger rate is often computed by marginalizing
+over the DCO component masses.
+We obtain the SFRD(Zi , z) by multiplying the total
+star formation rate density (SFRD) with a metallicity
+probability density function
+d3 MSFR
+(zform )
+dts dVc dZi
+d2 MSFR
+dP
+=
+(zform ) ×
+(zform ) ,
+dt dVc
+dZ
+| s {z
+} | i {z }
+
+SFRD(Zi , zform ) ≡
+
+SFRD
+
+(44)
+
+GSMF + MZR
+
+where we used the short hand notation zform = z(tform ).
+In the available COMPAS postprocessing scripts, the
+metallicity distribution function, dP /dZi , is typically
+described as a convolution between a galaxy mass function, the number density of galaxies per logarithmic
+mass bin (GSMF) and the mass-metallicity relation
+(MZR). This is discussed in more detail in the following
+sections and schematically shown in Figure 10.
+In practice, the integral in Equation 43 is approximated by a Monte Carlo estimate, integrating over simulated metallicities. The metallicities in the integral limit
+in Equation 43 that fall outside of the simulated metallicity range can be either included in the edge bins (see,
+e.g., Broekgaarden et al. (2021a) for more details) or
+conservatively ignored (effectively curtailing dP /dZi to
+zero outside the range of simulated metallicities).
+The DCO merger rate in Equation 43 is then converted to a local detection rate Rdet by integrating over
+the comoving volume and taking into account the probability Pdet of detecting a gravitational-wave source (Section 6.6) using
+d3 Ndet
+Rdet (tdet , M1 , M2 ) ≡
+dtdet dM1 dM2
+Z
+dVc dtm
+= dz
+Rm (tm ) Pdet (M1 , M2 , z(tm )), (45)
+dz dtdet
+where tdet is the time in the detector (i.e. the observer)
+frame, Pdet (M1 , M2 , z) is the probability of detecting a
+gravitational-wave signal from a binary with component
+dtm
+1
+masses M1 , M2 merging at redshift z, and dt
+= (1+z)
+det
+c
+and dV
+dz are given by, e.g., Hogg (1999). In practice, this
+integral over redshift can be computed as a Riemann
+sum over discrete redshift bins; see, e.g., previous work
+by Dominik et al. (2013, 2015); Belczynski et al. (2016a);
+Mandel & de Mink (2016); Eldridge et al. (2019b); Baibhav et al. (2019); Bavera et al. (2020); Chruslinska et al.
+
+27
+
+COMPAS code paper
+
+ZAMS
+
+BHNS
+
+Merger
+
+Figure 9. Schematic display of the different times in the formation and evolution of a binary system that impact the time tm
+at which a DCO (here a BHNS) system will merge in the history of the universe. The relevant timescales are: the moment
+the binary is formed at ZAMS from a gas cloud, tform , the moment of DCO formation, tDCO , the time at which the merger
+takes place, tm , the time it takes the binary to evolve from ZAMS to the DCO system, tevolve = tDCO − tform , the inspiral
+time, tinspiral = tm − tDCO and the time between binary formation at ZAMS and merger, tdelay = tm − tform . All mergers
+that occur within the horizon distance of GW detectors are potentially detectable today. Arrows indicate that those times
+that vary per binary system. Figure from Broekgaarden et al. (2021a) available at https://github.com/FloorBroekgaarden/
+BlackHole-NeutronStar/tree/main/plottingCode/Fig 1/variations.
+
+(2019). The total detection rate per unit time can be
+obtained by further integrating over DCO masses.
+6.5. Metallicity-specific Star Formation Rate Density
+Prescriptions
+In COMPAS, the current publicly available postprocessing scripts use convolutions between analytical
+prescriptions for the SFRD, GSMF and MZR (Equation 44). The analytical equations are based on observations and simulations and can be flexibly adapted to
+the user’s preferences. We present below the prescriptions existing in COMPAS postprocessing based on the
+work from Neijssel et al. (2019). An overview of the default available options for those prescriptions is given in
+Table 3.
+6.5.1. Star Formation Rate Density Prescriptions
+The COMPAS cosmic integration postprocessing
+scripts have different options for the SFRD. Several
+examples are given in the second column of Table 3 and
+shown in Figure 11. One of the SFRD prescriptions
+is based on the ‘preferred’ model from Neijssel et al.
+
+(2019), which is calibrated to match the GW detections
+from the first two observing runs of LIGO and Virgo.
+Two other options are the Madau & Dickinson (2014)
+and Madau & Fragos (2017) SFRDs. All three SFRDs
+are given by the functional form
+
+d2 MSFR
+(1 + z)b2
+(z) = b1
+M yr−1 Mpc−3 .
+dts dVc
+1 + [(1 + z)/b3 ]b4
+(46)
+where z is the redshift. The parameters b1 , b2 , b3
+and b4 in the equation for the SFRD are defined by:
+b1 = 0.01, b2 = 2.77, b3 = 2.9 and b4 = 4.7 for the preferred model in Neijssel et al. (2019); b1 = 0.015, b2 =
+2.7, b3 = 2.9 and b4 = 5.6 for the Madau & Dickinson (2014) prescription (see their Equation 15) and
+b1 = 0.01, b2 = 2.6, b3 = 3.2 and b4 = 6.2 for the Madau
+& Fragos (2017) prescription (see their Equation 1). Another available SFRD is the one from Strolger et al.
+(2004, see their Equation (1)), which uses an extinctioncorrected model for SFRD described as a function of the
+
+28
+
+d /d i
+
+SFRD( i, )
+
+SFRD( i, )
+
+Team COMPAS
+
+Metallicity distribution function
+
+Star formation rate density
+
+✕
+
+Metallicity-specific SFRD
+
+＝
+
+1
+
+d /d i
+
+d /d i
+Mass-Metallicity relationship
+
+Galaxy Stellar Mass Function
+
+1
+
+Figure 10. Schematic depiction of how models for the metallicity-specific star formation rate density, SFRD(Zi , z), can be
+created in COMPAS by multiplying a star formation rate density with a metallicity probability distribution function, dP/ dZi .
+The metallicity distribution function is typically constructed in the available COMPAS postprocessing scripts by convolving
+a galaxy stellar mass function with a mass-metallicity relationship. An exception is the ‘preferred’ model from Neijssel et al.
+(2019), which uses a phenomenological model directly for the metallicity distribution function. The arrows in each subfigure
+indicate in which direction the distribution moves as redshift increases. Original figure from Broekgaarden et al. (2021a) available
+at https://github.com/FloorBroekgaarden/BlackHole-NeutronStar/tree/main/plottingCode/Fig 2.
+
+universe’s age:
+d2 MSFR
+(tform ) =
+(47)
+dts dVc
+
+
+
+
+
+tform − t0
+M
+tform
+2
+c1 tcform
++ c4 exp c4
+exp −
+,
+c3
+c3
+yr Mpc3
+
+The preferred model from Neijssel et al. (2019) (yz =
+00 in Table 3) uses a phenomenological model, which
+defines the metallicity density function as a symmetric
+log-normal distribution:
+2
+
+1
+(ln(Zi ) − µ1 (z))
+dP
+√ exp −
+(z) =
+, (48)
+Note from Floor: See jupyter
+dZi
+2σ12
+Zi σ1 2π
+with c1 = 0.182, c2 = 1.26, c3 = 1.865, c4 = 0.071 and
+notebook in this samewhere
+folder
+for
+t0 = 13.47 Gyr.
+σ1 is the standard deviation in ln(Z)-space and
+µ1 (z) images
+is the redshift-dependent mean in ln(Z)-space.
+how to make the cartoon
+6.5.2. Metallicity distribution function over redshift
+Neijssel et al. (2019) use a redshift independent σ1 =
+(GSMF
++ MZR)
+above.
+0.39 and mean µ1 = hln(Z)i defined by
+
+The chemical evolution of star formation in our universe is described in the COMPAS postprocessing
+scripts by the metallicity probability density, dP/ dZi ,
+which is a function of redshift. The cosmic integration
+postprocessing scripts offer several options for the metallicity density function.
+
+
+
+hZ(z)i = exp (µ1 + σ12 /2) = Z0 10e1 z ,
+
+
+
+(49)
+
+where Z0 is the mean metallicity at redshift 0. In the
+preferred phenomenological model, Z0 = 0.035 and e1 =
+−0.23.
+
+29
+
+COMPAS code paper
+xyz index
+
+SFRD [x]
+
+GSMF [y]
+
+MZR [z]
+
+0 (default)
+1
+2
+3
+
+‘preferred’ phenomenological model from Neijssel et al. (2019)
+Madau & Dickinson (2014) Panter et al. (2004)
+Langer & Norman (2006)
+Strolger et al. (2004)
+Furlong et al. (2015) single Schechter
+Langer & Norman (2006) + offset
+Madau & Fragos (2017)
+Furlong et al. (2015) double Schechter Ma et al. (2016a)
+
+0.
+
+03
+
+/2
+Z
+
+i =
+
+Z
+i =
+
+Z
+
+Z
+
+i =
+
+Z
+
+/5
+Z
+
+i =
+
+i =
+
+Z
+
+Z
+
+3.0
+
+Z
+
+i =
+
+Z
+
+0.
+
+00
+
+/1
+
+0
+
+01
+
+Table 3. Examples of the by-default available options to construct a metallicity-specific star formation density model
+SFRD(Zi , z) in the publicly available cosmic integration postprocessing scripts of COMPAS. A SFRD(Zi , z) model can be
+obtained by combining a star formation rate (SFR) with a galaxy stellar mass function (GSMF) and mass-metallicity relation
+(MZR). See Sections 6.4 for more details. The labels 0, 1, 2, 3 are solely used in the figures to refer to these models. The code
+is flexible to easily adopt a user specified prescription for the SFRD, GSMF or MZR.
+
+Neijssel+19
+x31
+x12
+
+2.5
+
+dP/dlog10(Zi)
+
+2.0
+
+z=0
+z=1
+z=2
+z=3
+
+1.5
+
+1.0
+
+0.5
+
+Figure 11. The star formation rate density as a function of
+redshift for the four default available options in the cosmic
+integration postprocessing scripts of COMPAS.
+
+This parameterization of the mean (Eq. 49) follows
+the work by Langer & Norman (2006). Observational
+evidence suggests the metallicity distributions are likely
+not symmetric in log-metallicity (e.g., Langer & Norman
+2006; Chruslinska et al. 2019; Boco et al. 2021). The
+other prescriptions for the metallicity distribution function, which are available in the COMPAS postprocessing, are therefore asymmetric convolutions of a GSMF
+and an MZR.
+
+0.0
+
+−4.0
+
+−3.5
+
+−3.0
+
+−2.5
+−2.0
+log10(Zi)
+
+−1.5
+
+−1.0
+
+Figure 12. Three examples of metallicity probability distribution functions (dP/ dZi ) available in the postprocessing
+scripts of COMPAS. For each of the prescriptions the metallicity distribution is shown for four different redshifts. Gray
+areas show Zi values that fall outside of the metallicity range
+of SSE tracks from Hurley et al. (2000).
+
+The GSMFs 1 and 2 use a functional form of a single
+Schechter function given by
+
+ΦM∗ (z) dM∗ = φ1 (z)
+
+M∗
+Mc (z)
+
+−ψ1 (z)
+
+
+exp
+
+−M∗
+Mc (z)
+
+
+dM∗ ,
+(50)
+
+6.5.3. Galaxy Stellar-Mass Function Prescriptions
+The available GSMFs in the COMPAS postprocessing scripts are all based on observations of luminosity
+distributions of galaxies, which are converted to galaxy
+mass distributions based on a luminosity-mass relation.
+The options are listed in the third column of Table 3 and
+in Figure 13. More details are provided in Appendix A3
+of Neijssel et al. (2019).
+
+where M∗ is the galaxy stellar mass, φ1 is the overall
+normalization, ψ1 is the parameter for the slope of the
+GSMF for M∗ ≤ Mc and Mc is the cutoff where the
+GSMF moves from a power-law into an exponential drop
+off (see Figure 13). Panter et al. (2004, Equation 1)
+use a z-independent single Schechter function with φ1 =
+7.8 · 10−3 Mpc−3 , ψ1 = +1.16 and Mc = 7.64 · 1010 M .
+The GSMF option “Furlong et al. (2015) single” (y = 2
+in Table 3), uses a linear fit by Neijssel et al. (2019) to
+the tabulated redshift-dependent values for φ1 , ψ1 , and
+
+30
+
+Team COMPAS
+
+Figure 13. The galaxy stellar mass functions (GSMFs) for
+the three default available options in the cosmic integration
+postprocessing scripts of COMPAS (see also Table 3). The
+GSMFs are shown at seven different redshift values, except
+for the Panter et al. GSMF, which is not redshift-dependent.
+
+Mc . The GSMF option “Furlong et al. (2015) double”
+(y = 3 in Table 3) is instead based on a double Schechter
+function given by
+
+
+−M∗
+ΦM∗ (z) dM∗ = exp
+×
+(51)
+Mc (z)
+"
+
+−ψ1 (z)
+
+−ψ2 (z) #
+M∗
+M∗
+φ1 (z)
++ φ2 (z)
+dM∗ ,
+Mc (z)
+Mc (z)
+which is fitted in a similar way based on tabulated data.
+6.5.4. Mass-Metallicity Relation Prescriptions
+The default MZR in the COMPAS postprocessing
+scripts are analytical formulas for the mapping between
+galaxy stellar mass and the metallicity of star formation.
+Outside of the phenomenological model by Neijssel et al.
+(2019), there are three different MZR available by default in COMPAS.
+The MZR 1 and 2 in Table 3 are based on Langer &
+Norman (2006), who derive a MZR based on Savaglio
+et al. (2005) observations of 56 galaxies in the Gemini
+Deep Deep and Canada-France Redshift Survey. They
+obtain a bisector fit, which is then simplified by Langer
+& Norman (2006) resulting in the MZR
+2
+
+Zi
+M
+=
+,
+(52)
+M∗
+Z
+with M∗ = 7.64·1010 M from Panter et al. (2004), and a
+mean metallicity that scales with redshift as Equation 49
+with the COMPAS default values of Z0 = 0.035, α =
+0.3. Combining these two relations results in the MZR
+
+Figure 14. The mass-metallicity relations for the three default available options in the cosmic integration postprocessing scripts of COMPAS. The MZRs are shown at different
+redshift values.
+
+by Langer & Norman (2006) given in Table 3 with the
+label z = 1. However, since this MZR has an offset
+from the Savaglio et al. (2005) bisector fit, Neijssel et al.
+(2019) also added a second default MZR prescription
+based on Langer & Norman (2006) with a fixed offset in
+metallicity to match the results by Savaglio et al. (2005).
+The MZR from Ma et al. (2016a) is based on theoretical models of cosmological simulations combined with
+population synthesis simulations. Their MZR is given
+by
+log10 (Zgas /Z ) =
+(53)
+
+
+
+
+M∗
+0.35 log10
+− 10 + 0.93 exp (−0.43z) − 1.05,
+M
+with Zgas the metallicity of the star forming gas (here
+Zi ).
+The three MZR options available by default in COMPAS are given in Figure 14.
+6.6. Gravitational-wave selection effects
+Whether a DCO merger is detectable by a GW interferometer depends on its distance (i.e. redshift), orientation, inclination, and source component masses M1
+and M2 . The detectability by a network is approximated by checking whether the source signal-to-noise
+ratio (S/N) in a single detector surpasses a predefined
+threshold. COMPAS contains publicly available postprocessing scripts that calculate the detection probability of a gravitational-wave source, based on the method
+described in Barrett et al. (2018). Source component
+spins and any residual in-band eccentricity are not currently included in these detection probability estimates.
+
+COMPAS code paper
+Typically a user sets in the COMPAS postprocessing scripts a S/N threshold of S/N = 8 for a single
+ground-based GW detector (Finn & Chernoff 1993),
+such that sources with a higher S/N are detectable, but
+this can be changed to the user-specified value. The
+S/Ns of the DCO mergers are calculated by computing the source waveforms using a user-chosen waveform
+model included in the LAL software suite (LIGO Scientific Collaboration 2018), such as IMRPhenomPv2
+(Hannam et al. 2014; Husa et al. 2016; Khan et al. 2016)
+and SEOBNRv3 (Pan et al. 2014; Babak et al. 2017).
+We marginalize over the sky localization and source orientation of the binary using the antenna pattern function from Finn & Chernoff (1993). The detector sensitivity can be chosen by the user. Available options include
+the sensitivity of a LIGO instrument at design sensitivity and O1, O2, and O3 configurations (Aasi et al. 2015;
+Abbott et al. 2016a), as well as the third-generation Einstein Telescope detector Hild et al. (2011).
+7. USAGE EXAMPLES
+
+In this section, we show a few practical examples of
+COMPAS usage. Although COMPAS has mainly been
+applied to large population studies (see examples in Section 1), it is often useful to visualize the full evolutionary
+path of a given isolated binary, especially when trying
+to reproduce a specific system. We show an example
+in Section 7.1, with the caveat that the approximate
+treatment of rapid population synthesis cannot match
+the precision of detailed stellar codes for individual systems. In Section 7.2 we show a more typical application
+of COMPAS postprocessing tools to predict a distribution over a population, in this case, the chirp mass
+distribution of detectable BBH mergers.
+7.1. Detailed Evolution of a Binary
+We provide an example plot of the COMPAS detailed output in Figure 15, which records the detailed
+evolution of the progenitor to a GW151226-like BBH
+(Abbott et al. 2016b; Stevenson et al. 2017). The
+code to reproduce this binary and the detailed output of any binary is available at https://github.com/
+TeamCOMPAS/COMPAS. can be used to plot the detailed output of any binary. We now describe the evolution of this example binary system. Descriptions of the
+stellar types referenced below can be found in Table 2.
+(i) Figure 15(b) shows that the primary star (red line)
+exceeds its Roche lobe at 5.8 Myr and initiates
+mass transfer as it expands rapidly once it evolves
+off the main sequence. This dynamically stable
+mass transfer episode is nonconservative, as reflected by the concurrent dip in total mass (black
+
+31
+
+curve in Figure 15(a)). This causes the semi-major
+axis to nearly triple, despite the larger initial mass
+of the donor (see Equation 25). Figure 15(a) shows
+that the primary loses 23 M (corresponding to its
+hydrogen envelope), of which 21 M is accreted by
+the secondary. The primary emerges as a stripped
+Helium star (HeMS), as shown in Figure 15(d),
+with total mass equal to its He-core mass (Figure
+15(a)).
+(ii) After another 0.6 Myr, the primary collapses into
+a BH in a core-collapse supernova (CCSN), ejecting 3 M in the process (Figure 15(a)). Its natal
+kick induces an orbital eccentricity of 0.62 (Figure
+15(c)), but due to a fortuitous combination of kick
+magnitude and direction, the orbital semi-major
+axis shrinks by ∼1/3 (Figure 15(b)).
+(iii) The secondary evolves off the main sequence at
+7.8 Myr (Figure 15(d)). It too expands and exceeds its Roche lobe shortly thereafter, triggering
+dynamically unstable mass transfer back onto the
+primary (now a BH, Figure 15(b)). The binary
+enters a CE, characterised by orbital tightening
+by several orders of magnitude (Figure 15(b)) on
+the dynamical timescale of the donor. In the default COMPAS model, CE phases are assumed to
+completely circularise the binary, removing the eccentricity imparted by the first SN (Figure 15(c)).
+(iv) The secondary is stripped by the CE episode and
+continues its evolution as a stripped helium star
+(HeMS) (Figure 15(d)), collapsing into a BH at
+8.3 Myr. The complete fallback in the second supernova results in no natal kick and a consequently
+small post-SN eccentricity (Figure 15(c)).
+
+7.2. Chirp Mass Distribution of LIGO BBHs
+We show an example application of COMPAS population postprocessing tools to predict the chirp mass
+distribution of BBHs detected by gravitational-wave detectors.
+We evolve ten million binaries with COMPAS assuming the default model. Metallicities are sampled loguniformly in the range log(Z) ∈ [0.0001, 0.03]. A Monte
+Carlo integral over a smooth distribution of metallicities
+(see Section 6.4) avoids the metallicity binning artefacts
+encountered when using a discrete metallicity grid, as
+discussed, e.g., by Dominik et al. (2015). We compute
+the merger rate distribution under the assumption of
+a phenomenological, metallicity-specific star-formation
+history (see Section 6.5) detailed in Neijssel et al. (2019).
+
+32
+
+Team COMPAS
+
+System Mass
+Total Mass 1
+He Core 1
+CO Core 1
+
+40
+
+Total Mass 2
+He Core 2
+CO Core 2
+
+20
+0
+
+0
+
+2
+
+4
+
+6
+
+Semi-Major Axis
+Roche Radius 1
+Roche Radius 2
+Stellar Radius 1
+Stellar Radius 2
+
+0
+
+Stellar Type
+
+Eccentricity
+
+0.6
+0.4
+0.2
+2
+
+10−1
+
+8
+d)
+
+0
+
+101
+
+10−3
+
+1.0
+c)
+0.8
+
+0.0
+
+103
+
+b)
+
+Radius / R⊙
+
+Mass / M⊙
+
+a)60
+
+4
+Time / Myr
+
+6
+
+8
+
+BH
+
+2
+
+4
+
+6
+
+8
+
+4
+Time / Myr
+
+6
+
+8
+
+Stellar Type 1
+Stellar Type 2
+
+HeHG
+HeMS
+HG
+MS
+
+0
+
+2
+
+Figure 15. Plots produced using detailed COMPAS output of the evolution of a with initial masses MZAMS,1 = 35.4 M ,
+MZAMS,2 = 29.3 M on a circular orbit with semi-major axis a = 1.02AU at metallicity Z = 0.001. These initial parameters
+produce a GW151226-like BBH with component masses 15.9 and 8.2 M and a coalescence time of 280 Myr (GW151226
++2.3
+had measured component masses of 14.2+8.3
+−3.7 and 7.5−2.3 M , Abbott et al. 2016b). Panels (a)–(d) plot respectively the time
+evolution of the mass parameters (masses of both stars and their He and CO cores, and the total mass of the binary), the radius
+parameters (stellar radii and Roche radii for both stars, and the semi-major axis), eccentricity, and stellar types (as described
+in Table 2). Red, blue, and black lines denote the primary star, secondary star, and the binary, respectively.)
+
+We apply gravitational-wave selection effects (see Section 6.6) for a LIGO detector network operating at O3
+sensitivity and an S/N detection threshold of 8. Figure 16 shows the chirp mass distribution of detectable
+BBHs.
+The script used to make this plot, which makes use
+of COMPAS’s postprocessing classes, can be found at
+https://github.com/TeamCOMPAS/COMPAS.
+8. CONCLUSIONS
+
+We described COMPAS, a public rapid binary population synthesis code. COMPAS v02.21.00 evolves
+∼ 100 binaries per second on a modern laptop computer.
+Given its parallel structure (jobs can be readily split
+across multiple cores with no need for communication
+until results are re-combined), a population of a billion
+binaries can be evolved in 24 hours on a modest 128 core
+cluster. COMPAS is designed to make it easy to specify desired parameterized prescriptions or introduce new
+models for various stages of stellar and binary evolution.
+Together with its postprocessing toolbox, COMPAS is
+
+thus well suited for inference studies on observed stellar
+binary populations (e.g., Barrett et al. 2018).
+The following are some of the planned enhancements
+to COMPAS that we hope to include in future versions:
+• COMPAS currently relies on Hurley et al. (2000)
+models for single stellar evolution. In order to
+evaluate the impact of uncertainties in these models, we plan to incorporate single stellar evolution
+tracks interpolated from other stellar evolution
+codes with METISSE (Method of Interpolation for
+Single Star Evolution, Agrawal et al. 2020).
+• Extend COMPAS to more accurately treat lowmass stars. While the code can evolve binaries
+with low-mass components, a number of features,
+ranging from white dwarf novae to magnetic braking, are either not included or insufficiently tested.
+• Include a proper treatment of stellar mergers, allowing the future evolution of merger products to
+be tracked.
+
+COMPAS code paper
+5
+
+dN
+dtdMc
+
+[yr−1M−1]
+
+4
+
+3
+
+2
+
+1
+
+0
+
+0
+
+10
+
+20
+
+30
+
+40
+
+Mc [M ]
+Figure 16. Distribution of the detection rate of BBH mergers over chirp mass, assuming LIGO O3 sensitivity, an S/N
+threshold of 8, and the default metallicity-specific star formation history model from Neijssel et al. (2019). The gray
+bars show a binned histogram. The thick gray smooth solid
+line is a kernel density estimate of the distribution, and the
+shaded region shows the one and two σ sampling uncertainties estimated through bootstrapping.
+
+• Update and re-activate the treatment of tidal interactions, including tidal synchronization and circularization, to include the latest models (e.g.,
+Vick & Lai 2020).
+COMPAS is a public code, and we encourage the community to use it and, should they wish, to become involved in its development. In particular, any defects
+or enhancement requests can be brought to our attention via the github issue tracker10 or by e-mail, compasuser@googlegroups.com. COMPAS is published in the
+Journal of Open Source Software under: Compas et al.,
+(2021). COMPAS: A rapid binary population synthesis
+suite. Journal of Open Source Software, 6(68), 3838.
+https://doi.org/10.21105/joss.03838
+9. ACKNOWLEDGEMENTS
+
+The authors thank Ben Bradnick, Isobel RomeroShaw and Rajath Sathyaprakash for past contributions to the code, and Simone Bavera, Chris Belczynski, Christopher Berry, Jan Eldridge, Tassos Fragos,
+David Hendriks, Jarrod Hurley, Vicky Kalogera, Morgan MacLeod, Pablo Marchant, Javier Morán Fraile,
+
+Philipp Podsiadlowski, Carl Rodriguez, Dorottya Szécsi
+and Michael Zevin for discussions and advice. Multiple
+authors are supported by the Australian Research Council Centre of Excellence for Gravitational Wave Discovery (OzGrav), through project number CE170100004.
+Multiple authors were funded in part by the National
+Science Foundation under grant No. (NSF grant No.
+2009131), the Netherlands Organization for Scientific
+Research (NWO) as part of the Vidi research program
+BinWaves with project number 639.042.728 and by the
+European Union’s Horizon 2020 research and innovation
+program from the European Research Council (ERC,
+grant agreement No. 715063). F.S.B. is supported in
+part by the Prins Bernard Cultuurfonds studiebeurs.
+I.M. is a recipient of an Australian Research Council Future Fellowship (FT190100574). A.V.G. acknowledges
+funding support by the Danish National Research Foundation (DNRF132).
+This research has made use of NASA’s Astrophysics
+Data System Bibliographic Services11 .
+
+Software: COMPAS is written in C++ and we acknowledge the use of the GNU C++ compiler, GNU scientific library (gsl), the BOOST C++ library, and the
+HDF5 C++ library from http://www.gnu.org/software/
+gsl/ (Galassi et al. 2002). The COMPAS suite makes
+use of Python from the Python Software Foundation.
+Python Language Reference Available at http://www.
+python.org (van Rossum 1995). In addition, the COMPAS suite makes use of the python packages Astropy
+(Astropy Collaboration et al. 2013, 2018), hdf512 (Collette 2013), the IPython13 and Jupyter notebook package14 (Pérez & Granger 2007; Kluyver et al. 2016), Matplotlib15 (Hunter 2007), NumPy16 (Harris et al. 2020),
+SciPy17 (Virtanen et al. 2020), Seaborn (Waskom & the
+seaborn development team 2020). The COMPAS postprocessing code for detection probability currently makes
+use of precomputed results from the LALSuite toolkit
+(LIGO Scientific Collaboration 2018), such as the IMRPhenomPv2 waveform (Hannam et al. 2014; Husa et al.
+2016; Khan et al. 2016).
+Facilities: Some of the results in this manuscript
+were obtained using the following computing facilities:
+11 http://adsabs.harvard.edu/
+12 https://docs.h5py.org/en/stable/
+13 http://ipython.org
+14 https://jupyter.org/
+15 http://www.matplotlib.org
+16 http://www.NumPy.org/
+17 https://www.scipy.org
+
+10 https://github.com/TeamCOMPAS/COMPAS/issues
+
+33
+
+34
+
+Team COMPAS
+
+FAS Research Computing, Harvard University, and the
+OzSTAR national facility at Swinburne University of
+Technology. The OzSTAR program receives funding
+in part from the Astronomy National Collaborative Research Infrastructure Strategy (NCRIS) allocation provided by the Australian Government.
+
+We encourage the community to make results obtained
+with COMPAS publicly available at https://zenodo.
+org/communities/compas/. The scripts to reproduce
+the data and plots for all figures in this manuscript using
+v02.21.00 of COMPAS are provided in the corresponding directories at https://github.com/TeamCOMPAS/
+COMPAS.
+
+DATA AVAILABILITY
+
+REFERENCES
+Aasi, J., Abbott, B. P., Abbott, R., et al. 2015, Classical
+and Quantum Gravity, 32, 074001,
+doi: 10.1088/0264-9381/32/7/074001
+Abbott, B. P., Abbott, R., Abbott, T. D., et al. 2019,
+Physical Review X, 9, 031040,
+doi: 10.1103/PhysRevX.9.031040
+—. 2016a, Living Reviews in Relativity, 19, 1,
+doi: 10.1007/lrr-2016-1
+—. 2016b, Physical Review Letters, 116, 241103,
+doi: 10.1103/PhysRevLett.116.241103
+Abt, H. A. 1983, ARA&A, 21, 343,
+doi: 10.1146/annurev.aa.21.090183.002015
+Abt, H. A., Gomez, A. E., & Levy, S. G. 1990, ApJS, 74,
+551, doi: 10.1086/191508
+Agrawal, P., Hurley, J., Stevenson, S., Szécsi, D., & Flynn,
+C. 2020, MNRAS, 497, 4549,
+doi: 10.1093/mnras/staa2264
+Akmal, A., Pandharipande, V., & Ravenhall, D. 1998,
+Phys. Rev. C, 58, 1804, doi: 10.1103/PhysRevC.58.1804
+Almeida, L., Sana, H., Taylor, W., et al. 2017, A&A, 598,
+A84
+Andrews, J. J., Farr, W. M., Kalogera, V., & Willems, B.
+2015, ApJ, 801, 32, doi: 10.1088/0004-637X/801/1/32
+Andrews, J. J., Zezas, A., & Fragos, T. 2018, Astrophys. J.
+Suppl., 237, 1, doi: 10.3847/1538-4365/aaca30
+Arzoumanian, Z., Chernoff, D. F., & Cordes, J. M. 2002,
+ApJ, 568, 289, doi: 10.1086/338805
+Asplund, M., Grevesse, N., Sauval, A. J., & Scott, P. 2009,
+Annual Review of Astronomy and Astrophysics, 47, 481,
+doi: 10.1146/annurev.astro.46.060407.145222
+Astropy Collaboration, Price-Whelan, A. M., Sipőcz, B. M.,
+et al. 2018, AJ, 156, 123, doi: 10.3847/1538-3881/aabc4f
+Astropy Collaboration, Robitaille, T. P., Tollerud, E. J.,
+et al. 2013, A&A, 558, A33,
+doi: 10.1051/0004-6361/201322068
+Atri, P., et al. 2019, Mon. Not. Roy. Astron. Soc., 489,
+3116, doi: 10.1093/mnras/stz2335
+Babak, S., Taracchini, A., & Buonanno, A. 2017, PhRvD,
+95, 024010, doi: 10.1103/PhysRevD.95.024010
+
+Baibhav, V., Berti, E., Gerosa, D., et al. 2019, PhRvD, 100,
+064060, doi: 10.1103/PhysRevD.100.064060
+Banerjee, S., Belczynski, K., Fryer, C. L., et al. 2020, A&A,
+639, A41, doi: 10.1051/0004-6361/201935332
+Barkat, Z., Rakavy, G., & Sack, N. 1967, Physical Review
+Letters, 18, 379, doi: 10.1103/PhysRevLett.18.379
+Barrett, J. W., Gaebel, S. M., Neijssel, C. J., et al. 2018,
+Mon. Not. Roy. Astron. Soc., 477, 4685,
+doi: 10.1093/mnras/sty908
+Barrett, J. W., Mandel, I., Neijssel, C. J., Stevenson, S., &
+Vigna-Gomez, A. 2017, IAU Symp., 325, 46,
+doi: 10.1017/S1743921317000059
+Bavera, S. S., Fragos, T., Qin, Y., et al. 2020, A&A, 635,
+A97, doi: 10.1051/0004-6361/201936204
+Beasor, E. R., & Davies, B. 2018, MNRAS, 475, 55,
+doi: 10.1093/mnras/stx3174
+Belczynski, K., Bulik, T., Fryer, C. L., et al. 2010, ApJ,
+714, 1217, doi: 10.1088/0004-637X/714/2/1217
+Belczynski, K., Kalogera, V., & Bulik, T. 2002, ApJ, 572,
+407, doi: 10.1086/340304
+Belczynski, K., Kalogera, V., Rasio, F. A., Taam, R. E., &
+Bulik, T. 2007, Astrophys. J., 662, 504,
+doi: 10.1086/513562
+Belczynski, K., Kalogera, V., Rasio, F. A., et al. 2008,
+ApJS, 174, 223, doi: 10.1086/521026
+Belczynski, K., Repetto, S., Holz, D. E., et al. 2016a, ApJ,
+819, 108, doi: 10.3847/0004-637X/819/2/108
+Belczynski, K., Heger, A., Gladysz, W., et al. 2016b, A&A,
+594, A97, doi: 10.1051/0004-6361/201628980
+Belczynski, K., Klencki, J., Fields, C. E., et al. 2020a,
+A&A, 636, A104, doi: 10.1051/0004-6361/201936528
+Belczynski, K., Hirschi, R., Kaiser, E. A., et al. 2020b, ApJ,
+890, 113, doi: 10.3847/1538-4357/ab6d77
+Belczynski, K., Romagnolo, A., Olejak, A., et al. 2021,
+arXiv e-prints, arXiv:2108.10885.
+https://arxiv.org/abs/2108.10885
+Beniamini, P., & Piran, T. 2016, MNRAS, 456, 4089,
+doi: 10.1093/mnras/stv2903
+
+COMPAS code paper
+Berger, E. 2014, ARA&A, 52, 43,
+doi: 10.1146/annurev-astro-081913-035926
+Bhattacharya, D., & van den Heuvel, E. P. J. 1991, PhR,
+203, 1, doi: 10.1016/0370-1573(91)90064-S
+Bisnovatyi-Kogan, G. S. 1993, Astronomical and
+Astrophysical Transactions, 3, 287,
+doi: 10.1080/10556799308230566
+Blaauw, A. 1961, BAN, 15, 265
+Boco, L., Lapi, A., Chruslinska, M., et al. 2021, Astrophys.
+J., 907, 110, doi: 10.3847/1538-4357/abd3a0
+Bondi, H., & Hoyle, F. 1944, MNRAS, 104, 273,
+doi: 10.1093/mnras/104.5.273
+Bowman, D. M. 2020, Frontiers in Astronomy and Space
+Sciences, 7, 70, doi: 10.3389/fspas.2020.578584
+Brandt, N., & Podsiadlowski, P. 1995, MNRAS, 274, 461,
+doi: 10.1093/mnras/274.2.461
+Bray, J. C., & Eldridge, J. J. 2016, MNRAS, 461, 3747,
+doi: 10.1093/mnras/stw1275
+—. 2018, MNRAS, 480, 5657, doi: 10.1093/mnras/sty2230
+Breivik, K., Coughlin, S., Zevin, M., et al. 2020, ApJ, 898,
+71, doi: 10.3847/1538-4357/ab9d85
+Brisken, W. F., Benson, J. M., Goss, W. M., & Thorsett,
+S. E. 2002, ApJ, 571, 906, doi: 10.1086/340098
+Broekgaarden, F. S., & Berger, E. 2021, ApJL, 920, L13,
+doi: 10.3847/2041-8213/ac2832
+Broekgaarden, F. S., Justham, S., de Mink, S. E., et al.
+2019, MNRAS, 490, 5228, doi: 10.1093/mnras/stz2558
+Broekgaarden, F. S., Berger, E., Neijssel, C. J., et al.
+2021a, MNRAS, 508, 5028, doi: 10.1093/mnras/stab2716
+Broekgaarden, F. S., Berger, E., Stevenson, S., et al. 2021b,
+arXiv e-prints, arXiv:2112.05763.
+https://arxiv.org/abs/2112.05763
+Brookshaw, L., & Tavani, M. 1993, ApJ, 410, 719,
+doi: 10.1086/172789
+Brown, G. E. 1995, ApJ, 440, 270, doi: 10.1086/175268
+Burrows, A., & Hayes, J. 1996, Physical Review Letters, 76,
+352
+Burrows, A., & Vartanyan, D. 2021, Nature, 589, 29,
+doi: 10.1038/s41586-020-03059-w
+Castor, J. I., Abbott, D. C., & Klein, R. I. 1975, ApJ, 195,
+157, doi: 10.1086/153315
+Chattopadhyay, D., Stevenson, S., Hurley, J. R., Bailes,
+M., & Broekgaarden, F. 2021, MNRAS, 504, 3682,
+doi: 10.1093/mnras/stab973
+Chattopadhyay, D., Stevenson, S., Hurley, J. R., Rossi,
+L. J., & Flynn, C. 2020, Mon. Not. Roy. Astron. Soc.,
+494, 1587, doi: 10.1093/mnras/staa756
+Chevalier, R. A. 1993, ApJL, 411, L33, doi: 10.1086/186905
+Chini, R., Hoffmeister, V., Nasseri, A., Stahl, O., &
+Zinnecker, H. 2012, MNRAS, 424, 1925
+
+35
+
+Chiosi, C., & Maeder, A. 1986, Annual Review of
+Astronomy and Astrophysics, 24, 329,
+doi: 10.1146/annurev.aa.24.090186.001553
+Chruslinska, M., Nelemans, G., & Belczynski, K. 2019,
+MNRAS, 482, 5012, doi: 10.1093/mnras/sty3087
+Collette, A. 2013, Python and HDF5 (O’Reilly)
+Conroy, C., & Kratter, K. M. 2012, ApJ, 755, 123,
+doi: 10.1088/0004-637X/755/2/123
+de Jager, C., Nieuwenhuijzen, H., & van der Hucht, K. A.
+1988, A&AS, 72, 259
+de Kool, M. 1990, ApJ, 358, 189, doi: 10.1086/168974
+Delgado, A. J., & Thomas, H. C. 1981, A&A, 96, 142
+de Mink, S., Langer, N., Izzard, R., Sana, H., & de Koter,
+A. 2013, The Astrophysical Journal, 764, 166
+Doherty, C. L., Gil-Pons, P., Siess, L., & Lattanzio, J. C.
+2017, PASA, 34, e056, doi: 10.1017/pasa.2017.52
+Dominik, M., Belczynski, K., Fryer, C., et al. 2012, ApJ,
+759, 52, doi: 10.1088/0004-637X/759/1/52
+—. 2013, ApJ, 779, 72, doi: 10.1088/0004-637X/779/1/72
+Dominik, M., Berti, E., O’Shaughnessy, R., et al. 2015,
+ApJ, 806, 263, doi: 10.1088/0004-637X/806/2/263
+Donati, J. F., & Landstreet, J. D. 2009, ARA&A, 47, 333,
+doi: 10.1146/annurev-astro-082708-101833
+Dosopoulou, F., & Kalogera, V. 2016, ApJ, 825, 71,
+doi: 10.3847/0004-637X/825/1/71
+Dray, L. M., & Tout, C. A. 2003, MNRAS, 341, 299,
+doi: 10.1046/j.1365-8711.2003.06420.x
+Duchêne, G., & Kraus, A. 2013, ARA&A, 51, 269,
+doi: 10.1146/annurev-astro-081710-102602
+Dufton, P. L., Langer, N., Dunstall, P. R., et al. 2013,
+A&A, 550, A109, doi: 10.1051/0004-6361/201220273
+Duquennoy, A., & Mayor, M. 1991a, A&A, 500, 337
+—. 1991b, A&A, 248, 485
+Eggleton, P. P. 1983, ApJ, 268, 368, doi: 10.1086/160960
+Eggleton, P. P., Fitchett, M. J., & Tout, C. A. 1989, ApJ,
+347, 998, doi: 10.1086/168190
+El-Badry, K., & Rix, H.-W. 2018, MNRAS, 480, 4884,
+doi: 10.1093/mnras/sty2186
+Eldridge, J. J., Fraser, M., Smartt, S. J., Maund, J. R., &
+Crockett, R. M. 2013, MNRAS, 436, 774,
+doi: 10.1093/mnras/stt1612
+Eldridge, J. J., Guo, N. Y., Rodrigues, N., Stanway, E. R.,
+& Xiao, L. 2019a, PASA, 36, e041,
+doi: 10.1017/pasa.2019.31
+Eldridge, J. J., Stanway, E. R., & Tang, P. N. 2019b,
+MNRAS, 482, 870, doi: 10.1093/mnras/sty2714
+Eldridge, J. J., Stanway, E. R., Xiao, L., et al. 2017, PASA,
+34, e058, doi: 10.1017/pasa.2017.51
+Eldridge, J. J., Xiao, L., Stanway, E. R., Rodrigues, N., &
+Guo, N. Y. 2018, PASA, 35, 49, doi: 10.1017/pasa.2018.47
+
+36
+
+Team COMPAS
+
+Ertl, T., Janka, H. T., Woosley, S. E., Sukhbold, T., &
+Ugliano, M. 2016, Astrophys. J., 818, 124,
+doi: 10.3847/0004-637X/818/2/124
+Farmer, R., Renzo, M., de Mink, S. E., Marchant, P., &
+Justham, S. 2019, ApJ, 887, 53,
+doi: 10.3847/1538-4357/ab518b
+Faucher-Giguere, C.-A., & Kaspi, V. M. 2006, Astrophys.
+J., 643, 332, doi: 10.1086/501516
+Finn, L. S., & Chernoff, D. F. 1993, PhRvD, 47, 2198,
+doi: 10.1103/PhysRevD.47.2198
+Fowler, W. A., & Hoyle, F. 1964, ApJS, 9, 201,
+doi: 10.1086/190103
+Fraley, G. S. 1968, Ap&SS, 2, 96, doi: 10.1007/BF00651498
+Friend, D. B., & Abbott, D. C. 1986, ApJ, 311, 701,
+doi: 10.1086/164809
+Fryer, C. L., Belczynski, K., Wiktorowicz, G., et al. 2012,
+ApJ, 749, 91, doi: 10.1088/0004-637X/749/1/91
+Furlong, M., Bower, R. G., Theuns, T., et al. 2015,
+MNRAS, 450, 4486, doi: 10.1093/mnras/stv852
+Galassi, M., Davies, J., Theiler, J., et al. 2002, GNU
+scientific library (Network Theory Limited)
+Ge, H., Webbink, R. F., Chen, X., & Han, Z. 2015, ApJ,
+812, 40, doi: 10.1088/0004-637X/812/1/40
+Geller, A. M., Hurley, J. R., & Mathieu, R. D. 2013, AJ,
+145, 8, doi: 10.1088/0004-6256/145/1/8
+Gessner, A., & Janka, H.-T. 2018, Astrophys. J., 865, 61,
+doi: 10.3847/1538-4357/aadbae
+Giacobbo, N., & Mapelli, M. 2018, MNRAS, 480, 2011,
+doi: 10.1093/mnras/sty1999
+—. 2020, ApJ, 891, 141, doi: 10.3847/1538-4357/ab7335
+Giacobbo, N., Mapelli, M., & Spera, M. 2018, MNRAS,
+474, 2959, doi: 10.1093/mnras/stx2933
+Götberg, Y., de Mink, S. E., Groh, J. H., Leitherer, C., &
+Norman, C. 2019, A&A, 629, A134,
+doi: 10.1051/0004-6361/201834525
+Götberg, Y., de Mink, S. E., McQuinn, M., et al. 2020,
+A&A, 634, A134, doi: 10.1051/0004-6361/201936669
+Gunn, J. E., & Ostriker, J. P. 1970, ApJ, 160, 979,
+doi: 10.1086/150487
+Hamann, W.-R., & Koesterke, L. 1998, A&A, 335, 1003
+Hannam, M., Schmidt, P., Bohé, A., et al. 2014, PhRvL,
+113, 151101, doi: 10.1103/PhysRevLett.113.151101
+Hansen, B. M. S., & Phinney, E. S. 1997, Mon. Not. Roy.
+Astron. Soc., 291, 569, doi: 10.1093/mnras/291.3.569
+Harris, C. R., Millman, K. J., van der Walt, S. J., et al.
+2020, Nature, 585, 357, doi: 10.1038/s41586-020-2649-2
+Heger, A., Langer, N., & Woosley, S. E. 2000, Astrophys.
+J., 528, 368, doi: 10.1086/308158
+Heggie, D. C. 1975, MNRAS, 173, 729,
+doi: 10.1093/mnras/173.3.729
+
+Hild, S., Abernathy, M., Acernese, F., et al. 2011, Classical
+and Quantum Gravity, 28, 094013,
+doi: 10.1088/0264-9381/28/9/094013
+Hills, J. G. 1983, ApJ, 267, 322, doi: 10.1086/160871
+Hirai, R., & Mandel, I. 2021, PASA, 38, e056,
+doi: 10.1017/pasa.2021.53
+Hjellming, M. S., & Webbink, R. F. 1987, ApJ, 318, 794,
+doi: 10.1086/165412
+Hobbs, G., Lorimer, D. R., Lyne, A. G., & Kramer, M.
+2005, MNRAS, 360, 974,
+doi: 10.1111/j.1365-2966.2005.09087.x
+Höfner, S., & Olofsson, H. 2018, A&A Rv, 26, 1,
+doi: 10.1007/s00159-017-0106-5
+Hogg, D. W. 1999, arXiv e-prints, astro.
+https://arxiv.org/abs/astro-ph/9905116
+Howitt, G., Stevenson, S., Vigna-Gómez, A. r., et al. 2020,
+MNRAS, 492, 3229, doi: 10.1093/mnras/stz3542
+Hoyle, F., & Lyttleton, R. A. 1939, Proceedings of the
+Cambridge Philosophical Society, 35, 405,
+doi: 10.1017/S0305004100021150
+Huang, S. S. 1956, AJ, 61, 49, doi: 10.1086/107290
+Huang, S.-S. 1963, ApJ, 138, 471, doi: 10.1086/147659
+Humphreys, R. M., & Davidson, K. 1994, PASP, 106, 1025,
+doi: 10.1086/133478
+Hunter, J. D. 2007, Computing in Science and Engineering,
+9, 90, doi: 10.1109/MCSE.2007.55
+Hurley, J. R., Pols, O. R., & Tout, C. A. 2000, MNRAS,
+315, 543, doi: 10.1046/j.1365-8711.2000.03426.x
+Hurley, J. R., Tout, C. A., & Pols, O. R. 2002, MNRAS,
+329, 897, doi: 10.1046/j.1365-8711.2002.05038.x
+Husa, S., Khan, S., Hannam, M., et al. 2016, PhRvD, 93,
+044006, doi: 10.1103/PhysRevD.93.044006
+Ivanova, N., Heinke, C. O., Rasio, F. A., Belczynski, K., &
+Fregeau, J. M. 2008, MNRAS, 386, 553,
+doi: 10.1111/j.1365-2966.2008.13064.x
+Ivanova, N., & Taam, R. E. 2004, ApJ, 601, 1058,
+doi: 10.1086/380561
+Ivanova, N., Justham, S., Chen, X., et al. 2013, The
+Astronomy & Astrophysics Review, 21, 59
+Izzard, R. G., Dray, L. M., Karakas, A. I., Lugaro, M., &
+Tout, C. A. 2006, A&A, 460, 565,
+doi: 10.1051/0004-6361:20066129
+Izzard, R. G., Glebbeek, E., Stancliffe, R. J., & Pols, O. R.
+2009, A&A, 508, 1359, doi: 10.1051/0004-6361/200912827
+Izzard, R. G., Tout, C. A., Karakas, A. I., & Pols, O. R.
+2004, MNRAS, 350, 407,
+doi: 10.1111/j.1365-2966.2004.07446.x
+Janka, H. T. 2013, Mon. Not. Roy. Astron. Soc., 434, 1355,
+doi: 10.1093/mnras/stt1106
+Janka, H.-T., & Müller, E. 1994, A&A, 290, 496
+
+COMPAS code paper
+
+37
+
+Johnston, S., Hobbs, G., Vigeland, S., et al. 2005, Mon.
+Not. Roy. Astron. Soc., 364, 1397,
+doi: 10.1111/j.1365-2966.2005.09669.x
+
+Lin, L., Bingham, D., Broekgaarden, F., & Mandel, I. 2021,
+The Annals of Applied Statistics, 15, 1604 ,
+doi: 10.1214/21-AOAS1484
+
+Kalogera, V. 1996, ApJ, 471, 352, doi: 10.1086/177974
+
+Lipunov, V. M., Ozernoy, L. M., Popov, S. B., Postnov,
+K. A., & Prokhorov, M. E. 1996a, ApJ, 466, 234,
+doi: 10.1086/177505
+
+Khan, S., Husa, S., Hannam, M., et al. 2016, PhRvD, 93,
+044007, doi: 10.1103/PhysRevD.93.044007
+Kiel, P., Hurley, J., Bailes, M., & Murray, J. 2008, Mon.
+Not. Roy. Astron. Soc., 388, 393,
+doi: 10.1111/j.1365-2966.2008.13402.x
+
+Lipunov, V. M., Postnov, K. A., & Prokhorov, M. E.
+1996b, A&A, 310, 489
+
+Klencki, J., Moe, M., Gladysz, W., et al. 2018, A&A, 619,
+A77, doi: 10.1051/0004-6361/201833025
+
+Lipunov, V. M., Postnov, K. A., Prokhorov, M. E., &
+Bogomazov, A. I. 2009, Astronomy Reports, 53, 915,
+doi: 10.1134/S1063772909100047
+
+Klencki, J., Nelemans, G., Istrate, A. G., & Chruslinska, M.
+2021, A&A, 645, A54, doi: 10.1051/0004-6361/202038707
+
+Loveridge, A. J., van der Sluys, M. V., & Kalogera, V.
+2011, ApJ, 743, 49, doi: 10.1088/0004-637X/743/1/49
+
+Kluyver, T., Ragan-Kelley, B., Pérez, F., et al. 2016, in
+ELPUB, 87–90
+
+Lyne, A. G., & Lorimer, D. R. 1994, Nature, 369, 127,
+doi: 10.1038/369127a0
+
+Kobulnicky, H. A., Kiminki, D. C., Lundquist, M. J., et al.
+2014, ApJS, 213, 34, doi: 10.1088/0067-0049/213/2/34
+
+Ma, X., Hopkins, P. F., Faucher-Giguère, C.-A., et al.
+2016a, MNRAS, 456, 2140, doi: 10.1093/mnras/stv2659
+
+Kozyreva, A., Blinnikov, S., Langer, N., & Yoon, S. C.
+2014a, A&A, 565, A70,
+doi: 10.1051/0004-6361/201423447
+Kozyreva, A., Yoon, S. C., & Langer, N. 2014b, A&A, 566,
+A146, doi: 10.1051/0004-6361/201423641
+Kozyreva, A., Gilmer, M., Hirschi, R., et al. 2017, MNRAS,
+464, 2854, doi: 10.1093/mnras/stw2562
+Kroupa, P. 2001, MNRAS, 322, 231,
+doi: 10.1046/j.1365-8711.2001.04022.x
+Kruckow, M. U., Tauris, T. M., Langer, N., et al. 2016,
+Astron. Astrophys., 596, A58,
+doi: 10.1051/0004-6361/201629420
+Kudritzki, R. P., Pauldrach, A., Puls, J., & Abbott, D. C.
+1989, A&A, 219, 205
+Kudritzki, R. P., & Reimers, D. 1978, A&A, 70, 227
+Lai, D., Chernoff, D. F., & Cordes, J. M. 2001, Astrophys.
+J., 549, 1111, doi: 10.1086/319455
+
+Ma, X., Hopkins, P. F., Kasen, D., et al. 2016b, MNRAS,
+459, 3614, doi: 10.1093/mnras/stw941
+MacLeod, M., & Ramirez-Ruiz, E. 2015, ApJL, 798, L19,
+doi: 10.1088/2041-8205/798/1/L19
+Madau, P., & Dickinson, M. 2014, ARA&A, 52, 415,
+doi: 10.1146/annurev-astro-081811-125615
+Madau, P., & Fragos, T. 2017, ApJ, 840, 39,
+doi: 10.3847/1538-4357/aa6af9
+Maeder, A. 1987, A&A, 178, 159
+Maeder, A., & Meynet, G. 2000, ARA&A, 38, 143,
+doi: 10.1146/annurev.astro.38.1.143
+Mandel, I. 2016, Mon. Not. Roy. Astron. Soc., 456, 578,
+doi: 10.1093/mnras/stv2733
+Mandel, I., & Broekgaarden, F. S. 2021, arXiv e-prints,
+arXiv:2107.14239. https://arxiv.org/abs/2107.14239
+Mandel, I., & de Mink, S. E. 2016, MNRAS, 458, 2634,
+doi: 10.1093/mnras/stw379
+
+Langer, N. 1992, A&A, 265, L17
+
+Mandel, I., & Farmer, A. 2018, ArXiv e-prints.
+https://arxiv.org/abs/1806.05820
+
+—. 2012, ARA&A, 50, 107,
+doi: 10.1146/annurev-astro-081811-125534
+
+Mandel, I., & Müller, B. 2020, MNRAS, 499, 3214,
+doi: 10.1093/mnras/staa3043
+
+Langer, N., & Norman, C. A. 2006, ApJL, 638, L63,
+doi: 10.1086/500363
+
+Mandel, I., Müller, B., Riley, J., et al. 2021, MNRAS, 500,
+1380, doi: 10.1093/mnras/staa3390
+
+Lattimer, J. M., & Schutz, B. F. 2005, Astrophys. J., 629,
+979, doi: 10.1086/431543
+
+Marchant, P., Langer, N., Podsiadlowski, P., Tauris, T. M.,
+& Moriya, T. J. 2016, Astron. Astrophys., 588, A50,
+doi: 10.1051/0004-6361/201628133
+
+Lau, M. Y. M., Mandel, I., Vigna-Gómez, A., et al. 2020,
+MNRAS, 492, 3061, doi: 10.1093/mnras/staa002
+Leung, S.-C., Nomoto, K., & Blinnikov, S. 2019, ApJ, 887,
+72, doi: 10.3847/1538-4357/ab4fe5
+LIGO Scientific Collaboration. 2018, LIGO Algorithm
+Library - LALSuite, free software (GPL),
+doi: 10.7935/GT1W-FZ16
+
+Marchant, P., Renzo, M., Farmer, R., et al. 2019, ApJ, 882,
+36, doi: 10.3847/1538-4357/ab3426
+Massevitch, A., & Yungelson, L. 1975,
+Mem. Soc. Astron. Italiana, 46, 217
+Mestel, L. 1952, MNRAS, 112, 583,
+doi: 10.1093/mnras/112.6.583
+
+38
+
+Team COMPAS
+
+Miller-Jones, J. C. A., Bahramian, A., Orosz, J. A., et al.
+2021, Science, 371, 1046, doi: 10.1126/science.abb3363
+Miyaji, S., Nomoto, K., Yokoi, K., & Sugimoto, D. 1980,
+PASJ, 32, 303
+Moe, M., & Di Stefano, R. 2017, ApJS, 230, 15,
+doi: 10.3847/1538-4365/aa6fb6
+Mohamed, S., & Podsiadlowski, P. 2007, in Astronomical
+Society of the Pacific Conference Series, Vol. 372, 15th
+European Workshop on White Dwarfs, ed. R. Napiwotzki
+& M. R. Burleigh, 397
+Mokiem, M. R., de Koter, A., Vink, J. S., et al. 2007, A&A,
+473, 603, doi: 10.1051/0004-6361:20077545
+Moriya, T. J., Mazzali, P. A., Tominaga, N., et al. 2017,
+MNRAS, 466, 2085, doi: 10.1093/mnras/stw3225
+Müller, B. 2020, Astrophysics, 6, 3,
+doi: 10.1007/s41115-020-0008-5
+Müller, B., Gay, D. W., Heger, A., Tauris, T. M., & Sim,
+S. A. 2018, MNRAS, 479, 3675,
+doi: 10.1093/mnras/sty1683
+Müller, B., Heger, A., Liptai, D., & Cameron, J. B. 2016,
+MNRAS, 460, 742, doi: 10.1093/mnras/stw1083
+Müller, B., Tauris, T. M., Heger, A., et al. 2019, MNRAS,
+484, 3307, doi: 10.1093/mnras/stz216
+Nagakura, H., Sumiyoshi, K., & Yamada, S. 2019, ApJL,
+880, L28, doi: 10.3847/2041-8213/ab30ca
+Nakamura, K., Takiwaki, T., Kuroda, T., & Kotake, K.
+2015, Publ. Astron. Soc. Jap., 67, 107,
+doi: 10.1093/pasj/psv073
+Neijssel, C. J., Vinciguerra, S., Vigna-Gómez, A., et al.
+2021, ApJ, 908, 118, doi: 10.3847/1538-4357/abde4a
+Neijssel, C. J., Vigna-Gómez, A., Stevenson, S., et al. 2019,
+MNRAS, 490, 3740, doi: 10.1093/mnras/stz2840
+Nelemans, G., Yungelson, L. R., Portegies Zwart, S. F., &
+Verbunt, F. 2001, A&A, 365, 491,
+doi: 10.1051/0004-6361:20000147
+Neo, S., Miyaji, S., Nomoto, K., & Sugimoto, D. 1977,
+PASJ, 29, 249
+Nieuwenhuijzen, H., & de Jager, C. 1990, A&A, 231, 134
+Nomoto, K. 1984, ApJ, 277, 791, doi: 10.1086/161749
+—. 1987, ApJ, 322, 206, doi: 10.1086/165716
+Nomoto, K., & Kondo, Y. 1991, ApJL, 367, L19,
+doi: 10.1086/185922
+Noutsos, A., Kramer, M., Carr, P., & Johnston, S. 2012,
+MNRAS, 423, 2736,
+doi: 10.1111/j.1365-2966.2012.21083.x
+Öpik, E. 1924, Publications of the Tartu Astrofizica
+Observatory, 25, 1
+Oslowski, S., Bulik, T., Gondek-Rosińska, D., & Belczyński,
+K. 2011, MNRAS, 413, 461,
+doi: 10.1111/j.1365-2966.2010.18147.x
+
+Paczynski, B. 1976, in IAU Symposium, Vol. 73, Structure
+and Evolution of Close Binary Systems, ed. P. Eggleton,
+S. Mitton, & J. Whelan, 75
+Paczyński, B., & Sienkiewicz, R. 1972, AcA, 22, 73
+Pan, Y., Buonanno, A., Taracchini, A., et al. 2014, PhRvD,
+89, 084006, doi: 10.1103/PhysRevD.89.084006
+Panter, B., Heavens, A. F., & Jimenez, R. 2004, MNRAS,
+355, 764, doi: 10.1111/j.1365-2966.2004.08355.x
+Pérez, F., & Granger, B. E. 2007, Computing in Science
+and Engineering, 9, 21, doi: 10.1109/MCSE.2007.53
+Peters, P. C. 1964, Physical Review, 136, 1224,
+doi: 10.1103/PhysRev.136.B1224
+Pfahl, E., Rappaport, S., & Podsiadlowski, P. 2002, ApJL,
+571, L37, doi: 10.1086/341197
+Pfahl, E., Rappaport, S., & Podsiadlowski, P. 2002,
+Astrophys. J., 573, 283, doi: 10.1086/340494
+Planck Collaboration, Ade, P. A. R., Aghanim, N., et al.
+2016, A&A, 594, A13, doi: 10.1051/0004-6361/201525830
+Podsiadlowski, P. 2001, Astronomical Society of the Pacific
+Conference Series, Vol. 229, Common-Envelope Evolution
+and Stellar Mergers, ed. P. Podsiadlowski, S. Rappaport,
+A. R. King, F. D’Antona, & L. Burderi, 239
+—. 2010, NewAR, 54, 39, doi: 10.1016/j.newar.2010.09.023
+Podsiadlowski, P., Joss, P. C., & Hsu, J. J. L. 1992, ApJ,
+391, 246, doi: 10.1086/171341
+Podsiadlowski, P., Langer, N., Poelarends, A. J. T., et al.
+2004, ApJ, 612, 1044, doi: 10.1086/421713
+Pols, O. R., Schröder, K.-P., Hurley, J. R., Tout, C. A., &
+Eggleton, P. P. 1998, MNRAS, 298, 525,
+doi: 10.1046/j.1365-8711.1998.01658.x
+Portegies Zwart, S. F., & Verbunt, F. 1996, A&A, 309, 179
+Portegies Zwart, S. F., & Yungelson, L. R. 1998, A&A, 332,
+173. https://arxiv.org/abs/astro-ph/9710347
+Postnov, K. A., & Yungelson, L. R. 2014, Living Reviews in
+Relativity, 17, 3
+Ramı́rez-Agudelo, O. H., Simón-Dı́az, S., Sana, H., et al.
+2013, A&A, 560, A29, doi: 10.1051/0004-6361/201321986
+Remillard, R. A., & McClintock, J. E. 2006, ARA&A, 44,
+49, doi: 10.1146/annurev.astro.44.051905.092532
+Renzo, M., Farmer, R., Justham, S., et al. 2020, A&A, 640,
+A56, doi: 10.1051/0004-6361/202037710
+Renzo, M., Ott, C. D., Shore, S. N., & de Mink, S. E. 2017,
+A&A, 603, A118, doi: 10.1051/0004-6361/201730698
+Repetto, S., Igoshev, A. P., & Nelemans, G. 2017, Mon.
+Not. Roy. Astron. Soc., 467, 298,
+doi: 10.1093/mnras/stx027
+Riley, J., Mandel, I., Marchant, P., et al. 2021, Mon. Not.
+Roy. Astron. Soc., 505, 663, doi: 10.1093/mnras/stab1291
+Rosdahl, J., Katz, H., Blaizot, J., et al. 2018, MNRAS, 479,
+994, doi: 10.1093/mnras/sty1655
+
+COMPAS code paper
+Salpeter, E. E. 1955, ApJ, 121, 161, doi: 10.1086/145971
+Sana, H. 2017, in IAU Symposium, Vol. 329, The Lives and
+Death-Throes of Massive Stars, ed. J. J. Eldridge, J. C.
+Bray, L. A. S. McClelland, & L. Xiao, 110–117,
+doi: 10.1017/S1743921317003209
+
+39
+
+Taam, R. E., & Sandquist, E. L. 2000, ARA&A, 38, 113,
+doi: 10.1146/annurev.astro.38.1.113
+Takahashi, K. 2018, Astrophys. J., 863, 153,
+doi: 10.3847/1538-4357/aad2d2
+
+Sana, H., de Mink, S. E., de Koter, A., et al. 2012, Science,
+337, 444, doi: 10.1126/science.1223344
+
+Talon, S., Zahn, J.-P., Maeder, A., & Meynet, G. 1997,
+Astron. Astrophys., 322, 209.
+https://arxiv.org/abs/astro-ph/9611131
+
+Sana, H., Le Bouquin, J. B., Lacour, S., et al. 2014, ApJS,
+215, 15, doi: 10.1088/0067-0049/215/1/15
+
+Tauris, T. M., Langer, N., Moriya, T. J., et al. 2013, ApJL,
+778, L23, doi: 10.1088/2041-8205/778/2/L23
+
+Sander, A. A. C., Vink, J. S., & Hamann, W. R. 2020,
+MNRAS, 491, 4406, doi: 10.1093/mnras/stz3064
+
+Tauris, T. M., Langer, N., & Podsiadlowski, P. 2015,
+MNRAS, 451, 2123, doi: 10.1093/mnras/stv990
+
+Savaglio, S., Glazebrook, K., Le Borgne, D., et al. 2005,
+ApJ, 635, 260, doi: 10.1086/497331
+
+Tauris, T. M., & Takens, R. J. 1998, A&A, 330, 1047
+
+Schneider, F. R. N., Izzard, R. G., Langer, N., & de Mink,
+S. E. 2015, ApJ, 805, 20,
+doi: 10.1088/0004-637X/805/1/20
+Schneider, F. R. N., Podsiadlowski, P., & Müller, B. 2021,
+A&A, 645, A5, doi: 10.1051/0004-6361/202039219
+Schrøder, S. L., MacLeod, M., Loeb, A., Vigna-Gómez, A.,
+& Mandel, I. 2020, ApJ, 892, 13,
+doi: 10.3847/1538-4357/ab7014
+Schrøder, S. L., MacLeod, M., Ramirez-Ruiz, E., et al.
+2021, arXiv e-prints, arXiv:2107.09675.
+https://arxiv.org/abs/2107.09675
+Schwab, J., Podsiadlowski, P., & Rappaport, S. 2010, ApJ,
+719, 722, doi: 10.1088/0004-637X/719/1/722
+Smith, N. 2014, ARA&A, 52, 487,
+doi: 10.1146/annurev-astro-081913-040025
+Soberman, G. E., Phinney, E. S., & van den Heuvel,
+E. P. J. 1997, A&A, 327, 620.
+https://arxiv.org/abs/astro-ph/9703016
+Socrates, A., Blaes, O., Hungerford, A., & Fryer, C. L.
+2005, ApJ, 632, 531, doi: 10.1086/431786
+Spera, M., & Mapelli, M. 2017, MNRAS, 470, 4739,
+doi: 10.1093/mnras/stx1576
+Stevenson, S., Sampson, M., Powell, J., et al. 2019, ApJ,
+882, 121, doi: 10.3847/1538-4357/ab3981
+Stevenson, S., Vigna-Gómez, A., Mandel, I., et al. 2017,
+Nature Communications, 8, 14906,
+doi: 10.1038/ncomms14906
+Strolger, L.-G., Riess, A. G., Dahlen, T., et al. 2004, ApJ,
+613, 200, doi: 10.1086/422901
+Sukhbold, T., & Adams, S. 2020, MNRAS, 492, 2578,
+doi: 10.1093/mnras/staa059
+Sukhbold, T., & Woosley, S. 2014, Astrophys. J., 783, 10,
+doi: 10.1088/0004-637X/783/1/10
+Suwa, Y., Yoshida, T., Shibata, M., Umeda, H., &
+Takahashi, K. 2015, MNRAS, 454, 3073,
+doi: 10.1093/mnras/stv2195
+
+Tauris, T. M., & van den Heuvel, E. P. J. 2006, Formation
+and evolution of compact stellar X-ray sources, Vol. 39,
+623–665
+Tauris, T. M., Kramer, M., Freire, P. C. C., et al. 2017,
+ApJ, 846, 170, doi: 10.3847/1538-4357/aa7e89
+Taylor, S. R., & Gerosa, D. 2018, PhRvD, 98, 083017,
+doi: 10.1103/PhysRevD.98.083017
+Timmes, F. X., Woosley, S. E., & Weaver, T. A. 1996, ApJ,
+457, 834, doi: 10.1086/176778
+Toonen, S., Nelemans, G., & Portegies Zwart, S. 2012,
+A&A, 546, A70, doi: 10.1051/0004-6361/201218966
+Tout, C. A., Aarseth, S. J., Pols, O. R., & Eggleton, P. P.
+1997, MNRAS, 291, 732, doi: 10.1093/mnras/291.4.732
+Tout, C. A., Pols, O. R., Eggleton, P. P., & Han, Z. 1996,
+MNRAS, 281, 257, doi: 10.1093/mnras/281.1.257
+Tutukov, A., & Yungelson, L. 1996, MNRAS, 280, 1035,
+doi: 10.1093/mnras/280.4.1035
+Ugliano, M., Janka, H.-T., Marek, A., & Arcones, A. 2012,
+ApJ, 757, 69, doi: 10.1088/0004-637X/757/1/69
+van Rossum, G. 1995, Python tutorial, Tech. Rep.
+CS-R9526, Centrum voor Wiskunde en Informatica
+(CWI), Amsterdam
+van Son, L., de Mink, S., Broekgaarden, F., et al. 2020,
+Astrophys. J., 897, 100, doi: 10.3847/1538-4357/ab9809
+van Son, L. A. C., de Mink, S. E., Callister, T., et al. 2021,
+arXiv e-prints. https://arxiv.org/abs/2110.01634
+van den Heuvel, E. P. J. 1976, in IAU Symposium, Vol. 73,
+Structure and Evolution of Close Binary Systems, ed.
+P. Eggleton, S. Mitton, & J. Whelan, 35
+Vassiliadis, E., & Wood, P. R. 1993, ApJ, 413, 641,
+doi: 10.1086/173033
+Verbunt, F., Igoshev, A., & Cator, E. 2017, A&A, 608, A57,
+doi: 10.1051/0004-6361/201731518
+Vick, M., & Lai, D. 2020, MNRAS, 496, 3767,
+doi: 10.1093/mnras/staa1784
+Vigna-Gómez, A., Toonen, S., Ramirez-Ruiz, E., et al.
+2021, ApJL, 907, L19, doi: 10.3847/2041-8213/abd5b7
+
+40
+
+Team COMPAS
+
+Vigna-Gómez, A., Neijssel, C. J., Stevenson, S., et al. 2018,
+MNRAS, 481, 4009, doi: 10.1093/mnras/sty2463
+Vigna-Gómez, A., MacLeod, M., Neijssel, C. J., et al. 2020,
+PASA, 37, e038, doi: 10.1017/pasa.2020.31
+Vinciguerra, S., Neijssel, C. J., Vigna-Gómez, A., et al.
+2020, MNRAS, 498, 4705, doi: 10.1093/mnras/staa2177
+Vink, J. S., & de Koter, A. 2005, A&A, 442, 587,
+doi: 10.1051/0004-6361:20052862
+Vink, J. S., de Koter, A., & Lamers, H. J. G. L. M. 2000,
+A&A, 362, 295
+—. 2001, A&A, 369, 574, doi: 10.1051/0004-6361:20010127
+Virtanen, P., Gommers, R., Oliphant, T. E., et al. 2020,
+Nature Methods, 17, 261, doi: 10.1038/s41592-019-0686-2
+Waskom, M., & the seaborn development team. 2020,
+mwaskom/seaborn, Tech. rep.,
+doi: 10.5281/zenodo.592845
+Webbink, R. F. 1984, ApJ, 277, 355, doi: 10.1086/161701
+Willcox, R., Mandel, I., Thrane, E., et al. 2021, ApJL, 920,
+L37, doi: 10.3847/2041-8213/ac2cc8
+Wongwathanarat, A., Janka, H. T., & Mueller, E. 2013,
+Astron. Astrophys., 552, A126,
+doi: 10.1051/0004-6361/201220636
+Woods, T. E., Ivanova, N., van der Sluys, M. V., &
+Chaichenets, S. 2012, ApJ, 744, 12,
+doi: 10.1088/0004-637X/744/1/12
+Woosley, S., & Heger, A. 2007, Physics Reports, 442, 269
+Woosley, S. E. 1987, in IAU Symposium, Vol. 125, The
+Origin and Evolution of Neutron Stars, ed. D. J. Helfand
+& J. H. Huang, 255
+
+Woosley, S. E. 2017, ApJ, 836, 244,
+doi: 10.3847/1538-4357/836/2/244
+—. 2019, ApJ, 878, 49, doi: 10.3847/1538-4357/ab1b41
+Woosley, S. E., & Bloom, J. S. 2006, ARA&A, 44, 507,
+doi: 10.1146/annurev.astro.43.072103.150558
+Woosley, S. E., Heger, A., & Weaver, T. A. 2002, Reviews
+of Modern Physics, 74, 1015,
+doi: 10.1103/RevModPhys.74.1015
+Xu, X.-J., & Li, X.-D. 2010a, ApJ, 716, 114,
+doi: 10.1088/0004-637X/716/1/114
+—. 2010b, ApJ, 722, 1985,
+doi: 10.1088/0004-637X/722/2/1985
+Yao, J., Zhu, W., Manchester, R. N., et al. 2021, Nature
+Astronomy, 5, 788, doi: 10.1038/s41550-021-01360-w
+Ye, C. S., Kremer, K., Chatterjee, S., Rodriguez, C. L., &
+Rasio, F. A. 2019, Astrophys. J., 877, 122,
+doi: 10.3847/1538-4357/ab1b21
+Yoon, S.-C., Chun, W., Tolstov, A., Blinnikov, S., &
+Dessart, L. 2019, ApJ, 872, 174,
+doi: 10.3847/1538-4357/ab0020
+Yoon, S.-C., Dessart, L., & Clocchiatti, A. 2017, ApJ, 840,
+10, doi: 10.3847/1538-4357/aa6afe
+Yoshida, T., Umeda, H., Maeda, K., & Ishii, T. 2016,
+MNRAS, 457, 351, doi: 10.1093/mnras/stv3002
+Zapartas, E., de Mink, S. E., Justham, S., et al. 2021,
+A&A, 645, A6, doi: 10.1051/0004-6361/202037744
+—. 2019, A&A, 631, A5, doi: 10.1051/0004-6361/201935854
+
+

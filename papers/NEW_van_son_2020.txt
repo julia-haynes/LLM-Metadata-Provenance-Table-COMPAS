@@ -1,0 +1,2800 @@
+Draft version June 2, 2020
+Typeset using LATEX twocolumn style in AASTeX63
+
+Polluting the pair-instability mass gap for binary black holes
+through super-Eddington accretion in isolated binaries
+L.A.C. van Son,1, 2 S. E. de Mink,1, 2 F. S. Broekgaarden,1 M. Renzo,3 S. Justham,4, 5 E. Laplace,5
+J. Morán-Fraile,6 D. D. Hendriks,7 and R. Farmer5, 1
+1 Center for Astrophysics — Harvard & Smithsonian, 60 Garden Street, Cambridge, MA 02138, USA
+2 Anton Pannekoek Institute for Astronomy, University of Amsterdam, Science Park 904, 1098XH Amsterdam, The Netherlands
+
+arXiv:2004.05187v2 [astro-ph.HE] 1 Jun 2020
+
+3 Center for Computational Astrophysics, Flatiron Institute, New York, NY 10010, USA
+4 School of Astronomy and Space Science, University of the Chinese Academy of Sciences, Beijing 100012, China
+5 Anton Pannekoek Institute for Astronomy and GRAPPA, University of Amsterdam, NL-1090 GE Amsterdam, The Netherlands
+6 Heidelberger Institut fr Theoretische Studien, Schloss-Wolfsbrunnenweg 35, 69118 Heidelberg, Germany
+7 Department of Physics, University of Surrey, Guildford, GU2 7XH Surrey, UK
+
+(Received June 2, 2020)
+
+ABSTRACT
+The theory for single stellar evolution predicts a gap in the mass distribution of black holes (BHs)
+between approximately 45–130 M , the so-called “pair-instability mass gap”. We examine whether
+BHs can pollute the gap after accreting from a stellar companion. To this end, we simulate the
+evolution of isolated binaries using a population synthesis code, where we allow for super-Eddington
+accretion. Under our most extreme assumptions, we find that at most about 2% of all merging binary
+BH systems contains a BH with a mass in the pair-instability mass gap, and we find that less than
+0.5% of the merging systems has a total mass larger than 90 M . We find no merging binary BH
+systems with a total mass exceeding 100 M . We compare our results to predictions from several
+dynamical pathways to pair-instability mass gap events and discuss the distinguishable features. We
+conclude that the classical isolated binary formation scenario will not significantly contribute to the
+pollution of the pair-instability mass gap. The robustness of the predicted mass gap for the isolated
+binary channel is promising for the prospective of placing constraints on (i) the relative contribution
+of different formation channels, (ii) the physics of the progenitors including nuclear reaction rates, and
+(iii), tentatively, the Hubble parameter.
+Keywords: Binary black holes, Accretion, Eddington limit, Pair-instability, Gravitational wave sources
+
+1. INTRODUCTION
+
+Gravitational-wave detections are starting to reveal
+the properties of the population of merging binary black
+holes (BBHs). From the first gravitational-wave detections we learned that heavy black holes with masses
+& 30 M exist (Abbott et al. 2016a; Abbott et al.
+2019a,b), which is well above the typical mass for BHs
+found in X-ray binaries in our galaxy (e.g. Özel et al.
+2010; Farr et al. 2011).
+These gravitational-wave detections yield unique information about the physics that governed the lives and
+deaths of their massive stellar progenitors. The first ten
+gravitational-wave detections already support a dearth
+of BBH mergers with component masses greater than
+45 M (Fishbach & Holz 2017; Abbott et al. 2019b). It
+
+has been suggested that this dearth can be attributed to
+so-called Pair-instability supernova (or PISN, Belczynski et al. 2016b; Woosley 2017; Stevenson et al. 2019).
+The theory of stellar evolution predicts that massive
+stars can end their lives as BHs with masses up to
+about MBH,max ≈ 45 M (e.g. Heger & Woosley 2002;
+Woosley et al. 2002; Woosley 2017; Farmer et al. 2019;
+Renzo et al. 2020). Progenitor stars with initial masses
+between 100 M and 140 M which potentially produce
+BHs with masses above MBH,max ≈ 45 M , become unstable due to the production of electron-positron pairs
+in their cores. This leads to the explosive ignition of
+oxygen, resulting in complete disintegration of the star
+in a pair-instability supernova (PISN, Fowler & Hoyle
+1964; Rakavy & Shaviv 1967; Barkat et al. 1967; Fra-
+
+2
+
+van Son et al.
+
+ley 1968). Photodisintegration prevents the explosion
+of the most massive progenitors, with final helium cores
+of MHe & 130 M , thus allowing for BH formation with
+masses in excess of 130 M (e.g. Bond et al. 1982; Heger
+& Woosley 2002). Stellar theory thus predicts a gap in
+the black hole mass function between approximately 45
+and 130 M , referred to as the pair-instability supernova
+mass gap (or PISN mass gap).
+Farmer et al. (2019) and Renzo et al. (2020) show that
+the predictions for the existence and the location of the
+pair-instability mass gap are remarkably robust. However, uncertainties in the nuclear reaction rates have a
+significant effect on MBH,max , though they merely shift
+the location of the gap, and do not affect its existence.
+The fact that a robust and quantitative prediction exists for the final remnant masses of very massive stars
+is remarkable given how little is known about the lives
+of the most massive stars.
+
+for the final masses of the merging BBH population.
+
+This prediction of a gap leads to many applications
+of MBH,max . For example, Farr et al. (2019) (following Schutz 1986; Holz & Hughes 2005) argue that if
+the BH mass distribution is truly shaped by PISN,
+MBH,max could be used as a standard siren for cosmology. Farmer et al. (2020, in prep.) show that the
+location of MBH,max can be used to constrain stellar
+physics, in particular the uncertain nuclear reaction rate
+of 12 C(α, γ)16 O. It has also been suggested that the existence of a mass gap can help to determine the relative
+contribution of different formation channels to the overall population of BBHs (Sedda et al. 2020; Baibhav et al.
+2020).
+
+2.1. Forming PISN mass gap events through the
+classic isolated binary channel
+
+1.1. The scope of this work
+In this work, we consider the possibility of forming
+BBH mergers where at least one of the components has
+a mass within the PISN mass gap, which we will refer to
+as “PISN mass gap events” hereafter, via the classic isolated binary channel. The classical isolated binary evolution channel for BBH mergers considers the evolution
+of stars that are born as members of an isolated binary
+system and experience a common-envelope (CE) phase
+(Postnov & Yungelson 2014; Belczynski et al. 2016a; Eldridge & Maund 2016; Lipunov et al. 2017).
+We compare our results to predictions from dynamical
+pathways to PISN mass gap events. For this purpose,
+we adapt an existing population synthesis code, and
+we allow BHs to accrete mass from a stellar companion
+assuming the Eddington accretion rate can be exceeded
+during either a stable mass-transfer phase or during a
+common envelope event. We investigate the implications
+
+This paper is structured as follows: we give an
+overview of different pathways to PISN mass gap events
+in Section 2. We describe our simulations in Section
+3. The resulting predictions for populations of BHs are
+presented in Section 4. We compare our results to predictions from dynamical pathways to PISN mass gap
+events and discuss the distinguishable features in Section 5. We then discuss the robustness of our results in
+Section 6, and provide a summary of our conclusions in
+Section 7.
+2. FORMING PISN MASS GAP EVENTS
+The formation of BBH mergers can be broadly divided
+into two channels, those originating from isolated binary
+evolution, and those that require dynamical interaction.
+We provide a brief overview of how each channel may
+contribute to the pollution of the PISN mass gap.
+
+In this paper we investigate whether the classical isolated binary evolution channel can contribute to the rate
+of PISN mass gap events. The first born BH in the classical isolated binary evolution channel may accrete mass
+from its companion star as this star evolves and swells
+to fill its Roche lobe.
+In most population synthesis simulations of compact
+object mergers, accretion onto the compact object is assumed to be limited by the Eddington rate (e.g. Belczynski et al. 2002; Vigna-Gómez et al. 2018; Neijssel
+et al. 2019; Spera et al. 2019). Though exceptions exist, see for example Belczynski et al. (2008) and Mondal
+et al. (2019).
+The Eddington rate is defined as the threshold where
+radiation pressure from the accretion luminosity halts
+the inflow of material in the case of spherical accretion.
+Assuming pure hydrogen accretion;
+
+ 
+
+4π G mp M
+M
+M
+ṀEdd =
+≈ 10−8
+, (1)
+ c σT
+M
+yr
+with G the gravitational constant, mp the proton mass,
+M the mass of the accreting object, c the speed of light,
+and σT the Thompson scattering cross section (Eddington 1926). We have assumed an accretion efficiency of
+ = 0.1 (Frank et al. 2002).
+When considering BHs that can accrete from a companion star, the duration of the mass transfer phase
+is typically short (at most of the order of the thermal
+timescale of the donor star in the case of stable mass
+transfer and of the order of the dynamical timescale
+during a common envelope inspiral) and never longer
+
+PISN mass gap events from isolated binaries
+than about 10 Myr, which is longer than the typical
+lifetime of massive stars. For these short durations the
+Eddington limit poses a very severe restriction on the
+amount of mass that a BH can accrete, as Eq. 1 shows.
+For example, a typical BH of MBH ≈ 10 M cannot
+accrete more than a solar mass in 10 Myr if its accretion
+is limited at the Eddington rate.
+Whether or not the Eddington rate poses an absolute limit to the rate at which BHs can accrete is matter of debate. First of all, it is based on several idealized assumptions, such as spherical accretion, that are
+typically not valid. If a BH accretes through a ‘slim’
+accretion disk, the photons may escape without preventing accretion onto the BH (e.g. Abramowicz et al.
+1988; Jiang et al. 2014; Madau et al. 2014; Volonteri
+et al. 2015). At high accretion rates, larger than approximately 10 × Ṁedd , photons may be trapped, and
+advected into the black hole (e.g. Popham et al. 1999;
+Wyithe & Loeb 2012; Sadowski & Narayan 2015; Inayoshi et al. 2016). It is uncertain how accretion proceeds in such cases, but Inayoshi et al. (2016) argue that
+mass accretion in excess of 5000 times the Eddington accretion rate could occur, and can proceed stably.
+Secondly, super-Eddington accretion has been suggested as the most natural explanation for a wide range
+of astronomical phenomena. For example in the context
+of the rapid growth of super-massive BHs in galactic
+nuclei (e.g. Volonteri & Rees 2005; Pezzulli et al. 2016;
+Johnson & Haardt 2016, and references therein). But
+also in the case of ultra luminous X-ray pulsars (Bachetti
+et al. 2014; Israel et al. 2017) and the galactic source SS
+433 (see Fabrika 2004, for a review).
+The uncertainties related to the applicability of the
+Eddington rate pose an uncertainty on the predictions
+for binary black hole populations and therefore on the
+robustness of the prediction of the existence of the PISN
+mass gap. In this work we consider whether and how
+the possibility of super-Eddington accretion can lead to
+PISN mass gap events.
+2.2. Pathways to pollute the PISN mass gap requiring
+dynamical interaction
+Various other pathways have been proposed to create
+PISN mass gap events. Here, we provide a brief overview
+of these potential alternative pathways.
+2.2.1. Consecutive mergers of BHs
+The pathway that has been most extensively studied
+so far with regards to PISN mass gap events involves
+multiple consecutive mergers of BHs. These may occur
+in very dense environments where the escape velocities
+
+3
+
+are large, and BBH can form dynamically. High escape velocities are required to retain the BBH-merger
+product within the formation environment, thereby enabling a consecutive BH merger (Schnittman & Buonanno 2007; Baker et al. 2007). Gerosa & Berti (2019)
+estimate that an escape speed of about & 50 km s−1 is
+required to produce PISN mass gap events through consecutive BH mergers. Promising sites are nuclear star
+clusters (Antonini et al. 2019) and the disks of active
+galactic nuclei (McKernan et al. 2014, 2018; Secunda
+et al. 2019; Secunda et al. 2020), where BHs may assemble in migration traps (Bellovary et al. 2016; Yang
+et al. 2019; McKernan et al. 2020b).
+Globular clusters have also been proposed as sites to
+create PISN mass gap events through consecutive mergers (Rodriguez et al. 2019). However, their contribution
+may be low due to their low escape velocities. Globular
+clusters can only contribute significantly to the production of PISN mass gap events if the BHs are born with
+low spin (Rodriguez et al. 2019), which minimizes the
+BBH merger-recoil.
+2.2.2. Fallback of a H-rich envelope
+An alternative idea involves a star with a final He core
+mass just below the limit for pulsational pair-instability,
+i.e. with MHe . 35 M , and an overmassive hydrogenrich envelope (Woosley et al. 2007; Spera et al. 2019).
+If such a star would (i) retain a hydrogen envelope that
+is substantially more massive than 10 M until its final
+stages, and (ii) the envelope of this star would fall onto
+the BH, then the total mass of the resulting BH could
+exceed the PISN limit.
+Woosley et al. (2007) find BH masses of up to 65 M
+in their models for single stars, when assuming strongly
+reduced stellar winds and complete fallback of the hydrogen envelope. Di Carlo et al. (2019b) propose to produce hydrogen-rich progenitors with core masses near
+the PISN limit through the merger of two stars in a
+binary system (see also Di Carlo et al. 2019a; VignaGómez et al. 2019; Mapelli et al. 2020). They argue
+that such stellar mergers may be prevalent in globular
+clusters as the result of dynamical encounters.
+To be detectable as a PISN mass gap event, these BHs
+need to pair up with another BH, which may be possible inside young stellar clusters (Di Carlo et al. 2019a,b).
+The predictions for this channel are considered to be uncertain because these stellar mergers are not well understood (Justham et al. 2014; Menon & Heger 2017) and
+since it is unclear whether the hydrogen envelope will
+fall back onto the BH (e.g. Nadezhin 1980; Lovegrove &
+Woosley 2013; Wu et al. 2018).
+2.2.3. Accretion from the interstellar medium
+
+4
+
+van Son et al.
+
+Roupas & Kazanas (2019) explore the limits of BHs
+fed by the interstellar medium (ISM), based on earlier work from Leigh et al. (2013). They assume that
+BHs in young stellar clusters accrete all the gas from
+their formation environment. These BHs subsequently
+form BBH pairs in the cluster through dynamical interactions.Their simulations suggest that it is possible
+to populate the PISN mass gap through this pathway,
+although their results depend heavily on the assumed
+cluster mass and gas density, as well as the gas depletion time-scale.
+2.2.4. Primordial BHs
+So far we have implicitly assumed the BHs to be of
+stellar origin. BHs have been hypothesized to be of primordial nature, in which case they are formed as a result of fluctuations in the early Universe (Zel’dovich &
+Novikov 1966; Hawking 1971). In principle, such BHs
+could populate the PISN mass gap, since there is no
+reason to expect a sudden absence or reduction of BHs
+in this mass range (Carr 1975; Bird et al. 2016; Sasaki
+et al. 2016; Raidal et al. 2017; Dvorkin et al. 2018). Primordial BHs also have to dynamically find a companion
+BH to form a PISN mass gap event.
+3. METHOD
+
+For this study we use the rapid population synthesis
+code that is part of the COMPAS suite. A full description
+of the code can be found in Stevenson et al. (2017);
+Vigna-Gómez et al. (2018); Broekgaarden et al. (2019).
+Here we give a brief summary with an emphasis on the
+physics relevant for this study.
+3.1. Initial parameters
+We assume the masses of the initially more massive
+stellar components (the primary M1 ) are distributed following a Kroupa (2001) initial mass function and draw
+masses in the range 20 - 150 M . The binary systems
+are assumed to follow a uniform distribution of mass ratios (0.001 . q = M2 /M1 < 1.0) where the lower limit
+is set by the minimum mass of the initially less massive
+component (the secondary component, M2 ≥ 0.1 M ).
+The initial binary separations are furthermore assumed
+to follow a distribution of orbital separations that is flat
+in the logarithm (Öpik 1924) in the range 0.01 − 1000
+AU. Binary systems that fill their Roche lobe at zero age
+main sequence are discarded. All simulations assume a
+metallicity of Z = 0.001, chosen to represent a typical
+low metallicity environment in which heavy black holes
+can form (Belczynski et al. 2010a; Stevenson et al. 2017)
+and to be consistent with Farmer et al. (2019). In Section 4.4, we discuss why adopting a single metallicity is
+sufficient for the purposes of this study.
+
+To optimize computing time, we use the adaptive sampling algorithm STROOPWAFEL (Broekgaarden et al. 2019)
+to draw the initial parameters of the binaries. This algorithm consists of an exploration phase to draw massive
+binaries directly from their initial birth distributions.
+After this, systems are drawn from reweighted distributions to optimize for the number of systems that end as a
+BBH that will merge within a Hubble time. In total we
+evolve 106 binaries for each considered model variation.
+This results in approximately 1.4 × 105 BBH systems in
+each model.
+3.2. Evolution and mass loss
+We model the evolution of individual binary systems
+with the algorithms by Hurley et al. (2000, 2002) based
+on evolutionary models by Pols et al. (1995). We account for stellar wind mass loss following Vink et al.
+(2000, 2001), Hamann & Koesterke (1998) and Vink
+& de Koter (2005), and we assume enhanced mass loss
+rates in the regime of luminous blue variables following
+Belczynski et al. (2010b).
+3.2.1. Compact objects and supernova kicks
+The remnant mass is modeled as a function of the
+estimated carbon-oxygen (CO) core mass at the moment
+of core collapse ( MCO ). For MCO < 30 M we use
+the delayed model from Fryer et al. (2012) to determine
+the remnant masses. For MCO > 30 M we use the
+remnant mass prescription from Farmer et al. (2019)
+to account for the effects of pair pulsations and pairinstability supernovae (see Appendix C for a comparison
+of these two prescriptions). With this implementation
+the lower edge of the pair-instability mass gap is located
+at MBH,max ≈ 43.5 M , for a metallicity Z = 0.001.
+To model supernova kicks, we draw kick velocities with
+random isotropic orientations and kick magnitudes from
+a Maxwellian distribution (Hobbs et al. 2005). BH kicks
+are subsequently reduced. For BHs resulting from progenitors with MCO < 30 M at the moment of corecollapse, BH kicks are reduced by the amount of mass
+falling back onto them during the explosion mechanism,
+following Fryer et al. (2012). Since the most massive
+BHs are thought to form without a supernova explosion,
+we assume no supernova kick occurs for BHs resulting
+from progenitors with MCO > 30 M .
+3.2.2. Mass transfer
+We account for mass transfer when a star overflows
+its Roche lobe, where the Roche-lobe radius is approximated following Eggleton (1983). To determine whether
+Roche-lobe overflow is stable we use an estimate for the
+response of the radius of the donor star and its Roche
+
+PISN mass gap events from isolated binaries
+lobe as a result of mass transfer (see e.g. Vigna-Gómez
+et al. 2018, and references therein).
+During stable mass transfer onto a stellar companion
+we assume that the accretion rate is limited to at most
+ten times the thermal rate of the accreting star (Neo
+et al. 1977; Hurley et al. 2002). Material lost from the
+system is assumed to carry the specific orbital angular
+momentum of the accreting star (e.g. Soberman et al.
+1997; van den Heuvel et al. 2017).
+Unstable mass transfer is assumed to result in CE evolution (Paczyński 1970; Ivanova et al. 2013). Successful
+CE ejection is allowed for donor stars that are in the
+Hertzsprung gap (the optimistic approach to CE, following Belczynski et al. 2020).This is consistent with
+Stevenson et al. (2019). We assume this shrinks the orbit following the α, λ formalism as proposed by Webbink
+(1984) and de Kool (1990), using the fits provided by Xu
+& Li (2010a,b) that account for the internal energy of
+the envelope. If the donor star overflows its Roche lobe
+directly following a CE event, we assume the binary was
+not able to eject its envelope and presume the system
+ends as a stellar merger.
+3.3. Treatment of black hole accretion in this study
+Here we consider different modes where we allow for
+the possibility of super-Eddington accretion onto BHs,
+as we describe below. We adopt the assumption of Eddington limited accretion in what we will refer to as our
+fiducial simulation (model 0). Specifically, we limit the
+accretion onto compact objects to the Eddington rate as
+given in Eq. 1.
+In our first model variation (model 1) we allow for
+super-Eddington accretion during phases of stable mass
+transfer when the accretor is a BH. We consider the
+extreme limit where the black hole accretes all the mass
+provided by the donor star.
+In our second model variation (model 2), we consider the accretion of mass onto BHs during the inspiral phase of a CE event. Following the arguments
+first presented in Chevalier (1993); Brown (1995); Bethe
+& Brown (1998) and later MacLeod & Ramirez-Ruiz
+(2015), the mass accreted by the BH, ∆Macc , can be
+estimated as Hoyle-Littleton accretion rate ṀHL times
+the duration of the inspiral time, ∆tinsp . This gives
+
+∆Macc ≈ ṀHL ∆tinsp ≈
+
+MBH,birth · Mcomp
+,
+2 (MBH,birth + Mcomp )
+
+(2)
+
+where MBH,birth is the birth mass of the BH and Mcomp
+is the mass of the companion. Equation 2 approximates
+the inspiral time as the ratio of the orbital energy to
+the drag luminosity (i.e. Iben & Livio 1993). Unlike
+
+5
+
+MacLeod & Ramirez-Ruiz (2015), we do not restrict the
+accreted mass due to microphysics or the envelope structure, implying that our estimates for the final BH masses
+can be taken as extreme upper limits.
+Lastly, we also run a combined model (model 3) which
+allows for super-Eddington accretion onto BHs during
+both stable mass-transfer phases and CE phases.
+The assumptions adopted in our model variations are
+extreme by design. This allows us to place an upper
+limit on the masses that stellar-mass BHs can reach.
+These assumptions are intended to provide upper limits
+to the contribution of the isolated binary evolutionary
+channel to PISN gap merger events.
+We refer to our first model variation as model 1: ‘stable accretion model’, and to our second model variation
+as model 2: ‘CE accretion model’. The combined model
+variation is referred to as model 3: ‘combined model’.
+Throughout this paper we will use ‘PISN mass gap
+systems’ as a shorthand for BBH systems with at least
+one component with MBH > MBH,max . If a PISN gap
+system will merge within a Hubble time due to gravitational waves, we refer to it as a ‘PISN mass gap event’.
+We adopt MBH,max = 45 M for the lower edge of
+the PISN mass gap. This value is slightly higher than
+the MBH,max resulting from the simulations by Farmer
+et al. (2019) at Z = 0.001, whose prescriptions we adopt
+to model the final remnant masses. MBH,max = 45 M
+is thus chosen to represent a conservative limit for the
+lower edge of the PISN mass gap. This value is also
+consistent with the limit used by Fishbach et al. (2020).
+4. RESULTS
+
+We describe our results for the individual component
+masses of BBH systems in Section 4.1, and the effect
+on the mass ratios in Section 4.3. The distribution of
+total BBH masses is discussed in Section 4.2, and the
+estimated merger rates in Section 4.4.
+4.1. Component masses
+Figure 1 shows the distribution of individual BH
+masses for our fiducial (model variation 0), stable accretion (model variation 1) and CE accretion model (model
+variation 2). The top row of Figure 1 shows a cartoon
+depiction of the model variations considered here. The
+primary BH mass, MBH,1 , refers to the mass of the BH
+that originates from the initially more massive star in
+the binary system. Similarly the secondary BH mass,
+MBH,2 , refers to the mass of the BH that originates from
+the initially less massive star. The middle row displays
+all BBHs resulting from our simulations, while the bottom row focuses on BBH systems that merge within a
+Hubble time due to gravitational-wave emission.
+
+6
+
+van Son et al.
+0 Fiducial
+Eddington limited
+
+1 Stable accretion
+Super Eddington accretion
+
+2 Common envelope accretion
+Super Eddington accretion
+
+Figure 1. Top: Cartoon depictions of the BH accretion phase of binary evolution that is varied between the simulations.
+Middle: The final component masses of the simulated BBH systems for the fiducial population (left column), the BH population
+that accretes at super-Eddington rates during stable mass transfer (middle column), and the BH population that accretes during
+CE events (right column). The light blue shaded region bordered by dotted blue lines indicates the approximate location of
+the PISN mass gap. Colors indicate the amount of mass accreted by one of the BH components. Gray dots are systems where
+the BHs did not accrete any mass. The black dotted line shows where MBH,1 = MBH,2 . Bottom: same as middle, but only
+including the BHs that merge within a Hubble time. Note that the BHs as shown are all those that occur in our simulations;
+they are not weighted by their formation probability.
+
+BBH systems are shown as gray points unless the first
+born BH accreted from its companion. For the latter
+systems, the colors indicate the amount of mass that is
+accreted by the first born BH through accretion from its
+stellar companion, ∆Macc .
+We furthermore estimate the fraction of BBHs with at
+least one component more massive than 30 and 45 M ,
+denoted as f30 and f45 respectively. We also quote the
+maximum mass for individual BHs ( MBH,max ) created
+in our simulations. The results for all three model variations as discussed below are summarized in Table 1.
+4.1.1. Fiducial model
+The fiducial population does not produce any BBH
+systems with component masses above MBH,max =
+45 M (i.e. f45 = 0%), in agreement with earlier stud-
+
+ies (e.g. Belczynski et al. 2016b; Stevenson et al. 2019).
+This can be seen in the left-most column of Figure 1
+and in Table 1. In practice we find no BHs more massive than MBH ≈ 43 M , which is the limit set by the
+remnant mass function as adopted in this work (see Appendix C).
+We see that BBHs that have accreted mass (blue
+points in the left column of Figure 1) span the whole
+mass range, but have a slight preference for equal mass
+ratios. BHs that are part of a merging BBH system
+prefer lower primary BH masses, MBH,1 . The BBH
+systems with the lowest mass MBH,1 primarily result
+from systems that interacted early on in their stellar
+evolution. Further substructure in the MBH,1 , MBH,2
+distribution is caused by their origin from different evo-
+
+7
+
+PISN mass gap events from isolated binaries
+
+Table 1. Comparison of the full population of BBH (All) and the subset of those that merge within a Hubble time (Merging).
+We provide the maximum BH ( MBH,max ) for individual BHs and the fractions of BBHs with at least one component more
+massive than 30 and 45 M ( f30 and f45 , respectively). The errors shown are an estimate of the 1–σ errors that result from
+the statistical sampling uncertainty, see Appendix B for the derivation.
+
+f30
+%
+
+All
+f45
+%
+
+MBH,max
+(M )
+
+f30
+%
+
+Merging
+f45
+%
+
+MBH,max
+(M )
+
+35.5 ± 0.4
+44.0 ± 0.5
+36.6 ± 0.4
+46.1 ± 0.4
+
+0.0
+20.3 ± 0.2
+0.63 ± 0.01
+20.7 ± 0.2
+
+43
+103
+57
+103
+
+10.7 ± 0.1
+7.89 ± 0.1
+14.8 ± 0.1
+16.8 ± 0.1
+
+0.0
+0.13 ± 0.03
+1.33 ± 0.05
+2.35 ± 0.06
+
+42
+90
+57
+90
+
+Model
+0. Fiducial
+1. Stable super-Eddington
+2. Common envelope accretion
+3. Combined
+
+lutionary channels (see e.g. Dominik et al. 2012, for a
+discussion of different evolutionary channels).
+The fraction systems containing a heavy BH, f30 , is
+about a third for the full population and one tenth for
+the population that merges. These values are relatively
+large, this results from the fact that we have assumed a
+low value for the metallicity Z = 0.001, which leads to
+reduced mass loss through stellar winds and the formation of heavier black holes. This has been pointed out
+in earlier studies (e.g. Belczynski et al. 2010b; Stevenson
+et al. 2017).
+The Eddington limit severely restricts the amount of
+mass that is accreted, ∆Macc , and BHs accrete less than
+about 0.01 M in this model. This confirms that accretion cannot lead to PISN mass gap systems in the
+fiducial model.
+The results obtained with our fiducial model are very
+similar to those presented in Stevenson et al. (2019),
+who also used the COMPAS suite, with very similar assumptions and initial conditions. Small differences arise
+from the different treatment of pulsational mass loss and
+PISNe, which are discussed in Section 3 and Appendix
+C).
+4.1.2. Model variation 1: Stable Accretion
+Our first model variation, where we allow for superEddington accretion rates during stable mass transfer,
+is shown in the central column of Figure 1. The population of BHs experiencing stable mass accretion accretes between 0.1 and approximately 63 M , placing
+many BHs in the PISN mass gap. Note that the progenitors of accreting BHs are commonly the initially more
+massive stars, since these typically evolve on a shorter
+timescale. We find that approximately one fifth of all
+systems have at least one BH more massive than 45 M ,
+i.e. f45 ≈ 20%.
+The maximum amount of mass that BHs can accrete
+is limited by the available matter rather than the accretion rate in this model. In practice the available matter
+
+equals the mass of the donor’s envelope. The theoretical maximum for the most massive BH in this model
+variation is therefore the maximum mass of a BH at
+birth, plus the maximum envelope mass of the companion. The most massive BH formed in this simulation is
+just over 100 M (i.e., MBH,max ≈ 103 M ), but we note
+that for the most extreme masses, our simulations are
+affected by uncertainties resulting from sampling effects.
+The distribution shows a clear upward diagonal trend,
+similar to the fiducial simulation but shifted to higher
+masses for MBH,1 . This can be understood when considering that higher-mass BHs generally come from highermass progenitors, which typically have higher-mass companions. Higher-mass companions typically have more
+massive envelopes and thus have more mass available to
+donate to the first born BH, leading to a larger amount
+of accreted mass, ∆Macc , and a higher-mass primary
+BH, MBH,1 . At the same time, the higher-mass companions have larger cores and result in higher-mass secondary BHs, MBH,2 . Thus, the accreted mass (∆Macc )
+scales with the final mass of the secondary BH, MBH,2 .
+Outliers to this main trend exist, as can be seen in
+the central column, middle row of Figure 1 around
+MBH,1 ≈ MBH,2 ≈ 50 M , and around MBH,1 ≈ 75 M
+with MBH,2 ≤ 25 M . In these cases, the massive stellar progenitor of the BH has already lost most of its
+envelope due to winds. This occurs in systems where
+the mass transfer happens at a later evolutionary stage
+of the donor star (i.e., case C mass transfer, Lauterborn
+1970).
+For conservative mass transfer, as we assume for accreting BHs in this model variation, mass and angular
+momentum conservation dictate that the binary orbit
+widens when the donor is less massive than the accretor, i.e. when the mass ratio is reversed (e.g. Soberman
+et al. 1997). This is also true when we consider lower accretion efficiencies and assume that the mass that is not
+
+van Son et al.
+
+accreted is lost with the specific orbital angular momentum of the BH (see Appendix A and Section 6.1 for a
+discussion). We find that the mass ratio is almost always
+reversed by the super-Eddington accretion in this model
+variation, and thus also that the binary orbit widens in
+almost all cases.
+Stable mass transfer thus widens BBH systems. Moreover, the more mass is transferred, the wider the system
+becomes and therefore stable super-Eddington accretion
+widens BBH systems significantly. Widening the orbit
+has a strong effect on the gravitational-wave merger
+time, since it scales with the binary separation to the
+fourth power (Peters 1964). Sufficiently wide BBH
+systems cannot merge within a Hubble time through
+gravitational waves alone.
+The most massive BH that is part of a BBH system
+that still merges within a Hubble time has a mass of
+MBH ≈ 90 M . The most massive systems ( MBH,1 ≥
+70 M ) in the stable accretion model that still merge
+within a Hubble time experience a similar evolution.
+Merging BBH systems after a long phase of stable super
+Eddington accretion is only possible through a BH-kick
+from the secondary BH. A ‘lucky’ BH-kick can increase
+the binary eccentricity to nearly 1, which radically reduces the gravitational wave inspiral time (Peters 1964).
+Significant BH-kicks are only implemented in our simulations for relatively low mass CO cores (≤ 15 M ).
+Therefore this evolutionary pathway is only possible
+for relatively extreme mass ratio BBHs. Whether such
+BBH systems exist in nature furthermore depends on
+the physics of BH-kicks, which is a matter of debate.
+The vast majority of the affected systems do not merge
+within a Hubble time (central column, bottom row of
+Figure 1). Only 0.1% of the merging BBH systems in
+this model variation contain a BH with MBH ≥ 45 M
+( f45 = 0.1 ± 0.03%). Moreover, the bulk of PISN mass
+gap systems created in this model variation is not only
+too wide to merge within a Hubble time, but is also too
+wide to be detectable through all planned gravitationalwave detectors such as LISA (based on values from Ni
+2018).
+
+4.1.3. Model variation 2: common envelope accretion
+Our second model variation, which allows superEddington accretion onto BHs during the inspiral phase
+of a CE event, is displayed in the right-most column of
+Figure 1. This model does produce BHs with masses
+in the PISN gap, but the BHs are not as massive as
+those resulting from our stable super-Eddington accretion model.
+
+60
+
+Pair-instability gap
+
+50
+
+MBH [M ]
+
+8
+
+40
+30
+20
+BH birth mass [M ]
+
+10
+1
+
+10
+15
+
+20
+25
+
+30
+35
+
+10
+
+40
+45
+
+100
+
+Mcomp [M ]
+Figure 2. The maximum mass for accreting BHs in model
+variation two, the CE accretion model, following Equation
+2 as a function of the companion mass at the moment of
+Roche-lobe overflow. This illustrates that only BHs with
+a birth mass close to the PISN gap can potentially accrete
+enough to end with a final mass in the gap.
+
+The amount that BHs can accrete in this model,
+∆Macc , is regulated by Equation 2, which effectively limits the maximum mass that a BH can accrete to about
+20 M . We illustrate this in Figure 2, where we plot
+MBH = MBH,birth + ∆Macc as a function of the companion mass at the onset of the CE, for different values of
+MBH,birth . The figure shows that only BHs with high
+birth masses can produce BHs with masses in the PISN
+gap. The maximum potential BH mass is about 60 M ,
+but this mass can only be achieved under optimal and
+idealized circumstances. In practice this limit is never
+reached, both because of sampling effects, and because
+of stellar winds, which eject part of the envelope before it can be transferred to the BH companion. In our
+numerical simulations, the most massive BH formed is
+MBH,max ≈ 57 M .
+While this model does not favor the formation of extremely massive systems as found in model variation
+1, it does favor the formation of BBHs in tight orbits.
+A larger number of affected systems can thus merge
+within a Hubble time through the emission of gravitational waves with respect to the affected systems in
+model variation 1, as can be seen in the bottom row of
+Figure 1.
+4.1.4. Model variation 3: Combined
+Our combined model variation leads to the combined
+effects of model variations 1 and 2, the stable accretion
+and CE accretion models respectively. More BBH systems are affected by accretion in the combined model,
+and the fraction of PISN gap mergers increases. How-
+
+PISN mass gap events from isolated binaries
+ever, it does not lead to a significantly larger MBH,max ≈
+103 nor a larger BH mass among the merging BBH population, MBH,max ≈ 90 M , than in our second model
+variation. We find only about 2% PISN gap mergers
+where one of the BHs is more massive than 45 M , i.e.
+f45 ≈ 2.4%.
+4.2. Total mass distribution
+Analysis of gravitational wave merger signals provides
+a more accurate determination for the total mass of
+BBH mergers than for the individual BH masses. We
+therefore show the distribution of the total BBH masses
+( MBBH = MBH,1 + MBH,2 ) in Figure 3. The distributions are normalized and the individual BHs are
+weighted according to the distributions of their initial
+parameters. We have checked that the 1–σ statistical
+sampling error is less than 0.001 for all bins. The blueshaded region marks the location of the PINS mass gap
+for equal mass systems.
+We furthermore provide the maximum total BBH
+mass ( MBBH,max ) and the fractions of BBHs with a total mass MBBH higher than 60 M and 90 M ( fBBH,60
+and fBBH,90 respectively, in Table 2.
+4.2.1. All BBHs
+The top panel of Figure 3 shows the distribution for
+all BBHs formed in our simulations, including those that
+are too wide to merge.
+The assumptions we make in the second model variation (super-Eddington accretion during CE) appear to
+have limited effect on the overall population of BBHs,
+and the shape of the BBH mass distribution varies little
+between the fiducial and CE accretion model (models 0
+and 2).
+Both the fiducial and CE accretion model avoid
+the PISN mass gap.
+For the fiducial model
+MBBH,max ≈ 86 M and fBBH,90 = 0%. Although the
+maximum BBH system mass MBBH,max ≈ 99 for the
+CE accretion model, fBBH,90 is only 0.1%.
+As discussed in Section 4.1, the CE accretion model
+only produces BBH mergers that are marginally in the
+PISN mass gap. Figure 3 shows that such marginal BBH
+mergers do not stand out as PISN mass gap systems
+when MBBH is evaluated.
+The stable accretion and combined model variations
+(models 1 and 3) both display a clear tail of massive
+systems. The maximum total BBH mass extends to
+MBBH,max ≈ 144 M in both models. We find that approximately 12.7% and 12.2% of the BBH systems has
+a mass of MBBH ≥ 90 M for model variation 1 and 3,
+respectively.
+All model variations peak in MBBH at approximately
+30 to 40 M .
+
+9
+
+4.2.2. Merging BBHs
+The middle panel of Figure 3 only shows BBH systems
+that merge within a Hubble time.
+The tail of massive systems from the stable accretion
+and combined model variations is absent in the merging
+populations, since nearly all of these systems are too
+wide to merge (as discussed in Section 4.1).
+We see that the subset of merging BBHs from the
+first model variation (super-Eddington accretion during
+stable mass transfer) is not significantly different from
+the fiducial population of merging BBHs. For both the
+fiducial and the first model variation fBBH,90 = 0% and
+MBBH,max ≈ 84 M .
+The second model variation (super-Eddington accretion during CE) affects the subset of BBHs that merges
+more strongly than the first model variation. We see
+that the peak of the merging distribution is shifted to
+higher masses with respect to the fiducial population,
+which is reflected in the higher value of fBBH,60 ≈ 7.1%.
+In other words, mass distribution of merging BBHs is
+shifted to higher masses in the CE accretion model with
+respect to the fiducial distribution. This effect is also
+visible in the combined model variation, which closely
+follows the merging BBH distribution of the CE accretion model.
+Although the peak of the merging distribution is
+shifted to higher masses for our second and third model
+variations, they do not produce a significant amount
+of PISN mass gap events in terms of MBBH . Only
+about 0.36% and 0.45% of the merging populations has
+a MBBH > 90 M for model variation 2 and 3.
+4.2.3. Merging BBHs reweighted
+In the bottom panel of Figure 3 we apply a simple
+re-weighting to the merging distribution to account for
+the detection probability which scales approximately as
+( MBH,1 )2.2 , following Fishbach & Holz (2017). In this
+panel, we show the 90% confidence intervals of the observed MBBH values from Abbott et al. (2019a) at arbitrary heights with horizontal grey lines. This shows that
+the total mass distribution as produced by our fiducial
+model is able to form BBHs with total masses similar to
+the detections from LIGO and Virgo’s first and second
+observing runs.
+Re-weighting the distribution results in the largest deviations from the fiducial simulation. In general the reweighting has a flattening effect on the distribution of
+BBH masses, since the massive end ( MBBH > 60 M ) of
+the distribution is boosted, while the intrinsic BBH distributions peak at low masses (approximately between
+20 and 30 M ).
+
+10
+
+van Son et al.
+
+dN/Ntotal
+
+0.25
+
+All BBHs
+
+0.2
+0.15
+
+Pair-instability
+gap
+
+0.1
+0.05
+0.0
+
+20
+
+Merging BBHs
+
+40
+
+60
+
+80
+
+100
+
+120
+
+140
+
+250
+
+275
+
+300
+
+250
+
+275
+
+300
+
+250
+
+275
+
+300
+
+0.3
+
+dN/Ntotal
+
+0.25
+0 Fiducial
+1 Stable accretion
+2 Common envelope accretion
+3 Combined
+
+0.2
+0.15
+0.1
+0.05
+0.0
+
+20
+
+40
+
+Merging BBHs reweighted
+
+60
+
+80
+
+100
+
+120
+
+140
+
+0.3
+
+dN/Ntotal
+
+0.25
+
+GWTC1
+
+0.2
+
+Pair-instability
+gap
+
+0.15
+0.1
+0.05
+0.0
+
+20
+
+40
+
+60
+
+80
+
+100
+
+MBBH = MBH,1 + MBH,2 [M ]
+
+120
+
+140
+
+Figure 3. Top: Weighted distribution of the total BBH masses ( MBBH ) from our fiducial simulation (filled gray), the stable
+super-Eddington accretion (dashed pink line), the simulation allowing super-Eddington accretion during a CE phase (dotted
+green line) and the combined model (solid orange line). All distributions are normalized. The light blue region bordered by
+dotted lines indicates the approximate location of the PISN gap assuming BHs of equal mass. Middle: The same as the top
+panel, but restricted to BBH systems that are close enough to merge within a Hubble time. Bottom: The same as the middle
+panel, but the population is re-weighted by the detection bias from LIGO/Virgo (Fishbach & Holz 2017). The 90% confidence
+intervals of the observed MBBH values from Abbott et al. (2019a) are also shown as grey horizontal lines, at arbitrary heights.
+
+The small fraction of BBHs with masses in the PISN
+mass gap from the second and third model variation
+becomes visible due to the re-weighting. However, we
+see that BBH mergers with masses in the range 90 M ≤
+MBBH < 100 M only constitute a few percent of the
+re-weighted distribution. Moreover, none of the model
+variations produces a merging BBH system with a mass
+of MBBH ≥ 100 M .
+We conclude that, despite our extreme assumptions
+regarding accretion onto BHs, none of our model variations is able to significantly populate the PISN mass gap
+with systems that merge in a Hubble time. Under our
+
+most extreme assumptions, we find that in only about
+0.45% of all cases, the BBH mass MBBH exceeds 90 M .
+4.3. Mass ratios
+Figure 4 displays the cumulative distribution function
+of the mass ratio, q, defined as the ratio of the less massive over the more massive BH. Figure 4 shows that the
+CE accretion model leads to similar mass ratios as the
+fiducial model, but results in a slightly larger fraction of
+mass ratios with q ≤ 0.35 when considering the merging
+population (dash-dotted gray, and dotted green lines in
+Figure 4).
+
+11
+
+PISN mass gap events from isolated binaries
+
+Table 2. The fractions of BBHs with a total mass MBBH higher than 60 and 90 M ( fBBH,60 and fBBH,90 , respectively), and
+the maximum total BBH mass ( MBBH,max ). The errors shown are the 1–σ estimate of the statistical sampling uncertainty.
+
+Model
+
+fBBH,60
+%
+
+All
+fBBH,90
+%
+
+MBBH,max
+(M )
+
+fBBH,60
+%
+
+Merging
+fBBH,90
+%
+
+MBBH,max
+(M )
+
+0. Fiducial
+1. Stable super-Eddington
+2. Common envelope accretion
+3. Combined
+
+23.1 ± 0.3
+32.2 ± 0.4
+23.4 ± 0.3
+32.6 ± 0.3
+
+0.0
+12.7 ± 0.2
+0.11 ± 0.01
+12.2 ± 0.2
+
+86
+144
+99
+146
+
+5.8 ± 0.1
+2.6 ± 0.1
+7.1 ± 0.1
+6.2 ± 0.1
+
+0.0
+0.01 ± 0.00
+0.36 ± 0.03
+0.45 ± 0.03
+
+84
+95
+99
+99
+
+The stable accretion model and combined model
+(dashed pink, and solid orange line in Figure 4) lead
+to a higher fraction of low mass ratio systems than the
+fiducial model. For the combined model, we find that
+about 40% (50%) of all (merging) BBHs have a mass
+ratio of q ≤ 0.5. For the fiducial model, we find that
+about 20% (40%) of all (merging) BBHs have a mass
+ratio of q ≤ 0.5. Moreover, the stable accretion model
+and combined model allow for more extreme mass ratios
+with respect to the fiducial population, down to q ≈ 0.1.
+These low mass ratios are caused by accretion onto the
+first-born BH in the models where we allow for superEddington accretion. This accretion increases the mass
+of the first-born BH, and thus leads to BBHs with lower
+mass ratios.
+The 90% confidence interval of observed mass ratios
+from LIGO/Virgo’s first and second observing run are
+shown at the bottom right of Figure 4 (Abbott et al.
+2016b). For most detections, the mass ratios are relatively poorly constrained. Of special interest is the
+recently announced GW190412, which is the only system published so far with significantly unequal masses,
+(q = 0.28+0.13
+−0.07 , Abbott et al. 2020, blue line in Figure 4).
+The formation of systems with such mass ratios is more
+common in our models that allow for super Eddington
+accretion. We find that about 30% of the merging fiducial population has a mass ratio of q ≤ 0.41, which is the
+upper limit of the 90% confidence interval for the mass
+ratio of GW190412. This fraction increases to 40% of
+the merging BBH population for the combined model
+variation.
+If we consider systems for which the individual masses
+coincide with the the component masses inferred for
++1.7
+GW190412 ( MBH,1 =29.7+5.0
+−5.3 M , MBH,2 =8.4−1.0 M ,
+Abbott et al. 2020), we find that 0.5% of the merging fiducial population coincides with GW190412. This
+fraction increases to 3.6% for the merging population of
+the Combined model. We further note that GW190412
+shows evidence for spin, which may be expected for the
+accreting BH. However, see Section 5.2.3 for a more in
+depth discussion of the spins.
+
+4.4. BBH merger rates
+We briefly discuss simple estimates for the merger
+rates that can be obtained directly from our simulations.
+For this we closely follow the procedure outlined by Dominik et al. (2012), detailed in Appendix B. Table 3
+provides an overview of the quantities discussed here.
+In this work, we consider simulations at a fixed metallicity of Z=0.001, representative for the low metallicity environments in which heavy BBHs are believed to
+form (e.g. Abbott et al. 2016a). By choosing a fixed
+low metallicity, we overestimate the BBH formation rate
+and BBH merger rate. We furthermore assume the optimistic CE model as discussed in Belczynski et al. (2020).
+The optimistic CE model tends to lead to an overprediction of the BBH merger rate (e.g. Dominik et al. 2012).
+Stevenson et al. (2017) find merger rates which are approximately 3 times lower for the pessimistic model with
+respect to the optimistic model at Z = 0.001. Assuming the optimistic model, their BBH merger rates at
+Z = 0.001 are comparable to the rate estimate we find
+for our Fiducial model.
+Our estimates of the BBH merger rates should be considered as rough upper limits that enable comparison to
+other work. For a more careful treatment we refer to
+Neijssel et al. (2019) and Stevenson et al. (2019), who
+consider different metallicities and account for the abundance evolution through cosmic time. They also both
+use the COMPAS suite, while assuming initial conditions
+that are very similar to those adopted in our fiducial
+model. They indeed find merger rates that are consistent with the rates from Abbott et al. (2019a).
+We first estimate the number of BBHs formed per
+unit star forming mass that merge within a Hubble
+time, dNtH /dMSFR and the number of BBHs formed
+per unit star forming mass that merge within 10 Gyr
+dN10 /dMSFR . We find that both quantities vary only
+slightly across our model variations, as can be seen in
+Table 3. The physical assumptions we varied primarily
+affect the amount of mass that BHs accrete and therefore
+their masses, but these assumptions do not significantly
+affect the rate of BBH mergers.
+
+12
+
+van Son et al.
+
+Figure 4. Cumulative distribution function of the mass ratio q, defined as the ratio of the less massive over the more massive
+BH. The left panel shows all BBHs, while the right panels displays only the BBH population that merges within a Hubble time.
+The 90% confidence interval of observed mass ratios are shown as gray lines for observations from LIGO/Virgo’s first and second
+observing run (Abbott et al. 2019a), and as a blue line for GW190412. The CE accretion model has little effect on the mass
+ratio distribution of BBHs. The stable accretion model variation and combined model variation shift the mass ratios to lower
+values.
+Table 3. Estimate of the BBH merger rates for our chosen fixed metallicity. We provide the total number of BBHs formed per
+unit star-forming mass that merge within a Hubble time, dNtH /dMSFR , and within 10 Gyr, N10 /MSFR , respectively. The BBH
+merger rate for a synthetic Milky Way-like galaxy ( RMWG ), the volumetric BBH merger rate Rvol , and the volumetric merger
+rate for BBHs with a component MBH > 45 M . The 1–σ estimate of the statistical sampling uncertainty is shown whenever
+it exceeds 0.5% of the relevant value.
+
+Model
+0. Fiducial
+1. Stable super-Eddington
+2. Common envelope accretion
+3. Combined
+
+NtH /MSFR
+( M · 10−5 )
+
+N10 /MSFR
+( M · 10−5 )
+
+RMWG
+(Myr−1 )
+
+Rvol
+(Gpc−3 yr−1 )
+
+Rvol,45
+(Gpc−3 yr−1 )
+
+2.3
+2.4
+2.2
+2.1
+
+2.2
+2.3
+2.0
+2.0
+
+77 ± 0.3
+81 ± 0.3
+72 ± 0.3
+71 ± 0.3
+
+897 ± 4
+937 ± 4
+832 ± 3
+825 ± 3
+
+0.0
+1.2
+11
+19
+
+We also estimate the total merger rates for a synthetic
+Milky Way-like galaxy, RMWG and the consequential total volumetric merger rates Rvol . As stated above, these
+rates are higher than the current estimates from Abbott
+et al. (2019a) due to the fixed low metallicity, however
+they are consistent with estimates from Stevenson et al.
+(2017) and de Mink & Belczynski (2015). RMWG (and
+consequently Rvol ) are comparable for the fiducial and
+first model variation. However, they are slightly lower
+for the second and third model variation, which implies
+that allowing for accretion during a CE leads to slightly
+fewer BBH mergers. This can be understood as our
+
+CE accretion model leading to more ‘failed’ common
+envelopes that end in a stellar merger instead of a BBH.
+Applying the fractional rates, f45 , to the volumetric merger rate for BBHs ( Rvol ), results in our estimates of the PISN mass gap event rate, Rvol,45 . For
+our first model variation, the estimates of the PISN
+mass-gap-event rates Rvol,45 , are consistent with the
+rates inferred by Fishbach et al. (2020) for gravitational wave events in the first and second observing run.
+−3
+They find Rvol,45 = 3.02+12.97
+yr−1 under the as−2.28 Gpc
+sumption of a flat-in-log prior for the mean merger rate
+per bin. Assuming a power-law prior, Fishbach et al.
+(2020) constrain the PISN mass gap merger rates to
+
+PISN mass gap events from isolated binaries
+−3
+Rvol,45 = 1.79+2.30
+yr−1 . The second and third
+−1.23 Gpc
+model variation lead to estimates of the PISN mass-gapevent rates that are higher than the current estimates
+from Fishbach et al. (2020).
+The uncertainties quoted in Table 3 result from the
+sampling procedure. We note that the model uncertainties are much larger, by orders of magnitude (e.g. Dominik et al. 2012; de Mink & Belczynski 2015; Chruslinska et al. 2018) and that the rates are affected by the
+choice of a constant metallicity Z = 0.001.
+
+5. DISTINGUISHING BETWEEN DIFFERENT
+
+PATHWAYS TO PISN MASS GAP EVENTS
+In this paper we consider the possibility to form PISN
+mass gap events through the isolated binary evolutionary channel. Various other pathways have been proposed to produce PISN mass gap events, see Section 2.2
+for a brief overview. In this Section, we compare our
+results to the findings for other pathways that have
+been proposed in the literature to create PISN mass gap
+events.
+This comparison is not straightforward. Different
+studies have adopted different input assumptions, for
+example concerning the location of the PISN mass gap.
+Moreover, the few quantitative predictions that exist to
+date often rely on relatively crude assumptions for complex physical processes. It is to be expected that these
+predictions will change with time as the models become
+more sophisticated. The comparison we present here
+reflects what is available in the literature to date.
+We first briefly compare different pathways and their
+predictions for the shape of the BBH mass distribution
+(Section 5.1 and Figure 5 ), followed by predictions for
+the maximum masses (Sect. 5.2.1), mass ratios (Section 5.2.2) and BH spins (Section 5.2.3). A schematic
+overview is provided in Figure 6.
+5.1. The shape of the BBH mass distribution
+In Figure 5, we compare various predictions for the
+distribution of total BBH masses, MBBH , for systems
+that merge within a Hubble time. This figure is similar
+to the middle panel of Figure 3 except for the use of
+a logarithmic y-axis, to highlight the differences in the
+tail of the distribution. We consider BBHs with total
+masses above 90 M to be PISN mass gap events. All
+distributions are normalized to their respective population of BBHs. This figure thus allows us to compare
+the shape of the distributions but, at present, cannot
+be used to infer which pathway contributes most significantly to PISN mass gap since the relative contribution
+from each pathway is unknown.
+Sedda et al. (2020) argue that with enough detections,
+the fraction of mergers with masses falling in the low
+
+13
+
+or high mass end of the BBH mass distribution can be
+used to place constraints on the relative contribution of
+different pathways to the overall population.
+5.1.1. Isolated binaries
+Our most optimistic simulation for super-Eddington
+accretion in isolated binaries, which allows for accretion onto BHs during both stable mass transfer, and CE
+events is shown in filled red in Figure 3.
+We find that isolated binaries will contribute less than
+0.45% of mergers with MBBH ≥ 90 M . As discussed in
+Section 4, although the maximum value of MBBH , i.e.
+MBBH,max , increases with respect to our fiducial simulation (model 0, shown in grey for reference), isolated
+binary evolutionary does not significantly populate the
+PISN mass gap.
+Our results show that super-Eddington accretion in
+interacting binaries can produce BBHs with total masses
+larger than 90 M , but due to their typically large orbital periods (of approximately 100 days), we do not
+expect these systems to merge as a result of isolated
+binary interaction alone.
+It is conceivable that a fraction of these binaries experience a decay of their orbits due to external factors.
+For example, a significant number of massive binary
+systems are born as part of a triple system or even higher
+order multiple (e.g. Sana et al. 2014). Secular interactions with a third companion such as Lidov-Kozai cycles
+have been proposed to increase the merger rate (Toonen
+et al. 2016; Kimpson et al. 2016; Antonini et al. 2017).
+Furthermore, a fraction of massive binaries is born in
+dense stellar environments, such as a globular or nuclear
+star cluster. These binaries and their BH remnants can
+be affected by a sequence of dynamical encounters and
+exchanges (Rodriguez et al. 2016). The heavy BHs in
+our models are good candidates for dynamical interactions since they will be among the most massive BHs
+formed in the cluster. As these sink to the center of the
+cluster they will be prone to interact and take part in
+dynamically-assisted mergers.
+Simulating the combined effects of super-Eddington
+accretion and external effects is beyond the scope of
+this paper. However, we can explore the upper limits
+of the contribution from super-Eddington accretion by
+considering the distribution of total masses for our full
+BBH population including those that are too wide to
+merge due to gravitational waves alone (model 3 “al”,
+dashed red line in Figure 5). About 12% of the BBHs in
+this distribution have a total mass MBBH , that exceeds
+2 × 45 = 90 M . This should be considered as an extreme upper limit that we do not believe to be realistic.
+The distribution of all BBH systems in our combined
+
+14
+
+van Son et al.
+this work
+
+100
+
+Isolated binaries, (model 0 Fiducial)
+Isolated binaries, (model 3 Combined)
+.
+
+””
+
+(””
+
+all BBH)
+
+Globular clusters, (Rodriguez+ 2019)
+
+dN/Ntotal
+
+10−1
+
+AGN disks,
+
+(Sedda 2020)
+
+H-fallback,
+
+(Di Carlo+ 2019)
+
+10−2
+
+10−3
+0
+
+20
+
+40
+
+60
+
+80
+100
+MBBH [M ]
+
+120
+
+140
+
+160
+
+180
+
+Figure 5. MBBH distribution for BBH systems from different pathways into the PISN mass gap. We compare the distribution
+of total BBH masses, MBBH , of multiple generations of BH-mergers in globular clusters (green open squares, Rodriguez et al.
+2019), multiple generations of BH-mergers in AGN disks (yellow open triangles, Sedda 2020) and stellar mergers in young
+stellar clusters assuming full H-fallback during BH formation (closed dark blue circles, Di Carlo et al. 2019a) to the effect of
+super-Eddington accretion in isolated binaries as discussed in this work. The grey line displays the merging population of BBH
+systems from our Fiducial model (model 0) The dashed and filled orange distributions respectively show the total and merging
+population of BBH systems from our most optimistic model variation (model 3 combined). The light blue region bordered by
+dotted lines indicates the approximate location of the PISN gap assuming BHs of equal mass. All distributions are normalized
+to their respective population of merging BBHs. This is therefore not a prediction for the number of PISN mass gap events.
+
+model extends up to 145 M , showing a rise around 130–
+145 M . This pile up results from BBH systems where
+the first born BH gained mass through stable accretion
+from its companion. This distinguishes this distribution
+from other pathways, which all decline at high masses.
+5.1.2. Globular clusters
+We show results for globular clusters from Rodriguez
+et al. 2019 (green open squares). In their simulations,
+close BBHs form and tighten as a result of dynamical
+interactions in the dense core of a globular star cluster.
+Massive BHs that form as the result of an earlier BBH
+merger may stay bound to the cluster if the merger recoil
+is sufficiently small. These so-called second generation
+BHs can have masses in the PISN gap. They can give
+rise to PISN mass gap events if they pair and merge
+with a third BH. We show the results from the most
+optimistic model for all redshifts by Rodriguez et al.
+2019 (as shown in the top left panel of their figure 3).
+This model assumes zero birth spin for all black holes.
+Low birth spin minimizes the BBH merger recoil during
+the first merger event, enabling the resulting BH to take
+part in a second merger.
+Their distribution displays a significant drop around
+90 M , which corresponds to two times the maximum
+value for first generation mergers. For total masses between 90 and 125 M the distribution is dominated by
+
+1st + 2nd generation mergers. A second drop exist, near
+125 M , which is close to three times MBH,max . Events
+with masses in excess of 125 M are primarily the result of 2nd + 2nd generation BHs, which very rare. Their
+distribution extends to MBBH ≈ 150 M .
+Rodriguez et al. (2019) find that about 4% of the detected BBHs will have MBBH ≥ 100 M for their most
+optimistic model assuming zero birth spin for all BHs.
+This pathway is the most efficient at producing very
+massive events among all those we consider, at least in
+relative terms. The fraction of events where the total
+mass exceeds 90 M is about 5% in their simulations.
+However, when a less optimistic model is assumed, i.e.
+when the birth spin for BHs is assumed to be non-zero,
+the rate of PISN mass gap events drops significantly. For
+example, when assuming a birth spin of χbirth = 0.5 for
+all BHs, they find that less than 0.1% of all BBH mergers will have a total mass MBBH ≥ 100 M (as shown in
+the bottom left panel of figure 3 from Rodriguez et al.
+2019).
+5.1.3. AGN disks
+AGN disks have been proposed as promising sites that
+allow for a sequence of multiple mergers and thus the
+creation of PISN gap mergers in a similar way as globular clusters. The difference between these two pathways
+arises from the larger escape speeds in AGN disks due
+
+PISN mass gap events from isolated binaries
+to a deeper potential well. This opens the possibility
+for higher generations of BHs in AGN disks, while the
+contribution from 2nd + 2nd and > 3rd generation BHs
+is expected to be negligible in globular clusters (Gerosa
+& Berti 2019).
+We compare our mass distribution to predictions from
+Sedda (2020), extracted from the top panel of their figure 19, shown as yellow open triangles in Fig. 5. Their
+distribution extends to about 140 M .
+The fraction of events where the total mass exceeds
+MBBH > 2 × 45 = 90 M is about 4% in their simulations, which is comparable to the predictions by Rodriguez et al. (2019) for globular clusters when BHs are
+born with zero spin.
+5.1.4. Fallback of a hydrogen-rich envelope
+Finally, we compare to a pathway studied by Di Carlo
+et al. (2019a). They consider stellar mergers occuring
+in young star clusters, involving at least one evolved
+star. Such mergers are poorly understood, but they may
+produce stars with overmassive hydrogen envelopes and
+relatively small cores (Vigna-Gómez et al. 2019). If the
+core mass of such a merger product is below the limit for
+pair pulsations, it is expected to collapse directly to a
+BH. If it is assumed that the massive hydrogen envelope
+is entirely accreted onto the forming BH, this can result
+in a BH with a mass in the PISN mass gap. Dynamical
+interactions within the cluster could later pair such a BH
+with another BH, possibly facilitating a BBH merger.
+We compare to the simulations from Di Carlo et al.
+(2019a, their Figure 5 ), shown as closed dark blue circles
+in Figure 5. They find BBH mergers with total masses
+up about 130 M . This is higher than what we expect
+from isolated binaries, but lower than what is claimed
+for globular clusters and AGN disks.
+The fraction of events where the total mass exceeds
+MBBH > 2 × 45 = 90 M is about 3% in their simulations, which is also slightly below the predictions for
+globular clusters and AGN disks.
+5.2. Predictions for masses, mass ratios and spins
+The overview of predicted BBH mass distributions as
+displayed in Figure 5 show that the BBH population
+cannot be explained by the isolated binary evolution
+channel alone if more than 1% of all BBH mergers has
+a mass higher than 90 M . We will now discuss other
+observables that might help distinguish between the different pathways considered in this work.
+5.2.1. Maximum masses
+In all our model variations, the amount of mass that
+a BH can accrete is ultimately capped by the envelope
+mass of the donor star. The most massive BBH system
+
+15
+
+that merges within a Hubble time has a mass 99 M ,
+though this is for extreme assumptions. We do find more
+massive systems, up to about 144 M , but for those we
+would need to invoke an external mechanism to merge
+the system.
+This maximum mass distinguishes this channel from
+predictions by other proposed pathways. Simulations
+of multiple BH mergers in massive globular clusters and
+AGN disks are found to result in maximum BBH masses
+of about 160 M (Rodriguez et al. 2019) and about
+145 M (Sedda 2020) respectively. However, as long as
+the merger product remains bound to the merger environment, there is no reason to believe that these pathways have to adhere to any maximum value of MBBH .
+Di Carlo et al. (2019a) find a maximum of 130 M for
+a metallicity of Z = 0.02. The maximum mass resulting
+from PISN mass gap events as discussed in Di Carlo
+et al. (2019a) and Di Carlo et al. (2019b) are in essence
+the sum of the maximum BH mass and the envelope
+mass of the progenitor at the moment of BH formation
+(i.e. MBH,max + Menv ). When complete fallback of the
+overmassive envelope is assumed, the maximum BBH
+system mass is thus capped by the maximum possible
+envelope mass prior to BH formation.
+
+5.2.2. Mass ratios
+PISN mass gap events resulting from the classical binary evolutionary channel may also be distinguished by
+their mass ratios. Here we define q to be the mass ratio of the less massive over the more massive BH. As
+discussed in Section 4.3, accretion onto the first born
+BH increases its mass, leading to events with more extreme mass ratios. Figure 4 displays the mass ratios
+for all BBH systems. When we focus on the mass ratios of PISN mass gap systems, we find that our Combined model predicts BBH systems that peak strongly
+at q ≈ 0.4.
+The merging population of PISN mass gap systems
+from our Combined model predicts a wider range of mass
+ratios: 0.2 < q < 0.7. These mass ratios are comparable but slightly lower than those for PISN gap events
+from stellar and globular clusters, which are expected
+to peak around q ∼ 0.4 − 0.6 and q ∼ 0.5, respectively
+(Rodriguez et al. 2019; Di Carlo et al. 2019a).
+Mass ratios from BBH mergers in AGN disks are still
+highly uncertain, but McKernan et al. (2020a) predict
+that the median mass ratios of BBH mergers in AGN
+disks will range from 0.20 to 0.97. However, when a
+higher generation BH is involved (i.e. a BH formed
+through multiple consecutive BBH mergers), mass ratios can be expected to drop to very small values of q.
+
+16
+
+van Son et al.
+
+Possible pathways leading to PISN mass gap systems
+a. Isolated binaries
+
+b. Multiple BH mergers
+in clusters
+
+c. Multiple BH mergers
+in AGN disks
+
+d. Overmassive envelope
++ fallback
+
+e. Primordial
+
+H
+
+Reference
+MBBH,max [M⨀]
+q of PISN gap system
+lower mass/higher mass
+
+𝛘1
+𝛘2
+𝛘 eff =
+
+𝐌 𝐁𝐇𝟏 𝛘 1 +𝐌𝐁 𝐇𝟐 𝛘 2
+𝐌 𝐁𝐁𝐇
+
+Spin orientation
+fBBH,90
+
+[M BBH > 90M ⨀]
+
+#𝐍
+𝐋
+
+All BBH
+
+Merging BBH
+
+Globular clusters
+
+AGN disk
+
+Fall back
+
+Primordial
+
+This work
+model 3,
+Combined
+
+This work,
+model 3,
+Combined
+
+Rodriguez et al. 2019
+
+Yang et al. 2019,
+Sedda 2020
+
+Di Carlo et al. 2019a,
+Di Carlo et al. 2019b
+
+Mirbabayi et al. 2019
+Postnov et al. 2019
+
+146
+
+99
+
+≈ 160
+
+No maximum?
+
+≈ 130
+
+No maximum
+
+≈0.4
+
+0.2-0.7
+
+≈0.5
+
+0.2-0.97, possibility to ~0.1
+
+≈0.4-0.6
+
+Possibly spun
+up?
+
+Possibly spun
+up?
+
+≈0.69
+
+≈0.69
+
+Spinning progenitor?
+
+≈0
+
+natal
+
+natal
+
+≈0
+
+natal
+
+natal
+
+≈0
+
+isotropic
+
+≈0.45, ≈0.75
+
+≈0.47
+
+≈0.46
+
+≈0.4
+
+aligned
+
+aligned
+
+isotropic
+
+isotropic
+
+isotropic
+
+12.2±0.2%
+
+0.45 ±0.03%
+
+4.6%
+
+4.4%
+
+3.2%
+
+Figure 6. Predicted characteristics of PISN mass gap events from different pathways. We compare the maximum BBH mass,
+MBBH,max , the mass ratio q of the system defined as the ratio less massive over the more massive BH mass, the dimensionless
+spin parameters of the BHs χ1 and χ2 , the effective spin parameter, χeff , the expected spin orientation and the fraction of BH
+systems with MBBH > 90 M .
+
+This could possibly push q down to values lower than
+q ∼ 0.1 when around 10 consecutive mergers or more
+are allowed.
+5.2.3. Spins
+Bardeen (1970) argues that spin-up is expected as a
+result of accretion in the case of a thin disk (see also
+King & Kolb 1999; O’Shaughnessy et al. 2008). However, the (significantly) super-Eddington accretion rates
+considered in this work are expected to result in thick
+accretion disks or even near-radial inflow (Volonteri &
+Rees 2005; Begelman et al. 2006; Pezzulli et al. 2016;
+Johnson & Haardt 2016). It is not clear whether this
+accretion geometry will lead to significant spin up. For
+example, Tchekhovskoy et al. (2012) show that accumulation of magnetic flux around the central regions of
+the accreting BHs might cause the BH to spin down instead of spinning up. Therefore we cannot, at present,
+confidently predict the final spins of BHs.
+Nevertheless, we attempt to provide an upper limit using the expression in Eq. 4 of Bardeen (1970) for thin accretion disks. Using this and the assumption of zero natal spins, we find that the vast majority (> 75%) of the
+accreting BHs are spun up to the maximum possible spin
+value in our first model variation for stable mass transfer. This results in effective spins of 0.65 < χeff < 0.8.
+In our second model variation for CE accretion, we find
+effective spins of 0.2 < χeff < 0.6. Our combined model
+spans the whole range of effective spins and results in
+0.2 < χeff < 0.85, with two distinct peaks, one around
+
+χeff ≈ 0.45 and one around χeff ≈ 0.75. The merging
+population of the combined model is dominated by the
+effective spins of the CE accretion model and spans the
+range χeff ≈ 0.2–0.6, with a peak around χeff ≈ 0.47.
+We expect PISN mass gap events created through
+super-Eddington accretion in isolated binaries to result
+in relative alignment of the BH-spin with the orbit. The
+spin of the first-born BH will likely align with the orbit
+during the mass transfer phase. However, a natal kick of
+the second born BH could possibly tilt the orbit. Given
+the uncertainties in the spin itself we have chosen not to
+model this, but we expect no, or very low velocity, natal
+kicks for the most massive BHs.
+For globular clusters, the optimal conditions for PISN
+mass gap events as discussed in Rodriguez et al. (2019)
+require two non-spinning BH for the first generation of
+BHs, which are expected to produce BHs with spins
+strongly peaked at χ ≈ 0.69. This implies that one
+of the BHs involved in the PISN mass gap event is expected to have a spin of χ1 ≈ 0.69, while its companion
+is expected to have its natal spin of χ2 ≈ 0.
+Yang et al. (2019) predict that the effective spin distribution of BBHs is dominated by 1st + 2nd generation BHs. This suggests that the spin of the incoming
+second generation BH will be strongly peaked around
+χ1 ≈ 0.69, as explained above. Assuming all first generation BHs have the same mass, they find that due
+to the random alignment of spins, this results in an ef-
+
+PISN mass gap events from isolated binaries
+fective spin distribution that is peaked strongly around
+χeff ≈ 0.4.
+Furthermore, it is highly uncertain what BH spin is
+expected for BBHs in stellar clusters when the BHprogenitor is the end product of a stellar merger (as
+suggested in Di Carlo et al. 2019a). One might intuitively argue that such a stellar merger would lead to a
+spinning BH progenitor, however Schneider et al. (2019)
+show that stellar mergers can result in a slowly spinning merger product. In any case, the connection between BH spin and its progenitor is highly uncertain,
+even more so when an overmassive envelope is speculated to fall back during BH formation (see e.g. Heger
+et al. 2005; Lovegrove & Woosley 2013; Belczynski et al.
+2020).
+The BBH systems leading to PISN mass gap events
+formed in globular clusters, AGN disks, and stellar clusters are all dynamically assembled. For such
+dynamically-assembled BBHs, the angle between the orbital angular momentum and the BH spins is expected
+to be distributed isotropically (Rodriguez et al. 2016).
+This results in misaligned spin orientation in the majority of cases and suggests that the distribution of χef f is
+also symmetric and centered on zero (Rodriguez et al.
+2019).
+Lastly, the spin of primordial BHs is conventionally
+believed to be small (Mirbabayi et al. 2020; Luca et al.
+2019). BBHs consisting of primordial BHs are expected
+to be dynamically assembled and thus have isotropically
+distributed spins (Rodriguez et al. 2016).
+In conclusion, it is extremely difficult to distinguish
+between the different pathways to PISN mass gap
+events. At the time of writing, predictions from different pathways for the maximum masses, mass ratios,
+and BH spins are not sufficiently constrained to decisively differentiate between pathways.
+In light of the above discussions, we find that the combination of extreme mass ratios and an aligned spin orientation in a BBH system with MBBH ≤ 100 M could
+be indicative of BHs that underwent super-Eddington
+accretion from a companion star (Figure 6). We expect that our ability to distinguish between the different
+pathways will be improved with upcoming gravitationalwave surveys which will enhance constraints on both the
+rates and properties of (PISN mass gap) mergers.
+6. DISCUSSION
+
+This work examines whether the classical isolated binary evolutionary channel can produce BBH mergers
+with a component in the pair instability mass gap (a
+PISN mass gap event). Under our most extreme as-
+
+17
+
+sumptions (i.e., those that favor the mass growth of
+black holes most strongly) we find about 2% of all
+BBH mergers at Z = 0.001 to be PISN mass gap
+events and we find a maximum mass for a BH involved in a PISN mass gap event of MBH,max = 90 M .
+Moreover, under these assumptions, we find only about
+0.45% of the merging BBH systems have a total mass
+MBBH ≥ 90 M , and we find no merging BBH systems
+with masses of MBBH ≥ 100 M .
+We discuss how robust these main findings are against
+variations in the assumptions about mass transfer in
+Sections 6.1.1 and 6.1.2, and consider further caveats in
+Section 6.3. We conclude by speculating on the effects of
+super-Eddington accretion in binaries to the lower mass
+gap in Section 6.2.
+6.1. Variations in mass transfer
+Most of the heavy BBHs in our simulations are too
+wide to merge within a Hubble time (see Section 4).
+The BBHs that do merge as PISN mass gap events are
+only marginally in the PISN mass gap since they have
+accreted less mass than their non-merging counterparts.
+We first discuss additional mechanisms that could shrink
+the BBH orbits and whether this could increase the rate
+of PISN mass gap events in Section 6.1.1. This is followed by a discussion on whether there are any possibilities left to accrete more mass onto the BHs in Section
+6.1.2.
+6.1.1. Shrinking the binary orbit
+In our first model variation, we have assumed that
+BHs can accept all the mass that is available from their
+donor star. We thus assume that the total mass and
+angular momentum is conserved. If instead a fraction of
+the mass is lost, this lost mass will carry away angular
+momentum, which leads to a different orbital evolution.
+Observations of X-ray binary systems show evidence
+for outflows resulting from the accretion disk around a
+black hole (e.g. Blundell & Bowler 2005; Remillard &
+McClintock 2006). The effect of such an outflow on the
+binary orbit can be modeled assuming that a fraction of
+the transferred mass (β) is accreted and the remainder is
+lost from the system carrying away the specific angular
+momentum of the accretor (Soberman et al. 1997). It
+can be shown that under these assumptions the orbit
+widens irrespective of the chosen mass transfer efficiency
+(value of β), as long as the mass of the accreting black
+hole becomes large relative to the donor mass (Md ). For
+low β this implies the orbit widens as soon as MBH &
+0.76 times the mass of the donor (see Appendix A for
+the derivation). This condition is typically met for the
+progenitors of systems that can form PISN mass gap
+systems. This is a robust result that is also valid for
+
+18
+
+van Son et al.
+
+other binaries that do not evolve into BHs (Renzo et al.
+2019).
+We thus conclude that lowering the mass transfer efficiency under these assumptions does not increase the
+number of PISN mass gap mergers.
+We can furthermore consider what happens when
+mass is lost with a higher specific angular momentum.
+For example, mass lost from the outer Lagrangian point
+may be ejected to form a circumbinary disk. This mode
+of mass loss leads to rapid shrinking of the orbit for
+almost all variations of mass transfer efficiency (see Appendix A for details). Test simulations show that most
+BHs plunge into the companion’s envelope, unless the
+mass transfer efficiency is highly fine-tuned. It is unclear what is the fate of such systems.
+In conclusion, we do not expect that variations in
+the mass transfer efficiency can significantly increase the
+number of PISN gap mergers.
+6.1.2. Can we accrete even more?
+
+f45 = R(MBH > 45M )/R
+
+The most massive black hole involved in a BBH
+merger in our simulations has a mass of MBH,max ≈
+90 M . Can MBH,max be taken as a robust upper
+limit or are there uncertainties that allow us to increase
+MBH,max further?
+During stable mass transfer we already assume a mass
+transfer efficiency of 100%. However, in our CE accretion model, the BHs typically accrete less than 20% of
+the companions mass (see also Figure 2). While the
+assumptions in our second model variation are already
+extreme, it is worthwhile to consider what happens if
+BHs are allowed to accrete even more during the CE
+inspiral phase.
+
+0.4
+
+Merging BBH
+with MBH > 45M
+
+6.2. Effects of super-Eddington accretion on the lower
+mass gap
+
+0.4
+
+If all BHs that enter a CE-phase are allowed to accrete at a super-Eddington rate, we could hypothesize
+that the same accretion model would apply to neutron
+stars, as was originally suggested by Houck & Chevalier
+(1991) Fryer et al. (1996) and Popham et al. (1999). Allowing for accretion onto neutron stars during every CE
+event following Eq. 2 could create an overabundance of
+BHs and possibly leads to BH neutron star and binary
+neutron star rates that are inconsistent with the current
+estimates from Abbott et al. (2019b).
+We consider the consequences of super-Eddington accretion onto NS stars and whether this can populate
+the lower mass gap between neutron stars and BHs (between 3 and 5 M ) by evaluating the effect of applying
+Equation 2 to mass ranges that are relevant for neutron
+stars.
+
+0.3
+0.2
+0.1
+0
+0
+
+0.2
+
+To investigate this, we ran a grid of 17 additional simulations with the same setup as for our second model
+variation (as described in Section 3), but now assuming
+that a fixed fraction facc of the envelope is accreted onto
+the BH. We vary facc between 0.0 and 0.99. We still estimate the final separations by considering the binding
+energy of the envelope, after subtracting the mass accreted by the BH. These additional simulations are run
+at a lower resolution of 105 systems per simulation.
+Figure 7 shows the fractional rate of PISN gap mergers, fgal,45 as a function of facc . We see that the rate of
+PISN gap mergers increases with facc and peaks when
+BHs are assumed to accrete about 85% of their companions envelope. This simulation predicts as many as 42%
+of BBH mergers from PISN mass gap systems. For even
+higher values of facc , we see that there is not enough
+of the envelope left to sufficiently shrink the orbit. We
+note that such high rates for PISN gap mergers are already contradicted by first and second LIGO and Virgo
+observing run (Abbott et al. 2019b).
+These simulations further show that we can only obtain a significant fraction of PISN gap mergers (> 2%)
+when BHs accrete at least 35% of their companion’s envelope mass during the envelope inspiral. This would
+suggest accretion rates that significantly surpass the
+Hoyle-Lyttleton accretion rate (MacLeod & RamirezRuiz 2015) during every CE event. We consider it unlikely that such high rates are physical.
+We thus consider it very unlikely that MBH,max can
+be significantly increased beyond the values as quoted
+in Tables 1 and 2 for systems originating from isolated
+binary evolution.
+
+0.6
+
+0.8
+
+Accreted envelope fraction, facc
+
+1.0
+
+Figure 7. The fraction of BBH mergers with a component
+mass MBH > 45 M (i.e. f45 ), as a function of the fraction
+of the companion’s envelope that is accreted during each CE
+mass transfer episode. Each point represents one simulation
+from the additional exploratory grid of 17 simulations discussed in Section 6.1.2.
+
+PISN mass gap events from isolated binaries
+4.5
+4.0
+
+Lower mass gap
+
+MNS [M ]
+
+3.5
+3.0
+2.5
+2.0
+1.5
+1.0
+0.51
+
+NS birth mass [M ]
+1.0
+1.2
+
+1.4
+1.6
+
+10
+
+1.8
+2.0
+
+2.5
+3.0
+
+100
+
+Mcomp [M ]
+Figure 8. The maximum mass for an accreting NS according to Equation 2 as a function of the companion mass at
+the moment of Roche-lobe overflow. This illustrates that
+only neutron stars that are born close to the lower mass gap
+will be able to accrete enough to end with a final mass in the
+lower mass gap.
+
+In Figure 8 we show the maximum mass for accreting
+NS according to Equation 2 as a function of the companion mass at the moment of Roche-lobe overflow. This
+illustrates that only neutron stars that are born close to
+the lower mass gap will be able to accrete enough to end
+with a final mass in the gap. We thus expect that extending our model variation 2 to mass ranges relevant for
+neutron stars, would not significantly pollute the lower
+mass gap, which is in accordance with the findings in
+MacLeod & Ramirez-Ruiz (2015).
+6.3. Caveats
+We emphasize that the simulations presented in this
+paper are extreme by design. We do not consider them
+realistic, but they are chosen to constrain the maximum
+amount by which the isolated binary evolutionary channel can pollute the PISN mass gap.
+Our results are subject to all caveats that apply to
+population synthesis simulations that make use of approximate evolutionary algorithms (see e.g., Langer
+et al. 2020). Of primary concern is the treatment of
+the common-envelope phase, which is one of the least
+understood phases of binary interaction. A specific example is the stability of mass transfer in cases where
+the donor star evolves to become a convective red giant
+(e.g., Pavlovskii & Ivanova 2015; Pavlovskii et al. 2016,
+and references therein).
+The treatment we adopt in
+our second model variation is inspired by the results of
+hydro-dynamical simulations by MacLeod & RamirezRuiz (2015) and uses very simple scaling arguments as
+a recipe for accretion onto the compact object. The
+
+19
+
+predictions for the final separation after the common
+envelope phase are based on simple energy arguments
+(Webbink 1984). The treatment of this process is simplistic, and we hope this will be reconsidered carefully
+in future work as the understanding of the commonenvelope phase increases.
+We are further affected by uncertainties in massive
+star evolution. The main open questions concern the
+role of stellar wind mass loss (e.g., Smith 2014; Renzo
+et al. 2017), and interior mixing (e.g., Maeder & Meynet
+2000), which affect the final core masses and radial evolution. The algorithms used in our simulations are based
+on detailed evolutionary simulations for single stars with
+masses up to 50 M . Above 50 M we rely on extrapolations of fits.
+7. CONCLUSIONS AND SUMMARY
+
+In this work we investigate the BBH population in
+the pair-instability mass gap due to isolated binaries,
+by allowing for accretion onto BHs at a super-Eddington
+rate from their stellar companions. We accomplish this
+by means of the population synthesis code COMPAS.
+We place an upper limit on the contribution of isolated binaries to creating PISN mass gap events, defined as BBH mergers that contain a component with
+MBH > 45 M . We find that a substantial population
+of BBH systems with a component in the PISN mass
+gap can be formed via stable super-Eddington accretion onto BHs (see Figure 1). However, these systems
+will not contribute to the BBH merger rate since their
+binary orbits are typically too wide to merge within a
+Hubble time (Table 3).
+In our most optimistic model, which allows for accretion onto BHs during both stable mass transfer and
+during a CE phase (model 3, combined), we find that
+less than about 2% of all BBH mergers are expected
+to contain one component in the PISN mass gap (see
+Table 1). Moreover, only about 0.5% of the merging
+BBH systems in this model variation have a total mass
+MBBH ≥ 90 M (see Figure 3 and Table 2). By design this model includes extreme assumptions about
+the accretion physics. More conventional assumptions
+significantly lower these fractions.
+Our results show that the classical isolated binary formation scenario of BBHs is not expected to significantly
+pollute the pair-instability mass gap when compared to
+other pathways proposed in the literature (see Figure 5).
+None of our simulations produce a merging BBH system
+with a total mass MBBH ≥ 100 M (Table 2).
+We argue that BBH systems with MBBH ≤ 100 M
+and extreme mass ratios, combined with an aligned spin
+
+20
+
+van Son et al.
+
+orientation could be indicative of BHs that underwent
+super-Eddington accretion from a companion star (Figure 6). However, at the time of writing, predictions
+from different pathways for the maximum masses, mass
+ratios and BH spins are not sufficiently constrained to
+decisively differentiate between pathways.
+We predict that the BBH population cannot be explained by the isolated binary evolution channel alone
+if more than 1% of all BBH mergers has a mass higher
+than 90 M . Future detections of PISN mass gap events
+will enable us to determine the relative contribution of
+different channels to the overall population of BBHs.
+Our finding that the isolated binary evolutionary scenario does not introduce significant uncertainties for the
+existence and location of the PISN mass gap are promising. This strengthens the predictive power that can be
+drawn from MBH,max for constraining the relative con-
+
+tribution of different formation scenarios (Sedda et al.
+2020), the physics of the progenitors including nuclear
+reaction rates (Farmer et al. 2019), and possibly even
+the Hubble constant (e.g. Farr et al. 2019).
+
+ACKNOWLEDGMENTS
+We thank Y. Götberg, M. MacLeod, E. Ramirez-Ruiz,
+R. Narayan, C. Rodriguez, N. Ivanova and the members of the COMPAS collaboration for insightful discussions. This project was funded in part by the European Union’s Horizon 2020 research and innovation program from the European Research Council (ERC, Grant
+agreement No. 715063), and by the Netherlands Organization for Scientific Research (NWO) as part of the
+Vidi research program BinWaves with project number
+639.042.728. RF is supported by an NWO top grant
+(PI: de Mink) with project number 614.001.501.
+
+REFERENCES
+Abbott, B., Abbott, R., Abbott, T., et al. 2019a, Physical
+Review X, 9, doi: 10.1103/physrevx.9.031040
+Abbott, B. P., Abbott, R., Abbott, T. D., et al. 2016a,
+ApJL, 818, L22, doi: 10.3847/2041-8205/818/2/L22
+—. 2016b, PhRvL, 116, 241102,
+doi: 10.1103/PhysRevLett.116.241102
+Abbott, B. P., Abbott, R., Abbott, T. D., et al. 2019b, The
+Astrophysical Journal, 882, L24,
+doi: 10.3847/2041-8213/ab3800
+Abbott, R., Abbott, T. D., Abraham, S., et al. 2020,
+GW190412: Observation of a Binary-Black-Hole
+Coalescence with Asymmetric Masses.
+https://arxiv.org/abs/2004.08342
+Abramowicz, M. A., Czerny, B., Lasota, J. P., &
+Szuszkiewicz, E. 1988, ApJ, 332, 646, doi: 10.1086/166683
+Antonini, F., Gieles, M., & Gualandris, A. 2019, MNRAS,
+486, 5008, doi: 10.1093/mnras/stz1149
+Antonini, F., Toonen, S., & Hamers, A. S. 2017, ApJ, 841,
+77, doi: 10.3847/1538-4357/aa6f5e
+Artymowicz, P., & Lubow, S. H. 1994a, ApJ, 421, 651,
+doi: 10.1086/173679
+—. 1994b, ApJ, 421, 651, doi: 10.1086/173679
+Bachetti, M., Harrison, F. A., Walton, D. J., et al. 2014,
+Nature, 514, 202, doi: 10.1038/nature13791
+Baibhav, V., Gerosa, D., Berti, E., et al. 2020, The mass
+gap, the spin gap, and the origin of merging binary black
+holes. https://arxiv.org/abs/2004.00650
+Baker, J. G., Boggs, W. D., Centrella, J., et al. 2007, ApJ,
+668, 1140, doi: 10.1086/521330
+
+Bardeen, J. M. 1970, Nature, 226, 64,
+doi: 10.1038/226064a0
+Barkat, Z., Rakavy, G., & Sack, N. 1967, PhRvL, 18, 379,
+doi: 10.1103/PhysRevLett.18.379
+Begelman, M. C., Volonteri, M., & Rees, M. J. 2006,
+MNRAS, 370, 289, doi: 10.1111/j.1365-2966.2006.10467.x
+Belczynski, K., Bulik, T., Fryer, C. L., et al. 2010a, ApJ,
+714, 1217, doi: 10.1088/0004-637X/714/2/1217
+—. 2010b, ApJ, 714, 1217,
+doi: 10.1088/0004-637X/714/2/1217
+Belczynski, K., Holz, D. E., Bulik, T., & O’Shaughnessy, R.
+2016a, Nature, 534, 512, doi: 10.1038/nature18322
+Belczynski, K., Kalogera, V., & Bulik, T. 2002, ApJ, 572,
+407, doi: 10.1086/340304
+Belczynski, K., Taam, R. E., Rantsiou, E., & van der Sluys,
+M. 2008, The Astrophysical Journal, 682, 474486,
+doi: 10.1086/589609
+Belczynski, K., Heger, A., Gladysz, W., et al. 2016b, A&A,
+594, A97, doi: 10.1051/0004-6361/201628980
+Belczynski, K., Klencki, J., Fields, C. E., et al. 2020,
+Evolutionary roads leading to low effective spins, high
+black hole masses, and O1/O2 rates for LIGO/Virgo
+binary black holes, EDP Sciences,
+doi: 10.1051/0004-6361/201936528
+Bellovary, J. M., Mac Low, M.-M., McKernan, B., & Ford,
+K. E. S. 2016, ApJL, 819, L17,
+doi: 10.3847/2041-8205/819/2/L17
+Bethe, H. A., & Brown, G. E. 1998, ApJ, 506, 780,
+doi: 10.1086/306265
+
+PISN mass gap events from isolated binaries
+
+21
+
+Bird, S., Cholis, I., Muñoz, J. B., et al. 2016, Physical
+Review Letters, 116, 201301,
+doi: 10.1103/PhysRevLett.116.201301
+
+Flynn, C., Holmberg, J., Portinari, L., Fuchs, B., &
+Jahreiß, H. 2006, MNRAS, 372, 1149,
+doi: 10.1111/j.1365-2966.2006.10911.x
+
+Blundell, K. M., & Bowler, M. G. 2005, ApJL, 622, L129,
+doi: 10.1086/429663
+
+Fowler, W. A., & Hoyle, F. 1964, ApJS, 9, 201,
+doi: 10.1086/190103
+
+Bond, J. R., Arnett, W. D., & Carr, B. J. 1982, in NATO
+Advanced Science Institutes (ASI) Series C, Vol. 90,
+NATO Advanced Science Institutes (ASI) Series C, ed.
+M. J. Rees & R. J. Stoneham, 303–311
+
+Fraley, G. S. 1968, Ap&SS, 2, 96, doi: 10.1007/BF00651498
+
+Broekgaarden, F. S., Justham, S., de Mink, S. E., et al.
+2019, Monthly Notices of the Royal Astronomical
+Society, 490, 52285248, doi: 10.1093/mnras/stz2558
+
+Fryer, C. L., Belczynski, K., Wiktorowicz, G., et al. 2012,
+ApJ, 749, 91, doi: 10.1088/0004-637X/749/1/91
+
+Brown, G. E. 1995, ApJ, 440, 270, doi: 10.1086/175268
+Carr, B. J. 1975, ApJ, 201, 1, doi: 10.1086/153853
+Chevalier, R. A. 1993, ApJL, 411, L33, doi: 10.1086/186905
+Chruslinska, M., Belczynski, K., Klencki, J., & Benacquista,
+M. 2018, MNRAS, 474, 2937, doi: 10.1093/mnras/stx2923
+de Kool, M. 1990, ApJ, 358, 189, doi: 10.1086/168974
+de Mink, S. E., & Belczynski, K. 2015, ApJ, 814, 58,
+doi: 10.1088/0004-637X/814/1/58
+Di Carlo, U. N., Giacobbo, N., Mapelli, M., et al. 2019a,
+MNRAS, 487, 2947, doi: 10.1093/mnras/stz1453
+Di Carlo, U. N., Mapelli, M., Bouffanais, Y., et al. 2019b,
+arXiv e-prints, arXiv:1911.01434.
+https://arxiv.org/abs/1911.01434
+Dominik, M., Belczynski, K., Fryer, C., et al. 2012, ApJ,
+759, 52, doi: 10.1088/0004-637X/759/1/52
+Dvorkin, I., Uzan, J.-P., Vangioni, E., & Silk, J. 2018,
+MNRAS, 479, 121, doi: 10.1093/mnras/sty1414
+Eddington, A. S. 1926, The Internal Constitution of the
+Stars, ed. Eddington, A. S.
+
+Frank, J., King, A., & Raine, D. J. 2002, Accretion Power
+in Astrophysics: Third Edition (Cambridge University
+Press), 398
+
+Fryer, C. L., Benz, W., & Herant, M. 1996, ApJ, 460, 801,
+doi: 10.1086/177011
+Gerosa, D., & Berti, E. 2019, PhRvD, 100, 041301,
+doi: 10.1103/PhysRevD.100.041301
+Hamann, W.-R., & Koesterke, L. 1998, A&A, 335, 1003
+Hawking, S. 1971, MNRAS, 152, 75,
+doi: 10.1093/mnras/152.1.75
+Heger, A., & Woosley, S. E. 2002, ApJ, 567, 532,
+doi: 10.1086/338487
+Heger, A., Woosley, S. E., & Spruit, H. C. 2005, ApJ, 626,
+350, doi: 10.1086/429868
+Hobbs, G., Lorimer, D. R., Lyne, A. G., & Kramer, M.
+2005, MNRAS, 360, 974,
+doi: 10.1111/j.1365-2966.2005.09087.x
+Holz, D. E., & Hughes, S. A. 2005, ApJ, 629, 15,
+doi: 10.1086/431341
+Houck, J. C., & Chevalier, R. A. 1991, ApJ, 376, 234,
+doi: 10.1086/170272
+Hurley, J. R., Pols, O. R., & Tout, C. A. 2000, MNRAS,
+315, 543, doi: 10.1046/j.1365-8711.2000.03426.x
+
+Eggleton, P. P. 1983, ApJ, 268, 368, doi: 10.1086/160960
+
+Hurley, J. R., Tout, C. A., & Pols, O. R. 2002, MNRAS,
+329, 897, doi: 10.1046/j.1365-8711.2002.05038.x
+
+Eldridge, J. J., & Maund, J. R. 2016, MNRAS, 461, L117,
+doi: 10.1093/mnrasl/slw099
+
+Iben, Icko, J., & Livio, M. 1993, PASP, 105, 1373,
+doi: 10.1086/133321
+
+Fabrika, S. 2004, Astrophys. Space Phys. Res., 12, 1.
+https://arxiv.org/abs/astro-ph/0603390
+
+Inayoshi, K., Haiman, Z., & Ostriker, J. P. 2016, MNRAS,
+459, 3738, doi: 10.1093/mnras/stw836
+
+Farmer, R., Renzo, M., de Mink, S. E., Marchant, P., &
+Justham, S. 2019, The Astrophysical Journal, 887, 53,
+doi: 10.3847/1538-4357/ab518b
+
+Israel, G. L., Belfiore, A., Stella, L., et al. 2017, Science,
+355, 817, doi: 10.1126/science.aai8635
+
+Farr, W. M., Fishbach, M., Ye, J., & Holz, D. E. 2019,
+ApJL, 883, L42, doi: 10.3847/2041-8213/ab4284
+Farr, W. M., Sravan, N., Cantrell, A., et al. 2011, ApJ, 741,
+103, doi: 10.1088/0004-637X/741/2/103
+Fishbach, M., Farr, W. M., & Holz, D. E. 2020, The
+Astrophysical Journal, 891, L31,
+doi: 10.3847/2041-8213/ab77c9
+Fishbach, M., & Holz, D. E. 2017, ApJ, 851, L25,
+doi: 10.3847/2041-8213/aa9bf6
+
+Ivanova, N., Justham, S., Chen, X., et al. 2013, A&A Rv,
+21, 59, doi: 10.1007/s00159-013-0059-2
+Jiang, Y.-F., Stone, J. M., & Davis, S. W. 2014, ApJ, 796,
+106, doi: 10.1088/0004-637X/796/2/106
+Johnson, J. L., & Haardt, F. 2016, PASA, 33, e007,
+doi: 10.1017/pasa.2016.4
+Justham, S., Podsiadlowski, P., & Vink, J. S. 2014, ApJ,
+796, 121, doi: 10.1088/0004-637X/796/2/121
+Kimpson, T. O., Spera, M., Mapelli, M., & Ziosi, B. M.
+2016, MNRAS, 463, 2443, doi: 10.1093/mnras/stw2085
+
+22
+
+van Son et al.
+
+King, A. R., & Kolb, U. 1999, Monthly Notices of the
+Royal Astronomical Society, 305, 654,
+doi: 10.1046/j.1365-8711.1999.02482.x
+Kopparapu, R. K., Hanna, C., Kalogera, V., et al. 2008,
+ApJ, 675, 1459, doi: 10.1086/527348
+Kroupa, P. 2001, MNRAS, 322, 231,
+doi: 10.1046/j.1365-8711.2001.04022.x
+Langer, N., Baade, D., Bodensteiner, J., et al. 2020,
+Astronomy & Astrophysics, 633, A40,
+doi: 10.1051/0004-6361/201936736
+Lauterborn, D. 1970, A&A, 7, 150
+Leigh, N. W. C., Böker, T., Maccarone, T. J., & Perets,
+H. B. 2013, MNRAS, 429, 2997,
+doi: 10.1093/mnras/sts554
+Lipunov, V. M., Kornilov, V., Gorbovskoy, E., et al. 2017,
+NewA, 51, 122, doi: 10.1016/j.newast.2016.08.017
+Lovegrove, E., & Woosley, S. E. 2013, ApJ, 769, 109,
+doi: 10.1088/0004-637X/769/2/109
+Luca, V. D., Desjacques, V., Franciolini, G., Malhotra, A.,
+& Riotto, A. 2019, Journal of Cosmology and
+Astroparticle Physics, 2019, 018018,
+doi: 10.1088/1475-7516/2019/05/018
+MacLeod, M., & Ramirez-Ruiz, E. 2015, ApJL, 798, L19,
+doi: 10.1088/2041-8205/798/1/L19
+Madau, P., Haardt, F., & Dotti, M. 2014, ApJL, 784, L38,
+doi: 10.1088/2041-8205/784/2/L38
+Maeder, A., & Meynet, G. 2000, A&A, 361, 159
+Mapelli, M., Spera, M., Montanari, E., et al. 2020, The
+Astrophysical Journal, 888, 76,
+doi: 10.3847/1538-4357/ab584d
+McKernan, B., Ford, K. E. S., Kocsis, B., Lyra, W., &
+Winter, L. M. 2014, MNRAS, 441, 900,
+doi: 10.1093/mnras/stu553
+McKernan, B., Ford, K. E. S., & O’Shaughnessy, R. 2020a,
+Black hole, neutron star and white dwarf merger rates in
+AGN disks. https://arxiv.org/abs/2002.00046
+McKernan, B., Ford, K. E. S., OShaugnessy, R., &
+Wysocki, D. 2020b, Monthly Notices of the Royal
+Astronomical Society, 494, 12031216,
+doi: 10.1093/mnras/staa740
+McKernan, B., Ford, K. E. S., Bellovary, J., et al. 2018,
+ApJ, 866, 66, doi: 10.3847/1538-4357/aadae5
+McMillan, P. J. 2011, MNRAS, 414, 2446,
+doi: 10.1111/j.1365-2966.2011.18564.x
+Menon, A., & Heger, A. 2017, MNRAS, 469, 4649.
+https://arxiv.org/abs/1703.04918
+Mirbabayi, M., Gruzinov, A., & Norea, J. 2020, Spin of
+primordial black holes, IOP Publishing,
+doi: 10.1088/1475-7516/2020/03/017
+
+Mondal, S., Belczyski, K., Wiktorowicz, G., Lasota, J.-P.,
+& King, A. R. 2019, Monthly Notices of the Royal
+Astronomical Society, doi: 10.1093/mnras/stz3227
+Nadezhin, D. K. 1980, Ap&SS, 69, 115,
+doi: 10.1007/BF00638971
+Neijssel, C. J., Vigna-Gómez, A., Stevenson, S., et al. 2019,
+MNRAS, 2457, doi: 10.1093/mnras/stz2840
+Neo, S., Miyaji, S., Nomoto, K., & Sugimoto, D. 1977,
+PASJ, 29, 249
+Ni, W.-T. 2018, in European Physical Journal Web of
+Conferences, Vol. 168, European Physical Journal Web of
+Conferences, 01004, doi: 10.1051/epjconf/201816801004
+Öpik, E. 1924, Tartu Obs. Publ., 25, 6
+O’Shaughnessy, R., Belczynski, K., & Kalogera, V. 2008,
+ApJ, 675, 566, doi: 10.1086/526334
+Özel, F., Psaltis, D., Narayan, R., & McClintock, J. E.
+2010, ApJ, 725, 1918,
+doi: 10.1088/0004-637X/725/2/1918
+Paczyński, B. 1970, AcA, 20, 47
+Pavlovskii, K., & Ivanova, N. 2015, Monthly Notices of the
+Royal Astronomical Society, 449, 44154427,
+doi: 10.1093/mnras/stv619
+Pavlovskii, K., Ivanova, N., Belczynski, K., & Van, K. X.
+2016, Monthly Notices of the Royal Astronomical
+Society, 465, 20922100, doi: 10.1093/mnras/stw2786
+Peters, P. C. 1964, Physical Review, 136, 1224,
+doi: 10.1103/PhysRev.136.B1224
+Pezzulli, E., Valiante, R., & Schneider, R. 2016, MNRAS,
+458, 3047, doi: 10.1093/mnras/stw505
+Pols, O. R., Tout, C. A., Eggleton, P. P., & Han, Z. 1995,
+MNRAS, 274, 964
+Popham, R., Woosley, S. E., & Fryer, C. 1999, ApJ, 518,
+356, doi: 10.1086/307259
+Postnov, K. A., & Yungelson, L. R. 2014, Living Reviews in
+Relativity, 17, 3, doi: 10.12942/lrr-2014-3
+Raidal, M., Vaskonen, V., & Veermäe, H. 2017, JCAP,
+2017, 037, doi: 10.1088/1475-7516/2017/09/037
+Rakavy, G., & Shaviv, G. 1967, ApJ, 148, 803,
+doi: 10.1086/149204
+Remillard, R. A., & McClintock, J. E. 2006, ARA&A, 44,
+49, doi: 10.1146/annurev.astro.44.051905.092532
+Renzo, M., Farmer, R. J., Justham, S., et al. 2020,
+Sensitivity of the lower edge of the pair-instability black
+hole mass gap to the treatment of time-dependent
+convection, Oxford University Press (OUP),
+doi: 10.1093/mnras/staa549
+Renzo, M., Ott, C. D., Shore, S. N., & de Mink, S. E. 2017,
+A&A, 603, A118, doi: 10.1051/0004-6361/201730698
+Renzo, M., Zapartas, E., de Mink, S. E., et al. 2019, A&A,
+624, A66, doi: 10.1051/0004-6361/201833297
+
+PISN mass gap events from isolated binaries
+Rodriguez, C. L., Haster, C.-J., Chatterjee, S., Kalogera,
+V., & Rasio, F. A. 2016, ApJL, 824, L8,
+doi: 10.3847/2041-8205/824/1/L8
+Rodriguez, C. L., Zevin, M., Amaro-Seoane, P., et al. 2019,
+Physical Review D, 100,
+doi: 10.1103/physrevd.100.043027
+Rodriguez, C. L., Zevin, M., Pankow, C., Kalogera, V., &
+Rasio, F. A. 2016, The Astrophysical Journal, 832, L2,
+doi: 10.3847/2041-8205/832/1/l2
+Roupas, Z., & Kazanas, D. 2019, A&A, 632, L8,
+doi: 10.1051/0004-6361/201937002
+Sadowski, A., & Narayan, R. 2015, MNRAS, 453, 3213,
+doi: 10.1093/mnras/stv1802
+Sana, H., de Koter, A., de Mink, S. E., et al. 2013, A&A,
+550, A107, doi: 10.1051/0004-6361/201219621
+Sana, H., Le Bouquin, J.-B., Lacour, S., et al. 2014, ApJS,
+215, 15, doi: 10.1088/0067-0049/215/1/15
+Sasaki, M., Suyama, T., Tanaka, T., & Yokoyama, S. 2016,
+Physical Review Letters, 117,
+doi: 10.1103/physrevlett.117.061101
+Schneider, F. R. N., Ohlmann, S. T., Podsiadlowski, P.,
+et al. 2019, Nature, 574, 211214,
+doi: 10.1038/s41586-019-1621-5
+Schnittman, J. D., & Buonanno, A. 2007, The
+Astrophysical Journal, 662, L63, doi: 10.1086/519309
+Schutz, B. F. 1986, Nature, 323, 310, doi: 10.1038/323310a0
+Secunda, A., Bellovary, J., Mac Low, M.-M., et al. 2019,
+ApJ, 878, 85, doi: 10.3847/1538-4357/ab20ca
+Secunda, A., Bellovary, J., Low, M.-M. M., et al. 2020,
+Orbital Migration of Interacting Stellar Mass Black Holes
+in Disks around Supermassive Black Holes II. Spins and
+Incoming Objects. https://arxiv.org/abs/2004.11936
+Sedda, M. A. 2020, Birth, Life, and Death of Black Hole
+Binaries around Supermassive Black Holes: Dynamical
+Evolution of Gravitational Wave Sources, American
+Astronomical Society, doi: 10.3847/1538-4357/ab723b
+Sedda, M. A., Mapelli, M., Spera, M., Benacquista, M., &
+Giacobbo, N. 2020, Fingerprints of binary black hole
+formation channels encoded in the mass and spin of
+merger remnants. https://arxiv.org/abs/2003.07409
+Smith, N. 2014, ARA&A, 52, 487,
+doi: 10.1146/annurev-astro-081913-040025
+Soberman, G. E., Phinney, E. S., & van den Heuvel,
+E. P. J. 1997, A&A, 327, 620
+Spera, M., Mapelli, M., Giacobbo, N., et al. 2019, MNRAS,
+485, 889, doi: 10.1093/mnras/stz359
+Stevenson, S., Sampson, M., Powell, J., et al. 2019, The
+Astrophysical Journal, 882, 121,
+doi: 10.3847/1538-4357/ab3981
+
+23
+
+Stevenson, S., Vigna-Gómez, A., Mandel, I., et al. 2017,
+Nature Communications, 8, 14906,
+doi: 10.1038/ncomms14906
+Tchekhovskoy, A., McKinney, J. C., & Narayan, R. 2012,
+in Journal of Physics Conference Series, Vol. 372, Journal
+of Physics Conference Series, 012040,
+doi: 10.1088/1742-6596/372/1/012040
+Toonen, S., Hamers, A., & Portegies Zwart, S. 2016,
+Computational Astrophysics and Cosmology, 3, 6,
+doi: 10.1186/s40668-016-0019-0
+van den Heuvel, E. P. J. 1994, in Saas-Fee Advanced
+Course 22: Interacting Binaries, ed. S. N. Shore,
+M. Livio, E. P. J. van den Heuvel, H. Nussbaumer, &
+A. Orr, 263–474
+van den Heuvel, E. P. J., Portegies Zwart, S. F., & de
+Mink, S. E. 2017, MNRAS, 471, 4256,
+doi: 10.1093/mnras/stx1430
+Vigna-Gómez, A., Justham, S., Mandel, I., de Mink, S. E.,
+& Podsiadlowski, P. 2019, ApJL, 876, L29,
+doi: 10.3847/2041-8213/ab1bdf
+Vigna-Gómez, A., Neijssel, C. J., Stevenson, S., et al. 2018,
+MNRAS, 481, 4009, doi: 10.1093/mnras/sty2463
+Vink, J. S., & de Koter, A. 2005, A&A, 442, 587,
+doi: 10.1051/0004-6361:20052862
+Vink, J. S., de Koter, A., & Lamers, H. J. G. L. M. 2000,
+A&A, 362, 295
+—. 2001, A&A, 369, 574, doi: 10.1051/0004-6361:20010127
+Volonteri, M., & Rees, M. J. 2005, ApJ, 633, 624,
+doi: 10.1086/466521
+Volonteri, M., Silk, J., & Dubus, G. 2015, ApJ, 804, 148,
+doi: 10.1088/0004-637X/804/2/148
+Webbink, R. F. 1984, ApJ, 277, 355, doi: 10.1086/161701
+Woosley, S. E. 2017, ApJ, 836, 244,
+doi: 10.3847/1538-4357/836/2/244
+Woosley, S. E., Blinnikov, S., & Heger, A. 2007, Nature,
+450, 390, doi: 10.1038/nature06333
+Woosley, S. E., Heger, A., & Weaver, T. A. 2002, Reviews
+of Modern Physics, 74, 1015,
+doi: 10.1103/RevModPhys.74.1015
+Wu, S., Coughlin, E. R., & Nixon, C. 2018, Monthly
+Notices of the Royal Astronomical Society, 478,
+30163024, doi: 10.1093/mnras/sty971
+Wyithe, J. S. B., & Loeb, A. 2012, MNRAS, 425, 2892,
+doi: 10.1111/j.1365-2966.2012.21127.x
+Xu, X.-J., & Li, X.-D. 2010a, ApJ, 716, 114,
+doi: 10.1088/0004-637X/716/1/114
+—. 2010b, ApJ, 722, 1985,
+doi: 10.1088/0004-637X/722/2/1985
+Yang, Y., Bartos, I., Haiman, Z., et al. 2019, ApJ, 876, 122,
+doi: 10.3847/1538-4357/ab16e3
+
+24
+
+van Son et al.
+Zel’dovich, Y. B., & Novikov, I. D. 1966, AZh, 43, 758
+
+25
+
+PISN mass gap events from isolated binaries
+APPENDIX
+
+A. ANGULAR MOMENTUM LOSS DURING (NON) CONSERVATIVE MASS TRANSFER
+
+To evaluate the evolution of the binary separation during mass transfer, we need to quantify the angular momentum
+that is lost from the system. For this purpose we follow classical arguments describing the details of mass transfer in
+binaries, (e.g. those presented in van den Heuvel 1994 and similarly Section 4 from Renzo et al. 2019, and references
+therein).
+The orbital evolution of binaries is well constrained by the change in total orbital angular momentum, J:
+J2 = G
+
+M2d M2a
+a(1 − e2 )
+Md + Ma
+
+(A1)
+
+with G the gravitational constant, a the orbital separation, e the eccentricity and Md the mass of the donor star, annd
+MBH the mass of the accreting BH.
+We parametrise the amount of mass lost from the system with a conservativeness parameter β, defining ṀBH =
+−β Ṁd where ṀBH and −Ṁd are the mass accretion and donation rates respectively. We furthermore approximate
+the specific orbital angular momentum of the ejected matter as γ times the specific angular momentum of the binary.
+The specific angular momentum of the ejected matter, hloss , can then be rewritten in terms of γ and β:
+
+hloss = γ
+
+J
+J̇
+,
+=
+M1 + M2
+Ṁ1 + Ṁ2
+
+(A2)
+
+J̇
+γ(1 − β)Ṁd
+→ =
+.
+J
+Md + M a
+Using Eq. A1 we can derive a very general formula for the change in angular momentum:
+2
+
+J̇
+Ṁd
+Ṁa
+Ṁd + Ṁa
+ȧ
+(−2eė)
+=2
++2
+−
++ +
+J
+Md
+Ma
+Md + Ma
+a (1 − e2 )
+
+(A3)
+
+In the case of Roche-lobe overflow we assume the orbit is fully circularised, and thus the last term is zero (see e.g.
+Soberman et al. 1997, for an expression of the orbital evolution incuding eccentricity). Substituting the result from
+Eq. A2 and the definition of β, we can write this for the orbital evolution;
+Ṁd
+ȧ
+= −2
+a
+Md
+
+
+
+Md
+Md
+1
+1−β
+− (γ + )(1 − β)
+MBH
+2
+Md + MBH
+
+
+(A4)
+
+or, rewriting to explicitly show the dependence on our different parametrisation parameters:
+Ṁd
+ȧ
+= −2
+{1 − f(β, MBH , Md , γ)}
+a
+Md
+
+(A5)
+
+Since Ṁd < 0, we see that the orbit shrinks (ȧ < 0) as soon as f(β, q, γ) is larger than one.
+It is now a matter of specifying γ and β.
+A.1. Varying the mass conservation
+In this work we assume isotropic reemission of the ejected matter. This assumes that the mass is ejected from
+the vicinity of the accretor, e.g. when mass is lost via bipolar outflows from a compact object. In this case we can
+approximate γ1 = Md /MBH (e.g. Soberman et al. 1997). We can rewrite Equation A5 as
+
+
+
+β
+1 1
+1 > 1 orbit shrinks, (ȧ < 0)
+f (β, q, γ1 ) = +
++
+(1 − β)
+,
+(A6)
+q
+q
+2
+q + 1 < 1 orbit widens, (ȧ > 0)
+where we have used q ≡ MBH /Md to describe the mass ratio.
+
+26
+
+van Son et al.
+= 0.0
+= 0.2
+= 0.4
+= 0.6
+= 0.8
+= 1.0
+
+2.2
+
+Isotropic remission
+1 = Md/Ma
+
+2.0
+1.8
+
+f (β, q, γ1)
+
+1.6
+
+qwiden = 1.0
+
+1.4
+1.2
+
+orbit shrinks
+
+1.0
+0.8
+
+orbit widens
+qwiden = 0.79
+
+0.6
+0.4
+
+0.6
+
+0.8
+
+1.0
+
+1.2
+
+1.4
+
+q = MBH/Md
+Figure 9. Parametrisation of the specific orbital angular momentum evolution that determines whether mass transfer will
+shrink (above the dashed black line) or widen (below the dashed black line) the binary orbit. The conservativeness parameter
+β varies from completely non-conservative (β = 0) to completely conservative (β = 1). This assumes isotropic reemission of the
+ejected matter, i.e., assuming the ejected matter carries the specific angular momentum of the accretor.
+
+Figure 9 displays the condition for widening or shrinking the orbit (Eq. A6) as a function of the mass ratio and the
+conservativeness parameter. In the case of stable mass transfer from a star onto a BH, the binary typically starts with
+q ≤ 1 and then moves to higher q. For fully non-conservative mass transfer (β = 0.0) the system will widen as soon
+as the mass ratio q > qwiden = 0.76. For fully conservative mass transfer (β = 1.0) the system will widen as soon as
+the mass ratio q > qwiden = 1.0. Systems where the accreting BH is more massive than the donor at the start of the
+stable mass transfer will always widen.
+Figure 9 shows that mass transfer will always widen the orbit when the mass ratio q is larger than some mass ratio
+qwiden , as long as the lost mass is presumed to carry the specific angular momentum of the accretor. We therefore
+expect high amounts of mass transfer to always lead to significant widening of the binary system, regardless of the
+conservativeness of the mass transfer, and thus prevent the BBH from merging within a Hubble time.
+In model 1, allowing for stable super Eddington accretion onto BHs, we assume the mass transfer is completely
+conservative (β = 1). Based on Figure 9 we conclude that varying the mass conservation in model 1 would still lead
+to significant widening of the BBHs and thus would not change our main conclusions.
+A.2. Varying the specific angular momentum lost
+If the mass that is lost from the system carries sufficiently high specific angular momentum, the orbit will shrink. If
+the lost mass ends up in a Keplerian orbit around the binary, it is called a circumbinary ring. This may occur when
+mass escapes through the outer Lagrangian point, L2. The angular momentum of such a ring would correspond to
+(Artymowicz & Lubow 1994a):
+γ2 =
+
+(Md + MBH )2 √
+α,
+Md MBH
+
+(A7)
+
+where α = aring /a is the ratio of the orbital separation of the binary over the distance between the circumbinary ring
+and the center of mass. For typical parameter of viscous disks, the location of the inner edge of a circumbinary disk
+varies between 1.8a and 2.6a (Artymowicz & Lubow 1994b).
+
+27
+
+PISN mass gap events from isolated binaries
+Equation A5 can then be rewritten as:
+
+β
+(1 + q)(1 − β) √
+1 − β √ > 1
+f (β, q, γ2 ) = +
+α+
+α
+< 1
+q
+q
+2(q + 1)
+
+orbit shrinks, (ȧ < 0)
+
+.
+
+(A8)
+
+orbit widens, (ȧ > 0)
+
+We have calculated the effect of this mode of non-conservative mass transfer for α = 2. Larger α lead to higher
+ȧ, though varying between 1.8a and 2.6a has little effect. We find that non-conservative mass transfer (β ≤ 0.3) in
+combination with high mass-transfer rates leads to shrinking of the binary orbit in a runaway fashion, which leads to
+a stellar merger. The orbit will shrink with increasing speeds (increasing f (β, q, γ2 )) as the mass ratio q increases.
+For mass transfer with slightly to highly conservative mass transfer (β ≥ 0.3) it is unclear what the fate of the
+systems will be. Test simulations using α = 2, indicate that most BHs in this situation will plunge into their
+companions envelope, unless the mass transfer efficiency is highly fine-tuned. More detailed simulations of this specific
+scenario are needed to determine its plausibility.
+B. BH FORMATION YIELDS AND MERGER RATES
+
+Our calculation of the BH formation yields follow Dominik et al. (2012) and Neijssel et al. (2019) but includes the
+weights from the adaptive sampling (as described in Broekgaarden et al. 2019).
+We start by calculating the total stellar mass contained in a synthetic galaxy (M?,gal ), assuming a Kroupa (2001)
+initial mass function with initial masses in the range 0.08 − 200 M . We compute the subset of this synthetic galaxy
+that is spanned by our set of initial parameters (M?,sub−gal ) by integrating over the volume of initial parameter space.
+In our simulations, we adopt a binary fraction fbin = 0.5 (e.g. Sana et al. 2013) and draw initial masses in the range
+20 − 150 M . The fraction of the synthetic Universe that is spanned by our initial parameter space is now computed
+as follows:
+fsim =
+
+M?,sub−gal
+.
+M?,gal
+
+(B9)
+
+The total star forming mass that our simulation represents is given by:
+−1
+MSF = Msim · fsim
+,
+
+(B10)
+
+where Msim is the total initial mass that is evolved in COMPAS. This is used to calculate the number of merging BBHs
+formed per unit of star forming mass:
+
+PN
+1, if type(i)= BBH, and t
+δ
+w
+NBBH,tH
+delay,i < tH
+t
+,i
+i
+= i H
+,
+with δtH ,i =
+.
+(B11)
+
+MSFR
+MSF
+0, otherwise
+Here NBBH,tH is the total number of BBHs formed with a coalescence time that is less than the Hubble time, δtH ,i is
+the Dirac delta function that equals 1 for a BBH system with a coalescence time that is less than the Hubble time,
+i.e. if it merges within the age of the Universe, and N is the total number of samples in the simulation N= 1 × 106 .
+Finally, wi is the formation weight of the binary based on the adaptive importance sampling algorithm as described
+in Broekgaarden et al. (2019). We estimate the absolute 1–σ statistical sampling uncertainty on the number of BBHs
+that merge in a Hubble time NBBH,tH by computing the variance about the mean, that is
+hP
+i2
+N
+N
+(δ
+w
+)
+X
+t
+,i
+i
+H
+i
+,
+(B12)
+σ2 ≈
+(δt2H ,i wi2 ) −
+N
+i
+
+We calculate merger rates for a synthetic galaxy following the same procedure as Belczynski et al. (2016a) and de
+Mink & Belczynski (2015). For this purpose, we calculate the number of coalescing BBHs occurring in a synthetic
+galaxy, observed per Myr today;
+NBBH,10
+NBBH,gal =
+· SFRgal · tgal ,
+(B13)
+MSFR
+with a constant star formation rate, SFRgal = 3.5 M yr−1 , and a galaxy lifetime tgal = 10 Gyr. These properties
+are chosen to resemble the Milky Way (following estimates from Flynn et al. 2006; McMillan 2011). The number of
+
+28
+
+van Son et al.
+
+merging BBH systems per unit star forming mass, NBBH,10 /MSFR , is defined in a similar way as in Equation B11,
+but we now require the BBHs to merge in less than the age of the galaxy, tgal = 10 Gyr. The statistical sampling
+uncertainty on NBBH,10 is estimated analogous to equation B12.
+The merger rate per synthetic galaxy is then calculated as
+RMWG =
+
+NBBH,gal
+[Myr−1 ],
+tgal
+
+(B14)
+
+note that the age of the synthetic galaxy tgal , cancels out in this equation. tgal only appears in the equivalent of
+Equation B11, when calculating the number of merging BBH systems per unit star forming mass.
+The merger rate per synthetic galaxy can be converted into an approximate volumetric rate following:
+
+
+
+ρgal
+RMWG
+Rvol = 103
+yr−1 Gpc−3
+(B15)
+Mpc−3
+Myr−1
+where ρgal = 0.0116 Mpc−3 is the local density of Milky Way-like galaxies (e.g. Kopparapu et al. 2008).
+All uncertainty ranges on the formation yields and merger rates as quoted in this work are estimates of the 1–σ
+statistical sampling uncertainty following from Equation B12.
+C. REMNANT MASS PRESCRIPTION
+
+To calculate the remnant masses we adopt the delayed model from Fryer et al. (2012) for estimated CO core masses
+at the moment of core collapse MCO < 30 M , while we follow Farmer et al. (2019) for MCO > 30 M .
+Previous works studying the PISN gap (Stevenson et al. 2017; Belczynski et al. 2016a) use Fryer et al. (2012) for
+MCO > 30 M . Fryer et al. (2012) compute the remnant mass based on the estimated helium core masses at the
+moment of core collapse while Farmer et al. (2019) account for a PISN and compute the remnant mass based on
+the estimated CO core masses at the moment of core collapse. Mapping between the helium core masses and PISN
+depends on uncertain physics such as the efficiency and extent of mixing (overshooting) which varies between models
+and with wind mass loss. The CO core mass at the moment of supernova is therefore a more robust parameter than
+the helium core mass at the moment of supernova to map the pre-supernova stellar properties to the final remnant
+mass (Farmer et al. 2019).
+For MCO > 30 M the prescription from Farmer et al. (2019) results in lower remnant masses with respect to
+the prescriptions from Fryer et al. (2012). This is because Fryer et al. (2012) does not account for pulsational pairinstability supernovae. The maximum BH mass formed in our simulation at Z = 0.001 for Farmer et al. (2019) is
+MBH,max = 43.4 M , while MBH,max = 54 M for Fryer et al. (2012).
+D. ADDITIONAL MATERIAL
+
+For each model variation, we provide a python file describing the initial conditions as used in each of our 4
+model variations described in Section 3, and a HDF file containing i.a. a list of compact object properties as resulting from our COMPAS simulations at https://doi.org/10.5281/zenodo.3746936 and https://liekevanson.github.io/
+IsolatedBinaries PISNgap.html.
+
+

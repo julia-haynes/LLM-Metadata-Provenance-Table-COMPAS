@@ -1,0 +1,1324 @@
+                                               Publications of the Astronomical Society of Australia (PASA)
+                                               doi: 10.1017/pas.2020.xxx.
+
+
+
+
+                                               Common–Envelope Episodes that lead to Double
+                                               Neutron Star formation
+arXiv:2001.09829v3 [astro-ph.SR] 21 Jul 2020
+
+
+
+
+                                               Alejandro Vigna-Gómez1,2,3,4,? , Morgan MacLeod5 , Coenraad J. Neijssel2,3,4 , Floor S.
+                                               Broekgaarden5,3,4 , Stephen Justham6,7,8 , George Howitt9,4 , Selma E. de Mink5,8 , Serena
+                                               Vinciguerra10,3,4 , Ilya Mandel3,4,2
+                                               1 DARK, Niels Bohr Institute, University of Copenhagen, Blegdamsvej 17, 2100, Copenhagen, Denmark
+                                               2 Birmingham Institute for Gravitational Wave Astronomy and School of Physics and Astronomy, University of Birmingham,
+
+                                               Birmingham, B15 2TT, United Kingdom
+                                               3 Monash Centre for Astrophysics, School of Physics and Astronomy, Monash University, Clayton, Victoria 3800, Australia
+                                               4 The ARC Center of Excellence for Gravitational Wave Discovery – OzGrav
+                                               5 Harvard-Smithsonian Center for Astrophysics, 60 Garden Street, Cambridge, MA, 02138, USA
+                                               6 School of Astronomy & Space Science, University of the Chinese Academy of Sciences, Beijing 100012, China
+                                               7 National Astronomical Observatories, Chinese Academy of Sciences, Beijing 100012, China
+                                               8 Anton Pannekoek Institute for Astronomy, University of Amsterdam, Postbus 94249, 1090 GE Amsterdam, The Netherlands
+                                               9 School of Physics, University of Melbourne, Parkville, Victoria, 3010, Australia
+                                               10 Max Planck Institute for Gravitational Physics (Albert Einstein Institute), D-30167 Hannover, Germany
+                                               ? Email: avignagomez@nbi.ku.dk
+
+
+
+                                               Abstract
+                                               Close double neutron stars have been observed as Galactic radio pulsars, while their mergers have been
+                                               detected as gamma–ray bursts and gravitational–wave sources. They are believed to have experienced
+                                               at least one common–envelope episode during their evolution prior to double neutron star formation. In
+                                               the last decades there have been numerous efforts to understand the details of the common-envelope
+                                               phase, but its computational modelling remains challenging. We present and discuss the properties of
+                                               the donor and the binary at the onset of the Roche-lobe overflow leading to these common–envelope
+                                               episodes as predicted by rapid binary population synthesis models. These properties can be used as
+                                               initial conditions for detailed simulations of the common–envelope phase. There are three distinctive
+                                               populations, classified by the evolutionary stage of the donor at the moment of the onset of the
+                                               Roche-lobe overflow: giant donors with fully–convective envelopes, cool donors with partially–convective
+                                               envelopes, and hot donors with radiative envelopes. We also estimate that, for standard assumptions,
+                                               tides would not circularise a large fraction of these systems by the onset of Roche-lobe overflow. This
+                                               makes the study and understanding of eccentric mass-transferring systems relevant for double neutron
+                                               star populations.
+
+
+                                               Keywords: binaries – neutron stars – mass transfer – common envelope – population synthesis
+
+
+
+                                               1 INTRODUCTION                                                        one CEE (Ivanova et al., 2013a).
+                                                                                                                        While CEEs are frequently invoked as a fundamen-
+                                               A dynamically-unstable mass transfer episode initiated                tal part of binary evolution, the detailed physics re-
+                                               by a post-main-sequence donor is likely to lead to a                  main poorly understood (Paczynski, 1976; Iben & Livio,
+                                               common-envelope episode (CEE), in which one star en-                  1993; Ivanova et al., 2013b). There have been efforts
+                                               gulfs its companion and the binary spiral closer under                in modelling and understanding the phase through hy-
+                                               the influence of drag forces (Paczynski, 1976). CEEs are              drodynamic simulations, using Eulerian adaptive mesh
+                                               proposed as a solution to the problem of how initially                refinement (Sandquist et al., 1998; Ricker & Taam, 2008;
+                                               wide binaries, whose component stars may expand by                    Passy et al., 2012; Ricker & Taam, 2012; MacLeod &
+                                               tens to thousands of solar radii during their lifetime,               Ramirez-Ruiz, 2015; Staff et al., 2016; MacLeod et al.,
+                                               become close binaries at later stages of evolution (van               2017b; Iaconi et al., 2017, 2018; Chamandy et al., 2018;
+                                               den Heuvel, 1976). Most evolutionary pathways leading                 De et al., 2019; Li et al., 2020; López-Cámara et al.,
+                                               to close compact binaries are expected to involve at least            2019; Shiber et al., 2019), moving meshes (Ohlmann
+                                                                                                                 1
+2                                                                                                   Vigna-Gómez et al.
+
+et al., 2016, 2017; Prust & Chang, 2019), smoothed par-        which may be signatures of common-envelope ejections
+ticle (Rasio & Livio, 1996; Lombardi et al., 2006; Nan-        (Ivanova et al., 2013b; MacLeod et al., 2017a; Blagorod-
+dez et al., 2015; Nandez & Ivanova, 2016; Passy et al.,        nova et al., 2017; Pastorello et al., 2019; Howitt et al.,
+2012; Ivanova & Nandez, 2016; Reichardt et al., 2019),         2020), and Be X-ray binaries (Vinciguerra et al., 2020).
+particle-in-cell (Livio & Soker, 1988) and general rela-          This paper is structured in the following way. Section
+tivistic (Cruz-Osorio & Rezzolla, 2020) methods. Other         2 describes the initial distributions and relevant physical
+approaches pursue detailed stellar modeling (Dewi &            parameterisations used in rapid population synthesis.
+Tauris, 2000; Kruckow et al., 2016; Clayton et al., 2017;      Section 3 presents the results of our study, particularly
+Fragos et al., 2019; Klencki et al., 2020) or binary popu-     Hertzsprung-Russell (HR) diagrams displaying different
+lation synthesis (e.g. Tauris & Bailes, 1996; Nelemans         properties of the systems, as well as their distributions.
+et al., 2000; Dewi et al., 2006; Andrews et al., 2015;         Section 4 discusses the results and some of the caveats.
+Kruckow et al., 2018; Vigna-Gómez et al., 2018). There        Finally, section 5 summarises and presents the conclu-
+is currently no consensus on a thorough understanding          sions of this work.
+of CEEs on all the relevant spatial and time scales.
+   Recent rapid population synthesis studies of double
+                                                               2 POPULATION SYNTHESIS MODEL
+neutron star (DNS) populations have been partially mo-
+tivated by the development of gravitational-wave astron-       We characterise CEEs with the rapid population syn-
+omy. Software tools such as StarTrack (Dominik et al.,         thesis element of the COMPAS suite2 (Stevenson et al.,
+2012; Belczynski et al., 2018; Chruslinska et al., 2017,       2017; Barrett et al., 2018; Vigna-Gómez et al., 2018;
+2018), MOBSE (Giacobbo & Mapelli, 2018, 2019a,b,               Neijssel et al., 2019). Rapid population synthesis re-
+2020), C o m B i n E (Kruckow et al., 2018) and COM-           lies on simplified methods and parameterisations in or-
+PAS (Vigna-Gómez et al., 2018; Chattopadhyay et al.,          der to simulate a single binary from the zero-age main-
+2020) have been used to explore synthetic DNS popula-          sequence (ZAMS) until stellar merger, binary disruption
+tions in detail. Most of those studies focus on predicting     or double compact object (DCO) formation. This ap-
+or matching the observed DNS merger rate, either by            proach relies on sub-second evolution of a single binary
+investigating different parameterisations of the physics       in order to generate a large population within hours
+or varying the parameters within the models. In particu-       using a single processor.
+lar, all of the aforementioned population synthesis codes         In COMPAS, an initial binary is defined as a
+follow a similar simplified treatment of the common            gravitationally-bound system completely specified by
+envelope (CE) phase.                                           its metallicity, component masses, separation and eccen-
+   In this paper, we present a detailed analysis of the        tricity at the ZAMS. We assume that our binaries have
+CEEs that most merging DNSs are believed to experi-            solar metallicity Z = Z = 0.0142 (Asplund et al., 2009).
+ence at some point during their formation (Bhattacharya        The mass of the primary (m1 ), i.e. the more massive star
+& van den Heuvel, 1991; Belczynski et al., 2002; Ivanova       in the binary at birth, is drawn from the initial mass
+et al., 2003; Dewi & Pols, 2003; Dewi et al., 2005; Tauris     function dN/dm1 ∝ m−2.3 1    (Kroupa, 2001) sampled be-
+& van den Heuvel, 2006; Andrews et al., 2015; Tauris           tween 5 ≤ m1 /M ≤ 100. The mass of the secondary
+et al., 2017; Belczynski et al., 2018; Kruckow et al., 2018;   (m2 ) is obtained by drawning from a flat distribution
+Vigna-Gómez et al., 2018). Dominik et al. (2012) pre-         in mass ratio (qZAMS = m2 /m1 ) in the form dN/dq ∝ 1
+viously used rapid population synthesis to study the           with 0.1 < qZAMS ≤ 1 (Sana et al., 2012). The initial
+relationship between CEEs and DNS merger rates. In             separation is drawn from a flat-in-the-log distribution in
+this study, we focus our attention on the properties at        the form dN/da ∝ a−1 with 0.01 < aZAMS /AU < 1000
+the onset of the Roche-lobe overflow (RLOF) episode            (Öpik, 1924). We assume that all our binaries have zero
+leading to the CEE. We consider both long-period non-          eccentricity at formation (the validity of this assumption
+merging DNSs as well as short-period merging DNSs. We          is discussed in Section 4.4.3).
+propose these distributions of binary properties as initial
+conditions for detailed studies of CEEs. We provide the
+                                                               2.1 Adaptive Importance Sampling
+results of this study in the form of a publicly available
+catalogue1 .                                                   COMPAS originally relied on Monte Carlo sampling
+   We examine the properties of binaries unaffected by         from the birth distributions described above. However,
+external dynamical interactions that experience CEEs           this becomes computationally expensive when studying
+on their way to forming DNS systems. We briefly dis-           rare events.
+cuss CEEs leading to DNS formation in the context of              In order to efficiently sample the parameter space
+generating some of the brightest luminous red novae,           leading to DNS formation, we adopt STROOPWAFEL as
+                                                               implemented in COMPAS (Broekgaarden et al., 2019).
+   1 The   database and resources can be found           on
+https://zenodo.org/record/3593843 (Vigna-Gómez, 2019)           2 https://compas.science/
+CEEs that lead to DNS formation                                                                                    3
+
+STROOPWAFEL is an adaptive importance sampling (AIS)           leads to a CEE. Inspired by Ge et al. (2015), for
+algorithm designed to improve the efficiency of sam-           main-sequence (MS) donors, we assume ζdonor =
+pling of unusual astrophysical events. The use of AIS          2.0; for Hertzsprung gap (HG) donors, we assume
+increases the fraction of DNSs per number of binaries          ζdonor = 6.5. For post-helium-ignition phases in
+simulated by ∼ 2 orders of magnitude with respect to           which the donor still has a hydrogen envelope, we
+regular Monte Carlo sampling. After sampling from a            follow Soberman et al. (1997). All mass transfer
+distribution designed to increase DNS yield, the binaries      episodes from stripped post-helium-ignition stars,
+are re-weighted by the ratio of the desired probability        i.e. case BB mass transfer (Delgado & Thomas,
+distribution of initial conditions to the actual sampling      1981; Dewi et al., 2002; Dewi & Pols, 2003) onto a
+probability distribution.                                      neutron star (NS) are assumed to be dynamically
+   We use bootstrapping to estimate the sampling uncer-        stable. For more details and discussion, see Tauris
+tainty. We randomly re-sample each model population            et al. (2015) and Vigna-Gómez et al. (2018).
+with replacement in order to generate a bootstrapped        3. We deviate from Stevenson et al. (2017) and Vigna-
+distribution. We perform this process N = 100 times to         Gómez et al. (2018) by allowing MS accretors to
+get a 10% accuracy of the bootstrapped standard devia-         survive a CEE. Previously, any MS accretor was
+tion. We calculate and report the standard deviation of        mistakenly assumed to imminently lead to a stellar
+the bootstrapped distributions as 1σ error bars.               merger. We now treat MS accretors just like any
+                                                               other stellar type. This does not have any effect
+                                                               on the COMPAS DNS population, as there are no
+2.2 Underlying Physics
+                                                               dynamically unstable mass transfer phases with MS
+We mostly follow the physical model as presented in            accretors leading to DNS formation (see discussion
+Vigna-Gómez et al. (2018). However we highlight key           on formation history in Section 3.1).
+aspects of the model that are particularly relevant for     4. We follow de Kool (1990) in the parameterization
+this work, along with a few non-trivial changes to the         of the binding energy (Ebind ) of the donor star’s
+code. See also Appendix A for a summary and additional         envelope (mdonor,env ) given as:
+details on the setup.
+ 1. We approximate the Roche-lobe radius following                                 −Gmdonor mdonor,env
+                                                                         Ebind =                       ,         (4)
+    the fitting formula provided by Eggleton (1983) in                                 λRdonor
+    the form:
+                              2/3
+      RRL           0.49qRL                                    where G is the gravitational constant and λ is a
+          =      2/3           1/3
+                                   , 0 < qRL < ∞, (1)          numerical factor that parameterises the binding
+       ap   0.6q     + ln(1 + q )
+                  RL                RL
+                                                               energy.
+    where RRL is the effective Roche-lobe radius of the     5. For the value of the λ parameter, we follow the
+    donor, ap = a(1 − e) is the periastron, a and e are        fitting formulae from detailed stellar models as cal-
+    the semi-major axis and eccentricity respectively,         culated by Xu & Li (2010a,b). This λ, originally
+    qRL is the mass ratio; qRL = mdonor /mcomp , with          referred to as λb , includes internal energy and is
+    mdonor and mcomp being the mass of the donor and           implemented in the same way as λNanjing in Star-
+    companion star, respectively. RLOF will occur once         Track (Dominik et al., 2012). Additionally, we fixed
+    Rdonor ≥ RRL , where Rdonor is the radius of the           a bug which underestimated the binding energy of
+    donor.                                                     the envelope. We discuss the effect this has on the
+ 2. We use the properties of the system at the onset           DNS population in Section 3.2.
+    of RLOF in order to determine whether the mass          6. We use the αλ-formalism (Webbink, 1984; de Kool,
+    transfer episode leads to a CEE. Dynamical stability       1990) to determine the post-CEE orbit, with α = 1
+    is determined by comparing the response of the             in all of our CEEs.
+    radius of the donor to (adiabatic) mass loss to the     7. We use the Fryer et al. (2012) delayed supernova
+    response of the Roche-lobe radius to mass transfer.        remnant mass prescription, which was the preferred
+    This is done using the mass-radius exponent                model from Vigna-Gómez et al. (2018). This pre-
+                                                               scription allows for a continuous (gravitational) rem-
+                                 d log Ri                      nant mass distribution between NSs and black-holes,
+                       ζi =                ,         (2)
+                              d log mdonor                     with a transition point at 2.5 M .
+    where the subscript “i” represents either the mass-     8. The remnant mass of NSs with large baryonic mass
+    radius exponent for the donor (ζdonor ) or for the         previously only accounted for neutrino mass loss
+    Roche lobe (ζRL ). We assume that                          instead of an actual equation of state. This has now
+                                                               been corrected. This only affects NSs with remnant
+                         ζdonor < ζRL                (3)       masses larger than ≈ 2.15 M .
+4                                                                                                    Vigna-Gómez et al.
+
+2.3 Tidal Timescales                                          2.3.1 The equilibrium tide for stars with convective
+                                                                    envelopes
+Mass transfer episodes occur in close binaries that ex-
+                                                              Under the equilibrium tide, the synchronisation and
+perienced tidal interactions. The details of these tidal
+                                                              circularisation evolution equations for tides acting on
+interactions are sensitive to the properties of the binary
+                                                              a star of mass mtide from a companion star with mass
+and the structure of the envelope of the tidally distorted
+                                                              mcomp are
+stars, either radiative or convective.
+   The equilibrium tide refers to viscous dissipation in                            2       6
+                                                                  dΩspin         k    q Rtide       Ωorb
+a star that is only weakly perturbed away from the                        =3           2
+                                                                    dt         τtide rg     a     (1 − e2 )6
+shape that it would have in equilibrium (Zahn, 1977).                                                          (5)
+Meanwhile, the dynamical tide (Zahn, 1975) refers to                                2         2 3/2    2 Ωspin
+                                                                            × f2 (e ) − (1 − e ) f5 (e )
+the excitation of multiple internal modes of a star in                                                    Ωorb
+a time-varying gravitational potential; when these os-        and
+cillatory modes are damped, orbital energy is lost to                                            8
+thermal energy (Eggleton et al., 1998; Moe & Kratter,           de            k               Rtide         e
+                                                                   = − 27          q(1 + q)
+2018). Tidal evolution tends to align and synchronise           dt          τtide               a      (1 − e2 )13/2
+                                                                                                                     (6)
+the component spins with the direction of the orbital                  
+                                                                                   11
+                                                                                                              
+                                                                             2              2 3/2     2 Ωspin
+angular momentum vector and circularise the binary                   × f3 (e ) − (1 − e ) f4 (e )               ,
+                                                                                   18                    Ωorb
+(Counselman, 1973; Zahn, 2008).
+   There are numerous uncertainties in tidal evolution.       where fn (e2 ) are polynomial expressions given by Hut
+For example, the role of eccentricity is an active field      (1981). The structure of the tidally deformed star is
+of research. Heartbeat stars are eccentric binaries with      parameterised by k, which is the apsidal motion constant
+close periastron passage which experience tidal excita-       (Lecar et al., 1976) and the intrinsic tidal timescale
+tion of different oscillatory modes (see Shporer et al.       (τtide ), usually associated with viscous dissipation (Zahn,
+2016 and references therein). Eccentric systems may           1977). We follow Hurley et al. (2002) in the calculation of
+also experience resonance locking, which occurs when a        the (k/τtide ) factor, which depends on the evolutionary
+particular tidal harmonic resonates with a stellar oscil-     stage and structure of the star. The mass ratio is defined
+lation mode; this enhances the efficiency of tidal dissipa-   as q =pmcomp /mtide = 1/qRL and the gyration radius as
+                                                              rg = Itide /(mtide Rtide 2 ), where I
+tion (Witte & Savonije, 1999a,b). The high-eccentricity                                              tide and Rtide are the
+regime, previously studied in the parabolic (and chaotic)     moment of inertia and the radius of the tidally deformed
+limit (Mardling, 1995a,b), has recently being revisited       star, respectively. The mean orbital velocity and the
+in the context of both dynamical (Vick & Lai, 2018)           donor spin angular velocity are denoted by Ωorb and
+and equilibrium tides (Vick & Lai, 2020). There are           Ωspin , respectively.
+uncertainties in the low-eccentricity regime: for example,       Given that a > Rtide , for a non-synchronous eccentric
+there is a range of parameterisations for the equilibrium     binary we expect synchronisation to be faster than circu-
+tide, such as the weak friction approximation, turbulent      larisation. If we assume that the system is synchronous
+viscosity and fast tides (Zahn, 2008).                        (Ωorb = Ωspin ), we simplify Equation (6) and estimate
+   Here, we make several simplifying approximations for       the circularisation timescale as
+the synchronisation and circularisation timescales, τsync                      e
+                                                                τcirc = −
+and τcirc respectively, in order to parameterise the tidal                  de/dt
+evolution of the system.                                                                            8
+                                                                                  k               Rtide         1
+   We assume that the equilibrium tide operates on all                 = 27             q(1 + q)                         (7)
+                                                                                τtide              a       (1 − e2 )13/2
+stars with a convective envelope, regardless of the binary                                                  −1
+eccentricity. We use the equilibrium tide description in                                 11
+                                                                          × f3 (e2 ) − (1 − e2 )3/2 f4 (e2 )        .
+the weak friction model as described by Hut (1981) and                                   18
+implemented by Hurley et al. (2002), although this may
+not be accurate for high-eccentricity systems (but see        2.3.2 The dynamical tide for stars with radiative
+Vick & Lai 2020). Since the equilibrium tide is generally           envelopes
+a more efficient energy transport/dissipation mechanism       Following the derivation by Zahn (1977) we can write
+than the dynamical tide for stars with convective en-         the synchronisation and circularisation timescales for
+velopes, we ignore the contribution of the latter. Our        the dynamical tide as
+equilibrium tide model is summarised in Section 2.3.1.                               3      1/2 2
+                                                                               −5/3   Rtide       rg
+   We apply the dynamical tide only to stars with a                  τsync = 52                      (1 + q)−5/6
+radiative envelope. In Section 2.3.2 we present our imple-                           Gmtide       q2
+                                                                                           17/2                (8)
+mentation of the dynamical tide following Zahn (1977),                           −1    D
+as used in Hurley et al. (2002).                                             × E2
+                                                                                      Rtide
+CEEs that lead to DNS formation                                                                                           5
+
+and                                                            culation of k and τtide follows Hurley et al. (2000) and
+                     1/2                           21/2      is uncertain for massive stars. For the radial expansion
+                           (1 + q)−11/6 −1
+             3                             
+          2    Rtide                           D               timescale, the fitting formulae we use are not accurate
+ τcirc =                               E2                 ,
+         21 Gmtide               q            Rtide            in representing the evolution of the star on thermal or
+                                                        (9)    dynamical timescales. These formulae also miss detailed
+where E2 = 1.592 × 10−9 (M/M )2.84 is a second-order           information about the evolution of, e.g., the size of the
+tidal coefficient as fitted by Hurley et al. (2002) from       convective envelope. Additionally, they are not accurate
+the values given by Zahn (1975), under the assumption          in representing the effect of mass loss and mass gain.
+(violated for some of the systems we consider) that close
+binaries are nearly circular. For the dynamical tide, we
+set the tidal separation (D) to be the semilatus rectum        3 RESULTS
+D = a(1 − e2 ). This corresponds to p   the conservation
+of orbital angular momentum Jorb ∝ a(1 − e2 ). This            We present the results of the synthetic population of
+assumption may lead us to underestimate the circular-          binaries which become DNSs. We focus our attention
+isation timescale for stars with radiative envelopes in        on the properties of the systems at the onset of the
+highly eccentric orbits.                                       CEE. If a donor star experiences RLOF, leading to a
+   The dynamical tide is much less efficient than the          dynamically unstable mass transfer episode, the system
+equilibrium tide for virtually all binaries; therefore, we     is classified as experiencing a CEE. In that case we report
+ignore the contribution of dynamical tides for convective-     the properties of the system at the moment of RLOF. We
+envelope stars, even though they are active along with         do not resolve the details of the CEE, such as the possible
+equilibrium tides.                                             delayed onset of the dynamical inspiral phase. Given
+   Given the uncertainties in tidal circularisation effi-      that we are interested in DNS progenitors, all of these
+ciency, we do not include tides in dynamical binary            CEEs will, by selection, experience a successful ejection
+evolution. Instead, we evolve binaries without the im-         of the envelope, i.e. no stellar mergers are reported in this
+pact of tides, then estimate whether tides would have          study. All the data presented in this work are available
+been able to circularise the binary prior to the onset of      at https://zenodo.org/record/3593843 (Vigna-Gómez,
+RLOF leading to a CEE as described below.                      2019).
+
+2.3.3 Radial expansion timescale                                  Our synthetic data set contains about 1,000,000 bina-
+                                                               ries evolved using COMPAS. Out of all the simulated
+The strong dependence of the tidal timescales on Rtide /a
+                                                               binaries, targeted at DNS-forming systems (see Section
+means that tides only become efficient when the star ex-
+                                                               2.1), there are 15,201 CEEs leading to DNS formation.
+pands to within a factor of a few of the binary separation.
+                                                               These provide a far more accurate sampling of the ≈365
+Therefore, the rate of expansion of the star, which de-
+                                                               systems that would be expected for 86,000,000 M of
+pends on the stage of stellar evolution, plays a key role in
+                                                               star-forming mass sampled from the initial conditions.
+determining the efficiency of circularisation: the binary
+                                                               For simplicity, we assume 100% binarity a priori. Never-
+can circularise only if the circularisation timescale of an
+                                                               theless, given our assumed separation distribution that is
+eccentric binary is shorter than the star’s radial expan-
+                                                               capped at 1000 AU, 10% of our systems never experience
+sion timescale. We define this radial expansion timescale
+                                                               any mass transfer episode, resulting in two effectively
+as the radial e-folding time τradial ≡ dt/d log R. This is
+                                                               single stars. While DNSs are believed to form in dif-
+computed by evaluating the local derivatives within the
+                                                               ferent environments, several studies have shown that
+fitting formulae of Hurley et al. (2000) to the detailed
+                                                               metallicity does not play a large role in DNS properties,
+stellar models from Pols et al. (1998).
+                                                               unlike binary black hole or neutron star/black hole for-
+2.3.4 Uncertainties in timescales                              mation (Dominik et al., 2012; Vigna-Gómez et al., 2018;
+                                                               Giacobbo & Mapelli, 2018; Neijssel et al., 2019).
+The timescales defined here, rather than fully accurate
+descriptions of tidal evolution, are used as order of mag-        The results section is structured as follows. Section
+nitude estimates to analyse the overall properties of          3.1 discusses the two dominant formation channels in
+the population. Tidal timescales have significant un-          our model, i.e. the evolutionary history of the binary
+certainties, including in the treatment of the dominant        from ZAMS to DNS formation. Section 3.2 we present
+dissipation mechanism (e.g. weak friction approximation,       a comparison with the results from Vigna-Gómez et al.
+turbulent convection, fast tides) and their parameteri-        (2018). In Section 3.3 we describe the way main results
+sation (Zahn, 2008) and implementation (Hurley et al.,         are presented. In Section 3.4 we report the properties of
+2002). Siess et al. (2013) noted the problem with the          the donor. In section 3.5 we report the properties of the
+E2 fit being commonly misused, both via interpolation          binary, in particular the orbital properties. Finally, in
+and extrapolation of stars above 20 M (see also the            Section 3.6 we present and report the tidal circularisation
+alternative approach of Kushnir et al. 2017). The cal-         timescales.
+6                                                                                                     Vigna-Gómez et al.
+
+Table 1 Properties of the donor star and the binary at the onset of RLOF leading to a CEE. In this Table, we list the
+symbols and units for each parameter, as well as the figure where the parameter is presented.
+
+                               Property                         Symbol               Units   Figure
+                              Luminosity                         Ldonor               L         2
+                        Effective temperature                  Teff,donor              K        2
+                             Stellar phase                          -                  -        2
+                                 Mass                           mdonor                M       3, 10
+                            Envelope mass                      menv,donor             M         -
+                              Core mass                       mcore,donor             M         -
+                          Core mass fraction          fdonor ≡ mcore,donor /mdonor     -        3
+                      Radial expansion timescale              τradial,donor          Myr      6, 8
+                            Binding energy                      |Ebind |              erg      3,9
+                             Eccentricity                           e                  -        4
+                           Semi-major axis                          a                 R       9,10
+                              Periastron                     ap = a(1 − e)            R       4,10
+                           Companion mass                        mcomp                M        10
+                              Total mass               mtotal = mdonor + mcomp        M         5
+                              Mass ratio                  q = mcomp /mdonor            -       5,9
+                       Circularisation timescale                  τcirc              Myr      6, 8
+
+
+3.1 Formation Channels of Double Neutron                        phase. Rapid population synthesis modelling of CEEs
+    Star systems                                                sometimes parameterise these donors in two possible
+                                                                outcomes: optimistic and pessimistic (Dominik et al.,
+Two common evolutionary pathways leading to the
+                                                                2012). The optimistic approach assumes the donor
+formation of DNS from isolated binary evolution are
+                                                                has a clear core/envelope separation and that, as a
+identified in the literature (Bhattacharya & van den
+                                                                result, the two stellar cores can potentially remove the
+Heuvel, 1991; Tauris & van den Heuvel, 2006; Tauris
+                                                                common envelope, allowing the binary to survive the
+et al., 2017). Following Vigna-Gómez et al. (2018), we
+                                                                CEE. Throughout this paper, we assume the optimistic
+refer to these formation channels as Channel I and
+                                                                approach unless stated otherwise. The pessimistic
+Channel II.
+                                                                approach assumes that dynamically unstable mass
+                                                                transfer from a HG donor leads imminently to a merger.
+  Channel I is illustrated in the top panel of Figure 1
+                                                                The pessimistic approach results in 4% of potential
+and proceeds in the following way:
+                                                                DNS candidates merging before DCO formation.
+    1. A post-MS primary engages in stable mass transfer
+       onto a MS secondary.                                       Channel II is illustrated in the bottom panel of Figure
+    2. The primary, now stripped, continues its evolution       1 and proceeds in the following way:
+       as a naked helium star until it explodes in a super-
+                                                                 1. A dynamically unstable mass transfer episode leads
+       nova, leaving a NS remnant in a bound orbit with
+                                                                    to a CEE when the primary and the secondary are
+       a MS companion.
+                                                                    both post-MS star. During this CEE, both stars
+    3. The secondary evolves off the MS, expanding and
+                                                                    have a clear core-envelope separation, and they en-
+       engaging in a CEE with the NS accretor.
+                                                                    gage in what is referred to in the literature as a
+    4. After successfully ejecting the envelope, and hard-
+                                                                    double-core CEE (Brown, 1995; Dewi et al., 2006;
+       ening the orbit, the secondary becomes a naked
+                                                                    Justham et al., 2011). For these binaries, evolu-
+       helium star.
+                                                                    tionary timescales are quite similar, with a mini-
+    5. The stripped post-helium-burning secondary en-
+                                                                    mum and mean mass ratio of ≈ 0.93 and ≈ 0.97
+       gages in highly non-conservative stable (case BB)
+                                                                    respectively, consistent with high-mass and low-
+       mass transfer onto the NS companion.
+                                                                    mass solar metallicity values reported in Dewi et al.
+    6. After being stripped of its helium envelope, the
+                                                                    (2006). During this double-core CEE, both stars are
+       ultra-stripped secondary (Tauris et al., 2013, 2015)
+                                                                    stripped and become naked-helium-stars.
+       continues its evolution until it explodes as an ultra-
+                                                                 2. The stripped post-helium-burning primary engages
+       stripped SN (USSN), forming a DNS.
+                                                                    in stable (case BB) mass transfer onto a stripped
+   In Channel I the CEE may occur while the donor                   helium-burning secondary.
+is crossing the HG, i.e. between the end of the MS               3. The primary, now a naked metal star, explodes in
+and the start of the core helium burning (CHeB)                     a supernova (SN) and becomes a NS.
+CEEs that lead to DNS formation                                                                                              7
+
+  4. There is a final highly non-conservative stable (case       temperature (Teff,donor ) and stellar type of the donor.
+     BB) mass transfer episode from the stripped post-           In the case of a double-core CEE, the donor is defined
+     helium-burning secondary onto the NS.                       as the more evolved star from the binary, which is the
+  5. The secondary then explodes as an USSN, forming             primary in Channel II.
+     a DNS.                                                         In Figure 2, there is a visually striking feature: the
+                                                                 almost complete absence of systems which forms a white
+  The two dominant channels, Channel I and Channel II,           polygon around log10 (Ldonor /L ) = 4.5. This feature
+comprise 69% and 14% of all DNSs in our simulations              is a consequence of the fitting formulae used for single
+(Z = 0.0142), respectively. The remaining formation              stellar evolution (c.f. Figures 14 and 15 of Hurley et al.
+channels are mostly variations of the dominant chan-             2000). This white region is bounded by the evolution of a
+nels. These variations either alter the sequence of events       12.9 M and a 13.0 M star at Z=0.0142. The MS evo-
+or avoid certain mass transfer phases. Some formation            lution of both stars is quite similar. After the end of the
+scenarios rely on fortuitous SN kicks. Some other ex-            MS, there is a bifurcation point arising from the lower
+otic scenarios, which allow for the formation of DNS in          mass system experiencing a blue loop and the higher
+which neither neutron star is recycled by accretion (e.g.        mass system avoiding it. This bifurcation is enhanced by
+Belczyński & Kalogera, 2001), comprise less than 2% of          the sharp change in the Teff − L slope from the interpola-
+the DNS population.                                              tion adopted by Hurley et al. (2000) during the HG phase.
+                                                                 This change in slope around log10 (Ldonor /L ) = 4.5 and
+3.2 Comparison with Vigna-Gómez et al.                          log10 (Teff,donor /K) = 4.4 is model-dependent, but we do
+    (2018)                                                       expect to have some differences in the evolution of stars
+                                                                 around that mass. This bifurcation corresponds to the
+This work generally uses similar assumptions and physics         transition around the First Giant Branch, which sep-
+parameterisations as the preferred model of Vigna-               arates intermediate-mass and high-mass stars. Stellar
+Gómez et al. (2018), including the Fryer et al. (2012)          tracks from Choi et al. (2016) also display a bifurcation
+delayed supernova engine. Although the qualitative re-           point, but models and interpolation are smoother than
+sults are similar, there are some quantitative changes           those in Hurley et al. (2000).
+due to updated model choices and corrections to the                 A rare example of how a system could end up in the
+COMPAS population synthesis code as described in Sec-            forbidden region is the following. If a star experiences a
+tion 2.2 and Appendix A. For example, the percentage of          blue loop, it contracts and then re-expands before contin-
+systems forming though Channel I remains ≈ 70%, but              uing to evolve along the giant branch. If the companion
+now only ≈ 14% of systems experience Channel II, in-             experiences a supernova with a suitable kick while the
+stead of ≈ 21% in Vigna-Gómez et al. (2018). The main           star is in this phase, and the orbit is modified appropri-
+change concerns the DNS rates which in this work are a           ately in the process, the system may experience RLOF.
+factor of a few lower than those in the preferred model of       A fortuitous kick making the orbit smaller, more eccen-
+Vigna-Gómez et al. (2018). Here, we estimate the forma-         tric, or both, would be an unusual but not implausible
+tion rate of all (merging) DNS to be 85(60) Gpc−3 yr−1 .         outcome of a SN.
+Vigna-Gómez et al. (2018) reports the formation rate
+of all (merging) DNS to be 369(281) Gpc−3 yr−1 for
+the preferred model. We discuss rates in more detail in          3.4 Properties of the Donor
+Section 4.4.6.                                                   We report the luminosity, effective temperature, stel-
+                                                                 lar phase, mass and core mass fraction of the donor
+3.3 Common-Envelope Episodes leading to                          (fdonor ≡ mcore,donor /mdonor ), as presented in Table 1.
+    Double Neutron Star Formation in the                         The luminosity and effective temperature limits are
+    Hertzsprung-Russell Diagram                                  log10 [Ldonor,min /L , Ldonor,max /L ] = [4.3, 5.5] and
+                                                                 log10 [Teff,donor,min /K, Teff,donor,max /K] = [3.5, 4.0], re-
+For all properties, we present a colour coded HR dia-            spectively. In Figure 2 we highlight the stellar phase,
+gram, normalised distribution and CDF. In Figure 2,              which is colour-coded. While the evolution in the HR
+we present our synthetic population of DNS progeni-              diagram is itself an indicator of the evolutionary phase of
+tors at the onset of RLOF leading to a CEE. They are             the star, our stellar models follow closely the stellar-type
+coloured according to the stellar type of the donor at           nomenclature as defined in Hurley et al. (2000). Donors
+RLOF, which is specified using the nomenclature from             which engage in a CEE leading to DNS formation can
+Hurley et al. (2000)3 . Additionally, Figure 2 shows the         be in the HG (4%), GB (7%), CHeB (59%) or EAGB
+normalised distributions of luminosity (Ldonor ), effective      (30%) phase.
+   3 We use the early asymptotic giant branch (EAGB) nomencla-      In the case of Channel I, donors are HG or CHeB stars;
+ture even for stars with masses m ' 10 M which do not become     they span most of the parameter space from terminal-
+AGB stars.                                                       age MS until the end of core-helium burning, with a
+8                                                                                                               Vigna-Gómez et al.
+
+
+
+
+                                                        CHANNELI
+
+            ZAMS                        RL
+                                         OF                         Pos
+                                                                      t-
+                                                                       RLOF                         SN
+
+
+
+
+                   NS                      CEE                  Pos
+                                                                  t-
+                                                                   CEE           Cas
+                                                                                   eBBRL
+                                                                                       OF                USSN             DNS
+
+
+
+
+                                                        CHANNELI
+                                                               I
+
+             ZAMS                            CEE                       Pos
+                                                                         t-
+                                                                          CEE                    Cas
+                                                                                                   eBBRL
+                                                                                                       OF
+
+
+
+
+                   SN                         NS                  Cas
+                                                                    eBBRL
+                                                                        OF                   USSN                   DNS
+
+
+
+
+Figure 1. Schematic representation of DNS formation channels as described in Section 3.1. Top: Channel I is the dominant formation
+channel for DNS systems, as well as the most common formation channel in the literature (see, e.g., Tauris et al. 2017 and references
+therein). Bottom: Formation Channel II distinguished by an early double-core common-envelope phase. Acronyms as defined in text.
+Credit: T. Rebagliato.
+CEEs that lead to DNS formation                                                                                                           9
+
+
+
+
+Figure 2. Main properties of the donor star at the onset of RLOF leading to the CEE in DNS-forming binaries. Top: HR diagram
+coloured by stellar phase: HG (blue), GB (orange), CHeB (yellow) and EAGB (purple). The sizes of the markers represent their sampling
+weight. We show the progenitor of the luminous red nova M101 OT2015-1 (Blagorodnova et al., 2017) with a star symbol. The solid
+black lines indicate ZAMS and TAMS loci for a grid of SSE models (Hurley et al., 2000) at Z ≈ 0.0142. We show the evolution of a
+single non-rotating 16 M star, from ZAMS to the end of the giant phase: the dotted dark-grey line shows a MIST stellar track from
+Choi et al. (2016) and the dashed grey line shows the stellar track from Pols et al. (1998, 2009). The dash-dotted light-blue and solid
+green lines show how fitting formulae from Hurley et al. (2000) lead to a bifurcation after the MS for stars with masses between 12.9
+and 13.0 M . This bifurcation is related to which stars are assumed to begin core-helium-burning while crossing of the HG or only after
+it: see the presence (lack) of the blue loop in the 12.9 (13.0) M track. Grey lines indicate stellar radii of R = {10, 100, 500, 1000} R .
+Bottom: Normalised distributions in blue (left vertical axis) and CDFs in orange (right vertical axis) of luminosity (left panel), effective
+temperature (middle panel) and stellar type (right panel). Black error bars indicate 1σ sampling uncertainty in the histograms. Grey
+lines show 100 bootstrapped distributions that indicate the sampling uncertainty in the CDFs. The CDFs show a subset of 365 randomly
+sampled values, which is the same number of DNS in our population, for each bootstrapped distribution.
+10                                                                                                   Vigna-Gómez et al.
+
+temperature range of ∼ 0.5 dex. In the case of Channel II,    are [ap,min , ap,max ] ≈ [7, 3100] R . (Very rarely, even
+donors are GB or EAGB giant-like stars. The parameter         smaller periapses are possible when fortuitous super-
+space in the HR diagram for these giant-like donors is        nova kicks send the newly formed NS plunging into the
+significantly smaller, spanning an effective temperature      envelope of an evolved companion on a very eccentric
+range of only ∼ 0.1 dex.                                      orbit; however it is not clear whether such events lead
+   The limits in the mass of the donor are [mdonor,min ,      to a CEE or to a more exotic outcome, such as the
+mdonor,max ] = [8, 29] M . The core mass fraction,            formation of a Thorne & Żytkow 1977 object). The to-
+shown in Figure 3, has limits of [fcore,donor,min ,           tal mass distribution, shown in Figure 5, has limits of
+fcore,donor,max ] = [0.2, 0.5]. The core mass fraction can    [mtotal,min , mtotal,max ] = [9, 37] M .
+serve as a proxy for the evolutionary phase.                     We compute the mass ratio at the onset of the RLOF
+   We report the binding energy of the envelope (see          leading to the CEE. The mass ratio, shown in Figure
+Figure 3) as defined in Equation 4. In the case of            5, has limits of [qmin , qmax ] = [0.05, 1.11]. The broad
+a double-core CEE, the binding energy of the com-             distribution in fact consists of two distinct peaks, one
+mon envelope is assumed to be Ebind = Ebind,donor +           close to q = 0 and the other close to q = 1, with a large
+Ebind,comp . The binding energy falls in the range            gap between 0.18 ≤ q ≤ 0.98 (see Figure 5). The extreme
+log10 (−[Ebind,min , Ebind,max ]/erg) = [49.5, 46.8]. The     mass ratio systems correspond to CEEs from Channel
+systems with the most tightly bound envelopes, and            I, where the companion is a NS. The q ≈ 1 systems
+therefore the lowest (most negative) binding energies,        correspond to CEEs from Channel II, where there is a
+are those experiencing a CEE shortly after TAMS or as         double-core CEE with a non-compact companion star.
+double-core CEEs. For double-core systems, the enve-          The systems with q > 1 are double-core CE systems
+lope of the less evolved companion is more bound than         with qZAMS ≈ 1 which, at high metallicity, may reverse
+the one of the more evolved donor star.                       their mass ratio via mass loss through winds before the
+                                                              primary star expands and undergoes RLOF.
+3.5 Properties of the Binary
+                                                              3.6 Tidal Timescales in
+We also report the properties of each binary by
+                                                                  Pre-Common-Envelope Systems
+colour coding the property of interest in the HR di-
+agram. We report the eccentricity, semi-major axis,           Given the uncertainties in the treatment of tides, and
+total mass (mtotal = mcomp + mdonor ), mass ratio             our interest in comparing the impact of different tidal
+(q = mcomp /mdonor ) and the ratio of the circularisa-        prescriptions as discussed below (see Section 4.4.2), we
+tion timescale (τcirc ) to the radial expansion timescale     do not include tidal synchronisation or circularisation
+(τradial ), as presented in Table 1. All quantities are re-   in binary evolution modelling for this study. Instead,
+ported at the onset of the RLOF unless stated otherwise.      we consider whether tides would be able to efficiently
+   The eccentricity, semi-major axis and masses of the        circularise the binary before the onset of RLOF leading
+system determine the orbital energy and angular momen-        to a CEE. As discussed in Section 2.3.3, we use the ratio
+tum of a binary (in the two point-mass approximation).        of the circularisation timescale to the radial expansion
+The eccentricity and semi-major axis distributions shown      timescale as a proxy for the efficiency of tidal circulari-
+in Figure 4 do not account for tidal circularisation. The     sation of an expanding star about to come into contact
+eccentricities span the entire allowed parameter range        with its companion. If τcirc /τradial,donor > 1, we label the
+0 ≤ e < 1. The eccentricity distribution has a sharp          binary as still eccentric at RLOF. Given that the circu-
+feature around e ≈ 0. Systems with e ≈ 0 are typically        larisation timescale is longer than the synchronisation
+those from Channel II, where the double-core CEE hap-         timescale (see Section 2.3), we focus on the former and
+pens as the first mass-transfer interaction, without any      assume that if the binary is able to circularise, it will
+preceding supernova to make the binary eccentric given        already be synchronous.
+our assumption of initially circular binaries (further dis-      Figure 6 shows the ratio τcirc /τradial,donor under our
+cussion of this choice is in Section 4.4.3). Meanwhile, the   default assumption in which both HG and CHeB stars
+most eccentric binaries have the smallest periapses and       have fully convective envelopes for the purpose of tidal
+interact the earliest during the evolution of the donor,      circularisation calculations and experience the equilib-
+explaining the trend of greater eccentricities for smaller    rium tide. This assumption results in 82% of the systems
+donor sizes in Figure 4.                                      being circular at the onset of RLOF.
+   The semi-major axis distribution, shown in Figure             The analysis of circularisation timescales is mostly
+4, has limits of [amin , amax ] = [330, 7000000] R . The      relevant for systems formed through Channel I (see
+very few extremely wide systems correspond to very            Section 4.4.2). There are two reasons for this. The first
+eccentric binaries, almost unbound during the super-          one is that they are expected to acquire a non-zero
+nova explosion (e.g. e ≈ 0.9999 for the widest binary).       eccentricity after the first supernova. The second one
+While those limits are broad, the limits in periastron        is that they are more likely to have a radiative or only
+CEEs that lead to DNS formation                                                                                                     11
+
+
+
+
+Figure 3. Pre-CEE donor properties of all DNS-forming systems: mass (top), core mass fraction (middle), and envelope binding energy
+(bottom). The core mass fraction is defined as fcore,donor ≡ mcore,donor /mdonor . In the case of a double-core CEE, the binding energy
+is the sum of the individual envelope binding energies. Yellow systems with binding energies larger than log10 |Ebind /erg| ≈ 48.5
+during the red supergiant phase are double-core CEE systems. For more details, see Section 3.4. See the caption of Figure 2 for further
+explanations.
+12                                                                                                                  Vigna-Gómez et al.
+
+
+
+
+Figure 4. Pre-CEE orbital properties of all DNS-forming systems. The binary properties presented are eccentricity (top) and semi-major
+axis (bottom). The orbital properties do not account for tidal circularisation. For more details, see Section 3.5. See the caption of Figure
+2 for further explanations.
+CEEs that lead to DNS formation                                                                                              13
+
+
+
+
+Figure 5. Pre-CEE mass of all DNS-forming systems. The binary properties presented are total mass (top) and mass ratio (bottom).
+For more details, see Section 3.5. See the caption of Figure 2 for further explanations.
+14                                                                                                  Vigna-Gómez et al.
+
+partially convective envelope, making circularisation less    the dynamical stability of mass transfer. In particular,
+efficient. On the other hand, systems formed through          hot donors lacking a deep convective envelope may be
+Channel II have a fully-convective envelope, which allows     stable to mass transfer and avoid a CEE. At the same
+for efficient tidal circularisation and synchronisation. We   time, some of the less evolved hot donors may not survive
+apply the low-eccentricity approximation described in         a CEE even if they do experience dynamical instability
+Section 2.3.1 to computing the tidal timescales of these      (pessimistic variation).
+systems, even though they are circular by construction          Klencki et al. (2020) use detailed stellar evolution
+before the first SN (we discuss this assumption in Section    models to argue that only red supergiant donors with
+4.4.3).                                                       deep convective envelopes are able to engage in and
+                                                              survive a CEE. For their assumptions, this would reduce
+4 DISCUSSION                                                  the estimated rate of DNS formation. However, and
+                                                              similar to this study, they focus on RLOF structures
+In this section we discuss the properties of CEEs expe-       and not the structures at the moment of the instability.
+rienced by isolated stellar binaries evolving into DNSs
+and present some of the caveats in our COMPAS rapid              Here, we focus only on the impact of the assumed
+population synthesis models.                                  structure of the donor on the efficiency of tidal circulari-
+                                                              sation and do not account for possible consequences for
+                                                              mass transfer stability. We compare three alternative
+4.1 Common-Envelope Episode                                   models in Figure 8.
+    Sub-populations in Evolving Double
+                                                                 Our default tidal circularisation model assumes that
+    Neutron Stars
+                                                              all evolved donors, including both HG and CHeB stars,
+4.1.1 Formation channels                                      have fully convective envelopes, and therefore experience
+There are two main formation channels leading to DNS          efficient equilibrium tides. Our default assumption esti-
+formation. Channel I involves high mass ratio single-core     mates that 18% of systems will be eccentric at the onset
+CEE between a NS primary and a post-MS secondary.             of the RLOF leading to the CEE. This is the lowest frac-
+Channel I has been studied thoroughly in the literature,      tion of eccentric systems among all variations because
+e.g. Bhattacharya & van den Heuvel (1991); Tauris &           tides are particularly efficient for stars with convective
+van den Heuvel (2006); Tauris et al. (2017) and refer-        envelopes.
+ences therein. Channel II involves a double-core common          In reality, CHeB stars are expected to begin the CHeB
+envelope between two post-MS stars. A similar channel         phase with a radiative envelope and develop a deep con-
+has been proposed by Brown (1995) and Dewi et al.             vective envelope by the end of it. The single stellar fits
+(2006), among others. Channel II requires similar masses      from Hurley et al. (2000) do not contain explicit infor-
+at ZAMS driven by the need of similar evolutionary            mation about the moment when this transition occurs.
+timescales so that both stars are post-MS giants at the       Hurley et al. (2002) assume that all CHeB stars have a
+time of their first interaction. For low (high) mass stars,   radiative envelope and that the dynamical tide is domi-
+the difference in ZAMS mass can be up to 3 (7)%, in           nant in their tidal evolution. Adopting this assumption
+agreement with Dewi et al. (2006). Our Channel II has an      leads to 68% of binaries remaining eccentric at the onset
+additional case BB mass transfer episode from a helium-       of the RLOF leading to the CEE.
+shell-burning primary onto a helium-MS secondary.
+                                                                 Alternatively, Belczynski et al. (2008) assume that
+4.1.2 Sub-populations and tidal circularisation               hot stars with log10 (Teff /K) > 3.73 have a radiative
+We separate CEE donors into three distinct sub-               envelope, while cool stars with log10 (Teff /K) ≤ 3.73
+populations depending on their evolutionary phase at          have a convective envelope. Adopting this assumption
+the onset of RLOF: giants, cool and hot (see Table 2          leads to 40% of binaries remaining eccentric at the onset
+and Figure 7).                                                of the RLOF leading to the CEE.
+   The first one, giants, correspond to giant donors             According to our estimates, a significant fraction of
+with fully-convective envelopes. The other two sub-           systems will be eccentric at RLOF. These estimates were
+populations correspond to HG or CHeB donors, most of          made within the framework of the fitting formulae for
+them evolving via the single-core Channel I. We distin-       single stellar evolution from Hurley et al. (2000). More
+guish between cool donors with a partially convective         detailed fitting formulae, which include the evolutionary
+envelope and hot donors with a radiative envelope. We         stage of stars as well as the mass and radial coordi-
+follow Belczynski et al. (2008) in using the temperature      nates of their convective envelopes, would allow for a
+log10 (Teff,donor /K) = 3.73 as the boundary between the      self-consistent determination of whether a star has a
+cool and hot sub-populations.                                 radiative, a partially convective or a fully convective
+   The presence and depth of a convective envelope im-        envelope for both dynamical stability and tidal circular-
+pacts the response of the star to mass loss and, hence,       isation calculations.
+CEEs that lead to DNS formation                                                                                                       15
+
+
+
+
+Figure 6. Ratio of tidal circularisation timescale to the star’s radial expansion timescale for all DNS-forming systems. We present
+the default scenario where all evolved stars, including HG and CHeB stars, are assumed to have formed a fully convective envelope. If
+log10 (τcirc /τradial ) ≤ 0, we assume that binaries circularise before the onset of the CEE. Binaries indicated with blue (red) dots are
+predicted to have circular (eccentric) orbits. We cap −2 ≤ log10 (τcirc /τradial ) ≤ 2 to improve the plot appearance. The grey shaded
+region in the histogram highlights the systems which circularise by the onset of RLOF. For more details, see Section 3.6. See the caption
+of Figure 2 for further explanations.
+
+
+
+
+                Table 2 Distinct DNS sub-populations as described in Section 4.1 and presented in Figure 7.
+
+Sub-population             Threshold             Dominant Channel            Donor                Envelope             Colour      Fraction
+    Giants                       -                II (double core)         GB, EAGB           fully convective          blue         0.37
+     Cool            log10 (Teff /K) < 3.73        I (single core)         HG, CHeB         partially convective       orange        0.38
+     Hot             log10 (Teff /K) ≥ 3.73        I (single core)         HG, CHeB         radiative/convective       yellow        0.25
+
+
+
+
+Figure 7. DNS-forming binaries clustered by the donor type at the onset of the CEE. Sub-populations: (a) giant donors with fully-
+convective envelopes in blue, (b) HG or CHeB donors with partially-convective envelopes in red, and (c) HG or CHeB donors which
+have not yet formed a deep convective envelope in yellow. For more details, see Section 3.4. See the caption of Figure 2 for further
+explanations.
+16                                                                                                           Vigna-Gómez et al.
+
+                                                                      4.2 Common-Envelope Episodes as
+                                                                          candidates for luminous red novae
+                                                                          transients
+                                                                      Recently, the luminous red nova transient M101 OT2015-
+                                                                      1 was reported by Blagorodnova et al. (2017). This event
+                                                                      is similar to other luminous red novae associated with
+                                                                      CEEs (Ivanova et al., 2013b). Following the discovery
+                                                                      of M101 OT2015-1, archival photometric data from ear-
+                                                                      lier epochs were found. Blagorodnova et al. (2017) used
+                                                                      these to derive the characteristics of the progenitor. The
+                                                                      inferred properties of the progenitor of M101 OT2015-
+                                                                      1 are a luminosity of Ldonor ≈ 87, 000 L , an effec-
+                                                                      tive temperature of Teff,donor ≈ 7, 000 K and a mass of
+                                                                      mdonor = 18 ± 1 M (see Figure 2 for location in the
+                                                                      HR diagram).
+                                                                         Blagorodnova et al. (2017) found that the immediate
+                                                                      pre-outburst progenitor of M101 OT2015-1 was consis-
+Figure 8. CDF of the ratio of the circularisation timescale to        tent with an F-type yellow supergiant crossing the HG.
+the donor radial expansion timescale computed at RLOF onset           If we take the inferred values for this star as the values at
+leading to CEE for all DNS-forming systems. Here we present           the onset of RLOF, then this star is consistent with pre-
+three scenarios. The solid blue line is our default assumption: all
+donors have a deep convective envelope (same as in left panel of
+                                                                      CEE stars in our predicted distribution of DNS-forming
+Figure 6). The red dashed line follows Hurley et al. (2002) with      systems. However, we emphasise that the appearance of
+the assumption that CHeB tidal evolution is dominated by the          the donor star can change significantly between the onset
+dynamical tide, i.e. that CHeB stars have a radiative envelope.       of RLOF, i.e., the point at which the models shown in
+The yellow dotted line follows Belczynski et al. (2008) in assuming
+that stars with log Teff ≤ 3.73 K have a fully convective envelope,   Figure 2 are plotted, and dynamical instability.
+for both HG and CHeB donors; and a fully radiative envelope              Howitt et al. (2020) explored population synthesis
+otherwise, as in Figure 7. For more details, see Section 3.6.         models of luminous red novae. Here we use the same
+                                                                      pipeline adopted for that study to explore the connection
+                                                                      to DNS populations. Doing so, fewer than 0.02% of all
+                                                                      luminous red novae lead to DNSs. These are amongst
+                                                                      the most energetic luminous red novae and would be
+                                                                      over-represented in the magnitude-limited observable
+                                                                      population. Future DNSs constitute nearly 10% of the
+                                                                      subpopulation of luminous red novae with predicted
+                                                                      plateau luminosities greater than 107 L .
+
+
+                                                                      4.3 Eccentric Roche-lobe Overflow leading to
+                                                                          a Common-Envelope Episode
+                                                                      We predict that the sub-population of giant donors with
+                                                                      fully-convective envelopes and cool donors with partially-
+                                                                      convective envelopes are likely to be circular at the onset
+                                                                      of the CEE (see Figures 6 and 8). On the other hand, we
+                                                                      find that the sub-population of hot donors often does not
+                                                                      circularise by the onset of the CEE. This sub-population
+                                                                      with hot donors are binaries with high eccentricities at
+Figure 9. All DNS-forming binaries from our Fiducial model are        the onset of the RLOF (see Figure 4).
+shown here. We present the post-CEE separation af as a function of       This result raises questions about the initial conditions
+the absolute value of the envelope binding energy |Ebind |. For the
+double-core scenario, the binding energy is Ebind = Ebind,donor +     of a CEE, which is often assumed to begin in a circular or-
+Ebind,comp . The size of the marker indicates the sampling weight     bit, both in population synthesis studies and in detailed
+and its colour shows the mass ratio q. This Figure can be compared    simulations. Population synthesis codes such as SEBA
+to Figures 1 and 2 from Iaconi & De Marco (2019). That study
+                                                                      (Portegies Zwart & Verbunt, 1996; Portegies Zwart &
+presents simulations of CE binaries and observations of post-CE
+binaries. Most systems presented here do not feature in Iaconi &      Yungelson, 1998; Toonen et al., 2012), STARTRACK (Bel-
+De Marco (2019).                                                      czynski et al., 2002, 2008), BSE (Hurley et al., 2002), the
+                                                                      Brussels code (De Donder & Vanbeveren, 2004), COM-
+CEEs that lead to DNS formation                                                                                                     17
+
+
+
+
+Figure 10. Binary separations at CEEs leading to DNSs at the onset of RLOF (left) and after the CEE (right). We show the donor
+(mdonor ) and companion (mcomp ) mass in both plots, with a solid grey line indicating mdonor = mcomp . The colour bars, with different
+scales, show the pre-CEE periastron (left) and final semi-major axis (right).
+
+
+
+PAS (Stevenson et al., 2017; Vigna-Gómez et al., 2018),             for low-eccentricity binaries, precisely those which may
+ComBinE (Kruckow et al., 2018) and customised soft-                  efficiently circularise through mass transfer.
+ware based on them all assume that RLOF commences                       Hamers & Dosopoulou (2019) noted that evolution
+in circular binaries. Detailed simulations, such as those            towards circularisation from Dosopoulou & Kalogera
+of Passy et al. (2012), MacLeod et al. (2018) and others,            (2016b) could lead to (nonphysical) negative eccentricity
+often make the assumption of an initially circular orbit             solutions. They proposed a revised analytic model for
+(but see Staff et al. 2016, discussed in more detail in              mass transfer in eccentric binaries. This study takes
+Section 4.3.2).                                                      into account the separation and eccentricity evolution of
+                                                                     an initially eccentric system at RLOF. However, their
+4.3.1 Theory of mass transfer in eccentric binaries                  model is only valid in the regime of fully-conservative
+Mass transfer in eccentric binaries has been explored                mass transfer, and is therefore more restricted than the
+with both semi-analytical and analytical methods                     general formalism Dosopoulou & Kalogera (2016b). Mass
+(Matese & Whitmire, 1983, 1984; Sepinsky et al., 2007,               transfer episodes in binaries which will become DNSs are
+2009, 2010; Dosopoulou & Kalogera, 2016a,b).                         typically non-conservative. Mass transfer from a post-
+   The analysis of Sepinsky et al. (2007) et al. assumes             MS donor onto a MS companion, such as the first mass
+fully conservative mass transfer. While they consider                transfer episode from Channel I, is generally only partly
+mass transfer from a stellar donor onto a neutron star,              conservative (Schneider et al., 2015). Mass transfer onto
+this assumption and the typical 10−9 M yr−1 mass                     a NS companion is highly non-conservative, almost in
+transfer rate they consider is relevant for low-mass X-              the fully non-conservative limit (Tauris et al., 2015).
+ray binaries, not DNS progenitors as discussed here.                    A full understanding of the evolution of eccentric sys-
+                                                                     tems in RLOF is yet to be achieved. A detailed treatment
+   Dosopoulou & Kalogera (2016b) study orbital evolu-
+                                                                     of non-conservative mass transfer in an eccentric binary
+tion considering both conservative and non-conservative
+                                                                     could yield different criteria for dynamical stability and,
+mass transfer. The latter scenario is particularly rele-
+                                                                     ultimately, for determining if a system engages in a CEE.
+vant for DNS formation. We assume a mass transfer rate
+of 10−5 M yr−1 , a 1.44 M NS and mass loss from
+                                                                      4.3.2 Modelling of mass transfer in eccentric
+the vicinity of the NS (isotropic re-emission) as param-
+                                                                            binaries
+eters in their Equation (44). Highly eccentric systems
+(e > 0.9) have circularisation timescales of more than 1             Numerical methods and simulations have also been used
+Myr due to mass transfer, under their assumption that                to study mass transfer in eccentric binaries (Regös et al.,
+all mass transfer happens at periapsis. This timescale is            2005; Church et al., 2009; Lajoie & Sills, 2011; van der
+reduced to around a thousand years for mass transfer in              Helm et al., 2016; Staff et al., 2016; Bobrick et al., 2017).
+e < 0.1 binaries, although this can be very sensitive to                Staff et al. (2016) carried out hydrodynamic simula-
+assumptions about the specific angular momentum lost                 tions of a ≈ 3 M giant star with a less massive MS
+at the level of an order of magnitude. The assumption of             companion in an eccentric orbit. They conclude that
+instantaneous mass transfer at periapsis is questionable             eccentric systems transfer mass only during the perias-
+18                                                                                                   Vigna-Gómez et al.
+
+tron passage, which delays the onset of the CEE. Each          star with a radiative envelope is not likely to circularise
+periastron passage also makes the binary less eccentric.       during the mass transfer phase. This would lead to a
+   Gilkis et al. (2019) discuss the passage of a NS through    post-mass-transfer eccentric system such as γ 2 Velorum.
+the envelope of a giant star, likely on an eccentric orbit,
+and conclude that the system might be able to eject
+                                                               4.4 Caveats and Limitations
+the envelope or lead to a merger between the neutron
+star and the core, which they call a CE jets supernova         4.4.1 CEE and delayed dynamical instability
+(Soker & Gilkis, 2018, see also Schrøder et al. 2020). The     The uncertainties in our stellar and binary models prop-
+former results in a less luminous transient, comparable        agate to uncertainties in whether a mass-transferring
+in energetic to luminous red novae (Kashi & Soker, 2016).      system experiences a CEE. We compare the response
+The interaction is driven by jets which might enhance          of the radius of the donor to mass loss to the response
+mass loss at periastron passages, keeping the system           of the orbit to mass transfer to determine whether a
+eccentric (Kashi & Soker, 2018). These jets might, in          binary experiences a CEE (see Section 2.2). This ap-
+some cases, prevent CEEs (Shiber & Soker, 2018).               proach relies on determining the appropriate response
+                                                               of the donor to (adiabatic) mass loss, the amount of
+4.3.3 Observations of eccentric mass-transferring              mass that the companion can accrete, and the specific
+        binaries                                               angular momentum removed from the binary by the non-
+Eccentric semi-detached and contact binaries, i.e. mass        accreted mass; all of these quantities have uncertainties
+transferring binaries, have been previously observed in        and are model-dependent. Other population synthesis
+low-mass systems (Petrova & Orlov, 1999). Eccentric            codes directly use the mass ratio at RLOF to determine
+(e . 0.2) MS-White Dwarf binaries which are believed           whether the mass transfer will be stable (e.g. Hurley
+to have experienced RLOF are not rare (Vos et al., 2013;       et al. 2002, Claeys et al. 2014).
+Kawahara et al., 2018; Masuda et al., 2019). Jayasinghe           The evolution of a mass transferring system is non-
+et al. (2019) found a more massive B-type Heartbeat star       trivial. One possibility is delayed dynamical instabil-
+in an eccentric (e = 0.58) orbit. Heartbeat stars exhibit      ity, in which the donor experiences a prolonged mass
+clear signatures of tidal oscillations at each periastron      transfer phase before it becomes dynamically unstable
+passage. While there is no evidence for accretion, it is       (Hjellming & Webbink, 1987; Ivanova & Taam, 2004; Ge
+likely that the system reported in Jayasinghe et al. (2019)    et al., 2010). This can lead the donor to be significantly
+will engage in RLOF at some later point .                      under-luminous at the moment when the CEE begins,
+   Sirius (van den Bos, 1960; Gatewood & Gatewood,             compared to its appearance at the onset of the mass
+1978) is a MS-White Dwarf binary with e = 0.59 which,          transfer episode itself (Podsiadlowski et al., 2002). We
+according to canonical binary evolution dynamics, should       report the properties at the onset of the RLOF because
+have circularised when the White Dwarf progenitor be-          we do not account for delayed dynamical instability.
+came a giant. Bonačić Marinović et al. (2008) propose a        The opposite is also possible, where initially unstable
+model which allows for tides, mass loss and mass transfer      systems may reach a stable configuration after ejecting
+in an eccentric orbit, physically motivated by Sirius. Fol-    only a fraction of the common envelope. Pavlovskii et al.
+lowing Bonačić Marinović et al. (2008), Saladino & Pols     (2017) found that some massive giant donors with stel-
+(2019) carried out hydrodynamic simulations of binary          lar mass black-hole companions, which were previously
+stars with significant wind-driven mass loss and find that     expected to experience a CEE, might experience stable
+this eccentricity-enhancing mechanism is non-negligible.       mass transfer instead.
+                                                                  In general, the transition from stable to unstable mass
+4.3.4 γ 2 Velorum as an eccentric massive                      transfer is not fully understood. The details of the thresh-
+       post-mass-transferring binary                           old of stability are regulated by the hydrodynamics of the
+North et al. (2007) reported the orbital solution and          material lost from the donor and the thermal response
+fundamental parameter determination of the massive             of the donor. This confluence of physical processes will
+binary γ 2 Velorum. This binary has a reported period          always be at play because, at the low mass exchange
+of 78.53 ± 0.01 days and an eccentricity of 0.334 ± 0.003,     rates that mass loss is initiated at, both dynamical and
+with an inferred mass of 28.5 ± 1.1 M for the O-star           thermal readjustments of the binary are taking place
+primary and 9.0 ± 0.6 M for the Wolf-Rayet secondary.          on competing timescales. Accessing this regime in three-
+While γ 2 Velorum did not experience a CEE, it could           dimensional hydrodynamic simulations is challenging, as
+have experienced some mass transfer as an eccentric            discussed by Reichardt et al. (2019) because near-stable
+system. Eldridge (2009) discusses γ 2 Velorum as post-         configurations evolve over long timescales and are sus-
+mass-transfer binary system. In that work, Eldridge            ceptible to small numerical perturbations. In the case of
+(2009) takes into account how the evolutionary stage of        eccentric orbits, dynamical tides raised on the donor also
+the donor during mass transfer determines the efficiency       play a significant role and the eventual orbital evolution
+of tidal circularisation. They point out that a less evolved   is determined by a combination of tidal, thermal, and
+CEEs that lead to DNS formation                                                                                        19
+
+hydrodynamic evolution.                                        peak associated with these system (see Figure 4) would
+                                                               be replaced by the birth eccentricity distribution.
+4.4.2 Tidal evolution
+Both the tidal circularisation timescales and the applica-     4.4.4 Massive binary stars
+bility of various types of tides are highly uncertain. As      In this work we focused on CEEs during the formation
+discussed in Sections 2.3 and 4.1, we explore the impact       of DNSs. Similar evolutionary pathways are experienced
+of assumptions about the dominant tidal mechanism              by other massive stellar binaries, including progenitors
+based on the evolutionary phase of the donor by consid-        of, black hole - NS or black hole - black hole systems
+ering the tidal circularisation timescale at the onset of      (Dominik et al., 2012; Kruckow et al., 2018; Neijssel
+RLOF. While this approach makes it possible to analyse         et al., 2019). The impact of eccentric RLOF is not in
+the impact of different choices without re-analysing the       the exclusive interest of DCO formation. The role of
+full population, it does mean that tides are not self-         tidal evolution and dynamical instability is fundamental
+consistently included throughout the evolution of the          for massive stellar mergers (Podsiadlowski et al., 1992;
+binary.                                                        Justham et al., 2014; Vigna-Gómez et al., 2019).
+   We also make a number of simplifying assumptions
+about the efficiency of tidal circularisation. For example,    4.4.5 Dynamics
+we apply the equilibrium tide to convective-envelope           We do not consider the impact of dynamical interactions
+donors regardless of the orbital eccentricity, although        on the formation of DNSs. This could take the form of
+the perturbation-from-equilibrium approximation is un-         dynamically-induced mergers in dense stellar environ-
+likely to be valid for very eccentric binaries which are not   ments such as globular clusters (Andrews & Mandel 2019
+pseudo-synchronised at periapsis. We crudely approxi-          but see, e.g., Ye et al. 2020). Meanwhile, Kozai-Lidov
+mate coefficients in the tidal circularisation timescale       oscillations (Kozai, 1962; Lidov, 1962) in hierarchical
+equations based on Rasio et al. (1996), Hurley et al.          triple systems can drive up the eccentricity of the inner
+(2002) and references therein.                                 binary (see Naoz et al. 2016 for a review) and contribute
+   Witte & Savonije (1999a,b) discuss how resonance            to the formation of merging DNSs (Hamers & Thompson,
+locking could enhance pre-RLOF circularisation of a            2019). Both types of dynamical encounters can change
+10 M MS star with a 1.4 M NS companion. This                   the binary orbital evolution, including the eccentricity.
+system is similar to the phase immediately after the first
+SN in Channel I. The timescales on which resonance             4.4.6 DNS merger rates
+locking occurs are typically a few million years and could     The merger rate of DNSs was inferred to fall in the range
+lead to less eccentric orbits at the onset of RLOF. It is      110–3840 Gpc3 yr−1 with 90% confidence (Abbott et al.,
+uncertain how much of an effect resonance locking would        2019) based on a single detection of GW170817 with a
+have on a population of massive interacting binaries.          flat-in-rate prior (Abbott et al., 2017). The detection of
+                                                               GW190425 under the assumption of a DNS progenitor
+4.4.3 Zero-eccentricity initial distribution                   updates the local DNS merger rate to 250–2810 Gpc3
+We assume that binaries are circular at birth. This as-        yr−1 (Abbott et al., 2020).
+sumption is justified for close binaries, which are tidally       Vigna-Gómez et al. (2018) predicted a DNS merger
+circularised at birth, but is not consistent with observa-     rate of ≈ 280 Gpc−3 yr−1 . After several changes in COM-
+tions of wide binaries (see Levato et al. 1987; Abt et al.     PAS (see Section 3.2) the DNS merger rate is now ≈ 60
+1990; Sana et al. 2012; Kobulnicky et al. 2014 as pre-         Gpc−3 yr−1 . This is more in line with the reported rates
+sented in Figure 3 of Moe & Di Stefano 2017). Our goal is      from other rapid population synthesis codes (Giacobbo
+to be conservative when studying eccentricity at the on-       et al., 2018; Giacobbo & Mapelli, 2019b; Kruckow et al.,
+set of the CEE. Thus all changes in eccentricity from an       2018). Chruslinska et al. (2018) pointed out that all
+initially circular binary are due to the subsequent binary     population synthesis models struggle to jointly predict
+evolution. Vigna-Gómez et al. (2018) showed that using        the binary black-hole and DNS merger rate, particularly
+a thermal eccentricity distribution at birth decreases the     under standard assumptions. Most rapid population syn-
+DNS formation rate by about a half, but has no signifi-        thesis studies agree that predicted rates are difficult
+cant effect on the orbital properties of DNSs (we follow       to reconcile with the DNS merger rates inferred from
+the eccentricity distribution from Vigna-Gómez et al.         gravitational-wave observations, particularly if future ob-
+2018 to be able to make a more direct comparison with          servations push these above & 1000 Gpc−3 yr−1 . Some
+those results). However, the eccentricity distribution at      particular choices of physics increase rates up to a few
+ZAMS likely affects the eccentricity distribution at the       hundreds of DNSs Gpc−3 yr−1 , but the typical predic-
+onset of RLOF. This is particularly true for Channel           tion is around a few tens of DNSs Gpc−3 yr−1 . Recently,
+II binaries, which enter the double-core CEE without           Giacobbo & Mapelli (2020) proposed that a revised na-
+previous interactions or supernovae, thus retaining their      tal kick prescription might prove important to reconcile
+birth eccentricity modulo tidal effects. The current e = 0     double compact object merger rates, as suggested by
+20                                                                                                 Vigna-Gómez et al.
+
+Chruslinska et al. (2018) (see more about natal kick           of the mass transferred is accreted by the companion
+prescriptions in Section 4.5).                                 during the mass transfer episode. The default model
+   The impact of the power-law exponent (αIMF ) of the         predicts 190 ± 20 Be X-ray binaries in the SMC; in this
+initial mass function on the DNS merger rate has been          model, ∼ 59% (46%) of all (merging) DNS experience
+previously discussed by de Mink & Belczynski (2015).           a Be X-ray binary phase. The preferred model predicts
+They find that the rate can increase (decrease) by a factor    80±10 Be X-ray binaries in the SMC, with ∼ 96% (98%)
+of a few for plausible shallower (steeper) initial mass        of all (merging) DNS experiencing a Be X-ray binary
+functions. Schneider et al. (2018a, see also Farr & Mandel     phase. Both variations have a formation rate of merging
+2018 and Schneider et al. 2018b) find that the initial         DNSs of ∼ 10−5 M−1 . Vinciguerra et al. (2020) show
+mass function of young massive stars in the 30 Doradus         that the preferred model better represents observations
+region of the Large Magellanic Cloud may be shallower          of Be X-ray binaries in comparison to the default model.
+than the canonical Salpeter (1955) value. While this           However, there is no significant difference in the pre-
+level of fluctuation in the initial mass function may          dicted DNS merger rate or the DNS mass distribution
+prove insufficient to resolve the DNS rate discrepancy         between these two models.
+(Belczynski et al., 2018), it may be one of the ingredients.
+   Observations of Galactic DNSs as radio pulsars point
+                                                               4.5 Comparison with other rapid population
+to a DNS merger rate that peaks at a few tens of mergers
+                                                                   synthesis studies
+per Myr in the Galaxy; e.g., 37+24−11 Myr
+                                           −1
+                                               according to
+Pol et al. (2020). This can be converted to a volumetric       It is challenging to compare results between population
+rate in units of Gpc−3 yr−1 by multiplying the rate per        synthesis studies. The results depend on initial con-
+Myr per Milky Way equivalent galaxy by a factor of ∼ 10        ditions, physical parameterisations and computational
+(Abadie et al., 2010). The peak of the rate extrapolated       methods. Most population synthesis software differ in
+from Galactic observations thus falls between the typical      the implementation of at least one of these, and often in
+binary population synthesis predictions and the peak of        all. Some of the arguably most important physical inter-
+the rate inferred from gravitational-wave observations.        actions, including supernovae and mass transfer events,
+However, this extrapolation does not account for dif-          are treated differently between various research groups,
+ferences between the Galaxy and other environments             codes and particular projects.
+(Abadie et al., 2010), and all rate intervals are broad.          In the context of supernovae, there are several com-
+   Lau et al. (2020) use a synthesised DNS population          mon choices for remnant mass and natal kick prescrip-
+to predict that a four-year LISA mission (Amaro-Seoane         tions. StarTrack, MOBSE and COMPAS usually follow
+et al., 2017; Baker et al., 2019) will detect 35 Galactic      Fryer et al. (2012) for the remnant mass prescription of
+DNSs. Andrews et al. (2020) predict between 46 and 240         compact objects, using either the rapid or delayed varia-
+Galactic DNSs for the same mission, depending on the           tion, while C o m B i n E use their own (Kruckow et al.,
+assumed physical assumptions. LISA DNS observations            2018). The natal kick distribution varies not only be-
+will further constrain the DNS formation and merger            tween codes, but also between papers. COMPAS initially
+rates.                                                         followed StarTrack (e.g. Belczynski et al., 2008, 2018)
+                                                               with a no-kick model for electron-capture SN (ECSN)
+4.4.7 Be X-ray Binaries                                        (Stevenson et al., 2017) and more recently changed to
+The Be X-ray binary phase occurs in binaries consisting        a low-kick distribution (e.g. Vigna-Gómez et al., 2018).
+of a rapidly rotating Be star, a MS B star with emission       MOBSE has explored the impact of variations in the core-
+lines from a decretion disk, and a NS which accretes           collapse SN (CCSN) and ECSN natal kicks (Giacobbo
+from this disk. This phase can be one of the intermediate      & Mapelli, 2018, 2019a) and C o m B i n E use their own
+stages between ZAMS and DNS formation. We expect               natal kick prescription (Kruckow et al., 2018). COMPAS
+that most systems formed through Channel I experi-             and C o m B i n E use a distinct prescription for USSNe;
+enced a Be X-ray binary configuration after the primary        StarTrack initially did not separately account for them,
+initiated the first mass transfer episode, spinning up the     but Chruslinska et al. (2018) followed the model from
+secondary, and exploded as a supernova (see Figure 1).         Bray & Eldridge (2016), in which the natal kick is pro-
+   The SMC Be X-ray binary catalogue by Coe & Kirk             portional to the ejecta mass. Similarly, MOBSE evolved
+(2015) presents 69 systems. From those 69, 44 have an          from not explicitly accounting for USSNe (Giacobbo &
+observed orbital period (Porb < 520 days). Vinciguerra         Mapelli, 2018) to treating USSNe as low-kick CCSNe
+et al. (2020) used COMPAS to study Be X-ray binaries           (Giacobbo & Mapelli, 2019a). Giacobbo & Mapelli (2020)
+at SMC metallicity (Z ≈ 0.0035). We focus on two par-          estimate the natal kick using the ejecta mass, similarly
+ticular variations from that study. Their default model        to Bray & Eldridge (2016).
+follows similar COMPAS settings as the ones in this pa-           In the context of mass transfer and CEEs, both crucial
+per, while the preferred model allows for mass transfer        phases in DNS formation, the main differences appear
+to be more conservative than the default model, i.e. half      in the definition of dynamical instability and in the
+CEEs that lead to DNS formation                                                                                         21
+
+treatment of stable mass transfer and CEEs.                        Channel II, which accounts for 14% of all formed
+   For the definition of stability MOBSE follows BSE               DNSs, involves two giant stars, with mass ratio close
+(Hurley et al., 2002). StarTrack uses adiabatic mass-loss          to unity, in a double-core common-envelope.
+indexes and a temperature threshold to identify stars            • Close to 10% of the brightest luminous red nova
+with a fully-convective envelope. COMPAS generally                 transients, which have been previously associated
+follows BSE and StarTrack but with significant amount              with stellar mergers and common-envelope ejections,
+of changes (see Vigna-Gómez et al. 2018 and Appendix              are predicted to occur during binary evolution that
+A). C o m B i n E use their own criteria based on a critical       leads to DNS formation. The progenitor of M101
+mass ratio (Kruckow et al., 2018).                                 OT2015-1 as reported in Blagorodnova et al. (2017)
+   COMPAS and MOBSE both follow BSE to solve for                   is somewhat similar to the pre-CEE properties of
+mass transfer episodes. In the default COMPAS models,              DNS-forming systems (see Section 4.2 and Figure
+non-accreted mass leaves the binary with the specific              2).
+angular momentum of the accretor. StarTrack sets a               • We find that tidal circularisation timescales can be
+fixed fraction of mass transfer as conservative, while any         long compared to stellar radial growth timescales
+non-accreted mass leaves the system with the specific              (see Figures 6 and 8), especially for rapidly evolving
+angular momentum of the orbit. Kruckow et al. (2018)               HG donors and/or donors with radiative envelopes
+follows the approach from Soberman et al. (1997).                  experiencing only the less efficient dynamical tide
+   For the CEE, COMPAS closely follows StarTrack as                rather than the more efficient equilibrium tide. This
+implemented in Dominik et al. (2012), particularly in the          indicates that ∼ 20% − 70% of binaries may not
+estimation of the binding energy structure parameter               circularise prior to the onset of CEEs (see Sections
+λ (see Section 2.2). MOBSE follows Dewi & Tauris                   3.6 and 4.1). This finding suggests that the ensu-
+(2000) and Claeys et al. (2014) to determine this λ                ing common envelope phases in these binaries may
+parameter. Additionally, MOBSE frequently has highly-              be distinct from those that have been previously
+efficient envelope ejection by allowing α > 1. Following           considered. Future work is needed to determine the
+Kruckow et al. (2016), C o m B i n E self-consistently uses        implication of these differences for the predicted
+their own stellar models to calculate the binding energy.          formation rate and properties of DNSs.
+   Most comparisons between population synthesis codes           One of the main goals of this study is to constrain
+come from merger rates. However, the merger-rate den-          the parameter space of interest for detailed evolutionary
+sity is not the only prediction from population synthesis,     studies of CEEs. We hope that the results presented in
+and the full properties of observed populations will place     this catalogue can inform choices of initial conditions
+stronger constraints on the physics (Barrett et al., 2018;     for detailed hydrodynamical simulations and lead to
+Kruckow et al., 2018). The population of luminous red          an improved understanding of the complexities of dy-
+novae which will become DNSs do not seem to be an              namically unstable mass transfer and the subsequent
+unequivocal additional constraint (see Section 4.2). Be        common-envelope phase. In particular, our present work
+X-ray binaries and short gamma-ray bursts must be              highlights the roles of several uncertain processes that
+included as additional constrains to the observed Galac-       may be of crucial importance in DNS formation:
+tic DNS population and the growing catalogue of DNS
+gravitational-wave sources to fully dissect the origin and       (i) Tidal dissipation in pre-CEE binary evolution;
+formation of DNSs.                                              (ii) Eccentric Roche lobe overflow; and
+                                                               (iii) The hydrodynamics of double-core CEEs.
+5 SUMMARY AND CONCLUSIONS
+                                                               6 ACKNOWLEDGEMENTS
+We carried out a rapid population-synthesis study of a
+million massive binaries using COMPAS, finding 15,201          We thank Poojan Agrawal, J.J. Eldridge, Mike Y.M. Lau,
+(unweighted) simulated systems which experience a CEE          Orsola de Marco, Noam Soker, Simon Stevenson and Eric
+and eventually become a DNS. We present the key prop-          Thrane for discussions. We thank Teresa Rebagliato for the
+erties of the donor and binary star at the onset of the        graphic representation of the formation channels. A.V-G. ac-
+RLOF phase leading to the CEE. We provide an online            knowledges funding support from Consejo Nacional de Cien-
+catalogue of this synthesised population.                      cia y Tecnologı́a (CONACYT) and support by the Danish
+  Some of our main results are:                                National Research Foundation (DNRF132). M.M. is grate-
+                                                               ful for support for this work provided by NASA through
+  • The CEEs that occur in DNS progenitors can be              Einstein Postdoctoral Fellowship grant number PF6-170169
+    broadly divided into two types (description in Sec-        awarded by the Chandra X-ray Center, which is operated
+    tions 3.1 and 4.1). Channel I, which accounts for          by the Smithsonian Astrophysical Observatory for NASA
+    69% of all formed DNSs, involves a post-MS donor           under contract NAS8-03060. This material is based upon
+    (the initially less massive star) with a NS companion.     work supported by the National Science Foundation under
+22                                                                                                 Vigna-Gómez et al.
+
+Grant No. 1909203. S.dM. and S.J. acknowledge funding by     A POPULATION SYNTHESIS: DETAILS
+the Netherlands Organization for Scientific Research (NWO)     OF THE COMPAS SETUP
+as part of the Vidi research program BinWaves with project
+number 639.042.728 and the European Union’s Horizon 2020     We present a list of the initial values and default settings
+research and innovation program from the European Re-        used for this study in Table 3 in order to be able to
+search Council (ERC, grant agreement No. 715063). I.M.       emulate them with other population synthesis codes.
+is a recipient of the Australian Research Council Future     References have been added where needed in order to
+Fellowship FT190100574.                                      justify our assumptions. Some of these assumptions are
+                                                             described in Section 2.
+
+
+                                                             REFERENCES
+
+                                                             Abadie J., et al., 2010, Classical and Quantum Gravity,
+                                                               27, 173001
+                                                             Abbott B. P., et al., 2017, The Astrophysical Journal
+                                                               Letters, 848, L13
+                                                             Abbott B. P., et al., 2019, Phys. Rev. X, 9, 031040
+                                                             Abbott B. P., et al., 2020, ApJ, 892, L3
+                                                             Abt H. A., Gomez A. E., Levy S. G., 1990, ApJS, 74,
+                                                               551
+                                                             Amaro-Seoane P., et al., 2017, arXiv e-prints, p.
+                                                               arXiv:1702.00786
+                                                             Andrews J. J., Mandel I., 2019, ApJ, 880, L8
+                                                             Andrews J. J., Farr W. M., Kalogera V., Willems B.,
+                                                               2015, ApJ, 801, 32
+                                                             Andrews J. J., Breivik K., Pankow C., D’Orazio D. J.,
+                                                               Safarzadeh M., 2020, ApJ, 892, L9
+                                                             Asplund M., Grevesse N., Sauval A. J., Scott P., 2009,
+                                                               ARA&A, 47, 481
+                                                             Baker J., et al., 2019, arXiv e-prints, p. arXiv:1907.06482
+                                                             Barrett J. W., Gaebel S. M., Neijssel C. J., Vigna-Gómez
+                                                               A., Stevenson S., Berry C. P. L., Farr W. M., Mandel
+                                                               I., 2018, MNRAS, 477, 4685
+                                                             Belczynski K., Kalogera V., Bulik T., 2002, ApJ, 572,
+                                                               407
+                                                             Belczynski K., Kalogera V., Rasio F. A., Taam R. E.,
+                                                               Zezas A., Bulik T., Maccarone T. J., Ivanova N., 2008,
+                                                               ApJS, 174, 223
+                                                             Belczynski K., Bulik T., Fryer C. L., Ruiter A., Valsecchi
+                                                               F., Vink J. S., Hurley J. R., 2010a, ApJ, 714, 1217
+                                                             Belczynski K., Dominik M., Bulik T., O’Shaughnessy
+                                                               R., Fryer C., Holz D. E., 2010b, ApJ, 715, L138
+                                                             Belczynski K., et al., 2018, A&A, 615, A91
+                                                             Belczyński K., Kalogera V., 2001, The Astrophysical
+                                                               Journal Letters, 550, L183
+                                                             Bhattacharya D., van den Heuvel E. P. J., 1991,
+                                                               Phys. Rep., 203, 1
+                                                             Blagorodnova N., et al., 2017, ApJ, 834, 107
+                                                             Bobrick A., Davies M. B., Church R. P., 2017, MNRAS,
+                                                               467, 3556
+                                                             Bonačić Marinović A. A., Glebbeek E., Pols O. R., 2008,
+                                                               A&A, 480, 797
+                                                             Bray J. C., Eldridge J. J., 2016, MNRAS, 461, 3747
+                                                             Broekgaarden F. S., et al., 2019, MNRAS, p. 2309
+CEEs that lead to DNS formation                                                                                                                                                         23
+
+Table 3 Initial values and default settings of the population synthesis model simulations with COMPAS, including pertinent
+references.
+
+Description / Name / Symbol                           Value / Range               Note / Setting
+                                                                                      Initial conditions
+Initial mass m1                                       [5, 100] M                  Kroupa (2001) IMF ∝ m1 −α with αIMF = 2.3 for stars above 1 M
+Initial mass ratio qZAMS = m2 /m1                     [0.1, 1]                    we assume a flat mass ratio distribution p(qZAMS ) ∝ 1
+Initial separation a                                  [0.01, 1000] AU             distributed flat-in-log p(a) ∝ 1/a
+SN natal kick magnitude vk                            [0, ∞) km s−1               drawn from Maxwellian distribution with standard deviation σ
+SN natal kick polar angle θk                          [0, π]                      p(θk ) = sin(θk )/2
+SN natal kick azimuthal angle φk                      [0, 2π]                     uniform p(φ) = 1/(2π)
+SN mean anomaly of the orbit                          [0, 2π]                     uniform distributed
+Initial metallicity Z                                 Z = 0.0142                  Asplund et al. (2009)
+Initial orbital eccentricity e                        0                           all binaries are assumed to be circular at birth
+                                                                                           Settings
+Stellar winds for hydrogen-rich stars                 Belczynski et al. (2010a)   based on Vink et al. (2000, 2001), including luminous blue variable (LBV) wind mass loss with fLBV = 1.5.
+Stellar winds for hydrogen-poor/helium stars          Belczynski et al. (2010b)   based on Hamann & Koesterke (1998) and Vink & de Koter 2005.
+Mass transfer stability criteria                      ζ-prescription              based on Vigna-Gómez et al. (2018) and references therein
+Case BB mass transfer stability                       always stable               based on Vigna-Gómez et al. (2018)
+CE prescription                                       α−λ                         based on Webbink (1984) and de Kool (1990)
+CE efficiency α-parameter                             1.0
+CE λ-parameter                                        λNanjing = λb               based on Xu & Li (2010a,b) and Dominik et al. (2012). Includes internal energy.
+Hertzsprung gap (HG) donor in CE                      optimistic                  defined in Dominik et al. (2012): HG donors survive a CE phase
+Core-collapse SN remnant mass prescription            delayed                     from Fryer et al. (2012) which has no lower black-hole mass gap
+USSN remnant mass prescription                        delayed                     from Fryer et al. (2012)
+ECSN remnant mass prescription                        mf = 1.26 M                 based on Eq. 8 in Timmes et al. (1996)
+                                      1D
+Core-collapse SN velocity dispersion σrms             265 km s−1                  1D rms value based on Hobbs et al. (2005)
+USSN and ECSN velocity dispersion σrms 1D
+                                                      30 km s−1                   1D rms value based on e.g. Pfahl et al. (2002); Podsiadlowski et al. (2004)
+PISN / PPISN remnant mass prescription                NA                          NA
+                                                                                     Simulation settings
+Total number of binaries sampled per metallicity NZ   ≈ 106
+Sampling method                                       S T RO O P WA F E L         adaptive importance sampling from Broekgaarden et al. (2019)
+Binary fraction                                       fbin = 1                    broadly consistent with Sana et al. (2012)
+
+
+
+
+Brown G. E., 1995, ApJ, 440, 270                                                                   368, 1742
+Chamandy L., et al., 2018, MNRAS, 480, 1898                                                      Dominik M., Belczynski K., Fryer C., Holz D. E., Berti
+Chattopadhyay D., Stevenson S., Hurley J. R., Rossi                                                E., Bulik T., Mandel I., O’Shaughnessy R., 2012, ApJ,
+  L. J., Flynn C., 2020, MNRAS, 494, 1587                                                          759, 52
+Choi J., Dotter A., Conroy C., Cantiello M., Paxton B.,                                          Dosopoulou F., Kalogera V., 2016a, ApJ, 825, 70
+  Johnson B. D., 2016, ApJ, 823, 102                                                             Dosopoulou F., Kalogera V., 2016b, ApJ, 825, 71
+Chruslinska M., Belczynski K., Bulik T., Gladysz W.,                                             Eggleton P. P., 1983, ApJ, 268, 368
+  2017, Acta Astron., 67, 37                                                                     Eggleton P. P., Kiseleva L. G., Hut P., 1998, ApJ, 499,
+Chruslinska M., Belczynski K., Klencki J., Benacquista                                             853
+  M., 2018, MNRAS, 474, 2937                                                                     Eldridge J. J., 2009, MNRAS, 400, L20
+Church R. P., Dischler J., Davies M. B., Tout C. A.,                                             Farr W. M., Mandel I., 2018, Science, 361, aat6506
+  Adams T., Beer M. E., 2009, MNRAS, 395, 1127                                                   Fragos T., Andrews J. J., Ramirez-Ruiz E., Meynet G.,
+Claeys J. S. W., Pols O. R., Izzard R. G., Vink J.,                                                Kalogera V., Taam R. E., Zezas A., 2019, ApJ, 883,
+  Verbunt F. W. M., 2014, A&A, 563, A83                                                            L45
+Clayton M., Podsiadlowski P., Ivanova N., Justham S.,                                            Fryer C. L., Belczynski K., Wiktorowicz G., Dominik
+  2017, MNRAS, 470, 1788                                                                           M., Kalogera V., Holz D. E., 2012, ApJ, 749, 91
+Coe M. J., Kirk J., 2015, MNRAS, 452, 969                                                        Gatewood G. D., Gatewood C. V., 1978, ApJ, 225, 191
+Counselman Charles C. I., 1973, ApJ, 180, 307                                                    Ge H., Hjellming M. S., Webbink R. F., Chen X., Han
+Cruz-Osorio A., Rezzolla L., 2020, ApJ, 894, 147                                                   Z., 2010, ApJ, 717, 724
+De Donder E., Vanbeveren D., 2004, NAR, 48, 861                                                  Ge H., Webbink R. F., Chen X., Han Z., 2015, ApJ, 812,
+De S., MacLeod M., Everson R. W., Antoni A., Man-                                                  40
+  del I., Ramirez-Ruiz E., 2019, arXiv e-prints, p.                                              Giacobbo N., Mapelli M., 2018, MNRAS, 480, 2011
+  arXiv:1910.13333                                                                               Giacobbo N., Mapelli M., 2019a, MNRAS, 482, 2234
+de Kool M., 1990, ApJ, 358, 189                                                                  Giacobbo N., Mapelli M., 2019b, MNRAS, 486, 2494
+Delgado A. J., Thomas H.-C., 1981, A&A, 96, 142                                                  Giacobbo N., Mapelli M., 2020, ApJ, 891, 141
+Dewi J. D. M., Pols O. R., 2003, MNRAS, 344, 629                                                 Giacobbo N., Mapelli M., Spera M., 2018, MNRAS, 474,
+Dewi J. D. M., Tauris T. M., 2000, A&A, 360, 1043                                                  2959
+Dewi J. D. M., Pols O. R., Savonije G. J., van den Heuvel                                        Gilkis A., Soker N., Kashi A., 2019, MNRAS, 482, 4233
+  E. P. J., 2002, MNRAS, 331, 1027                                                               Hamann W. R., Koesterke L., 1998, A&A, 335, 1003
+Dewi J. D. M., Podsiadlowski P., Pols O. R., 2005, MN-                                           Hamers A. S., Dosopoulou F., 2019, ApJ, 872, 119
+  RAS, 363, L71                                                                                  Hamers A. S., Thompson T. A., 2019, ApJ, 883, 23
+Dewi J. D. M., Podsiadlowski P., Sena A., 2006, MNRAS,                                           Hjellming M. S., Webbink R. F., 1987, ApJ, 318, 794
+24                                                                                             Vigna-Gómez et al.
+
+Hobbs G., Lorimer D. R., Lyne A. G., Kramer M., 2005,       ApJS, 64, 487
+  MNRAS, 360, 974                                         Li X., Chang P., Levin Y., Matzner C. D., Armitage
+Howitt G., Stevenson S., Vigna-Gómez A. r., Justham         P. J., 2020, MNRAS, 494, 2327
+  S., Ivanova N., Woods T. E., Neijssel C. J., Mandel     Lidov M., 1962, Planetary and Space Science, 9, 719
+  I., 2020, MNRAS, 492, 3229                              Livio M., Soker N., 1988, ApJ, 329, 764
+Hurley J. R., Pols O. R., Tout C. A., 2000, MNRAS,        Lombardi Jr. J. C., Proulx Z. F., Dooley K. L., Theriault
+  315, 543                                                   E. M., Ivanova N., Rasio F. A., 2006, ApJ, 640, 441
+Hurley J. R., Tout C. A., Pols O. R., 2002, MNRAS,        López-Cámara D., De Colle F., Moreno Méndez E., 2019,
+  329, 897                                                   MNRAS, 482, 3646
+Hut P., 1981, A&A, 99, 126                                MacLeod M., Ramirez-Ruiz E., 2015, ApJ, 803, 41
+Iaconi R., De Marco O., 2019, MNRAS, 490, 2550            MacLeod M., Macias P., Ramirez-Ruiz E., Grindlay J.,
+Iaconi R., Reichardt T., Staff J., De Marco O., Passy        Batta A., Montes G., 2017a, ApJ, 835, 282
+  J.-C., Price D., Wurster J., Herwig F., 2017, MNRAS,    MacLeod M., Antoni A., Murguia-Berthier A., Macias
+  464, 4028                                                  P., Ramirez-Ruiz E., 2017b, ApJ, 838, 56
+Iaconi R., De Marco O., Passy J.-C., Staff J., 2018,      MacLeod M., Ostriker E. C., Stone J. M., 2018, ApJ,
+  MNRAS, 477, 2349                                           863, 5
+Iben Jr. I., Livio M., 1993, PASP, 105, 1373              Mardling R. A., 1995a, ApJ, 450, 722
+Ivanova N., Nandez J. L. A., 2016, MNRAS, 462, 362        Mardling R. A., 1995b, ApJ, 450, 732
+Ivanova N., Taam R. E., 2004, ApJ, 601, 1058              Masuda K., Kawahara H., Latham D. W., Bieryla A.,
+Ivanova N., Belczynski K., Kalogera V., Rasio F. A.,         Kunitomo M., MacLeod M., Aoki W., 2019, ApJ, 881,
+  Taam R. E., 2003, ApJ, 592, 475                            L3
+Ivanova N., et al., 2013a, A&A Rev., 21, 59               Matese J. J., Whitmire D. P., 1983, ApJ, 266, 776
+Ivanova N., Justham S., Avendano Nandez J. L., Lom-       Matese J. J., Whitmire D. P., 1984, ApJ, 282, 522
+  bardi J. C., 2013b, Science, 339, 433                   Moe M., Di Stefano R., 2017, ApJS, 230, 15
+Jayasinghe T., Stanek K. Z., Kochanek C. S., Thompson     Moe M., Kratter K. M., 2018, ApJ, 854, 44
+  T. A., Shappee B. J., Fausnaugh M., 2019, MNRAS,        Nandez J. L. A., Ivanova N., 2016, MNRAS, 460, 3992
+  p. 2120                                                 Nandez J. L. A., Ivanova N., Lombardi J. C. J., 2015,
+Justham S., Podsiadlowski P., Han Z., 2011, MNRAS,           MNRAS, 450, L39
+  410, 984                                                Naoz S., Fragos T., Geller A., Stephan A. P., Rasio F. A.,
+Justham S., Podsiadlowski P., Vink J. S., 2014, The         2016, ApJ, 822, L24
+  Astrophysical Journal, 796, 121                         Neijssel C. J., et al., 2019, MNRAS, p. 2457
+Kashi A., Soker N., 2016, Research in Astronomy and       Nelemans G., Verbunt F., Yungelson L. R., Portegies
+  Astrophysics, 16, 99                                       Zwart S. F., 2000, A&A, 360, 1011
+Kashi A., Soker N., 2018, MNRAS, 480, 3195                North J. R., Tuthill P. G., Tango W. J., Davis J., 2007,
+Kawahara H., Masuda K., MacLeod M., Latham D. W.,            MNRAS, 377, 415
+  Bieryla A., Benomar O., 2018, AJ, 155, 144              Ohlmann S. T., Röpke F. K., Pakmor R., Springel V.,
+Klencki J., Nelemans G., Istrate A. G., Chruslinska M.,     2016, ApJ, 816, L9
+  2020, arXiv e-prints, p. arXiv:2006.11286               Ohlmann S. T., Röpke F. K., Pakmor R., Springel V.,
+Kobulnicky H. A., et al., 2014, ApJS, 213, 34               2017, A&A, 599, A5
+Kozai Y., 1962, The Astronomical Journal, 67, 591         Öpik E., 1924, Publications of the Tartu Astrofizica
+Kroupa P., 2001, MNRAS, 322, 231                             Observatory, 25
+Kruckow M. U., Tauris T. M., Langer N., Szécsi D.,       Paczynski B., 1976, in Eggleton P., Mitton S., Whelan J.,
+  Marchant P., Podsiadlowski P., 2016, A&A, 596, A58         eds, IAU Symposium Vol. 73, Structure and Evolution
+Kruckow M. U., Tauris T. M., Langer N., Kramer M.,           of Close Binary Systems. p. 75
+  Izzard R. G., 2018, MNRAS, 481, 1908                    Passy J.-C., et al., 2012, ApJ, 744, 52
+Kushnir D., Zaldarriaga M., Kollmeier J. A., Waldman      Pastorello A., et al., 2019, A&A, 630, A75
+  R., 2017, MNRAS, 467, 2146                              Pavlovskii K., Ivanova N., Belczynski K., Van K. X.,
+Lajoie C.-P., Sills A., 2011, ApJ, 726, 67                  2017, MNRAS, 465, 2092
+Lau M. Y. M., Mandel I., Vigna-Gómez A., Neijssel        Petrova A. V., Orlov V. V., 1999, AJ, 117, 587
+  C. J., Stevenson S., Sesana A., 2020, MNRAS, 492,       Pfahl E., Rappaport S., Podsiadlowski P., 2002, ApJ,
+  3061                                                       571, L37
+Lecar M., Wheeler J. C., McKee C. F., 1976, ApJ, 205,     Podsiadlowski P., Joss P. C., Hsu J. J. L., 1992, ApJ,
+  556                                                       391, 246
+Levato H., Malaroda S., Morrell N., Solivella G., 1987,
+CEEs that lead to DNS formation                                                                                   25
+
+Podsiadlowski P., Rappaport S., Pfahl E. D., 2002, ApJ,       455, 3511
+  565, 1107                                                 Stevenson S., Vigna-Gómez A., Mandel I., Barrett J. W.,
+Podsiadlowski P., Langer N., Poelarends A. J. T., Rap-        Neijssel C. J., Perkins D., de Mink S. E., 2017, Nature
+  paport S., Heger A., Pfahl E., 2004, ApJ, 612, 1044         Communications, 8, 14906
+Pol N., McLaughlin M., Lorimer D. R., 2020, Research        Tauris T. M., Bailes M., 1996, A&A, 315, 432
+  Notes of the American Astronomical Society, 4, 22         Tauris T. M., van den Heuvel E. P. J., 2006, Forma-
+Pols O. R., Schröder K.-P., Hurley J. R., Tout C. A.,        tion and evolution of compact stellar X-ray sources.
+  Eggleton P. P., 1998, MNRAS, 298, 525                       Cambridge University Press, pp 623–665
+Pols O. R., Schroeder K. P., Hurley J. R., Tout C. A.,      Tauris T. M., Langer N., Moriya T. J., Podsiadlowski
+  Eggleton P. P., 2009, VizieR Online Data Catalog, p.        P., Yoon S.-C., Blinnikov S. I., 2013, ApJ, 778, L23
+  J/MNRAS/298/525                                           Tauris T. M., Langer N., Podsiadlowski P., 2015, MN-
+Portegies Zwart S. F., Verbunt F., 1996, A&A, 309, 179        RAS, 451, 2123
+Portegies Zwart S. F., Yungelson L. R., 1998, A&A, 332,     Tauris T. M., et al., 2017, ApJ, 846, 170
+  173                                                       Thorne K. S., Żytkow A. N., 1977, ApJ, 212, 832
+Prust L. J., Chang P., 2019, MNRAS, 486, 5809               Timmes F. X., Woosley S. E., Weaver T. A., 1996, ApJ,
+Rasio F. A., Livio M., 1996, ApJ, 471, 366                    457, 834
+Rasio F. A., Tout C. A., Lubow S. H., Livio M., 1996,       Toonen S., Nelemans G., Portegies Zwart S., 2012, A&A,
+  ApJ, 470, 1187                                              546, A70
+Regös E., Bailey V. C., Mardling R., 2005, MNRAS,          van den Bos W. H., 1960, Journal des Observateurs, 43,
+  358, 544                                                    145
+Reichardt T. A., De Marco O., Iaconi R., Tout C. A.,        van den Heuvel E. P. J., 1976, in Eggleton P., Mitton S.,
+  Price D. J., 2019, MNRAS, 484, 631                          Whelan J., eds, IAU Symposium Vol. 73, Structure
+Ricker P. M., Taam R. E., 2008, ApJ, 672, L41                 and Evolution of Close Binary Systems. p. 35
+Ricker P. M., Taam R. E., 2012, ApJ, 746, 74                van der Helm E., Portegies Zwart S., Pols O., 2016,
+Saladino M. I., Pols O. R., 2019, A&A, 629, A103              MNRAS, 455, 462
+Salpeter E. E., 1955, ApJ, 121, 161                         Vick M., Lai D., 2018, MNRAS, 476, 482
+Sana H., et al., 2012, Science, 337, 444                    Vick M., Lai D., 2020, MNRAS,
+Sandquist E. L., Taam R. E., Chen X., Bodenheimer P.,       Vigna-Gómez A., et al., 2018, MNRAS, 481, 4009
+  Burkert A., 1998, ApJ, 500, 909                           Vigna-Gómez A., Justham S., Mandel I., de Mink S. E.,
+Schneider F. R. N., Izzard R. G., Langer N., de Mink          Podsiadlowski P., 2019, ApJ, 876, L29
+  S. E., 2015, ApJ, 805, 20                                 Vigna-Gómez A., 2019, Dataset from: Com-
+Schneider F. R. N., et al., 2018a, Science, 359, 69           mon–Envelope Episodes that lead to Double
+Schneider F. R. N., et al., 2018b, Science, 361, aat7032      Neutron Star formation, doi:10.5281/zenodo.3593843,
+Schrøder S. L., MacLeod M., Loeb A., Vigna-Gómez A.,         https://doi.org/10.5281/zenodo.3593843
+  Mandel I., 2020, ApJ, 892, 13                             Vinciguerra S., et al., 2020, arXiv e-prints, p.
+Sepinsky J. F., Willems B., Kalogera V., Rasio F. A.,         arXiv:2003.00195
+  2007, ApJ, 667, 1170                                      Vink J. S., de Koter A., 2005, A&A, 442, 587
+Sepinsky J. F., Willems B., Kalogera V., Rasio F. A.,       Vink J. S., de Koter A., Lamers H. J. G. L. M., 2000,
+  2009, ApJ, 702, 1387                                        A&A, 362, 295
+Sepinsky J. F., Willems B., Kalogera V., Rasio F. A.,       Vink J. S., de Koter A., Lamers H. J. G. L. M., 2001,
+  2010, ApJ, 724, 546                                         A&A, 369, 574
+Shiber S., Soker N., 2018, MNRAS, 477, 2584                 Vos J., Østensen R. H., Németh P., Green E. M., Heber
+Shiber S., Iaconi R., De Marco O., Soker N., 2019, MN-        U., Van Winckel H., 2013, A&A, 559, A54
+  RAS, 488, 5615                                            Webbink R. F., 1984, ApJ, 277, 355
+Shporer A., et al., 2016, The Astrophysical Journal, 829,   Witte M. G., Savonije G. J., 1999a, A&A, 341, 842
+  34                                                        Witte M. G., Savonije G. J., 1999b, A&A, 350, 129
+Siess L., Izzard R. G., Davis P. J., Deschamps R., 2013,    Xu X.-J., Li X.-D., 2010a, ApJ, 716, 114
+  A&A, 550, A100                                            Xu X.-J., Li X.-D., 2010b, ApJ, 722, 1985
+Soberman G. E., Phinney E. S., van den Heuvel E. P. J.,     Ye C. S., Fong W.-f., Kremer K., Rodriguez C. L., Chat-
+  1997, A&A, 327, 620                                         terjee S., Fragione G., Rasio F. A., 2020, ApJ, 888,
+Soker N., Gilkis A., 2018, MNRAS, 475, 1198                   L10
+Staff J. E., De Marco O., Macdonald D., Galaviz P.,         Zahn J.-P., 1975, A&A, 41, 329
+  Passy J.-C., Iaconi R., Mac Low M.-M., 2016, MNRAS,       Zahn J.-P., 1977, A&A, 57, 383
+26                                                 Vigna-Gómez et al.
+
+Zahn J. P., 2008, in Goupil M. J., Zahn J. P.,
+  eds, EAS Publications Series Vol. 29, EAS Pub-
+  lications Series. pp 67–90 (arXiv:0807.4870),
+  doi:10.1051/eas:0829002
+de Mink S. E., Belczynski K., 2015, ApJ, 814, 58
+

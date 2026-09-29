@@ -1,0 +1,856 @@
+arXiv:1704.01352v2 [astro-ph.HE] 10 Apr 2017
+
+Formation of the first three gravitational-wave
+observations through isolated binary evolution
+Simon Stevenson,1∗Alejandro Vigna-Gómez,1 Ilya Mandel,1
+Jim W. Barrett,1 Coenraad J. Neijssel,1 David Perkins,1 Selma E. de
+Mink2
+1 School of Physics and Astronomy, University of Birmingham, Edgbaston, Birmingham
+
+B15 2TT, United Kingdom
+2 Anton Pannekoek Institute for Astronomy, University of Amsterdam, 1090 GE Amsterdam, The Netherlands
+
+April 11, 2017
+
+Abstract
+
+During its first 4 months of taking data, Advanced LIGO
+has detected gravitational waves from two binary black hole
+mergers, GW150914 and GW151226, along with the statistically less significant binary black hole merger candidate
+LVT151012. We use our rapid binary population synthesis
+code COMPAS to show that all three events can be explained by a single evolutionary channel – classical isolated
+binary evolution via mass transfer including a common envelope phase. We show all three events could have formed
+in low-metallicity environments (Z = 0.001) from progenitor binaries with typical total masses & 160M , & 60M
+and & 90M , for GW150914, GW151226, and LVT151012,
+respectively.
+∗
+
+E-mail: simon.stevenson@ligo.org
+
+1
+
+Introduction
+The Advanced Laser Interferometer Gravitational-wave observatory (aLIGO) 1 has
+confidently observed gravitational waves (GWs) from two binary black hole (BBH)
+mergers, GW150914 2 and GW151226 3 . The BBH merger candidate LVT151012
+is less statistically significant, but has a > 86% probability of being astrophysical
+in origin 4,5 .
+GW150914 was a heavy BBH merger, with a well-measured total mass M =
+6,5
+m1 + m2 = 65.3 ±4.1
+, where m1,2 are the component masses. Several for3.4 M
+mation scenarios could produce such heavy BBHs. These include: the classical
+isolated binary evolution channel we discuss in this paper 7,8,9 , including formation
+from population III stars 10 ; formation through chemically homogeneous evolution
+in very close tidally locked binaries 11,12,13 ; dynamical formation in globular clusters 14,15,16 , young stellar clusters 17 , or galactic nuclei 18,19 ; or even mergers in a
+population of primordial binaries 20,21 . One common feature of all GW150914 formation channels with stellar-origin black holes is the requirement that the stars are
+formed in sub-solar metallicity environments in order to avoid rapid wind-driven
+mass loss which would bring the remnant masses below 30M 22,23 ; see Results and
+Abbott et al. 24,5 for further discussion.
+We are developing a platform for the statistical analysis of observations of
+massive binary evolution, Compact Object Mergers: Population Astrophysics and
+Statistics (COMPAS). COMPAS is designed to address the key problem of GW
+astrophysics: how to go from a population of observed sources to understanding
+uncertainties about binary evolution. In addition to a rapid population synthesis code developed with model-assumption flexibility in mind, COMPAS also includes tools to interpolate model predictions under different astrophysical model
+assumptions, astrostatistics tools for population reconstruction and inference in
+the presence of selection effects and measurement certainty, and clustering tools
+for model-independent exploration.
+Here, we attempt to answer the following question: can all three LIGO-observed
+BBHs have formed through a single evolutionary channel? We use the binary
+population synthesis element of COMPAS to explore the formation of the observed
+systems through the classical isolated binary evolution channel 25 via a commonenvelope (CE) phase 26 . We show that GW151226 and LVT151012 could have
+formed through this channel in an environment at Z = 10%Z (with Z ≡ 0.02)
+from massive progenitor binaries with a total zero-age main-sequence (ZAMS)
+mass & 65M and & 95M , respectively.
+These BBHs could also originate from lower-mass progenitors with total masses
+& 60M and & 90M , respectively, at metallicity Z = 5%Z , where the same
+channel could have formed GW150914 from binaries with a total ZAMS mass
+& 160M . At low metallicity, this channel can produce merging BBHs with sig2
+
+nificantly unequal mass ratios: more than 50% of BBHs have a mass ratio more
+extreme than 2 to 1 at Z = 10%Z .
+
+Results
+Forming GW151226 and LVT151012
+For relatively low-mass GW events the GW signal in the aLIGO sensitive frequency
+band is inspiral-dominated and the chirp mass M = M q 3/5 (1 + q)−6/5 is the most
+accurately measured mass parameter, while the mass ratio q = m2 /m1 cannot be
+measured as accurately (see figure 4 of Abbott et al. 5 ). The 90% credible intervals
+on these for GW151226 and LVT151012 are 8.6 ≤ M/M ≤ 9.2, q ≥ 0.28; and
+14.0 ≤ M/M ≤ 16.5, q ≥ 0.24, respectively 5 . For more massive events, the
+ringdown phase of the GW waveform makes a significant contribution and the
+most accurately measured mass parameter is the total mass M . For GW150914,
+6,5
+M = 65.3 ±4.1
+, with mass ratio q ≥ 0.65.
+3.4 M
+We simulate events at 10%-solar (Z = 0.002) and 5%-solar (Z = 0.001) metallicity using the Fiducial model assumptions (see Methods). We select binaries
+which fall within the 90% credible interval on total (chirp) BBH mass and with
+q above the 90% credible interval lower bound for GW150914 (GW151226 and
+LVT151012). In all cases, we select only BBHs that merge within the Hubble
+time. Systems satisfying these conditions are shown in Figure 1. The upper panel
+shows BBHs formed at 10%-solar metallicity whilst the lower panel shows those
+formed at 5%-solar metallicity. The black hole mass of the initially more massive
+star is labeled as M1BH and that of the initially less massive star as M2BH .
+In the left hand column of Figure 1 we show the ZAMS masses of possible
+progenitors of these events. Progenitors of the events are separated in ZAMS
+masses apart from rare systems that start on very wide orbits, avoiding mass
+transfer altogether, but are brought to merger by fortuitous supernova kicks. These
+systems do not lose mass through non-conservative mass transfer, and can therefore
+form more massive binaries from lower mass progenitors – the LVT151012 outlier
+progenitor in the lower left corner of the bottom left panel of Figure 1 was formed
+this way.
+Massive stars have high mass loss rates; e.g., at solar metallicity, massive stars
+could lose tens of solar masses through winds even before interacting with their
+companion. We find, in agreement with Abbott et al. 24 and Belczynski et al. 7 ,
+that it is not possible to form GW150914 or LVT151012 through classical isolated
+binary evolution at solar metallicity. GW151226 lies at the high-mass boundary
+of BBHs that can be formed at solar metallicity.
+GW151226 is consistent with being formed through classical isolated binary
+3
+
+M2ZAMS [M ¯ ]
+
+M2BH [M ¯ ]
+M2BH [M ¯ ]
+
+40
+35
+30
+25
+20
+15
+10
+5
+0
+40
+35
+30
+25
+20
+15
+10
+5
+0
+
+M2ZAMS [M ¯ ]
+
+100 Z = 0. 002
+90
+GW150914
+80
+GW151226
+LVT151012
+70
+60
+50
+40
+30
+20
+100 Z = 0. 001
+90
+GW150914
+80
+GW151226
+LVT151012
+70
+60
+50
+40
+30
+20
+30 40 50 60 70 80 90 100
+
+Z = 0. 002
+GW150914
+GW151226
+LVT151012
+
+Z = 0. 001
+GW150914
+GW151226
+LVT151012
+
+10 20 30 40 50 60
+
+M1BH [M ¯ ]
+
+M1ZAMS [M ¯ ]
+
+Figure 1: Masses of binary black holes observed by aLIGO and their
+progenitors.
+Each point in the plots represents one system in our simulations.
+(a) ZAMS masses M1ZAMS and M2ZAMS for GW150914 (blue - no events), GW151226
+(orange) and LVT151012 (green) progenitors at Z = 10%Z = 0.002. We define
+M1ZAMS > M2ZAMS and so shade the non-allowed region gray.
+(b) Final black hole masses M1BH and M2BH for merging BBHs consistent with
+GW150914, GW151226 and LVT151012 formed at Z = 10%Z . The grey diagonal
+dashed line shows M1BH = M2BH . The constraints we use to determine if a merging
+binary black hole is similar to one of the observed GW events are shown in grey
+and described in Results.
+(c) ZAMS masses M1ZAMS and M2ZAMS for GW150914, GW151226 and LVT151012
+progenitors at the lower metallicity Z = 5%Z = 0.001. The progenitor masses required to produce GW151226 and LVT151012 decrease, and we are able to produce
+GW150914.
+(d) Final black hole masses M1BH and M2BH for GW150914, GW151226 and
+LVT151012 BBHs formed from 5%-solar metallicity progenitors.
+The panels of this figure are formatted to be comparable to Figure 4 in Abbott
+et al. 5 .
+
+4
+
+evolution at 10%-solar metallicity from a binary with total mass 65 . M/M .
+100 (see upper left panel of Figure 1). LVT151012 is also consistent with being formed at 10%-solar metallicity from binaries with initial total masses 95 .
+M/M . 125. Typical progenitors have a mass ratio close to unity (median
+q = 0.75), with an initial orbital period of ∼ 500 days.
+GW150914 could have formed through isolated binary evolution at metallicities Z . 5%Z from binaries with initial total mass & 160M (see lower left
+panel of Figure 1). While this mass range is similar to that found by others who
+investigated the formation of GW150914 through isolated binary evolution at low
+metallicities 7,9,8 , we note that, unlike Eldridge & Stanway 8 , we do not require
+fortuitous supernova kicks resulting in high eccentricity to form this binary at
+Z = 5%Z . We identify the same main evolutionary channel (see Figure 2) as
+Belczynski et al. 7 . We find that GW151226 and LVT151012 are also consistent
+with forming through this channel at lower metallicity, from initially lower mass binaries. For example, the total progenitor binary mass range for forming GW151226
+reduces from 65 . M/M . 100 at 10% solar metallicity to 60 . M/M . 90 at
+5%-solar metallicity, demonstrating a degeneracy in the ZAMS masses and metallicity inferred in our model due to the dependence of mass loss rates on metallicity.
+We find that the chirp masses of GW151226 and LVT151012 lie near the peak
+of the mass distribution of BBH mergers formed at 10%-solar metallicity which
+are observable by aLIGO. There remains significant support for both systems at
+5%-solar metallicity. GW150914 cannot be formed at 10%-solar metallicity in our
+model, and remains in the tail of the total mass distribution at 5%-solar, which
+is the highest metallicity at which we form significant numbers of all three event
+types in the Fiducial model. Events like GW150914 are much more common at
+1%-solar metallicity.
+At Z = 5%Z , the more massive black hole is formed from the initially more
+massive star in ∼ 90% of systems.
+Interestingly, low metallicities can produce significantly unequal mass ratios.
+For example, the median mass ratio of merging BBHs is ∼ 0.5 at 10% solar metallicity. The high fraction of merging BBHs with low mass ratios at low metallicities
+is a general trend; this agrees with Figure 9 of Dominik et al. 27 , who do not,
+however, discuss this effect. A GW detection of a heavy BBH with an accurately
+measured low mass ratio could indicate formation in a lower metallicity environment, and not necessarily dynamical formation as suggested in Abbott et al. 5 .
+The significant fraction of low mass-ratio mergers at low metallicity arises due
+to a combination of effects. The maximum black hole (BH) mass for single stars
+is a function of metallicity (e.g., Figure 6 of Spera et al. 23 ), with more massive
+BHs formed at lower metallicities due to reduced mass loss. Therefore, for a given
+observed chirp mass, more unequal BHs can be formed at low metallicity. A second
+
+5
+
+effect comes from the difference in the onset of the first episode of mass transfer,
+which is key for determining the mass of the remnant. The dependence of stellar
+radius on metallicity 28 means that stars with lower metallicity experience their
+first episode of mass transfer in a more evolved phase of their evolution for a given
+initial orbital separation 29 . They thus lose less mass when the hydrogen envelope
+is stripped, again allowing for more unequal remnants.
+
+Typical evolutionary pathway of GW151226
+In Figure 2 we show the evolution in time of the masses, stellar types and orbital
+period of typical progenitors of all three observed GW events. Progenitors of all
+three systems follow the same typical channel. Here we describe the evolution
+of a typical 10%-solar metallicity progenitor of GW151226 (solid orange line in
+Figure 2); it is shown graphically in Figure 3.
+The binary initially has two high-mass main-sequence (MS) O stars, a primary
+of ∼ 64M and a ∼ 28M companion with an initial orbital period of ∼ 300 days.
+The primary expands at the end of its main sequence evolution, fills its Roche
+lobe and initiates mass transfer as a ∼ 60M Hertzsprung-Gap (HG) or core
+helium-burning (CHeB) star (case B or C mass transfer), donating its ∼ 36M
+hydrogen-rich envelope to the secondary, which accretes only ∼ 3M of it. This
+leaves the primary as a stripped naked helium star (HeMS) of ∼ 25M . After
+evolving and losing a few solar masses through stellar winds, the primary collapses
+to a BH of ∼ 19M through almost complete fallback.
+The secondary continues evolving and initiates mass transfer as a CHeB star
+of ∼ 30M . This mass transfer is dynamically unstable and leads to the formation
+and subsequent ejection of a CE. The CE ejection draws energy from the orbit and
+results in significant orbital hardening: the orbital period is reduced by ∼ 3 orders
+of magnitude as can be seen in the lower right panel of Figure 2. The secondary,
+which becomes a HeMS star of ∼ 11M after the ejection of the envelope, eventually collapses to a ∼ 6M BH. Finally, the binary merges through GW emission
+in ∼ 100 Myrs.
+A few percent of our BBH progenitors form through a variant of this channel
+involving a double CE. This variant involves two nearly equal mass ZAMS stars
+which first interact during the CHeB phase of their evolution, initiating a double
+CE which brings the cores close together. This is followed by both stars collapsing
+into BHs and merging through GW emission.
+
+6
+
+80
+60
+40
+20
+
+BH
+
+Secondary typ e
+
+Primary typ e
+
+0
+
+HeMS
+CHeB
+HG
+MS
+
+200
+
+100
+
+Total Mass [M ⊙ ]
+
+100
+
+120
+
+80
+60
+40
+20
+
+Time [Myr]
+
+150
+125
+100
+75
+50
+25
+0
+
+BH
+
+1000
+
+HeMS
+CHeB
+HG
+
+100
+10
+1
+
+MS
+
+0 1 2 3 4 5 6 7 8
+
+175
+
+0
+
+Period [days]
+
+Secondary Mass [M ⊙ ]
+
+Primary Mass [M ⊙ ]
+
+120
+
+0 1 2 3 4 5 6 7 8
+
+Time [Myr]
+
+0.1
+0 1 2 3 4 5 6 7 8
+
+Time [Myr]
+
+Figure 2: Typical evolution of BBH progenitors.
+Evolution in time of representative GW150914 (blue), GW151226 (orange) and
+LVT151012 (green) progenitors at 10%-solar (Z = 0.002, solid lines) and 5%-solar
+metallicity (Z = 0.001, dashed lines). (a) The mass of the initially more massive
+star. The stars lose mass through stellar winds, mass transfer and supernovae. (b)
+The mass of the secondary star. The stars may accrete mass during mass transfer
+episodes. (c) The evolution of the total mass of the binary. (d) The evolutionary
+stage (stellar type) of the initially more massive star as given by Hurley et al. 30 (see
+Results for definitions). (e) The evolutionary stage (stellar type) of the secondary
+star. (f) The orbital period of the binary in days.
+
+7
+
+Time M1
+
+ST1
+
+ST2
+
+M2
+
+a
+
+[Myr]
+
+[M ]
+
+−
+
+−
+
+[M ]
+
+[R ]
+
+0.0
+
+63.6 MS
+
+MS
+
+27.8 729.93
+
+4.1
+
+60.4 HG
+
+MS
+
+27.7 757.5
+
+4.12 24.6 HeMS
+
+MS
+
+30.6 622.07
+
+4.49 19.1 BH
+
+MS
+
+30.6 692.7
+
+7.21 19.1 BH
+
+CHeB 30.3 697.48
+
+7.42 19.1 BH
+
+CHeB 29.7 706.33
+
+7.42 19.1 BH
+7.88 19.1 BH
+
+HeMS 10.6 5.18
+5.7 8.82
+BH
+
+Figure 3: Formation of GW151226
+Typical formation of GW151226 at 10%-solar metallicity in our model, as described
+in the Results. The columns show the time, the masses and stellar types of the
+primary and secondary, M1 , ST1 and M2 , ST2 respectively, and the semi-major
+axis a. Some intermediate stages of the evolution are omitted for clarity.
+
+1
+
+8
+
+Discussion
+We have explored whether all of the GW events observed to date could have been
+formed through classical isolated binary evolution via a CE phase. All three observed systems can be explained through this channel under our Fiducial model
+assumptions. Forming all observed GW events through a single formation channel
+avoids the need to fine tune the merger rates from the very different evolutionary channels discussed in the Introduction to be comparable. Other proposed
+formation scenarios struggle to produce at least one of the observed BBHs. For
+example, both chemically homogeneous evolution 11,12,13 and dynamical formation
+in old, low-metallicity globular clusters in the model of Rodriguez et al. 14 (see their
+figure 2) have little or no support for relatively low-mass BBHs such as GW151226,
+5
+which has a total mass M = 21.8 ±5.9
+. The ability of a single channel to ex1.7 M
+plain all observed events will be tested with future GW observations 5,31 .
+We form ∼ 2 × 104 BBHs that merge in a Hubble time per 1 × 109 solar
+masses of star formation at 10%-solar metallicity in our Fiducial model, using
+the Kroupa 32 initial mass function (IMF), a uniform mass ratio distribution and
+assuming that all stars are in binaries. This increases to ∼ 3 × 104 BBHs per
+1 × 109 solar masses of star formation at Z = 5%Z . Rescaling by the total star
+formation rate 33 at redshift z = 0 , this would correspond to a BBH formation rate
+of ∼ 300 Gpc−3 yr−1 assuming all star formation happens at 10%-solar metallicity.
+This can be compared to the empirical LIGO BBH merger rate estimate 5 of 9 –
+240 Gpc−3 yr−1 . However, this comparison should be made with caution, because
+even local mergers can arise from binaries formed at a broad range of redshifts and
+metallicities. An accurate calculation of the merger rate requires the convolution of
+the metallicity-specific redshift-dependent star formation rate with the time delay
+distribution, integrated over a range of metallicities 34 .
+There are many uncertainties in the assumptions we make (see Methods for
+details of our default assumptions). The evolution of massive progenitor binaries
+is poorly constrained by observations, although there has been recent progress,
+such as with the VLT-FLAMES Tarantula Survey (VFTS) in the 30 Doradus
+region of the Large Magellanic Cloud 35 .
+In rapid population synthesis codes like COMPAS, these uncertainties are
+treated by parametrising complex physical processes into simple one or two parameter models, such as treating the CE with the α prescription 36 , or scaling
+Luminous Blue Variable (LBV) mass loss rates with fLBV . The multidimensional
+space of model parameters, including α and fLBV , must then be explored in order
+to properly examine the model uncertainties.
+We leave a full exploration of this parameter space for future studies with COMPAS; here we follow the common approach 27,37,38 of varying individual parameters
+independently and assessing their impact relative to the Fiducial model.
+9
+
+In the Fiducial model, we used the ‘delayed’ supernova model of Fryer et al. 39 .
+We have also checked that using the ‘rapid’ model of Fryer et al. 39 does not significantly alter the typical evolutionary pathways for forming heavy BBHs discussed
+here, since both models predict high-mass BH formation through almost complete
+fallback.
+Mennekens & Vanbeveren 37 use a LBV mass loss rate of 10−3 M yr−1 . They
+find that such strong mass loss can shut off the typical channel for BBH formation.
+In COMPAS, we follow SSE 30 for identifying LBVs as massive stars with L/L >
+6 × 105 and (R/R )(L/L )1/2 > 105 . We find that increasing the mass loss rate of
+LBVs from 1.5 × 10−4 M to 10−3 M yr−1 does not significantly change the total
+BBH merger rate; nevertheless, the number of BBH mergers similar to LVT151012
+was reduced by a factor of ∼ 10 for progenitors at 5%-solar metallicity.
+In the Fiducial model we only permit evolved CHeB stars with a well defined
+core-envelope separation to survive CE events (see Methods). This model therefore
+corresponds to the pessimistic model of Dominik et al. 27 , which is also the standard
+model (M1) of Belczynski et al. 7 . We also consider an alternate model where we
+allow HG donors to initiate and survive CE events, as in the optimistic model of
+Dominik et al. 27 . We find that the optimistic CE treatment predicts total BBHs
+merger rates which are ∼ 3 times higher than the Fiducial model at Z = 10%Z ,
+and ∼ 2 times higher at Z = 5%Z . This optimistic variation also raises the total
+merging BBH mass that can be formed at a given metallicity; e.g., at Z = 10%Z ,
+the maximum total BBH mass rises from ∼ 50M for the pessimistic model to
+∼ 60M for the optimistic model, as also noted by Dominik et al. 27 . The spread
+between these optimistic and pessimistic models also reflects the uncertainty in the
+radial evolution of very massive stars; the results of the pessimistic model could
+move toward those of the optimistic model if the radial expansion for the most
+massive stars predominantly happens during the CHeB phase rather than during
+the HG phase.
+For a very small number of our simulated systems, immediately after the CE
+is ejected the binary is comprised of a BH and a HeMS secondary that is already
+overfilling its Roche lobe. In the Fiducial model we treat these systems as an
+unsuccessful CE event, leading to mergers. Similar studies 40,41 have allowed only
+those systems which overfill the Roche lobe by no more than 10% at the end of
+the CE phase to survive. We also consider the extreme alternative of allowing
+all such systems to survive. The HeMS stars lose a significant fraction of their
+mass through rapid but stable mass transfer onto the BH companion. Most of this
+mass is removed from the binary as the BH companion can only accrete at the
+Eddington limit, and the HeMS star leaves behind a relatively low mass BH. We
+verify that this has no impact on our conclusions.
+We test the impact of the assumed CE ejection efficiency by changing the value
+
+10
+
+of αλ from the fiducial 0.1 to 0.01. At 10%-solar metallicity we find the total BBH
+merger rate drops by a factor of ∼ 2. Dominik et al. 27 performed the same study,
+setting αλ = 0.1 (model V2) and αλ = 0.01 (model V1) and report the same
+decrease (see tables 1,2 and 3 in Dominik et al. 27 ). At 5%-solar metallicity, the
+total BBH merger rate drops by a factor of ∼ 4, with the specific merger rates of
+binaries like GW151226, LVT151012, and GW150914 dropping by factor of ∼ 25,
+∼ 4, and ∼ 50, respectively. The maximum BBH mass produced at 10%-solar
+metallicity increases from ∼ 50M in the Fiducial model to ∼ 60M under this
+variation. At 5%-solar metallicity we find that the maximum total BBH mass
+decreases from ∼ 75M to ∼ 65M .
+In conclusion, we have shown that GW150914, GW151226 and LVT151012 are
+all consistent with formation through the same classical isolated binary evolution
+channel via mass transfer and a common envelope. GW observations can place
+constraints on the uncertain astrophysics of binary evolution 42,43,44,45,46 . Although
+the focus of this paper has been on the constraints placed by the observed BBH
+masses, other observational signatures, including merger rates (and their variation with redshift) 47 , BH spin magnitude and spin-orbit misalignment measurements 48,49,50 , and possibly a GW stochastic background observation 51,52 , can all
+contribute additional information. COMPAS will provide a platform for exploring
+the full evolutionary model parameter space with future GW and electromagnetic
+observations.
+
+Acknowledgments
+We would like to thank Chris Belczynski, Christopher Berry, Natasha Ivanova,
+Stephen Justham, Vicky Kalogera, Gijs Nelemans, Philipp Podsiadlowski, David
+Stops and Alberto Vecchio for useful discussions and suggestions. IM acknowledges
+support from STFC grant RRCM19068.GLGL; his work was performed in part at
+the Aspen Center for Physics, which is supported by National Science Foundation
+grant PHY-1066293. AVG acknowledges support from CONACYT. SS and IM
+are grateful to NOVA for partially funding their visit to Amsterdam to collaborate
+with SdM. SdM acknowledges support by a Marie Sklodowska-Curie Action (H2020
+MSCA-IF-2014, project id 661502) and National Science Foundation under Grant
+No. NSF PHY11-25915.
+
+Author contributions
+All authors contributed to the analysis and writing of the paper.
+
+11
+
+Data Availability
+We make the results of our simulations available at http://www.sr.bham.ac.uk/
+compas/.
+
+Competing Financial Interests
+The authors declare no competing financial interests.
+
+Methods
+COMPAS population synthesis code
+COMPAS includes a rapid Monte-Carlo binary population synthesis code to simulate the evolution of massive stellar binaries, the possible progenitors of merging
+compact binaries containing neutron stars (NSs) and BHs which are potential GW
+sources. Our approach to population synthesis is broadly similar to BSE 53 and the
+codes derived from it, such as binary_c 54,55,56,57 and StarTrack 58,59 .
+COMPAS was developed to explore the many poorly constrained stages of
+binary evolution, such as mass transfer, CE evolution and natal supernova kicks
+imparted to NSs and BHs 25 . Here we provide a brief overview of our default
+assumptions.
+For our Fiducial model, we simulate likely BBHs progenitor binaries with the
+primary mass m1 drawn from the Kroupa IMF 32 up to m1 ≤ 100M where the IMF
+has a power-law index of −2.3. The mass of the secondary is then determined by
+the initial mass ratio q ≡ m2 /m1 , which we draw from a flat distribution between
+0 and 1 60 .
+The semimajor axis a is chosen from a flat-in-the-log distribution 61,62 and restricted between 0.1 < a/AU < 1000; the period distribution is therefore set by the
+convolved semimajor axis and mass distributions. The boundaries on the component masses and separations are chosen to safely encompass all individual solutions
+yielding BBHs of interest, and so impact normalisation only. Binaries are assumed
+to have an initial eccentricity of zero; the initial semimajor axis distribution serves
+as a proxy for the periapsis distribution, which is the relevant parameter affecting
+binary evolution 38 . Stellar rotation and tides are not included in the Fiducial
+model.
+We use the analytical fits of Hurley et al. 30 to the models of Pols et al. 28 for
+single stellar evolution. We note that the original grid of single star models extends
+only to 50 solar masses. We extrapolate above this limit, as described in Hurley
+et al. 30 .
+12
+
+We include mass loss due to stellar winds for hot O stars following the Vink
+model 63,22 , with a LBV mass loss rate of fLBV × 10−4 M yr−1 , independent of
+metallicity. In the Fiducial model fLBV = 1.5 22 . For Wolf-Rayet (WR) stars we
+use the formalism of Hamann & Koesterke 64 , modified as in Belczynski et al. 22 to
+be metallicity dependent (∝ Z 0.85 ) based on Vink & de Koter 65 . We assume that
+all stellar winds are isotropic and remove the specific angular momentum of the
+mass losing object. We do not account for wind accretion by a companion.
+Mass transfer occurs when the donor star fills its Roche lobe, whose radius
+is calculated according to Eggleton 66 . Although all of our binaries are initially
+circular, supernovae can lead to some eccentric systems. We use the periastron
+to check whether a star would fill its Roche lobe, whose radius is computed for
+a circular orbit with the periastron separation. We assume that mass transfer
+circularises the orbit.
+In the absence of accurate stellar models spanning the full parameter space of
+interest, we use a simplified treatment of mass transfer. We assume that mass
+transfer from main-sequence, core-hydrogen-burning donors (case A) is dynamically stable for mass ratios q ≥ 0.65. We follow de Mink et al. 57 and Claeys et al. 67
+in assuming that case A systems with q < 0.65 will result in mergers as the accretor expands and brings the binary into contact 40 . Stable case A mass transfer is
+solved using an adaptive algorithm 68 which requires the radius of the donor to stay
+within its Roche lobe during the whole episode; when this is impossible, we assume
+that any donor mass outside the Roche lobe is transferred on a thermal timescale
+until the donor is again contained within its Roche lobe. In our Fiducial model
+we first test whether mass transfer is stable; if it is, we treat stable mass transfer
+from all evolved stars (case B or case C) equally, without distinguishing between
+donors with radiative and convective envelopes: we remove the entire envelope of
+the donor on its thermal timescale 69 . We follow Tout et al. 70 , Belczynski et al. 59
+in our model for the rejuvenation of mass accreting stars.
+The efficiency of mass transfer (i.e., how conservative it is) is set by the rate at
+which the accretor can accept material from the donor. For NS and BH accretors,
+the maximum rate of accretion is defined by the Eddington limit. We assume
+that a star can accrete at a rate CMacc /τth , with the Kelvin-Helmholtz thermal
+timescale τth = GM Menv /RL, where G is the gravitational constant, M is the
+total mass of the star, Menv is the mass of the envelope, R is the radius of the star
+and L is its luminosity. The constant C is a free parameter in our model; we use
+C = 10 for all accretion episodes in the Fiducial model 53 . The material that fails
+to be accreted is removed from the system with the specific angular momentum of
+the accretor via isotropic re-emission.
+We determine the onset of dynamically unstable mass transfer by comparing
+the response of the radius of the donor star to a small amount of mass loss against
+
+13
+
+the response of the orbit to a small amount of mass transfer 71 . We use fits to
+condensed polytrope models 72,71 to calculate the radius response of a giant to
+mass loss on a dynamical timescale. Dynamically unstable mass transfer leads to
+a CE. If the donor star is on the HG, we follow Belczynski et al. 73 ,7 in assuming
+such systems cannot survive a CE. In fact, such systems may never enter CE at
+all. Pavlovskii et al. 74 have shown that in many cases mass transfer from HG
+donors will be stable and not lead to a CE.
+All of our successful CE events therefore involve a donor star which has reached
+CHeB. For CE events, the λ parameter, which characterizes the binding energy of
+the envelope 36 , is set to λ = 0.1 75,76,27,7 while the α parameter, which characterizes
+the efficiency of converting orbital energy into CE ejection, is set to α = 1. If one
+of the stars in the post-CE binary is filling its Roche lobe immediately after CE
+ejection, we assume that there is insufficient orbital energy available to eject the
+envelope and the binary evolution is terminated in a merger. We assume that CE
+events with successful envelope ejections circularise orbits (see section 10.3.1 of
+Ivanova et al. 26 .)
+The relationship between the pre-supernova core mass and the compact remnant mass follows the ‘delayed’ model of Fryer et al. 39 . Supernova kicks are assumed to be isotropic and their magnitude is drawn from a Maxwellian distribution
+with a 1D velocity dispersion σ = 250 km s−1 77 , reduced by a factor of (1 − f ),
+where f is the fallback fraction, calculated according to Fryer et al. 39 . As in Belczynski et al. 7 , we find that most of our heavy black holes form through complete
+fallback without a supernova or associated kick.
+
+References
+[1] Aasi, J. et al. Advanced LIGO. Class. Quantum Grav 32, 074001 (2015).
+[2] Abbott, B. P. et al. Observation of Gravitational Waves from a Binary Black
+Hole Merger. Phys. Rev. Lett. 116, 061102 (2016).
+[3] Abbott, B. P. et al. GW151226: Observation of Gravitational Waves from a
+22-Solar-Mass Binary Black Hole Coalescence. Phys. Rev. Lett. 116, 241103
+(2016).
+[4] Abbott, B. P. et al. GW150914: First results from the search for binary black
+hole coalescence with Advanced LIGO. Phys. Rev. D 93, 122003 (2016).
+[5] Abbott, B. P. et al. (LIGO Scientific Collaboration and Virgo Collaboration).
+Binary Black Hole Mergers in the First Advanced LIGO Observing Run. Phys.
+Rev. X 6, 041015 (2016).
+14
+
+[6] Abbott, B. P. et al. Properties of the Binary Black Hole Merger GW150914.
+Phys. Rev. Lett. 116, 241102 (2016).
+[7] Belczynski, K., Holz, D. E., Bulik, T. & O’Shaughnessy, R. The first
+gravitational-wave source from the isolated evolution of two stars in the 40–
+100 solar mass range. Nature 534, 512–515 (2016).
+[8] Eldridge, J. J. & Stanway, E. R. BPASS predictions for Binary Black-Hole
+Mergers. Mon. Not. R. Astron. Soc. 462, 3302–3313 (2016).
+[9] Lipunov, V. M. et al. First Gravitational-Wave Burst GW150914, as predicted
+by the scenario machine. New Astronomy 51, 122 – 127 (2017).
+[10] Inayoshi, K., Kashiyama, K., Visbal, E. & Haiman, Z. Gravitational wave
+background from population iii binary black holes consistent with cosmic
+reionization. Mon. Not. R. Astron. Soc. 461, 2722–2727 (2016).
+[11] Mandel, I. & de Mink, S. E. Merging binary black holes formed through
+chemically homogeneous evolution in short-period stellar binaries. Mon. Not.
+R. Astron. Soc. 458, 2634–2647 (2016).
+[12] Marchant, P. et al. A new route towards merging massive black holes. Astron.
+Astrophys. 588, A50 (2016).
+[13] de Mink, S. E. & Mandel, I. The chemically homogeneous evolutionary channel for binary black hole mergers: Rates and Properties of gravitational-wave
+events detectable by advanced LIGO. Mon. Not. R. Astron. Soc. (2016).
+[14] Rodriguez, C. L. et al. Dynamical Formation of the GW150914 Binary Black
+Hole. Astrophys. J. Lett. 824, L8 (2016).
+[15] O’Leary, R. M., Meiron, Y. & Kocsis, B. Dynamical formation signatures of
+black hole binaries in the first detected mergers by LIGO. Astrophys. J. 824,
+L12 (2016).
+[16] Askar, A. et al. MOCCA-SURVEY Database I: Coalescing Binary Black Holes
+Originating From Globular Clusters. Mon. Not. R. Astron. Soc. Lett. 464,
+L36–L40 (2017).
+[17] Mapelli, M. Massive black hole binaries from runaway collisions: the impact
+of metallicity. Mon. Not. R. Astron. Soc. (2016).
+[18] Bartos, I., Kocsis, B., Haiman, Z. & MÃarka,
+S. Rapid and Bright Stellar,
+mass Binary Black Hole Mergers in Active Galactic Nuclei. Astrophys. J. 835,
+165 (2017).
+15
+
+[19] Stone, N. C., Metzger, B. D. & Haiman, Z. Assisted Inspirals of Stellar Mass
+Black Holes Embedded in AGN Discs: solving the ’final au problem’. Mon.
+Not. R. Astron. Soc. 464, 946–954 (2017).
+[20] Bird, S. et al. Did LIGO Detect Dark Matter? Phys. Rev. Lett. 116, 201301
+(2016).
+[21] Sasaki, M., Suyama, T., Tanaka, T. & Yokoyama, S. Primordial Black Hole
+Scenario for the Gravitational-Wave Event GW150914. Phys. Rev. Lett. 117,
+061101 (2016).
+[22] Belczynski, K. et al. The Effect of Metallicity on the Detection Prospects for
+Gravitational Waves. Astrophys. J. Lett. 715, L138–L141 (2010).
+[23] Spera, M., Mapelli, M. & Bressan, A. The mass spectrum of compact remnants from the PARSEC stellar evolution tracks. Mon. Not. R. Astron. Soc.
+451, 4086–4103 (2015).
+[24] Abbott, B. P. et al. Astrophysical Implications of the Binary Black Hole
+Merger GW150914. Astrophys. J. Lett. 818, L22 (2016).
+[25] Postnov, K. A. & Yungelson, L. R. The Evolution of Compact Binary Star
+Systems. Living Reviews in Relativity 17, 3 (2014).
+[26] Ivanova, N. et al. Common envelope evolution: where we stand and how we
+can move forward. Astron. Astrophys. Rev. 21, 59 (2013).
+[27] Dominik, M. et al. Double Compact Objects. I. The Significance of the Common Envelope on Merger Rates. Astrophys. J. 759, 52 (2012).
+[28] Pols, O. R. et al. Stellar evolution models for Z = 0.0001 to 0.03. Mon. Not.
+R. Astron. Soc. 298, 525–536 (1998).
+[29] de Mink, S. E., Pols, O. R. & Yoon, S. C. Binaries at Low Metallicity: ranges
+for case A, B and C mass transfer. AIP Conf. Proc. 990, 230–232 (2008).
+[30] Hurley, J. R., Pols, O. R. & Tout, C. A. Comprehensive analytic formulae for
+stellar evolution as a function of mass and metallicity. Mon. Not. R. Astron.
+Soc. 315, 543–569 (2000).
+[31] Abbott, B. P. et al. Prospects for Observing and Localizing GravitationalWave Transients with Advanced LIGO and Advanced Virgo. Living Reviews
+in Relativity 19 (2016).
+
+16
+
+[32] Kroupa, P. On the variation of the initial mass function. Mon. Not. R. Astron.
+Soc. 322, 231–246 (2001).
+[33] Madau, P. & Dickinson, M. Cosmic Star-Formation History. Annu. Rev.
+Astron. Astrophys 52, 415–486 (2014).
+[34] Dominik, M. et al. Double Compact Objects III: Gravitational-wave Detection
+Rates. Astrophys. J. 806, 263 (2015).
+[35] Sana, H. & the VLT-Flames Tarantula consortium. The vlt-flames tarantula
+survey: an overview of the vfts results so far. EAS Publications Series 64,
+147–154 (2013). URL https://doi.org/10.1051/eas/1364021.
+[36] Webbink, R. F. Double white dwarfs as progenitors of R Coronae Borealis
+stars and Type I supernovae. Astrophys. J. 277, 355–360 (1984).
+[37] Mennekens, N. & Vanbeveren, D. Massive double compact object mergers:
+gravitational wave sources and r-process element production sites. Astron.
+Astrophys. 564, A134 (2014).
+[38] de Mink, S. E. & Belczynski, K. Merger Rates of Double Neutron Stars
+and Stellar Origin Black Holes: The Impact of Initial Conditions on Binary
+Evolution Predictions. Astrophys. J. 814, 58 (2015).
+[39] Fryer, C. L. et al. Compact Remnant Mass Function: Dependence on the
+Explosion Mechanism and Metallicity. Astrophys. J. 749, 91 (2012).
+[40] de Mink, S. E., Pols, O. R. & Hilditch, R. W. Efficiency of mass transfer in
+massive close binaries. Tests from double-lined eclipsing binaries in the SMC.
+Astron. Astrophys. 467, 1181–1196 (2007).
+[41] Podsiadlowski, P., Ivanova, N., Justham, S. & Rappaport, S. Explosive
+common-envelope ejection: implications for gamma-ray bursts and low-mass
+black-hole binaries. Mon. Not. R. Astron. Soc. 406, 840–847 (2010).
+[42] Bulik, T. & Belczyński, K. Constraints on the Binary Evolution from Chirp
+Mass Measurements. Astrophys. J. Lett. 589, L37–L40 (2003).
+[43] O’Shaughnessy, R. Data-driven methods to explore a large space of computationally costly compact binary progenitor models. Phys. Rev. D 88, 084061
+(2013).
+[44] Stevenson, S., Ohme, F. & Fairhurst, S. Distinguishing Compact Binary Population Synthesis Models Using Gravitational Wave Observations of Coalescing
+Binary Black Holes. Astrophys. J. 810, 58 (2015).
+17
+
+[45] Mandel, I., Haster, C.-J., Dominik, M. & Belczynski, K. Distinguishing types
+of compact-object binaries using the gravitational-wave signatures of their
+mergers. Mon. Not. R. Astron. Soc. 450, L85–L89 (2015).
+[46] Mandel, I. et al. Model-independent inference on compact-binary observations. Mon. Not. R. Astron. Soc. 465, 3254 (2017).
+[47] Mandel, I. & O’Shaughnessy, R. Compact binary coalescences in the band of
+ground-based gravitational-wave detectors. Class. Quantum Grav 27, 114007–
++ (2010).
+[48] Vitale, S., Lynch, R., Sturani, R. & Graff, P. Use of gravitational waves to
+probe the formation channels of compact binaries. Class. Quant. Grav. 34,
+03LT01 (2017).
+[49] Kushnir, D., Zaldarriaga, M., Kollmeier, J. A. & Waldman, R. GW150914:
+spin-based constraints on the merger time of the progenitor system. Mon.
+Not. R. Astron. Soc. 462, 844–849 (2016).
+[50] Rodriguez, C. L. et al. Illuminating Black Hole Binary Formation Channels
+with Spins in Advanced LIGO. Astrophys. J. 832, L2 (2016).
+[51] Abbott, B. P. et al. GW150914: Implications for the Stochastic GravitationalWave Background from Binary Black Holes. Phys. Rev. Lett. 116, 131102
+(2016).
+[52] Callister, T. et al. The limits of astrophysics with gravitational wave backgrounds. Phys. Rev. X 6, 031018 (2016).
+[53] Hurley, J. R., Tout, C. A. & Pols, O. R. Evolution of binary stars and the
+effect of tides on binary populations. Mon. Not. R. Astron. Soc. 329, 897–928
+(2002).
+[54] Izzard, R. G., Tout, C. A., Karakas, A. I. & Pols, O. R. A new synthetic
+model for asymptotic giant branch stars. Mon. Not. R. Astron. Soc. 350,
+407–426 (2004).
+[55] Izzard, R. G. et al. Population nucleosynthesis in single and binary stars.
+Astron. Astrophys. 460, 565–572 (2006).
+[56] Izzard, R. G., Glebbeek, E., Stancliffe, R. J. & Pols, O. R. Population synthesis of binary carbon-enhanced metal-poor stars. Astron. Astrophys. 508,
+1359–1374 (2009).
+
+18
+
+[57] de Mink, S. E. et al. The Rotation Rates of Massive Stars: The Role of Binary
+Interaction through Tides, Mass Transfer, and Mergers. Astrophys. J. 764,
+166 (2013).
+[58] Belczynski, K., Kalogera, V. & Bulik, T. A comprehensive study of binary
+compact objects as gravitational wave sources: Evolutionary channels, rates,
+and physical properties. Astrophys. J. 572, 407 (2002).
+[59] Belczynski, K. et al. Compact Object Modeling with the StarTrack Population
+Synthesis Code. Astrophys. J. Supplement 174, 223–260 (2008).
+[60] Sana, H. et al. Binary Interaction Dominates the Evolution of Massive Stars.
+Science 337, 444– (2012).
+[61] Öpik, E. Statistical Studies of Double Stars: On the Distribution of Relative
+Luminosities and Distances of Double Stars in the Harvard Revised Photometry North of Declination -31 degrees. Publications of the Tartu Astrofizica
+Observatory 25, 1 (1924).
+[62] Abt, H. A. Normal and abnormal binary frequencies. Annu. Rev. Astron.
+Astrophys 21, 343–372 (1983).
+[63] Vink, J. S., de Koter, A. & Lamers, H. J. G. L. M. Mass-loss predictions for
+O and B stars as a function of metallicity. Astron. Astrophys. 369, 574–588
+(2001).
+[64] Hamann, W.-R. & Koesterke, L. Spectrum formation in clumped stellar
+winds: consequences for the analyses of Wolf-Rayet spectra. Astron. Astrophys. 335, 1003–1008 (1998).
+[65] Vink, J. S. & de Koter, A. On the metallicity dependence of Wolf-Rayet
+winds. Astron. Astrophys. 442, 587–596 (2005).
+[66] Eggleton, P. P. Approximations to the radii of Roche lobes. Astrophys. J.
+268, 368 (1983).
+[67] Claeys, J. S. W. et al. Theoretical uncertainties of the Type Ia supernova
+rate. Astron. Astrophys. 563, A83 (2014).
+[68] Schneider, F. R. N., Izzard, R. G., Langer, N. & de Mink, S. E. Evolution of Mass Functions of Coeval Stars through Wind Mass Loss and Binary
+Interactions. Astrophys. J. 805, 20 (2015).
+
+19
+
+[69] Kippenhahn, R. & Weigert, A. Entwicklung in engen Doppelsternsystemen I. Massenaustausch vor und nach Beendigung des zentralen WasserstoffBrennens. Zeitschrift fÃijr Astrophysik 65, 251 (1967).
+[70] Tout, C. A., Aarseth, S. J., Pols, O. R. & Eggleton, P. P. Rapid binary star
+evolution for N-body simulations and population synthesis. Mon. Not. R.
+Astron. Soc. 291, 732 (1997).
+[71] Soberman, G. E., Phinney, E. S. & Heuvel, E. P. J. v. d. Stability criteria for
+mass transfer in binary stellar evolution. Astron. Astrophys. 327, 620 (1997).
+[72] Hjellming, M. S. & Webbink, R. F. Thresholds for rapid mass transfer in
+binary systems. I - Polytropic models. Astrophys. J. 318, 794–808 (1987).
+[73] Belczynski, K. et al. On the Rarity of Double Black Hole Binaries: Consequences for Gravitational Wave Detection. Astrophys. J. 662, 504–511 (2007).
+[74] Pavlovskii, K., Ivanova, N., Belczynski, K. & Van, K. X. Stability of mass
+transfer from massive giants: double black-hole binary formation and ultraluminous X-ray sources. Preprint at https://arxiv.org/abs/1606.04921
+(2016).
+[75] Dewi, J. D. M. & Tauris, T. M. On the energy equation and efficiency parameter of the common envelope evolution. Astron. Astrophys. 360, 1043–1051
+(2000).
+[76] Loveridge, A. J., van der Sluys, M. V. & Kalogera, V. Analytical Expressions
+for the Envelope Binding Energy of Giants as a Function of Basic Stellar
+Parameters. Astrophys. J. 743, 49 (2011).
+[77] Hobbs, G., Lorimer, D. R., Lyne, A. G. & Kramer, M. A statistical study of
+233 pulsar proper motions. Mon. Not. R. Astron. Soc. 360, 974–992 (2005).
+
+20
+
+

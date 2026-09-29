@@ -1,0 +1,3607 @@
+Draft version May 23, 2022
+Typeset using LATEX twocolumn style in AASTeX631
+
+The redshift evolution of the binary black hole merger rate: a weighty matter
+L. A. C. van Son,1, 2, 3 S. E. de Mink,3, 2, 4 T. Callister,5 S. Justham,6, 2, 3 M. Renzo,7, 5 T. Wagg,8, 4, 3
+F. S. Broekgaarden,4 F. Kummer,2 R. Pakmor,3 and I. Mandel9, 10, 11
+
+arXiv:2110.01634v2 [astro-ph.HE] 20 May 2022
+
+1 Center for Astrophysics | Harvard & Smithsonian,60 Garden St., Cambridge, MA 02138, USA
+2 Anton Pannekoek Institute for Astronomy, University of Amsterdam, Science Park 904, 1098XH Amsterdam, The Netherlands
+3 Max Planck Institute for Astrophysics, Karl-Schwarzschild-Str. 1, 85748 Garching, Germany
+4 Center for Astrophysics | Harvard & Smithsonian, 60 Garden St., Cambridge, MA 02138, USA
+5 Center for Computational Astrophysics, Flatiron Institute, New York, NY 10010, USA
+6 School of Astronomy and Space Science, University of the Chinese Academy of Sciences, Beijing 100012, China
+7 Department of Physics, Columbia University, New York, NY 10027, USA
+8 Department of Astronomy, University of Washington, Seattle, WA, 98195
+9 Monash Centre for Astrophysics, School of Physics and Astronomy, Monash University, Clayton, Victoria 3800, Australia
+10 The ARC Center of Excellence for Gravitational Wave Discovery – OzGrav, Hawthorn VIC 3122, Australia
+11 Birmingham Institute for Gravitational Wave Astronomy and School of Physics and Astronomy, University of Birmingham,
+
+Birmingham, B15 2TT, United Kingdom
+
+ABSTRACT
+Gravitational wave detectors are starting to reveal the redshift evolution of the binary black hole
+(BBH) merger rate, RBBH (z). We make predictions for RBBH (z) as a function of black hole mass for
+systems originating from isolated binaries. To this end, we investigate correlations between the delay
+time and black hole mass by means of the suite of binary population synthesis simulations, COMPAS.
+We distinguish two channels: the common envelope (CE), and the stable Roche-lobe overflow (RLOF)
+channel, characterised by whether the system has experienced a common envelope or not. We find
+that the CE channel preferentially produces BHs with masses below about 30 M and short delay
+times (tdelay . 1 Gyr), while the stable RLOF channel primarily forms systems with BH masses above
+30 M and long delay times (tdelay & 1 Gyr). We provide a new fit for the metallicity specific starformation rate density based on the Illustris TNG simulations, and use this to convert the delay time
+distributions into a prediction of RBBH (z). This leads to a distinct redshift evolution of RBBH (z) for
+high and low primary BH masses. We furthermore find that, at high redshift, RBBH (z) is dominated
+by the CE channel, while at low redshift it contains a large contribution (∼ 40%) from the stable
+RLOF channel. Our results predict that, for increasing redshifts, BBHs with component masses above
+30 M will become increasingly scarce relative to less massive BBH systems. Evidence of this distinct
+evolution of RBBH (z) for different BH masses can be tested with future detectors.
+
+Keywords: stars: black holes — gravitational waves -– stars: binaries: close — stars: evolution —
+black hole physics
+1. INTRODUCTION
+
+The Advanced LIGO (LIGO Scientific Collaboration
+et al. 2015), Advanced Virgo (Acernese et al. 2015) and
+KAGRA (Akutsu et al. 2021) gravitational wave detectors are revealing gravitational wave events that probe
+Corresponding author: L. van Son
+lieke.van.son@cfa.harvard.edu
+
+a progressively larger fraction of the Universe (Abbott
+et al. 2018a, 2021a,g,b) . As the number of gravitational wave detections increases, they unveil the evolution of the binary black hole (BBH) merger rate with
+redshift. Current gravitational wave detectors already
+probe black holes (BHs) with component masses of
+about 30 M out to redshifts z ∼ 1 (Fishbach et al. 2018;
+Callister et al. 2020; Abbott et al. 2021b,c,d). Thirdgeneration detectors, scheduled to start observations in
+the 2030s, promise to observe stellar mass BBH mergers
+
+2
+with component masses in the range ∼ 5 − 350 M out
+to z > 10 (e.g. Sathyaprakash et al. 2019a,b; Maggiore
+et al. 2020). This means that we are rapidly moving towards a complete picture of both the redshift evolution
+of the stellar-mass BBHs merger rate, and the redshift
+evolution of source property distributions.
+The redshift evolution of the BBH merger rate contains information on the origin of these BBHs, however,
+a direct interpretation is complicated. To infer the birthtime and environment of the observed merging BBHs we
+first need to understand the difference between the time
+at which the progenitor stars formed and the time of
+merger of the BBH. This is what we define as the delay
+time tdelay . It is the sum of two independent timescales:
+I) the lifetime of the binary stars up to the moment that
+both have become compact objects, and II) the inspiral
+time of the two BHs up to the BBH merger event. The
+former timescale, i.e. the lifetime of massive stars, is
+typically a few Myr. The latter timescale depends primarily on the separation between the two BHs at BBH
+formation (Peters 1964). To interpret the BBH merger
+rate, we first need to understand the impact of the delay
+time distribution on the observed rate at each redshift.
+The delay time of BBHs from isolated binaries of interest can range from Myr to more than a Hubble time
+(see e.g. Neijssel et al. 2019; Giacobbo & Mapelli 2018).
+This implies that BBH mergers observed to merge at
+a given redshift, zmerge , formed Myr to Gyr earlier.
+Hence, these mergers are comprised of a mixture of systems that originate from different formation redshifts,
+and likely probe a range of different formation environments.
+The delay time is thus a very important quantity,
+which, unfortunately, cannot be observed directly for
+an individual system. It is possible to make statistical
+inferences about the delay time distribution using the
+detections available so far (see e.g. Fishbach & Kalogera
+2021). However, inference of the time delay distribution
+is difficult because it is degenerate with the progenitor
+formation rate. Moreover, we are currently still limited
+by the low number of sources that are detected out to
+higher redshifts.
+Although the delay time is not directly observable, we
+will observe the redshift evolution of the source properties, i.e. the BH-mass, spin and mass ratio distributions
+at different redshifts. Several earlier studies have investigated the evolution of the BBH merger rate with redshift for the total population of merging BBHs, (e.g. Rodriguez & Loeb 2018; Mapelli & Giacobbo 2018; Choksi
+et al. 2019; Santoliquido et al. 2021). The redshift evolution of source property distributions remains relatively
+obscured, though it is actively being studied (see e.g.
+
+MZAMS,A
+
+MZAMS,B
+
+Menv, A
+
+1st mass transfer
+
+Mcore, A
+M"B
+
+MBH,A
+
+2nd mass transfer
+
+CE channel
+
+MBH,A
+
+Stable RLOF channel
+
+MBH,B
+
+median(aBBH) = 7.3 R⨀
+
+MBH,A
+
+MBH,B
+
+median( aBBH) = 18.6 R⨀
+
+Figure 1. Cartoon depiction of the typical evolution of a
+BBH progenitor system through the stable RLOF and CE
+channel. Annotations refer to masses at zero age main sequence (MZAMS ), the envelope mass (Menv ), the core mass
+(Mcore ), mass post mass transfer (M̃B ) and BH mass (MBH ).
+The subscript A (B) denotes the initially more (less) massive
+star. The red cross gives an impression of the location of the
+centre of mass at the onset of the evolutionary phase depicted
+(not to scale). The median separation at BBH formation is
+annotated for each channel, considering BBH mergers that
+can be observed by a ‘perfect detector’ (see text).
+
+Neijssel et al. 2019; Mapelli et al. 2022). Recent work
+hints towards relations between source properties and
+redshift evolution. Mapelli et al. (2019) for example,
+find that massive BBHs tend to have longer delay times
+in their models. An important step to move forward, is
+thus to associate possible trends in delay time distribution to observable characteristics, while understanding
+their physical origin.
+Here, we inspect the delay time-mass relation for
+BHs coming from isolated binaries, as predicted by the
+rapid population synthesis code COMPAS. We consider
+two main channels: 1) the common envelope channel
+(or CE channel, e.g. Belczynski et al. 2007; Postnov &
+
+3
+Yungelson 2014; Belczynski et al. 2016a; Vigna-Gómez
+et al. 2018), including BBH systems where the progenitor system has experienced at least one common envelope, and 2) the stable Roche-lobe overflow channel (or
+stable RLOF channel, e.g. van den Heuvel et al. 2017;
+Inayoshi et al. 2017). The stable RLOF channel contains
+all BBH systems that experience only stable mass transfer (i.e. all systems that do not experience CE events,
+and so it is the complement set of the CE channel). See
+also Figure 1 for a cartoon depiction of the most common evolution of these two channels. Note that this
+does not display all possible variations of the CE and
+stable RLOF channel. However, other sub-channels are
+rare. For example, the sub-channel where both the first
+and second mass transfer are unstable (which is one of
+the mos common sub-channels), contributes only 0.6%
+to the total rate of BBH mergers as observed by a perfect detector (equation 6). The respective contribution
+of the CE and the stable RLOF channel to the observed
+population of merging double compact objects is an active area of research (see e.g. Neijssel et al. 2019; Bavera
+et al. 2021; Marchant et al. 2021; Gallegos-Garcia et al.
+2021). In this work we aim to use characteristic delay time-mass distributions from each channel to make
+predictions for observables in the gravitational wave distributions.
+This paper is structured as follows: in Section 2 we
+describe the population synthesis code COMPAS used in
+this work. We find that massive BHs (MBH,1 > 30 M ,
+where we define MBH,1 as the more massive BH at BBH
+merger) predominantly form in BBHs with long delay
+times (tdelay > 1 Gyr). We show that this can be explained by differences between the CE channel and the
+stable RLOF channel in Section 3. In Section 4 we describe how we calculate cosmic BBH merger rates. We
+then discuss how the distinct delay times and mass distributions arising from CE and stable RLOF affect the
+observed merger rate evolution of BBHs in Section 5.
+In Section 6 we discuss the prospect of observing trends
+in the BBH merger rate with current and near-future
+gravitational wave detectors. Specifically, our models
+predict that the slope of the intrinsic BBH merger rate
+density with redshift is more shallow and starts decreasing at lower redshift for higher MBH,1 . We discuss the
+robustness of our main findings and caveats that apply
+to a population synthesis approach in Section 7, and
+summarise our main results in Section 8.
+2. METHOD (I) : SIMULATING MERGING BBH
+
+POPULATIONS
+To simulate the evolution of isolated massive binary
+star progenitors that lead to merging BBH, we use
+
+the rapid population synthesis code that is part of the
+COMPAS suite1 (version v02.19.04, Riley et al. 2022;
+Stevenson et al. 2017; Vigna-Gómez et al. 2018). We
+simulate a total of 107 binaries. To check that our results are converged, we have repeated all analyses for an
+independent set of 106 binaries, and we found no significant differences. In this section we discuss the treatment of stellar evolution and binary interaction processes (Sec. 2.1) and sampling of the initial parameters
+(Sec 2.2).
+2.1. Binary evolution
+We model the evolution of massive stars in binary systems using fast algorithms following Hurley et al. (2000,
+2002), based on detailed evolutionary models by Pols
+et al. (1998). Here we summarise the treatment of the
+physical processes that are most relevant for this study.
+For a full description of the code we refer to the references mentioned above.
+Winds —For hot O and B type stars (with effective
+temperatures Teff ≥ 12500K), we follow Vink et al.
+(2000a,b) to account for metallicity-dependent stellar
+wind mass loss. For cooler, more evolved stars (Teff ≤
+12500K) the mass-loss prescription from Kudritzki &
+Reimers (1978) and the prescription from Nieuwenhuijzen & de Jager (1990), modified by a metallicity dependent factor from Kudritzki et al. (1989), are compared and the maximum is adopted. The latter massloss prescription is only assumed to be non-zero for stars
+with luminosity L > 4000 L . For low mass stars that
+evolve towards the asymptotic giant branch, the prescription from Vassiliadis & Wood (1993) is added to
+this comparison. For hot Wolf-Rayet-like stars, we use
+the empirical mass loss prescription from Belczynski
+et al. (2010), that is adapted from Hamann & Koesterke
+(1998) but scaled by metallicity following Vink & de
+Koter (2005). For very luminous stars, that lie above
+the Humphreys-Davidson limit, i.e. if the luminosities L
+and stellar radii R fulfil the condition L > 6 × 105 L
+and (R/ R )(L/ L )1/2 > 105 (Humphreys & Davidson 1979), we assume enhanced mass loss rates following Hurley et al. (2000), motivated by the scarcity of
+observed stars in this regime and the observed Luminous Blue Variables (LBV) phenomenon. This additional mass loss is metallicity independent (in line with
+recent results from, e.g. Davies & Beasor 2020), and is
+meant to mimic eruptive mass loss.
+Stable mass transfer and common envelope phases —We account for mass transfer when a star overflows its Roche
+
+1 see also https://compas.science/
+
+4
+lobe (Eggleton 1983). To determine whether Roche-lobe
+overflow is stable we use an estimate for the response of
+the radius of the donor star, R and its Roche lobe, RRL
+as a result of mass transfer. COMPAS determines stability
+by comparing estimates of the adiabatic response of the
+donors radius and the response of the donors Roche-lobe
+radius (see e.g. Vigna-Gómez et al. 2018, 2020, and references therein). This procedure depends crucially on
+the assumed value of ζ∗ ≡ (∂ log R/∂ log M )ad , with R
+and M the radius and mass of the donor star, for different types of donor stars (e.g. Soberman et al. 1997).
+We assume ζad = 2 for main sequence donors, ζad = 6.5
+for Hertzsprung gap donor stars (Ge et al. 2015) and follow Soberman et al. (1997) for donor stars post helium
+ignition.
+During stable mass transfer onto a stellar companion
+we assume that the accretion rate is limited to ten times
+the thermal rate of the accreting star (Neo et al. 1977;
+Hurley et al. 2002). If the accreting component is a BH,
+the accretion is assumed to be Eddington limited. Material lost from the system during non conservative mass
+transfer, is assumed to carry away the specific orbital
+angular momentum of the accreting component (e.g.
+Soberman et al. 1997; van den Heuvel et al. 2017). This
+reduces the orbital angular momentum and can lead to
+either shrinking or widening of the orbit, depending on
+the fraction of mass that is accreted and the binary’s
+mass ratio (e.g. van Son et al. 2020, Appendix A).
+Unstable mass transfer is assumed to result in CE
+evolution (Paczynski 1976; Ivanova et al. 2013; Ivanova
+et al. 2020). We assume that ejecting the envelope
+shrinks the binary orbit following the energy considerations proposed by Webbink (1984) and de Kool (1990).
+Here, the pre-CE binding energy of the donor’s envelope
+is equated to the orbital energy that becomes available
+by shrinking the orbit. How efficiently this orbital energy can be used to eject the envelope is parameterized
+by the αCE parameter, which is set to one in this work.
+For the binding (and internal) energy of the envelope,
+we use the “Nanjing” prescription (Dominik et al. 2012),
+based on fits provided by Xu & Li (2010a,b). We adopt
+the pessimistic CE scenario from Dominik et al. (2012),
+that is, we assume that Hertzsprung Gap donor stars do
+not survive a CE event.
+Supernovae, kicks and compact remnants —To model natal supernova kicks, we draw kick velocities with random isotropic orientations and draw the kick magnitudes
+from a Maxwellian distribution (Hobbs et al. 2005). BH
+kicks are reduced by the amount of mass falling back
+onto the newly-formed BH during the explosion mechanism, following the ‘delayed’ prescription from (Fryer
+et al. 2012). This prescription assumes full fallback for
+
+BHs resulting from progenitors with a carbon oxygen
+core mass MCO > 11 M , and hence these BHs receive
+no supernova kick.
+The remnant mass is modelled as a function of the
+estimated MCO at the moment of core collapse following Fryer et al. (2012). Stars with helium cores above
+35 M at the moment of core collapse are assumed to
+experience pulsational-pair instability following Farmer
+et al. (2019). Stars with helium core masses between
+60−135 M at the moment of core collapse are expected
+to be completely disrupted by pair instability, and therefore leave no remnant BH. With this implementation the
+lower edge of the pair-instability mass gap is located at
+about 45 M (Stevenson et al. 2017; Marchant et al.
+2019; Farmer et al. 2019; Farmer et al. 2020; Woosley &
+Heger 2021, but see e.g. Mehta et al. 2022). Due to the
+metallicity dependence of stellar winds and the adopted
+pulsational-pair instability prescription, the maximum
+BH mass is also metallicity dependent. The upper limit
+of about 45 M is only reached for the lowest metallicity systems (with Z . 0.001). For reference, systems
+with metallicities of about Z ∼ 0.01 and Z ∼ 0.0032
+can maximally achieve a BH mass of about 18 M and
+32 M respectively in our simulations (see Figure 7 for
+a decomposition of the BH mass distribution by metallicity).
+2.2. Sampling
+The evolution of a binary system is mainly a function
+of its initial metallicity Z, initial primary and secondary
+mass M1 and M2 , and the initial separation a.
+We sample birth metallicities with a probability distribution that is flat-in-log in the range 10−4 ≤ Z ≤ 0.03.
+Sampling metallicities from a smooth probability distribution is an improvement over discrete sets of metallicity, which is the most common technique in binary
+population synthesis studies (but see, for example, Riley et al. 2021 for an exception). Smoothly sampling
+birth metallicity avoids artificial peaks in the BH mass
+distribution (e.g. Dominik et al. 2015; Kummer 2020).
+The flat-in-log distribution ensures that we sample ample binaries at the low metallicities that are favoured for
+BBH formation. Later in this paper, when we calculate
+cosmic merger rates, we re-weight systems to account for
+the metallicity-dependent star formation (see Section 4).
+We adjust the normalisation of this re-weighting over
+the metallicity range of our simulations to preserve the
+correct total star-formation rate, i.e., star formation at
+more extreme metallicities is not discarded.
+We assume the masses of the initially more massive
+stellar components (the primary, M1 ) are universally
+distributed following a Kroupa (2001) initial mass func-
+
+5
+tion and draw masses in the range 10 - 150 M , in order
+to focus on stars that evolve into BHs. The binary systems are assumed to follow a uniform distribution of
+mass ratios (0.01 . q ≡ M2 /M1 < 1.0, with M2 , the
+mass of the secondary star). We require M2 ≥ 0.1 M .
+The initial binary separations are assumed to follow a
+distribution of orbital separations that is flat in the logarithm (Öpik 1924) in the range 0.01 − 1000 AU. Binary
+systems that fill their Roche lobe at zero age main sequence are discarded. All binary orbits are assumed to
+be circular at birth.
+If a zero age main sequence (ZAMS) star is rotating faster than the metallicity-dependent rotational frequency threshold described in Riley et al. (2021), the
+binary is assumed to evolve chemically homogeneously.
+In this work, we focus on the ‘classical’ pathway of isolated binaries towards merging BBHs and thus we exclude chemically homogeneously evolving stars from our
+sample.
+Because BBH mergers are intrinsically very rare
+events, direct sampling of the birth distributions is very
+inefficient and time consuming. We therefore make use
+of the adaptive importance sampling code STROOPWAFEL. This algorithm consists of an initial exploration phase to find regions of interest in the binary
+parameter space. In a subsequent adaptive refinement
+phase we optimise the simulations by sampling near the
+regions of interest (see Broekgaarden et al. 2019, for details).
+3. BH MASS-DELAY TIME RELATIONS
+
+In this section, we first explore the type of BBHs that
+can be produced by the isolated channel according to
+our simulations. We aim to find links between the delay
+time tdelay and observable properties, such as BH masses
+and spins. Of these, the BH mass is observationally the
+best constrained source property. Hence our main focus
+is on the BH mass. While we do not discuss BH spins
+here, previous studies have argued that tidal spin-up is
+most likely in close binaries with short delay times (e.g.
+Kushnir et al. 2016; Zaldarriaga et al. 2018; Bavera et al.
+2020). In appendix A, we additionally investigate the
+correlations between BBH mass ratios and tdelay .
+In Figure 2 we show two-dimensional histograms of
+tdelay , and the mass of the heavier BH, MBH,1 , for BBHs
+in our simulations. In the top row we show results for
+low metallicity, which is representative for the majority
+of BBH formation (defined as Z ≤ Z /10, with solar
+metallicity Z = 0.014, Asplund et al. 2009). To elucidate the impact of metallicity, we show results for the
+highest metallicities (Z > Z /5) in the bottom row.
+In the left column we show the result for all BBHs in
+
+the selected metallicity range. In the middle and right
+column we show the separate contributions of the CE
+and stable RLOF channel respectively. All histograms
+shown are normalised relative to the number of merging
+BBHs in our full simulation, combining all metallicities.
+The colour shading and contours thus indicate the relative frequency with which these combinations of primary
+mass and delay time occur in our full set of simulations.
+We refer to Sect 2 for how the progenitors are sampled
+and weighed in our simulation. We note that the underlying distribution in metallicity that is implicitly assumed here, is not representative for star formation in
+the Universe. Nevertheless, these diagrams are useful to
+understand trends in the delay times and primary BH
+masses at low and high metallicity.
+When inspecting the left-most-panel in the top row of
+Figure 2, which shows the results for all BBH in our simulations for low-metallicity, we observe two main components. Firstly, we see that the histogram peaks at
+delay times of ∼ 0.1–1 Gyr and primary BH masses of
+∼ 18 M . This peak comes predominantly from systems
+formed through the CE channel (as can be seen from the
+top middle panel). Secondly, we see a noticeable tail of
+more massive systems MBH & 20 M with longer delay times around ∼ 10 Gyr, which predominantly come
+from the stable RLOF channel (as can be seen in the
+top right-most panel). Finally, we see a dearth of BBH
+systems with high masses (MBH,1 ≥ 30 M ) and short
+delay times (tdelay ≤ 0.1 Gyr), which are not formed
+by either of the channels considered here.
+Comparing low and high metallicity (top and bottom
+row respectively), we see that the same two components
+are present, but the systems with highest mass are absent at high metallicity. This result is understood as the
+effect of the metallicity dependent stellar winds, which
+are stronger for higher metallicity (e.g. Vink & de Koter
+2005). The high metallicity systems thus also display a
+lack of BH systems with high masses (MBH,1 ≥ 30 M )
+and short delay times (tdelay ≤ 0.1 Gyr).
+In the following subsections we discuss the origin for
+these features.
+3.1. Why the CE channel does not produce high-mass
+black holes
+We find that the massive progenitor stars that lead
+to BHs with masses MBH,1 > 30 M are disfavoured
+from engaging in, and surviving, CE events in our simulations because of a variety of effects. To form such
+BHs, we need stars that form helium cores of at least
+MHe & 30 M . Such cores can only be formed in the
+most massive stars in our simulations, typically with
+zero-age main sequence masses of 60 M and higher, al-
+
+6
+
+1e
+-0
+4
+
+0.1
+
+20
+
+1e
+-0
+
+10−4
+0.1
+
+1
+
+20
+
+3e-03
+
+3
+
+3e-03
+
+1e
+
+-0
+
+30
+
+10−3
+
+10
+0
+0.01
+
+10
+
+10−4
+0.1
+
+1
+
+10
+
+tdelay [Gyr]
+
+tdelay [Gyr]
+
+CE channel
+high metallicity, Z > Z /5
+
+Stable RLOF channel
+high metallicity, Z > Z /5
+
+4
+
+-03
+1e
+
+10
+10−4
+0.1
+
+1
+
+tdelay [Gyr]
+
+10
+
+40
+30
+
+1e-04
+
+10−3
+
+-04
+1e
+
+10−2
+
+(NBBH)/NBBH,tot−sim= 0.069
+
+-04
+1e
+
+20
+
+4
+
+30
+
+50 P
+
+10−3
+
+1e-
+
+03
+
+10
+0
+0.01
+
+10−4
+0.1
+
+1
+
+tdelay [Gyr]
+
+10
+
+NBBH/NBBH,tot−sim
+MBH,1[M ]
+
+10−2
+
+(NBBH)/NBBH,tot−sim= 0.09
+
+10−2
+
+40
+
+All BBHs
+high metallicity, Z > Z /5
+
+1e-0
+
+MBH,1[M ]
+
+10−3
+
+(NBBH)/NBBH,tot−sim= 0.285
+
+tdelay [Gyr]
+
+04
+1e-
+
+0
+0.01
+
+4
+3e-03
+6
+1e-02e-03
+
+0
+0.01
+
+10
+
+40
+
+20
+
+-0
+
+1e-0
+
+50 P
+
+1
+
+4
+1e-04
+
+4
+
+MBH,1[M ]
+
+0
+0.01
+
+1e
+
+30
+
+10
+
+10−4
+
+NBBH/NBBH,tot−sim
+
+10
+
+-0
+
+40
+
+Stable RLOF channel
+low metallicity, Z ≤ Z /10
+
+50 P
+
+10−2
+
+(NBBH)/NBBH,tot−sim= 0.021
+
+40
+30
+
+10−3
+
+20
+1e
+
+-0
+
+4
+
+10
+0
+0.01
+
+NBBH/NBBH,tot−sim
+
+03
+
+6e
+1e-02 -03
+
+3
+
+1e
+
+50 P
+
+NBBH/NBBH,tot−sim
+
+20
+
+3
+
+0
+e-
+
+10−3
+
+(NBBH
+1e-0)/NBBH,tot−sim= 0.482
+4
+
+10−2
+
+1e
+-04
+
+3
+
+CE channel
+low metallicity, Z ≤ Z /10
+
+NBBH/NBBH,tot−sim
+MBH,1[M ]
+
+1e-0
+
+50 P
+
+MBH,1[M ]
+
+4
+1e-0
+
+1e-04
+
+30
+
+3e-
+
+MBH,1[M ]
+
+40
+
+NBBH/NBBH,tot−sim
+
+(NBBH)/NBBH,tot−sim= 0.767
+
+10−2
+
+1e-03
+
+All BBHs
+low metallicity, Z ≤ Z /10
+3e-03
+
+50 P
+
+10−4
+0.1
+
+1
+
+10
+
+tdelay [Gyr]
+
+Figure 2. Two-dimensional histograms of the distribution of delay times and primary masses for BBHs in our simulation. The
+top and bottom row show results for low (≤ Z /10) and high (> Z /5) metallicity, respectively. The left most panels show
+all BBHs, while the middle and right most panels are split by formation channel. All histograms are normalised relative to
+the total simulation including all simulated metallicities. The colour-bar and contours thus indicate the relative frequency of
+occurrence in our simulations. We use bin sizes of ∆ log10 (tdelay ) = 0.2 and ∆MBH,1 = 2.5 M . All panels reveal a lack of BBH
+systems with high mass (MBH,1 & 30 M ) and short delay time (tdelay . 0.1 Gyr).
+
+though we note that the exact value is considerably uncertain. Such massive stars are unlikely to engage in,
+and survive a CE for several reasons.
+First of all, the massive progenitors of heavy black
+holes are thought to experience heavy mass loss, which
+can remove a large part of the hydrogen envelope before
+the stars initiates interaction with its companion. Although mass loss by radiatively driven winds is thought
+to be reduced at low metallicity, mass loss by LBV eruptions is likely to still be very significant also at low metallicity (e.g. Smith 2014; Sanyal et al. 2017; Kalari et al.
+2018; Davies et al. 2018; Higgins & Vink 2020; Sabhahit
+et al. 2021; Gilkis et al. 2021). In fact, such heavy mass
+loss can prevent massive stars in wider binaries from
+ever filling their Roche lobe (Mennekens & Vanbeveren
+2014; Belczynski et al. 2016b). In our simulations this
+is the dominant reason for the suppression of the CE
+channel at higher masses.
+Secondly, even if a massive progenitor would fill its
+Roche lobe, it is unlikely to do so while it has a convective envelope. It is generally thought that donor stars
+with extended convective envelopes are favoured for successful ejection of a common envelope. This is mainly
+because convective stars have large dimensions, and a
+
+relatively large fraction of the mass is located at large
+radii. The binding energy of the envelopes of such stars
+is thus low with respect to radiative counterparts, and
+it is thought that the envelope can therefore more easily be removed by an inspiraling companion, as recently
+emphasised by Klencki et al. (2021) and Marchant et al.
+(2021). Very massive stars typically do not grow to the
+dimensions needed to cool their envelope sufficiently to
+become unstable against convection. Even though some
+massive stars may manage develop a deep convective
+envelope, they do not significantly expand further in radius (in contrast to less massive stars that will ascend
+the giant branch). Hence very massive stars generally
+fill their Roche lobe at an earlier point in their evolution,
+when the envelope was still radiative. Overall, the occurrence of successful CE is therefore very rare for such
+massive stars.
+Thirdly, closely related to the second effect, mass
+transfer from high-mass donor stars is preferentially stable and hence it does not initiate a CE phase. This is
+especially true for radiative donors, as the early adiabatic response of radiative envelopes to mass loss is contraction (see, e.g. Hjellming & Webbink 1987). Recent
+studies, based on simulations with a more sophisticated
+
+7
+treatment of the physics, tend to emphasize this finding,
+also for convective donors (e.g. Pavlovskii & Ivanova
+2015; Pavlovskii et al. 2017; Marchant et al. 2021). In
+addition, albeit more speculatively, this effect may be
+enhanced by the role of envelope inflation. This occurs
+in massive stars that are close to the Eddington limit.
+They can develop extended halos (e.g. Sanyal et al.
+2015; Jiang et al. 2015, 2018). This can likely cause stable mass exchange before the star has really filled its
+Roche lobe. Although our simulations treat the stability criteria in a very simplified way, the recent studies
+mentioned above tend to strengthen our findings that
+mergers involving more massive BHs are unlikely from
+the CE channel.
+We remind the reader that, in the CE channel, it is
+normally the second phase of mass transfer where the
+common envelope phase occurs, see Fig. 1. The considerations above thus primarily concern the initially
+less massive star in the binary system. In principle,
+it is possible to form BBH mergers with at least one
+heavy BH from binary systems with a very massive primary (& 60 M ) and significantly less massive secondary
+(. 40 M ). The heavy BH then originates from the primary star, while the secondary star is of low enough
+mass to initiate a CE phase in which the envelope is
+ejected successfully. However, we find that such systems are extremely rare. The secondary typically accretes during the first mass transfer phase and becomes
+massive enough to be subject to the first two effects mentioned above. This scenario thus only works for systems
+with extreme initial mass ratios. Such systems tend to
+merge upon the first mass transfer phase and will thus
+not be able to form BBHs that merge within a Hubble
+time.
+Overall we find that the formation of BBHs with at
+least one heavy BH is not impossible through the CE
+channel, but very unlikely in our simulations. More detailed recent studies on partial aspects of the problem
+strengthen this finding.
+3.2. Why the stable RLOF channel does not produce
+short delay times
+We find that the stable RLOF channel leads to longer
+delay times than the CE channel, due to longer inspiral
+times. These longer inspiral times are caused by wider
+separations (larger semi-major axis) at BBH formation.
+We find that the median separation at BBH formation is
+about 7 R for systems that came from the CE channel,
+and about 20 R for systems that come from the stable
+RLOF channel, when considering all systems that can
+be observed by a ‘perfect detector’ (see Eq. 6). Wider
+separations lead to longer inspiral times because the or-
+
+bital decay time from gravitational-wave emission scales
+with the fourth power of the separation (Peters 1964).
+We find that the effect of the component masses and
+eccentricity of BBH systems are typically subdominant
+to the effect of the separation.
+To understand why the CE channel produces shorter
+separations we consider the difference in orbital evolution for both channels. For stable mass transfer, whether
+the orbit widens or shrinks depends on the mass ratio,
+the amount of mass lost from the system, and the assumed angular momentum that is carried away by the
+mass that is lost (e.g. Soberman et al. 1997). To produce merging BBH systems through stable RLOF we
+typically need to considerably shrink the orbit during
+reverse mass transfer (van den Heuvel et al. 2017). The
+accretor is already a BH at this time and its accretion is
+assumed to be limited to the Eddington accretion rate.
+This means that most of the mass that is transferred is
+lost from the system. For highly non-conservative mass
+transfer, the orbit shrinks (when Macc /Mdonor ≤ 0.79,
+for which see e.g. Appendix A from van Son et al. 2020)
+under the assumption that mass is lost from the vicinity
+of the accreting companion and has the specific angular momentum of the accretor’s orbit. This criterion
+may be fulfilled when the secondary star fills its Roche
+lobe at first and lead to shrinking of the orbit, but as
+more mass is lost, the orbital evolution can reverse from
+shrinking to widening. In contrast, CE evolution exclusively shrinks the orbit in our simulations, in agreement
+with general expectation (e.g. Paczynski 1976, Ivanova
+et al. 2013).
+Even though many of the details regarding orbital
+shrinking are uncertain in both scenarios, these mechanisms are so different that we can robustly expect substantial differences in the resulting final separations.
+Since the separation is the dominant term in the expression for the inspiral time, we are confident that our
+finding that the two channels lead to a difference in their
+delay times is robust, at least qualitatively. For completeness, we show the delay times distributions, similar
+to Figure 2, but for all metallicities and integrated over
+MBH,1 in Appendix B.
+4. METHOD (II) : CALCULATING INTRINSIC
+
+MERGER RATES
+To place our results into cosmological context we need
+to integrate over the metallicity-dependent star formation rate density, S(Z, z) (see also Dominik et al. 2013,
+2015; Belczynski et al. 2016b; Mandel & de Mink 2016;
+Chruślińska et al. 2018). This results in an intrinsic
+BBH merger rate density, RBBH (z), that we will discuss
+in Sections 5.1 and 6. Throughout this work we adopt
+
+8
+cosmological parameters consistent with the WMAP9–
+cosmology (Hinshaw et al. 2013) including h = H0 /(100
+km s−1 Mpc−1 ) = 0.693, where H0 is the Hubble constant.
+4.1. Estimating the intrinsic BBH merger rate
+We follow the method described in Neijssel et al.
+(2019) and Broekgaarden et al. (2021a) to calculate the
+BBH merger rate2 .
+The number of detections that occur during the active
+observing time (Tobs , measured in the detector frame
+at z = 0) of an infinitely sensitive gravitational-wave
+detector is given by
+
+
+d2 Ndet
+RBBH (z, ζ) dVc
+Tobs
+=
+(z)
+,
+(1)
+dζdz
+dζ
+dz
+1+z
+where Ndet is the number of detectable BBH mergers, ζ
+c
+is the set of parameters that describe a BBH, and dV
+dz (z)
+is the differential co-moving volume per redshift (see e.g.
+Abbott et al. 2019).
+Our goal is to estimate the intrinsic merger rate density of all BBHs in the source frame, RBBH (z):
+Z
+
+d2 NBBH
+(z) [cGpc−3 yr−1 ],
+dVc dt
+(2)
+which is the number of mergers NBBH per co-moving
+volume Vc in co-moving gigaparsec, cGpc−3 per year,
+with t the time in the source frame.
+Often, we would like to evaluate the intrinsic rate density over larger redshift bins. For that purpose, we define
+the volume averaged intrinsic merger rate density:
+R zmax
+c
+RBBH (z) dV
+dz dz
+[cGpc−3 yr−1 ], (3)
+RBBH (z) = zminR zmax dVc
+dz
+dz
+zmin
+RBBH (z) =
+
+dζ RBBH (z, ζ) =
+
+To approximate the intrinsic merger rate density at
+redshift z, we convolve the number of BBH mergers per
+unit star-forming mass with the star-formation rate density over the merger time tm (z), and integrate this over
+all metallicities:
+
+where the time of merger, tm (z), delay time, tdelay , and
+formation time, tform , are related by tform = tm − tdelay .
+We adopt the redshift of first star-formation zfirst SF =
+10 in our work. Equation 4 is evaluated at redshift steps
+of dz = 0.001.
+Our choice for the metallicity-dependent star formation rate at the formation redshift, S(Z, zform (tform ))
+is detailed and discussed in Appendix C.
+d2 Nform /(dMSF dtdelay ) is the number of BBH systems that form with delay times in the interval dtdelay
+per unit of star forming mass dMSF . Because we model
+only a small fraction of the total star forming mass, we
+need to re-normalise our results, given the initial distributions of primary masses and mass ratios (see §2.2).
+In our simulations we neglect single stars, only draw
+primary masses in the range 10 − 150 M and apply
+adaptive importance sampling. When re-normalising,
+we assume that the Universe has a constant binary
+fraction of fbin = 0.7 (Sana et al. 2012), and stars are
+formed with initial masses in the range 0.1 − 200 M .
+5. THE MERGER RATES AND MASS FUNCTION
+
+AT DIFFERENT REDSHIFTS
+5.1. The role of the two formation channels
+In Figure 3 we show the averaged intrinsic merger rate
+density RBBH (z), as a function of redshift, z, and per
+primary BH mass, MBH,1 . We split the rate by channel,
+showing the CE and stable RLOF channel in the bottom
+left and right panel respectively.
+In the left hand panel, we see that the overall BBH
+merger rate density peaks around redshift 2 − 3, and at
+a mass of about 15 M for the most massive BH. The
+merger rate decreases towards higher mass and higher
+redshift. Comparing the middle and right panels, we see
+that the CE channel and RLOF channel contribute to
+the rate in distinct ways.
+We would like to quantify the relative contribution
+of each channel to the production of MBH,1 . For this
+purpose we define the total rate of BBH mergers in the
+detector frame as:
+Rdet (z, ζ) =
+
+RBBH (z, ζ) =
+
+Z
+
+tm(z)
+
+dZ
+
+0
+
+Z
+
+dt0delay
+
+0
+
+2
+
+d Nform
+(Z 0 , t0delay , ζ) ∗ S(Z 0 , z(tform )) ,
+dMSF dtdelay
+{z
+}
+|
+{z
+} |
+BBH formation rate
+
+(4)
+
+Z−dependent SFRD
+
+2 The scripts to compute the rates are available as part of the
+
+COMPAS suite https://github.com/TeamCOMPAS/COMPAS.
+
+RBBH (z, ζ) dVc
+.
+1+z
+dz
+
+(5)
+
+Integrating this from redshift zero to the redshift of first
+star formation, we obtain the total rate of BBH mergers
+throughout the Universe:
+Z zfirst SF
+Rdet
+(ζ)
+=
+dz Rdet (z, ζ)
+(6)
+Univ
+0
+
+This is the same as the BBH merger rate as observed
+by an infinitely sensitive detector at redshift zero. In
+the left-hand panel of Figure 4 we show what fraction of
+
+9
+time since z = 10 [Gyr]
+
+30
+
+2.5
+0
+
+10.00
+
+20
+
+100
+
+0.1
+0
+
+1.00
+
+10°1
+0.0
+1
+
+10
+1.00
+
+0
+
+0
+
+2
+
+4
+
+6
+
+8
+
+10
+
+10°2
+
+time since z = 10 [Gyr]
+
+0.2
+
+0.0
+
+CE channel
+
+50
+
+101
+
+40
+
+0.0
+1
+
+100
+
+0.10
+
+30
+
+2.50
+
+20
+
+10°1
+
+10
+
+10.00
+
+1.0
+0
+
+0
+
+13.3
+
+0
+
+2
+
+merger redshift, z
+
+1.00
+
+4
+
+6
+
+8
+
+10
+
+10°2
+
+2.8
+
+1.1
+
+0.5
+
+0.2
+
+0.0
+
+50 Stable RLOF channel
+
+101
+
+40
+100
+
+30
+50
+
+2.
+
+20
+
+1.00
+
+10
+0
+
+10−1
+
+1.00
+
+0
+
+merger redshift, z
+
+2
+
+4
+
+6
+
+8
+
+10
+
+dRBBH/dMBBH,1 [Gpc−3yr−1M−1]
+
+MBH,1 [MØ]
+
+1
+0.0
+
+40
+
+0.5
+
+1
+
+0.10
+
+1.1
+
+0.0
+
+101
+
+2.8
+
+10
+
+All BBHs
+
+50
+
+13.3
+
+0.
+
+0.0
+
+MBH,1 [M ]
+
+0.2
+
+0.0
+1
+
+0.5
+
+MBH,1 [MØ]
+
+1.1
+
+dRBBH/dMBBH,1 [Gpc°3yr°1M°1
+Ø ]
+
+2.8
+
+dRBBH/dMBBH,1 [Gpc°3yr°1M°1
+Ø ]
+
+time since z = 10 [Gyr]
+13.3
+
+10−2
+
+merger redshift, z
+
+Figure 3. The averaged intrinsic merger rate density RBBH (z), for redshift bins of dz = 0.2, and primary BH mass bins of
+dMBH,1 = 2.5 M . The top axis shows the time passed since z = 10, which we have chosen as the redshift of first star formation.
+The left panel shows the full distribution. The middle panel shows mergers of systems that have experienced at least one CE
+during their evolution, while the right panel shows mergers of systems that formed through the stable RLOF channel. All panels
+show a dearth of high mass BHs (MBH,1 & 30 M ) merging at higher redshifts (z > 6).
+
+1.0
+0.8
+
+0.8
+
+det
+Rdet
+channel/RUniv
+
+det
+Rdet
+channel/R (z)
+
+time since z = 10 [Gyr]
+13.3
+1.0
+
+0.6
+
+1.1
+
+0.5
+
+0.2
+
+0.0
+
+4
+
+6
+
+8
+
+10
+
+0.6
+
+0.4
+
+0.4
+
+0.2
+0.0
+
+2.8
+
+0.2
+
+CE channel
+Stable RLOF
+
+0
+
+10
+
+20
+
+30
+
+40
+
+50
+
+MBH,1 [M ]
+
+0.0
+
+CE channel
+Stable RLOF
+
+0
+
+2
+
+merger redshift, z
+
+Figure 4. Fractional contribution of the CE channel (green hatched) and the stable RLOF channel (pink cross hatched) to
+Rdet (z, ζ). Left panel shows the relative contributions to Rdet (z, ζ) per mass bin after integrating over all redshifts. Right panel
+shows the fractional contribution to Rdet (z, ζ) integrated over all MBH,1 , as a function of redshift.
+
+Rdet
+Univ (ζ) derives from which channel for different values
+of MBH,1 . This emphasises how the stable RLOF channel dominates Rdet
+Univ (ζ) at higher masses, while the CE
+channel dominates for primary BH masses below 25 M .
+The formation channels differ in how they contribute
+to the intrinsic merger rate density as a function of redshift. Specifically, the contribution of the stable RLOF
+channel decreases faster towards higher redshifts than
+the CE channel. As a result, the CE channel becomes
+increasingly dominant towards higher redshifts. To show
+this more clearly, we again integrate Rdet (z, ζ), but now
+over all MBH,1 to obtain Rdet (z). We show what fraction of Rdet (z) derives from which channel for different
+redshift bins in the right-hand panel of Figure 4. Overall the CE channel is dominant, but the stable RLOF
+channel becomes more important at low redshift, and is
+responsible for about 40% of BBHs merging in the local
+Universe.
+
+The reduced contribution of the stable RLOF channel at higher redshifts is a result of the scarcity of short
+delay times in this channel, as shown in Fig 2. Systems
+coming from the stable RLOF channel generally have
+delay times & 1 Gyr. At redshift 6, only 0.5 Gyr has
+passed since our adopted redshift of first star formation
+(z = 10). This means that systems coming from the stable RLOF channel have typically not had enough time
+to merge at these high redshifts. For completeness, we
+show the distributions similar to Figure 3, but for chirp
+mass Mchirp in Appendix D.
+In Figure 5 we display the distribution of MBH,1 split
+by formation channel, for merger redshifts between 0
+and 0.5 (see equation 3).
+The results in Figure 5 imply that the high-mass
+merger events that have been detected so far at relatively
+low redshift, primarily come from the stable RLOF
+channel (assuming that the observed BBH merger rate is
+dominated by these two channels). This is in contrast to
+
+dRBBH/dMBH,1 [Gpc−3 yr−1 M−1]
+
+10
+All BBHs
+CE channels
+Stable RLOF channel
+
+101
+
+100
+
+10−1
+
+0
+
+10
+
+20
+
+30
+
+40
+
+50
+
+MBH,1 [M ]
+Figure 5. Distribution of primary BH masses MBH,1 split by
+formation channel, for merger redshifts between 0 ≤ z < 0.5.
+
+the results in, e.g., Belczynski et al. (2016a) and Stevenson et al. (2017), but agrees with findings in more recent
+work from e.g. Neijssel et al. (2019) and Gallegos-Garcia
+et al. (2021).
+
+5.2. The shape of the mass function at different
+redshifts.
+In the left panel of Figure 6 we show the MBH,1 distribution for different redshift bins (again adopting the
+averaged intrinsic merger rate density RBBH (z) for every
+redshiftbin). We see that there are features of the mass
+distribution that persist in all redshift bins. Firstly, the
+peak of the distribution occurs at ∼ 18 M . From Figures 2 and 3 we find that this peak originates from the
+CE channel.
+In every redshift bin, RBBH (z) decays for BH masses
+above ∼ 18 M . In part, the slope on the right side
+of ∼ 18 M is steepened due to the decay of the initial
+mass function towards higher mass stars. However, the
+primary driver behind the decay towards higher masses
+is the effect of metallicity: higher metallicities lead to
+more mass loss through stellar winds, and therefore shift
+the maximum possible MBH,1 to lower values. In Figure 7 we show this shift in the maximum BH mass by
+dissecting the MBH,1 distribution for 0 < z < 0.5 into
+bins of different formation metallicities. This shows that
+the maximum BH mass is about 18 M in our simulations for the high metallicities (Z & 0.01) that dominate
+the metallicity dependent star formation rate density,
+S(Z, z). For completeness, we show the MBH,1 distribution split by both formation channel and formation
+metallicity in appendix Figure 13. This shows that the
+stable RLOF channel dominates the higher mass end of
+the distribution at every metallicity.
+
+The decay of the distribution for BH masses below
+∼ 18 M in Figure 6, can be understood as a combination of our adopted SN kick and CE physics. Firstly,
+above carbon oxygen core masses of MCO = 11 M , BHs
+are assumed to experience full fallback, and hence receive no kick. BHs from lower-mass progenitors are expected to receive higher SN kicks (given the adopted BHkick prescription from Fryer et al. 2012). These higher
+SN kicks can unbind the binary system and thus prevent the formation of a merging BBH system (see also
+panels M, N and O in Figure 15).. Secondly, for the
+same change in orbital separation, lower-mass BHs can
+provide less orbital energy to help unbind the common
+envelope. This means that progressively lower-mass BHs
+will fail to eject their companion‘s envelope at a given
+CE efficiency αCE . Increasing αCE will allow successful CE ejection for lower-mass BHs, thus pushing the
+peak of the mass distribution to lower-mass BHs (see
+also panels F-I Figure 15).
+Apart from the peak in Figure 6, two other distinct
+features persist in all redshift bins. The first is the rise
+in RBBH (z) just before the edge of the distribution at
+MBH,1 ≈ 45 M . This feature is caused by the prescription for pair pulsations. Specifically, we adopted the
+prescriptions from Farmer et al. (2019) (see Section 2).
+This is also called the ‘pulsational pair-instability supernova’ (or PPISN) pile-up (e.g. Talbot & Thrane 2018;
+Marchant et al. 2019). Secondly there is a bump at
+MBH,1 ∼ 35 M . This bump is an artefact of the transition between prescriptions for remnant masses from core
+collapse supernovae (CCSN, following Fryer et al. 2012),
+to remnant masses from pair pulsational instability supernovae (from Farmer et al. 2019). Though the bump
+in our results is an artificial feature, it is not clear that
+the transition between core-collapse supernovae and pair
+pulsational supernovae should be smooth. For example,
+Renzo et al. (2020b) argue that such a discontinuity can
+occur if convection is not efficient at carrying away energy for the lowest mass systems that experience pair
+pulsations. Furthermore, Abbott et al. (2021c) find evidence for an overdensity in the merger rate (> 99% credibility) at MBH,1 = 35+1.5
+−3.1 M . It is difficult to attribute
+this observed peak to the PPISN pile-up at the loweredge of the PISN mass gap, since stellar models predict
+this pile-up to occur at masses of about 40 − 60 M (see
+e.g. Marchant et al. 2019; Farmer et al. 2019; Renzo
+et al. 2020a,b; Marchant & Moriya 2020; Woosley &
+Heger 2021; Costa et al. 2021, and references therein).
+To investigate redshift evolution of the primary BH
+mass distribution, in the right panel of Figure 6 we show
+the intrinsic distribution normalised by the peak rate
+for each redshift bin. We focus on redshifts in the range
+
+11
+0 < z ≤ 2, because a large absolute change in RBBH (z)
+is contained in this redshift range (see Figure 8), while
+the contribution from different metallicities to S(Z, z)
+does not vary greatly up to z ∼ 1.5. The right panel
+of Figure 6 shows that the high mass end (MBH,1 >
+18 M ) decays faster at higher redshifts than the low
+mass end (MBH,1 ≤ 18 M ) of the distribution. We find
+that the ratio of MBH,1 > 18 M /MBH,1 ≤ 18 M is
+about 0.7 in the redshift bin 0 − 0.5, while it is about
+0.45 in the redshift bin 1 − 1.5. The steeper decay of
+the high mass end of the mass distribution for higher
+redshifts can be explained by the scarcer contribution of
+the stable RLOF channel (which is responsible for the
+high mass end of the mass distribution) towards higher
+redshifts, as discussed above in Section 5.1.
+6. PROSPECTS FOR OBSERVING TRENDS WITH
+
+REDSHIFT IN THE INTRINSIC MERGER RATE
+DENSITY
+Third-generation detectors promise to probe BBH
+mergers across all redshifts of interest, but these
+instruments are still at least a decade away (e.g.
+Sathyaprakash et al. 2019a). Present-day detectors are,
+however, already beginning to probe the evolution at
+low redshift.
+In the previous section we found evolution of the highmass slope of the predicted MBH,1 distribution for redshifts in the range 0 − 2. Since current ground based
+detectors already detect many systems with MBH,1 >
+20 M , it is possible to start probing this mass-specific
+redshift evolution of the merger rate RBBH (z) (Abbott
+et al. 2021e,c).
+In this section we explore the possibility of probing
+trends of the rates separated by mass bin as a function
+of redshift. In Section 6.1 we show our predictions and in
+Section 6.2 we discuss whether these effects are observable in the second gravitational-wave transient catalogue
+(GWTC-2).
+6.1. The slope of the intrinsic rates per mass bin at
+low redshift
+In Fig. 8 we show how the intrinsic BBH merger rate
+density, RBBH (z), evolves as a function of redshift for
+four different MBH,1 mass bins. In each mass bin we
+have normalised the merger rate to the rate at redshift
+zero, to emphasize different trends at low redshifts. We
+see clear differences in the evolution of the rate at low
+redshift and the overall redshift evolution. These differences are highlighted by the orange lines, that show
+linear fits in the range 0 ≤ z ≤ 1, with the slopes ai
+provided in the legend.
+For the lowest-mass BHs (MBH,1 ≤ 10 M and
+10 M ≤ MBH,1 ≤ 20 M ), our models predict a steep
+
+increase of the BBH merger rate density with increasing
+redshift, with a slope that is very similar to the slope
+of SFRD(z)/SFRD(z = 0). The peak of the merger
+rate of the lowest MBH,1 bin coincides with the peak of
+SFRD(z)/SFRD(z = 0), as adopted in our models (at
+z = 2.7). The merger rate for slightly higher masses
+(10 M ≤ MBH,1 ≤ 20 M ), peaks at slightly higher
+redshifts, around z = 2.8. The redshift evolution of
+RBBH (z)/R0 follows the shape of SFRD(z)/SFRD(z =
+0) for these mass bins, because the lowest-mass events
+are formed predominantly through the CE channel,
+which produces short delay time systems. On top of
+this, these lower-mass events can form from almost all
+metallicities, as opposed to the high-mass systems that
+only form from the lowest metallicities (see Figure 7).
+In contrast, for BHs with masses in the range
+20 M < MBH,1 ≤ 30 M we find that the evolution
+of the merger rate with redshift is much less steep in the
+low-redshift regime than the merger rate for lower-mass
+BHs. Moreover, the merger rate of these events starts
+to decline at redshift z = 2.4, lower than the redshift
+of peak SFRD(z). The rate density for the most massive BHs (MBH,1 > 30 M ) exhibits the flattest slope
+and peaks at the lowest redshift ( at z = 1.9). In other
+words, in order to capture the peak of the BBH merger
+rate density for BHs with MBH,1 & 30 M we need gravitational wave detectors that can observe out to redshift
+z ∼ 2 (depending on the exact location of the peak of
+star formation). This peak at lower redshift can be understood from the characteristics of the stable RLOF
+channel, which is the primary producer of such massive events. As discussed in Sections 3 and 5, these
+events primarily form with long delay times. Hence, at
+progressively higher redshifts, the fraction of systems
+formed through the stable RLOF channel BBHs that
+can contribute to the merger rate decreases. The systems that don’t contribute at higher redshift have not
+had sufficient time since the adopted moment of first
+star formation to merge as a BBH.
+This implies that mergers of massive BHs are relatively less common at higher redshifts. This may at first
+sight seem counter intuitive, considering that at higher
+redshifts, the low metallicities that allow for the formation of massive BHs are more common (see Figure 7 and,
+e.g. Vink & de Koter 2005; Belczynski et al. 2010; Spera
+et al. 2019).
+6.2. Observing the different slopes in GWTC-2
+To test our prediction of a distinct redshift evolution for different MBH,1 as discussed in Section 6.1, we
+look for observational evidence of a different slope in
+RBBH (z) in the open data from the first, second, and
+
+peak rate
+
+Redshiftbin
+100
+
+transition CCSN − PPISN
+
+10
+
+[0.0, 0.5)
+[0.5, 1.0)
+
+1
+
+RBBH/RBBH,max
+
+dRBBH/dMBH,1 [Gpc−3 yr−1 M−1]
+
+12
+
+PPISN pile − up
+
+100
+
+Redshiftbin
+[0, 2)
+[2, 4)
+
+[1.0, 1.5)
+[1.5, 2.0)
+
+10−1
+
+[4, 6)
+
+10−1
+
+[6, 8)
+[8, 10)
+
+0
+
+10
+
+20
+
+30
+
+40
+
+50
+
+10−2
+
+0
+
+10
+
+20
+
+30
+
+40
+
+50
+
+MBH,1 [M ]
+
+MBH,1 [M ]
+
+dRBBH/dMBH,1 [Gpc−3 yr−1 M−1]
+
+Figure 6. Distribution of primary BH masses MBH,1 for several redshift bins. The left panel shows the general trend for
+different redshift bins. The right panel shows the same distribution normalised by the peak rate value for the given redshift bin,
+with a focus on redshifts up to z = 2. Both distributions are shown down to MBH,1 = 2.5 M , which is our minimum allowed
+BH mass. This shows that the distribution of primary BH masses evolves with redshift.
+log10 Metallicity
+All Z
+(−4, −3]
+
+101
+
+(−3, −2.5]
+(−2.5, −2]
+(−2, −1.5]
+
+100
+
+48M
+
+10−1
+0
+
+44M
+18M
+
+10
+
+32M
+
+20
+30
+MBH,1 [M ]
+
+40
+
+50
+
+Figure 7. Breakdown of the MBH,1 mass distribution
+by birth metallicity for all BBH mergers between redshifts
+0 ≤ z < 0.5. The maximum BH mass that contributes to
+each metallicity bin is annotated.
+
+half of the third observing runs of Advanced LIGO and
+Advanced Virgo (Abbott et al. 2021f), also presented
+in the gravitational-wave transient catalogues GWTC2 (Abbott et al. 2021a) and GWTC-2.1 (Abbott et al.
+2021g). To this end, we use the observed BBH mergers
+to hierarchically infer their underlying mass and spin
+distributions (e.g. Mandel et al. 2019).
+Contrary to our predictions here, analyses of the
+BBH population typically assume that BBHs have
+independently distributed masses and redshifts, with
+p(MBH,1 , z) = p(MBH,1 )p(z). Here, we will explore
+several alternative models for the joint distribution
+p(MBH,1 , z) of BBH masses and redshifts. Our method
+closely follows that of Callister et al. (2021). We assume
+that the distribution of mass ratios p(q|MBH,1 , γ) follows
+a power-law with index γ and that the distribution of
+
+effective spins, p(χeff |µχ , σχ ), follows a Gaussian with
+mean µχ and variance σχ (Roulet & Zaldarriaga 2019;
+Miller et al. 2020).
+For primary masses and redshifts, we take as a baseline the Powerlaw + Peak model from Abbott et al.
+(2021e), with an overall merger rate that is allowed to
+evolve as a function of z:
+h
+dNBBH
+dVc
+= R0
+(1 + z)κ fp P (MBH,1 |λ, mmax )
+dt dMBH,1 dz
+dz
+i
++ (1 − fp )N (MBH,1 |µm , σm , mmax ) .
+
+(7)
+Here, the assumed primary mass distribution is a mixλ
+ture between a power law P (MBH,1 |λ, mmax ) ∝ MBH,1
+(for MBH,1 between 5 M and mmax ) and a Gaussian
+peak N (MBH,1 |µm , σm , mmax ), with mean µm and variance σm , which is needed to fit an observed excess of
+BBHs with primary masses near MBH,1 ≈ 35 M . R0 is
+the local rate of BBH mergers per co-moving volume at
+z = 0.
+We inspect several variations of this model in an attempt to identify any relationship between BBH masses
+and their redshift distribution.
+First, we expanded Eq. (7) such that the parameter
+κ, governing the BBH rate evolution, is a function of
+MBH,1 . We considered several possibilities, including a
+piecewise function cut at 30 M ,
+
+κ
+(MBH,1 < 30 M )
+low
+κ(MBH,1 ) =
+(8)
+κ
+(M
+≥ 30 M ),
+high
+
+BH,1
+
+a piecewise function in which the cut location mcut itself
+varies as a free parameter,
+
+κ
+(MBH,1 < mcut )
+low
+κ(MBH,1 |mcut ) =
+(9)
+κ
+(M
+≥ m ),
+high
+
+BH,1
+
+cut
+
+13
+
+time since z = 10 [Gyr]
+13.3
+
+2.8
+
+1.1
+
+zpe
+
+ak =
+
+RBBH(z)/R0
+
+8
+
+ak =
+
+ak =
+
+1 .9
+
+2 .4
+
+0.2
+
+SFRD(z)/SFRD(z = 0) aSF = 1.77 ± 0.02
+MBH,1 ≤ 10M
+a1 = 1.72 ± 0.02
+
+2 .8
+
+2 .7
+
+10M > MBH,1 ≤ 20M
+
+a2 = 1.93 ± 0.04
+
+MBH,1 > 30M
+
+a4 = 0.56 ± 0.01
+
+20M > MBH,1 ≤ 30M
+
+SF
+RD
+
+a2
+a1
+a3
+a4
+
+2
+
+0
+
+1
+
+2
+
+3
+
+a3 = 1.1 ± 0.01
+
+a2
+a1
+a3
+a4
+
+(z)
+
+4
+
+0
+
+ak =
+
+zpe
+
+zpe
+6
+
+zpe
+
+0.5
+
+4
+
+5
+
+6
+
+7
+
+8
+
+9
+
+redshift
+Figure 8. Intrinsic BBH merger rate density as a function of redshift, z (RBBH (z), Eq. 2), normalised by the rate at redshift
+zero (R0 ), for several bins in primary BH mass. The top axis shows the time since z = 10, which we have chosen as the redshift
+of first star formation. The dashed grey line shows the star formation rate density as a function of redshift, SFRD(z), normalised
+by the star formation rate density at redshift 0, SFRD(z = 0). The redshift at which the merger rate peaks is annotated with
+a dotted line for each mass bin. A linear fit to the merger rate density between 0 ≤ z ≤ 1 is shown with an orange line for each
+mass bin (these are also highlighted in the inset). The respective slopes of these fits are annotated in the legend. This shows
+that, at low redshift, the slope of RBBH (z) is more shallow for higher MBH,1 .
+
+and a case in which κ is a linear function of MBH,1 :
+
+κ MBH,1 |κ0 , κ0 = κ0 + κ0
+
+
+
+
+MBH,1
+−1 .
+30 M
+
+(10)
+
+In Fig. 8, we also saw that dRBBH /dz is not a strictly
+monotonic function of mass. Instead, this slope reaches
+a maximum in the range 10 M < MBH,1 ≤ 20 M , below which it again decreases. To capture this possibility,
+we additionally considered a three-bin piecewise model,
+
+κ(MBH,1 ) =
+
+
+
+κlow
+
+
+κmid
+
+
+
+κhigh
+
+(MBH,1 < 10 M )
+(10 M ≥ MBH,1 < 30 M )
+(MBH,1 ≥ 30 M ),
+
+(11)
+We do not consider more complex models, given the relative scarcity of the data available at the time of writing.
+In all four cases above, we find no evidence for a varying
+redshift distribution as a function of mass.
+
+As mentioned above, the BBH primary mass distribution in GWTC-2 is well-modelled as a mixture between
+a broad power law and an additional peak between 30
+to 35 M . As an alternative test, we allow the rates of
+BBHs comprising the broad power law and those situated in the peak to each evolve independently as a
+function of redshift:
+dNBBH
+dVc h pl
+=
+R0 (1 + z)κpl P (MBH,1 |λ, mmax )
+dt dMBH,1 dz
+dz
+i
++ R0peak (1 + z)κpeak N (MBH,1 |µm , σm , mmax ). ,
+
+(12)
+in which R0pl and R0peak are the local merger rate densities of BBHs in the power law and peak, respectively,
+with κpl and κpeak governing the redshift evolution of
+each rate. We find very marginal evidence that the
+BBH mergers comprising these two components obey
+different redshift distributions; we measure κpl = 2.7+3.2
+−3.5
+and κpeak = 0.7+4.0
+−5.8 , with κpeak < κpl for about 70% of
+the posterior samples. However, our large uncertainties
+
+14
+mean we cannot draw any conclusions about differing
+rate evolution (or lack thereof).
+We conclude that we find insufficient evidence in
+GWTC-2 (Abbott et al. 2021a) for a distinct redshift
+evolution of RBBH (z) for different MBH,1 . This is consistent with Fishbach et al. (2021), who find no strong
+evidence in GWTC-2 that the BBH mass distribution
+evolves with redshift. Specifically, they find that the
+detections in GWTC-2 are consistent with a mass distribution that consists of a power law with a break that
+does not evolve with redshift, as well as with a mass distribution that includes a sharp maximum mass cutoff, if
+this cutoff does evolve with redshift. Furthermore, Fishbach & Kalogera (2021) found no strong evidence for the
+time delay distribution to evolve with mass. They did
+find a mild preference for high mass (MBH,1 ∼ 50 M )
+BBH to prefer shorter delay times than the low mass
+(MBH,1 ∼ 15 M ) BBH systems. However, they also
+argue that this preference could be an effect of higher
+mass BHs forming more strictly at the lowest metallicities (which is consistent with our findings in Figure 7).
+Alternatively, these high mass mergers with masses of
+about 50 M could be probing hierarchical mergers.
+At the time of writing, finding evidence for a distinct redshift evolution in GWTC-2 is difficult, considering that observed BBHs with lower mass primary
+BH masses (MBH,1 ∼ 10 M ) only probe the very local Universe (z . 0.4). As can be seen from Figure 8,
+this redshift range encompasses only a small fraction of
+the BBH merger rate evolution. Given the prospects
+of observing BBH mergers out to increasingly high redshifts with Advanced LIGO, Advanced Virgo and KAGRA (Abbott et al. 2018b), second- (Voyager Adhikari
+et al. 2020), and third-generation detectors like the Einstein telescope (Punturo et al. 2010; Hild et al. 2011;
+Sathyaprakash et al. 2019b; Maggiore et al. 2020) and
+the Cosmic Explorer (Abbott et al. 2017; Reitze et al.
+2019) we expect our predicted different evolution of the
+BBH merger rate to be either confirmed or disproven
+within the coming decades.
+7. DISCUSSION
+
+In the previous sections we showed our prediction that
+the mass distribution of merging BBH systems varies
+with redshift. Specifically, we showed that the evolution
+of the merger rate with redshift, RBBH (z), is more shallow and peaks at lower redshifts for systems with higher
+primary BH masses compared to systems with lower primary BH masses. This difference is the result of the contribution of two different formation channels. The CE
+channel predominantly forms lower mass BBH systems
+(MBH,1 . 30 M ) and allows for very short delay times
+
+(tdelay < 1 Gyr). In contrast, the stable RLOF channel
+is the main source of massive systems (MBH,1 & 30 M )
+and primarily forms systems with longer delay times
+(tdelay & 1 Gyr).
+The quantitative predictions presented in this work
+are subject to several major uncertainties and we discuss
+the key ones in the remainder of this section. Throughout this section we also argue why we expect our qualitative findings to be robust.
+7.1.
+
+The relative contribution of the CE and stable
+RLOF channel
+
+The prediction that merging BBHs can be formed
+through both the CE and stable RLOF channels has
+been reported by various groups (e.g. van den Heuvel
+et al. 2017; Bavera et al. 2021; Marchant et al. 2021;
+Broekgaarden et al. 2021a; Gallegos-Garcia et al. 2021;
+Shao & Li 2021; Olejak et al. 2021). However, the relative contribution of both channels is uncertain. This
+is mainly due to uncertainties in the treatment of stability of mass transfer, and whether or not the ejection
+of a common envelope is successful (Ivanova et al. 2013,
+Ivanova et al. 2020, and references therein).
+Recent work by e.g. Pavlovskii et al. (2017), Klencki
+et al. (2021), Marchant et al. (2021) and Gallegos-Garcia
+et al. (2021) have questioned whether the CE channel
+plays a prominent role, based on results obtained with
+the 1D detailed binary evolutionary code MESA (Paxton et al. 2015). They argue that systems that are typically assumed to lead to successful CE ejection in rapid
+population synthesis simulations (such as ours), will instead fail to initiate and survive a common envelope
+phase. If true, this would potentially drastically reduce
+the relative contribution of the CE channel. This would
+have major implications for the field and implies that
+the contribution of the CE channel is over estimated in
+our work.
+Despite all off the above, it seems unlikely that the
+CE channel does not operate at all. Various compact
+binary systems containing double white dwarfs and double neutron stars exist, which are hard to all explain
+through other formation channels (Rebassa-Mansergas
+et al. 2007, 2012; Nebot Gómez-Morán et al. 2011;
+Ivanova et al. 2013). As long as the CE channel plays a
+non-negligible role, we believe that at least our qualitative conclusions will hold.
+7.2. Are the delay time and mass distributions of the
+two channels distinguishable?
+Although the detailed shape of the delay time and
+mass distributions are uncertain, we believe that our
+finding that these two channels lead to distinct delay
+time distributions is robust for the following reasons.
+
+15
+The first reason is that the CE channel and stable
+RLOF channel lose angular momentum through intrinsically different mechanisms as explained in Section 3.2.
+Because of this, it is reasonable to expect a difference in
+the distributions of final separations and thus inspiral
+times. In fact, fine tuning would be required to avoid
+significant differences. Similar arguments can be made
+for the mass distribution (see e.g. Dominik et al. 2012;
+Eldridge & Stanway 2016; Bavera et al. 2021; GallegosGarcia et al. 2021).
+To better understand the impact of our (uncertain)
+model assumptions on the resulting delay time and mass
+distributions we have analysed the suite of models presented in Broekgaarden et al. (2021b) (see Appendix F).
+A relative lack of high mass BHs with short delay times
+was found in all model variations. Furthermore, we find
+significant differences in the delay-time and mass distributions for the two channels for almost all variations.
+Exceptions concern the models where we assume high
+values for the CE ejection efficiency αCE (panels H and
+I in Figure 14). In these simulations the number of
+short delay-time systems resulting from the CE channel is reduced (for αCE = 2) or disappear entirely (for
+αCE = 10). The latter assumption results in delay-time
+distributions for the CE and RLOF channel that are
+practically indistinguishable, but we consider such high
+efficiencies unrealistic.
+The distinction in the MBH,1 distribution diminishes
+in the models where a fixed accretion efficiency during
+stable Roche-lobe overflow involving two stellar companions is considered, β = 0.25 and β = 0.5, where β denotes the fraction of the mass lost by the donor that
+is accreted by the companion (see panels B and C in
+Figure 14). In these models, we find that the RLOF
+channel is less efficient in producing BBH mergers, especially in the case of systems with high-mass MBH,1 .
+We still find significant differences in the delay times between the two channels, but the RLOF and CE channel
+can no longer be clearly distinguished in the MBH,1 distribution. While the mass accretion efficiency is an important uncertainty in our simulations, we do not believe
+that assuming a fixed accretion efficiency is realistic.
+
+7.3. Alternative observables to distinguish the two
+channels
+We are not able to directly observe whether a BBH
+was formed through the CE channel or the stable RLOF
+channel. Hence we need characteristic observable source
+properties to expose the distinct rate evolution. In this
+work we have focused on BH mass as this can be inferred
+relatively well from observations. Possible other observ-
+
+ables that could be used are the distribution of the BH
+spins, the secondary masses, and the mass ratio.
+Mass ratios —In the left panel of Figure 9 we show our
+predictions for the distribution of mass ratios as seen
+by a hypothetical perfect detector (equation 6), which
+are very different for both channels. The CE channel preferentially produces systems with unequal masses
+(qfinal ≈ 0.3) but the distribution is broad and spans
+from 0.2 . qfinal . 1. In contrast, we find that the
+stable RLOF channel predominantly forms merging binaries with 0.6 . qfinal . 0.8 in our simulation. The
+distinct shape of this distribution is the result of the
+requirement of the stability of mass transfer, the totalmass to core-mass relation, the mass transfer efficiency
+(see Appendix A for an analytical derivation of the low
+qfinal end). The clear difference in the two distributions
+is promising, but we note that at the time of writing the
+mass ratios inferred for the detected systems are typically not well constrained (e.g. Abbott et al. 2021b).
+Secondary masses —The distribution of secondary
+masses, MBH,2 , is shown in the right panel of Figure 9. The CE channel dominates the formation of
+low secondary BH masses MBH,2 < 15 M , while the
+stable RLOF channel dominates in the range 15 M <
+MBH,2 < 40 M . The reason for this is the same as discussed in Section 3.1. The CE channel dominates again
+for the highest secondary mass BHs (36 M < MBH,2 <
+46 M ). The contribution of the stable RLOF drops
+quickly here due to a lack of equal mass systems and
+the PISN mass limit of about 46 M . We caution not
+to over interpret the features of the highest mass BHs
+as the uncertainties in the evolution of the progenitor
+systems are the largest here.
+Spins —Gravitational wave observations provide constraints on the mass weighted effective spin, χeff and
+for some events on the individual spin magnitudes and
+their orientation. The constraints on the spin have been
+suggested as a promising diagnostic to distinguish formation scenarios (e.g. Kushnir et al. 2016; Hotokezaka
+& Piran 2017; Zaldarriaga et al. 2018)
+Our simulations do not provide predictions for the
+spin, but Bavera et al. (2020) showed that, in case of
+the CE channel, the post-CE separation may well be
+small enough to allow for tidal spin up of the He core
+that is the progenitor of the second born BH (e.g. Bavera et al. 2020; Mandel & Fragos 2020). In the case
+of the stable RLOF channel, final separations are expected to be too wide for tidal spin-up (e.g. Bavera et al.
+2021), but one might expect spin-up of the first born BH
+through mass transfer (e.g. Bardeen 1970), although
+this is matter of debate. In case of Eddington limited
+
+16
+102
+1000
+
+101
+
+−1
+Rdet
+Univ /dq [yr ]
+
+800
+
+All BBHs
+CE channels
+Stable RLOF channel
+
+−1 −1
+Rdet
+Univ /dMBH,2 [M yr ]
+
+All BBHs
+CE channels
+Stable RLOF channel
+
+600
+
+100
+
+400
+
+10−1
+
+200
+0
+0.0
+
+0.2
+
+0.4
+
+0.6
+
+0.8
+
+qfinal ≡ MBH,2/MBH,1
+
+1.0
+
+10−2
+
+0
+
+10
+
+20
+
+30
+
+40
+
+50
+
+MBH,2 [M ]
+
+Figure 9. Distributions of mass ratios, qfinal , and secondary masses, MBH,2 , for BBHs seen by a hypothetical perfect detector
+(Rdet
+Univ (ζ), equation 6). Each panel shows the distribution for all systems in grey, the stable RLOF channel in cross hatched
+pink, and the CE channel in line hatched green. The dark and light shaded areas shows the 1- and 2-σ sampling uncertainties
+respectively, obtained through bootstrapping.
+
+accretion, spin up may not be significant (Bavera et al.
+2021). In the case of super-Eddington accretion it remains unclear whether one can significantly spin up the
+accreting BH (e.g. Tchekhovskoy et al. 2012) and in this
+case the orbit widens preventing the formation of a GW
+source (van Son et al. 2020). Furthermore, large uncertainties remain in the angular momentum transport
+of massive stars, which makes it difficult to accurately
+translate stellar spins to BH spins (see e.g. Fuller et al.
+2015, Olejak & Belczynski 2021 and Steinle & Kesden
+2021 for a discussion of possible pathways to spinning
+BHs from the isolated binary channel).
+7.4.
+
+The uncertain metallicity dependent cosmic star
+formation history
+
+In general, variations in the assumed S(Z, z) have a
+large impact on RBBH (z), and the shape of the BH mass
+distribution (e.g. Chruślińska et al. 2018; Neijssel et al.
+2019; Broekgaarden et al. 2021b; Briel et al. 2021). Because the highest mass BHs can only form from the lowest metallicities (see Figure 7), the stable RLOF channel
+will only play a significant role in the BBH merger rate
+if there is sufficient star formation at low metallicity,
+and the stable RLOF systems have had enough time to
+coalesce since this low metallicity star formation.
+To test the effect of the S(Z, z) on our main results, we repeated our complete analysis while adopting the phenomenological model from Neijssel et al.
+(2019). This S(Z, z) forms fewer stars at low metallicity (Z < 0.01) for the majority of our simulated
+star-forming universe, but forms a significantly larger
+amount of low-metallicity stars at the highest redshifts.
+Because this model is very sharply peaked around the
+mean metallicity at each redshift there is almost no star
+formation at low metallicities for all redshifts lower than
+
+z ≈ 1. In contrast, in our fiducial model we adopt a
+skewed distribution to capture the tail of low metallicity star formation at low redshifts.
+With this S(Z, z), we still retrieve the distinct redshift evolution for different BH mass bins, similar to the
+trends discussed in Sections 5 and 6 . Specifically we find
+a steep positive slope for RBBH (z) between 0 < z < 1 for
+BBHs with MBH,1 < 20 M , and a more shallow slope
+for BBHs with MBH,1 ≥ 20 M . This causes the high
+mass end (MBH,1 & 20 M ) of the MBH,1 mass distribution to decay faster at higher redshifts than the low-mass
+end (MBH,1 . 18 M ) of the distribution. This is in line
+with Neijssel et al. (2019), who also found evidence for
+evolution of the BBH mass distribution with redshift.
+Our estimate of the total intrinsic BBH merger rate
+is R0 = 73 Gpc−3 yr−1 at redshift zero, and R0.2 =
+94 Gpc−3 yr−1 at z = 0.2. Although this rate prediction is not an outlier in the recent review of local BBH
+merger rate predictions for isolated binaries from Mandel & Broekgaarden (2022), it is a factor 2-5 higher than
+the most recent estimates from the LIGO/Virgo/Kagra
+collaboration (R0.2 = 17.3−45 Gpc−3 yr−1 , Abbott et al.
+2021c). Our setup and binary physics assumptions are
+similar to those in Neijssel et al. (2019), who predict a
+local rate of R0 ≈ 22 Gpc−3 yr−1 . The difference in our
+rate prediction stems from our updated prescription for
+the metallicity-dependent star-formation rate density as
+described above, S(Z, z) (see also Appendix C).
+Although we acknowledge the large uncertainties in
+S(Z, z), we note that if we are sufficiently confident in
+the delay time distributions of observed BBH mergers,
+the redshift evolution of the BBH merger rate can be
+used to measure the star formation rate with gravitational waves (Vitale et al. 2019). Therefore, detecting
+evolution in the BH mass distribution as described in
+
+17
+Section 6 could help us constrain S(Z, z) through gravitational waves.
+7.5.
+
+Further caveats of rapid population synthesis
+
+All uncertainties that apply to rapid population synthesis simulations also apply to this work (see e.g.
+Ablimit & Maeda 2018; Belczynski et al. 2022; Broekgaarden et al. 2021b). Above, we already discussed the
+main uncertainties related to mass transfer stability and
+the treatment of common envelope phases. Below, we
+highlight further known shortcomings and uncertainties
+that are expected to impact our quantitative predictions
+A major uncertainty for the evolution of massive stars
+concerns internal mixing and, specifically, mixing beyond the boundaries of the convectively unstable regions. This directly impacts the core masses. In our simulations we use prescriptions from Hurley et al. (2000)
+that are fitted against models by Pols et al. (1997). For
+stars with initial masses higher than 50 M these fits are
+extrapolated. The core masses in our simulations turn
+out to be substantially smaller than those predicted in
+more recent grids of detailed evolutionary models that
+were calibrated against observations (e.g. Brott et al.
+2011). Overall, we expect that our core masses for high
+mass stars to be underestimated (as is true for all simulations that apply the original Hurley formulae). This
+will affect the quantitative predictions for the BH mass,
+and mass ratio distributions. This includes our predictions for the maximum BH mass that is efficiently
+formed through the CE channel (∼ 30 M in this work).
+The post-supernova remnant mass, including the
+amount of fallback, is uncertain. In particular, stars that
+retain a significant fraction of their envelope up to the
+moment of core collapse have been hypothesised to produce massive BHs if the envelope is assumed to entirely
+fall back onto the newly formed BH (e.g. Fernández
+et al. 2018; Di Carlo et al. 2019, 2020a). This way,
+relatively low mass stars (MZAMS . 40 M ) that are
+expected to more easily lead to successful CE events
+(following our arguments as stated in Section 3.1), can
+still form high BH masses (MBH,1 & 30 M , Di Carlo
+et al. 2019, 2020a,b; Kremer et al. 2020). However,
+for red supergiant stars, the envelope is expected to
+be sufficiently loosely bound that the change in gravitational mass due to neutrino losses when a core collapses likely unbinds the envelope (Nadezhin 1980; Lovegrove & Woosley 2013; Adams et al. 2017). Complete
+fallback is expected only for blue and yellow supergiants (Fernández et al. 2018; Ivanov & Fernández 2021).
+Moreover, in this work we only study isolated binaries,
+which are not able to form BBH progenitors that merge
+within the age of the Universe without the system trans-
+
+ferring or losing angular momentum as a consequence of
+mass transfer. Mass transfer, whether stable or unstable (CE) leads to significant mass loss in our simulations.
+Therefore, we find that forming merging BBHs with a
+massive primary BH through the fallback of a hydrogen
+envelope only works if there is an external mechanism
+that brings the BH progenitors closer together.
+Lastly, in this work we have assumed a universal initial
+mass function (IMF). However, recent studies suggest
+that the IMF might be more top-heavy at low metallicity (e.g. Geha et al. 2013; Martı́n-Navarro et al. 2015;
+Schneider et al. 2018; Gennaro et al. 2018). Although
+uncertainties in the IMF can have a large impact on rate
+predictions (de Mink & Belczynski 2015; Chruślińska
+et al. 2021), to first order, we expect to still retrieve
+a distinct redshift evolution, RBBH (z) for low and high
+mass BHs because the existence of the CE channel and
+stable RLOF channel is not affected by IMF changes. A
+full study of the effect of a non-universal IMF is outside
+the scope of this paper.
+7.6. Contribution from other formation channels
+In this work, we focus on predictions from the isolated binary channel. However, the observed population of merging BBHs is most likely a mixture of several
+channels (Zevin et al. 2021; Wong et al. 2021). The variety of physics involved is vast, and hence the span of
+predictions for merging BBH properties is equally large.
+See also Mapelli (2021) and Mandel & Farmer (2022)
+for reviews of proposed formation channels, and Mandel & Broekgaarden (2022) for a review of predictions
+for the merger rates from said formation channels. Below we summarise findings for other formation channels,
+with an emphasis on delay-time predictions, the slope of
+RBBH (z), and the predicted mass distribution (see also,
+Fishbach & Kalogera 2021 for an overview of delay time
+predictions from several different formation channels).
+Two formation channels which exhibit a preference
+for the formation of more massive BBHs are chemicallyhomogeneous evolution (CHE; e.g. de Mink et al.
+2009; Song et al. 2013, 2016; Mandel & de Mink 2016;
+Marchant et al. 2016; Riley et al. 2021) and Population III binaries (e.g. Marigo et al. 2001; Belczynski
+et al. 2004; Kinugawa et al. 2014; Inayoshi et al. 2017).
+Riley et al. (2021) find that CHE binaries have quite
+short delay times (between 0.1−1 Gyr), causing the redshift evolution of RBBH (z) to be fairly similar between
+CHE binaries and the full population of isolated binaries. du Buisson et al. (2020) furthermore find that the
+intrinsic BBH merger rate from CHE binaries evolves
+less steeply at low redshift than their adopted SFRD.
+Ng et al. (2021) compare the intrinsic BBH merger rate
+
+18
+density from formation in isolated binaries and dynamical formation in globular clusters, to predictions for
+BBH mergers formed from Population III stars. They
+find that Population III remnants should result in a secondary peak of RBBH (z) around z ≈ 12 (beyond what
+we have adopted as the redshift of first star formation).
+Several formation channels have been proposed where
+the BBH merger is assisted by dynamical encounters.
+These include BBH formation in nuclear star clusters
+(e.g. Antonini et al. 2016; Petrovich & Antonini 2017;
+Antonini et al. 2019; Arca Sedda et al. 2020; Arca
+Sedda 2020; Fragione & Silk 2020), globular clusters
+(e.g. Downing et al. 2010; Bae et al. 2014; Askar et al.
+2017; Fragione & Kocsis 2018; Rodriguez et al. 2019) and
+young stellar clusters (e.g. Portegies Zwart & McMillan 2000; Mapelli et al. 2013; Ziosi et al. 2014; Mapelli
+et al. 2017; Bouffanais et al. 2019; Fragione & Banerjee
+2021). For globular clusters, Choksi et al. (2019) find a
+merger rate that is weakly increasing out to z = 1.5 and
+drops at higher redshift. This behaviour is driven by
+dynamical processes within the cluster, which introduce
+a significant delay between cluster formation and BBH
+mergers.
+Recent studies aim to compare the redshift evolution
+of the intrinsic BBH merger rate between different formation channels. Zevin et al. (2021) investigate the local
+source properties for the CE channel, stable RLOF channel, globular clusters and nuclear clusters. Their Figure
+1 shows evidence that the stable RLOF channel preferentially forms higher chirp masses than the CE channel. Mapelli et al. (2022) compare the rate evolution of
+the intrinsic BBH merger rate from isolated binaries to
+the rate from nuclear star clusters, globular star clusters
+and young stellar clusters. They find that the primary
+BH mass function is more top heavy at high redshift
+for both globular and nuclear star clusters. In contrast
+to our work, they find that the mass distribution from
+isolated binaries does not vary greatly with redshift, because the majority of systems in their isolated binary
+channel is formed through CE, which results in short
+delay times. However, the mass distribution of isolated
+binaries in their Figure 5 appears to contain fewer primary BH masses of & 20 M at redshift 4 relative to
+redshift 0 (although this effect is smaller than the variation with redshift that they retrieve for nuclear and
+globular clusters).
+Lastly, AGN disks (e.g. Baruteau et al. 2011;
+Bellovary et al. 2016; Leigh et al. 2018; Yang et al. 2019;
+Secunda et al. 2019; McKernan et al. 2020), and mergers in hierarchical systems assisted by dynamical interactions (e.g. Kimpson et al. 2016; Antonini et al. 2017;
+Rodriguez & Antonini 2018; Hoang et al. 2018) have also
+
+been proposed as promising formation channels for BBH
+mergers.
+At the time of writing, the estimates for the relative
+contribution of formation channels are highly uncertain.
+However, linking source properties to predictions for the
+rate evolution with redshift, such as in this work, could
+help distinguish between the many possible origins of
+merging BBH systems.
+8. CONCLUSIONS AND SUMMARY
+
+We discuss the implications of relations between the
+delay time and BH mass for BBH systems that originate
+from isolated binaries. We explore the origin of these
+relations by dividing our simulations into two main formation channels: BBH systems that have experienced
+at least one common envelope (the ‘CE channel’) and
+systems that did not experience a CE, i.e. that only experienced stable Roche-lobe overflow (the ‘stable RLOF
+channel’). We discuss how our findings affect the redshift evolution of the BBH mass distribution. Specifically, we find a distinct redshift evolution of the BBH
+merger rate, RBBH (z), for different primary BH masses,
+MBH,1 . Below we summarise our main findings.
+The CE channel predominantly forms BBH systems
+with masses MBH,1 . 30 M and typically short delay
+times (tdelay < 1 Gyr) —The CE channel typically leads
+
+to shorter separations at BBH formation than the stable
+RLOF channel. This causes on average shorter inspiral
+times and thus shorter delay times (Figure 2). The CE
+channel does not form more massive BHs, because the
+massive progenitor stars required for these BH masses
+experience less radial expansion and stronger winds with
+respect to their lower mass counter parts. This results in
+conditions that are ill-favoured for successful commonenvelope initiation and ejection.
+The stable RLOF channel generally forms BBH systems with longer delay times (tdelay & 1 Gyr) and it is
+the main source of BBH systems with MBH,1 & 30 M .
+—The stable RLOF channel primarily produces larger
+
+separations at BBH formation than the CE channel,
+which result in longer delay times. Because high mass
+stars are ill-favoured for successful common-envelope initiation and ejection, the highest mass BHs are almost
+exclusively formed through the stable RLOF channel.
+The redshift evolution of the intrinsic BBH merger
+rate density is different for low and high MBH,1 —Due
+
+to the relations between the delay time and BH mass, we
+find distinctly different slopes in the BBH merger rate
+density RBBH (z) for different mass ranges of MBH,1 (see
+Figure 8). The merger rate density of the lowest mass
+BHs (MBH,1 ≤ 20 M ) is dominated by the CE channel.
+
+19
+For these BH masses, the merger rate density has a slope
+at low redshift that is similar to the slope of the star
+formation rate. The merger rate density of the highest
+mass BHs (MBH,1 ≥ 30 M ) is dominated by the stable
+RLOF channel. These higher mass systems have relatively longer delay times (tdelay > 1 Gyr), causing the
+rate density to peak at lower redshift than the peak of
+the star formation rate. We find that in the low-redshift
+regime that current detectors probe, the evolution of the
+merger rate density is less steep for higher-mass MBH,1
+than for lower-mass BHs.
+Although we cannot find significant evidence for this
+relation in the observed data at the time of writing,
+if isolated binaries contribute significantly to the BBH
+merger rate density, we expect that the distinct redshift
+evolution of the intrinsic merger rate density for different
+BH masses will be verifiable with near-future detectors
+(see Section 6.2).
+The contribution of different formation channels to
+RBBH (z) varies with redshift. —While the CE channel
+
+dominates the production of merging BBHs in the Universe, we predict that almost half of the systems we
+see merging at redshift 0 come from the stable RLOF
+channel (Figure 4). Conversely, in the high redshift
+Universe, the contribution to RBBH (z) from the stable
+RLOF channel will be negligible.
+ACKNOWLEDGEMENTS
+We thank Charlie Conroy and Eva Laplace for useful
+discussions and support. We thank Will Farr for his suggestion to investigate trends in the rate per mass bin and
+Maya Fishbach for discussing the impact of the results
+at an early stage. The authors thank Lokesh Khandelwal for his invaluable work on STROOPWAFEL.
+The authors are furthermore grateful for stimulating
+conversations with and Katie Breivik and members of
+the BinCosmos, COMPAS, CCA-GW and MPA stellar groups. LvS performed portions of this study as
+part of the remote pre-doctoral Program at the Center
+for Computational Astrophysics of the Flatiron Institute, supported by the Simons Foundation. LvS and
+SdM also acknowledge KITP for hospitality. The authors acknowledge partial financial support from the National Science Foundation under Grant No. (NSF grant
+number 2009131 and PHY-1748958).” , the Netherlands
+Organisation for Scientific Research (NWO) as part
+of the Vidi research program BinWaves with project
+number 639.042.728 and the European Union’s Hori-
+
+zon 2020 research and innovation program from the
+European Research Council (ERC, Grant agreement
+No. 715063). IM is partially supported by the Australian Research Council (ARC) Centre of Excellence for
+Gravitational-wave Discovery (OzGrav), project number CE170100004. IM is the recipient of the ARC Future Fellowship FT190100574. This research has made
+use of NASA’s Astrophysics Data System Bibliographic
+Services.
+SOFTWARE AND DATA
+The data used in this work is available on Zenodo under an open-source Creative Commons Attribution license at doi:10.5281/zenodo.5544170. Simulations in
+this paper made use of the COMPAS rapid binary population synthesis code (v02.19.04), which is freely available
+at http://github.com/TeamCOMPAS/COMPAS (Riley
+et al. 2022). The data used in Appendix F is described in
+Broekgaarden et al. (2021b) and is publically available
+at https://zenodo.org/record/5651073. The authors
+use the adaptive importance sampling tool STROOPWAFEL from Broekgaarden et al. (2019), publicly available at https://github.com/lokiysh/stroopwafel.
+This research has made use of GW data provided
+by the Gravitational Wave Open Science Center (https:
+//www.gw-openscience.org/), a service of LIGO Laboratory, the LIGO Scientific Collaboration and the Virgo
+Collaboration. LIGO Laboratory and Advanced LIGO
+are funded by the United States National Science Foundation (NSF) as well as the Science and Technology
+Facilities Council (STFC) of the United Kingdom, the
+Max-Planck-Society (MPS), and the State of Niedersachsen/Germany for support of the construction of Advanced LIGO and construction and operation of the
+GEO600 detector. Additional support for Advanced
+LIGO was provided by the Australian Research Council. Virgo is funded, through the European Gravitational Observatory (EGO), by the French Centre National de Recherche Scientifique (CNRS), the Italian
+Istituto Nazionale di Fisica Nucleare (INFN) and the
+Dutch Nikhef, with contributions by institutions from
+Belgium, Germany, Greece, Hungary, Ireland, Japan,
+Monaco, Poland, Portugal, Spain.
+Further software used in this work:
+Python
+(Van Rossum & Drake 2009), Astropy (Astropy Collaboration et al. 2013, 2018) Matplotlib (Hunter 2007),
+NumPy (Harris et al. 2020), SciPy (Virtanen et al.
+2020), ipython/jupyter (Perez & Granger 2007;
+Kluyver et al. 2016), Seaborn (Waskom 2021) and hdf5
+(Collette et al. 2019).
+
+APPENDIX
+
+20
+A.
+
+INSPECTING MASS RATIOS
+
+Below we derive the typical minimum mass ratio of a BBH that forms through the stable RLOF channel, as a
+function of the uncertain assumptions that go into our population synthesis. We will refer to the the star that is
+more (less) massive at zero-age main sequence (ZAMS) as the primary (secondary) and with the subscript A (B). See
+Figure 1 for a cartoon example of a stable RLOF system, including a short definition of the symbols as used in this
+section.
+A.1. First mass transfer: from the primary to the secondary
+Since the primary star is more massive, it will evolve on a shorter timescale than the secondary and thus it will be
+the first to overflow its Roche Lobe. The donor (primary star) typically starts RLOF either at the end of its main
+sequence, or during H-shell burning, also known as Case A or early Case B mass transfer. We will focus on Case B
+mass transfer (post core H burning) because, due to the large radial expansion, this is most common case of mass
+transfer (e.g. Sana et al. 2012). During this phase of stable mass transfer, the primary star will donate at most its
+envelope to the secondary star. We neglect all mass loss due to winds in this simple approximation. We capture the
+mass transfer efficiency in the parameter β, where β = 0 implies no mass is accreted, while β = 1 implies the complete
+envelope of the primary is accreted by the secondary. The mass of the secondary after completion of the first mass
+transfer phase becomes:
+M˜B = MZAMS,B + βMenv,A = MZAMS,A · qZAMS + MZAMS,A · β(1 − fcore )
+= MZAMS,A · (qZAMS + β(1 − fcore )) ,
+
+(A1)
+
+where qZAMS ≡ MZAMS,B /MZAMS,A , and we assume a fraction fcore of the stellar mass is used to form the He core.
+We implicitly assume the core mass fraction of star A and star B are similar, i.e. fcore,A /fcore,B ≈ 1.
+The primary star will continue to evolve and ultimately form a BH. For the purpose of this argument, we assume
+the complete core mass of the primary goes into forming the BH mass, i.e.
+MBH,A = MZAMS,A · fcore .
+
+(A2)
+
+A.2. Second mass transfer: from the secondary to the primary
+When the secondary star ends core-H burning, it will swell up in size and, in our case, start stable mass transfer.
+The second phase of mass transfer is highly non-conservative, since accretion onto the BH is assumed to be Eddington
+limited. Therefore, MBH,A remains approximately the same, and MBH,B will be approximately;
+MBH,B = M˜B fcore ,
+
+(A3)
+
+where we again assume that the complete He core mass is used to form the BH mass.
+A.3. Final mass ratio
+We find that for the stable channel, MBH,B typically forms the more massive BH, because in most cases star B
+accretes a significant fraction of its companions envelope, making it more massive than the primary at ZAMS. Hence,
+we define the typical final mass ratio at BBH formation as:
+MBH,A
+≈ qBBH .
+MBH,B
+
+(A4)
+
+MZAMS,A
+1
+=
+.
+˜
+(q
++
+β(1
+− fcore ))
+MB
+ZAMS
+
+(A5)
+
+qfinal ≡
+Using Equations A2 and A3 we find
+
+qBBH =
+
+We find that in our simulations, core mass fractions range between about 0.33 and 0.43, To minimise equation A5
+we further need to maximise qZAMS = 1 and β = 1. Hence we find min(qfinal ) ≈ 0.60 − 0.64. This agrees broadly with
+the location of the drop in the distribution of mass ratios that we find in our simulations below around qfinal ≈ 0.6,
+shown in Fig. 9. Understanding the right hand side of the mass ratio distribution is more involved. It is set in part
+
+21
+180
+
+140
+
+160
+
+120
+
+140
+
+M1 [M ]
+
+100
+
+HG
+
+120
+
+80
+60
+
+HeM
+HeM
+
+40
+
+100
+
+S
+
+S
+
+80
+
+BH
+
+Separation [R ]
+
+HG
+
+BH
+
+60
+
+M?,1
+
+20
+
+M?,2
+0
+3.0
+
+3.5
+
+4.0
+
+4.5
+
+5.0
+
+5.5
+
+40
+6.0
+
+time[Myr]
+Figure 10. Masses (dashed lines, left y-axis) and binary orbital separation (solid yellow line, right y-axis) over time, for a
+typical BBH progenitor system that evolved through the stable RLOF channel. Transitions to different evolutionary stages are
+labelled with the following acronyms: HG for Hertzsprung Gap star, HeMS for He Main Sequence star and BH for Black Hole.
+
+by the requirement that the systems shrinks sufficiently during the second mass transfer, but also by mass transfer
+efficiency itself.
+For illustration, we also show a typical example system in Figure 10. This system started with MZAMS,1 ≈ 90 M
+and MZAMS,2 ≈ 70 M and ends with MBH,A = 36 M and MBH,B = 43 M , hence qfinal ≈ 0.84.
+B. DELAY TIME DISTRIBUTIONS
+
+We emphasise the bimodality in the delay time distribution by plotting the number of merging BBHs per log tdelay
+in the left panel of 11. This is similar to Figure 2, but integrated over all BH masses. For completeness, we also show
+the same distribution, but per tdelay (i.e. not in log space).
+C.
+
+METALLICITY-DEPENDENT STAR FORMATION RATE S(Z, z)
+
+Several recent studies have highlighted the importance of the choice of the metallicity dependent cosmic starformation
+rate density S(Z, z) and the impact on the final predictions (e.g. Chruślińska et al. 2019; Chruślińska & Nelemans
+2019; Neijssel et al. 2019; Broekgaarden et al. 2021b; Briel et al. 2021).
+For the metallicity dependent starformation history assumed in this work we use the IllustrisTNG simulations. This
+is a suite of large magneto-hydrodynamical cosmological simulations computed with the moving-mesh code Arepo
+(Springel 2010; Pakmor et al. 2016; Weinberger et al. 2020). The simulations follow the formation and evolution of
+galaxies from high redshift to the current time and solve for the evolution of dark matter and gas under the influence
+of feedback from star formation and supermassive blackholes (for details see Springel et al. 2018; Marinacci et al. 2018;
+Nelson et al. 2018; Pillepich et al. 2018a; Naiman et al. 2018).
+The simulations were originally calibrated against the observed total cosmic star formation rate density and the
+stellar mass function of galaxies (Pillepich et al. 2018b). They reproduce the evolution of the sizes of galaxies with
+redshift (Genel et al. 2018) and with observational constraints on the mass-metallicity relation of galaxies up to z = 2
+(Torrey et al. 2019) as well as iron abundances (Naiman et al. 2018) and the metallicity gradients within galaxies at
+low redshift (Hemler et al. 2021). These simulations have also already been used to make predictions for gravitational
+wave sources through pairing with predictions for the outcomes of binary evaluation obtained with the BPASS code
+Briel et al. (2021).
+We extract the amount of starformation ongoing at each redshift and metallicity in the IllustrisTNG100 simulations
+and use this to derive the metallicity cosmic starformation rate density, S(Z, z). For this we make use of an analytical
+
+22
+103
+
+All BBHs
+CE channels
+Stable RLOF channel
+
+8
+
+∆NBBH/∆tdelay [Gyr−1106M−1]
+
+∆NBBH/∆ log10 tdelay [106M−1]
+
+10
+
+6
+
+4
+
+2
+
+0.001
+
+0.01
+
+0.1
+
+1.0
+
+10.0
+
+All BBHs
+CE channels
+Stable RLOF channel
+
+102
+101
+100
+10−1
+10−2
+
+0.01
+
+tdelay [Gyr]
+
+0.1
+
+1.0
+
+10
+
+tdelay [Gyr]
+
+Figure 11. Similar to Figure 2, but integrated over MBH,1 . The solid line shows the centres of the histogram per d log10 tdelay
+(left panel) versus the histogram per dtdelay (right panel), with bin sizes that are equal size in log-space (d log10 tdelay = 0.1),
+and hence unequal size in tdelay . Both are normalised per 106 M of star forming mass. This histogram contains a mixture of
+birth metallicities, that were sampled uniformly in log. The dark and light shaded areas shows the 1- and 2-σ bootstrapping
+uncertainties respectively. We indicate the stable RLOF channel with pink cross hatched lines, and the CE channel with green
+line hatches.
+
+fit inspired by Neijssel et al. (2019), but adapted to better capture the asymmetry in the metallicity distribution as
+detailed in Van Son et al. (in prep.). For the simulations presented in this work we use
+
+ 
+
+b
+
+(1 + z)
+2
+ln Z − ξ(z)
+ln Z − ξ(z) 
+S(Z, z) = a
+φ
+M yr−1 cMpc−3
+(C6)
+Φ α
+d Z
+ω(z)
+ω(z)
+1 + [(1 + z)/c] |
+{z
+}
+|
+{z
+}
+(1) SFRD(z)
+
+(2) dP(Z,z)/dZ
+
+where the first term (1) governs the overall starformation rate density SFRD(z), as a function of redshift z (following
+the analytical form proposed by Madau & Dickinson 2014). The second term (2) governs the metallicity distribution
+at each redshift, we approximate this with a skewed log-normal distribution written as the product of the standard lognormal distribution, φ, and the cumulative distribution function of the standard log-normal distribution, Φ (O’Hagan
+& Leonard 1976). For the width of the distribution we assume ω(z) = ω0 · 10ωz ·z . We furthermore ensure that mean
+of the metallicity distribution has the following simple dependence on redshift hZi ≡ µ(z) = µ0 · 10µz ·z by setting
+
+
+−ω(z)2
+µ0 · 10µz ·z
+α
+ξ(z) =
+.
+(C7)
+ln
+where β = √
+2
+2Φ(βω(z))
+1 + α2
+
+This leaves us in total with nine free parameters which are fitted simultaneously. In this work we have used a = 0.02,
+b = 1.48, c = 4.45, d = 5.9, α = −1.77, µ0 = 0.025, µz = −0.048, ω0 = 1.125, and ωz = 0.048 (c.f. Van Son et al. in
+prep).
+We note that our approach differs from the approach taken in some earlier studies that use observed scaling relations
+to construct a prescription for the metallicity dependent cosmic star formation history, for example as proposed by
+Langer & Norman (2006). Unfortunately, the observational constraints are scarce at high redshift, where simple
+extrapolations may not be valid. This is problematic for gravitational wave sources, which preferentially form from
+low metallicity star formation which is most poorly constrained, especially at high redshift (cf. Chruślińska et al.
+2021). We have therefore opted instead to make use of current state-of-the-art cosmological simulations (see also Briel
+et al. 2021, for a discussion). These provide physically motivated predictions at high redshift and have by now been
+extensively compared with observational constraints at lower redshift. Despite the large remaining uncertainties in
+these simulations, we believe this to be our best option at current times.
+D. THE REDSHIFT DEPENDENCE OF THE MERGER RATE AS A FUNCTION OF CHIRP MASS
+
+In Figure 12 we show the same evolution of RBBH (z) per primary BH mass, in the merger redshift – MBH,1 plane as
+displayed in Figure 3, but as a function of chirp mass, Mchirp . We observe similar trends in the BBH merger distribution
+
+23
+
+50 All BBHs
+
+Mchirp [M ]
+
+101
+
+0.01
+
+40
+
+0.10
+
+0.
+
+100
+
+01
+
+30
+1.00
+
+20
+
+0.01
+
+10.00
+
+0
+
+2
+
+4
+
+6
+
+8
+
+10
+
+10−2
+
+1.1
+
+0.5
+
+time since z = 10 [Gyr]
+
+0.2
+
+0.0
+
+50 CE channel
+
+13.3
+101
+
+40
+100
+
+0.
+1
+
+30
+
+0
+0.01
+
+0.10
+
+20
+2.50
+
+10−1
+
+1.00
+
+10
+0
+
+10.00
+
+0
+
+2
+
+merger redshift, z
+
+4
+
+6
+
+8
+
+10
+
+10−2
+
+2.8
+
+1.1
+
+0.5
+
+0.2
+
+0.0
+
+50 Stable RLOF channel
+
+101
+
+40
+0.10
+
+0.01
+
+100
+
+30
+1.00
+
+20
+2.50
+
+10
+0
+
+0
+
+2
+
+merger redshift, z
+
+10−1
+
+1
+
+2.50
+
+2.8
+
+0.0
+
+10−1
+
+10
+0
+
+13.3
+
+Mchirp [M ]
+
+0.0
+
+4
+
+6
+
+8
+
+10
+
+dRBBH/dMchirp [Gpc−3yr−1M−1]
+
+time since z = 10 [Gyr]
+
+0.2
+
+0.01
+
+0.5
+
+Mchirp [M ]
+
+1.1
+
+dRBBH/dMchirp [Gpc−3yr−1M−1]
+
+2.8
+
+dRBBH/dMchirp [Gpc−3yr−1M−1]
+
+time since z = 10 [Gyr]
+13.3
+
+10−2
+
+merger redshift, z
+
+dRBBH/dMBH,1 [Gpc−3 yr−1 M−1]
+
+Figure 12. The averaged intrinsic merger rate density RBBH (z), for redshift bins of dz = 0.2, and chrip mass bins of
+dMchirp = 2.5 M . The colours and symbols are the same as in Figure 3.
+
+Split by metallicity and channel
+
+10
+
+1 CE Channel
+
+log10 Metallicity
+All Z
+(−4, −3]
+
+Stable RLOF Channel
+
+(−3, −2.5]
+(−2.5, −2]
+
+100
+10−1
+0
+
+10
+
+20
+30
+MBH,1 [M ]
+
+40
+
+50
+
+Figure 13. Distribution of primary BH masses MBH,1 split by formation channel and birth metallicity, for merger redshifts
+between 0 ≤ z < 0.5.
+
+when we investigate Mchirp instead of MBH,1 . Specifically, BBH mergers with high chirp mass (Mchirp > 20 M )
+originate predominantly from the stable RLOF channel, while the CE channel dominates the BBH merger rate for low
+chirp mass (Mchirp ≤ 20 M ).
+E. MASS DISTRIBUTION SPLIT BY FORMATION CHANNEL AND METALLICITY
+
+In Figure 13 we show the MBH,1 distribution split by both formation channel and formation metallicity. We apply
+the same metallicity bins as those in Figure 7, but exclude the highest metallicity bin to focus on metallicities low
+enough to form BHs with masses above 20 M . This shows that the stable RLOF channel dominates the high mass
+end of the distribution at every metallicity.
+F. PHYSICS VARIATIONS
+
+To test the robustness of our finding that the CE channel and stable RLOF channel lead to distinct distributions in
+delay time and primary BH mass, we use the grid of models presented in Broekgaarden et al. (2021a) and Broekgaarden
+et al. (2021b). These simulations were performed with a version of COMPAS that predates the publicly available code
+(most similar to version 02.13.01 of the publicly available code).
+In Figures 14, 15, and 16, we show the distribution of primary BH mass (MBH,1 ) and delay time (tdelay ) similar to
+Figure 2. Each panel in these Figures displays a separate simulation of 53 × 106 binaries. The fiducial model in this
+grid (panel A in Figure 14) adopts physics assumptions that are very similar to our model assumptions as described in
+Section 2. The exceptions are the PPISN prescription (which follows Marchant et al. 2019), the metallicity sampling
+(which uses a discrete grid of 53 metallicities between 10−4 −0.03), and the LBV wind prescription (LBV-type stars, that
+is, stars above the Humphreys-Davidson limit, are assumed to receive an additional wind mass loss of 10−4 M yr−1 ,
+inspired by Belczynski et al. 2010).
+
+24
+Each panel in Figures 14, 15 and 16 considers a physics variation with respect to the fiducial model in panel A. The
+variations are summarised in the caption of each Figure, and for a full description of the physics assumptions we direct
+the reader to Broekgaarden et al. (2021a) and Broekgaarden et al. (2021b).
+Figures 14, 15 and 16 show that the dearth of BBH systems with high mass (MBH,1 > 30 M ) and short delay time
+(tdelay . 1 Gyr) is quite robust over numerous physics variations. Moreover, as discussed in Section 7, we retrieve
+distinct BH-mass and delay-time distributions for the two channels in almost all variations. The exceptions are the
+models which assume a fixed value for the accretion efficiency β of 0.25 and 0.5 for episodes of mass transfer with a
+non-compact accretor (panels B and C in Figure 14 ), and the model which assumes a high value for the CE “efficiency
+parameter” (αCE = 2 and αCE = 10; panels H and I in Figure 14). Those variations in the accretion efficiency β
+diminish the contribution of the stable RLOF channel, and specifically reduce the production of high-mass MBH,1 .
+This removes the distinction between the channels in the MBH,1 distribution. Assuming αCE = 10 causes all the short
+delay-time systems from the CE channel to disappear. This is because at higher αCE , a BH needs to inspiral less
+deeply into its companion’s envelope to achieve envelope ejection. This results in wider post-CE separations and hence
+more similar delay-time distributions for the two channels.
+REFERENCES
+Abbott, B. P., Abbott, R., Abbott, T. D., et al. 2017,
+Classical and Quantum Gravity, 34, 044001,
+doi: 10.1088/1361-6382/aa51f4
+
+Adams, S. M., Kochanek, C. S., Gerke, J. R., Stanek, K. Z.,
+& Dai, X. 2017, MNRAS, 468, 4968,
+doi: 10.1093/mnras/stx816
+
+Abbott, B. P., et al. 2018a, Phys. Rev.
+https://arxiv.org/abs/1811.12907
+
+Adhikari, R. X., Arai, K., Brooks, A. F., et al. 2020,
+Classical and Quantum Gravity, 37, 165003,
+doi: 10.1088/1361-6382/ab9143
+
+Abbott, B. P., Abbott, R., Abbott, T. D., et al. 2018b,
+Living Reviews in Relativity, 21, 3,
+doi: 10.1007/s41114-018-0012-9
+Abbott, B. P., et al. 2019, Astrophys. J., 882, L24,
+doi: 10.3847/2041-8213/ab3800
+Abbott, R., Abbott, T. D., Abraham, S., et al. 2021a,
+Physical Review X, 11, 021053,
+doi: 10.1103/PhysRevX.11.021053
+Abbott, R., Abbott, T. D., Acernese, F., et al. 2021b, arXiv
+e-prints, arXiv:2111.03606.
+https://arxiv.org/abs/2111.03606
+—. 2021c, arXiv e-prints, arXiv:2111.03634.
+https://arxiv.org/abs/2111.03634
+Abbott, R., Abe, H., Acernese, F., et al. 2021d, arXiv
+e-prints, arXiv:2111.03604.
+https://arxiv.org/abs/2111.03604
+Abbott, R., Abbott, T. D., Abraham, S., et al. 2021e,
+ApJL, 913, L7, doi: 10.3847/2041-8213/abe949
+—. 2021f, SoftwareX, 13, 100658,
+doi: 10.1016/j.softx.2021.100658
+Abbott, T. D., Acernese, F., Ackley, K., et al. 2021g, arXiv
+e-prints, arXiv:2108.01045.
+https://arxiv.org/abs/2108.01045
+Ablimit, I., & Maeda, K. 2018, ApJ, 866, 151,
+doi: 10.3847/1538-4357/aae378
+Acernese, F., Agathos, M., Agatsuma, K., et al. 2015,
+Classical and Quantum Gravity, 32, 024001,
+doi: 10.1088/0264-9381/32/2/024001
+
+Akutsu, T., Ando, M., Arai, K., et al. 2021, Progress of
+Theoretical and Experimental Physics, 2021, 05A101,
+doi: 10.1093/ptep/ptaa125
+Antonini, F., Chatterjee, S., Rodriguez, C. L., et al. 2016,
+ApJ, 816, 65, doi: 10.3847/0004-637X/816/2/65
+Antonini, F., Gieles, M., & Gualandris, A. 2019, MNRAS,
+486, 5008, doi: 10.1093/mnras/stz1149
+Antonini, F., Toonen, S., & Hamers, A. S. 2017, ApJ, 841,
+77, doi: 10.3847/1538-4357/aa6f5e
+Arca Sedda, M. 2020, ApJ, 891, 47,
+doi: 10.3847/1538-4357/ab723b
+Arca Sedda, M., Mapelli, M., Spera, M., Benacquista, M.,
+& Giacobbo, N. 2020, ApJ, 894, 133,
+doi: 10.3847/1538-4357/ab88b2
+Askar, A., Szkudlarek, M., Gondek-Rosińska, D., Giersz,
+M., & Bulik, T. 2017, MNRAS, 464, L36,
+doi: 10.1093/mnrasl/slw177
+Asplund, M., Grevesse, N., Sauval, A. J., & Scott, P. 2009,
+ARA&A, 47, 481,
+doi: 10.1146/annurev.astro.46.060407.145222
+Astropy Collaboration, Robitaille, T. P., Tollerud, E. J.,
+et al. 2013, A&A, 558, A33,
+doi: 10.1051/0004-6361/201322068
+Astropy Collaboration, Price-Whelan, A. M., Sipőcz, B. M.,
+et al. 2018, AJ, 156, 123, doi: 10.3847/1538-3881/aabc4f
+Bae, Y.-B., Kim, C., & Lee, H. M. 2014, MNRAS, 440,
+2714, doi: 10.1093/mnras/stu381
+
+25
+
+A
+
+B
+
+C
+
+C
+
+D
+
+E
+
+F
+F
+
+G
+
+H
+
+G
+
+I
+
+H
+
+I
+
+Figure 14. Same as Figure 2 but for several variations in the assumed model physics, based on models presented in Broekgaarden
+et al. (2021a) and Broekgaarden et al. (2021b). The models in each panel are as follows. Panel A: the fiducial model (see text).
+Panels B, C, and D: fixed mass-transfer efficiency of β = 0.25, 0.5, and 0.75 respectively. Panel E: case BB mass transfer is
+assumed to be always unstable. Panels F, G, H, I: the CE efficiency parameter, αCE , is set to 0.1, 0.5, 2.0, and 10.0 respectively.
+
+26
+
+J
+
+K
+
+L
+
+M
+
+N
+
+O
+
+P
+
+Q
+
+R
+
+Figure 15. Same as Figure 14 but for the following model variations: Panels J and K: maximum neutron star mass is fixed
+to 2.0 M and 3.0 M respectively. Panel L: no PPISN or PISN implemented. Panels M and N: natal kicks are drawn from a
+Maxwellian velocity distribution with a one-dimensional root-mean-square velocity dispersion of σCC = 100 km s−1 and 30 km s−1
+respectively. Panel O: BHs are assumed to receive no natal kick. Panels P and Q vary the strength of the Wolf-Rayet-like wind
+mass loss by a constant factor of fWR = 0.1 and 5 respectively. Panel R combines the assumption that case BB mass transfer
+is always unstable with allowing Hertzsprung-gap donor stars which initiate a CE to survive the CE event (models E and S).
+
+27
+
+S
+
+T
+
+Figure 16. Same as Figure 14 but for the following model variations: Panel S: Hertzsprung-gap donor stars initiating a CE
+are allowed to survive this CE event. Panel T: adopts the Fryer et al. (2012) “rapid” supernova remnant-mass prescription.
+Bardeen, J. M. 1970, Nature, 226, 64,
+doi: 10.1038/226064a0
+Baruteau, C., Cuadra, J., & Lin, D. N. C. 2011, ApJ, 726,
+28, doi: 10.1088/0004-637X/726/1/28
+Bavera, S. S., Fragos, T., Qin, Y., et al. 2020, A&A, 635,
+A97, doi: 10.1051/0004-6361/201936204
+Bavera, S. S., Fragos, T., Zevin, M., et al. 2021, A&A, 647,
+A153, doi: 10.1051/0004-6361/202039804
+Belczynski, K., Bulik, T., Fryer, C. L., et al. 2010, ApJ,
+714, 1217, doi: 10.1088/0004-637X/714/2/1217
+Belczynski, K., Bulik, T., & Rudak, B. 2004, ApJL, 608,
+L45, doi: 10.1086/422172
+Belczynski, K., Dominik, M., Bulik, T., et al. 2010, The
+Astrophysical Journal, 715, L138–L141,
+doi: 10.1088/2041-8205/715/2/l138
+Belczynski, K., Holz, D. E., Bulik, T., & O’Shaughnessy, R.
+2016a, Nature, 534, 512, doi: 10.1038/nature18322
+Belczynski, K., Repetto, S., Holz, D. E., et al. 2016b, ApJ,
+819, 108, doi: 10.3847/0004-637X/819/2/108
+Belczynski, K., Taam, R. E., Kalogera, V., Rasio, F. A., &
+Bulik, T. 2007, ApJ, 662, 504, doi: 10.1086/513562
+Belczynski, K., Romagnolo, A., Olejak, A., et al. 2022,
+ApJ, 925, 69, doi: 10.3847/1538-4357/ac375a
+Bellovary, J. M., Mac Low, M.-M., McKernan, B., & Ford,
+K. E. S. 2016, ApJL, 819, L17,
+doi: 10.3847/2041-8205/819/2/L17
+Bouffanais, Y., Mapelli, M., Gerosa, D., et al. 2019, ApJ,
+886, 25, doi: 10.3847/1538-4357/ab4a79
+Briel, M. M., Eldridge, J. J., Stanway, E. R., Stevance,
+H. F., & Chrimes, A. A. 2021, arXiv e-prints,
+arXiv:2111.08124. https://arxiv.org/abs/2111.08124
+Broekgaarden, F. S., Justham, S., de Mink, S. E., et al.
+2019, Monthly Notices of the Royal Astronomical
+Society, 490, 5228–5248, doi: 10.1093/mnras/stz2558
+
+Broekgaarden, F. S., Berger, E., Neijssel, C. J., et al.
+2021a, MNRAS, 508, 5028, doi: 10.1093/mnras/stab2716
+Broekgaarden, F. S., Berger, E., Stevenson, S., et al. 2021b,
+arXiv e-prints, arXiv:2112.05763.
+https://arxiv.org/abs/2112.05763
+Brott, I., de Mink, S. E., Cantiello, M., et al. 2011, A&A,
+530, A115, doi: 10.1051/0004-6361/201016113
+Callister, T., Fishbach, M., Holz, D. E., & Farr, W. M.
+2020, ApJL, 896, L32, doi: 10.3847/2041-8213/ab9743
+Callister, T. A., Haster, C.-J., Ng, K. K. Y., Vitale, S., &
+Farr, W. M. 2021, ApJL, 922, L5,
+doi: 10.3847/2041-8213/ac2ccc
+Choksi, N., Volonteri, M., Colpi, M., Gnedin, O. Y., & Li,
+H. 2019, ApJ, 873, 100, doi: 10.3847/1538-4357/aaffde
+Chruślińska, M., Belczynski, K., Klencki, J., & Benacquista,
+M. 2018, MNRAS, 474, 2937, doi: 10.1093/mnras/stx2923
+Chruślińska, M., & Nelemans, G. 2019, MNRAS, 488, 5300,
+doi: 10.1093/mnras/stz2057
+Chruślińska, M., Nelemans, G., & Belczynski, K. 2019,
+MNRAS, 482, 5012, doi: 10.1093/mnras/sty3087
+Chruślińska, M., Nelemans, G., Boco, L., & Lapi, A. 2021,
+MNRAS, 508, 4994, doi: 10.1093/mnras/stab2690
+Collette, A., Caswell, T. A., Tocknell, J., et al. 2019,
+h5py/h5py: 2.10.0, 2.10.0, Zenodo, Zenodo,
+doi: 10.5281/zenodo.3401726
+Costa, G., Bressan, A., Mapelli, M., et al. 2021, MNRAS,
+501, 4514, doi: 10.1093/mnras/staa3916
+Davies, B., & Beasor, E. R. 2020, MNRAS, 493, 468,
+doi: 10.1093/mnras/staa174
+Davies, B., Crowther, P. A., & Beasor, E. R. 2018,
+MNRAS, 478, 3138, doi: 10.1093/mnras/sty1302
+de Kool, M. 1990, ApJ, 358, 189, doi: 10.1086/168974
+de Mink, S. E., & Belczynski, K. 2015, ApJ, 814, 58,
+doi: 10.1088/0004-637X/814/1/58
+
+28
+de Mink, S. E., Pols, O. R., Langer, N., & Izzard, R. G.
+2009, A&A, 507, L1, doi: 10.1051/0004-6361/200913205
+Di Carlo, U. N., Giacobbo, N., Mapelli, M., et al. 2019,
+MNRAS, 487, 2947, doi: 10.1093/mnras/stz1453
+Di Carlo, U. N., Mapelli, M., Bouffanais, Y., et al. 2020a,
+MNRAS, 497, 1043, doi: 10.1093/mnras/staa1997
+—. 2020b, MNRAS, 497, 1043,
+doi: 10.1093/mnras/staa1997
+Dominik, M., Belczynski, K., Fryer, C., et al. 2013, ApJ,
+779, 72, doi: 10.1088/0004-637X/779/1/72
+—. 2012, ApJ, 759, 52, doi: 10.1088/0004-637X/759/1/52
+Dominik, M., Berti, E., O’Shaughnessy, R., et al. 2015,
+ApJ, 806, 263, doi: 10.1088/0004-637X/806/2/263
+Downing, J. M. B., Benacquista, M. J., Giersz, M., &
+Spurzem, R. 2010, MNRAS, 407, 1946,
+doi: 10.1111/j.1365-2966.2010.17040.x
+du Buisson, L., Marchant, P., Podsiadlowski, P., et al. 2020,
+MNRAS, 499, 5941, doi: 10.1093/mnras/staa3225
+Eggleton, P. P. 1983, ApJ, 268, 368, doi: 10.1086/160960
+Eldridge, J. J., & Stanway, E. R. 2016, MNRAS, 462, 3302,
+doi: 10.1093/mnras/stw1772
+Farmer, R., Renzo, M., de Mink, S. E., Fishbach, M., &
+Justham, S. 2020, ApJL, 902, L36,
+doi: 10.3847/2041-8213/abbadd
+Farmer, R., Renzo, M., de Mink, S. E., Marchant, P., &
+Justham, S. 2019, The Astrophysical Journal, 887, 53,
+doi: 10.3847/1538-4357/ab518b
+Fernández, R., Quataert, E., Kashiyama, K., & Coughlin,
+E. R. 2018, MNRAS, 476, 2366,
+doi: 10.1093/mnras/sty306
+Fishbach, M., Holz, D. E., & Farr, W. M. 2018, ApJL, 863,
+L41, doi: 10.3847/2041-8213/aad800
+Fishbach, M., & Kalogera, V. 2021, ApJL, 914, L30,
+doi: 10.3847/2041-8213/ac05c4
+Fishbach, M., Doctor, Z., Callister, T., et al. 2021, ApJ,
+912, 98, doi: 10.3847/1538-4357/abee11
+Fragione, G., & Banerjee, S. 2021, ApJL, 913, L29,
+doi: 10.3847/2041-8213/ac00a7
+Fragione, G., & Kocsis, B. 2018, PhRvL, 121, 161103,
+doi: 10.1103/PhysRevLett.121.161103
+Fragione, G., & Silk, J. 2020, MNRAS, 498, 4591,
+doi: 10.1093/mnras/staa2629
+Fryer, C. L., Belczynski, K., Wiktorowicz, G., et al. 2012,
+ApJ, 749, 91, doi: 10.1088/0004-637X/749/1/91
+Fuller, J., Cantiello, M., Lecoanet, D., & Quataert, E. 2015,
+ApJ, 810, 101, doi: 10.1088/0004-637X/810/2/101
+Gallegos-Garcia, M., Berry, C. P. L., Marchant, P., &
+Kalogera, V. 2021, ApJ, 922, 110,
+doi: 10.3847/1538-4357/ac2610
+
+Ge, H., Webbink, R. F., Chen, X., & Han, Z. 2015, ApJ,
+812, 40, doi: 10.1088/0004-637X/812/1/40
+Geha, M., Brown, T. M., Tumlinson, J., et al. 2013, ApJ,
+771, 29, doi: 10.1088/0004-637X/771/1/29
+Genel, S., Nelson, D., Pillepich, A., et al. 2018, MNRAS,
+474, 3976, doi: 10.1093/mnras/stx3078
+Gennaro, M., Tchernyshyov, K., Brown, T. M., et al. 2018,
+ApJ, 855, 20, doi: 10.3847/1538-4357/aaa973
+Giacobbo, N., & Mapelli, M. 2018, MNRAS, 480, 2011,
+doi: 10.1093/mnras/sty1999
+Gilkis, A., Shenar, T., Ramachandran, V., et al. 2021,
+MNRAS, 503, 1884, doi: 10.1093/mnras/stab383
+Hamann, W. R., & Koesterke, L. 1998, A&A, 335, 1003
+Harris, C. R., Millman, K. J., van der Walt, S. J., et al.
+2020, Nature, 585, 357–362,
+doi: 10.1038/s41586-020-2649-2
+Hemler, Z. S., Torrey, P., Qi, J., et al. 2021, MNRAS, 506,
+3024, doi: 10.1093/mnras/stab1803
+Higgins, E. R., & Vink, J. S. 2020, A&A, 635, A175,
+doi: 10.1051/0004-6361/201937374
+Hild, S., Abernathy, M., Acernese, F., et al. 2011, Classical
+and Quantum Gravity, 28, 094013,
+doi: 10.1088/0264-9381/28/9/094013
+Hinshaw, G., Larson, D., Komatsu, E., et al. 2013, ApJS,
+208, 19, doi: 10.1088/0067-0049/208/2/19
+Hjellming, M. S., & Webbink, R. F. 1987, ApJ, 318, 794,
+doi: 10.1086/165412
+Hoang, B.-M., Naoz, S., Kocsis, B., Rasio, F. A., &
+Dosopoulou, F. 2018, ApJ, 856, 140,
+doi: 10.3847/1538-4357/aaafce
+Hobbs, G., Lorimer, D. R., Lyne, A. G., & Kramer, M.
+2005, MNRAS, 360, 974,
+doi: 10.1111/j.1365-2966.2005.09087.x
+Hotokezaka, K., & Piran, T. 2017, ApJ, 842, 111,
+doi: 10.3847/1538-4357/aa6f61
+Humphreys, R. M., & Davidson, K. 1979, ApJ, 232, 409,
+doi: 10.1086/157301
+Hunter, J. D. 2007, Computing in Science and Engineering,
+9, 90, doi: 10.1109/MCSE.2007.55
+Hurley, J. R., Pols, O. R., & Tout, C. A. 2000, MNRAS,
+315, 543, doi: 10.1046/j.1365-8711.2000.03426.x
+Hurley, J. R., Tout, C. A., & Pols, O. R. 2002, MNRAS,
+329, 897, doi: 10.1046/j.1365-8711.2002.05038.x
+Inayoshi, K., Hirai, R., Kinugawa, T., & Hotokezaka, K.
+2017, MNRAS, 468, 5020, doi: 10.1093/mnras/stx757
+Ivanov, M., & Fernández, R. 2021, ApJ, 911, 6,
+doi: 10.3847/1538-4357/abe59e
+Ivanova, N., Justham, S., & Ricker, P. 2020, Common
+Envelope Evolution, 2514-3433 (IOP Publishing),
+doi: 10.1088/2514-3433/abb6f0
+
+29
+Ivanova, N., Justham, S., Chen, X., et al. 2013, A&A Rv,
+21, 59, doi: 10.1007/s00159-013-0059-2
+Jiang, Y.-F., Cantiello, M., Bildsten, L., Quataert, E., &
+Blaes, O. 2015, ApJ, 813, 74,
+doi: 10.1088/0004-637X/813/1/74
+Jiang, Y.-F., Cantiello, M., Bildsten, L., et al. 2018,
+Nature, 561, 498, doi: 10.1038/s41586-018-0525-0
+Kalari, V. M., Vink, J. S., Dufton, P. L., & Fraser, M. 2018,
+A&A, 618, A17, doi: 10.1051/0004-6361/201833484
+Kimpson, T. O., Spera, M., Mapelli, M., & Ziosi, B. M.
+2016, MNRAS, 463, 2443, doi: 10.1093/mnras/stw2085
+Kinugawa, T., Inayoshi, K., Hotokezaka, K., Nakauchi, D.,
+& Nakamura, T. 2014, MNRAS, 442, 2963,
+doi: 10.1093/mnras/stu1022
+Klencki, J., Nelemans, G., Istrate, A. G., & Chruślińska, M.
+2021, A&A, 645, A54, doi: 10.1051/0004-6361/202038707
+Kluyver, T., Ragan-Kelley, B., Pérez, F., et al. 2016, in
+Positioning and Power in Academic Publishing: Players,
+Agents and Agendas, ed. F. Loizides & B. Schmidt, IOS
+Press, 87 – 90
+Kremer, K., Spera, M., Becker, D., et al. 2020, ApJ, 903,
+45, doi: 10.3847/1538-4357/abb945
+Kroupa, P. 2001, MNRAS, 322, 231,
+doi: 10.1046/j.1365-8711.2001.04022.x
+Kudritzki, R. P., Pauldrach, A., Puls, J., & Abbott, D. C.
+1989, A&A, 219, 205
+Kudritzki, R. P., & Reimers, D. 1978, A&A, 70, 227
+Kummer, F. 2020, MSc thesis, University of Amsterdam
+Kushnir, D., Zaldarriaga, M., Kollmeier, J. A., & Waldman,
+R. 2016, MNRAS, 462, 844, doi: 10.1093/mnras/stw1684
+Langer, N., & Norman, C. A. 2006, ApJL, 638, L63,
+doi: 10.1086/500363
+Leigh, N. W. C., Geller, A. M., McKernan, B., et al. 2018,
+MNRAS, 474, 5672, doi: 10.1093/mnras/stx3134
+LIGO Scientific Collaboration, Aasi, J., Abbott, B. P.,
+et al. 2015, Classical and Quantum Gravity, 32, 074001,
+doi: 10.1088/0264-9381/32/7/074001
+Lovegrove, E., & Woosley, S. E. 2013, ApJ, 769, 109,
+doi: 10.1088/0004-637X/769/2/109
+Madau, P., & Dickinson, M. 2014, ARA&A, 52, 415,
+doi: 10.1146/annurev-astro-081811-125615
+Maggiore, M., Van Den Broeck, C., Bartolo, N., et al. 2020,
+JCAP, 2020, 050, doi: 10.1088/1475-7516/2020/03/050
+Mandel, I., & Broekgaarden, F. S. 2022, Living Reviews in
+Relativity, 25, 1, doi: 10.1007/s41114-021-00034-3
+Mandel, I., & de Mink, S. E. 2016, MNRAS, 458, 2634,
+doi: 10.1093/mnras/stw379
+Mandel, I., & Farmer, A. 2022, PhR, 955, 1,
+doi: 10.1016/j.physrep.2022.01.003
+
+Mandel, I., Farr, W. M., & Gair, J. R. 2019, MNRAS, 486,
+1086, doi: 10.1093/mnras/stz896
+Mandel, I., & Fragos, T. 2020, ApJL, 895, L28,
+doi: 10.3847/2041-8213/ab8e41
+Mapelli, M. 2021, in Handbook of Gravitational Wave
+Astronomy (Springer, Singapore), 4,
+doi: 10.1007/978-981-15-4702-7 16-1
+Mapelli, M., Bouffanais, Y., Santoliquido, F., Arca Sedda,
+M., & Artale, M. C. 2022, MNRAS, 511, 5797,
+doi: 10.1093/mnras/stac422
+Mapelli, M., & Giacobbo, N. 2018, MNRAS, 479, 4391,
+doi: 10.1093/mnras/sty1613
+Mapelli, M., Giacobbo, N., Ripamonti, E., & Spera, M.
+2017, MNRAS, 472, 2422, doi: 10.1093/mnras/stx2123
+Mapelli, M., Giacobbo, N., Santoliquido, F., & Artale,
+M. C. 2019, MNRAS, 487, 2, doi: 10.1093/mnras/stz1150
+Mapelli, M., Zampieri, L., Ripamonti, E., & Bressan, A.
+2013, MNRAS, 429, 2298, doi: 10.1093/mnras/sts500
+Marchant, P., Langer, N., Podsiadlowski, P., Tauris, T. M.,
+& Moriya, T. J. 2016, A&A, 588, A50,
+doi: 10.1051/0004-6361/201628133
+Marchant, P., & Moriya, T. J. 2020, A&A, 640, L18,
+doi: 10.1051/0004-6361/202038902
+Marchant, P., Pappas, K. M. W., Gallegos-Garcia, M.,
+et al. 2021, A&A, 650, A107,
+doi: 10.1051/0004-6361/202039992
+Marchant, P., Renzo, M., Farmer, R., et al. 2019, ApJ, 882,
+36, doi: 10.3847/1538-4357/ab3426
+Marigo, P., Girardi, L., Chiosi, C., & Wood, P. R. 2001,
+A&A, 371, 152, doi: 10.1051/0004-6361:20010309
+Marinacci, F., Vogelsberger, M., Pakmor, R., et al. 2018,
+MNRAS, 480, 5113, doi: 10.1093/mnras/sty2206
+Martı́n-Navarro, I., La Barbera, F., Vazdekis, A.,
+Falcón-Barroso, J., & Ferreras, I. 2015, MNRAS, 447,
+1033, doi: 10.1093/mnras/stu2480
+McKernan, B., Ford, K. E. S., & O’Shaughnessy, R. 2020,
+MNRAS, 498, 4088, doi: 10.1093/mnras/staa2681
+Mehta, A. K., Buonanno, A., Gair, J., et al. 2022, ApJ,
+924, 39, doi: 10.3847/1538-4357/ac3130
+Mennekens, N., & Vanbeveren, D. 2014, A&A, 564, A134,
+doi: 10.1051/0004-6361/201322198
+Miller, S., Callister, T. A., & Farr, W. M. 2020, ApJ, 895,
+128, doi: 10.3847/1538-4357/ab80c0
+Nadezhin, D. K. 1980, Ap&SS, 69, 115,
+doi: 10.1007/BF00638971
+Naiman, J. P., Pillepich, A., Springel, V., et al. 2018,
+MNRAS, 477, 1206, doi: 10.1093/mnras/sty618
+Nebot Gómez-Morán, A., Gänsicke, B. T., Schreiber,
+M. R., et al. 2011, A&A, 536, A43,
+doi: 10.1051/0004-6361/201117514
+
+30
+Neijssel, C. J., Vigna-Gómez, A., Stevenson, S., et al. 2019,
+MNRAS, 490, 3740, doi: 10.1093/mnras/stz2840
+Nelson, D., Pillepich, A., Springel, V., et al. 2018, MNRAS,
+475, 624, doi: 10.1093/mnras/stx3040
+Neo, S., Miyaji, S., Nomoto, K., & Sugimoto, D. 1977,
+PASJ, 29, 249
+Ng, K. K. Y., Vitale, S., Farr, W. M., & Rodriguez, C. L.
+2021, ApJL, 913, L5, doi: 10.3847/2041-8213/abf8be
+Nieuwenhuijzen, H., & de Jager, C. 1990, A&A, 231, 134
+O’Hagan, A., & Leonard, T. 1976, Biometrika, 63, 201,
+doi: 10.1093/biomet/63.1.201
+Olejak, A., & Belczynski, K. 2021, ApJL, 921, L2,
+doi: 10.3847/2041-8213/ac2f48
+Olejak, A., Belczynski, K., & Ivanova, N. 2021, A&A, 651,
+A100, doi: 10.1051/0004-6361/202140520
+Öpik, E. 1924, Tartu Obs. Publ., 25, 6
+Paczynski, B. 1976, in IAU Symposium, Vol. 73, Structure
+and Evolution of Close Binary Systems, ed. P. Eggleton,
+S. Mitton, & J. Whelan, 75–+
+Pakmor, R., Springel, V., Bauer, A., et al. 2016, MNRAS,
+455, 1134, doi: 10.1093/mnras/stv2380
+Pavlovskii, K., & Ivanova, N. 2015, MNRAS, 449, 4415,
+doi: 10.1093/mnras/stv619
+Pavlovskii, K., Ivanova, N., Belczynski, K., & Van, K. X.
+2017, MNRAS, 465, 2092, doi: 10.1093/mnras/stw2786
+Paxton, B., Marchant, P., Schwab, J., et al. 2015, ApJS,
+220, 15, doi: 10.1088/0067-0049/220/1/15
+Perez, F., & Granger, B. E. 2007, Computing in Science
+and Engineering, 9, 21, doi: 10.1109/MCSE.2007.53
+Peters, P. C. 1964, Physical Review, 136, 1224,
+doi: 10.1103/PhysRev.136.B1224
+Petrovich, C., & Antonini, F. 2017, ApJ, 846, 146,
+doi: 10.3847/1538-4357/aa8628
+Pillepich, A., Nelson, D., Hernquist, L., et al. 2018a,
+MNRAS, 475, 648, doi: 10.1093/mnras/stx3112
+Pillepich, A., Springel, V., Nelson, D., et al. 2018b,
+MNRAS, 473, 4077, doi: 10.1093/mnras/stx2656
+Pols, O. R., Schröder, K.-P., Hurley, J. R., Tout, C. A., &
+Eggleton, P. P. 1998, MNRAS, 298, 525,
+doi: 10.1046/j.1365-8711.1998.01658.x
+Pols, O. R., Tout, C. A., Schroder, K.-P., Eggleton, P. P., &
+Manners, J. 1997, MNRAS, 289, 869,
+doi: 10.1093/mnras/289.4.869
+Portegies Zwart, S. F., & McMillan, S. L. W. 2000, ApJL,
+528, L17, doi: 10.1086/312422
+Postnov, K. A., & Yungelson, L. R. 2014, Living Reviews in
+Relativity, 17, 3, doi: 10.12942/lrr-2014-3
+Punturo, M., Abernathy, M., Acernese, F., et al. 2010,
+Classical and Quantum Gravity, 27, 084007,
+doi: 10.1088/0264-9381/27/8/084007
+
+Rebassa-Mansergas, A., Gänsicke, B. T., Rodrı́guez-Gil, P.,
+Schreiber, M. R., & Koester, D. 2007, MNRAS, 382,
+1377, doi: 10.1111/j.1365-2966.2007.12288.x
+Rebassa-Mansergas, A., Nebot Gómez-Morán, A.,
+Schreiber, M. R., et al. 2012, MNRAS, 419, 806,
+doi: 10.1111/j.1365-2966.2011.19923.x
+Reitze, D., Adhikari, R. X., Ballmer, S., et al. 2019, in
+Bulletin of the American Astronomical Society, Vol. 51,
+35. https://arxiv.org/abs/1907.04833
+Renzo, M., Farmer, R., Justham, S., et al. 2020a, A&A,
+640, A56, doi: 10.1051/0004-6361/202037710
+Renzo, M., Farmer, R. J., Justham, S., et al. 2020b,
+MNRAS, 493, 4333, doi: 10.1093/mnras/staa549
+Riley, J., Mandel, I., Marchant, P., et al. 2021, MNRAS,
+505, 663, doi: 10.1093/mnras/stab1291
+Riley, J., Agrawal, P., Barrett, J. W., et al. 2022, ApJS,
+258, 34, doi: 10.3847/1538-4365/ac416c
+Rodriguez, C. L., & Antonini, F. 2018, ApJ, 863, 7,
+doi: 10.3847/1538-4357/aacea4
+Rodriguez, C. L., & Loeb, A. 2018, ApJL, 866, L5,
+doi: 10.3847/2041-8213/aae377
+Rodriguez, C. L., Zevin, M., Amaro-Seoane, P., et al. 2019,
+Phys. Rev., D100, 043027,
+doi: 10.1103/PhysRevD.100.043027
+Roulet, J., & Zaldarriaga, M. 2019, MNRAS, 484, 4216,
+doi: 10.1093/mnras/stz226
+Sabhahit, G. N., Vink, J. S., Higgins, E. R., & Sander, A.
+A. C. 2021, MNRAS, 506, 4473,
+doi: 10.1093/mnras/stab1948
+Sana, H., de Mink, S. E., de Koter, A., et al. 2012, Science,
+337, 444, doi: 10.1126/science.1223344
+Santoliquido, F., Mapelli, M., Giacobbo, N., Bouffanais, Y.,
+& Artale, M. C. 2021, MNRAS, 502, 4877,
+doi: 10.1093/mnras/stab280
+Sanyal, D., Grassitelli, L., Langer, N., & Bestenlehner,
+J. M. 2015, A&A, 580, A20,
+doi: 10.1051/0004-6361/201525945
+Sanyal, D., Langer, N., Szécsi, D., -C Yoon, S., &
+Grassitelli, L. 2017, A&A, 597, A71,
+doi: 10.1051/0004-6361/201629612
+Sathyaprakash, B., Belgacem, E., Bertacca, D., et al. 2019a,
+BAAS, 51, 248. https://arxiv.org/abs/1903.09260
+Sathyaprakash, B., Bailes, M., Kasliwal, M. M., et al.
+2019b, BAAS, 51, 276. https://arxiv.org/abs/1903.09277
+Schneider, F. R. N., Sana, H., Evans, C. J., et al. 2018,
+Science, 361, aat7032, doi: 10.1126/science.aat7032
+Secunda, A., Bellovary, J., Mac Low, M.-M., et al. 2019,
+ApJ, 878, 85, doi: 10.3847/1538-4357/ab20ca
+Shao, Y., & Li, X.-D. 2021, ApJ, 920, 81,
+doi: 10.3847/1538-4357/ac173e
+
+31
+Smith, N. 2014, ARA&A, 52, 487,
+doi: 10.1146/annurev-astro-081913-040025
+Soberman, G. E., Phinney, E. S., & van den Heuvel,
+E. P. J. 1997, A&A, 327, 620.
+https://arxiv.org/abs/astro-ph/9703016
+Song, H. F., Maeder, A., Meynet, G., et al. 2013, A&A,
+556, A100, doi: 10.1051/0004-6361/201321870
+Song, H. F., Meynet, G., Maeder, A., Ekström, S., &
+Eggenberger, P. 2016, A&A, 585, A120,
+doi: 10.1051/0004-6361/201526074
+Spera, M., Mapelli, M., Giacobbo, N., et al. 2019, MNRAS,
+485, 889, doi: 10.1093/mnras/stz359
+Springel, V. 2010, MNRAS, 401, 791,
+doi: 10.1111/j.1365-2966.2009.15715.x
+Springel, V., Pakmor, R., Pillepich, A., et al. 2018,
+MNRAS, 475, 676, doi: 10.1093/mnras/stx3304
+Steinle, N., & Kesden, M. 2021, PhRvD, 103, 063032,
+doi: 10.1103/PhysRevD.103.063032
+Stevenson, S., Vigna-Gómez, A., Mandel, I., et al. 2017,
+Nature Communications, 8, 14906,
+doi: 10.1038/ncomms14906
+Talbot, C., & Thrane, E. 2018, Astrophys. J., 856, 173,
+doi: 10.3847/1538-4357/aab34c
+Tchekhovskoy, A., McKinney, J. C., & Narayan, R. 2012,
+in Journal of Physics Conference Series, Vol. 372, Journal
+of Physics Conference Series, 012040,
+doi: 10.1088/1742-6596/372/1/012040
+Torrey, P., Vogelsberger, M., Marinacci, F., et al. 2019,
+MNRAS, 484, 5587, doi: 10.1093/mnras/stz243
+van den Heuvel, E. P. J., Portegies Zwart, S. F., & de
+Mink, S. E. 2017, MNRAS, 471, 4256,
+doi: 10.1093/mnras/stx1430
+Van Rossum, G., & Drake, F. L. 2009, Python 3 Reference
+Manual (Scotts Valley, CA: CreateSpace)
+van Son, L. A. C., De Mink, S. E., Broekgaarden, F. S.,
+et al. 2020, ApJ, 897, 100,
+doi: 10.3847/1538-4357/ab9809
+
+Vassiliadis, E., & Wood, P. R. 1993, ApJ, 413, 641,
+doi: 10.1086/173033
+Vigna-Gómez, A., Neijssel, C. J., Stevenson, S., et al. 2018,
+MNRAS, 481, 4009, doi: 10.1093/mnras/sty2463
+Vigna-Gómez, A., MacLeod, M., Neijssel, C. J., et al. 2020,
+PASA, 37, e038, doi: 10.1017/pasa.2020.31
+Vink, J. S., & de Koter, A. 2005, A&A, 442, 587,
+doi: 10.1051/0004-6361:20052862
+Vink, J. S., de Koter, A., & Lamers, H. J. G. L. M. 2000a,
+A&A, 362, 295
+—. 2000b, A&A, 362, 295.
+https://arxiv.org/abs/astro-ph/0008183
+Virtanen, P., Gommers, R., Oliphant, T. E., et al. 2020,
+Nature Methods, 17, 261, doi: 10.1038/s41592-019-0686-2
+Vitale, S., Farr, W. M., Ng, K. K. Y., & Rodriguez, C. L.
+2019, ApJL, 886, L1, doi: 10.3847/2041-8213/ab50c0
+Waskom, M. L. 2021, Journal of Open Source Software, 6,
+3021, doi: 10.21105/joss.03021
+Webbink, R. F. 1984, ApJ, 277, 355, doi: 10.1086/161701
+Weinberger, R., Springel, V., & Pakmor, R. 2020, ApJS,
+248, 32, doi: 10.3847/1538-4365/ab908c
+Wong, K. W. K., Breivik, K., Kremer, K., & Callister, T.
+2021, PhRvD, 103, 083021,
+doi: 10.1103/PhysRevD.103.083021
+Woosley, S. E., & Heger, A. 2021, ApJL, 912, L31,
+doi: 10.3847/2041-8213/abf2c4
+Xu, X.-J., & Li, X.-D. 2010a, ApJ, 716, 114,
+doi: 10.1088/0004-637X/716/1/114
+—. 2010b, ApJ, 722, 1985,
+doi: 10.1088/0004-637X/722/2/1985
+Yang, Y., Bartos, I., Gayathri, V., et al. 2019, PhRvL, 123,
+181101, doi: 10.1103/PhysRevLett.123.181101
+Zaldarriaga, M., Kushnir, D., & Kollmeier, J. A. 2018,
+MNRAS, 473, 4174, doi: 10.1093/mnras/stx2577
+Zevin, M., Bavera, S. S., Berry, C. P. L., et al. 2021, ApJ,
+910, 152, doi: 10.3847/1538-4357/abe40e
+Ziosi, B. M., Mapelli, M., Branchesi, M., & Tormen, G.
+2014, MNRAS, 441, 3703, doi: 10.1093/mnras/stu824
+
+
